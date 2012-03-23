@@ -1,0 +1,13 @@
+project(chain)
+add_executable(chain0 chain0.cpp)
+add_executable(chain1 chain1.cpp)
+add_executable(chain2 chain2.cpp)
+add_executable(chain3 chain3.cpp)
+add_executable(chain4 chain4.cpp)
+add_executable(chain4bm chain4bm.cpp)
+add_executable(chain4bm_v chain4bm_v.cpp)
+
+if (HAVE_RT_LIB AND FAS_USE_RT_LIB)
+  target_link_libraries(chain4bm rt)
+  target_link_libraries(chain4bm_v rt)
+endif (HAVE_RT_LIB AND FAS_USE_RT_LIB)

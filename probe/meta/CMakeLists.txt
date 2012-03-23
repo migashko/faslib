@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.6)
+project(meta-0.1)
+ADD_DEFINITIONS(-DFASLIB_TYPE_LIST_CHECK)
+SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti -O3" )  
+add_executable(meta meta.cpp)
+include_directories(../../../faslib)

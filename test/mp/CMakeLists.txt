@@ -1,0 +1,15 @@
+add_executable(ps ps.cpp)
+add_executable(ph_max ph_max.cpp)
+add_executable(bind bind.cpp)
+add_executable(apply apply.cpp)
+add_executable(apply2 apply2.cpp)
+add_executable(lambda lambda.cpp)
+add_executable(simplify simplify.cpp)
+
+add_test(mp ps)
+add_test(mp ph_max)
+add_test(mp bind)
+add_test(mp apply)
+add_test(mp apply2)
+add_test(mp simplify)
+
