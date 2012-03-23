@@ -13,7 +13,6 @@
 #include <fas/type_list/type_list_n.hpp>
 
 namespace fas{ namespace jsonrpc{
-
   
 struct _result_buffer_;
 

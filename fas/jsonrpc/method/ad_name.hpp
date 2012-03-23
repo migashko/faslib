@@ -1,5 +1,5 @@
-#ifndef FAS_JSONRPC_AD_NAME_HPP
-#define FAS_JSONRPC_AD_NAME_HPP
+#ifndef FAS_JSONRPC_METHOD_AD_NAME_HPP
+#define FAS_JSONRPC_METHOD_AD_NAME_HPP
 
 
 #include <fas/range/string_range.hpp>

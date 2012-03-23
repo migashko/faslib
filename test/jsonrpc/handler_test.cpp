@@ -1,10 +1,12 @@
 // #include <fas/system/disable_warnings.hpp>
 #include <fas/testing.hpp>
 #include <fas/jsonrpc/jsonrpc_handler.hpp>
-#include <fas/jsonrpc/method.hpp>
-#include <fas/jsonrpc/name.hpp>
+#include <fas/jsonrpc/method/method.hpp>
+#include <fas/jsonrpc/method/name.hpp>
 #include <fas/serialization/json/meta.hpp>
-#include <fas/jsonrpc/notify.hpp>
+#include <fas/jsonrpc/method/notify.hpp>
+#include <fas/jsonrpc/method/request.hpp>
+#include <fas/jsonrpc/method/result.hpp>
 
 
 
@@ -42,8 +44,7 @@ struct update
   template<typename T>
   void operator()(T& t, ::fas::empty_type, int id)
   {
-    
-    t.get_aspect().template get<_update_>().response(t, ::fas::empty_type(), id);
+    t.get_aspect().template get<_update_>().result(t, ::fas::empty_type(), id);
   }
 
 };

@@ -1,12 +1,12 @@
-#ifndef FAS_JSONRPC_AD_PROCESS_REQUEST_HPP
-#define FAS_JSONRPC_AD_PROCESS_REQUEST_HPP
+#ifndef FAS_JSONRPC_METHOD_AD_PARSE_REQUEST_HPP
+#define FAS_JSONRPC_METHOD_AD_PARSE_REQUEST_HPP
 
 #include <fas/jsonrpc/tags.hpp>
 #include <fas/adv/ad_aspect_select.hpp>
 
 namespace fas{ namespace jsonrpc{ 
 
-struct ad_process_request
+struct ad_parse_request
 {
   template<typename T, typename TM, typename R>
   void operator()(T& t, TM& tm, R r, int id)

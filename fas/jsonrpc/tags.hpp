@@ -18,9 +18,10 @@ struct _request_json_;
 struct _result_value_;
 struct _result_json_;
 
-struct _process_notify_;
-struct _process_request_;
-struct _process_response_;
+struct _parse_notify_;
+struct _parse_request_;
+struct _send_result_;
+
 struct _method_;
 
 struct _outgoing_buffer_;

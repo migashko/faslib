@@ -1,5 +1,5 @@
-#ifndef FAS_JSONRPC_AD_PROCESS_RESPONSE_HPP
-#define FAS_JSONRPC_AD_PROCESS_RESPONSE_HPP
+#ifndef FAS_JSONRPC_METHOD_AD_SEND_RESULT_HPP
+#define FAS_JSONRPC_METHOD_AD_SEND_RESULT_HPP
 
 #include <fas/jsonrpc/tags.hpp>
 #include <fas/jsonrpc/response_object.hpp>
@@ -9,7 +9,7 @@
 
 namespace fas{ namespace jsonrpc{ 
   
-struct ad_process_response
+struct ad_send_result
 {
   template<typename T, typename TM>
   void operator()(T& t, TM& tm, const typename TM::result_value_type& result, int id)
