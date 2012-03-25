@@ -12,6 +12,10 @@ struct _foreach_notify_;
 struct _foreach_request_;
 struct _foreach_error_;
 
+struct _request_group_;
+struct _notify_group_;
+struct _response_group_;
+struct _error_group_;
 
 }}
 
