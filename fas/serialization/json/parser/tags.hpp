@@ -2,7 +2,7 @@
 #define FAS_SERIALIZATION_JSON_PARSER_TAGS_HPP
 
 
-namespace fas{ namespace json{ namespace parser{
+namespace fas{ namespace json{ namespace parse{
 
 #include <fas/serialization/detail/tags.inl>
 

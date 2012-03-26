@@ -21,7 +21,7 @@ struct ad_raw
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
-    return t.get_aspect().template get<parser::_value_>()( t, r, init_range(v) ).first;
+    return t.get_aspect().template get<parse::_value_>()( t, r, init_range(v) ).first;
   }
 };
 
@@ -39,13 +39,13 @@ public:
   template<typename T, typename M, typename R>
   bool check(T& t, M, R r)
   {
-    return t.get_aspect().template get<parser::_value_>().check(t, r);
+    return t.get_aspect().template get<parse::_value_>().check(t, r);
   };
 
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V&, R r)
   {
-    if ( !t.get_aspect().template get<parser::_value_>().check(t, r) )
+    if ( !t.get_aspect().template get<parse::_value_>().check(t, r) )
       return r;
 
     R income =  r;

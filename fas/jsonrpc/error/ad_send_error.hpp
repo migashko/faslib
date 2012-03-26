@@ -1,7 +1,7 @@
 #ifndef FAS_JSONRPC_ERROR_AD_ERROR_HPP
 #define FAS_JSONRPC_ERROR_AD_ERROR_HPP
 
-#include <fas/jsonrpc/tags.hpp>
+#include <fas/jsonrpc/outgoing/tags.hpp>
 #include <fas/jsonrpc/error/error_code.hpp>
 #include <fas/jsonrpc/error/json/error_notify_json.hpp>
 
@@ -30,11 +30,14 @@ struct ad_send_error
   template<typename T>
   void operator() (T& t, error_code::type code)
   {
+    t.get_aspect().template get<_send_>()(t, error_notify_json(), static_cast<int>(code) );
+    /*
     typedef typename T::aspect::template advice_cast< _serializer_ >::type  serializer;
     t.get_aspect().template get<_outgoing_buffer_manager_>().clear(t);
 
     serializer ser;
     ser(error_notify_json(), static_cast<int>(code), t.get_aspect().template get<_outgoing_buffer_manager_>().init_range(t) );
+    */
     
     /*
     t.get_aspect().template get<_serializer_>()
@@ -46,7 +49,7 @@ struct ad_send_error
     );*/
     
     
-    t.get_aspect().template get<_output_>()( t, t.get_aspect().template get<_outgoing_buffer_manager_>().range(t) );
+    //t.get_aspect().template get<_output_>()( t, t.get_aspect().template get<_outgoing_buffer_manager_>().range(t) );
   }
 
 

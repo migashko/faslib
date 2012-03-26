@@ -1,6 +1,7 @@
 #ifndef FAS_SERIALIZATION_JSON_PARSER_PARSER_HPP
 #define FAS_SERIALIZATION_JSON_PARSER_PARSER_HPP
 
+/*
 #include <fas/serialization/json/parser/tags.hpp>
 #include <fas/serialization/json/parser/aspect.hpp>
 
@@ -8,13 +9,13 @@
 #include <fas/aop/aspect_class.hpp>
 
 
-namespace fas{ namespace json{ namespace parser{
+namespace fas{ namespace json{ namespace parse{
 
 template<typename A = ::fas::aspect<> >
 class parser
-  : public ::fas::aspect_class<A, ::fas::json::parser::aspect >
+  : public ::fas::aspect_class<A, ::fas::json::parse::aspect >
 {
-  typedef ::fas::aspect_class<A, ::fas::json::parser::aspect > super;
+  typedef ::fas::aspect_class<A, ::fas::json::parse::aspect > super;
 public:
   template<typename R>
   bool is_null(R r) {  return super::get_aspect().template get<_null_>().check(r); }
@@ -78,5 +79,5 @@ public:
 };
 
 }}}
-
+*/
 #endif

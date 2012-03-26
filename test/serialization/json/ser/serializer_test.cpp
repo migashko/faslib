@@ -1,7 +1,7 @@
 #include <fas/testing.hpp>
 
 #include <fas/serialization/json/ser/tags.hpp>
-#include <fas/serialization/json/ser/serializer.hpp>
+#include <fas/serialization/json/serializer.hpp>
 #include <fas/serialization/json/meta.hpp>
 
 #include "../../bar.hpp"

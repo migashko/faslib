@@ -9,7 +9,7 @@
 #include <fas/range/distance.hpp>
 
 
-namespace fas{ namespace json{ namespace parser{
+namespace fas{ namespace json{ namespace parse{
 
 struct ad_object
 {

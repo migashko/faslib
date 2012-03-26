@@ -7,7 +7,7 @@
 #include <fas/serialization/json/except/out_of_range.hpp>
 #include <fas/serialization/json/parser/tags.hpp>
 
-namespace fas{ namespace json{ namespace parser{
+namespace fas{ namespace json{ namespace parse{
 
 struct ad_simple_string
 {

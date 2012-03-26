@@ -3,6 +3,8 @@
 
 #include <fas/jsonrpc/tags.hpp>
 
+#include <fas/serialization/json/meta/null.hpp>
+
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/definition.hpp>

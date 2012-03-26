@@ -1,6 +1,6 @@
 #include <fas/testing.hpp>
 
-#include <fas/serialization/json/parser/parser.hpp>
+#include <fas/serialization/json/parser.hpp>
 #include <fas/range.hpp>
 #include <fstream>
 #include <iostream>
@@ -13,7 +13,7 @@ UNIT(parser_test, "testing default parser")
   using namespace fas::testing;
   using namespace fas::json;
 
-  parser::parser<> jp;
+  parser<> jp;
   std::string s = "/*prev*/[ {\"jsonrpc\": \"2.0\", \"method\": \"sum\", \"params\": [1,2,4], \"id\": \"1\"},\
       {\"jsonrpc\": \"2.0\", \"method\": \"notify_hello\", \"params\": [7]},\
       {\"jsonrpc\": \"2.0\", \"method\": \"subtract\", \"params\": [42,23], \"id\": \"2\"},\

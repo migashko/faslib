@@ -21,7 +21,7 @@ struct ad_range
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
-    return t.get_aspect().template get<parser::_value_>()( t, r, v ).first;
+    return t.get_aspect().template get<parse::_value_>()( t, r, v ).first;
   }
 };
 

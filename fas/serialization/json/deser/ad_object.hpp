@@ -14,8 +14,8 @@ struct ad_object
   template<typename T, typename M, typename R>
   bool check(T& t, M, R r )
   {
-    return t.get_aspect().template get<parser::_object_>().is_object(r)
-           || t.get_aspect().template get<parser::_null_>().check(r);
+    return t.get_aspect().template get<parse::_object_>().is_object(r)
+           || t.get_aspect().template get<parse::_null_>().check(r);
   };
 
   template<typename T, typename M, typename V, typename R>
@@ -32,7 +32,7 @@ struct ad_object
     if ( !(++r) )
       throw unexpected_end_fragment();
     
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     
     if ( !r )
       throw unexpected_end_fragment();
@@ -41,16 +41,16 @@ struct ad_object
       return ++r;
     
     r = t.get_aspect().template get<deserializer_tag>()(t, target(), v, r);
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
 
     if ( *r == '}')
       return ++r;
     
     for ( ;r && *r==',';)
     {
-      r = t.get_aspect().template get< parser::_space_>()(t, ++r);
-      r = t.get_aspect().template get< parser::_member_>()(t, r);
-      r = t.get_aspect().template get< parser::_space_>()(t, r);
+      r = t.get_aspect().template get< parse::_space_>()(t, ++r);
+      r = t.get_aspect().template get< parse::_member_>()(t, r);
+      r = t.get_aspect().template get< parse::_space_>()(t, r);
     }
 
     if ( *r!='}' ) 

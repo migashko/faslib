@@ -23,7 +23,7 @@
 #include <fas/type_list/type_list_n.hpp>
 
 
-namespace fas{ namespace json{ namespace parser{
+namespace fas{ namespace json{ namespace parse{
 
 typedef
   ::fas::aspect<

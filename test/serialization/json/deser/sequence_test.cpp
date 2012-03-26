@@ -220,6 +220,6 @@ BEGIN_SUITE(sequence_deserialize_suite, "sequence deserializer suite")
   ADD_ADVICE( ::fas::json::deser::_integer_, ::fas::json::deser::ad_integer)
   ADD_ADVICE( ::fas::json::deser::_sequence_, ::fas::json::deser::ad_sequence)
   ADD_ADVICE( ::fas::json::deser::_string_, ::fas::json::deser::ad_string)
-  ADD_ASPECT(::fas::json::parser::aspect)
+  ADD_ASPECT(::fas::json::parse::aspect)
   
 END_SUITE(sequence_deserialize_suite)

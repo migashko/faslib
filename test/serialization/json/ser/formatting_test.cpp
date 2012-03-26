@@ -2,7 +2,7 @@
 #include <fas/typemanip/tstring.hpp>
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/serialization/json/ser/aspect.hpp>
-#include <fas/serialization/json/ser/serializer.hpp>
+#include <fas/serialization/json/serializer.hpp>
 #include <fas/serialization/json/ser/ad_block.hpp>
 #include <fas/serialization/json/ser/ad_comment.hpp>
 #include <fas/serialization/json/meta.hpp>

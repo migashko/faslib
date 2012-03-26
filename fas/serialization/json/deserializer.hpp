@@ -9,13 +9,19 @@ namespace fas{ namespace json{
 
 template<typename A = ::fas::aspect<> >
 class deserializer
-  : public aspect_class<A, typename aspect_merge< deser::aspect, parser::aspect>::type >
+  : public aspect_class<A, typename aspect_merge< deser::aspect, parse::aspect>::type >
 {
-  typedef aspect_class<A, typename aspect_merge< deser::aspect, parser::aspect>::type > super;
+  typedef aspect_class<A, typename aspect_merge< deser::aspect, parse::aspect>::type > super;
   
 public:
   
   typedef typename super::aspect aspect;
+
+  operator bool () const
+  {
+    return super::get_aspect().template get<_except_>();
+  }
+
   
   template<typename M, typename V, typename R>
   R operator()(M m, V& v, R r)

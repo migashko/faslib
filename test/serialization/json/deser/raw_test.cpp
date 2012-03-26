@@ -21,5 +21,5 @@ UNIT(raw_test, "deserialize raw value")
 
 BEGIN_SUITE(raw_deserialize_suite, "raw deserializer suite")
   ADD_UNIT(raw_test)
-  ADD_ASPECT(::fas::json::parser::aspect)
+  ADD_ASPECT(::fas::json::parse::aspect)
 END_SUITE(raw_deserialize_suite)

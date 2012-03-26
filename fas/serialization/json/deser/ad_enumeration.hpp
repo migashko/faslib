@@ -16,9 +16,9 @@ struct ad_enum_value
   template<typename T, typename M, typename R>
   bool check(T& t, M m, R r)
   {
-     return t.get_aspect().template get<parser::_string_>().is_string(r)
-            || t.get_aspect().template get<parser::_number_>().is_number(r)
-            || t.get_aspect().template get<parser::_null_>().check(r);
+     return t.get_aspect().template get<parse::_string_>().is_string(r)
+            || t.get_aspect().template get<parse::_number_>().is_number(r)
+            || t.get_aspect().template get<parse::_null_>().check(r);
   }
 
   template<typename T, typename M, typename V, typename R>
@@ -54,8 +54,8 @@ struct ad_enumset_value
   template<typename T, typename M, typename R>
   bool check(T& t, M m, R r)
   {
-     return t.get_aspect().template get<parser::_string_>().is_string(r)
-            || t.get_aspect().template get<parser::_number_>().is_number(r);
+     return t.get_aspect().template get<parse::_string_>().is_string(r)
+            || t.get_aspect().template get<parse::_number_>().is_number(r);
   }
 
   template<typename T, typename M, typename V, typename R>
@@ -104,26 +104,26 @@ struct ad_enumeration
   template<typename T, typename M, typename R>
   bool check(T& t, M, R r)
   {
-    return t.get_aspect().template get<parser::_string_>().check(r)
-           || t.get_aspect().template get<parser::_number_>().check(r);
+    return t.get_aspect().template get<parse::_string_>().check(r)
+           || t.get_aspect().template get<parse::_number_>().check(r);
   };
 
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
     using namespace ::fas::json;
-    if ( t.get_aspect().template get<parser::_null_>().check(r) )
+    if ( t.get_aspect().template get<parse::_null_>().check(r) )
     {
-      r = t.get_aspect().template get<parser::_null_>()(t, r);
+      r = t.get_aspect().template get<parse::_null_>()(t, r);
       v = V();
     }
-    else if ( t.get_aspect().template get<parser::_number_>().check(r) )
+    else if ( t.get_aspect().template get<parse::_number_>().check(r) )
     {
       int value;
       r = deserialize_integer( value, r);
       v = static_cast<V>(value);
     }
-    else if ( t.get_aspect().template get<parser::_string_>().check(r) )
+    else if ( t.get_aspect().template get<parse::_string_>().check(r) )
     {
       typedef typename M::target_list target_list;
       r = _(t, target_list(), v, r);
@@ -181,7 +181,7 @@ private:
   R _(T& t, empty_list, V& v, R r)
   {
     v = V();
-    return t.get_aspect().template get<parser::_string_>()(t, r);
+    return t.get_aspect().template get<parse::_string_>()(t, r);
   }
 
 

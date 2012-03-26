@@ -331,5 +331,5 @@ BEGIN_SUITE(array_deserialize_suite, "array serializer suite")
   ADD_ADVICE( ::fas::json::deser::_stub_, ::fas::json::deser::ad_stub)
   ADD_ADVICE( ::fas::json::deser::_enumset_value_, ::fas::json::deser::ad_enumset_value)
 
-  ADD_ASPECT(::fas::json::parser::aspect)
+  ADD_ASPECT(::fas::json::parse::aspect)
 END_SUITE(array_deserialize_suite)

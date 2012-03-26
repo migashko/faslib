@@ -24,20 +24,20 @@ struct f_item_deserialize
   template<typename R>
   R operator()(R r) const
   {
-    return t.get_aspect().template get<parser::_value_>()(t, r);
+    return t.get_aspect().template get<parse::_value_>()(t, r);
   }
   
 
   template<typename V, typename R>
   R operator()(V& v, R r) const
   {
-    r = t.get_aspect().template get<parser::_space_>()(t, r);
+    r = t.get_aspect().template get<parse::_space_>()(t, r);
     R current = t.get_aspect().template get<deserializer_tag>()(t, meta_type(), v, r);
     if ( current == r) 
-      r = t.get_aspect().template get<parser::_value_>()(t, r);
+      r = t.get_aspect().template get<parse::_value_>()(t, r);
     else 
       r = current;
-    r = t.get_aspect().template get<parser::_space_>()(t, r);
+    r = t.get_aspect().template get<parse::_space_>()(t, r);
     return r;
     // return t.get_aspect().template get<deserializer_tag>()(t, meta_type(), v, r);
   }

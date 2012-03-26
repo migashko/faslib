@@ -11,7 +11,7 @@ struct default_space_parser
   R operator()(R r) const
   {
     // TDOD: сделать функции для парсера
-    parser::ad_space ads;
+    parse::ad_space ads;
     return ads.parse(r);
   }
 };

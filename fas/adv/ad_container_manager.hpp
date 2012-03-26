@@ -5,6 +5,8 @@
 
 namespace fas{
 
+// TODO: сделать для массива и динамического выделения
+
 template<typename Tg, size_t R = 32, size_t MR = 1024 >
 struct ad_container_manager
 {

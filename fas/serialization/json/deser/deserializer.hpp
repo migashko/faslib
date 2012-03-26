@@ -1,6 +1,7 @@
 #ifndef FAS_SERIALIZATION_JSON_DESER_DESERIALIZER_HPP
 #define FAS_SERIALIZATION_JSON_DESER_DESERIALIZER_HPP
 
+/*
 #include <fas/aop/aspect_class.hpp>
 #include <fas/serialization/json/deser/aspect.hpp>
 #include <fas/serialization/json/parser/aspect.hpp>
@@ -12,7 +13,7 @@ class deserializer
   : public aspect_class< A, 
               typename aspect_merge< 
                 aspect, 
-                ::fas::json::parser::aspect
+                ::fas::json::parse::aspect
               >::type 
            >
 {
@@ -26,5 +27,6 @@ public:
 };
 
 }}}
+*/
 
 #endif

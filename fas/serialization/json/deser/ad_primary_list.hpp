@@ -39,7 +39,7 @@ private:
   R _(T& t,  V& v, R r, type_list<H, L> )
   {
     if ( *r == ',' )
-      r = t.get_aspect().template get< parser::_space_>()(t, ++r);
+      r = t.get_aspect().template get< parse::_space_>()(t, ++r);
     r = __(t, v, r, type_list<H, L>()  );
     return  r ;
   }
@@ -54,7 +54,7 @@ private:
     {
       return _trouble(t, v, r, type_list<H, L>() );
     }
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     if ( !r || *r!=',')
       return r;
     return _(t, v, r, L() );
@@ -90,7 +90,7 @@ private:
     r = t.get_aspect().template get<deserializer_tag>()(t, H(), v, r);
     if ( r && r == income)
       return _0(t, v, r, L(), ++pos);
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     return r;
   }
 
@@ -131,7 +131,7 @@ private:
   R _1_(T& t,  V& v, R r, TL, bool* flags, int_<I>, int_<N> )
   {
     if ( *r == ',' )
-      r = t.get_aspect().template get< parser::_space_>()(t, ++r);
+      r = t.get_aspect().template get< parse::_space_>()(t, ++r);
 
     return _2_(t, v, r, TL(), flags, int_<I>(), int_<N>() );
   }
@@ -156,7 +156,7 @@ private:
     
     flags[I] = true;
  
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
 
     return _3_(t, v, r, TL(), flags );
   }
@@ -174,12 +174,12 @@ private:
   template<typename T, typename V, typename R, typename TL >
   R _3_(T& t,  V& v, R r, TL, bool* flags )
   {
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     if ( !r || *r!=',')
       return r;
     
     if ( *r == ',' )
-      r = t.get_aspect().template get< parser::_space_>()(t, ++r);
+      r = t.get_aspect().template get< parse::_space_>()(t, ++r);
     
     // todo: Проверить flags на предмет возобновления обычного поиска
       
@@ -190,13 +190,13 @@ private:
   template<typename T, typename R>
   R _parse(T& t, R r)
   {
-    r = t.get_aspect().template get< parser::_value_>()(t, r);
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_value_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     if ( !r ) return r;
     if ( *r!=':') return r;
-    r = t.get_aspect().template get< parser::_space_>()(t, ++r);
-    r = t.get_aspect().template get< parser::_value_>()(t, r);
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, ++r);
+    r = t.get_aspect().template get< parse::_value_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     return r;
   }
 };

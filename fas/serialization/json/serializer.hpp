@@ -13,7 +13,12 @@ class serializer
   typedef aspect_class<A, ser::aspect > super;
 public:
   typedef typename super::aspect aspect;
-  
+
+  operator bool () const
+  {
+    return super::get_aspect().template get<_except_>();
+  }
+
   template<typename M, typename V, typename R>
   R operator()(M m, const V& v, R r)
   {

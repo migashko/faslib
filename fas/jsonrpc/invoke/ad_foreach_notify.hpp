@@ -1,76 +1,58 @@
-#ifndef FAS_JSONRPC_TAGS_HPP
-#define FAS_JSONRPC_TAGS_HPP
+#ifndef FAS_JSONRPC_INVOKE_FOREACH_NOTIFY_HPP
+#define FAS_JSONRPC_INVOKE_FOREACH_NOTIFY_HPP
+
+#include <fas/jsonrpc/method/tags.hpp>
 
 namespace fas{ namespace jsonrpc{
 
-struct _jsonrpc_;
-struct _input_;
-struct _output_;
-struct _invoke_;
-struct _context_;
-struct _notify_value_;
-struct _notify_json_;
-struct _notify_handler_;
-struct _request_handler_;
+template<typename Obj>
+struct f_notify
+{
+  const Obj& obj;
+  bool ready;
 
-struct _request_value_;
-struct _request_json_;
-struct _result_value_;
-struct _result_json_;
+  f_notify(const Obj& obj)
+    : obj(obj)
+    , ready(false)
+  {}
 
-struct _parse_notify_;
-struct _parse_request_;
-struct _send_result_;
+  template<typename T, typename Tg>
+  void operator()(T& t, tag<Tg> )
+  {
+    if (ready) return;
+    
+    if ( !t.get_aspect().template get<Tg>()
+           .get_aspect().template get<_name_>()
+           .check( obj.name_range() )
+       )
+      return;
 
-struct _method_;
+    ready = true;
 
-struct _outgoing_buffer_;
-struct _outgoing_buffer_manager_;
-  
-// Группы
-struct _clear_;
-struct _initialize_;
-struct _dispose_;
+    t.get_aspect().template get<Tg>()
+     .get_aspect().template get<_parse_notify_>()
+     (
+        t,
+        t.get_aspect().template get<Tg>(),
+        obj.params_range()
+     );
+  }
 
-// Пользовательские 
-struct _name_;
-struct _request_;
-struct _request_type_;
-struct _request_json_;
-struct _response_type_;
-struct _response_json_;
+  operator bool () const { return ready; }
+};
 
-struct _notify_;
-struct _notify_type_;
-struct _notify_json_;
 
-// Аспектные
-struct _ids_;
-struct _call_ids_;
+struct ad_foreach_notify
+{
+  template<typename T, typename Obj>
+  void operator()(T& t, const Obj& obj )
+  {
+    if ( !t.get_aspect().template getg<_notify_group_>().for_each(t, f_notify<Obj>( obj ) ) )
+      t.get_aspect().template get<_method_not_found_>()(t);
+  }
+};
 
-struct _send_error_;
-struct _invalid_id_;
-struct _invalid_request_;
-struct _method_not_found_;
-struct _not_impl_;
-struct _deserialize_error_;
-struct _parse_error_;
 
-struct _invoke_request_handler_;
-struct _invoke_notify_handler_;
-struct _invoke_result_handler_;
-struct _invoke_error_handler_;
-
-struct _process_;
-struct _process_object_;
-
-struct _serializer_;
-struct _deserializer_;
-struct _parser_;
-
-struct _switch_deserialize_;
-struct _deserialize_params_;
- 
 }}
 
 #endif

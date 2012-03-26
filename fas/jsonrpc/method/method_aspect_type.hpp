@@ -24,6 +24,7 @@
 namespace fas{ namespace jsonrpc{ 
   
 typedef type_list_n<
+  /*
   advice< _notify_, ad_notify_stub >,
   definition<_notify_value_, empty_type>,
   definition<_notify_json_, ::fas::json::null>,
@@ -42,6 +43,7 @@ typedef type_list_n<
   advice< _parse_notify_, ad_parse_notify >,
   advice< _parse_request_, ad_parse_request >,
   advice< _send_result_, ad_send_result >
+  */
 >::type method_advice_list;
 
 typedef ::fas::aspect< method_advice_list > method_aspect_type;

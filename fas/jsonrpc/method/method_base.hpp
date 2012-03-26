@@ -13,6 +13,7 @@ public:
   typedef aspect_class<A1, A2> super;
   typedef typename super::aspect aspect;
 
+    /*
   typedef typename aspect::template advice_cast<_notify_>::type notify_handler_type;
   typedef typename aspect::template advice_cast<_notify_value_>::type notify_value_type;
   typedef typename aspect::template advice_cast<_notify_json_>::type notify_json_type;
@@ -22,6 +23,7 @@ public:
   typedef typename aspect::template advice_cast<_request_json_>::type request_json_type;
   typedef typename aspect::template advice_cast<_result_value_>::type result_value_type;
   typedef typename aspect::template advice_cast<_result_json_>::type result_json_type;
+  */
 
   typedef typename aspect::template advice_cast<_context_>::type context_type;
 
@@ -32,11 +34,13 @@ public:
 
 ///-> jsonrpc interface
 
+  /*
   template<typename R>
   bool check_name(R r) const
   {
     return super::get_aspect().template get<_name_>().check(r);
   }
+  */
   
   /*
   template<typename T>
@@ -47,6 +51,7 @@ public:
   }
   */
 
+  /*
   template<typename T, typename R>
   void process_notify(T& t, R r) 
   {
@@ -58,17 +63,19 @@ public:
   {
     super::get_aspect().template get<_parse_request_>()(t, *this, r, id); 
   }
+  */
 
-  template<typename T>
-  void result(T& t, const result_value_type& result, int id)
+  template<typename T,typename M, typename V>
+  void result(T& t, M& m, const V& result, int id)
   {
-    super::get_aspect().template get<_send_result_>()(t, *this, result, id);
+    super::get_aspect().template get<_send_result_>()(t, m, result, id);
   }
   
 ///<- jsonrpc interface
 
 /// Для удобства 
 
+/*
   notify_handler_type& notify_handler() 
   {
     return super::get_aspect().template get<_notify_>(); 
@@ -78,6 +85,7 @@ public:
   {
     return super::get_aspect().template get<_notify_>();
   }
+  */
 
   context_type& context() 
   {

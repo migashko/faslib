@@ -3,7 +3,7 @@
 
 #include <fas/serialization/json/parser/aspect_type.hpp>
 
-namespace fas{ namespace json{ namespace parser{
+namespace fas{ namespace json{ namespace parse{
 
 struct aspect: aspect_type {};
 

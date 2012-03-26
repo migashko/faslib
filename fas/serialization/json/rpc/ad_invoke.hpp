@@ -136,9 +136,9 @@ struct ad_invoke
   template<typename T, typename R>
   R operator()(T& t, R r)
   {
-    if ( t.get_aspect().template get<_deserializer_>().get_aspect().template get<parser::_object_>().check(r) )
+    if ( t.get_aspect().template get<_deserializer_>().get_aspect().template get<parse::_object_>().check(r) )
       return t.get_aspect().template get<_invoke_method_>()(t, r);
-    else if ( t.get_aspect().template get<_deserializer_>().get_aspect().template get<parser::_array_>().check(r) )
+    else if ( t.get_aspect().template get<_deserializer_>().get_aspect().template get<parse::_array_>().check(r) )
       return t.get_aspect().template get<_invoke_batch_>()(t, r);
     //! return t.get_aspect().template get<_invalid_request_>()(t, r);
   }
@@ -152,11 +152,11 @@ struct ad_invoke_exec
     typedef typename T::aspect::template advice_cast<_deserializer_>::type deserializer;
     deserializer deser;
     
-    r = deser.get_aspect().template get< parser::_space_ >()(deser, r);
+    r = deser.get_aspect().template get< parse::_space_ >()(deser, r);
     for(;r;)
     {
       r = t.get_aspect().template get<_invoke_>()( t, r );
-      r = deser.get_aspect().template get< parser::_space_ >()(deser, r);
+      r = deser.get_aspect().template get< parse::_space_ >()(deser, r);
     }
     
     return r;

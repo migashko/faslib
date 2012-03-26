@@ -19,7 +19,7 @@ UNIT(value_test, "parse value")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_value adv;
   std::string s = "null bla-bla";
@@ -56,7 +56,7 @@ UNIT(copy_value_test, "copy parse value")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_value adv;
   std::string s = "null bla-bla";
@@ -101,7 +101,7 @@ UNIT(array_test, "parse array")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_value adv;
   std::string s = "[] bla-bla";
@@ -150,7 +150,7 @@ UNIT(copy_array_test, "parse array")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_value adv;
   std::string s = "[] bla-bla";
@@ -211,7 +211,7 @@ UNIT(member_test, "parse member")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_member adm;
   std::string s = "\"name\":null bla-bla";
@@ -260,7 +260,7 @@ UNIT(copy_member_test, "copy parse member")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_member adm;
   std::string s = "\"name\":null bla-bla";
@@ -321,7 +321,7 @@ UNIT(object_test, "parse object")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_object ado;
   std::string s = "{} bla-bla";
@@ -370,7 +370,7 @@ UNIT(copy_object_test, "copy parse object")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_object ado;
   std::string s = "{} bla-bla";
@@ -443,18 +443,18 @@ BEGIN_SUITE(object_parser_suite, "object json parser suite")
   ADD_UNIT(copy_member_test)
   ADD_UNIT(object_test)
   ADD_UNIT(copy_object_test)
-  ADD_ADVICE( ::fas::json::parser::_null_, ::fas::json::parser::ad_null)
-  ADD_ADVICE( ::fas::json::parser::_boolean_, ::fas::json::parser::ad_boolean)
-  ADD_ADVICE( ::fas::json::parser::_number_, ::fas::json::parser::ad_number)
-  ADD_ADVICE( ::fas::json::parser::_string_, ::fas::json::parser::ad_string)
+  ADD_ADVICE( ::fas::json::parse::_null_, ::fas::json::parse::ad_null)
+  ADD_ADVICE( ::fas::json::parse::_boolean_, ::fas::json::parse::ad_boolean)
+  ADD_ADVICE( ::fas::json::parse::_number_, ::fas::json::parse::ad_number)
+  ADD_ADVICE( ::fas::json::parse::_string_, ::fas::json::parse::ad_string)
 
-  ADD_ADVICE( ::fas::json::parser::_value_, ::fas::json::parser::ad_value)
-  ADD_ADVICE( ::fas::json::parser::_array_, ::fas::json::parser::ad_array)
-  ADD_ADVICE( ::fas::json::parser::_space_, ::fas::json::parser::ad_space)
-  ADD_ADVICE( ::fas::json::parser::_member_, ::fas::json::parser::ad_member)
-  ADD_ADVICE( ::fas::json::parser::_name_, ::fas::json::parser::ad_string)
+  ADD_ADVICE( ::fas::json::parse::_value_, ::fas::json::parse::ad_value)
+  ADD_ADVICE( ::fas::json::parse::_array_, ::fas::json::parse::ad_array)
+  ADD_ADVICE( ::fas::json::parse::_space_, ::fas::json::parse::ad_space)
+  ADD_ADVICE( ::fas::json::parse::_member_, ::fas::json::parse::ad_member)
+  ADD_ADVICE( ::fas::json::parse::_name_, ::fas::json::parse::ad_string)
 
-  ADD_ADVICE( ::fas::json::parser::_object_, ::fas::json::parser::ad_object)
+  ADD_ADVICE( ::fas::json::parse::_object_, ::fas::json::parse::ad_object)
   
   ADD_ADVICE( ::fas::json::_except_, ::fas::json::ad_except)
 END_SUITE(object_parser_suite)

@@ -5,7 +5,7 @@
 #include <fas/serialization/json/except/unexpected_end_fragment.hpp>
 #include <fas/serialization/json/parser/tags.hpp>
 
-namespace fas{ namespace json{ namespace parser{
+namespace fas{ namespace json{ namespace parse{
 
 struct ad_space
 {

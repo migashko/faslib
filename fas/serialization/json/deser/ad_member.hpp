@@ -16,8 +16,8 @@ struct ad_member
   bool check(T& , M, R )
   {
     /*
-    return t.get_aspect().template get<parser::_number_>().check(r)
-           || t.get_aspect().template get<parser::_null_>().check(r);
+    return t.get_aspect().template get<parse::_number_>().check(r)
+           || t.get_aspect().template get<parse::_null_>().check(r);
 
     #warning проверить на null member и sequence
     #warning сделать тесты на проверить на null для всех сущностей
@@ -41,7 +41,7 @@ struct ad_member
     
     if ( r == income )
       return income;
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     
     if (!r) 
       throw unexpected_end_fragment();
@@ -50,7 +50,7 @@ struct ad_member
     
     ++r;
     
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     
     if ( !t.get_aspect().template get<deserializer_tag2>().check(t, target2(), r ) )
       return income;

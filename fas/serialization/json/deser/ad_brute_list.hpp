@@ -29,9 +29,9 @@ struct ad_brute_list
     {
       _(t, v, r, target_list());
       r = _parse(t, r);
-      r = t.get_aspect().template get< parser::_space_>()(t, r);
+      r = t.get_aspect().template get< parse::_space_>()(t, r);
       if ( !r || *r!=',' ) return r;
-      r = t.get_aspect().template get< parser::_space_>()(t, ++r);
+      r = t.get_aspect().template get< parse::_space_>()(t, ++r);
       
     }
     return r;
@@ -42,12 +42,12 @@ private:
   template<typename T, typename R>
   R _parse(T& t, R r)
   {
-    r = t.get_aspect().template get< parser::_value_>()(t, r);
-    r = t.get_aspect().template get< parser::_space_>()(t, r);
+    r = t.get_aspect().template get< parse::_value_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
     if ( !r ) return r;
     if ( *r!=':') return r;
-    r = t.get_aspect().template get< parser::_space_>()(t, ++r);
-    r = t.get_aspect().template get< parser::_value_>()(t, r);
+    r = t.get_aspect().template get< parse::_space_>()(t, ++r);
+    r = t.get_aspect().template get< parse::_value_>()(t, r);
     return r;
   }
   

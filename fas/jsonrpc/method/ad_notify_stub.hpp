@@ -4,6 +4,7 @@
 #include <fas/jsonrpc/tags.hpp>
 // #include <fas/jsonrpc/error/error_code.hpp>
 
+// todo: убрать
 namespace fas{ namespace jsonrpc{ 
 
 struct ad_notify_stub

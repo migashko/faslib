@@ -1,5 +1,5 @@
-#ifndef FAS_JSONRPC_RAW_OBJECT_HPP
-#define FAS_JSONRPC_RAW_OBJECT_HPP
+#ifndef FAS_JSONRPC_JSON_RAW_OBJECT_HPP
+#define FAS_JSONRPC_JSON_RAW_OBJECT_HPP
 
 #include <vector>
 #include <algorithm>

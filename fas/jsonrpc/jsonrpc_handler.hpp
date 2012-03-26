@@ -140,7 +140,7 @@ struct ad_process_object
       std::cout << "ad_invoke catch " << e.what() << std::endl;
       // если и здесь exception то прерываем 
       // Сделать разные стратегии десериализации (с отправкой доп. поля description )
-      /*r = deser.get_aspect().template get< ::fas::json::parser::_value_>()(deser, r);
+      /*r = deser.get_aspect().template get< ::fas::json::parse::_value_>()(deser, r);
       t.get_aspect().template get<_invalid_request_>()(t );
       */
       typedef typename T::aspect::template advice_cast<_parser_>::type parser;

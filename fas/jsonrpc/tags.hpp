@@ -3,6 +3,7 @@
 
 namespace fas{ namespace jsonrpc{
 
+  /*
 struct _jsonrpc_;
 struct _input_;
 struct _output_;
@@ -70,6 +71,7 @@ struct _parser_;
 
 struct _switch_deserialize_;
 struct _deserialize_params_;
+*/
  
 }}
 

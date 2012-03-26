@@ -112,17 +112,17 @@ private:
     
     value_type item = value_type();
     
-    r = t.get_aspect().template get< parser::_space_ >()(t, r);
+    r = t.get_aspect().template get< parse::_space_ >()(t, r);
     R current = t.get_aspect().template get< deserializer_tag >()(t, target(), item, r);
     if ( r ==  current )
-      r = t.get_aspect().template get< parser::_value_ >()(t, r);
+      r = t.get_aspect().template get< parse::_value_ >()(t, r);
     else
     {
       r = current;
       *(varr++) = item;
       --counter;
     }
-    r = t.get_aspect().template get< parser::_space_ >()(t, r);
+    r = t.get_aspect().template get< parse::_space_ >()(t, r);
     return r;
   }
 
@@ -133,17 +133,17 @@ private:
     typedef typename target::deserializer_tag deserializer_tag;
     typedef typename VR::value_type value_type;
     
-    r = t.get_aspect().template get< parser::_space_ >()(t, r);
+    r = t.get_aspect().template get< parse::_space_ >()(t, r);
     R current = t.get_aspect().template get< deserializer_tag >()(t, target(), *varr, r);
     if ( r ==  current )
-      r = t.get_aspect().template get< parser::_value_ >()(t, r);
+      r = t.get_aspect().template get< parse::_value_ >()(t, r);
     else
     {
       r = current;
       ++varr;
       --counter;
     }
-    r = t.get_aspect().template get< parser::_space_ >()(t, r);
+    r = t.get_aspect().template get< parse::_space_ >()(t, r);
     return r;
   }
 

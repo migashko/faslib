@@ -19,7 +19,7 @@ UNIT(space_test, "parse space")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
   ad_space ads;
   std::string s = "";
   typedef random_access_range<std::string::const_iterator> range_type;
@@ -63,7 +63,7 @@ UNIT(copy_space_test, "copy parse space")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
   
   std::string dst;
   ad_space ads;
@@ -121,7 +121,7 @@ UNIT(wspace_test, "parse space wide char")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
   ad_space ads;
   std::wstring s = L"";
   typedef random_access_range<std::wstring::const_iterator> range_type;
@@ -140,7 +140,7 @@ UNIT(copy_wspace_test, "copy parse space wide char")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
   
   std::string dst;
   ad_space ads;
@@ -158,7 +158,7 @@ UNIT(null_test, "parse null from file")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   {
     std::ofstream ofs("test_null.txt");
@@ -180,7 +180,7 @@ UNIT(copy_null_test, "copy parse null from file")
 {
   using namespace fas;
   using namespace fas::testing;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   typedef std::istreambuf_iterator<char> iterator;
   typedef input_range< iterator > range_type;
@@ -197,7 +197,7 @@ UNIT(bool_test, "parse bool")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_boolean ads;
 
@@ -231,7 +231,7 @@ UNIT(copy_bool_test, "copy parse bool")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_boolean ads;
 
@@ -256,7 +256,7 @@ UNIT(number_test, "parse number")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_number ads;
 
@@ -281,7 +281,7 @@ UNIT(copy_number_test, "parse number")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_number ads;
 
@@ -310,7 +310,7 @@ UNIT(string_test, "parse string")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_string ads;
 
@@ -335,7 +335,7 @@ UNIT(copy_string_test, "copy parse string")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_string ads;
 
@@ -364,7 +364,7 @@ UNIT(simple_string_test, "parse simple string")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_simple_string ads;
 
@@ -389,7 +389,7 @@ UNIT(copy_simple_string_test, "copy parse simple string")
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json;
-  using namespace fas::json::parser;
+  using namespace fas::json::parse;
 
   ad_simple_string ads;
 
