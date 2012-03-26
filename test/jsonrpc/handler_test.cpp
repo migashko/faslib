@@ -15,7 +15,9 @@ UNIT(handler, "")
 
   ajr::handler<> h;
 
-  // h( fas::range( jsonrpc ) );
+  h( fas::range( jsonrpc ) );
+  
+  std::cout << std::endl << "[" << h.result() << "]"<< std::endl;
 }
 
 UNIT(handler_client, "")

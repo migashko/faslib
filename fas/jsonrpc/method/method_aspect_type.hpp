@@ -8,9 +8,9 @@
 #include <fas/jsonrpc/method/ad_notify_handler.hpp>
 #include <fas/jsonrpc/method/ad_request_handler.hpp>
 #include <fas/jsonrpc/method/ad_parse_notify.hpp>
-#include <fas/jsonrpc/method/ad_parse_request.hpp>
+#include <fas/jsonrpc/method/ad_parse_request_stub.hpp>
 #include <fas/jsonrpc/method/ad_send_result.hpp>
-#include <fas/jsonrpc/tags.hpp>
+#include <fas/jsonrpc/method/tags.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
 
@@ -24,6 +24,9 @@
 namespace fas{ namespace jsonrpc{ 
   
 typedef type_list_n<
+  advice< _parse_request_, ad_parse_request_stub >,
+  //advice< _send_result_, ad_send_result_null>, 
+  stub<_context_>
   /*
   advice< _notify_, ad_notify_stub >,
   definition<_notify_value_, empty_type>,

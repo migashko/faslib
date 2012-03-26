@@ -29,10 +29,10 @@ struct ad_object
 
     if ( !try_(t) )
       return r;
-
+    
     if ( !r )
       return throw_(t, out_of_range(), r);
-
+    
     *(r++)='}';
     
     return r;

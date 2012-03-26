@@ -4,7 +4,7 @@
 namespace fas{ namespace jsonrpc{
 
 struct _foreach_error_;
-struct _foreach_resonse_;
+struct _foreach_response_;
 
 }}
 

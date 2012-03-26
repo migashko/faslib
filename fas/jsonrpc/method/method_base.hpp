@@ -2,6 +2,7 @@
 #define FAS_JSONRPC_METHOD_METHOD_BASE_HPP
 
 #include <stdexcept>
+#include <fas/jsonrpc/method/tags.hpp>
 
 namespace fas{ namespace jsonrpc{
 

@@ -1,27 +1,30 @@
 #ifndef FAS_JSONRPC_METHOD_AD_REQUEST_HANDLER_HPP
 #define FAS_JSONRPC_METHOD_AD_REQUEST_HANDLER_HPP
 
-#include <fas/jsonrpc/tags.hpp>
+#include <fas/jsonrpc/error/tags.hpp>
+#include <fas/jsonrpc/method/tags.hpp>
 
 
 namespace fas{ namespace jsonrpc{ 
 
 struct ad_request_handler
 {
-  template<typename T, typename TM>
-  void operator()(T& t, TM& tm, const typename TM::request_value_type& v, int id)
+  template<typename T, typename M, typename V>
+  void operator()(T& t, M& m, const V& v, int id)
   {
     try
     {
       // TODO: сделать проверку ids
-      tm.get_aspect().template get<_request_>()(t, v, id);
+      m.get_aspect().template get<_request_>()(t, m, v, id);
     }
     catch(const std::exception& /*e*/)
     {
+      t.get_aspect().template get<_internal_error_>()(t, id);
       // server error
     }
     catch(...)
     {
+      t.get_aspect().template get<_internal_error_>()(t, id);
       // server error
     }
   }

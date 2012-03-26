@@ -418,6 +418,8 @@ inline void show_total_result( const suite_counts& sc )
 #define ADD_UNIT(name) ,name##_type_list
 #define ADD_CLASS(name) , ::fas::advice<name, name>
 #define ADD_ADVICE(tag, name) , ::fas::advice<tag, name>
+#define ADD_VALUE_ADVICE(tag, name) , ::fas::value_advice<tag, name>
+#define ADD_DEFINITION(tag, name) , ::fas::definition<tag, name>
 #define ADD_GROUP(tag, tag_list) , ::fas::group<tag, tag_list>
 #define ADD_STUB(tag) , ::fas::stub<tag>
 #define ADD_ASPECT(aspect) , aspect

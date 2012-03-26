@@ -9,7 +9,7 @@ struct f_response
   const Obj& obj;
   bool ready;
 
-  f_error(const Obj& obj)
+  f_response(const Obj& obj)
     : obj(obj)
     , ready(false)
   {}
@@ -22,12 +22,13 @@ struct f_response
     if ( !t.get_aspect().template get<Tg>()
            .get_aspect().template get<_ids_>()
            .has( obj.id )
+       )
       return;
 
     ready = true;
 
     t.get_aspect().template get<Tg>()
-     .get_aspect().template get<_process_response_>()
+     .get_aspect().template get<_parse_response_>()
      (
         t,
         t.get_aspect().template get<Tg>(),

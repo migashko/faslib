@@ -22,7 +22,7 @@ struct ad_process_object
     }
     else if ( obj.is_result() )
     {
-      t.get_aspect().template get<_foreach_resonse_>()(t, obj);
+      t.get_aspect().template get<_foreach_response_>()(t, obj);
     }
     else if ( obj.is_error() )
     {

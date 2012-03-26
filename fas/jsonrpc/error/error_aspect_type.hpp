@@ -5,6 +5,7 @@
 #include <fas/jsonrpc/error/ad_method_not_found.hpp>
 #include <fas/jsonrpc/error/ad_not_impl.hpp>
 #include <fas/jsonrpc/error/ad_parsing_error.hpp>
+#include <fas/jsonrpc/error/ad_internal_error.hpp>
 #include <fas/jsonrpc/error/ad_send_error.hpp>
 
 #include <fas/jsonrpc/error/tags.hpp>
@@ -21,6 +22,7 @@ typedef type_list_n<
   advice< _method_not_found_, ad_method_not_found >,
   advice< _not_impl_, ad_not_impl >,
   advice< _parsing_error_, ad_parsing_error >,
+  advice< _internal_error_, ad_internal_error >,
   advice< _send_error_, ad_send_error >
 >::type error_advice_list;
 

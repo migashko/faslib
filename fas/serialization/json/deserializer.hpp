@@ -19,7 +19,7 @@ public:
 
   operator bool () const
   {
-    return super::get_aspect().template get<_except_>();
+    return !super::get_aspect().template get<_except_>();
   }
 
   

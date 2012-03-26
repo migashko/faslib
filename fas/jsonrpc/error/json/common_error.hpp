@@ -9,7 +9,8 @@ namespace fas{ namespace jsonrpc{
 struct common_error
 {
   int id;
-  error_code::type code;
+  /*error_code::type code;*/
+  int code;
   
   common_error(error_code::type code, int id)
     : id(id)

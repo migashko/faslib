@@ -5,6 +5,7 @@ namespace fas{ namespace jsonrpc{
 
 struct _send_;
 struct _output_;
+struct _buffer_;
 
 }}
 

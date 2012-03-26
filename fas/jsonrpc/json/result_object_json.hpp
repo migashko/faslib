@@ -14,7 +14,7 @@ struct result_object_json:
   aj::object<
     typename type_list_n<
       aj::member< n_jsonrpc, aj::tstring<version> >,
-      aj::member< n_result,  aj::attr< O, V ,  &O::result,  aj::pointer<J> > >,
+      aj::member< n_result,  aj::attr< O, const V* ,  &O::result,  aj::pointer<J> > >,
       aj::member< n_id,      aj::attr< O, int, &O::id,      aj::integer > >
     >::type
   >

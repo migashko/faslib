@@ -7,9 +7,11 @@ template<typename Obj>
 struct f_error
 {
   const Obj& obj;
+  bool ready;
   
   f_error(const Obj& obj)
     : obj(obj)
+    , ready(false)
   {}
   
   template<typename T, typename Tg>
@@ -20,6 +22,7 @@ struct f_error
     if ( !t.get_aspect().template get<Tg>()
            .get_aspect().template get<_ids_>()
            .has( obj.id )
+       )
       return;
     
     t.get_aspect().template get<Tg>()

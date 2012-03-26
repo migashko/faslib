@@ -8,6 +8,7 @@ struct _method_not_found_;
 struct _not_impl_;
 struct _parsing_error_;
 struct _send_error_;
+struct _internal_error_;
 
 }}
 

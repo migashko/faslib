@@ -1,7 +1,7 @@
 #ifndef FAS_JSONRPC_METHOD_AD_REQUEST_STUB_HPP
 #define FAS_JSONRPC_METHOD_AD_REQUEST_STUB_HPP
 
-#include <fas/jsonrpc/tags.hpp>
+#include <fas/jsonrpc/error/tags.hpp>
 
 // todo: убрать
 
