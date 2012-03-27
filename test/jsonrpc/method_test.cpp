@@ -73,8 +73,31 @@ UNIT(request, "")
   mtr.get_aspect().get<ajr::_parse_response_>()(t, mtr, fas::range(jsonstring), 1 );
   std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
 
+  mtr.get_aspect().template get< ajr::_method_id_>().push(1);
   mtr.error( t, mtr, ajr::custom_error(-1, "my errror"), 1 );
+
   std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
+  
+  mtr.get_aspect().template get< ajr::_method_id_>().push(1);
+  mtr.error( t, mtr, 33, "my errror", 1 );
+
+  std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
+
+  mtr.get_aspect().template get< ajr::_method_id_>().push(1);
+  mtr.error( t, mtr, ajr::error_code::internal_error, 1 );
+
+  std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
+
+  mtr.get_aspect().template get< ajr::_method_id_>().push(1);
+  t.get_aspect().template get< ajr::_send_error_>()( t, 44, "message error" );
+
+  std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
+
+  mtr.get_aspect().template get< ajr::_method_id_>().push(1);
+  mtr.error( t, mtr, ajr::custom_error(ajr::error_code::internal_error), 1 );
+
+  std::cout << "[[" << t.get_aspect().template get< ajr::_buffer_>() << "]]" << std::endl;
+
 }
 
 BEGIN_SUITE(method_suite, "json-rpc method suite")

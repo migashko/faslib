@@ -1,6 +1,7 @@
 #ifndef FAS_JSONRPC_ASPECT_TYPE_HPP
 #define FAS_JSONRPC_ASPECT_TYPE_HPP
 
+#include <fas/jsonrpc/inbound/inbound_aspect.hpp>
 #include <fas/jsonrpc/invoke/invoke_aspect.hpp>
 #include <fas/jsonrpc/error/error_aspect.hpp>
 #include <fas/jsonrpc/json/json_aspect.hpp>
@@ -23,6 +24,7 @@ namespace fas{ namespace jsonrpc{
 */
   
 typedef type_list_n<
+  inbound_aspect,
   error_aspect,
   json_aspect,
   invoke_aspect,

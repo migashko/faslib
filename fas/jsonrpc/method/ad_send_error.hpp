@@ -19,7 +19,7 @@ template<
 struct ad_send_method_error
 {
   template<typename T, typename M>
-  void operator()(T& t, M& method, const V& result, int id)
+  void operator()(T& t, M& method, const V& user_error, int id)
   {
     typedef custom_error_object<V> error_value;
     typedef custom_error_message_json< error_value, V, J> error_json;
@@ -29,11 +29,41 @@ struct ad_send_method_error
     if ( send_ready )
     {
       method.get_aspect().template get<_method_id_>().pop(id);
-      send_ready = t.get_aspect().template get<_send_>()( t, error_json(), error_value(result, id) );
+      send_ready = t.get_aspect().template get<_send_>()( t, error_json(), error_value(user_error, id) );
     }
 
     if ( !send_ready )
-      method.get_aspect().template get<_send_error_fail_>()( t, method, result, id );
+      method.get_aspect().template get<_send_error_fail_>()( t, method, user_error, id );
+  }
+
+  template<typename T, typename M>
+  void operator()(T& t, M& method, error_code::type code, int id)
+  {
+    register bool send_ready = method.get_aspect().template get<_method_id_>().has(id);
+
+    if ( send_ready )
+    {
+      method.get_aspect().template get<_method_id_>().pop(id);
+      send_ready = t.get_aspect().template get<_send_error_>()( t, code, id );
+    }
+
+    if ( !send_ready )
+      method.get_aspect().template get<_send_error_fail_>()( t, method, custom_error(code), id );
+  }
+
+  template<typename T, typename M>
+  void operator()(T& t, M& method, int code, const std::string& message, int id)
+  {
+    register bool send_ready = method.get_aspect().template get<_method_id_>().has(id);
+
+    if ( send_ready )
+    {
+      method.get_aspect().template get<_method_id_>().pop(id);
+      send_ready = t.get_aspect().template get<_send_error_>()( t, code, message, id );
+    }
+
+    if ( !send_ready )
+      method.get_aspect().template get<_send_error_fail_>()( t, method, custom_error(code, message), id );
   }
 
 /// Только в ручную (не через method::error)

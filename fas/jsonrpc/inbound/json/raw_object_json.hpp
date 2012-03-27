@@ -1,10 +1,17 @@
-#ifndef FAS_JSONRPC_JSON_RAW_OBJECT_JSON_HPP
-#define FAS_JSONRPC_JSON_RAW_OBJECT_JSON_HPP
+#ifndef FAS_JSONRPC_INBOUND_JSON_RAW_OBJECT_JSON_HPP
+#define FAS_JSONRPC_INBOUND_JSON_RAW_OBJECT_JSON_HPP
 
-#include <fas/jsonrpc/json/raw_object.hpp>
+#include <fas/jsonrpc/inbound/raw_object.hpp>
 #include <fas/jsonrpc/names.hpp>
 
-#include <fas/serialization/json/meta.hpp>
+#include <fas/serialization/json/meta/string.hpp>
+#include <fas/serialization/json/meta/integer.hpp>
+#include <fas/serialization/json/meta/raw.hpp>
+#include <fas/serialization/json/meta/attr.hpp>
+#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/object.hpp>
+#include <fas/serialization/json/meta/readonly.hpp>
+
 
 #include <fas/type_list/type_list_n.hpp>
 

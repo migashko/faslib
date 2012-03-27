@@ -8,7 +8,7 @@ namespace fas{ namespace jsonrpc{
 struct ad_send_error_fail
 {
   template<typename T, typename M, typename V>
-  void operator() (T& t, M&, V&, int id)
+  void operator() (T& t, M&, const V&, int id)
   {
   }
 };
