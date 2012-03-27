@@ -1,6 +1,8 @@
 #ifndef FAS_JSONRPC_INVOKE_FOREACH_RESPONSE_HPP
 #define FAS_JSONRPC_INVOKE_FOREACH_RESPONSE_HPP
 
+#include <fas/jsonrpc/method/remote/tags.hpp>
+
 namespace fas{ namespace jsonrpc{
 
 template<typename Obj>

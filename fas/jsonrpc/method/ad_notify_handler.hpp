@@ -2,7 +2,7 @@
 #define FAS_JSONRPC_METHOD_AD_NOTIFY_HANDLER_HPP
 
 #include <fas/jsonrpc/method/tags.hpp>
-
+#include <fas/jsonrpc/method/error/tags.hpp>
 
 namespace fas{ namespace jsonrpc{ 
 
@@ -17,11 +17,11 @@ struct ad_notify_handler
     }
     catch(const std::exception& e)
     {
-      method.get_aspect().template get<_notify_error_>()(t, method, v, e);
+      method.get_aspect().template get<_notify_except_>()(t, method, v, e);
     }
     catch(...)
     {
-      method.get_aspect().template get<_notify_error_>()(t, method, v);
+      method.get_aspect().template get<_notify_except_>()(t, method, v);
     }
   }
 };

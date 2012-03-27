@@ -25,16 +25,22 @@ template<
 struct ad_send_result
 {
   template<typename T, typename M>
-  void operator()(T& t, M& , const V& result, int id)
+  void operator()(T& t, M& method, const V& result, int id)
   {
-    /*
-    typedef typename M::aspect::template advice_cast<_result_value_>::type result_value;
-    typedef typename M::aspect::template advice_cast<_result_json_>::type result_json;
-    */
     typedef result_object<V> result_value;
     typedef result_object_json< result_value, V, J> result_json;
+
+    register bool send_ready = method.get_aspect().template get<_method_id_>().has(id);
+
+    if ( send_ready )
+    {
+      method.get_aspect().template get<_method_id_>().pop(id);
+      send_ready = t.get_aspect().template get<_send_>()( t, result_json(), result_value(result, id) );
+    }
+
+    if ( !send_ready )
+      method.get_aspect().template get<_send_result_fail_>()( t, method, result, id );
     
-    t.get_aspect().template get<_send_>()( t, result_json(), result_value(result, id) );
   }
 };
 

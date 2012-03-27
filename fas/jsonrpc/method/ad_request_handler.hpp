@@ -2,6 +2,7 @@
 #define FAS_JSONRPC_METHOD_AD_REQUEST_HANDLER_HPP
 
 #include <fas/jsonrpc/method/tags.hpp>
+#include <fas/jsonrpc/method/error/tags.hpp>
 
 
 namespace fas{ namespace jsonrpc{ 
@@ -18,11 +19,11 @@ struct ad_request_handler
     }
     catch(const std::exception& e)
     {
-      method.get_aspect().template get<_request_error_>()(t, method, v, e, id);
+      method.get_aspect().template get<_request_except_>()(t, method, v, e, id);
     }
     catch(...)
     {
-      method.get_aspect().template get<_request_error_>()(t, method, v, id);
+      method.get_aspect().template get<_request_except_>()(t, method, v, id);
     }
   }
 };

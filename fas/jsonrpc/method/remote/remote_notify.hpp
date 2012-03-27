@@ -3,7 +3,7 @@
 
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/json/notify_object_json.hpp>
-#include <fas/jsonrpc/method/ad_send_notify.hpp>
+#include <fas/jsonrpc/method/remote/ad_send_notify.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
 #include <fas/aop/advice.hpp>

@@ -3,6 +3,8 @@
 
 #include <stdexcept>
 #include <fas/jsonrpc/method/tags.hpp>
+#include <fas/jsonrpc/method/remote/tags.hpp>
+#include <fas/jsonrpc/error/error_code.hpp>
 
 namespace fas{ namespace jsonrpc{
 
@@ -82,6 +84,24 @@ public:
   int request(T& t, M& m, const V& params)
   {
     return super::get_aspect().template get<_send_request_>()(t, m, params);
+  }
+
+  template<typename T,typename M, typename V>
+  void error(T& t, M& m, const V& message, int id)
+  {
+    super::get_aspect().template get<_send_error_>()(t, m, message, id);
+  }
+
+  template<typename T,typename M>
+  void error(T& t, M& m, int code, const std::string& message, int id)
+  {
+    super::get_aspect().template get<_send_error_>()(t, m, code, message, id);
+  }
+
+  template<typename T,typename M>
+  void error(T& t, M& m, error_code::type code, int id)
+  {
+    super::get_aspect().template get<_send_error_>()(t, m, code, id);
   }
 
 ///<- jsonrpc interface

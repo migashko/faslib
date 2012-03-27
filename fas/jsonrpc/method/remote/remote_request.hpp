@@ -4,7 +4,7 @@
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/json/request_object.hpp>
 #include <fas/jsonrpc/json/request_object_json.hpp>
-#include <fas/jsonrpc/method/ad_send_request.hpp>
+#include <fas/jsonrpc/method/remote/ad_send_request.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
 #include <fas/aop/advice.hpp>

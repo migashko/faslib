@@ -3,6 +3,7 @@
 
 #include <fas/jsonrpc/outgoing/tags.hpp>
 #include <fas/jsonrpc/method/tags.hpp>
+#include <fas/jsonrpc/method/error/tags.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
 #include <fas/jsonrpc/json/notify_object_json.hpp>
@@ -29,7 +30,7 @@ struct ad_send_notify
     typedef notify_object_json< name_type, J> notify_json;
     
     if ( !t.get_aspect().template get<_send_>()( t, notify_json(), params ) )
-      method.get_aspect().template get< _send_notify_error_ >()(t, method, params);
+      method.get_aspect().template get< _send_notify_fail_ >()(t, method, params);
   }
 };
 

@@ -3,6 +3,7 @@
 
 #include <fas/jsonrpc/outgoing/tags.hpp>
 #include <fas/jsonrpc/method/tags.hpp>
+#include <fas/jsonrpc/method/error/tags.hpp>
 #include <fas/jsonrpc/invoke/tags.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
@@ -40,7 +41,7 @@ struct ad_send_request
     {
       t.get_aspect().template get< _remote_id_ >().pop(id);
       method.get_aspect().template get< _remote_id_ >().pop(id);
-      method.get_aspect().template get< _send_request_error_ >()(t, method, params, id);
+      method.get_aspect().template get< _send_request_fail_ >()(t, method, params, id);
       return -1;
     }
     return id;

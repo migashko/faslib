@@ -6,14 +6,16 @@
 #include <fas/jsonrpc/method/name.hpp>
 #include <fas/jsonrpc/method/request.hpp>
 #include <fas/jsonrpc/method/result.hpp>
-#include <fas/jsonrpc/method/remote_notify.hpp>
-#include <fas/jsonrpc/method/remote_request.hpp>
-#include <fas/jsonrpc/method/remote_result.hpp>
+#include <fas/jsonrpc/method/remote/remote_notify.hpp>
+#include <fas/jsonrpc/method/remote/remote_request.hpp>
+#include <fas/jsonrpc/method/remote/remote_result.hpp>
 #include <fas/jsonrpc/method/notify.hpp>
+#include <fas/jsonrpc/method/error.hpp>
 
 #include <fas/jsonrpc/outgoing/outgoing_aspect.hpp>
 #include <fas/jsonrpc/json/json_aspect.hpp>
 #include <fas/jsonrpc/error/error_aspect.hpp>
+#include <fas/jsonrpc/error/json/custom_error.hpp>
 #include <fas/jsonrpc/invoke/invoke_aspect.hpp>
 #include <fas/range.hpp>
 
@@ -51,6 +53,7 @@ typedef ajr::method<
     ajr::request< method_request, method_request::params_type, aj::array<aj::integer> >,
     ajr::result<int, aj::integer>,
     ajr::notify< method_notify, method_notify::params_type, aj::array<aj::integer> >,
+    ajr::method_error<>,
     ajr::remote_notify< int, aj::integer>,
     ajr::remote_request< int, aj::integer>,
     ajr::remote_result< method_request, method_request::params_type, aj::array<aj::integer> >
@@ -68,6 +71,9 @@ UNIT(request, "")
   mtr.get_aspect().get<ajr::_parse_notify_>()(t, mtr, fas::range(jsonstring) );
   std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
   mtr.get_aspect().get<ajr::_parse_response_>()(t, mtr, fas::range(jsonstring), 1 );
+  std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
+
+  mtr.error( t, mtr, ajr::custom_error(-1, "my errror"), 1 );
   std::cout << "[" << t.get_aspect().template get< ajr::_buffer_>() << "]" << std::endl;
 }
 

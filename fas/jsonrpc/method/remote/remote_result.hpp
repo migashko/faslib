@@ -1,12 +1,12 @@
 #ifndef FAS_JSONRPC_METHOD_REMOTE_RESULT_HPP
 #define FAS_JSONRPC_METHOD_REMOTE_RESULT_HPP
 
-#include <fas/jsonrpc/method/tags.hpp>
+#include <fas/jsonrpc/method/remote/tags.hpp>
 #include <fas/jsonrpc/method/value_wrapper.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
-#include <fas/jsonrpc/method/ad_parse_response.hpp>
-#include <fas/jsonrpc/method/ad_response_handler.hpp>
+#include <fas/jsonrpc/method/remote/ad_parse_response.hpp>
+#include <fas/jsonrpc/method/remote/ad_response_handler.hpp>
 
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
