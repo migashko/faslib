@@ -6,6 +6,7 @@
 
 namespace fas{ namespace jsonrpc{ 
 
+  /*
 struct ad_parse_request_stub
 {
   template<typename T, typename M, typename R>
@@ -14,7 +15,7 @@ struct ad_parse_request_stub
     t.get_aspect().template get<_not_impl_>()(t, id);
   }
 };
-
+*/
 
 }}
 

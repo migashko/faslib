@@ -12,27 +12,11 @@ namespace fas{ namespace jsonrpc{
 struct ad_send
 {
   template<typename T, typename M, typename V>
-  void operator() (T& t, M, const V& value)
+  bool operator() (T& t, M, const V& value)
   {
     typedef typename T::aspect::template advice_cast< _buffer_ >::type buffer_type;
     
-    if ( !_send(t, M(), value, type2type<buffer_type>() ) )
-      throw ;
-    /*
-    typedef typename range_traits< buffer_type >::init_range init_range_type;
-    typedef typename range_traits< buffer_type >::range range_type;
-    
-    buffer_type& buffer = t.get_aspect().template get<_buffer_>();
-
-    serializer s;
-    s( M(), value, init_range(buffer, true) );
-    
-    if ( s )
-      t.get_aspect().template get<_output_>()( t, range( buffer ) );
-    else
-      throw 
-      */
-      /* недостаточно буфера */;
+    return _send(t, M(), value, type2type<buffer_type>() ) ;
   }
   
 private:

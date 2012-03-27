@@ -15,9 +15,7 @@ namespace fas{ namespace jsonrpc{
   
 template< typename V = const void*, typename J = ::fas::json::null >
 struct result: type_list_n<
-      advice< _send_result_, ad_send_result>,
-      definition<_result_value_, result_object<V> >,
-      definition<_result_json_, result_object_json< result_object<V>, V, J>  >
+      advice< _send_result_, ad_send_result< V, J, result_object, result_object_json > >
     >::type
 {};
 

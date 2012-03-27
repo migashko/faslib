@@ -20,7 +20,7 @@ struct f_response
     if (ready) return;
     
     if ( !t.get_aspect().template get<Tg>()
-           .get_aspect().template get<_ids_>()
+           .get_aspect().template get<_remote_id_>()
            .has( obj.id )
        )
       return;

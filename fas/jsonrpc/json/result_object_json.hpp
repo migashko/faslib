@@ -1,5 +1,5 @@
 #ifndef FAS_JSONRPC_JSON_RESULT_OBJECT_JSON_HPP
-#define FAS_JSONRPC_JSON_RESPONSE_OBJECT_JSON_HPP
+#define FAS_JSONRPC_JSON_RESULT_OBJECT_JSON_HPP
 
 #include <fas/jsonrpc/names.hpp>
 #include <fas/serialization/json/meta.hpp>

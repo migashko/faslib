@@ -30,7 +30,8 @@ struct ad_process_object
     }
     else
     {
-      t.get_aspect().template get<_send_error_>()(t, error_code::internal_error);
+      // Сюда не должен заходть, т.к. должны передавать валидный объект
+      // t.get_aspect().template get<_send_error_>()(t, error_code::internal_error);
     }
   }
 };

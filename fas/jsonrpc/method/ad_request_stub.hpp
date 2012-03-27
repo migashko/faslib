@@ -5,6 +5,7 @@
 
 // todo: убрать
 
+/*
 namespace fas{ namespace jsonrpc{ 
 
 struct ad_request_stub
@@ -16,7 +17,6 @@ struct ad_request_stub
   }
 };
 
-
 }}
-
+*/
 #endif

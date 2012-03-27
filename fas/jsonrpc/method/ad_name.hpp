@@ -10,6 +10,7 @@ namespace fas{ namespace jsonrpc{
 template<typename N>
 struct ad_name
 {
+  typedef N name_type;
   typedef string_range< typename N::value_type > range_type;
   
   typename N::value_type operator()() const 

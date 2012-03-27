@@ -1,6 +1,8 @@
 #ifndef FAS_JSONRPC_INVOKE_FOREACH_ERROR_HPP
 #define FAS_JSONRPC_INVOKE_FOREACH_ERROR_HPP
 
+#include <fas/jsonrpc/invoke/remote/tags.hpp>
+
 namespace fas{ namespace jsonrpc{
   
 template<typename Obj>
@@ -20,7 +22,7 @@ struct f_error
     if (ready) return;
     
     if ( !t.get_aspect().template get<Tg>()
-           .get_aspect().template get<_ids_>()
+           .get_aspect().template get<_remote_id_>()
            .has( obj.id )
        )
       return;
@@ -44,7 +46,10 @@ struct ad_foreach_error
   template<typename T, typename Obj>
   void operator()(T& t, const Obj& obj )
   {
-    t.get_aspect().template getg<_error_group_>().for_each(t, f_error<Obj>( obj ) );
+    if ( t.get_aspect().template get<_remote_id_>().has(obj.id) )
+      t.get_aspect().template getg<_error_group_>().for_each(t, f_error<Obj>( obj ) );
+    else
+      /*Отправить ошибку*/;
   }
 };
 

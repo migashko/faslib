@@ -71,7 +71,19 @@ public:
   {
     super::get_aspect().template get<_send_result_>()(t, m, result, id);
   }
-  
+
+  template<typename T,typename M, typename V>
+  void notify(T& t, M& m, const V& params)
+  {
+    super::get_aspect().template get<_send_notify_>()(t, m, params);
+  }
+
+  template<typename T,typename M, typename V>
+  int request(T& t, M& m, const V& params)
+  {
+    return super::get_aspect().template get<_send_request_>()(t, m, params);
+  }
+
 ///<- jsonrpc interface
 
 /// Для удобства 

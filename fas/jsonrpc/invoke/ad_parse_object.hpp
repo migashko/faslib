@@ -2,7 +2,6 @@
 #define FAS_JSONRPC_INVOKE_PARSE_OBJECT_HPP
 
 #include <fas/jsonrpc/tags.hpp>
-#include <fas/jsonrpc/aspect.hpp>
 
 #include <fas/jsonrpc/json/raw_object.hpp>
 #include <fas/jsonrpc/json/raw_object_json.hpp>

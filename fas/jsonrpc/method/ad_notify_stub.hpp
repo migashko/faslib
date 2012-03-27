@@ -7,6 +7,7 @@
 // todo: убрать
 namespace fas{ namespace jsonrpc{ 
 
+/*
 struct ad_notify_stub
 {
   template<typename T>
@@ -15,7 +16,7 @@ struct ad_notify_stub
     t.get_aspect().template get<_not_impl_>()(t);
   }
 };
-
+*/
 
 }}
 

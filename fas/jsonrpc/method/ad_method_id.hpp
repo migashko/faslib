@@ -1,18 +1,19 @@
-#ifndef FAS_JSONRPC_AD_IDS_HPP
-#define FAS_JSONRPC_AD_IDS_HPP
+#ifndef FAS_JSONRPC_METHOD_AD_METHOD_IDS_HPP
+#define FAS_JSONRPC_METHOD_AD_METHOD_IDS_HPP
 
 #include <set>
 
 namespace fas{ namespace jsonrpc{ 
 
+// for id only greater zero
 template<typename C = std::set<int> >
-class ad_ids
+class ad_method_id
 {
 public:
 
   typedef C container_type;
   
-  ad_ids(): _current_id(-1) { }
+  ad_method_id(): _current_id(-1) { }
   
   void push(int id) 
   {
@@ -45,7 +46,9 @@ class ad_ids_simple
 public:
 
   ad_ids_simple(): _current_id(-1) { }
-  
+
+  int new_id() { return 1; }
+
   void push(int id) { _current_id = id; }
   
   void pop(int id)  { _current_id = -1; }
@@ -60,6 +63,8 @@ class ad_ids_empty
 {
 public:
 
+  int new_id() { return 1; }
+  
   void push(int id) {  }
   
   void pop(int id)  {  }
@@ -70,6 +75,8 @@ public:
 class ad_no_ids
 {
 public:
+
+  int new_id() { return 1; }
 
   void push(int id) {  }
   

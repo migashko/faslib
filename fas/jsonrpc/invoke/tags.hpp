@@ -17,6 +17,8 @@ struct _notify_group_;
 struct _response_group_;
 struct _error_group_;
 
+struct _remote_id_;
+
 }}
 
 #endif

@@ -1,27 +1,27 @@
 #ifndef FAS_JSONRPC_METHOD_AD_NOTIFY_HANDLER_HPP
 #define FAS_JSONRPC_METHOD_AD_NOTIFY_HANDLER_HPP
 
-#include <fas/jsonrpc/tags.hpp>
+#include <fas/jsonrpc/method/tags.hpp>
 
 
 namespace fas{ namespace jsonrpc{ 
 
 struct ad_notify_handler
 {
-  template<typename T, typename TM>
-  void operator()(T& t, TM& tm, const typename TM::notify_value_type& v)
+  template<typename T, typename M, typename V>
+  void operator()(T& t, M& method, const V& v)
   {
     try
     {
-      tm.get_aspect().template get<_notify_>()(t, v);
+      method.get_aspect().template get<_notify_>()(t, method, v);
     }
-    catch(const std::exception& /*e*/)
+    catch(const std::exception& e)
     {
-      // server error
+      method.get_aspect().template get<_notify_error_>()(t, method, v, e);
     }
     catch(...)
     {
-      // server error
+      method.get_aspect().template get<_notify_error_>()(t, method, v);
     }
   }
 };

@@ -7,25 +7,38 @@
 
 namespace fas{ namespace jsonrpc{ 
 
-struct ad_parse_request
+template<typename V, typename J>
+struct ad_parse_request : V
 {
+  typedef V super;
+  typedef V request_value;
+  typedef J request_json;
   template<typename T, typename M, typename R>
-  void operator()(T& t, M& m, R r, int id)
+  void operator()(T& t, M& method, R r, int id)
   {
     typedef typename T::aspect::template advice_cast<_deserializer_>::type deserializer;
-    typedef typename M::aspect::template advice_cast<_request_value_>::type request_value;
-    typedef typename M::aspect::template advice_cast<_request_json_>::type request_json;
+    typename request_value::value_type value = super::operator()(t);
+
+    register bool valid_id = id > 0 && !method.get_aspect().template get<_method_id_>().has(id);
     
-    typename request_value::value_type value = m.get_aspect().template get<_request_value_>()(t);
+
+    if ( valid_id )
+      method.get_aspect().template get<_method_id_>().push(id);
     
     deserializer ds;
     ds( request_json(), value, r );
     
     if ( !ds )
-      t.get_aspect().template get<_invalid_request_>()(t, id);
-    else
-      m.get_aspect().template get<_request_handler_>()(t, m, value, id); 
-    
+    {
+      if ( valid_id )
+        method.get_aspect().template get<_method_id_>().pop(id);
+      
+      method.get_aspect().template get<_invalid_request_>()(t, method, r, id);
+    }
+    else if ( !valid_id)
+      method.get_aspect().template get<_invalid_id_>()(t, method, value, id);
+    else 
+      method.get_aspect().template get<_request_handler_>()(t, method, value, id); 
   }
 };
 

@@ -1,7 +1,6 @@
 #ifndef FAS_JSONRPC_METHOD_AD_REQUEST_HANDLER_HPP
 #define FAS_JSONRPC_METHOD_AD_REQUEST_HANDLER_HPP
 
-#include <fas/jsonrpc/error/tags.hpp>
 #include <fas/jsonrpc/method/tags.hpp>
 
 
@@ -10,22 +9,20 @@ namespace fas{ namespace jsonrpc{
 struct ad_request_handler
 {
   template<typename T, typename M, typename V>
-  void operator()(T& t, M& m, const V& v, int id)
+  void operator()(T& t, M& method, const V& v, int id)
   {
     try
     {
       // TODO: сделать проверку ids
-      m.get_aspect().template get<_request_>()(t, m, v, id);
+      method.get_aspect().template get<_request_>()(t, method, v, id);
     }
-    catch(const std::exception& /*e*/)
+    catch(const std::exception& e)
     {
-      t.get_aspect().template get<_internal_error_>()(t, id);
-      // server error
+      method.get_aspect().template get<_request_error_>()(t, method, v, e, id);
     }
     catch(...)
     {
-      t.get_aspect().template get<_internal_error_>()(t, id);
-      // server error
+      method.get_aspect().template get<_request_error_>()(t, method, v, id);
     }
   }
 };
