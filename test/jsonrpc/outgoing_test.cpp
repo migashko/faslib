@@ -26,7 +26,7 @@ struct ad_send_fail
 struct ad_output
 {
   template<typename T, typename R>
-  void operator()(T&, R r)
+  void operator()(T& t, R r)
   {
     if ( !r ) --r;
     if ( r ) *r = '\0';
@@ -62,7 +62,8 @@ UNIT(outgoing, "")
   t << is_false<expect>( send_result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( 1, fail_count(t) ) << FAS_TESTING_FILE_LINE;
   
-  t << equal<expect, std::string>( buffer, "[0,0,0,0,0" ) << FAS_TESTING_FILE_LINE
+  buffer[9]='\0';
+  t << equal<expect, std::string>( buffer, "[0,0,0,0," ) << FAS_TESTING_FILE_LINE
     << std::endl << buffer << std::endl;
 
   std::string test="test";

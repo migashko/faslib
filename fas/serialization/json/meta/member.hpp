@@ -16,6 +16,8 @@
 #include <fas/serialization/json/meta/is_string.hpp>
 #include <fas/serialization/json/meta/metalist.hpp>
 
+#include <fas/type_list/type_list_n.hpp>
+
 namespace fas{ namespace json{
 
 

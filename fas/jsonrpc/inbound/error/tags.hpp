@@ -4,6 +4,7 @@
 namespace fas{ namespace jsonrpc{
 
 struct _parse_error_;
+struct _invalid_request_;
 
 }}
 

@@ -28,7 +28,13 @@ public:
   {
     return _except;
   }
-  
+
+  template<typename T>
+  void operator()(T&, const json_error& e )
+  {
+    _except = true;
+  }
+
   template<typename T, /*typename E,*/ typename R>
   R operator()(T&, const json_error& e, R r )
   {

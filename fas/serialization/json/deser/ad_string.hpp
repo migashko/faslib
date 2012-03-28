@@ -183,7 +183,7 @@ protected:
     if ( ch >= '0' && ch<='9' ) return ch - '0';
     if ( ch >= 'a' && ch<='f' ) return (ch - 'a') + 10;
     if ( ch >= 'A' && ch<='F' ) return (ch - 'A') + 10;
-    throw_(t, invalid_json_string( distance(c) ) );
+    throw_(t, invalid_json_string( distance(c) ), c );
     return 0;
   }
 

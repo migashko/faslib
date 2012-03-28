@@ -3,6 +3,11 @@
 
 namespace fas{ namespace jsonrpc{
 
+struct _invoke_request_;
+struct _invoke_result_;
+struct _invoke_notify_;
+struct _invoke_error_;
+  /*
 struct _parse_incoming_;
 struct _process_incoming_;
 struct _parse_object_;
@@ -18,6 +23,7 @@ struct _response_group_;
 struct _error_group_;
 
 struct _remote_id_;
+*/
 
 }}
 

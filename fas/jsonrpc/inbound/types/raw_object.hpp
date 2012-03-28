@@ -28,12 +28,20 @@ struct raw_object
     std::fill_n(method, sizeof(method), 0);
   }
   
+  int get_id() const { return id; }
+  
   typedef string_range<const char*> name_range_type;
   name_range_type name_range() const { return name_range_type(method);}
   
   typedef range_traits< const raw_type >::range params_range_type;
   params_range_type params_range() const { return ::fas::range(params); }
-  
+
+  typedef range_traits< const raw_type >::range result_range_type;
+  result_range_type result_range() const { return ::fas::range(result); }
+
+  typedef range_traits< const raw_type >::range error_range_type;
+  error_range_type error_range() const { return ::fas::range(error); }
+
   bool has_method() const  { return method[0]!=0;    }
   bool has_version() const { return version[0]!=0;   }
   bool has_params() const  { return !params.empty(); }
@@ -45,7 +53,7 @@ struct raw_object
   { 
     return has_method() 
            && has_id() 
-           && has_params() 
+           //&& has_params() 
            && !has_result()
            && !has_error(); 
   }
@@ -63,7 +71,7 @@ struct raw_object
   { 
     return has_method() 
            && !has_id() 
-           && has_params() 
+           // && has_params() 
            && !has_result()
            && !has_error(); 
   }

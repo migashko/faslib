@@ -1,8 +1,8 @@
-#ifndef FAS_JSONRPC_ERROR_AD_INVALID_REQUEST_HPP
-#define FAS_JSONRPC_ERROR_AD_INVALID_REQUEST_HPP
+#ifndef FAS_JSONRPC_INBOUND_ERROR_AD_INVALID_REQUEST_HPP
+#define FAS_JSONRPC_INBOUND_ERROR_AD_INVALID_REQUEST_HPP
 
-#include <fas/jsonrpc/error/tags.hpp>
-#include <fas/jsonrpc/error/error_code.hpp>
+#include <fas/jsonrpc/outgoing/tags.hpp>
+#include <fas/jsonrpc/error_code.hpp>
 
 namespace fas{ namespace jsonrpc{ 
 

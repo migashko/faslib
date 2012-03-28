@@ -1,7 +1,7 @@
 #ifndef FAS_JSONRPC_INBOUND_JSON_RAW_OBJECT_JSON_HPP
 #define FAS_JSONRPC_INBOUND_JSON_RAW_OBJECT_JSON_HPP
 
-#include <fas/jsonrpc/inbound/raw_object.hpp>
+#include <fas/jsonrpc/inbound/types/raw_object.hpp>
 #include <fas/jsonrpc/names.hpp>
 
 #include <fas/serialization/json/meta/string.hpp>

@@ -1,20 +1,15 @@
-#ifndef FAS_JSONRPC_INVOKE_REMOTE_PARSE_INCOMING_HPP
-#define FAS_JSONRPC_INVOKE_REMOTE_PARSE_INCOMING_HPP
+#ifndef FAS_JSONRPC_INBOUND_AD_PARSE_INCOMING_HPP
+#define FAS_JSONRPC_INBOUND_AD_PARSE_INCOMING_HPP
+
+#include <fas/jsonrpc/inbound/error/tags.hpp>
+#include <fas/jsonrpc/inbound/tags.hpp>
 
 #include <fas/jsonrpc/invoke/tags.hpp>
 #include <fas/jsonrpc/json/tags.hpp>
 #include <fas/jsonrpc/error/tags.hpp>
-//#include <fas/jsonrpc/aspect.hpp>
 
 
-/*
-#include <fas/jsonrpc/raw_object.hpp>
-#include <fas/jsonrpc/raw_object_json.hpp>
-*/
 
-#include <fas/aop/aspect.hpp>
-#include <fas/aop/advice.hpp>
-#include <fas/type_list/type_list_n.hpp>
 
 namespace fas{ namespace jsonrpc{
 
@@ -40,7 +35,7 @@ struct ad_parse_incoming
       if ( p )
         t.get_aspect().template get<_invalid_request_>()(t);
       else
-        t.get_aspect().template get<_parsing_error_>()(t);
+        t.get_aspect().template get<_parse_error_>()(t);
     }
       
     return r;

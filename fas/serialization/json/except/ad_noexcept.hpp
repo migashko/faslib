@@ -25,7 +25,14 @@ struct ad_noexcept
   {
     return _except;
   }
-  
+
+  template<typename T>
+  void operator()(T&, const json_error& e )
+  {
+    _except = true;
+    _error = e;
+  }
+
   template<typename T, typename R>
   R operator()(T&, const json_error& e, R r )
   {

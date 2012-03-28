@@ -7,6 +7,7 @@ add_executable(
 
   outgoing_test.cpp
   outgoing_error_test.cpp
+  inbound_test.cpp
 
   handler_test.cpp
   common_test.cpp
