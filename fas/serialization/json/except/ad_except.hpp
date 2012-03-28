@@ -36,6 +36,11 @@ struct ad_except
     return std::string();
   }
 
+  json_error exception() const
+  {
+    return json_error("", 0);
+  }
+
 };
 
 }}

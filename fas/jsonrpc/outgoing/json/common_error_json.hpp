@@ -1,9 +1,8 @@
-#ifndef FAS_JSONRPC_ERROR_JSON_COMMON_ERROR_JSON_HPP
-#define FAS_JSONRPC_ERROR_JSON_COMMON_ERROR_JSON_HPP
+#ifndef FAS_JSONRPC_OUTGOING_JSON_COMMON_ERROR_JSON_HPP
+#define FAS_JSONRPC_OUTGOING_JSON_COMMON_ERROR_JSON_HPP
 
-#include <fas/jsonrpc/error/error_code.hpp>
-#include <fas/jsonrpc/error/json/error_code_json.hpp>
-#include <fas/jsonrpc/error/json/common_error.hpp>
+#include <fas/jsonrpc/outgoing/json/error_code_json.hpp>
+#include <fas/jsonrpc/outgoing/types/common_error.hpp>
 
 #include <fas/jsonrpc/names.hpp>
 
@@ -22,7 +21,6 @@ typedef aj::object<
   type_list_n<
     aj::member<n_code, aj::attr< common_error, int, &common_error::code, aj::integer > >,
     aj::member<n_message, aj::attr< common_error, int, &common_error::code, error_code_json > >
-    //aj::member<n_message, error_code_json >
   >::type
 > common_error_json;
   

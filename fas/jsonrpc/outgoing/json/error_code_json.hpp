@@ -1,7 +1,7 @@
-#ifndef FAS_JSONRPC_ERROR_JSON_ERROR_CODE_JSON_HPP
-#define FAS_JSONRPC_ERROR_JSON_ERROR_CODE_JSON_HPP
+#ifndef FAS_JSONRPC_OUTGOING_JSON_ERROR_CODE_JSON_HPP
+#define FAS_JSONRPC_OUTGOING_JSON_ERROR_CODE_JSON_HPP
 
-#include <fas/jsonrpc/error/error_code.hpp>
+#include <fas/jsonrpc/error_code.hpp>
 #include <fas/jsonrpc/names.hpp>
 
 #include <fas/serialization/json/meta/enumeration.hpp>
@@ -26,3 +26,4 @@ typedef aj::enumeration<
 }}
 
 #endif
+

@@ -1,7 +1,8 @@
-#ifndef FAS_JSONRPC_ERROR_JSON_CUSTOM_ERROR_HPP
-#define FAS_JSONRPC_ERROR_JSON_CUSTOM_ERROR_HPP
+#ifndef FAS_JSONRPC_OUTGOING_TYPES_CUSTOM_ERROR_HPP
+#define FAS_JSONRPC_OUTGOING_TYPES_CUSTOM_ERROR_HPP
 
-#include <fas/jsonrpc/error/json/error_code_json.hpp>
+#include <fas/jsonrpc/outgoing/json/error_code_json.hpp>
+#include <fas/jsonrpc/error_code.hpp>
 
 #include <string>
 
@@ -10,7 +11,6 @@ namespace fas{ namespace jsonrpc{
 // for serialize only 
 struct custom_error
 {
-  // int id;
   int code;
   std::string message;
   
@@ -25,6 +25,7 @@ struct custom_error
     , message(message)
   {
   }
+  
 private:
 
   template< typename T >
@@ -41,10 +42,11 @@ private:
     else
       _init( code, R() );
   }
-
    
   void _init( int code, empty_list )
   {
+    this->code = code;
+    message = "Unknown error.";
   }
 
 };

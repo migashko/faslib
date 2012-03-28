@@ -47,6 +47,12 @@ public:
     return std::string();
   }
 
+  json_error exception() const
+  {
+    return json_error("", 0);
+  }
+
+
 private:
   bool _except;
 };

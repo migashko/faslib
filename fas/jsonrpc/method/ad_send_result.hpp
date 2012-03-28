@@ -40,7 +40,6 @@ struct ad_send_result
 
     if ( !send_ready )
       method.get_aspect().template get<_send_result_fail_>()( t, method, result, id );
-    
   }
 };
 

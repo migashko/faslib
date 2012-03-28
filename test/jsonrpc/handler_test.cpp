@@ -1,16 +1,16 @@
 
 #include <fas/testing.hpp>
-#include <fas/jsonrpc/handler/handler.hpp>
+// #include <fas/jsonrpc/handler/handler.hpp>
 
 #include <fas/range.hpp>
 
 #include <string>
 
-namespace ajr = ::fas::jsonrpc;
+//namespace ajr = ::fas::jsonrpc;
 
 UNIT(handler, "")
 {
-  using namespace ::fas::testing;
+/*  using namespace ::fas::testing;
   std::string jsonrpc="{}";
 
   ajr::handler<> h;
@@ -18,6 +18,7 @@ UNIT(handler, "")
   h( fas::range( jsonrpc ) );
   
   std::cout << std::endl << "[" << h.result() << "]"<< std::endl;
+  */
 }
 
 UNIT(handler_client, "")

@@ -24,7 +24,23 @@ public:
   {
     return serialize(*this, m, v, r);
   }
-  
+
+  json_error exception() const
+  {
+    return super::get_aspect().template get< _except_ >().exception();
+  }
+
+  std::string what() const
+  {
+    return super::get_aspect().template get< _except_ >().what();
+  }
+
+  template<typename R>
+  std::string message(R r) const
+  {
+    return super::get_aspect().template get< _except_ >().message( r );
+  }
+
 protected:
 
   template<typename T, typename M, typename V, typename R>

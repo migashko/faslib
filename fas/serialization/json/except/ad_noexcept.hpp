@@ -45,6 +45,11 @@ struct ad_noexcept
     return _error.message(r);
   }
 
+  const json_error& exception() const
+  {
+    return _error;
+  }
+
 private:
   bool _except;
   json_error _error;

@@ -1,4 +1,6 @@
 #include <fas/testing.hpp>
+
+#include <fas/aop/value_advice.hpp>
 #include <fas/adv/ad_container_manager.hpp>
 #include <fas/adv/ad_aspect_select.hpp>
 #include <vector>
