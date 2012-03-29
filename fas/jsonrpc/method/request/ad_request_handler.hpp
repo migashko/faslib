@@ -1,9 +1,7 @@
-#ifndef FAS_JSONRPC_METHOD_AD_REQUEST_HANDLER_HPP
-#define FAS_JSONRPC_METHOD_AD_REQUEST_HANDLER_HPP
+#ifndef FAS_JSONRPC_METHOD_REQUEST_AD_REQUEST_HANDLER_HPP
+#define FAS_JSONRPC_METHOD_REQUEST_AD_REQUEST_HANDLER_HPP
 
-#include <fas/jsonrpc/method/tags.hpp>
-#include <fas/jsonrpc/method/error/tags.hpp>
-
+#include <fas/jsonrpc/method/request/tags.hpp>
 
 namespace fas{ namespace jsonrpc{ 
 

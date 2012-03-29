@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/method/remote/tags.hpp>
-#include <fas/jsonrpc/error/error_code.hpp>
+#include <fas/jsonrpc/error_code.hpp>
 
 namespace fas{ namespace jsonrpc{
 

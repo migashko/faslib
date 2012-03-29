@@ -29,10 +29,13 @@ struct ad_process_object
       if ( obj.has_id() ) 
         t.get_aspect().template get< _invoke_error_ >()(t, obj.result_range(), obj.get_id() );
       else
-        t.get_aspect().template get< _invoke_error_ >()(t, obj.result_range(), obj.get_id() );
+        t.get_aspect().template get< _invoke_other_error_ >()(t, obj.result_range() );
+      
     }
     else
     {
+      // Ошибка без id
+      
       // Сюда не должен заходть, т.к. должны передавать валидный объект
       // t.get_aspect().template get<_send_error_>()(t, error_code::internal_error);
     }

@@ -33,6 +33,7 @@ struct ad_send_error
   }
 
 
+  
   template<typename T>
   bool operator() (T& t, int code, const std::string& message, int id)
   {
@@ -54,7 +55,6 @@ struct ad_send_error
     
     return t.get_aspect().template get<_send_>()(t, error_json(), custom_error(code, message) );
   }
-
   
 };
 

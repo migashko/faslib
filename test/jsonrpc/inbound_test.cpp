@@ -62,6 +62,14 @@ struct ad_invoke_error
     error.assign( error_range.begin(), error_range.end() );
     this->id = id;
   }
+
+  template<typename T, typename RR>
+  void operator()( T& t, RR error_range )
+  {
+    error.assign( error_range.begin(), error_range.end() );
+    this->id = 0;
+  }
+
 };
 
 UNIT(inbound, "")
@@ -95,6 +103,7 @@ BEGIN_SUITE(inbound_suite, "inbound aspect suite")
   ADD_ADVICE( ajr::_invoke_result_, ad_invoke_result )
   ADD_ADVICE( ajr::_invoke_notify_, ad_invoke_notify )
   ADD_ADVICE( ajr::_invoke_error_, ad_invoke_error )
+  ADD_STUB( ajr::_invoke_other_error_ )
   ADD_ASPECT( ajr::inbound_aspect )
   ADD_ASPECT( ajr::outgoing_aspect )
 END_SUITE(inbound_suite)

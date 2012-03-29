@@ -56,9 +56,14 @@ private:
     R rr = s( J(), value, r );
 
     if ( s )
+    {
       t.get_aspect().template get< _output_ >()( t, rr );
+      t.get_aspect().template get< _empty_send_ >()( t);
+    }
     else
       t.get_aspect().template get< _send_failed_ >()( t, J(), value, r, s.exception() );
+
+    
 
     return (bool) s;
   }

@@ -1,5 +1,5 @@
-#ifndef FAS_JSONRPC_METHOD_AD_METHOD_IDS_HPP
-#define FAS_JSONRPC_METHOD_AD_METHOD_IDS_HPP
+#ifndef FAS_JSONRPC_ID_MANAGER_HPP
+#define FAS_JSONRPC_ID_MANAGER_HPP
 
 #include <set>
 
@@ -7,13 +7,28 @@ namespace fas{ namespace jsonrpc{
 
 // for id only greater zero
 template<typename C = std::set<int> >
-class ad_method_id
+class id_manager
 {
 public:
 
   typedef C container_type;
   
-  ad_method_id(): _current_id(-1) { }
+  id_manager(): _current_id(-1) { }
+
+  int new_id()
+  {
+    int id = 1;
+
+    if ( !_ids.empty() )
+      id = *(_ids.rbegin()) + 1;
+    
+    if ( id <= _current_id )
+      id = _current_id + 1;
+
+    this->push(id);
+    
+    return id;
+  }
   
   void push(int id) 
   {
@@ -35,55 +50,68 @@ public:
     return id == _current_id 
            || _ids.find(id)!=_ids.end();
   }
+
+  size_t size() const
+  {
+    return ( _current_id == -1 ? 0 : _current_id ) + _ids.size();
+  }
+
+  void clear()
+  {
+    _current_id = 0;
+    _ids.clear();
+  }
   
 private:
+  
   int _current_id;
   container_type _ids;
 };
 
-class ad_ids_simple
+class simple_id_manager
 {
 public:
 
-  ad_ids_simple(): _current_id(-1) { }
+  simple_id_manager(): _current_id(-1) { }
 
   int new_id() { return 1; }
 
   void push(int id) { _current_id = id; }
-  
+
   void pop(int id)  { _current_id = -1; }
-  
+
   bool has(int id) const { return id == _current_id; }
-  
+
 private:
   int _current_id;
 };
 
-class ad_ids_empty
+class empty_id_manager
 {
 public:
 
   int new_id() { return 1; }
-  
+
   void push(int id) {  }
-  
+
   void pop(int id)  {  }
-  
+
   bool has(int id) const  { return true; }
 };
 
-class ad_no_ids
+class fail_id_manager
 {
 public:
 
   int new_id() { return 1; }
 
   void push(int id) {  }
-  
+
   void pop(int id)  {  }
-  
+
   bool has(int id) const  { return false; }
 };
+
 
 
 }}

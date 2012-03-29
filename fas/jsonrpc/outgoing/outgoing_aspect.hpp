@@ -3,7 +3,9 @@
 
 #include <fas/jsonrpc/outgoing/tags.hpp>
 #include <fas/jsonrpc/outgoing/ad_send.hpp>
+#include <fas/jsonrpc/outgoing/ad_empty_send.hpp>
 #include <fas/jsonrpc/outgoing/ad_send_error.hpp>
+#include <fas/jsonrpc/outgoing/ad_send_custom_error.hpp>
 #include <fas/jsonrpc/outgoing/ad_send_failed.hpp>
 
 #include <fas/jsonrpc/outgoing/types/serializer.hpp>
@@ -23,10 +25,14 @@ struct outgoing_buffer: std::vector<char> {};
 struct outgoing_list
  : type_list_n<
     advice<_send_, ad_send>,
+    advice<_empty_send_, ad_empty_send>,
     advice<_send_error_, ad_send_error>,
+    advice<_send_custom_error_, ad_send_custom_error>,
     advice<_send_failed_, ad_send_failed>,
     definition< _serializer_, outgoing_serializer >,
-    value_advice< _buffer_, outgoing_buffer >
+    value_advice< _buffer_, outgoing_buffer >,
+    stub< _output_>,
+    stub< _empty_output_>
   >::type
 {};
 

@@ -14,6 +14,7 @@ struct ad_notify_handler
     try
     {
       method.get_aspect().template get<_notify_>()(t, method, v);
+      t.get_aspect().template get<_empty_send_>()( t );
     }
     catch(const std::exception& e)
     {

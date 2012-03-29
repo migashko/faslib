@@ -29,7 +29,7 @@ UNIT(outgoing_error, "")
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request.\"},\"id\":1}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
 
-  t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2.");
+  t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2." );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request 2.\"},\"id\":null}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
