@@ -90,8 +90,13 @@ struct aspect_traits
 //2  typedef typename remove_advices<advice_list1>::type advice_list2;
 //2  typedef typename organize<advice_list2>::type advice_list;
   
+  typedef or_< is_alias<_1>, is_forward<_1> > ctrl_marks;
+  typedef or_< is_del<_1>, ctrl_marks > marks;
+  typedef or_< is_advice<_1>, marks > items;
+  
+  
   // typedef typename aspect_select_t<aspect_type, lambda_r< or_< is_advice<_1>, is_del<_1> >, 1 >::template apply >::type advice_list1;
-  typedef typename aspect_select<aspect_type, or_< is_advice<_1>, is_del<_1> > >::type advice_list1;
+  typedef typename aspect_select<aspect_type, items /*or_< is_advice<_1>, is_del<_1> >*/ >::type advice_list1;
   typedef typename transform_tail_if<
     advice_list1,
     erase_if<
@@ -99,12 +104,14 @@ struct aspect_traits
       a< is_has_tag< p<_>, get_tag< head< _1 > > > >
     >,
     is_del<_>
-  >::type advice_list;
+  >::type common_list1;/*advice_list;*/
+  
+  typedef typename erase_if< common_list1, ctrl_marks >::type advice_list;
   
   typedef typename aspect_select_t<aspect_type, is_group>::type group_list;
   //typedef typename aspect_select_t<A, is_advice_or_alias>::type common_list1;
   // typedef typename aspect_select_t<aspect_type, lambda_r< or_< is_advice<_1>, is_alias<_1> >, 1 >::template apply >::type common_list1;
-  typedef typename aspect_select<aspect_type, or_< is_advice<_1>, is_alias<_1> > >::type common_list1;
+  ///--- typedef typename aspect_select<aspect_type, or_< is_advice<_1>, or_< is_alias<_1>, is_forward<_1> > > >::type common_list1;
   typedef typename unique<typename transform_t<group_list, get_tag >::type >::type group_tags;
   //!!! typedef typename transform_t<group_tags, lambda_r<group_call<_>, 1>::template apply >::type group_calls;
   //typedef typename transform_t<group_tags, metafunc<group_call>::apply >::type group_calls;

@@ -18,7 +18,7 @@ add_executable(
   
   deserializer_test.cpp
 )
-add_test(json test_deserializer)
+add_test(json_deserializer test_deserializer)
 
 
 

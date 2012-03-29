@@ -10,6 +10,7 @@ struct ad_invoke_invalid_id
   template<typename T>
   void operator() (T& t, int id)
   {
+    std::cout << "ad_invoke_invalid_id" << std::endl;
     t.get_aspect().template get<_empty_send_>()(t);
   }
 };

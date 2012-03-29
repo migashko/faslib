@@ -31,8 +31,8 @@ struct outgoing_list
     advice<_send_failed_, ad_send_failed>,
     definition< _serializer_, outgoing_serializer >,
     value_advice< _buffer_, outgoing_buffer >,
-    stub< _output_>,
-    stub< _empty_output_>
+    alias<_empty_output_, _output_>,
+    stub< _output_>
   >::type
 {};
 

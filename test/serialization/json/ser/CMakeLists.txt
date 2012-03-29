@@ -20,7 +20,7 @@ add_executable(
   
   serializer_test.cpp
 )
-add_test(json test_serializer)
+add_test(json_serializer test_serializer)
 
 
 

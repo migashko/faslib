@@ -11,7 +11,7 @@ if(UNIX)
 #-std=c++0x
 
 #SET(CMAKE_CXX_COMPILER "/usr/bin/g++-3.3")
-SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti")
+SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti -std=c++0x")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
 SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O2 -g")

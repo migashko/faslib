@@ -32,7 +32,7 @@ struct ad_parse_request : V
       if ( valid_id )
         method.get_aspect().template get<_request_id_>().pop(id);
       
-      method.get_aspect().template get<_invalid_request_>()(t, method, r, id);
+      t.get_aspect().template get<_invalid_request_>()(t, /*method, r,*/ id);
     }
     else if ( !valid_id)
       method.get_aspect().template get<_invalid_request_id_>()(t, method, value, id);

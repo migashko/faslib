@@ -7,7 +7,7 @@ add_executable(
   ${CMAKE_SOURCE_DIR}/fas/testing/testing.cpp
 )
 
-add_test(json test_parser)
+add_test(json_parser test_parser)
 
 
 

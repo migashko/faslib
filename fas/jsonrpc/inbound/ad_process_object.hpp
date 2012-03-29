@@ -22,6 +22,7 @@ struct ad_process_object
     }
     else if ( obj.is_result() )
     {
+      std::cout << "ad_process_object" << std::endl;
       t.get_aspect().template get< _invoke_result_ >()(t, obj.result_range(), obj.get_id() );
     }
     else if ( obj.is_error() )

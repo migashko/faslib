@@ -4,10 +4,11 @@ add_executable(aspect_hierarchy aspect_hierarchy.cpp)
 add_executable(aspect_class aspect_class.cpp)
 add_executable(aspect_group aspect_group.cpp)
 
-add_test(aop find_advice)
-add_test(aop aspect_hierarchy)
-add_test(aop aspect_class)
-add_test(aop aspect_group)
+add_test(advice_select      advice_select)
+add_test(find_advice        find_advice)
+add_test(aspect_hierarchy   aspect_hierarchy)
+add_test(aspect_class       aspect_class)
+add_test(aspect_group       aspect_group)
 
 
 

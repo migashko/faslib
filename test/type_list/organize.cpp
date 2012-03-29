@@ -74,7 +74,7 @@ int main()
     //test7 = static_check< has_metatype<list_7>::value >::value,
     
   };
-  return 1;
+  return 0;
 }
 
 

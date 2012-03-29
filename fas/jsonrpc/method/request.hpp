@@ -26,6 +26,7 @@ struct request: type_list_n<
       advice< _request_handler_, ad_request_handler >,
       value_advice< _request_id_, id_manager<> >,
       advice< _invalid_request_id_, ad_invalid_request_id >,
+      advice< _invalid_request_method_, ad_invalid_request_id >,
       advice< _request_except_, ad_request_except >
     >::type
 {};

@@ -13,14 +13,14 @@ struct ad_except
   
   operator bool () const { return false;}
 
-  template<typename T>
-  void operator()(T&, const json_error& e)
+  template<typename T, typename E>
+  void operator()(T&, const E& e)
   {
     throw e;
   }
 
-  template<typename T, typename R>
-  R operator()(T&, const json_error& e, R )
+  template<typename T, typename E, typename R>
+  R operator()(T&, const E& e, R )
   {
     throw e;
   }

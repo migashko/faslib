@@ -72,7 +72,7 @@ struct advice3_advice: advice<_tag2_, ad_advice3> {};
 
 struct advice_list2: type_list_n<
     advice3_advice,
-    alias<_tag3_, _tag2_>
+    forward<_tag3_, _tag2_>
 >::type {};
 struct aspect2: aspect<advice_list2> {};
 

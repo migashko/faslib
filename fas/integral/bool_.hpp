@@ -14,9 +14,12 @@ namespace fas{
 template<bool i = bool() >
 struct bool_: bool2type<i>{};
 
-struct true_: bool_<true> {};
+typedef bool_<true> true_;
+typedef bool_<false> false_;
 
-struct false_: bool_<false> {};
+//struct true_: bool_<true> {};
+
+//struct false_: bool_<false> {};
 
 }
 

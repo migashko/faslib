@@ -70,18 +70,35 @@ typedef ajr::method<
 > method_notify_test;
 */
 
+struct ad_output
+{
+  std::string buffer;
+  template<typename T, typename R>
+  void operator()(T& t, R r)
+  {
+    buffer += t.get_aspect().template get< ajr::_buffer_ >();
+  }
+};
+
+template<typename T>
+inline void clear(T& t)
+{
+  t.get_aspect().template get< ajr::_buffer_ >().buffer.clear();
+}
+
 
 template<typename T>
 inline std::string buffer(T& t)
 {
-  return t.get_aspect().template get< ajr::_buffer_ >();
+  return t.get_aspect().template get< ajr::_output_>().buffer;
 }
 
 template<typename T>
-inline void buffer(T& t, std::string data)
+inline void garbage(T& t, std::string data)
 {
   t.get_aspect().template get< ajr::_buffer_ >() = data;
 }
+
 
 struct notify_handler
 {
@@ -108,12 +125,30 @@ UNIT(notify, "")
 
   std::string jsonstring = "[1,2]";
 
-  buffer(t, "garbage");
+  garbage(t, "garbage");
   n.get_aspect().get< ajr::_parse_notify_>()( t, n, fas::range(jsonstring) );
   t << equal<expect>( 3, n.get_aspect().get< ajr::_notify_>().result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( buffer(t), "" ) << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
 }
 
+
+struct request_handler
+{
+  typedef int params_type[2];
+  int result;
+  request_handler(): result(-1) {}
+  template<typename T, typename M>
+  void operator()( T&t, M& m, const int params[2], int id)
+  {
+    result = params[0] + params[1];
+    m.result( t, m, result, id );
+  }
+};
+
+typedef fas::type_list_n<
+  ajr::request< request_handler, request_handler::params_type, aj::array<aj::integer> >,
+  ajr::result< int, aj::integer > 
+>::type request_aspect;
 /*
 typedef ajr::method<
   fas::type_list_n<
@@ -127,6 +162,16 @@ typedef ajr::method<
 UNIT(request, "")
 {
   using namespace ::fas::testing;
+  
+  ajr::method<request_aspect> n;
+
+  std::string jsonstring = "[1,2]";
+
+  garbage(t, "garbage");
+  n.get_aspect().get< ajr::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
+  t << equal<expect>( 3, n.get_aspect().get< ajr::_request_>().result ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"result\":3,\"id\":42}" ) << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
+  
 
   /*
   method_request_test request;
@@ -182,9 +227,11 @@ BEGIN_SUITE(method_suite, "json-rpc method suite")
   ADD_UNIT(request)
   
   ADD_VALUE_ADVICE( ajr::_buffer_, std::string )
+  ADD_ADVICE( ajr::_output_, ad_output )
+  
   ADD_ASPECT( ajr::invoke_aspect )
   ADD_ASPECT( ajr::outgoing_aspect )
   ADD_ASPECT( ajr::inbound_aspect )
-  ADD_STUB( ajr::_output_ )
+  
   
 END_SUITE(method_suite)
