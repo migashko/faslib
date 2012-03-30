@@ -1,9 +1,9 @@
 #ifndef FAS_JSONRPC_METHOD_REQUEST_AD_REQUEST_HANDLER_HPP
 #define FAS_JSONRPC_METHOD_REQUEST_AD_REQUEST_HANDLER_HPP
 
-#include <fas/jsonrpc/method/request/tags.hpp>
+#include <fas/jsonrpc/method/local/request/tags.hpp>
 
-namespace fas{ namespace jsonrpc{ 
+namespace fas{ namespace jsonrpc{ namespace local{
 
 struct ad_request_handler
 {
@@ -27,6 +27,6 @@ struct ad_request_handler
 };
 
 
-}}
+}}}
 
 #endif

@@ -10,15 +10,15 @@
 
 #include <fas/jsonrpc/method/method.hpp>
 #include <fas/jsonrpc/method/name.hpp>
-#include <fas/jsonrpc/method/request.hpp>
-#include <fas/jsonrpc/method/result.hpp>
+#include <fas/jsonrpc/method/local/request.hpp>
+#include <fas/jsonrpc/method/local/result.hpp>
 /*
 #include <fas/jsonrpc/method/remote/remote_notify.hpp>
 #include <fas/jsonrpc/method/remote/remote_request.hpp>
 #include <fas/jsonrpc/method/remote/remote_result.hpp>
 */
-#include <fas/jsonrpc/method/notify.hpp>
-#include <fas/jsonrpc/method/error.hpp>
+#include <fas/jsonrpc/method/local/notify.hpp>
+#include <fas/jsonrpc/method/local/error.hpp>
 /*
 #include <fas/jsonrpc/outgoing/outgoing_aspect.hpp>
 #include <fas/jsonrpc/json/json_aspect.hpp>
@@ -97,7 +97,7 @@ struct notify_handler
 };
 
 
-typedef ajr::notify< notify_handler, notify_handler::params_type, aj::array<aj::integer> > notify_aspect;
+typedef ajr::local::notify< notify_handler, notify_handler::params_type, aj::array<aj::integer> > notify_aspect;
 
 
 UNIT(notify, "")
@@ -109,7 +109,7 @@ UNIT(notify, "")
   std::string jsonstring = "[1,2]";
 
   buffer(t, "garbage");
-  n.get_aspect().get< ajr::_parse_notify_>()( t, n, fas::range(jsonstring) );
+  n.get_aspect().get< ajr::local::_parse_notify_>()( t, n, fas::range(jsonstring) );
   t << equal<expect>( 3, n.get_aspect().get< ajr::_notify_>().result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( buffer(t), "" ) << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
 }

@@ -4,7 +4,7 @@
 #include <fas/jsonrpc/outgoing/tags.hpp>
 #include <fas/jsonrpc/error_code.hpp>
 
-namespace fas{ namespace jsonrpc{ 
+namespace fas{ namespace jsonrpc{ namespace local{
 
 struct ad_request_except
 {
@@ -22,6 +22,6 @@ struct ad_request_except
   }
 };
 
-}}
+}}}
 
 #endif

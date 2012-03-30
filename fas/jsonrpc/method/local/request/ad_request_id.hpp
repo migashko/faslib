@@ -3,9 +3,9 @@
 
 #include <fas/jsonrpc/id_manager.hpp>
 
-namespace fas{ namespace jsonrpc{ 
+namespace fas{ namespace jsonrpc{ namespace local{
 
 
-}}
+}}}
 
 #endif

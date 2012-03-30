@@ -2,6 +2,7 @@
 #define FAS_JSONRPC_INVOKE_AD_INVOKE_REQUEST_HPP
 
 #include <fas/jsonrpc/method/tags.hpp>
+#include <fas/jsonrpc/method/local/request/tags.hpp>
 #include <fas/jsonrpc/invoke/tags.hpp>
 
 
@@ -37,7 +38,7 @@ struct f_request
     ready = true;
 
     t.get_aspect().template get<Tg>()
-     .get_aspect().template get<_parse_request_>()
+     .get_aspect().template get< local::_parse_request_>()
      (
         t,
         t.get_aspect().template get<Tg>(),

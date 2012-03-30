@@ -3,6 +3,7 @@
 
 #include <fas/aop/tag.hpp>
 
+#include <fas/jsonrpc/method/local/notify/tags.hpp>
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/invoke/tags.hpp>
 
@@ -37,7 +38,7 @@ struct f_notify
     ready = true;
 
     t.get_aspect().template get<Tg>()
-     .get_aspect().template get<_parse_notify_>()
+     .get_aspect().template get< local::_parse_notify_>()
      (
         t,
         t.get_aspect().template get<Tg>(),

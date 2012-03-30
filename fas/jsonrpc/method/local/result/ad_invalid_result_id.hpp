@@ -3,7 +3,7 @@
 
 #include <fas/jsonrpc/outging/tags.hpp>
 
-namespace fas{ namespace jsonrpc{ 
+namespace fas{ namespace jsonrpc{ namespace local{
 
 struct ad_invalid_result_id
 {
@@ -14,6 +14,6 @@ struct ad_invalid_result_id
   }
 };
 
-}}
+}}}
 
 #endif

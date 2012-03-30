@@ -2,9 +2,9 @@
 #define FAS_JSONRPC_METHOD_AD_NOTIFY_HANDLER_HPP
 
 #include <fas/jsonrpc/method/tags.hpp>
-#include <fas/jsonrpc/method/error/tags.hpp>
+//#include <fas/jsonrpc/method/error/tags.hpp>
 
-namespace fas{ namespace jsonrpc{ 
+namespace fas{ namespace jsonrpc{ namespace local{
 
 struct ad_notify_handler
 {
@@ -27,7 +27,6 @@ struct ad_notify_handler
   }
 };
 
-
-}}
+}}}
 
 #endif

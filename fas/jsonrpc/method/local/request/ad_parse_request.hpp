@@ -2,9 +2,9 @@
 #define FAS_JSONRPC_METHOD_REQUEST_AD_PARSE_REQUEST_HPP
 
 #include <fas/jsonrpc/inbound/tags.hpp>
-#include <fas/jsonrpc/method/request/tags.hpp>
+#include <fas/jsonrpc/method/local/request/tags.hpp>
 
-namespace fas{ namespace jsonrpc{ 
+namespace fas{ namespace jsonrpc{ namespace local{
 
 template<typename V, typename J>
 struct ad_parse_request : V
@@ -42,6 +42,6 @@ struct ad_parse_request : V
 };
 
 
-}}
+}}}
 
 #endif

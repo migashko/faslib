@@ -2,10 +2,10 @@
 #define FAS_JSONRPC_METHOD_AD_PARSE_NOTIFY_HPP
 
 #include <fas/jsonrpc/inbound/tags.hpp>
-#include <fas/jsonrpc/method/notify/tags.hpp>
+#include <fas/jsonrpc/method/local/notify/tags.hpp>
 #include <fas/adv/ad_aspect_select.hpp>
 
-namespace fas{ namespace jsonrpc{
+namespace fas{ namespace jsonrpc{ namespace local{
 
 template<typename V, typename J>
 struct ad_parse_notify : V
@@ -32,6 +32,6 @@ struct ad_parse_notify : V
 };
 
 
-}}
+}}}
 
 #endif

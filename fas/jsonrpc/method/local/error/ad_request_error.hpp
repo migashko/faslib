@@ -3,7 +3,7 @@
 
 #include <fas/jsonrpc/outgoing/tags.hpp>
 #include <fas/jsonrpc/method/tags.hpp>
-#include <fas/jsonrpc/method/error/tags.hpp>
+//#include <fas/jsonrpc/method/error/tags.hpp>
 
 #include <fas/jsonrpc/outgoing/types/custom_error.hpp>
 #include <fas/jsonrpc/outgoing/json/custom_error_json.hpp>
@@ -11,7 +11,7 @@
 #include <fas/jsonrpc/outgoing/json/error_message_json.hpp>
 #include <fas/jsonrpc/outgoing/json/error_notify_json.hpp>
 
-namespace fas{ namespace jsonrpc{
+namespace fas{ namespace jsonrpc{ namespace local{
 
 template<
   typename V = custom_error,
@@ -88,7 +88,7 @@ private:
       method.get_aspect().template get<_request_id_>().pop(id);
       if ( t.get_aspect().template get<_send_error_>()( t, JJ(), value, id ) )
         return true;
-      method.get_aspect().template get<_send_error_fail_>()( t, method, value.error, id );
+      method.get_aspect().template get<_request_error_fail_>()( t, method, value.error, id );
     }
     else
       method.get_aspect().template get< _invalid_error_id_ >()( t, method, value.error, id );
@@ -112,6 +112,6 @@ private:
 };
 
 
-}}
+}}}
 
 #endif

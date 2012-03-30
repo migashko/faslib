@@ -2,7 +2,7 @@
 #define FAS_JSONRPC_METHOD_METHOD_ASPECT_TYPE_HPP
 
 
-#include <fas/jsonrpc/method/error/method_error_aspect.hpp>
+//#include <fas/jsonrpc/method/error/method_error_aspect.hpp>
 
 /*
 #include <fas/jsonrpc/method/ad_notify_handler.hpp>
@@ -38,7 +38,7 @@ typedef type_list_n<
   advice< _notify_error_, ad_notify_error >,
   advice< _send_notify_error_, ad_send_request_error >,
   */
-  method_error_aspect,
+  //method_error_aspect,
   stub<_context_>
 >::type method_advice_list;
 

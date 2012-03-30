@@ -9,7 +9,7 @@
 #include <fas/jsonrpc/json/result_object_json.hpp>
 
 
-namespace fas{ namespace jsonrpc{
+namespace fas{ namespace jsonrpc{ namespace local{
 
 template<
   typename V = void* ,
@@ -49,7 +49,7 @@ struct ad_request_result
 };
 
 
-}}
+}}}
 
 #endif
 
