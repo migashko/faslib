@@ -2,7 +2,7 @@
 #define FAS_JSONRPC_METHOD_REQUEST_HPP
 
 #include <fas/jsonrpc/method/tags.hpp>
-#include <fas/jsonrpc/method/value_wrapper.hpp>
+#include <fas/jsonrpc/holder.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
 #include <fas/jsonrpc/method/local/request/ad_parse_request.hpp>
@@ -16,11 +16,18 @@
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/definition.hpp>
 
-namespace fas{ namespace jsonrpc{ 
+namespace fas{ namespace jsonrpc{ namespace local{
   
 
-template< typename H, typename V = ::fas::empty_type, typename J = ::fas::json::null, template<typename> class W = value_holder >
+template<
+  typename H,
+  typename V = empty_type,
+  typename J = ::fas::json::null,
+  template<typename> class W = holder,
+  typename A = empty_list
+>
 struct request: type_list_n<
+      A,
       advice< _request_, H >,
       advice< local::_parse_request_, local::ad_parse_request< W<V>, J > >,
       advice< local::_request_handler_, local::ad_request_handler >,
@@ -31,6 +38,6 @@ struct request: type_list_n<
 {};
 
   
-}}
+}}}
 
 #endif

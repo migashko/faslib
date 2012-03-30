@@ -3,7 +3,7 @@
 
 #include <fas/jsonrpc/method/local/notify/tags.hpp>
 
-#include <fas/jsonrpc/method/value_wrapper.hpp>
+#include <fas/jsonrpc/holder.hpp>
 
 #include <fas/serialization/json/meta/null.hpp>
 
@@ -17,7 +17,13 @@
 
 namespace fas{ namespace jsonrpc{ namespace local{
 
-template< typename H, typename V = ::fas::empty_type, typename J = ::fas::json::null, template<typename> class W = value_holder, typename A = ::fas::aspect<> >
+template<
+  typename H,
+  typename V = empty_type,
+  typename J = ::fas::json::null,
+  template< typename > class W = holder,
+  typename A = empty_list
+>
 struct notify: type_list_n<
       A,
       advice<_notify_, H >,

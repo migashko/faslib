@@ -29,13 +29,12 @@ struct ad_name
     return std::string( r.begin(), r.end() );
   }
 
-  template<typename R>
-  bool check(R r1) const
+  template<typename T, typename M, typename R>
+  bool operator() (T&, M&, R name) const
   {
-    range_type r2 = get_range();
-    for ( ;r1 && r2 && *r1==*r2; ++r1, ++r2 );
-
-    return !r1 && !r2;  
+    range_type r = get_range();
+    for ( ;name && r && *name==*r; ++name, ++r );
+    return !name && !r;  
   }
 };
 

@@ -1,12 +1,13 @@
 #ifndef FAS_JSONRPC_ID_MANAGER_HPP
 #define FAS_JSONRPC_ID_MANAGER_HPP
 
+#include <fas/jsonrpc/types.hpp>
 #include <set>
 
 namespace fas{ namespace jsonrpc{ 
 
 // for id only greater zero
-template<typename C = std::set<int> >
+template<typename C = std::set<id_t> >
 class id_manager
 {
 public:
@@ -15,9 +16,9 @@ public:
   
   id_manager(): _current_id(-1) { }
 
-  int new_id()
+  id_t new_id()
   {
-    int id = 1;
+    id_t id = 1;
 
     if ( !_ids.empty() )
       id = *(_ids.rbegin()) + 1;
@@ -30,14 +31,14 @@ public:
     return id;
   }
   
-  void push(int id) 
+  void push(id_t id) 
   {
     if ( _current_id != -1)
       _ids.insert(_current_id);
     _current_id = id;
   }
   
-  void pop(int id) 
+  void pop(id_t id) 
   {
     if ( id == _current_id)
       _current_id = -1;
@@ -45,7 +46,7 @@ public:
       _ids.erase(id);
   }
   
-  bool has(int id) const
+  bool has(id_t id) const
   {
     return id == _current_id 
            || _ids.find(id)!=_ids.end();
@@ -64,7 +65,7 @@ public:
   
 private:
   
-  int _current_id;
+  id_t _current_id;
   container_type _ids;
 };
 
@@ -74,45 +75,43 @@ public:
 
   simple_id_manager(): _current_id(-1) { }
 
-  int new_id() { return 1; }
+  id_t new_id() { return 1; }
 
-  void push(int id) { _current_id = id; }
+  void push(id_t id) { _current_id = id; }
 
-  void pop(int id)  { _current_id = -1; }
+  void pop(id_t id)  { _current_id = -1; }
 
-  bool has(int id) const { return id == _current_id; }
+  bool has(id_t id) const { return id == _current_id; }
 
 private:
-  int _current_id;
+  id_t _current_id;
 };
 
 class empty_id_manager
 {
 public:
 
-  int new_id() { return 1; }
+  id_t new_id() { return 1; }
 
-  void push(int id) {  }
+  void push(id_t id) {  }
 
-  void pop(int id)  {  }
+  void pop(id_t id)  {  }
 
-  bool has(int id) const  { return true; }
+  bool has(id_t id) const  { return true; }
 };
 
 class fail_id_manager
 {
 public:
 
-  int new_id() { return 1; }
+  id_t new_id() { return 1; }
 
-  void push(int id) {  }
+  void push(id_t id) {  }
 
-  void pop(int id)  {  }
+  void pop(id_t id)  {  }
 
-  bool has(int id) const  { return false; }
+  bool has(id_t id) const  { return false; }
 };
-
-
 
 }}
 

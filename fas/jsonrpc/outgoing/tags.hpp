@@ -8,6 +8,8 @@ struct _empty_send_;
 
 struct _send_error_;
 struct _send_custom_error_;
+struct _send_result_;
+
 struct _send_failed_;
 struct _output_;
 struct _empty_output_;

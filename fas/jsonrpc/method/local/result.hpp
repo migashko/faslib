@@ -3,8 +3,8 @@
 
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/method/local/result/tags.hpp>
-#include <fas/jsonrpc/json/result_object.hpp>
-#include <fas/jsonrpc/json/result_object_json.hpp>
+//#include <fas/jsonrpc/json/result_object.hpp>
+//#include <fas/jsonrpc/json/result_object_json.hpp>
 #include <fas/jsonrpc/method/local/result/ad_request_result.hpp>
 #include <fas/jsonrpc/method/local/result/ad_request_result_fail.hpp>
 #include <fas/jsonrpc/method/local/result/ad_invalid_result_id.hpp>
@@ -16,7 +16,11 @@
 
 namespace fas{ namespace jsonrpc{ namespace local{
   
-template< typename V = const void*, typename J = ::fas::json::null >
+template<
+  typename V = const void*,
+  typename J = ::fas::json::null,
+  typename A = empty_list
+>
 struct result: type_list_n<
       advice< _request_result_, ad_request_result< V, J  > >,
       advice< _request_result_fail_, ad_request_result_fail >,

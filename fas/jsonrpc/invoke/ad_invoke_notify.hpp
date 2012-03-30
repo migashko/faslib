@@ -28,15 +28,27 @@ struct f_notify
   void operator()(T& t, tag<Tg> )
   {
     if (ready) return;
-    
+
+    /*
     if ( !t.get_aspect().template get<Tg>()
            .get_aspect().template get<_name_>()
            .check( name )
        )
       return;
+    */
+
+    if ( !t.get_aspect().template get<Tg>()
+          ( t, t.get_aspect().template get<Tg>(), name )
+           /*.get_aspect().template get<_name_>()
+           .check( name )
+            */
+       )
+      return;
 
     ready = true;
 
+    t.get_aspect().template get<Tg>().parse_notify( t, t.get_aspect().template get<Tg>(), params);
+    /*
     t.get_aspect().template get<Tg>()
      .get_aspect().template get< local::_parse_notify_>()
      (
@@ -44,6 +56,7 @@ struct f_notify
         t.get_aspect().template get<Tg>(),
         params
      );
+     */
   }
 
   operator bool () const { return ready; }

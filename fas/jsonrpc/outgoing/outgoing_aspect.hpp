@@ -6,6 +6,7 @@
 #include <fas/jsonrpc/outgoing/ad_empty_send.hpp>
 #include <fas/jsonrpc/outgoing/ad_send_error.hpp>
 #include <fas/jsonrpc/outgoing/ad_send_custom_error.hpp>
+#include <fas/jsonrpc/outgoing/ad_send_result.hpp>
 #include <fas/jsonrpc/outgoing/ad_send_failed.hpp>
 
 #include <fas/jsonrpc/outgoing/types/serializer.hpp>
@@ -28,6 +29,7 @@ struct outgoing_list
     advice<_empty_send_, ad_empty_send>,
     advice<_send_error_, ad_send_error>,
     advice<_send_custom_error_, ad_send_custom_error>,
+    advice<_send_result_, ad_send_result>,
     advice<_send_failed_, ad_send_failed>,
     definition< _serializer_, outgoing_serializer >,
     value_advice< _buffer_, outgoing_buffer >,

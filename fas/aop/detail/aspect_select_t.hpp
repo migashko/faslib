@@ -14,6 +14,8 @@
 
 namespace fas{ namespace detail{
 
+#warning TDOD: сделать ошибку если в списке присутствует недопустимый элемент 
+
 template<typename M, typename L, template<typename> class F>
 struct aspect_select_t_impl;
 

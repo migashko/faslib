@@ -115,6 +115,7 @@ template< typename T>
 struct range_helper<T, range_flag::other >
 {
   typedef random_access_range<T*> range;
+  typedef range init_range;
   typedef typename range::iterator iterator;
   typedef typename range::range_category    range_category;
   typedef typename range::iterator_category iterator_category;
@@ -123,14 +124,16 @@ struct range_helper<T, range_flag::other >
   typedef typename range::pointer           pointer;
   typedef typename range::reference         reference;
 
-  static range make_range(T& v)
+  static inline range make_range(T& v)
   {
     return range(&v, &v + 1);
   }
 
-  static range make_init_range(T& v)
+  static inline init_range make_init_range(T& v, bool clear = false)
   {
-    return range(&v, &v + 1);
+    if ( clear )
+      v = T();
+    return init_range(&v, &v + 1);
   }
 
 };

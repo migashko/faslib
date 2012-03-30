@@ -22,10 +22,8 @@ struct aspect_merge_helper
         typename A2::type_list
       >::type
   > type;
-};*/
-
-
-
+};
+  */
 
 template<typename L1, typename L2, typename A1, typename A2>
 struct aspect_merge_impl;

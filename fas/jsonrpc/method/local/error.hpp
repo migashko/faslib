@@ -14,9 +14,14 @@
 
 namespace fas{ namespace jsonrpc{ namespace local{
   
-template< typename V = custom_error, typename J = custom_error_json >
+template<
+  typename V = custom_error,
+  typename J = custom_error_json,
+  typename A = empty_list
+>
 struct error:
   type_list_n<
+    A,
     advice< _request_error_, ad_request_error< V, J > >,
     advice< _request_error_fail_, ad_request_error_fail >,
     advice< _invalid_error_id_, ad_invalid_error_id >

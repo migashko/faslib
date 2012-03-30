@@ -20,78 +20,51 @@ template<
 struct ad_request_error
 {
   template<typename T, typename M>
-  void operator()(T& t, M& method, const V& user_error, int id)
+  bool operator()(T& t, M& method, const V& user_error, int id)
   {
-    /*
-    typedef error_message_object<V> error_value;
-    typedef error_message_json< error_value, V, J> error_json;
-      */
-
-    this->_send(t, method, J(), user_error, id );
-    /*
-    register bool send_ready = method.get_aspect().template get<_request_id_>().has(id);
-
-    if ( send_ready )
-    {
-      method.get_aspect().template get<_request_id_>().pop(id);
-      send_ready = t.get_aspect().template get<_send_>()( t, error_json(), error_value(user_error, id) );
-    }
-
-    if ( !send_ready )
-      method.get_aspect().template get<_send_error_fail_>()( t, method, user_error, id );
-    */
+    return this->_send(t, method, J(), user_error, id );
   }
 
   template<typename T, typename M>
-  void operator()(T& t, M& method, error_code::type code, int id)
+  bool operator()(T& t, M& method, error_code::type code, int id)
   {
     
-    this->_send(t, method, common_error_code_json(), code, id );
-    /*
-    register bool send_ready = method.get_aspect().template get<_request_id_>().has(id);
-
-    if ( send_ready )
+    if ( method.get_aspect().template get<_request_id_>().has(id) )
     {
       method.get_aspect().template get<_request_id_>().pop(id);
-      send_ready = t.get_aspect().template get<_send_error_>()( t, code, id );
+      if ( t.get_aspect().template get<_send_error_>()( t, code, id ) )
+        return true;
+      method.get_aspect().template get<_request_error_fail_>()( t, method, code, id );
     }
-
-    if ( !send_ready )
-      method.get_aspect().template get<_send_error_fail_>()( t, method, custom_error(code), id );*/
+    else
+      method.get_aspect().template get< _invalid_error_id_ >()( t, method, code, id );
+    return false;
   }
 
   template<typename T, typename M>
-  void operator()(T& t, M& method, int code, const std::string& message, int id)
+  bool operator()(T& t, M& method, int code, const std::string& message, int id)
   {
-    this->_send( t, method, custom_error_json(), custom_error(code, message) );
-    /*
-    register bool send_ready = method.get_aspect().template get<_request_id_>().has(id);
-
-    if ( send_ready )
-    {
-      method.get_aspect().template get<_request_id_>().pop(id);
-      send_ready = t.get_aspect().template get<_send_error_>()( t, code, message, id );
-    }
-
-    if ( !send_ready )
-      method.get_aspect().template get<_send_error_fail_>()( t, method, custom_error(code, message), id );
-    */
+    return this->_send( t, method, custom_error_json(), custom_error(code, message), id );
   }
 
 
 private:
+  
   template<typename T, typename M, typename JJ, typename VV>
   bool _send(T& t, M& method, JJ, const VV& value, int id)
   {
     if ( method.get_aspect().template get<_request_id_>().has(id) )
     {
       method.get_aspect().template get<_request_id_>().pop(id);
-      if ( t.get_aspect().template get<_send_error_>()( t, JJ(), value, id ) )
+      
+      if ( t.get_aspect().template get<_send_custom_error_>()( t, JJ(), value, id ) )
         return true;
-      method.get_aspect().template get<_request_error_fail_>()( t, method, value.error, id );
+      
+      method.get_aspect().template get<_request_error_fail_>()( t, method, value/*.error*/, id );
     }
     else
-      method.get_aspect().template get< _invalid_error_id_ >()( t, method, value.error, id );
+      method.get_aspect().template get< _invalid_error_id_ >()( t, method, value/*.error*/, id );
+    
     return false;
   }
 

@@ -26,6 +26,7 @@ struct ad_advice1
   int operator()(T& t, int value)
   {
     std::cout << "ad_advice1" << std::endl;
+    t.private_method();
     return t.get_aspect().template get<_tag2_>()(t, value) + 1;
   }
 };
@@ -50,10 +51,21 @@ template<typename A = aspect<> >
 class test
   : public aspect_class<A, aspect1>
 {
+  typedef aspect_class<A, aspect1> super;
 public:
   int method(int v)
   {
     return this->get_aspect().template get<_tag1_>()(*this, v);
+  };
+#ifdef __GXX_EXPERIMENTAL_CXX0X__
+private:
+
+  friend class super::aspect::template advice_cast< _tag1_ >::type;
+#endif
+  
+  void private_method()
+  {
+    
   };
 };
 
@@ -74,6 +86,7 @@ struct advice_list2: type_list_n<
     advice3_advice,
     forward<_tag3_, _tag2_>
 >::type {};
+
 struct aspect2: aspect<advice_list2> {};
 
 int main()

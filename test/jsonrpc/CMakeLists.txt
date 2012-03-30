@@ -14,6 +14,7 @@ add_executable(
   method_test.cpp
   error_test.cpp
   invoke_test.cpp
+  local_test.cpp
   call_test.cpp 
 )
 

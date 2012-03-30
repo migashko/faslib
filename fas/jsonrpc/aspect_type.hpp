@@ -3,11 +3,9 @@
 
 #include <fas/jsonrpc/inbound/inbound_aspect.hpp>
 #include <fas/jsonrpc/invoke/invoke_aspect.hpp>
-#include <fas/jsonrpc/error/error_aspect.hpp>
-#include <fas/jsonrpc/json/json_aspect.hpp>
+//#include <fas/jsonrpc/error/error_aspect.hpp>
+//#include <fas/jsonrpc/json/json_aspect.hpp>
 #include <fas/jsonrpc/outgoing/outgoing_aspect.hpp>
-
-
 
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
@@ -25,8 +23,8 @@ namespace fas{ namespace jsonrpc{
   
 typedef type_list_n<
   inbound_aspect,
-  error_aspect,
-  json_aspect,
+  // error_aspect,
+  // json_aspect,
   invoke_aspect,
   outgoing_aspect
 >::type advice_list;
