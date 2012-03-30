@@ -15,6 +15,7 @@ namespace metalist
   struct advice;
   struct aspect;
   struct alias;
+  struct forward;
   struct group;
   struct del;
 }

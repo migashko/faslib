@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fas/jsonrpc/inbound/inbound_aspect.hpp>
 #include <fas/jsonrpc/outgoing/outgoing_aspect.hpp>
 #include <fas/serialization/json/meta.hpp>

@@ -25,13 +25,28 @@ struct ad_send_fail
 
 struct ad_output
 {
+  std::string buffer;
   template<typename T, typename R>
   void operator()(T& t, R r)
   {
     if ( !r ) --r;
     if ( r ) *r = '\0';
+    buffer += t.get_aspect().template get< ajr::_buffer_ >();
+    //std::cout << t.get_aspect().template get< ajr::_buffer_ >() << std::endl;
   }
 };
+
+template<typename T>
+inline std::string buffer(T& t)
+{
+  return t.get_aspect().template get< ajr::_output_ >().buffer;
+}
+
+template<typename T>
+inline void clear(T& t)
+{
+  t.get_aspect().template get< ajr::_output_ >().buffer.clear();
+}
 
 template<typename T>
 int fail_count(T& t) { return t.get_aspect().template get< ajr::_send_failed_>().count; }
@@ -40,39 +55,40 @@ UNIT(outgoing, "")
 {
   using namespace ::fas::testing;
   
-  char *buffer = t.get_aspect().template get< ajr::_buffer_ >();
+  // char *buffer = t.get_aspect().template get< ajr::_buffer_ >();
 
   bool send_result = false;
   send_result = t.get_aspect().template get< ajr::_send_ >()( t, aj::integer(), 10 );
 
   t << is_true<expect>( send_result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( 0, fail_count(t) ) << FAS_TESTING_FILE_LINE;
-  t << equal<expect, std::string>( buffer, "10" ) << FAS_TESTING_FILE_LINE
-    << std::endl << buffer << std::endl;
+  t << equal<expect, std::string>( buffer(t), "10" ) << FAS_TESTING_FILE_LINE
+    << std::endl << buffer(t) << std::endl;
+  clear(t);
 
   int arr[10]={0};
 
   send_result = t.get_aspect().template get< ajr::_send_ >()( t, aj::array< aj::sequence< aj::integer, 4> >(), arr );
   t << is_true<expect>( send_result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( 0, fail_count(t) ) << FAS_TESTING_FILE_LINE;
-  t << equal<expect, std::string>( buffer, "[0,0,0,0]" ) << FAS_TESTING_FILE_LINE
-    << std::endl << buffer << std::endl;
-
+  t << equal<expect, std::string>( buffer(t), "[0,0,0,0]" ) << FAS_TESTING_FILE_LINE
+    << std::endl << buffer(t) << std::endl;
+  clear(t);
+  
   send_result = t.get_aspect().template get< ajr::_send_ >()( t, aj::array< aj::integer >(), arr );
   t << is_false<expect>( send_result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( 1, fail_count(t) ) << FAS_TESTING_FILE_LINE;
-  
-  buffer[9]='\0';
-  t << equal<expect, std::string>( buffer, "[0,0,0,0," ) << FAS_TESTING_FILE_LINE
-    << std::endl << buffer << std::endl;
+  t << equal<expect, std::string>( buffer(t), "" ) << FAS_TESTING_FILE_LINE
+    << std::endl << buffer(t) << std::endl;
+  clear(t);
 
   std::string test="test";
   send_result = t.get_aspect().template get< ajr::_send_ >()( t, aj::string(), test );
   t << is_true<expect>( send_result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( 1, fail_count(t) ) << FAS_TESTING_FILE_LINE;
-  t << equal<expect, std::string>( buffer, "\"test\"" ) << FAS_TESTING_FILE_LINE
-    << std::endl << buffer << std::endl;
-  
+  t << equal<expect, std::string>( buffer(t), "\"test\"" ) << FAS_TESTING_FILE_LINE
+    << std::endl << buffer(t) << std::endl;
+  clear(t);
 }
 
 

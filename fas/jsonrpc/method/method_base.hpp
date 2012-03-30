@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/method/local/request/tags.hpp>
+#include <fas/jsonrpc/method/local/result/tags.hpp>
+#include <fas/jsonrpc/method/local/error/tags.hpp>
 //#include <fas/jsonrpc/method/remote/tags.hpp>
 #include <fas/jsonrpc/error_code.hpp>
 

@@ -24,7 +24,7 @@ int main()
     test6 = static_check< some_type<merge<empty_list, int>::type, type_list<int> >::value >::value,
     test7 = static_check< some_type<merge<int, empty_list>::type, type_list<int> >::value >::value,
   };
-  return 1;
+  return 0;
 }
 
 

@@ -201,6 +201,7 @@ UNIT(bool_test, "parse bool")
 
   ad_boolean ads;
 
+  std::cout << "--1" << std::endl;
   std::string s = "true";
   typedef random_access_range<std::string::const_iterator> range_type;
   range_type r( s.begin(), s.end() );
@@ -211,11 +212,13 @@ UNIT(bool_test, "parse bool")
   s = "false";
   r = range_type( s.begin(), s.end() );
 
+  std::cout << "--2" << std::endl;
   r = ads(t, r);
   t << is_true<assert>(!r) << "2"  << FAS_TESTING_FILE_LINE;;
 
   try
   {
+    std::cout << "--3" << std::endl;
     s = "fals";
     r = range_type( s.begin(), s.end() );
     r = ads(t, r);

@@ -25,6 +25,14 @@ struct alias
   typedef TTg target;
 };
 
+template<typename Tg, typename TTg>
+struct forward
+{
+  typedef metalist::forward metatype;
+  typedef Tg tag;
+  typedef TTg target;
+};
+
 template<typename AL>
 struct target
 {
@@ -33,6 +41,12 @@ struct target
 
 template<typename Tg, typename TTg>
 struct target< alias<Tg, TTg> >
+{
+  typedef TTg type;
+};
+
+template<typename Tg, typename TTg>
+struct target< forward<Tg, TTg> >
 {
   typedef TTg type;
 };

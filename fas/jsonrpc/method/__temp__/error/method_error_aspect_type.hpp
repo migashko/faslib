@@ -2,7 +2,7 @@
 #define FAS_JSONRPC_METHOD_METHOD_ERROR_ASPECT_TYPE_HPP
 
 //#include <fas/jsonrpc/method/error/ad_invalid_id_method.hpp>
-#include <fas/jsonrpc/method/error/ad_invalid_request_method.hpp>
+//#include <fas/jsonrpc/method/error/ad_invalid_request_method.hpp>
 //#include <fas/jsonrpc/method/error/ad_notify_except.hpp>
 //#include <fas/jsonrpc/method/error/ad_request_except.hpp>
 #include <fas/jsonrpc/method/error/ad_send_notify_fail.hpp>
@@ -23,7 +23,7 @@ namespace fas{ namespace jsonrpc{
 typedef type_list_n<
 
   //advice< _invalid_id_, ad_invalid_id_method >,
-  advice< _invalid_request_, ad_invalid_request_method >,
+  //advice< _invalid_request_, ad_invalid_request_method >,
 
   //advice< _notify_except_, ad_notify_except >,
   //advice< _request_except_, ad_request_except >,

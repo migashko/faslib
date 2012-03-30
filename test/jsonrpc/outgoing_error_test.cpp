@@ -7,11 +7,30 @@
 namespace aj = ::fas::json;
 namespace ajr = ::fas::jsonrpc;
 
+struct ad_output
+{
+  std::string buffer;
+  
+  template<typename T, typename R>
+  void operator() ( T& t, R r)
+  {
+    buffer += t.get_aspect().template get< ajr::_buffer_ >();
+  }
+};
+
 template<typename T>
 std::string buffer(T& t)
 {
-  return t.get_aspect().template get< ajr::_buffer_ >();
+  return t.get_aspect().template get< ajr::_output_ >().buffer;
+  //return t.get_aspect().template get< ajr::_buffer_ >();
 }
+
+template<typename T>
+inline void clear(T& t)
+{
+  t.get_aspect().template get< ajr::_output_ >().buffer.clear();
+}
+
 
 UNIT(outgoing_error, "")
 {
@@ -23,22 +42,25 @@ UNIT(outgoing_error, "")
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request.\"},\"id\":null}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
+  clear(t);
 
   t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, 1 );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request.\"},\"id\":1}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
+  clear(t);
 
   t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2." );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request 2.\"},\"id\":null}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
-
+  clear(t);
     
   t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2.", 2 );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request 2.\"},\"id\":2}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
+  clear(t);
 }
 
 UNIT(outgoing_custom_error, "")
@@ -48,24 +70,26 @@ UNIT(outgoing_custom_error, "")
   std::string jsonrpc;
 
   ajr::custom_error error1( ajr::error_code::parse_error );
-  t.get_aspect().template get< ajr::_send_>()( t,
-    ajr::error_notify_json< ajr::custom_error, ajr::custom_error_json >(),
+  t.get_aspect().template get< ajr::_send_custom_error_>()( t,
+    ajr::custom_error_json(),
     error1
   );
-
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32700,\"message\":\"Parse error.\"},\"id\":null}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
+  clear(t);
 
   ajr::custom_error error2( ajr::error_code::parse_error, "Parse error 2."  );
-  t.get_aspect().template get< ajr::_send_>()( t,
-    ajr::error_message_json<  ajr::error_message_object< ajr::custom_error >, ajr::custom_error, ajr::custom_error_json >(),
-    ajr::error_message_object< ajr::custom_error>( error2, 3 )
+  t.get_aspect().template get< ajr::_send_custom_error_>()( t,
+    ajr::custom_error_json (),
+    error2, 
+    3 
   );
 
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32700,\"message\":\"Parse error 2.\"},\"id\":3}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
+  clear(t);
 }
  
 struct user_error
@@ -139,7 +163,7 @@ BEGIN_SUITE(outgoing_error_suite, "outgoing aspect suite")
   ADD_UNIT(outgoing_error)
   ADD_UNIT(outgoing_custom_error)
   ADD_UNIT(outgoing_user_error)
-  ADD_STUB( ajr::_output_ )
+  ADD_ADVICE( ajr::_output_, ad_output )
   ADD_VALUE_ADVICE( ajr::_buffer_, std::string )
   ADD_ASPECT( ajr::outgoing_aspect )
 END_SUITE(outgoing_error_suite)

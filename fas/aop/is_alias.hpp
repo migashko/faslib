@@ -28,6 +28,20 @@ struct is_alias< alias<Tg, TTg> >
 };
 
 template<typename T>
+struct is_forward
+  : is_has_metatype<T, metalist::forward>
+{
+};
+
+
+template<typename Tg, typename TTg>
+struct is_forward< forward<Tg, TTg> >
+{
+  enum { value = 1};
+  typedef true_ type;
+};
+
+template<typename T>
 struct is_del
   : is_has_metatype<T, metalist::del>
 {
