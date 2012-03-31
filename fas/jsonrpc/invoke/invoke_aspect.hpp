@@ -13,6 +13,7 @@
 #include <fas/jsonrpc/invoke/remote/ad_invoke_invalid_id.hpp>
 
 #include <fas/jsonrpc/invoke/tags.hpp>
+#include <fas/jsonrpc/id_manager.hpp>
 
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
@@ -28,6 +29,8 @@ struct invoke_list: type_list_n<
   advice< _not_impl_, ad_not_impl >,
   advice< _notify_not_found_, ad_notify_not_found >,
   advice< _request_not_found_, ad_request_not_found >,
+  
+  advice< _id_, id_manager<> >,
 
   /// stubs
   advice< _invoke_invalid_id_, ad_invoke_invalid_id >,

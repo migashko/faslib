@@ -16,7 +16,7 @@ public:
   
   id_manager(): _current_id(-1) { }
 
-  id_t new_id()
+  id_t new_id() const
   {
     id_t id = 1;
 
@@ -26,9 +26,12 @@ public:
     if ( id <= _current_id )
       id = _current_id + 1;
 
-    this->push(id);
-    
     return id;
+  }
+  
+  id_t fail_id() const 
+  {
+    return 0; 
   }
   
   void push(id_t id) 

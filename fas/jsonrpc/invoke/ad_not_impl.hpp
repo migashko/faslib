@@ -11,13 +11,13 @@ struct ad_not_impl
   template<typename T>
   void operator() (T& t, int id)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::method_not_found, id );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::method_not_found, id );
   }
 
   template<typename T>
   void operator() (T& t)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::method_not_found );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::method_not_found );
   }
 };
 

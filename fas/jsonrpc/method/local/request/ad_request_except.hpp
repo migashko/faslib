@@ -11,13 +11,13 @@ struct ad_request_except
   template<typename T, typename M, typename V>
   void operator() (T& t, M&, V&, const std::exception& , int id)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::internal_error, id );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::internal_error, id );
   }
 
   template<typename T, typename M, typename V>
   void operator() (T& t, M&, V&, int id)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::internal_error, id );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::internal_error, id );
     
   }
 };

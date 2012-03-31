@@ -38,25 +38,25 @@ UNIT(outgoing_error, "")
 
   std::string jsonrpc;
   
-  t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request );
+  t.get_aspect().template get< ajr::_send_common_error_ >()( t, ajr::error_code::invalid_request );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request.\"},\"id\":null}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
   clear(t);
 
-  t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, 1 );
+  t.get_aspect().template get< ajr::_send_common_error_ >()( t, ajr::error_code::invalid_request, 1 );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request.\"},\"id\":1}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
   clear(t);
 
-  t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2." );
+  t.get_aspect().template get< ajr::_send_common_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2." );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request 2.\"},\"id\":null}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
   clear(t);
     
-  t.get_aspect().template get< ajr::_send_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2.", 2 );
+  t.get_aspect().template get< ajr::_send_common_error_ >()( t, ajr::error_code::invalid_request, "Invalid Request 2.", 2 );
   jsonrpc = buffer(t);
   t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request 2.\"},\"id\":2}" ) << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;

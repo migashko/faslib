@@ -3,12 +3,14 @@
 
 namespace fas{ namespace jsonrpc{
 
+//struct _error_;
+
 namespace local
 {
-  
-struct _request_error_;
+ 
+struct _error_;
 struct _invalid_error_id_;
-struct _request_error_fail_;
+struct _error_fail_;
 
 }
 

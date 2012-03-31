@@ -11,13 +11,13 @@ struct ad_parse_error
   template<typename T>
   void operator() (T& t, int id)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::parse_error, id );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::parse_error, id );
   }
 
   template<typename T>
   void operator() (T& t)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::parse_error );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::parse_error );
   }
 };
 

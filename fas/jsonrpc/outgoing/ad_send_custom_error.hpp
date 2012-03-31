@@ -35,7 +35,7 @@ struct ad_send_custom_error
   template<typename T, typename J, typename V>
   bool operator() (T& t, J, const V& error)
   {
-    typedef error_notify_json< V, J > error_json;
+    typedef error_notify_json< /*V,*/ J > error_json;
     return t.get_aspect().template get<_send_>()(t, error_json(), error );
   }
 };

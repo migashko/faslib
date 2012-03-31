@@ -13,6 +13,9 @@
 #include <fas/jsonrpc/method/local/request.hpp>
 #include <fas/jsonrpc/method/local/result.hpp>
 #include <fas/jsonrpc/method/local/notify.hpp>
+#include <fas/jsonrpc/method/remote/notify.hpp>
+#include <fas/jsonrpc/method/remote/request.hpp>
+#include <fas/jsonrpc/method/remote/result.hpp>
 #include <fas/jsonrpc/method/local/error.hpp>
 #include <fas/range.hpp>
 
@@ -74,7 +77,7 @@ UNIT(notify, "")
 
   garbage(t, "garbage");
   n.get_aspect().get< ajr::local::_parse_notify_>()( t, n, fas::range(jsonstring) );
-  t << equal<expect>( 3, n.get_aspect().get< ajr::_notify_>().result ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>( 3, n.get_aspect().get< ajr::local::_notify_>().result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( buffer(t), "" ) << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
   clear(t);
 }
@@ -108,7 +111,7 @@ UNIT(request, "")
 
   garbage(t, "garbage");
   n.get_aspect().get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
-  t << equal<expect>( 3, n.get_aspect().get< ajr::_request_>().result ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>( 3, n.get_aspect().get< ajr::local::_request_>().result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"result\":3,\"id\":42}" ) << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
   clear(t);
 }
@@ -194,12 +197,93 @@ UNIT(request_error, "")
 
 }
 
+FAS_NAME(notify);
+  
+typedef ajr::method< fas::type_list_n<
+    ajr::name<n_notify>,
+    ajr::remote::notify< 
+      std::string, 
+      aj::string
+    > 
+>::type > notify_method;
+
+UNIT(remote_notify, "")
+{
+  using namespace ::fas::testing;
+  
+  notify_method n;
+  garbage(t, "garbage");
+  n.notify(t, n, "1" );
+  //n.get_aspect().get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
+  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"notify\",\"params\":\"1\"}" )
+    << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
+  clear(t);
+
+}
+
+FAS_NAME(request);
+
+struct result_handler
+{
+  int result;
+  result_handler(): result(0){}
+  
+  template<typename T, typename M>
+  void operator()( T&, M&, int params, int id)
+  {
+    result = params;
+  }
+  
+};
+  
+typedef ajr::method< fas::type_list_n<
+    ajr::name<n_request>,
+    ajr::remote::request< std::string, aj::string >,
+    ajr::remote::result< result_handler, int, aj::integer >
+>::type > request_method;
+
+UNIT(remote_request, "")
+{
+  using namespace ::fas::testing;
+  
+  request_method n;
+  garbage(t, "garbage");
+  ajr::id_t id = n.request(t, n, "1" );
+  t << equal<expect>( id, 1 ) << FAS_TESTING_FILE_LINE << std::endl << id;
+  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"request\",\"params\":\"1\",\"id\":1}" )
+    << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
+  clear(t);
+  
+  id = n.request(t, n, "2" );
+  t << equal<expect>( id, 2 ) << FAS_TESTING_FILE_LINE << std::endl << id;
+  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"request\",\"params\":\"2\",\"id\":2}" )
+    << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
+  clear(t);
+  
+  
+  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("1"), 1 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
+
+  // invalid id
+  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("2"), 1 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
+
+  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("2"), 2 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
+
+  // invalid id
+  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("3"), 2 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
+
+}
+
 
 BEGIN_SUITE(method_suite, "json-rpc method suite")
   ADD_UNIT(notify)
   ADD_UNIT(request)
   ADD_UNIT(request_error)
-  
+  ADD_UNIT(remote_notify)
+  ADD_UNIT(remote_request)
   ADD_VALUE_ADVICE( ajr::_buffer_, std::string )
   ADD_ADVICE( ajr::_output_, ad_output )
   

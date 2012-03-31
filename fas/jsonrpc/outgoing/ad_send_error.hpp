@@ -51,7 +51,7 @@ struct ad_send_error
   template<typename T>
   bool operator() (T& t, int code, const std::string& message)
   {
-    typedef error_notify_json< custom_error, custom_error_json > error_json;
+    typedef error_notify_json< /*custom_error,*/ custom_error_json > error_json;
     
     return t.get_aspect().template get<_send_>()(t, error_json(), custom_error(code, message) );
   }

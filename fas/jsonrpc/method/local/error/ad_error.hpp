@@ -1,5 +1,5 @@
-#ifndef FAS_JSONRPC_METHOD_REQUEST_AD_REQUEST_ERROR_HPP
-#define FAS_JSONRPC_METHOD_REQUEST_AD_REQUEST_ERROR_HPP
+#ifndef FAS_JSONRPC_METHOD_REQUEST_ERROR_AD_ERROR_HPP
+#define FAS_JSONRPC_METHOD_REQUEST_ERROR_AD_ERROR_HPP
 
 #include <fas/jsonrpc/outgoing/tags.hpp>
 #include <fas/jsonrpc/method/tags.hpp>
@@ -17,7 +17,7 @@ template<
   typename V = custom_error,
   typename J = custom_error_json
 >
-struct ad_request_error
+struct ad_error
 {
   template<typename T, typename M>
   bool operator()(T& t, M& method, const V& user_error, int id)
@@ -26,44 +26,42 @@ struct ad_request_error
   }
 
   template<typename T, typename M>
+  bool operator()(T& t, M& method, int code, const std::string& message, int id)
+  {
+    return this->_send( t, method, custom_error_json(), custom_error(code, message), id );
+  }
+
+  template<typename T, typename M>
   bool operator()(T& t, M& method, error_code::type code, int id)
   {
-    
-    if ( method.get_aspect().template get<_request_id_>().has(id) )
+    if ( method.get_aspect().template get<_id_>().has(id) )
     {
-      method.get_aspect().template get<_request_id_>().pop(id);
-      if ( t.get_aspect().template get<_send_error_>()( t, code, id ) )
+      method.get_aspect().template get<_id_>().pop(id);
+      if ( t.get_aspect().template get<_send_common_error_>()( t, code, id ) )
         return true;
-      method.get_aspect().template get<_request_error_fail_>()( t, method, code, id );
+      method.get_aspect().template get<_error_fail_>()( t, method, code, id );
     }
     else
       method.get_aspect().template get< _invalid_error_id_ >()( t, method, code, id );
     return false;
   }
 
-  template<typename T, typename M>
-  bool operator()(T& t, M& method, int code, const std::string& message, int id)
-  {
-    return this->_send( t, method, custom_error_json(), custom_error(code, message), id );
-  }
-
-
 private:
   
   template<typename T, typename M, typename JJ, typename VV>
   bool _send(T& t, M& method, JJ, const VV& value, int id)
   {
-    if ( method.get_aspect().template get<_request_id_>().has(id) )
+    if ( method.get_aspect().template get<_id_>().has(id) )
     {
-      method.get_aspect().template get<_request_id_>().pop(id);
+      method.get_aspect().template get<_id_>().pop(id);
       
       if ( t.get_aspect().template get<_send_custom_error_>()( t, JJ(), value, id ) )
         return true;
       
-      method.get_aspect().template get<_request_error_fail_>()( t, method, value/*.error*/, id );
+      method.get_aspect().template get<_error_fail_>()( t, method, value, id );
     }
     else
-      method.get_aspect().template get< _invalid_error_id_ >()( t, method, value/*.error*/, id );
+      method.get_aspect().template get< _invalid_error_id_ >()( t, method, value, id );
     
     return false;
   }

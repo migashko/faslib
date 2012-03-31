@@ -1,5 +1,5 @@
-#ifndef FAS_JSONRPC_OUTGOING_JSON_ERROR_NOTIFY_JSON_HPP
-#define FAS_JSONRPC_OUTGOING_JSON_ERROR_NOTIFY_JSON_HPP
+#ifndef FAS_JSONRPC_OUTGOING_JSON_NOTIFY_JSON_HPP
+#define FAS_JSONRPC_OUTGOING_JSON_NOTIFY_JSON_HPP
 
 #include <fas/jsonrpc/names.hpp>
 
@@ -16,13 +16,13 @@ namespace fas{ namespace jsonrpc{
 
 namespace aj = ::fas::json;
   
-template< /*typename O,*/ typename J >
-struct error_notify_json:
+template< typename Name, typename J >
+struct notify_json:
   aj::object<
     typename type_list_n<
       aj::member< n_jsonrpc, aj::tstring<version> >,
-      aj::member< n_error,   J >,
-      aj::member< n_id, aj::null >
+      aj::member< n_method, aj::tstring<Name> >,
+      aj::member< n_params,   J >
     >::type
   >
 {

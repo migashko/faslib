@@ -2,11 +2,17 @@
 #define FAS_JSONRPC_METHOD_METHOD_BASE_HPP
 
 #include <stdexcept>
+
 #include <fas/jsonrpc/method/tags.hpp>
-#include <fas/jsonrpc/method/local/request/tags.hpp>
+//#include <fas/jsonrpc/method/local/request/tags.hpp>
 #include <fas/jsonrpc/method/local/result/tags.hpp>
 #include <fas/jsonrpc/method/local/error/tags.hpp>
+
+#include <fas/jsonrpc/method/remote/notify/tags.hpp>
+#include <fas/jsonrpc/method/remote/request/tags.hpp>
+
 #include <fas/jsonrpc/error_code.hpp>
+#include <fas/jsonrpc/types.hpp>
 
 namespace fas{ namespace jsonrpc{
 
@@ -26,6 +32,8 @@ public:
   }
 
 ///-> jsonrpc interface
+
+#warning TODO: сдеать R operator() (T& t, M& m) const а проверку имени вынести в invoke
 
   template<typename T, typename M, typename R>
   bool operator() (T& t, M& m, R r) const
@@ -67,40 +75,39 @@ public:
   template<typename T,typename M, typename V>
   bool result(T& t, M& m, const V& result, int id)
   {
-    return super::get_aspect().template get< local::_request_result_ >()(t, m, result, id);
+    return super::get_aspect().template get< local::_result_ >()(t, m, result, id);
   }
 
   template<typename T,typename M, typename V>
   bool notify(T& t, M& m, const V& params)
   {
-    // super::get_aspect().template get<_send_notify_>()(t, m, params);
-    return false;
+    return super::get_aspect().template get< remote::_notify_ >()(t, m, params);
   }
 
   template<typename T,typename M, typename V>
-  int request(T& t, M& m, const V& params)
+  id_t request(T& t, M& m, const V& params)
   {
-    // return super::get_aspect().template get<_send_request_>()(t, m, params);
-    return false;
+    return super::get_aspect().template get< remote::_request_ >()(t, m, params);
   }
 
   template<typename T,typename M, typename V>
-  bool error(T& t, M& m, const V& message, int id)
+  bool error(T& t, M& m, const V& error, int id)
   {
-    return super::get_aspect().template get< local::_request_error_ >()(t, m, message, id);
+    return super::get_aspect().template get< local::_error_ >()(t, m, error, id);
   }
 
   template<typename T,typename M>
   bool error(T& t, M& m, int code, const std::string& message, int id)
   {
-    return super::get_aspect().template get< local::_request_error_ >()(t, m, code, message, id);
+    return super::get_aspect().template get< local::_error_ >()(t, m, code, message, id);
   }
 
   template<typename T,typename M>
   bool error(T& t, M& m, error_code::type code, int id)
   {
-     return super::get_aspect().template get< local::_request_error_ >()(t, m, code, id);
+     return super::get_aspect().template get< local::_error_ >()(t, m, code, id);
   }
+
 
 ///<- jsonrpc interface
 

@@ -11,13 +11,13 @@ struct ad_invalid_request
   template<typename T>
   void operator() (T& t, int id)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::invalid_request, id );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::invalid_request, id );
   }
 
   template<typename T>
   void operator() (T& t)
   {
-    t.get_aspect().template get<_send_error_>()( t, error_code::invalid_request );
+    t.get_aspect().template get<_send_common_error_>()( t, error_code::invalid_request );
   }
 };
 

@@ -22,6 +22,8 @@ struct _notify_group_;
 struct _response_group_;
 struct _error_group_;
 
+struct _id_;
+
 
   /*
 struct _parse_incoming_;
