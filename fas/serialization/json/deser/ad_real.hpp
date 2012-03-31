@@ -21,7 +21,8 @@ struct ad_real
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
-    using namespace ::fas::json;
+    int it_is_not_a_very_efficient_algorithm;
+   // using namespace ::fas::json;
     if ( t.get_aspect().template get<parse::_null_>().check(r) )
     {
       r = t.get_aspect().template get<parse::_null_>()(t, r);

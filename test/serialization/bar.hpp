@@ -55,7 +55,7 @@ struct bar: foo
     bar7.insert( std::make_pair("bar7-2", foo()) );
   }
 
-  bar(int): foo(0), bar1(0), bar2(0)
+  explicit bar(int): foo(0), bar1(0), bar2(0)
   {
     std::fill_n(bar4, sizeof(bar4)/sizeof(foo), foo());
   }

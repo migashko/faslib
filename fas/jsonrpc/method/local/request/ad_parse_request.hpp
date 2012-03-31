@@ -12,13 +12,14 @@ struct ad_parse_request : V
   typedef V super;
   typedef V request_value;
   typedef J request_json;
+  
   template<typename T, typename M, typename R>
   void operator()(T& t, M& method, R r, int id)
   {
     typedef typename T::aspect::template advice_cast<_deserializer_>::type deserializer;
     typename request_value::value_type value = super::operator()(t);
 
-    register bool valid_id = id > 0 && !method.get_aspect().template get<_request_id_>().has(id);
+    register bool valid_id = !method.get_aspect().template get<_request_id_>().has(id);
     
 
     if ( valid_id )
@@ -32,7 +33,7 @@ struct ad_parse_request : V
       if ( valid_id )
         method.get_aspect().template get<_request_id_>().pop(id);
       
-      t.get_aspect().template get<_invalid_request_>()(t, /*method, r,*/ id);
+      t.get_aspect().template get<_invalid_request_>()(t, id);
     }
     else if ( !valid_id)
       method.get_aspect().template get<_invalid_request_id_>()(t, method, value, id);

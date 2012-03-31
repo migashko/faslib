@@ -143,6 +143,35 @@ UNIT(ad_object_test4, "test ad_object advice")
   t << equal<expect>(result, "{\"bar1\":{\"baz1\":42}}") << FAS_TESTING_FILE_LINE;
 }
 
+  typedef aj::object<
+    aj::member< n_foo1, aj::attr<foo, int, &foo::foo1, aj::integer> >
+  > foo_json;
+
+  typedef aj::object<
+      aj::member< n_baz1, aj::attr<bar::baz, int, &bar::baz::baz1, aj::integer> >
+  > baz_json;
+
+  typedef
+    fas::type_list_n<
+      aj::member< n_bar1, aj::attr<bar, bar::baz, &bar::bar1, baz_json> >,
+      aj::member< n_bar2, aj::attr<bar, foo, &bar::bar2, foo_json> >,
+      aj::member< n_bar3, aj::attr<bar, std::vector<foo>, &bar::bar3, aj::array<foo_json> > >,
+      aj::member< n_bar4, aj::attr<bar, bar::bar4type, &bar::bar4, aj::array<foo_json> > >,
+      aj::member< n_bar5, aj::attr<bar, bar::foo_set, &bar::bar5, aj::array<foo_json> > >
+    >::type bar_json_list;
+  
+  struct bar_json: aj::object<
+    bar_json_list
+    /*fas::type_list_n<
+      aj::member< n_bar1, aj::attr<bar, bar::baz, &bar::bar1, baz_json> >,
+      aj::member< n_bar2, aj::attr<bar, foo, &bar::bar2, foo_json> >,
+      aj::member< n_bar3, aj::attr<bar, std::vector<foo>, &bar::bar3, aj::array<foo_json> > >,
+      aj::member< n_bar4, aj::attr<bar, bar::bar4type, &bar::bar4, aj::array<foo_json> > >,
+      aj::member< n_bar5, aj::attr<bar, bar::foo_set, &bar::bar5, aj::array<foo_json> > >
+    >::type
+    */
+  > {};
+
 UNIT(ad_object_test5, "test ad_object advice")
 {
   using namespace ::fas;
@@ -150,23 +179,8 @@ UNIT(ad_object_test5, "test ad_object advice")
   using namespace ::fas::json;
   using namespace ::fas::json::ser;
 
-  typedef object<
-    member< n_foo1, attr<foo, int, &foo::foo1, integer> >
-  > foo_json;
 
-  typedef object<
-      member< n_baz1, attr<bar::baz, int, &bar::baz::baz1, integer> >
-  > baz_json;
 
-  typedef object<
-    type_list_n<
-      member< n_bar1, attr<bar, bar::baz, &bar::bar1, baz_json> >,
-      member< n_bar2, attr<bar, foo, &bar::bar2, foo_json> >,
-      member< n_bar3, attr<bar, std::vector<foo>, &bar::bar3, array<foo_json> > >,
-      member< n_bar4, attr<bar, bar::bar4type, &bar::bar4, array<foo_json> > >,
-      member< n_bar5, attr<bar, bar::foo_set, &bar::bar5, array<foo_json> > >
-    >::type
-  > bar_json;
 
   bar f;
   ad_object ado;
@@ -177,7 +191,8 @@ UNIT(ad_object_test5, "test ad_object advice")
   t << equal<expect>( result,
                       "{\"bar1\":{\"baz1\":42},\"bar2\":{\"foo1\":-1},\"bar3\":[{\"foo1\":-1}],"
                       "\"bar4\":[{\"foo1\":-1},{\"foo1\":-1}],\"bar5\":[{\"foo1\":1},{\"foo1\":2}]}"
-                    ) << FAS_TESTING_FILE_LINE;
+                    ) << FAS_TESTING_FILE_LINE
+    << std::endl << result;
 }
 
 

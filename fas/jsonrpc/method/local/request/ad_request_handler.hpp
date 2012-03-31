@@ -12,7 +12,6 @@ struct ad_request_handler
   {
     try
     {
-      // TODO: сделать проверку ids
       method.get_aspect().template get<_request_>()(t, method, v, id);
     }
     catch(const std::exception& e)

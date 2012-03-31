@@ -19,6 +19,7 @@ struct ad_real
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V v, R r)
   {
+    int it_is_not_a_very_efficient_algorithm;
     std::stringstream ss;
 
     ss << v;

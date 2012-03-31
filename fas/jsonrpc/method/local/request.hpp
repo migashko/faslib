@@ -8,6 +8,7 @@
 #include <fas/jsonrpc/method/local/request/ad_parse_request.hpp>
 #include <fas/jsonrpc/method/local/request/ad_request_handler.hpp>
 #include <fas/jsonrpc/method/local/request/ad_invalid_request_id.hpp>
+#include <fas/jsonrpc/method/local/request/ad_invalid_request.hpp>
 #include <fas/jsonrpc/method/local/request/ad_request_except.hpp>
 #include <fas/jsonrpc/id_manager.hpp>
 
@@ -33,6 +34,7 @@ struct request: type_list_n<
       advice< local::_request_handler_, local::ad_request_handler >,
       value_advice< local::_request_id_, id_manager<> >,
       advice< local::_invalid_request_id_, local::ad_invalid_request_id >,
+      advice< local::_invalid_request_, local::ad_invalid_request >,
       advice< local::_request_except_, local::ad_request_except >
     >::type
 {};

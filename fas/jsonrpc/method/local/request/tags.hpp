@@ -18,7 +18,7 @@ struct _invalid_request_id_;
 struct _invalid_result_id_;
 //struct _invalid_error_id_;
 
-struct _invalid_request_method_;
+struct _invalid_request_;
 // struct _request_result_fail_;
 //struct _request_error_fail_;
 
