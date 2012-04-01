@@ -7,14 +7,14 @@
 #endif // FAS_ALGORITHM_LAMBDA_CAST
 
 
-#ifdef FAS_ALGORITHM_SIMPLIFY
+//#ifdef FAS_ALGORITHM_SIMPLIFY
 #include <fas/mp/simplify.hpp>
 #define FAS_SIMPLIFY(F) ::fas::simplify<F>::type
 #define FAS_T_SIMPLIFY(F) typename ::fas::simplify<F>::type
-#else
+/*#else
 #define FAS_SIMPLIFY(F) F
 #define FAS_T_SIMPLIFY(F) F
 #endif // FAS_ALGORITHM_SIMPLIFY
-
+*/
 #endif
 

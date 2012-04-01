@@ -9,20 +9,22 @@
 
 #include "detail/is_sorted.hpp"
 #include <fas/integral/bool_.hpp>
-#include <fas/algorithm/algomacro.hpp>
 #include <fas/integral/less.hpp>
 #include <fas/mp/placeholders.hpp>
-
+#include <fas/mp/lambda.hpp>
+#include <fas/algorithm/algomacro.hpp>
 namespace fas{
 
 template<typename L, typename F = less<_1, _2> >
 struct is_sorted
 {
+  /*
 #ifndef FAS_ALGORITHM_LAMBDA_CAST
   enum { value = detail::is_sorted_helper<L, FAS_T_SIMPLIFY(F) >::value  };
 #else
+  */
   enum { value = detail::is_sorted_helper_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply >::value  };
-#endif
+//#endif
   typedef bool_<value> type;
 };
 

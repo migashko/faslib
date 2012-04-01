@@ -7,7 +7,9 @@
 #define FAS_GENERATORS_GENERATOR_HPP
 
 #include <fas/mp/apply.hpp>
+#include <fas/mp/lambda.hpp>
 #include <fas/algorithm/algomacro.hpp>
+
 
 namespace fas{
 
@@ -24,15 +26,16 @@ struct generator
 {
   typedef T initial;
   //typedef typename simplify<F>::type simplified;
-#ifndef FAS_ALGORITHM_LAMBDA_CAST
+/*#ifndef FAS_ALGORITHM_LAMBDA_CAST
   typedef typename apply1< FAS_T_SIMPLIFY(F), initial>::type type;
   typedef generator< type, FAS_T_SIMPLIFY(F) > next;
 #else
+  */
   typedef generator_t<T, lambda< FAS_T_SIMPLIFY(F)>::template apply > gt;
   typedef typename gt::type type;
   typedef typename gt::next next;
   //typedef typename lambda< FAS_T_SIMPLIFY(F)>::apply<initial>::type type;
-#endif
+//#endif
   
 };
 

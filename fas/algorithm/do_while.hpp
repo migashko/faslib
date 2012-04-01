@@ -8,6 +8,7 @@
 #define FAS_ALGORITHM_DO_WHILE_HPP
 
 #include "detail/do_while.hpp"
+#include <fas/mp/lambda.hpp>
 #include <fas/algorithm/algomacro.hpp>
 
 namespace fas{
@@ -15,20 +16,20 @@ namespace fas{
 template<typename I, typename F, typename P >
 struct do_while
 {
- 
+ /*
 #ifndef FAS_ALGORITHM_LAMBDA_CAST
   typedef typename detail::do_while_helper<
     FAS_T_SIMPLIFY(I),
     FAS_T_SIMPLIFY(F),
     FAS_T_SIMPLIFY(P)
   >::type type;
-#else
+#else*/
   typedef typename detail::do_while_helper_t<
     FAS_T_SIMPLIFY(I),
     lambda< FAS_T_SIMPLIFY(F) >::template apply,
     lambda< FAS_T_SIMPLIFY(P) >::template apply
   >::type type;
-#endif
+//#endif
 };
 
 template<typename I, template<typename> class F, template<typename> class  P >

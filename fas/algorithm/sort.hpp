@@ -11,17 +11,18 @@
 #include <fas/mp/simplify.hpp>
 #include <fas/integral/less.hpp>
 #include <fas/mp/placeholders.hpp>
+#include <fas/mp/lambda.hpp>
 
 namespace fas{
 
 template<typename L, typename F = less<_1, _2> >
 struct sort
 {
-#ifndef FAS_ALGORITHM_LAMBDA_CAST
+/*#ifndef FAS_ALGORITHM_LAMBDA_CAST
   typedef typename detail::sort_helper<L, FAS_T_SIMPLIFY(F) >::type type;
-#else
+#else*/
   typedef typename detail::sort_helper_t<L, lambda_r<FAS_T_SIMPLIFY(F), 2>::template apply >::type type;
-#endif
+//#endif
 };
 
 template<typename L, template <typename, typename> class F = less >

@@ -58,9 +58,23 @@ template<int P, typename L, typename F>
 struct unique_first_if_impl
 {
   typedef typename type_at_c< P - 1, L>::type current;
-  // typedef typename unique_first_if_impl2< P, L, (count_if<L, typename apply<F, current >::type  >::value > 1), F >::type type;
-
-  // typedef typename unique_first_if_impl2< P, L, (count_if_t<L, bind1st<F, current>::template apply >::value > 1), F >::type type;
+  
+  typedef typename unique_first_if_impl2<
+    P,
+    L,
+    (
+    count_if< 
+      L,
+      typename lambda_r<F,2>::template apply< current, _1 >
+    >::value > 1
+    ),
+    F
+  >::type type;
+  
+  // typedef typename unique_first_if_impl2_t< P, L, count_if<L, bind1st<F, current>::template apply >::value > 1), F >::type type;
+  // typedef typename unique_first_if_impl2_t< P, L, (count_if_t<L, bind1st<F, current>::template apply >::value > 1), F >::type type;
+  /*
+  typedef typename type_at_c< P - 1, L>::type current;
   
   typedef typename unique_first_if_impl2<
     P,
@@ -73,6 +87,7 @@ struct unique_first_if_impl
     ),
     F
   >::type type;
+  */
   
 };
 
@@ -136,7 +151,6 @@ template<int P, typename L, template<typename, typename> class F>
 struct unique_first_if_impl_t
 {
   typedef typename type_at_c< P - 1, L>::type current;
-  // typedef typename unique_first_if_impl2_t< P, L, (count_if_t<L, lambda_r< typename F<current>::type, 1 >::template apply >::value > 1), F >::type type;
   typedef typename unique_first_if_impl2_t< P, L, (count_if_t<L, bind1st<F, current>::template apply >::value > 1), F >::type type;
 };
 

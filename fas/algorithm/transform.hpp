@@ -9,17 +9,19 @@
 
 #include "detail/transform.hpp"
 #include <fas/algorithm/algomacro.hpp>
+#include <fas/mp/lambda.hpp>
 
 namespace fas{
 
 template<typename L, typename F >
 struct transform
 {
-#ifndef FAS_ALGORITHM_LAMBDA_CAST
+/*#ifndef FAS_ALGORITHM_LAMBDA_CAST
   typedef typename detail::transform_helper<L, FAS_T_SIMPLIFY(F) >::type type;
 #else
+  */
   typedef typename detail::transform_helper_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply >::type type;
-#endif
+//#endif
 };
 
 template<typename L, template<typename> class F >

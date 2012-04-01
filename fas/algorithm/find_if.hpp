@@ -9,18 +9,23 @@
 
 #include "detail/find_if.hpp"
 #include <fas/mp/simplify.hpp>
-
+#include <fas/mp/lambda.hpp>
+#include <fas/algorithm/algomacro.hpp>
 
 namespace fas{
 
 template<typename L, typename F >
 struct find_if
 {
+  /*
 #ifndef FAS_ALGORITHM_LAMBDA_CAST
   typedef detail::find_if_helper<L, FAS_T_SIMPLIFY(F) > helper;
 #else
+  */
   typedef detail::find_if_helper_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply > helper;
+  /*
 #endif
+*/
 
   typedef typename helper::type type;
   typedef typename helper::tail tail;

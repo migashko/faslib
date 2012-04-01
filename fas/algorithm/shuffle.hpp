@@ -19,6 +19,7 @@
 
 namespace fas{
 
+  /*
 #ifndef FAS_ALGORITHM_LAMBDA_CAST
 
 template<typename L, typename RL>
@@ -29,7 +30,7 @@ struct shuffle
   typedef typename transform< sorted_list, second<_1> >::type type;
 };
 
-#else
+#else*/
 
 namespace detail
 {
@@ -51,7 +52,7 @@ struct shuffle
   typedef typename transform_t< sorted_list, second >::type type;
 };
 
-#endif
+//#endif
 
 
 }

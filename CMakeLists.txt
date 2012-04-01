@@ -1,20 +1,22 @@
+
+
 cmake_minimum_required(VERSION 2.6)
 project(faslib)
 
 #SUBDIRS(config)
-add_subdirectory(config)
+
 
 #  MSVC UNIX BORLAND APPLE WIN32 CYGWIN
 
 if(UNIX)
 
 #-std=c++0x
-
 #SET(CMAKE_CXX_COMPILER "/usr/bin/g++-3.3")
 SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
 SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O2 -g")
+
 
 elseif(MSVC)
 
@@ -26,7 +28,9 @@ SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "/Yd /O2 /DNDEBUG")
 else(UNIX)
   
 endif(UNIX)
- 
+
+
+add_subdirectory(config)
 
 #SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti -O0 -g" )
 #SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti -O3 -DNDEBUG" )  
@@ -34,9 +38,9 @@ endif(UNIX)
 #ADD_DEFINITIONS(-DFASLIB_TYPE_LIST_CHECK)
 #ADD_DEFINITIONS(-DDISABLE_TYPE_LIST_SPEC)
 #ADD_DEFINITIONS(-DFAS_ALGORITHM_LAMBDA_CAST)
-#ADD_DEFINITIONS(-DFAS_ALGORITHM_SIMPLIFY)
+ADD_DEFINITIONS(-DFAS_ALGORITHM_SIMPLIFY)
 
-#SET(FAS_USE_RT_LIB ON)
+SET(FAS_USE_RT_LIB ON)
 
 
 message(STATUS ${FAS_USE_RT_LIB})
@@ -59,6 +63,7 @@ include_directories(./)
 #SET(CMAKE_SOURCE_DIR ".")
 #set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${CMAKE_PLATFORM}/${PROJECT_NAME})
 #add_subdirectory(test)
+
 add_subdirectory(test)
 #add_subdirectory(example)
 add_subdirectory(tutorial)

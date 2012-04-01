@@ -8,6 +8,7 @@
 #define FAS_ALGORITHM_ERASE_IF_HPP
 
 #include <fas/algorithm/select.hpp>
+#include <fas/integral/not_.hpp>
 
 namespace fas{
 
