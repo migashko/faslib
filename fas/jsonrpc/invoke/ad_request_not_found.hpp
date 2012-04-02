@@ -14,7 +14,6 @@ struct ad_request_not_found
   }
 };
 
-
 }}
 
 #endif

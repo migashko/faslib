@@ -4,6 +4,7 @@
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/method/local/request/tags.hpp>
 #include <fas/jsonrpc/invoke/tags.hpp>
+#include <fas/jsonrpc/types.hpp>
 
 
 namespace fas{ namespace jsonrpc{
@@ -13,7 +14,7 @@ struct f_request
 {
   RN name;
   RP params;
-  int id;
+  id_t id;
   
   bool ready;
 
@@ -28,23 +29,12 @@ struct f_request
   void operator()(T& t, tag<Tg> )
   {
     if (ready) return;
-    
-    if ( !t.get_aspect().template get<Tg>()
-           .get_aspect().template get<_name_>()
-           .check( name )
-       )
-      return;
 
-    ready = true;
-
-    t.get_aspect().template get<Tg>()
-     .get_aspect().template get< local::_parse_request_>()
-     (
-        t,
-        t.get_aspect().template get<Tg>(),
-        params,
-        id
-     );
+    if ( t.get_aspect().template get<_check_name_>()( t, tag<Tg>(), name ) )
+    {
+      ready = true;
+      t.get_aspect().template get<Tg>().parse_request( t, params, id);
+    }
   }
 
   operator bool () const { return ready; }
@@ -54,7 +44,7 @@ struct f_request
 struct ad_invoke_request
 {
   template<typename T, typename RN, typename RP>
-  void operator()(T& t, RN name, RP params, int id  )
+  void operator()(T& t, RN name, RP params, id_t id  )
   {
     if ( !t.get_aspect().template getg<_request_group_>().for_each(t, f_request<RN, RP>( name, params, id ) ) )
       t.get_aspect().template get<_request_not_found_>()(t, name, params, id);

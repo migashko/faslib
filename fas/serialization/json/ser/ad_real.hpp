@@ -19,7 +19,10 @@ struct ad_real
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V v, R r)
   {
-    int it_is_not_a_very_efficient_algorithm;
+    #ifndef FAS_DISABLE_WARNINGS
+    void* it_is_not_a_very_efficient_algorithm;
+    #endif
+
     std::stringstream ss;
 
     ss << v;
@@ -35,6 +38,8 @@ struct ad_real
 
     return r;
   }
+
+  
 };
 
 }}}

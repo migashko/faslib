@@ -6,6 +6,8 @@
 #include <fas/jsonrpc/invoke/ad_not_impl.hpp>
 #include <fas/jsonrpc/invoke/ad_notify_not_found.hpp>
 #include <fas/jsonrpc/invoke/ad_request_not_found.hpp>
+#include <fas/jsonrpc/invoke/ad_check_range.hpp>
+#include <fas/jsonrpc/invoke/ad_check_name.hpp>
 
 #include <fas/jsonrpc/invoke/remote/ad_result_not_found.hpp>
 #include <fas/jsonrpc/invoke/remote/ad_error_not_found.hpp>
@@ -31,6 +33,8 @@ struct invoke_list: type_list_n<
   advice< _request_not_found_, ad_request_not_found >,
   
   advice< _id_, id_manager<> >,
+  advice< _check_range_, ad_check_range >,
+  advice< _check_name_, ad_check_name>,
 
   /// stubs
   advice< _invoke_invalid_id_, ad_invoke_invalid_id >,

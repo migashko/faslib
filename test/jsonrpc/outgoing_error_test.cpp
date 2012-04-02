@@ -164,8 +164,8 @@ UNIT(outgoing_user_error, "")
 
 BEGIN_SUITE(outgoing_error_suite, "outgoing aspect suite")
   ADD_UNIT(outgoing_error)
-  /*ADD_UNIT(outgoing_custom_error)
-  ADD_UNIT(outgoing_user_error)*/
+  ADD_UNIT(outgoing_custom_error)
+  ADD_UNIT(outgoing_user_error)
   ADD_ADVICE( ajr::_output_, ad_output )
   ADD_VALUE_ADVICE( ajr::_buffer_, std::string )
   ADD_ASPECT( ajr::outgoing_aspect )

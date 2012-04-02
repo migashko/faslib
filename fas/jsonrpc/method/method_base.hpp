@@ -5,11 +5,15 @@
 
 #include <fas/jsonrpc/method/tags.hpp>
 //#include <fas/jsonrpc/method/local/request/tags.hpp>
+#include <fas/jsonrpc/method/local/notify/tags.hpp>
 #include <fas/jsonrpc/method/local/result/tags.hpp>
+#include <fas/jsonrpc/method/local/request/tags.hpp>
 #include <fas/jsonrpc/method/local/error/tags.hpp>
 
 #include <fas/jsonrpc/method/remote/notify/tags.hpp>
 #include <fas/jsonrpc/method/remote/request/tags.hpp>
+#include <fas/jsonrpc/method/remote/result/tags.hpp>
+#include <fas/jsonrpc/method/remote/error/tags.hpp>
 
 #include <fas/jsonrpc/error_code.hpp>
 #include <fas/jsonrpc/types.hpp>
@@ -25,6 +29,8 @@ public:
   typedef typename super::aspect aspect;
 
   typedef typename aspect::template advice_cast<_context_>::type context_type;
+  // typedef typename aspect::template advice_cast<_name_>::type::value_type name_range_type;
+  
 
   std::string name() const
   {
@@ -33,21 +39,47 @@ public:
 
 ///-> jsonrpc interface
 
-#warning TODO: сдеать R operator() (T& t, M& m) const а проверку имени вынести в invoke
+// #warning TODO: сдеать R operator() (T& t, M& m) const а проверку имени вынести в invoke
 
+
+  /*
+  template<typename T>
+  typename aspect::template advice_cast<_name_>::type::range_type
+  operator()(T&) const
+  {
+    return super::get_aspect().template get<_name_>()();
+  }
+  */
+
+
+  /*
   template<typename T, typename M, typename R>
   bool operator() (T& t, M& m, R r) const
   {
     return this->get_aspect().template get<_name_>()(t, m, r);
   }
+  */
 
-  /*
+  template<typename R>
+  bool _check_name(R r, false_) const
+  {
+    return false;
+  }
+
+  template<typename R>
+  bool check_name(R r, true_) const
+  {
+    return super::get_aspect().template get<_name_>()(r);
+    // return false;
+  }
+  
   template<typename R>
   bool check_name(R r) const
   {
-    return super::get_aspect().template get<_name_>().check(r);
+    typedef typename super::aspect::template has_advice<_name_>::type has_name;
+    return _check_name(r, has_name() );
   }
-  */
+  
   
   /*
   template<typename T>
@@ -58,19 +90,30 @@ public:
   }
   */
 
-  /*
+  
   template<typename T, typename R>
-  void process_notify(T& t, R r) 
+  void parse_notify(T& t, R r)
   {
-    super::get_aspect().template get<_parse_notify_>()(t, *this, r);
+    super::get_aspect().template get< local::_parse_notify_>()(t, *this, r);
   }
 
   template<typename T, typename R>
-  void process_request(T& t, R r, int id) 
+  void parse_request(T& t, R r, id_t id)
   {
-    super::get_aspect().template get<_parse_request_>()(t, *this, r, id); 
+    super::get_aspect().template get< local::_parse_request_>()(t, *this, r, id); 
   }
-  */
+
+  template<typename T, typename R>
+  void parse_result(T& t, R r, id_t id)
+  {
+    super::get_aspect().template get< remote::_parse_result_>()(t, *this, r, id);
+  }
+
+  template<typename T, typename R>
+  void parse_error(T& t, R r, id_t id)
+  {
+    super::get_aspect().template get< remote::_parse_error_>()(t, *this, r, id);
+  }
 
   template<typename T,typename M, typename V>
   bool result(T& t, M& m, const V& result, int id)

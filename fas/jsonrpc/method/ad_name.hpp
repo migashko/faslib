@@ -12,7 +12,21 @@ struct ad_name
 {
   typedef N name_type;
   typedef string_range< typename N::value_type > range_type;
-  
+
+  range_type operator()() const
+  {
+    return range_type( N()() );
+  }
+
+  template<typename R>
+  bool operator() (R r1) const
+  {
+    range_type r2 = N()();
+    for ( ;r1 && r2 && *r1==*r2; ++r1, ++r2 );
+    return !r1 && !r2;
+  }
+
+  /*
   typename N::value_type operator()() const 
   {
     return  N()();
@@ -36,6 +50,7 @@ struct ad_name
     for ( ;name && r && *name==*r; ++name, ++r );
     return !name && !r;  
   }
+  */
 };
 
 }}

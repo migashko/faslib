@@ -22,6 +22,9 @@ struct _notify_group_;
 struct _response_group_;
 struct _error_group_;
 
+struct _check_range_;
+struct _check_name_;
+
 struct _id_;
 
 
