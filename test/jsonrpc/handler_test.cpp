@@ -8,6 +8,18 @@
 
 //namespace ajr = ::fas::jsonrpc;
 
+/**
+ *  client --> notify(hi) --> server
+ *  client <-- notify(hi) <-- server
+ *  client <-- request(get_name) <-- server
+ *  client --> result("client") --> server
+ *  client --> request(get_name) --> server
+ *  client <-- result("server") <-- server
+ *  client --> request(hi) --> server
+ *  client <-- error("Method not found") <-- server
+ * 
+*/
+
 UNIT(handler, "")
 {
 /*  using namespace ::fas::testing;

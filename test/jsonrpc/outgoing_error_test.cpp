@@ -109,22 +109,22 @@ FAS_NAME(data)
 FAS_NAME(position)
 FAS_NAME(description)
 
-struct custom_error_list: ajr::custom_error_json::target {};
-struct user_error_list: fas::type_list_n<
+typedef ajr::custom_error_json::target custom_error_list;
+typedef fas::type_list_n<
           aj::member< n_position, aj::attr< user_error, size_t, &user_error::position, aj::integer > >,
           aj::member< n_description, aj::attr< user_error, std::string, &user_error::description, aj::string > >
         >::type
-{};
+user_error_list;
 
-struct user_error_member: aj::member< n_data, aj::object<user_error_list> > {};
+typedef aj::member< n_data, aj::object<user_error_list> > user_error_member;
     
 
-struct user_error_json: aj::object<
+typedef aj::object<
   fas::type_list_n<
     custom_error_list,
-    user_error_list
+    user_error_member
   >::type
-> {};
+> user_error_json;
 
 UNIT(outgoing_user_error, "")
 {
@@ -156,7 +156,8 @@ UNIT(outgoing_user_error, "")
 
   jsonrpc = buffer(t);
   // {"jsonrpc":"2.0","error":{"code":-32700,"message":"Parse error.","data":{"position":5,"description":"parse error: [1,2,>>>},3,4,5]"}},"id":4}
-  t << equal<expect>( jsonrpc, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32700,\"message\":\"Parse error.\",\"data\":{\"position\":5,\"description\":\"parse error: [1,2,>>>},3,4,5]\"}},\"id\":4}" )
+  t << equal<expect>( jsonrpc, 
+      "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32700,\"message\":\"Parse error.\",\"data\":{\"position\":5,\"description\":\"parse error: [1,2,>>>},3,4,5]\"}},\"id\":4}" )
     << FAS_TESTING_FILE_LINE
     << std::endl << jsonrpc << std::endl;
   

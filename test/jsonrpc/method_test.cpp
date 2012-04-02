@@ -16,6 +16,7 @@
 #include <fas/jsonrpc/method/remote/notify.hpp>
 #include <fas/jsonrpc/method/remote/request.hpp>
 #include <fas/jsonrpc/method/remote/result.hpp>
+#include <fas/jsonrpc/method/remote/error.hpp>
 #include <fas/jsonrpc/method/local/error.hpp>
 #include <fas/range.hpp>
 
@@ -131,17 +132,20 @@ struct user_error
   }
 };
 
+
+// struct aaa{};
+
 FAS_NAME(data);
 FAS_NAME(foo);
 FAS_NAME(bar);
 
-struct user_error_json: aj::object< fas::type_list_n<
+typedef aj::object< fas::type_list_n<
   ajr::custom_error_json::target,
   aj::member< n_data, aj::object< fas::type_list_n<
     aj::member< n_foo, aj::attr< user_error, int, &user_error::foo, aj::integer > >,
     aj::member< n_bar, aj::attr< user_error, std::string, &user_error::bar, aj::string > >
   >::type > >
->::type > {};
+>::type > user_error_json;
 
 struct request_handler_error
 {
@@ -153,10 +157,9 @@ struct request_handler_error
     if ( params == 1 )
       m.error(t, m, ajr::error_code::invalid_params, id );
     else if ( params == 2 )
-      m.error(t, m, 33, "Error33", id );
+      m.error(t, m, 33, "Error 33", id );
     else if ( params == 3 )
       m.error(t, m, user_error(), id );
-    
   }
 };
 
@@ -181,7 +184,7 @@ UNIT(request_error, "")
   jsonstring = "2";
   garbage(t, "garbage");
   n.get_aspect().get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
-  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":33,\"message\":\"Error33\"},\"id\":42}" )
+  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":33,\"message\":\"Error 33\"},\"id\":42}" )
     << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
     
   clear(t);
@@ -233,7 +236,6 @@ struct result_handler
   {
     result = params;
   }
-  
 };
   
 typedef ajr::method< fas::type_list_n<
@@ -274,8 +276,60 @@ UNIT(remote_request, "")
   // invalid id
   n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("3"), 2 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
-
 }
+
+struct error_handler
+{
+  int error;
+  error_handler(): error(0){}
+  
+  template<typename T, typename M>
+  void operator()( T&, M&, const ajr::custom_error& err, int id)
+  {
+    error = err.code;
+  }
+};
+
+typedef ajr::method< fas::type_list_n<
+    ajr::name<n_request>,
+    ajr::remote::request< std::string, aj::string >,
+    ajr::remote::error< error_handler>
+>::type > error_method;
+
+UNIT(remote_error, "")
+{
+  using namespace ::fas::testing;
+  
+  error_method n;
+  garbage(t, "garbage");
+  ajr::id_t id = n.request(t, n, "1" );
+  t << equal<expect>( id, 1 ) << FAS_TESTING_FILE_LINE << std::endl << id;
+  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"request\",\"params\":\"1\",\"id\":1}" )
+    << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
+  clear(t);
+  
+  id = n.request(t, n, "2" );
+  t << equal<expect>( id, 2 ) << FAS_TESTING_FILE_LINE << std::endl << id;
+  t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"request\",\"params\":\"2\",\"id\":2}" )
+    << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
+  clear(t);
+  
+  
+  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 1 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
+
+  // invalid id
+  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 1 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
+
+  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 2 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
+
+  // invalid id
+  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("3"), 2 );
+  t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
+}
+
 
 
 BEGIN_SUITE(method_suite, "json-rpc method suite")
