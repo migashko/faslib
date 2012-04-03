@@ -1,6 +1,8 @@
 #ifndef FAS_RANGE_TYPERANGE_HPP
 #define FAS_RANGE_TYPERANGE_HPP
 
+#include <fas/range/iterator2range.hpp>
+
 #include <fas/range/range_category.hpp>
 
 #include <fas/range/output_range.hpp>
@@ -69,47 +71,6 @@ struct typerange_flag
   };
 };
 
-template<typename T, typename Tg = empty_type>
-struct iterator2range;
-
-template<typename T>
-struct iterator2range<T, std::input_iterator_tag>
-{
-  typedef input_range<T> type;
-};
-
-template<typename T>
-struct iterator2range<T, std::output_iterator_tag>
-{
-  typedef output_range<T> type;
-};
-
-template<typename T>
-struct iterator2range<T, std::forward_iterator_tag>
-{
-  typedef forward_range<T> type;
-};
-
-template<typename T>
-struct iterator2range<T, std::bidirectional_iterator_tag>
-{
-  typedef bidirectional_range<T> type;
-};
-
-template<typename T>
-struct iterator2range<T, std::random_access_iterator_tag>
-{
-  typedef random_access_range<T> type;
-};
-
-
-template<typename T>
-struct iterator2range<T, empty_type>
-  : iterator2range<T, typename std::iterator_traits<T>::iterator_category > 
-{
-
-};
-
 
 template<typename T>
 struct typerange;
@@ -120,8 +81,12 @@ struct range_helper;
 template< typename T>
 struct range_helper<T, typerange_flag::other >
 {
+  enum { flag = typerange_flag::other };
   typedef random_access_range<T*> range;
   typedef range init_range;
+  
+  typedef typename range::difference_type difference_type;
+  /*
   typedef typename range::iterator iterator;
   typedef typename range::range_category    range_category;
   typedef typename range::iterator_category iterator_category;
@@ -129,6 +94,7 @@ struct range_helper<T, typerange_flag::other >
   typedef typename range::difference_type   difference_type;
   typedef typename range::pointer           pointer;
   typedef typename range::reference         reference;
+  */
 
   static inline range make_range(T& v)
   {
@@ -142,12 +108,16 @@ struct range_helper<T, typerange_flag::other >
     return init_range(&v, &v + 1);
   }
 
+  static inline difference_type distance( const T& ) { return 1;} 
 };
 
 template< typename T>
 struct range_helper<T*, typerange_flag::pointer >
 {
+  enum { flag = typerange_flag::pointer };
   typedef random_access_range<T*> range;
+  typedef typename range::difference_type   difference_type;
+  /*
   typedef typename range::iterator iterator;
   typedef typename range::range_category    range_category;
   typedef typename range::iterator_category iterator_category;
@@ -155,20 +125,24 @@ struct range_helper<T*, typerange_flag::pointer >
   typedef typename range::difference_type   difference_type;
   typedef typename range::pointer           pointer;
   typedef typename range::reference         reference;
+  */
 
   template<typename TT>
   static inline range make_range(TT* beg, TT* end )
   {
     return range(beg, end);
   }
-  
+  static inline difference_type distance( const T& ) { return 0;} 
 };
 
 template< typename T, int N>
 struct range_helper<T[N], typerange_flag::array >
 {
+  enum { flag = typerange_flag::array };
   typedef random_access_range<T*> range;
   typedef range init_range;
+  typedef typename range::difference_type   difference_type;
+  /*
   typedef typename range::iterator iterator;
   typedef typename range::range_category    range_category;
   typedef typename range::iterator_category iterator_category;
@@ -176,7 +150,10 @@ struct range_helper<T[N], typerange_flag::array >
   typedef typename range::difference_type   difference_type;
   typedef typename range::pointer           pointer;
   typedef typename range::reference         reference;
+  */
 
+  static inline difference_type distance( const T* ) { return N;} 
+  
   template<typename TT>
   static inline range make_range(TT* v)
   {
@@ -217,7 +194,10 @@ private:
 template< typename R>
 struct range_helper<R, typerange_flag::range >
 {
+  enum { flag = typerange_flag::range };
   typedef R range;
+  typedef typename range::difference_type   difference_type;
+  /*
   typedef typename range::iterator iterator;
   typedef typename range::range_category    range_category;
   typedef typename range::iterator_category iterator_category;
@@ -225,6 +205,7 @@ struct range_helper<R, typerange_flag::range >
   typedef typename range::difference_type   difference_type;
   typedef typename range::pointer           pointer;
   typedef typename range::reference         reference;
+  */
 
   template<typename RR>
   static inline range make_range(RR r)
@@ -238,13 +219,16 @@ struct range_helper<R, typerange_flag::range >
     return range( r.end() , r.end());
   }
 
+  static inline difference_type distance( R r ) { return r.distance();} 
 };
 
 template< typename I>
 struct range_helper<I, typerange_flag::iterator >
 {
+  enum { flag = typerange_flag::iterator };
   typedef typename iterator2range< typename remove_const<I>::type >::type range;
-  
+  typedef typename range::difference_type   difference_type;
+  /*
   typedef typename range::iterator iterator;
   typedef typename range::range_category    range_category;
   typedef typename range::iterator_category iterator_category;
@@ -252,7 +236,7 @@ struct range_helper<I, typerange_flag::iterator >
   typedef typename range::difference_type   difference_type;
   typedef typename range::pointer           pointer;
   typedef typename range::reference         reference;
-  
+  */
   
   /*template<typename II>*/
   static inline range make_range(I/*I*/ beg)
@@ -267,6 +251,8 @@ struct range_helper<I, typerange_flag::iterator >
     // template for other range
     return range(beg, end);
   }
+  
+  static inline difference_type distance( I r ) { return 0;} 
 };
 
 template< typename C, int CNST>
@@ -281,6 +267,7 @@ struct range_container_helper
   }
 
 };
+
 
 template< typename C>
 struct range_container_helper<C, false>
@@ -300,8 +287,10 @@ struct range_container_helper<C, false>
   {
     return range( ctn.begin(), ctn.end() );
   }
-
+  
+  
 };
+
 
 
 
@@ -309,8 +298,10 @@ template< typename C>
 struct range_helper<C, typerange_flag::container >
   : range_container_helper< C, is_const<C>::value  >
 {
+  enum { flag = typerange_flag::container };
   typedef range_container_helper< C, is_const<C>::value > super;
   typedef typename super::range range;
+  typedef typename range::difference_type   difference_type;
   /*
   typedef typename iterator2range<
     if_c< is_const<C>::value
@@ -323,6 +314,8 @@ struct range_helper<C, typerange_flag::container >
   */
   
   // typedef typename range::iterator iterator;
+  
+  /*
   typedef typename range::iterator iterator;
   typedef typename range::range_category    range_category;
   typedef typename range::iterator_category iterator_category;
@@ -330,6 +323,7 @@ struct range_helper<C, typerange_flag::container >
   typedef typename range::difference_type   difference_type;
   typedef typename range::pointer           pointer;
   typedef typename range::reference         reference;
+  */
 
   /*
   template<typename CC>
@@ -350,6 +344,7 @@ struct range_helper<C, typerange_flag::container >
     return range( ctn.end(), ctn.end() );
   }
 
+  static inline difference_type distance( const C& c ) { return c.size();} 
 };
 
 template<typename T>
