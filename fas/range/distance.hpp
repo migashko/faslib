@@ -2,7 +2,7 @@
 #define FAS_RANGE_DISTANCE_HPP
 
 
-#include <fas/range/range_traits.hpp>
+#include <fas/range/typerange.hpp>
 
 namespace fas{
 

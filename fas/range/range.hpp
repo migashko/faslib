@@ -1,7 +1,7 @@
 #ifndef FAS_RANGE_RANGE_HPP
 #define FAS_RANGE_RANGE_HPP
 
-#include <fas/range/range_traits.hpp>
+#include <fas/range/typerange.hpp>
 #include <fas/range/string_range.hpp>
 
 namespace fas{

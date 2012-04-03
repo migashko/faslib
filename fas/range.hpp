@@ -2,6 +2,7 @@
 #define FAS_range_HPP
 
 #include <fas/range/rangeop.hpp>
+#include <fas/range/typerange.hpp>
 
 #include <fas/range/trivial_range.hpp>
 #include <fas/range/output_range.hpp>

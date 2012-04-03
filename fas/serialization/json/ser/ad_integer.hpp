@@ -1,7 +1,7 @@
 #ifndef FAS_SERIALIZATION_JSON_SERIALIZER_AD_INTEGER_HPP
 #define FAS_SERIALIZATION_JSON_SERIALIZER_AD_INTEGER_HPP
 
-#include <fas/range/range_traits.hpp>
+#include <fas/range/typerange.hpp>
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/out_of_range.hpp>
 

@@ -1,5 +1,5 @@
-#ifndef FAS_RANGE_RANGE_TRAITS_HPP
-#define FAS_RANGE_RANGE_TRAITS_HPP
+#ifndef FAS_RANGE_TYPERANGE_HPP
+#define FAS_RANGE_TYPERANGE_HPP
 
 #include <fas/range/range_category.hpp>
 
