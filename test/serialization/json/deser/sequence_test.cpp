@@ -56,7 +56,7 @@ UNIT(sequence_deserialize_test, "test sequence_deserialize function")
 
   value="0,-1,1000";
   result.clear();
-  deserialize_sequence(  init_range(result), range(value), deserialize_integer<int, range_traits<std::string>::range> );
+  deserialize_sequence(  init_range(result), range(value), deserialize_integer<int, typerange<std::string>::range> );
   t << equal<assert, int>(result.size(), 3) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result[0], 0 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result[1], -1 ) << FAS_TESTING_FILE_LINE;

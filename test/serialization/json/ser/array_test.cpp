@@ -57,7 +57,7 @@ UNIT(array_serialize_test, "test array_serialize function")
   serialize_array(
     range(value),
     init_range(result),
-    serialize_integer<int, range_traits<std::string>::init_range >
+    serialize_integer<int, typerange<std::string>::init_range >
   );
 
   t << equal<expect>(result, "[1,2,3]") << FAS_TESTING_FILE_LINE;

@@ -52,7 +52,7 @@ UNIT(array_deserialize_test1, "test array_deserialize function")
   deserialize_array(
     init_range(result),
     range("[1,2,3]"),
-    deserialize_integer<int, range_traits<const char*>::range>
+    deserialize_integer<int, typerange<const char*>::range>
   );
 
   t << equal<assert, int>(result.size(), 3) << FAS_TESTING_FILE_LINE;
@@ -73,7 +73,7 @@ UNIT(array_deserialize_test2, "test array_deserialize function")
   deserialize_array(
     init_range(result),
     range("[1,2,3]"),
-    deserialize_integer<int, range_traits<const char*>::range>
+    deserialize_integer<int, typerange<const char*>::range>
   );
 
   t << equal<expect>(result[0], 1) << FAS_TESTING_FILE_LINE;

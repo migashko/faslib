@@ -20,14 +20,14 @@ struct ad_container_manager
   struct range_type_t
   {
     typedef typename container_type_t<T>::type container_type;
-    typedef typename range_traits< container_type >::range type;
+    typedef typename typerange< container_type >::range type;
   };
 
   template<typename T>
   struct init_range_type_t
   {
     typedef typename container_type_t<T>::type container_type;
-    typedef typename range_traits< container_type >::init_range type;
+    typedef typename typerange< container_type >::init_range type;
   };
   
 

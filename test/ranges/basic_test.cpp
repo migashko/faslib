@@ -70,7 +70,7 @@ UNIT(output1, "output range testing (back_insert_iterator)")
   static_check< !has_range_category2<iterator>::value > test3;
   */
   
-  typedef range_traits< iterator >::range range_type;
+  typedef typerange< iterator >::range range_type;
   
   container_type cnt1;
   
@@ -225,7 +225,7 @@ UNIT(initial_range_sequence, "initial sequence range testing")
   using namespace fas::testing;
   typedef std::vector<int> container_type;
   
-  typedef typename range_traits<container_type>::init_range/*initial_range_type*/ range_type;
+  typedef typename typerange<container_type>::init_range/*initial_range_type*/ range_type;
   /*enum { is_s =  range_traits<container_type>::is_sequence_container };
   enum { is_a =  range_traits<container_type>::is_associative_container };
   enum { result = static_check<is_s>::value + static_check<!is_a>::value };
@@ -247,7 +247,7 @@ UNIT(initial_range_associative, "initial associative range testing")
   using namespace fas::testing;
   typedef std::set<int> container_type;
   
-  typedef typename range_traits<container_type>::init_range range_type;
+  typedef typename typerange<container_type>::init_range range_type;
   /*enum { is_s =  range_traits<container_type>::is_sequence_container };
   enum { is_a =  range_traits<container_type>::is_associative_container };
   enum { result = static_check<!is_s>::value + static_check<is_a>::value };*/

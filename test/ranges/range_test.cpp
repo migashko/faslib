@@ -17,7 +17,7 @@ UNIT(range_vector_test, "test range( vector<int> )")
   using namespace ::fas::testing;
   
   std::vector<int> v;
-  fas::range_traits< std::vector<int>  >::init_range ir = fas::init_range( v );
+  fas::typerange< std::vector<int>  >::init_range ir = fas::init_range( v );
   *ir++=1;
   *ir++=2;
   // v.push_back(1); v.push_back(2);
@@ -37,7 +37,7 @@ UNIT(range_set_test, "test range( set<int> )")
   using namespace ::fas::testing;
 
   std::set<int> v;
-  fas::range_traits< std::set<int>  >::init_range ir = fas::init_range( v );
+  fas::typerange< std::set<int>  >::init_range ir = fas::init_range( v );
   *ir++=1;
   *ir++=2;
   trivial_const_test( t, fas::range(v) );
@@ -49,7 +49,7 @@ UNIT(range_set_test, "test range( set<int> )")
 };
 
 typedef int int_array[2];
-typedef fas::range_traits< int_array  >::init_range range_type;
+typedef fas::typerange< int_array  >::init_range range_type;
 
 UNIT(range_array_test, "test range( int[2] )")
 {

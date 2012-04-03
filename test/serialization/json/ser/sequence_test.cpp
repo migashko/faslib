@@ -48,7 +48,7 @@ UNIT(sequence_serialize_test, "test sequence_serialize function")
 
   result.clear();
   value.push_back(1000);
-  serialize_sequence( range(value), init_range(result), serialize_integer<int, range_traits<std::string>::init_range> );
+  serialize_sequence( range(value), init_range(result), serialize_integer<int, typerange<std::string>::init_range> );
   t << equal<expect>(result, "0,-1,1000") << FAS_TESTING_FILE_LINE;
 }
 

@@ -47,7 +47,7 @@ private:
   {
     if (!r) return r;
 
-    typedef typename range_traits<V>::init_range range_type;
+    typedef typename typerange<V>::init_range range_type;
     range_type vr = init_range(v);
 
     r = _2( t, M(), vr, r );
@@ -75,7 +75,7 @@ private:
   {
     if (!r || !v) return r;
 
-    typedef typename range_traits<V*>::range range_type;
+    typedef typename typerange<V*>::range range_type;
     range_type vr = range(v, v + N);
     r = _2( t, M(), vr, r );
     _finalize(vr, true_() );

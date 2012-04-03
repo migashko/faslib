@@ -13,6 +13,8 @@
 #include <fas/typemanip/empty_type.hpp>
 #include <fas/typemanip/type2type.hpp>
 #include <fas/typemanip/remove_const.hpp>
+#include <fas/typemanip/is_array.hpp>
+#include <fas/typemanip/is_pointer.hpp>
 
 namespace fas{
 
@@ -20,7 +22,7 @@ FAS_HAS_TYPENAME(has_iterator_category, iterator_category);
 FAS_HAS_TYPENAME(has_range_category, range_category);
 FAS_HAS_TYPENAME(has_iterator, iterator);
 
-struct range_flag
+struct typerange_flag
 {
   struct shift
   {
@@ -35,11 +37,11 @@ struct range_flag
   };
   
   enum {
-    other = 0,
-    pointer = 1 << shift::pointer,
-    array = 1 << shift::array,
-    range = 1 << shift::range,
-    iterator = 1 << shift::iterator,
+    other     = 0,
+    pointer   = 1 << shift::pointer,
+    array     = 1 << shift::array,
+    range     = 1 << shift::range,
+    iterator  = 1 << shift::iterator,
     container = 1 << shift::container
   };
 
@@ -48,17 +50,21 @@ struct range_flag
   {
     enum
     {
-      iterator_flag = has_iterator_category<T>::value,
+      array_flag = is_array<T>::value, 
+      pointer_flag = !array_flag && is_pointer<T>::value, 
+      iterator_flag = !pointer_flag && has_iterator_category<T>::value,
       container_flag = !iterator_flag && has_iterator<T>::value,
-      range_flag = !iterator_flag && has_range_category<T>::value
+      range_flag = !iterator_flag && has_range_category<T>::value,
     };
 
     enum
     {
       value =
-          ( iterator_flag << shift::iterator )
+          ( array_flag     << shift::array )
+        | ( pointer_flag   << shift::pointer )
+        | ( iterator_flag  << shift::iterator )
         | ( container_flag << shift::container )
-        | ( range_flag << range_flag::shift::range )
+        | ( range_flag     << shift::range )
     };
   };
 };
@@ -106,13 +112,13 @@ struct iterator2range<T, empty_type>
 
 
 template<typename T>
-struct range_traits;
+struct typerange;
 
 template< typename T, int flag >
 struct range_helper;
 
 template< typename T>
-struct range_helper<T, range_flag::other >
+struct range_helper<T, typerange_flag::other >
 {
   typedef random_access_range<T*> range;
   typedef range init_range;
@@ -139,7 +145,7 @@ struct range_helper<T, range_flag::other >
 };
 
 template< typename T>
-struct range_helper<T*, range_flag::pointer >
+struct range_helper<T*, typerange_flag::pointer >
 {
   typedef random_access_range<T*> range;
   typedef typename range::iterator iterator;
@@ -159,7 +165,7 @@ struct range_helper<T*, range_flag::pointer >
 };
 
 template< typename T, int N>
-struct range_helper<T[N], range_flag::array >
+struct range_helper<T[N], typerange_flag::array >
 {
   typedef random_access_range<T*> range;
   typedef range init_range;
@@ -209,7 +215,7 @@ private:
 };
 
 template< typename R>
-struct range_helper<R, range_flag::range >
+struct range_helper<R, typerange_flag::range >
 {
   typedef R range;
   typedef typename range::iterator iterator;
@@ -235,7 +241,7 @@ struct range_helper<R, range_flag::range >
 };
 
 template< typename I>
-struct range_helper<I, range_flag::iterator >
+struct range_helper<I, typerange_flag::iterator >
 {
   typedef typename iterator2range< typename remove_const<I>::type >::type range;
   
@@ -300,7 +306,7 @@ struct range_container_helper<C, false>
 
 
 template< typename C>
-struct range_helper<C, range_flag::container >
+struct range_helper<C, typerange_flag::container >
   : range_container_helper< C, is_const<C>::value  >
 {
   typedef range_container_helper< C, is_const<C>::value > super;
@@ -347,28 +353,24 @@ struct range_helper<C, range_flag::container >
 };
 
 template<typename T>
-struct range_traits
-  : range_helper<T, range_flag::make<T>::value
-      /*
-        ( has_iterator_category2<T>::value << range_flag::shift::iterator )
-      | ( has_iterator2<T>::value << range_flag::shift::container   )
-      | ( has_range_category2<T>::value << range_flag::shift::range )
-      */
-    >
+struct typerange
+  : range_helper<T, typerange_flag::make<T>::value >
 {
 };
 
+/*
 template<typename T, int N>
 struct range_traits<T[N]>
-  : range_helper<T[N], range_flag::array >
+  : range_helper<T[N], typerange_flag::array >
 {
 };
 
 template<typename T>
 struct range_traits<T*>
-  : range_helper<T*, range_flag::pointer >
+  : range_helper<T*, typerange_flag::pointer >
 {
 };
+*/
 
 
 };

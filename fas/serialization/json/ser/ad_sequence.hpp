@@ -43,7 +43,7 @@ struct ad_sequence
   template<typename T, typename M, typename V, typename R, int N, typename ISA>
   R _1(T& t, M, const V& v, R r, ISA, int_<N>)
   {
-    typename ::fas::range_traits< const V>::range rr = ::fas::range( v );
+    typename ::fas::typerange< const V>::range rr = ::fas::range( v );
     if ( rr.distance() > N )
       rr.narrow( rr.distance() - N );
     

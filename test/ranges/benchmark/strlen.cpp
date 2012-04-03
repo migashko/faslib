@@ -104,7 +104,7 @@ int main()
   show(start, finish);
 
   std::cout << "------ ++ -------" << std::endl;
-  range_traits<const char*>::range r = range(str, str + sizeof(str));
+  typerange<const char*>::range r = range(str, str + sizeof(str));
   summ = 0;
   start = process_nanotime();
   for (int i = 0; i < LIMIT_OP; ++i)
