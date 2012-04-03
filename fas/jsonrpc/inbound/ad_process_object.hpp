@@ -22,15 +22,14 @@ struct ad_process_object
     }
     else if ( obj.is_result() )
     {
-      std::cout << "ad_process_object" << std::endl;
       t.get_aspect().template get< _invoke_result_ >()(t, obj.result_range(), obj.get_id() );
     }
     else if ( obj.is_error() )
     {
       if ( obj.has_id() ) 
-        t.get_aspect().template get< _invoke_error_ >()(t, obj.result_range(), obj.get_id() );
+        t.get_aspect().template get< _invoke_error_ >()(t, obj.error_range(), obj.get_id() );
       else
-        t.get_aspect().template get< _invoke_other_error_ >()(t, obj.result_range() );
+        t.get_aspect().template get< _invoke_other_error_ >()(t, obj.error_range() );
       
     }
     else

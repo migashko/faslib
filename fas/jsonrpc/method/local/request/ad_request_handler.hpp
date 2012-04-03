@@ -12,7 +12,9 @@ struct ad_request_handler
   {
     try
     {
+      std::cout << "ad_request_handler" << std::endl;
       method.get_aspect().template get<_request_>()(t, method, v, id);
+      std::cout << "ad_request_handler ready" << std::endl;
     }
     catch(const std::exception& e)
     {

@@ -32,6 +32,8 @@ struct ad_parse_error : V
     }
     
     deserializer ds;
+
+    std::cout << "[" << std::string( r.begin(), r.end() ) << "]" << std::endl;
     ds( error_json(), error, r );
     
     if ( !ds )

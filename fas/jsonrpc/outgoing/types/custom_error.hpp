@@ -13,7 +13,12 @@ struct custom_error
 {
   int code;
   std::string message;
-  
+
+  custom_error()
+    : code(0)
+  {
+  }
+
   custom_error(error_code::type code)
     : code(code)
   {

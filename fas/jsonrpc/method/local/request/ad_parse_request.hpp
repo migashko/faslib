@@ -19,6 +19,8 @@ struct ad_parse_request : V
     typedef typename T::aspect::template advice_cast<_deserializer_>::type deserializer;
     typename request_value::value_type value = super::operator()(t);
 
+    std::cout << "ad_parse_request" << std::endl;
+    
     register bool valid_id = !method.get_aspect().template get<_id_>().has(id);
     
 
@@ -30,13 +32,17 @@ struct ad_parse_request : V
     
     if ( !ds )
     {
+      std::cout << "!id" << std::endl;
       if ( valid_id )
         method.get_aspect().template get<_id_>().pop(id);
       
       t.get_aspect().template get<_invalid_request_>()(t, id);
     }
     else if ( !valid_id)
+    {
+      std::cout << "!valid_id" << std::endl;
       method.get_aspect().template get<_invalid_request_id_>()(t, method, value, id);
+    }
     else 
       method.get_aspect().template get<_request_handler_>()(t, method, value, id); 
   }

@@ -23,6 +23,7 @@
 #include <fas/algorithm/transform_tail_if.hpp>
 #include <fas/algorithm/erase_if.hpp>
 #include <fas/integral/or_.hpp>
+#include <fas/integral/bool_.hpp>
 
 #include <fas/typemanip/if_c.hpp>
 #include <fas/type_list/type_list.hpp>
@@ -177,6 +178,7 @@ public:
     typedef index_of_if_t< advice_list, bind2nd<is_has_tag, Tg>::template apply > helper;
     
     enum { value = helper::value!=-1 };
+    typedef bool_< value!=0 > type;
   };
   
   // TODO: впихать в аспект и использовать простой get! (или не надо?)

@@ -17,7 +17,7 @@
 namespace fas{ namespace jsonrpc{ namespace remote{
   
 template<
-  typename V = const void*,
+  typename V = empty_type,
   typename J = ::fas::json::null
 >
 struct notify: ::fas::aspect< 

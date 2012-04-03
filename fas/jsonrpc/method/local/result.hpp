@@ -17,7 +17,7 @@
 namespace fas{ namespace jsonrpc{ namespace local{
   
 template<
-  typename V = const void*,
+  typename V = empty_type,
   typename J = ::fas::json::null
 >
 struct result: ::fas::aspect< 

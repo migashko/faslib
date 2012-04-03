@@ -7,6 +7,8 @@
 //#include <fas/jsonrpc/json/json_aspect.hpp>
 #include <fas/jsonrpc/outgoing/outgoing_aspect.hpp>
 
+#include <fas/jsonrpc/tags.hpp>
+
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
 #include <fas/type_list/type_list_n.hpp>
@@ -22,6 +24,7 @@ namespace fas{ namespace jsonrpc{
 */
   
 typedef type_list_n<
+  alias< _input_, _inbound_ >,
   inbound_aspect,
   // error_aspect,
   // json_aspect,

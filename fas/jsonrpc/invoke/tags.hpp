@@ -19,7 +19,7 @@ struct _error_not_found_;
 
 struct _request_group_;
 struct _notify_group_;
-struct _response_group_;
+struct _result_group_;
 struct _error_group_;
 
 struct _check_range_;

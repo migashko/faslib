@@ -21,7 +21,7 @@ struct ad_name
   template<typename R>
   bool operator() (R r1) const
   {
-    range_type r2 = N()();
+    range_type r2 = range_type( N()() );
     for ( ;r1 && r2 && *r1==*r2; ++r1, ++r2 );
     return !r1 && !r2;
   }

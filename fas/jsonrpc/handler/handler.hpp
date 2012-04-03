@@ -1,51 +1,80 @@
 #ifndef FAS_JSONRPC_HANDLER_HANDLER_HPP
 #define FAS_JSONRPC_HANDLER_HANDLER_HPP
 
-#include <fas/aop/aspect.hpp>
-#include <fas/aop/advice.hpp>
-#include <fas/type_list/type_list_n.hpp>
-
-#include <fas/jsonrpc/aspect.hpp>
+#include <string>
+#include <fas/jsonrpc/tags.hpp>
+#include <fas/jsonrpc/handler/handler_aspect.hpp>
 
 
 namespace fas{ namespace jsonrpc{
   
-struct ad_output
-{
-  std::string result;
-  template<typename T, typename R>
-  void operator()(T&, R r)
-  {
-    result.assign( r.begin(), r.end() );
-  }
-};
-
-typedef type_list_n<
-  aspect,
-  advice<_output_, ad_output>
->::type handler_advice_list;
-  
-typedef ::fas::aspect< handler_advice_list > handler_aspect_type;
-
-struct handler_aspect: handler_aspect_type {};
-  
 template<typename A1 = ::fas::aspect<>, typename A2 = handler_aspect >
-class handler
+class handler_base
   : public aspect_class<A1, A2 >
 {
+  
 public:
+  typedef handler_base<A1, A2> self;
+  
   template<typename R>
   R operator () (R r)
   {
-    return this->get_aspect().template get<_process_incoming_>()( *this, r);
+    return this->get_aspect().template get<_input_>()( *this, r);
   }
+
+  
+  self& operator << ( const std::string& value)
+  {
+    _buffer += value;
+    return *this;
+  }
+  
   
   const std::string& result() const
   {
-    return this->get_aspect().template get<_output_>().result;
+    return _buffer;
+  }
+
+  void clear()
+  {
+    _buffer.clear();
+  }
+
+  template<typename R>
+  const std::string& parse( R r)
+  {
+    _buffer.clear();
+    this->get_aspect().template get<_input_>()( *this, r);
+    return _buffer;
+  }
+
+  template<typename Tg, typename V>
+  const std::string& notify(const V& v)
+  {
+    _buffer.clear();
+    this->get_aspect().template get<Tg>().notify(*this, v);
+    return _buffer;
+  }
+
+  template<typename Tg, typename V>
+  const std::string& request(const V& v)
+  {
+    _buffer.clear();
+    this->get_aspect().template get<Tg>().request(*this, v);
+    return _buffer;
   }
   
+public:
+  std::string _buffer;
 };
+
+template<typename A1 = ::fas::aspect<> >
+class handler:
+  public handler_base<A1, handler_aspect>
+{
+  
+};
+
 
 }}
 

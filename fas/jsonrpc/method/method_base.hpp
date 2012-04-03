@@ -17,6 +17,7 @@
 
 #include <fas/jsonrpc/error_code.hpp>
 #include <fas/jsonrpc/types.hpp>
+#include <fas/integral/bool_.hpp>
 
 namespace fas{ namespace jsonrpc{
 
@@ -67,16 +68,22 @@ public:
   }
 
   template<typename R>
-  bool check_name(R r, true_) const
+  bool _check_name(R r, true_) const
   {
     return super::get_aspect().template get<_name_>()(r);
     // return false;
+  }
+
+  template<typename ID>
+  bool check_id(ID id) const
+  {
+    return super::get_aspect().template get< remote::_id_>().has(id);
   }
   
   template<typename R>
   bool check_name(R r) const
   {
-    typedef typename super::aspect::template has_advice<_name_>::type has_name;
+    typedef typename super::aspect::template has_advice< _name_ >::type has_name;
     return _check_name(r, has_name() );
   }
   
@@ -100,6 +107,7 @@ public:
   template<typename T, typename R>
   void parse_request(T& t, R r, id_t id)
   {
+    std::cout << "void parse_request(T& t, R r, id_t id)" << std::endl;
     super::get_aspect().template get< local::_parse_request_>()(t, *this, r, id); 
   }
 
@@ -115,40 +123,40 @@ public:
     super::get_aspect().template get< remote::_parse_error_>()(t, *this, r, id);
   }
 
-  template<typename T,typename M, typename V>
-  bool result(T& t, M& m, const V& result, int id)
+  template<typename T, typename V>
+  bool result(T& t, const V& result, int id)
   {
-    return super::get_aspect().template get< local::_result_ >()(t, m, result, id);
+    return super::get_aspect().template get< local::_result_ >()(t, *this, result, id);
   }
 
-  template<typename T,typename M, typename V>
-  bool notify(T& t, M& m, const V& params)
+  template<typename T, typename V>
+  bool notify(T& t, const V& params)
   {
-    return super::get_aspect().template get< remote::_notify_ >()(t, m, params);
+    return super::get_aspect().template get< remote::_notify_ >()(t, *this, params);
   }
 
-  template<typename T,typename M, typename V>
-  id_t request(T& t, M& m, const V& params)
+  template<typename T, typename V>
+  id_t request(T& t, const V& params)
   {
-    return super::get_aspect().template get< remote::_request_ >()(t, m, params);
+    return super::get_aspect().template get< remote::_request_ >()(t, *this, params);
   }
 
-  template<typename T,typename M, typename V>
-  bool error(T& t, M& m, const V& error, int id)
+  template<typename T, typename V>
+  bool error(T& t, const V& error, int id)
   {
-    return super::get_aspect().template get< local::_error_ >()(t, m, error, id);
+    return super::get_aspect().template get< local::_error_ >()(t, *this, error, id);
   }
 
-  template<typename T,typename M>
-  bool error(T& t, M& m, int code, const std::string& message, int id)
+  template<typename T>
+  bool error(T& t, int code, const std::string& message, int id)
   {
-    return super::get_aspect().template get< local::_error_ >()(t, m, code, message, id);
+    return super::get_aspect().template get< local::_error_ >()(t, *this, code, message, id);
   }
 
-  template<typename T,typename M>
-  bool error(T& t, M& m, error_code::type code, int id)
+  template<typename T>
+  bool error(T& t, error_code::type code, int id)
   {
-     return super::get_aspect().template get< local::_error_ >()(t, m, code, id);
+     return super::get_aspect().template get< local::_error_ >()(t, *this, code, id);
   }
 
 

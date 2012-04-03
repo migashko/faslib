@@ -93,7 +93,7 @@ struct request_handler
   void operator()( T&t, M& m, const int params[2], int id)
   {
     result = params[0] + params[1];
-    m.result( t, m, result, id );
+    m.result( t, result, id );
   }
 };
 
@@ -155,11 +155,11 @@ struct request_handler_error
   void operator()( T& t, M& m, int params, int id)
   {
     if ( params == 1 )
-      m.error(t, m, ajr::error_code::invalid_params, id );
+      m.error(t, ajr::error_code::invalid_params, id );
     else if ( params == 2 )
-      m.error(t, m, 33, "Error 33", id );
+      m.error(t, 33, "Error 33", id );
     else if ( params == 3 )
-      m.error(t, m, user_error(), id );
+      m.error(t, user_error(), id );
   }
 };
 
@@ -216,7 +216,7 @@ UNIT(remote_notify, "")
   
   notify_method n;
   garbage(t, "garbage");
-  n.notify(t, n, "1" );
+  n.notify(t, "1" );
   //n.get_aspect().get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
   t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"notify\",\"params\":\"1\"}" )
     << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
@@ -250,13 +250,13 @@ UNIT(remote_request, "")
   
   request_method n;
   garbage(t, "garbage");
-  ajr::id_t id = n.request(t, n, "1" );
+  ajr::id_t id = n.request(t, "1" );
   t << equal<expect>( id, 1 ) << FAS_TESTING_FILE_LINE << std::endl << id;
   t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"request\",\"params\":\"1\",\"id\":1}" )
     << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
   clear(t);
   
-  id = n.request(t, n, "2" );
+  id = n.request(t, "2" );
   t << equal<expect>( id, 2 ) << FAS_TESTING_FILE_LINE << std::endl << id;
   t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"method\":\"request\",\"params\":\"2\",\"id\":2}" )
     << FAS_TESTING_FILE_LINE << std::endl << buffer(t);

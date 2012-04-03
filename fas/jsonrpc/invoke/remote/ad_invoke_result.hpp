@@ -3,6 +3,7 @@
 
 #include <fas/jsonrpc/method/tags.hpp>
 #include <fas/jsonrpc/invoke/tags.hpp>
+#include <fas/jsonrpc/types.hpp>
 
 
 namespace fas{ namespace jsonrpc{
@@ -11,11 +12,11 @@ template<typename RP>
 struct f_result
 {
   RP result;
-  int id;
+  id_t id;
   
   bool ready;
 
-  f_result(RP result, int id)
+  f_result(RP result, id_t id)
     : result(result)
     , id(id)
     , ready(false)
@@ -26,22 +27,12 @@ struct f_result
   {
     if (ready) return;
     
-    if ( !t.get_aspect().template get<Tg>()
-           .get_aspect().template get<_remote_id_>()
-           .has( id )
-       )
+    if ( !t.get_aspect().template get<Tg>().check_id( id ) )
       return;
 
     ready = true;
 
-    t.get_aspect().template get<Tg>()
-     .get_aspect().template get<_parse_result_>()
-     (
-        t,
-        t.get_aspect().template get<Tg>(),
-        result,
-        id
-     );
+    t.get_aspect().template get<Tg>().parse_result(t, result, id);
   }
 
   operator bool () const { return ready; }
@@ -52,7 +43,7 @@ struct ad_invoke_result
 {
   
   template<typename T, typename RP>
-  void operator()(T& t, RP result, int id  )
+  void operator()(T& t, RP result, id_t id  )
   {
     if ( !t.get_aspect().template getg<_result_group_>().for_each(t, f_result<RP>( result, id ) ) )
       t.get_aspect().template get<_result_not_found_>()(t, result, id);

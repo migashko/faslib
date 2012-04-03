@@ -57,7 +57,7 @@ public:
 
   size_t size() const
   {
-    return ( _current_id == -1 ? 0 : _current_id ) + _ids.size();
+    return ( _current_id == -1 ? 0 : 1 ) + _ids.size();
   }
 
   void clear()

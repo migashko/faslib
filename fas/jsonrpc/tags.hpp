@@ -3,6 +3,7 @@
 
 namespace fas{ namespace jsonrpc{
 
+struct _input_;
  
 }}
 

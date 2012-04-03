@@ -7,7 +7,7 @@
 #include <fas/jsonrpc/method/remote/request/ad_request_fail.hpp>
 #include <fas/jsonrpc/method/remote/request/ad_invalid_request_id.hpp>
 
-/*#include <fas/serialization/json/meta/null.hpp>*/
+#include <fas/serialization/json/meta/null.hpp>
 #include <fas/jsonrpc/id_manager.hpp>
 
 #include <fas/aop/advice.hpp>
@@ -18,8 +18,8 @@
 namespace fas{ namespace jsonrpc{ namespace remote{
   
 template<
-  typename V /*= const void**/,
-  typename J /*= ::fas::json::null*/
+  typename V = empty_type,
+  typename J = ::fas::json::null
 >
 struct request: ::fas::aspect< 
   typename type_list_n<
