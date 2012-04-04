@@ -36,22 +36,22 @@ int main() { for (int i =0; i < 3; ++i) {
   vect2.clear();
 
   start = process_nanotime();
-  initialize(init_range(array1), LIMIT_OP);
+  initialize(orange(array1), LIMIT_OP);
   finish = process_nanotime();
   std::cout << "init array1: " << finish - start << std::endl;
   
   start = process_nanotime();
-  initialize(init_range(array2), LIMIT_OP);
+  initialize(orange(array2), LIMIT_OP);
   finish = process_nanotime();
   std::cout << "init array2: " << finish - start << std::endl;
   
   start = process_nanotime();
-  initialize(init_range(vect1), LIMIT_OP);
+  initialize(orange(vect1), LIMIT_OP);
   finish = process_nanotime();
   std::cout << "init vect1: " << finish - start << std::endl;
   
   start = process_nanotime();
-  initialize(init_range(vect2), LIMIT_OP);
+  initialize(orange(vect2), LIMIT_OP);
   finish = process_nanotime();
   std::cout << "init vect1: " <<  finish - start << std::endl;
   

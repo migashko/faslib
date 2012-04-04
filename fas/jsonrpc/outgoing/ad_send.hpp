@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <fas/typemanip/type2type.hpp>
 
 #include <fas/jsonrpc/outgoing/tags.hpp>
@@ -27,7 +27,7 @@ private:
   {
     typedef B buffer_type;
     buffer_type& buffer = t.get_aspect().template get<_buffer_>();
-    return _output( t, J(), value, init_range(buffer, true) );
+    return _output( t, J(), value, orange(buffer, true) );
   }
 
   template<typename T, typename J, typename V, typename B, int N>

@@ -11,7 +11,7 @@
 #include <fas/serialization/json/meta/block.hpp>
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <string>
 
 //namespace test{ namespace formatting{
@@ -86,7 +86,7 @@ UNIT(ad_comment_test, "test fas::serialization::json::ser::ad_comment_test advic
   serializer<> ser;
   
   foo f = foo();
-  ser(foo_json(), f, init_range(result) );
+  ser(foo_json(), f, orange(result) );
   std::cout<< result << std::endl;
   
   

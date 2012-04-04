@@ -23,7 +23,7 @@ struct range_helper<T[N], typerange_flag::array >
   };
   
   typedef random_access_range<T*> range;
-  typedef range init_range;
+  typedef range orange;
   
   typedef typename range::difference_type   difference_type;
 
@@ -46,7 +46,7 @@ struct range_helper<T[N], typerange_flag::array >
   }
 
   template<typename TT>
-  static inline init_range make_init_range(TT* v, bool clear = false)
+  static inline orange make_orange(TT* v, bool clear = false)
   {
     if ( clear)
       _clear( v, type2type<TT>() );

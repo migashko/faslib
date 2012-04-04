@@ -225,13 +225,13 @@ UNIT(initial_range_sequence, "initial sequence range testing")
   using namespace fas::testing;
   typedef std::vector<int> container_type;
   
-  typedef typename typerange<container_type>::init_range/*initial_range_type*/ range_type;
+  typedef typename typerange<container_type>::orange/*initial_range_type*/ range_type;
   /*enum { is_s =  range_traits<container_type>::is_sequence_container };
   enum { is_a =  range_traits<container_type>::is_associative_container };
   enum { result = static_check<is_s>::value + static_check<!is_a>::value };
   */
   container_type cnt;
-  range_type r = init_range(  cnt );
+  range_type r = orange(  cnt );
   *(r++) = 1;
   *(r) = 2;
   *(r) = 3;
@@ -247,12 +247,12 @@ UNIT(initial_range_associative, "initial associative range testing")
   using namespace fas::testing;
   typedef std::set<int> container_type;
   
-  typedef typename typerange<container_type>::init_range range_type;
+  typedef typename typerange<container_type>::orange range_type;
   /*enum { is_s =  range_traits<container_type>::is_sequence_container };
   enum { is_a =  range_traits<container_type>::is_associative_container };
   enum { result = static_check<!is_s>::value + static_check<is_a>::value };*/
   container_type cnt;
-  range_type r = init_range(  cnt );
+  range_type r = orange(  cnt );
   *(r) = 3;
   *(r++) = 2;
   *(r) = 1;

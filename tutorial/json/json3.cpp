@@ -22,7 +22,7 @@ int main()
   dict["key3"]="value3";
   
   std::cout << "JSON serialization: " << std::endl;
-  s( aj::dict< std::string, aj::string >(), dict, fas::init_range(jsonstring) );
+  s( aj::dict< std::string, aj::string >(), dict, fas::orange(jsonstring) );
   std::cout << "Dictonary: " << jsonstring << std::endl;
   
 

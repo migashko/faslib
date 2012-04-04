@@ -6,7 +6,7 @@
 
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 
 template<typename T>
 std::ostream& test_serialize_string(T& t, const std::string& from, const std::string& check)
@@ -19,7 +19,7 @@ std::ostream& test_serialize_string(T& t, const std::string& from, const std::st
   std::string result;
   serialize_string(
     range( from.begin(), from.end() ),
-    init_range( result )
+    orange( result )
   );
 
   return t << equal<expect>(check, result) << check <<"!=" << result;
@@ -39,7 +39,7 @@ std::ostream& test_ad_string(T& t, const char* from, const std::string& check)
   ad_string ads;
   t << is_true<expect>( ads.check(t, string(), from) ) << FAS_TESTING_FILE_LINE;
 
-   *( ads(t, string(), from, init_range( result ) ) ) = '\0';
+   *( ads(t, string(), from, orange( result ) ) ) = '\0';
   return t << equal<expect>(check, result) << check <<"!=" << result;
 }
 

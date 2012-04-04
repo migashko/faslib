@@ -15,7 +15,7 @@
 //#include <fas/typemanip/type2type.hpp>
 #include <fas/typemanip/is_array.hpp>
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <fas/range/distance.hpp>
 
 namespace fas{ namespace json{ namespace deser{
@@ -44,7 +44,7 @@ struct ad_string
     if ( t.get_aspect().template get<parse::_null_>().check(r) )
       r = t.get_aspect().template get<parse::_null_>()(t, r);
     else if ( t.get_aspect().template get<parse::_string_>().check(r) )
-      r = _(t, init_range(v, !ISA::value), r, /*typename is_array<V>::type*/ISA() );
+      r = _(t, orange(v, !ISA::value), r, /*typename is_array<V>::type*/ISA() );
     
     return r;
   }

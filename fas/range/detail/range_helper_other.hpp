@@ -11,7 +11,7 @@ struct range_helper<T, typerange_flag::other >
 {
   enum { flag = typerange_flag::other };
   typedef random_access_range<T*> range;
-  typedef range init_range;
+  typedef range orange;
   
   typedef typename range::difference_type difference_type;
 
@@ -22,11 +22,11 @@ struct range_helper<T, typerange_flag::other >
   }
 
   template<typename TT>
-  static inline init_range make_init_range(TT& v, bool clear = false)
+  static inline orange make_orange(TT& v, bool clear = false)
   {
     if ( clear )
       v = T();
-    return init_range(&v, &v + 1);
+    return orange(&v, &v + 1);
   }
 
   template<typename TT>

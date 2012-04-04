@@ -17,7 +17,7 @@ UNIT(ad_container_manager_test, "ad_container_manager")
   acm.clear(t);
   acm.dispose(t);
   
-  typename ad_container_manager<_vector_>::init_range_type_t<T>::type r = acm.init_range(t);
+  typename ad_container_manager<_vector_>::orange_type_t<T>::type r = acm.orange(t);
   *(r++) = 1;
   *(r++) = 2;
   *(r++) = 3;

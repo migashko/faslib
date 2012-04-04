@@ -24,14 +24,14 @@ template< typename C>
 struct range_container_helper<C, false>
 {
   typedef typename iterator2range< typename C::iterator >::type range;
-  typedef typename iterator2range< std::insert_iterator<C>, typename C::value_type >::type init_range;
+  typedef typename iterator2range< std::insert_iterator<C>, typename C::value_type >::type orange;
   
   template<typename CC>
-  static inline init_range make_init_range(CC& cnt, bool clear = false)
+  static inline orange make_orange(CC& cnt, bool clear = false)
   {
     if (clear)
       cnt.clear();
-    return init_range( std::inserter(cnt, cnt.end()) );
+    return orange( std::inserter(cnt, cnt.end()) );
   }
 
   template<typename CC>

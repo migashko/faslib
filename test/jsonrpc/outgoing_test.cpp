@@ -71,7 +71,7 @@ UNIT(outgoing, "")
   /*
   aj::serializer<> ser;
   std::string tmp;
-  ser( aj::array< aj::sequence< aj::integer, 4> >(), arr, fas::init_range(tmp) );
+  ser( aj::array< aj::sequence< aj::integer, 4> >(), arr, fas::orange(tmp) );
   std::cout << tmp << std::endl;*/
 
   send_result = t.get_aspect().template get< ajr::_send_ >()( t, aj::array< aj::sequence< aj::integer, 4> >(), arr );

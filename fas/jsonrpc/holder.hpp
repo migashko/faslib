@@ -15,7 +15,7 @@ struct holder
   template<typename T>
   value_type operator()(T&)
   {
-    init_range( _value, true );
+    orange( _value, true );
     return _value;
   }
 
@@ -89,7 +89,7 @@ struct holder
   template<typename T>
   value_type operator()(T&)
   {
-    init_range( _value, true );
+    orange( _value, true );
     return _value;
   }
 

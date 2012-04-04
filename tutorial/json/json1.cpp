@@ -16,27 +16,27 @@ int main()
   std::cout << "JSON serialization: " << std::endl;
   
   std::cout << "integer -12345: ";
-  s( aj::integer(), -12345, fas::init_range(jsonstring) );
+  s( aj::integer(), -12345, fas::orange(jsonstring) );
   std::cout << jsonstring << std::endl;
   jsonstring.clear();
 
   std::cout << "real 3.14: ";
-  s( aj::real(), 3.14, fas::init_range(jsonstring) );
+  s( aj::real(), 3.14, fas::orange(jsonstring) );
   std::cout << jsonstring << std::endl;
   jsonstring.clear();
 
   std::cout << "boolean true: ";
-  s( aj::boolean(), true, fas::init_range(jsonstring) );
+  s( aj::boolean(), true, fas::orange(jsonstring) );
   std::cout << jsonstring << std::endl;
   jsonstring.clear();
 
   std::cout << "simple string \"hello world\": ";
-  s( aj::string(), "hello world", fas::init_range(jsonstring) );
+  s( aj::string(), "hello world", fas::orange(jsonstring) );
   std::cout << jsonstring << std::endl;
   jsonstring.clear();
 
   std::cout << "tabbed string \"hello	world\": ";
-  s( aj::string(), "hello	world", fas::init_range(jsonstring) );
+  s( aj::string(), "hello	world", fas::orange(jsonstring) );
   std::cout << jsonstring << std::endl;
   jsonstring.clear();
 

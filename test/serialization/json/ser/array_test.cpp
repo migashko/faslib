@@ -33,7 +33,7 @@
 #include "../../foo.hpp"
 #include "../../names.hpp"
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <fas/typemanip/tstring.hpp>
 #include <vector>
 #include <string>
@@ -57,8 +57,8 @@ UNIT(array_serialize_test, "test array_serialize function")
 
   serialize_array(
     range(value),
-    init_range(result),
-    serialize_integer<int, typerange<std::string>::init_range >
+    orange(result),
+    serialize_integer<int, typerange<std::string>::orange >
   );
 
   t << equal<expect>(result, "[1,2,3]") << FAS_TESTING_FILE_LINE;
@@ -78,7 +78,7 @@ UNIT(ad_array_test1, "test ad_array advice")
   value.push_back(3);
 
   ad_array ada;
-  ada(t, array<integer>(), value, init_range(result) );
+  ada(t, array<integer>(), value, orange(result) );
   t << equal<expect>(result, "[1,2,3]") << FAS_TESTING_FILE_LINE;
 }
 
@@ -96,7 +96,7 @@ UNIT(ad_array_test2, "test ad_array advice")
   std::string result;
 
   typedef attr<foo, std::vector<int>, &foo::foo4, array<integer> > foo4_json;
-  ada(t, foo4_json(), f, init_range(result) );
+  ada(t, foo4_json(), f, orange(result) );
   t << equal<expect>(result, "[20,30,40]") << FAS_TESTING_FILE_LINE;
 }
 
@@ -127,7 +127,7 @@ UNIT(ad_array_test3, "test ad_array advice")
   foo f;
   ad_array ada;
   std::string result;
-  ada(t, foo_json(), f, init_range(result) );
+  ada(t, foo_json(), f, orange(result) );
 
   // t << message(result);
   /// [-1,"test-foo2","test-foo3",[0,1,2,3,4],[20,30,40],["test-foo6-1","test-foo6-2"]]
@@ -160,7 +160,7 @@ UNIT(ad_array_test4, "test ad_array advice")
   foo f;
   ad_array ada;
   std::string result;
-  ada(t, foo_json(), f, init_range(result) );
+  ada(t, foo_json(), f, orange(result) );
   //t << message(result);
   /// [-1,"test-foo2","test-foo3",0,1,2,3,4,20,30,40,"test-foo6-1","test-foo6-2"]
   t << equal<expect>(result, "[-1,\"test-foo2\",\"test-foo3\",0,1,2,3,4,20,30,40,\"test-foo6-1\",\"test-foo6-2\"]") << FAS_TESTING_FILE_LINE;
@@ -195,18 +195,18 @@ UNIT(ad_enumset_test, "test fas::serialization::json::ser::enumset")
   ad_array ade;
   int value = value1 | value3;
   
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   
   t << equal<expect>(result, std::string("[\"value1\",\"value3\"]") ) << result <<  FAS_TESTING_FILE_LINE;
 
   result.clear();
   value = 0;
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   t << equal<expect>(result, std::string("[]") ) << result << FAS_TESTING_FILE_LINE;
 
   result.clear();
   value = value1 | value2 | value3;
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   t << equal<expect>(result, std::string("[\"value1\",\"value2\",\"value3\"]") ) << result << FAS_TESTING_FILE_LINE;
 
 }

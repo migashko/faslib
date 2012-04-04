@@ -7,7 +7,7 @@
 #include <fas/serialization/json/parser/tags.hpp>
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 
 namespace fas{ namespace json{ namespace deser{
 
@@ -22,7 +22,7 @@ struct ad_raw
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
-    return t.get_aspect().template get<parse::_value_>()( t, r, init_range(v) ).first;
+    return t.get_aspect().template get<parse::_value_>()( t, r, orange(v) ).first;
   }
 };
 

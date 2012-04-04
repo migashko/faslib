@@ -19,7 +19,7 @@
 #include <fas/serialization/json/meta/member.hpp>
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 
 #include <fas/typemanip/tstring.hpp>
 
@@ -41,34 +41,34 @@ UNIT(ad_member_test1, "test fas::json::ser::ad_member advice")
   std::string result;
   
   typedef member< n_foo1, attr<foo, int, &foo::foo1, integer> > foo_foo1;
-  adm( t, foo_foo1(), f, init_range(result) );
+  adm( t, foo_foo1(), f, orange(result) );
   t << equal<expect>(result, "\"foo1\":-1" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 
   typedef member< n_foo2, attr<foo, std::string, &foo::foo2, string> > foo_foo2;
-  adm( t, foo_foo2(), f, init_range(result) );
+  adm( t, foo_foo2(), f, orange(result) );
   t << equal<expect>(result, "\"foo2\":\"test-foo2\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 
   typedef member< n_foo3, attr<foo, foo::foo3type, &foo::foo3, string> > foo_foo3;
-  adm( t, foo_foo3(), f, init_range(result) );
+  adm( t, foo_foo3(), f, orange(result) );
   t << equal<expect>(result, "\"foo3\":\"test-foo3\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
   bar b;
   
   typedef member< n_bar1, attr<bar::baz, int, &bar::baz::baz1, integer> > bar_baz_baz1;
-  adm( t, bar_baz_baz1(), b.bar1, init_range(result) );
+  adm( t, bar_baz_baz1(), b.bar1, orange(result) );
   t << equal<expect>( result, "\"bar1\":42" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
   typedef member< n_bar1, attr<bar, bar::baz, &bar::bar1, attr<bar::baz, int, &bar::baz::baz1, integer> > > bar_bar1_baz1;
-  adm( t, bar_bar1_baz1(), b, init_range(result) );
+  adm( t, bar_bar1_baz1(), b, orange(result) );
   t << equal<expect>(result, "\"bar1\":42" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
   typedef member< n_bar2, attr<bar, foo, &bar::bar2, attr<foo, std::string, &foo::foo2, string> > > bar_bar1_foo2;
-  adm( t, bar_bar1_foo2(), b, init_range(result) );
+  adm( t, bar_bar1_foo2(), b, orange(result) );
   t << equal<expect>(result, "\"bar2\":\"test-foo2\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 }

@@ -2,7 +2,7 @@
 #define FAS_ADV_AD_CONTAINER_MANAGER_HPP
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 
 namespace fas{
 
@@ -25,10 +25,10 @@ struct ad_container_manager
   };
 
   template<typename T>
-  struct init_range_type_t
+  struct orange_type_t
   {
     typedef typename container_type_t<T>::type container_type;
-    typedef typename typerange< container_type >::init_range type;
+    typedef typename typerange< container_type >::orange type;
   };
   
 
@@ -66,10 +66,10 @@ struct ad_container_manager
   }
 
   template<typename T>
-  typename init_range_type_t<T>::type
-  init_range(T& t)
+  typename orange_type_t<T>::type
+  orange(T& t)
   {
-    return ::fas::init_range( t.get_aspect().template get<Tg>() );
+    return ::fas::orange( t.get_aspect().template get<Tg>() );
   }
   
   template<typename T>

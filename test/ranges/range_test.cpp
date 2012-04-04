@@ -1,7 +1,7 @@
 #include "basic_test.hpp"
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 
 #include <fas/static_check/static_check.hpp>
 
@@ -18,7 +18,7 @@ UNIT(range_vector_test, "test range( vector<int> )")
   using namespace ::fas::testing;
   
   std::vector<int> v;
-  fas::typerange< std::vector<int>  >::init_range ir = fas::init_range( v );
+  fas::typerange< std::vector<int>  >::orange ir = fas::orange( v );
   *ir++=1;
   *ir++=2;
   // v.push_back(1); v.push_back(2);
@@ -38,7 +38,7 @@ UNIT(range_set_test, "test range( set<int> )")
   using namespace ::fas::testing;
 
   std::set<int> v;
-  fas::typerange< std::set<int>  >::init_range ir = fas::init_range( v );
+  fas::typerange< std::set<int>  >::orange ir = fas::orange( v );
   *ir++=1;
   *ir++=2;
   trivial_const_test( t, fas::range(v) );
@@ -50,7 +50,7 @@ UNIT(range_set_test, "test range( set<int> )")
 };
 
 typedef int int_array[2];
-typedef fas::typerange< int_array  >::init_range range_type;
+typedef fas::typerange< int_array  >::orange range_type;
 
 UNIT(range_array_test, "test range( int[2] )")
 {
@@ -58,7 +58,7 @@ UNIT(range_array_test, "test range( int[2] )")
 
   int_array v={3, 4};
   
-  range_type ir = fas::init_range( v );
+  range_type ir = fas::orange( v );
   *ir++=1;
   *ir++=2;
 
@@ -74,7 +74,7 @@ UNIT(range_array_test, "test range( int[2] )")
 
   std::stringstream ss;
 
-  fas::typerange< std::stringstream >::init_range isr = fas::init_range(ss);
+  fas::typerange< std::stringstream >::orange isr = fas::orange(ss);
   *(isr++) = 'a';
   *(isr++) = 'b';
 

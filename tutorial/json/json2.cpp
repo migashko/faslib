@@ -21,12 +21,12 @@ int main()
   std::cout << "JSON serialization: " << std::endl;
 
   int arr1[]={1,2,3,4};
-  s( aj::array<aj::integer>(), arr1, fas::init_range(jsonstring) );
+  s( aj::array<aj::integer>(), arr1, fas::orange(jsonstring) );
   std::cout << "int arr1[]={1,2,3,4}: " << jsonstring << std::endl;
   jsonstring.clear();
   
   char arr2[4][8] = { "a", "bb", "ccc", "ddd" };
-  s( aj::array< aj::string >(), arr2, fas::init_range(jsonstring) );
+  s( aj::array< aj::string >(), arr2, fas::orange(jsonstring) );
   std::cout << "char arr2[4][8]={\"a\",\"bb\",\"ccc\",\"ddd\"}: " << jsonstring << std::endl;
   jsonstring.clear();
   
@@ -34,7 +34,7 @@ int main()
   vect1.push_back(1.0);
   vect1.push_back(1.1);
   vect1.push_back(1.2);
-  s( aj::array< aj::real>(), vect1, fas::init_range(jsonstring) );
+  s( aj::array< aj::real>(), vect1, fas::orange(jsonstring) );
   std::cout << "std::vector<float>: " << jsonstring << std::endl;
   jsonstring.clear();
   
@@ -42,7 +42,7 @@ int main()
   set1.insert(vect1);
   set1.insert(vect1);
   set1.insert(vect1);
-  s( aj::array< aj::array< aj::real> >(), set1, fas::init_range(jsonstring) );
+  s( aj::array< aj::array< aj::real> >(), set1, fas::orange(jsonstring) );
   std::cout << "std::multiset< std::vector<float> >: " << jsonstring << std::endl;
 
   /// ////////////////////////////////////////////

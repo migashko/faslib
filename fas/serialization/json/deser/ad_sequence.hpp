@@ -47,8 +47,8 @@ private:
   {
     if (!r) return r;
 
-    typedef typename typerange<V>::init_range range_type;
-    range_type vr = init_range(v);
+    typedef typename typerange<V>::orange range_type;
+    range_type vr = orange(v);
 
     r = _2( t, M(), vr, r );
 

@@ -9,7 +9,7 @@
 using namespace fas;
 
 template<typename R>
-void init_range(R r)
+void orange(R r)
 {
   for (int i = 0 ; i < 10 && r; ++i, ++r)
     *r = '0' + i;
@@ -29,22 +29,22 @@ void show_range(R r)
 int main()
 {
   char arr[4]={0};
-  //init_range( <int[4]>(arr) );
-  init_range( (arr) );
+  //orange( <int[4]>(arr) );
+  orange( (arr) );
   show_range( (arr) );
   
   std::vector<char> vect(5);
-  init_range( (vect) );
+  orange( (vect) );
   show_range( (vect) );
   vect.clear();
-  init_range( ( std::back_inserter(vect) ) );
+  orange( ( std::back_inserter(vect) ) );
   show_range( (vect) );
   show_range( (vect.begin() + 2, vect.begin() + 7) );
   show_range( (vect.rbegin() + 2, vect.rbegin() + 7) );
   
   std::stringstream ss;
-  // init_range( (ss) ); // ERROR
-  init_range( (std::ostreambuf_iterator<char>(ss) ) ); // OK
+  // orange( (ss) ); // ERROR
+  orange( (std::ostreambuf_iterator<char>(ss) ) ); // OK
   //show_range( (std::istreambuf_iterator<char>(ss) ) ); // ERROR
   show_range( (std::istreambuf_iterator<char>(ss), std::istreambuf_iterator<char>() ) ); // OK
 

@@ -11,7 +11,7 @@
 #include <fas/serialization/json/meta/enum_value.hpp>
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <string>
 
 FAS_NAME(value1);
@@ -40,14 +40,14 @@ UNIT(ad_enumeration_test, "test fas::serialization::json::ser::ad_boolean advice
   ad_enumeration ade;
   test_enum value = value1;
   
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   
   t << equal<expect>(result, std::string("\"value1\"") ) << FAS_TESTING_FILE_LINE;
   
   
   result.clear();
   value = value2;
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   t << equal<expect>(result, std::string("\"value2\"") ) << FAS_TESTING_FILE_LINE;
 }
 
@@ -68,14 +68,14 @@ UNIT(ad_enumeration_test0, "test fas::serialization::json::ser::ad_boolean advic
   ad_enumeration ade;
   test_enum value = value1;
   
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   
   t << equal<expect>(result, std::string("\"\"") ) << "[" << result << "]"<< FAS_TESTING_FILE_LINE;
   
   
   result.clear();
   value = value2;
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   t << equal<expect>(result, std::string("\"\"") ) << FAS_TESTING_FILE_LINE;
 }
 
@@ -99,14 +99,14 @@ UNIT(ad_enumeration_test1, "test fas::serialization::json::ser::ad_boolean advic
   test_enum value = value1;
   //value = (test_enum)3;
   
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   
   t << equal<expect>(result, std::string("\"\"") ) << "[" << result << "]"<< FAS_TESTING_FILE_LINE;
   
   
   result.clear();
   value = value2;
-  ade(t, enum_json(), value, init_range(result) );
+  ade(t, enum_json(), value, orange(result) );
   t << equal<expect>(result, std::string("\"value2\"") ) << FAS_TESTING_FILE_LINE;
 }
 

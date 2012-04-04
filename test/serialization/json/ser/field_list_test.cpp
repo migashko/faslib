@@ -24,7 +24,7 @@
 
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 
 #include <fas/type_list/empty_list.hpp>
 
@@ -40,12 +40,12 @@ UNIT(ad_field_list_test1, "test fas::json::ser::ad_field_list advice")
   std::string result;
   
   typedef primary_list< empty_list > foo_list1;
-  adfl(t, foo_list1(), f, init_range(result) );
+  adfl(t, foo_list1(), f, orange(result) );
   t << equal<expect>(result, "" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
   typedef primary_list< attr<foo, int, &foo::foo1, integer> > foo_list2;
-  adfl(t, foo_list2(), f, init_range(result) );
+  adfl(t, foo_list2(), f, orange(result) );
   t << equal<expect>(result, "-1" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
@@ -55,7 +55,7 @@ UNIT(ad_field_list_test1, "test fas::json::ser::ad_field_list advice")
       attr<foo, std::string, &foo::foo2, string>
     >::type
   > foo_list3;
-  adfl(t, foo_list3(), f, init_range(result) );
+  adfl(t, foo_list3(), f, orange(result) );
   t << equal<expect>(result, "-1,\"test-foo2\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
@@ -67,7 +67,7 @@ UNIT(ad_field_list_test1, "test fas::json::ser::ad_field_list advice")
       attr<foo, foo::foo3type, &foo::foo3, string>
     >::type
   > foo_list4;
-  adfl(t, foo_list4(), f, init_range(result) );
+  adfl(t, foo_list4(), f, orange(result) );
   t << equal<expect>(result, "-1,\"test-foo2\",\"test-foo3\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 }
@@ -93,7 +93,7 @@ UNIT(ad_field_list_test2, "test fas::json::ser::ad_field_list advice")
       attr<bar, foo, &bar::bar2, attr<foo, std::string, &foo::foo2, string> >
     >::type
   > bar_list1;
-  adfl(t, bar_list1(), b, init_range(result) );
+  adfl(t, bar_list1(), b, orange(result) );
   t << equal<expect>(result, "-1,\"test-foo2\",\"test-foo3\",42,\"test-foo2\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 }
@@ -124,7 +124,7 @@ UNIT(ad_field_list_test3, "test fas::json::ser::ad_field_list advice")
   for (int i = 0 ; i < 5; ++i)
     std::cout <<  (int)(b.foo5[i]) << std::endl;
 
-  adfl(t, bar_list1(), b, init_range(result) );
+  adfl(t, bar_list1(), b, orange(result) );
   t << equal<expect>(result, "-1,\"test-foo2\",\"test-foo3\",42,\"test-foo2\",0,1,2,3,4,\"test-foo6-1\",\"test-foo6-2\"" ) << FAS_TESTING_FILE_LINE;
   std::cout << std::endl << result << std::endl << "-1,\"test-foo2\",\"test-foo3\",42,\"test-foo2\",0,1,2,3,4,\"test-foo6-1\",\"test-foo6-2\"" << std::endl;
   for (int i = 0 ; i < 5; ++i)

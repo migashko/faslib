@@ -25,7 +25,7 @@ private:
   {
     typedef B buffer_type;
     buffer_type& buffer = t.get_aspect().template get<_buffer_>();
-    return _output( t, init_range(buffer, true) );
+    return _output( t, orange(buffer, true) );
   }
 
   template<typename T,  typename B, int N>

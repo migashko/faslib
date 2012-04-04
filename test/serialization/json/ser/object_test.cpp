@@ -34,7 +34,7 @@
 #include "../../bar.hpp"
 #include "../../names.hpp"
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <fas/typemanip/tstring.hpp>
 #include <vector>
 #include <string>
@@ -56,7 +56,7 @@ UNIT(ad_object_test1, "test ad_object advice")
   value.push_back(3);
 
   ad_object ado;
-  ado(t, object< sequence<integer> >(), value, init_range(result) );
+  ado(t, object< sequence<integer> >(), value, orange(result) );
   // t << message(result);
   t << equal<expect>(result, "{1,2,3}") << FAS_TESTING_FILE_LINE;
 }
@@ -75,7 +75,7 @@ UNIT(ad_object_test2, "test ad_object advice")
   std::string result;
 
   typedef member< n_foo4,  attr<foo, std::vector<int>, &foo::foo4, array<integer> > > foo4_json;
-  adm(t, foo4_json(), f, init_range(result) );
+  adm(t, foo4_json(), f, orange(result) );
   // t << message(result);
   t << equal<expect>(result, "\"foo4\":[20,30,40]") << FAS_TESTING_FILE_LINE;
 }
@@ -107,7 +107,7 @@ UNIT(ad_object_test3, "test ad_object advice")
   foo f;
   ad_object ado;
   std::string result;
-  ado(t, foo_json(), f, init_range(result) );
+  ado(t, foo_json(), f, orange(result) );
 
   // t << message(result);
   /// {"foo1":-1,"foo2":"test-foo2","foo3":"test-foo3","foo5":[0,1,2,3,4],"foo4":[20,30,40],"foo6":["test-foo6-1","test-foo6-2"]}
@@ -138,7 +138,7 @@ UNIT(ad_object_test4, "test ad_object advice")
   bar f;
   ad_object ado;
   std::string result;
-  ado(t, bar_json(), f, init_range(result) );
+  ado(t, bar_json(), f, orange(result) );
   //t << message(result);
   /// {"bar1":{"baz1":42}}
   t << equal<expect>(result, "{\"bar1\":{\"baz1\":42}}") << FAS_TESTING_FILE_LINE;
@@ -186,7 +186,7 @@ UNIT(ad_object_test5, "test ad_object advice")
   bar f;
   ad_object ado;
   std::string result;
-  ado(t, bar_json(), f, init_range(result) );
+  ado(t, bar_json(), f, orange(result) );
   //t << message(result);
   /// {"bar1":{"baz1":42},"bar2":{"foo1":-1},"bar3":[{"foo1":-1}],"bar4":[{"foo1":-1},{"foo1":-1}],"bar5":[{"foo1":1},{"foo1":2}]}
   t << equal<expect>( result,
@@ -286,7 +286,7 @@ UNIT(ad_object_test6, "test ad_object advice")
   bar f;
   ad_object ado;
   std::string result;
-  ado(t, bar_json(), f, init_range(result) );
+  ado(t, bar_json(), f, orange(result) );
   //t << message(result);
   /** {
        "bar6":[
@@ -335,7 +335,7 @@ UNIT(ad_object_test7, "test ad_object advice")
   bar f;
   ad_object ado;
   std::string result;
-  ado(t, bar_json(), f, init_range(result) );
+  ado(t, bar_json(), f, orange(result) );
   //t << message(result);
   /** {
    *    "bar6-1":{"foo1":-1},

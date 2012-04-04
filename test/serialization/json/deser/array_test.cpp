@@ -50,7 +50,7 @@ UNIT(array_deserialize_test1, "test array_deserialize function")
   std::vector<int> result;
 
   deserialize_array(
-    init_range(result),
+    orange(result),
     range("[1,2,3]"),
     deserialize_integer<int, typerange<const char*>::range>
   );
@@ -71,7 +71,7 @@ UNIT(array_deserialize_test2, "test array_deserialize function")
   int result[5]={0};
 
   deserialize_array(
-    init_range(result),
+    orange(result),
     range("[1,2,3]"),
     deserialize_integer<int, typerange<const char*>::range>
   );

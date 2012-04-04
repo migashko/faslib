@@ -17,7 +17,7 @@ struct range_helper<R, typerange_flag::range >
     return r;
   }
 
-  static inline range make_init_range(R r, bool clear)
+  static inline range make_orange(R r, bool clear)
   {
     if ( clear )
       for ( R i = r; i ; ++i) *i = typename R::value_type();

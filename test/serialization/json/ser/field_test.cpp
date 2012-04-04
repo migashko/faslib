@@ -17,7 +17,7 @@
 #include <fas/serialization/json/except/ad_except.hpp>
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <fas/typemanip/tstring.hpp>
 
 #include <string>
@@ -70,18 +70,18 @@ UNIT(ad_field_test1, "test fas::json::ser::ad_field advice")
   std::string result;
   
   typedef attr<foo, int, &foo::foo1, integer> foo_foo1;
-  adf( t, foo_foo1(), f, init_range(result) );
+  adf( t, foo_foo1(), f, orange(result) );
   t << equal<expect>(result, "-1" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 
   typedef attr<foo, std::string, &foo::foo2, string> foo_foo2;
-  adf( t, foo_foo2(), f, init_range(result) );
+  adf( t, foo_foo2(), f, orange(result) );
   t << equal<expect>(result, "\"test-foo2\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 
 
   typedef attr<foo, foo::foo3type, &foo::foo3, string> foo_foo3;
-  adf( t, foo_foo3(), f, init_range(result) );
+  adf( t, foo_foo3(), f, orange(result) );
   
   t << equal<expect>(result, "\"test-foo3\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
@@ -89,17 +89,17 @@ UNIT(ad_field_test1, "test fas::json::ser::ad_field advice")
   bar b;
   
   typedef attr<bar::baz, int, &bar::baz::baz1, integer> bar_baz_baz1;
-  adf( t, bar_baz_baz1(), b.bar1, init_range(result) );
+  adf( t, bar_baz_baz1(), b.bar1, orange(result) );
   t << equal<expect>( result, "42" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
   typedef attr<bar, bar::baz, &bar::bar1, bar_baz_baz1> bar_bar1_baz1;
-  adf( t, bar_bar1_baz1(), b, init_range(result) );
+  adf( t, bar_bar1_baz1(), b, orange(result) );
   t << equal<expect>(result, "42" ) << FAS_TESTING_FILE_LINE;
   result.clear();
   
   typedef attr<bar, foo, &bar::bar2, foo_foo2> bar_bar1_foo2;
-  adf( t, bar_bar1_foo2(), b, init_range(result) );
+  adf( t, bar_bar1_foo2(), b, orange(result) );
   t << equal<expect>(result, "\"test-foo2\"" ) << FAS_TESTING_FILE_LINE;
   result.clear();
 }

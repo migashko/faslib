@@ -4,7 +4,7 @@
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/serialization/json/meta/tstring.hpp>
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <fas/range/srange.hpp>
 
 #include <fas/serialization/json/parser/aspect.hpp>
@@ -21,7 +21,7 @@ std::ostream& test_deserialize_string(T& t, const std::string& from, const std::
   try
   {
     deserialize_string(
-      init_range( result ),
+      orange( result ),
       range( from.begin(), from.end() )
     );
 

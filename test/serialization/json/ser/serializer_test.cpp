@@ -5,7 +5,7 @@
 #include <fas/serialization/json/meta.hpp>
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 
 #include "../../bar.hpp"
 #include "../../names.hpp"
@@ -43,7 +43,7 @@ UNIT(serializer_test, "test deserializer")
       "{\"foo1\":-1,\"foo2\":\"test-foo2\",\"foo3\":\"test-foo3\","
       "\"foo5\":[0,1,2,3,4],\"foo4\":[20,30,40],\"foo6\":[\"test-foo6-1\",\"test-foo6-2\"]}";
 
-  ser( foo_json1(), f, init_range(result) );
+  ser( foo_json1(), f, orange(result) );
   
   t << equal<expect>(result, json) << FAS_TESTING_FILE_LINE;
   
@@ -106,7 +106,7 @@ UNIT(serializer_block_test, "test deserializer")
       "{\"foo1\":-1,\"foo2\":\"test-foo2\",\"foo3\":\"test-foo3\","
       "\"foo5\":[0,1,2,3,4],\"foo4\":[20,30,40],\"foo6\":[\"test-foo6-1\",\"test-foo6-2\"]}";
 
-  ser( foo_json2(), f, init_range(result) );
+  ser( foo_json2(), f, orange(result) );
   
   // t << equal<expect>(result, json) << FAS_TESTING_FILE_LINE << result;
   

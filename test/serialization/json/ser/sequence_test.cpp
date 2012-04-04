@@ -9,7 +9,7 @@
 #include <fas/serialization/json/ser/serialize_sequence.hpp>
 #include <fas/serialization/json/ser/serialize_integer.hpp>
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <fas/typemanip/tstring.hpp>
 
 #include <vector>
@@ -34,22 +34,22 @@ UNIT(sequence_serialize_test, "test sequence_serialize function")
 
   std::string result;
   std::vector<int> value;
-  serialize_sequence( range(value), init_range(result), f_int() );
+  serialize_sequence( range(value), orange(result), f_int() );
   t << equal<expect>(result, "") << FAS_TESTING_FILE_LINE;
 
   result.clear();
   value.push_back(0);
-  serialize_sequence( range(value), init_range(result), f_int() );
+  serialize_sequence( range(value), orange(result), f_int() );
   t << equal<expect>(result, "0") << FAS_TESTING_FILE_LINE;
 
   result.clear();
   value.push_back(-1);
-  serialize_sequence( range(value), init_range(result), f_int() );
+  serialize_sequence( range(value), orange(result), f_int() );
   t << equal<expect>(result, "0,-1") << FAS_TESTING_FILE_LINE;
 
   result.clear();
   value.push_back(1000);
-  serialize_sequence( range(value), init_range(result), serialize_integer<int, typerange<std::string>::init_range> );
+  serialize_sequence( range(value), orange(result), serialize_integer<int, typerange<std::string>::orange> );
   t << equal<expect>(result, "0,-1,1000") << FAS_TESTING_FILE_LINE;
 }
 
@@ -65,25 +65,25 @@ UNIT(ad_sequence_test, "test ad_sequence advice")
 
   ad_sequence ads;
   t << is_false<expect>( ads.check(t, sequence<integer>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer>(), value, init_range(result));
+  ads(t, sequence<integer>(), value, orange(result));
   t << equal<expect>(result, "") << FAS_TESTING_FILE_LINE;
 
   result.clear();
   value.push_back(0);
   t << is_true<expect>( ads.check(t, sequence<integer>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer>(), value, init_range(result));
+  ads(t, sequence<integer>(), value, orange(result));
   t << equal<expect>(result, "0") << FAS_TESTING_FILE_LINE;
 
   result.clear();
   value.push_back(-1);
   t << is_true<expect>( ads.check(t, sequence<integer>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer>(), value, init_range(result));
+  ads(t, sequence<integer>(), value, orange(result));
   t << equal<expect>(result, "0,-1") << FAS_TESTING_FILE_LINE;
 
   result.clear();
   value.push_back(1000);
   t << is_true<expect>( ads.check(t, sequence<integer>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer>(), value, init_range(result));
+  ads(t, sequence<integer>(), value, orange(result));
   t << equal<expect>(result, "0,-1,1000") << FAS_TESTING_FILE_LINE;
 }
 
@@ -99,25 +99,25 @@ UNIT(ad_sequence_test2, "test ad_sequence advice 2")
 
   ad_sequence ads;
   t << is_false<expect>( ads.check(t, sequence<integer, 0>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer, 0>(), value, init_range(result));
+  ads(t, sequence<integer, 0>(), value, orange(result));
   t << equal<expect>(result, "") << FAS_TESTING_FILE_LINE << std::endl << result;
 
   result.clear();
   //value.push_back(0);
   t << is_true<expect>( ads.check(t, sequence<integer, 1>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer, 1>(), value, init_range(result));
+  ads(t, sequence<integer, 1>(), value, orange(result));
   t << equal<expect>(result, "0") << FAS_TESTING_FILE_LINE << std::endl << result;
 
   result.clear();
   //value.push_back(-1);
   t << is_true<expect>( ads.check(t, sequence<integer, 2>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer, 2>(), value, init_range(result));
+  ads(t, sequence<integer, 2>(), value, orange(result));
   t << equal<expect>(result, "0,-1") << FAS_TESTING_FILE_LINE;
 
   result.clear();
   //value.push_back(1000);
   t << is_true<expect>( ads.check(t, sequence<integer, 3>(), value) ) << FAS_TESTING_FILE_LINE;
-  ads(t, sequence<integer, 3>(), value, init_range(result));
+  ads(t, sequence<integer, 3>(), value, orange(result));
   t << equal<expect>(result, "0,-1,1000") << FAS_TESTING_FILE_LINE;
 }
 

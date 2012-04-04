@@ -9,7 +9,7 @@
 #include <fas/serialization/json/except/ad_except.hpp>
 
 #include <fas/range/range.hpp>
-#include <fas/range/init_range.hpp>
+#include <fas/range/orange.hpp>
 #include <sstream>
 
 #include <limits>
@@ -28,28 +28,28 @@ UNIT(ad_boolean_test, "test fas::serialization::json::ser::ad_boolean advice")
 
   t << is_true<expect>( adb.check(t, ::fas::json::boolean(), value) ) << FAS_TESTING_FILE_LINE;
 
-  adb(t, ::fas::json::boolean(), value, init_range(result) );
+  adb(t, ::fas::json::boolean(), value, orange(result) );
   t << equal<expect>(result, "false" ) << FAS_TESTING_FILE_LINE;
 
   value = true;
   result.clear();
-  adb(t, ::fas::json::boolean(), value, init_range(result) );
+  adb(t, ::fas::json::boolean(), value, orange(result) );
   t << is_true<expect>( adb.check(t, ::fas::json::boolean(), value) ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result, "true" ) << FAS_TESTING_FILE_LINE;
 
   int int_value = 0;
   result.clear();
-  adb(t, ::fas::json::boolean(), int_value, init_range(result) );
+  adb(t, ::fas::json::boolean(), int_value, orange(result) );
   t << equal<expect>(result, "false" ) << FAS_TESTING_FILE_LINE;
 
   int_value = 1;
   result.clear();
-  adb(t, ::fas::json::boolean(), int_value, init_range(result) );
+  adb(t, ::fas::json::boolean(), int_value, orange(result) );
   t << equal<expect>(result, "true" ) << FAS_TESTING_FILE_LINE;
 
   int_value = -1;
   result.clear();
-  adb(t, ::fas::json::boolean(), int_value, init_range(result) );
+  adb(t, ::fas::json::boolean(), int_value, orange(result) );
   t << equal<expect>(result, "true" ) << FAS_TESTING_FILE_LINE;
 }
 
@@ -67,7 +67,7 @@ std::ostream& value_test(T& t, I val)
   AD number_advice;
   std::string result;
   t << is_true<expect>( number_advice.check(t, M(), val) ) << FAS_TESTING_FILE_LINE;
-  number_advice(t, M(), val, init_range(result) );
+  number_advice(t, M(), val, orange(result) );
   return t << equal<expect>(result, income.str() ) << result << "!=" << income.str() << ". ";
 }
 

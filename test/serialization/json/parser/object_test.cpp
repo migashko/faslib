@@ -64,7 +64,7 @@ UNIT(copy_value_test, "copy parse value")
   typedef random_access_range<std::string::const_iterator> range_type;
   range_type r( s.begin(), s.end() );
 
-  r = adv(t, r, init_range(result) ).first;
+  r = adv(t, r, orange(result) ).first;
   std::string tail(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "null", result ) << FAS_TESTING_FILE_LINE;
@@ -73,7 +73,7 @@ UNIT(copy_value_test, "copy parse value")
   s = "false bla-bla";
   r = range_type( s.begin(), s.end() );
 
-  r = adv(t, r, init_range(result)).first;
+  r = adv(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "false", result ) << FAS_TESTING_FILE_LINE;
@@ -82,7 +82,7 @@ UNIT(copy_value_test, "copy parse value")
   s = "-127e+2 bla-bla";
   r = range_type( s.begin(), s.end() );
 
-  r = adv(t, r, init_range(result)).first;
+  r = adv(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "-127e+2", result ) << FAS_TESTING_FILE_LINE;
@@ -91,7 +91,7 @@ UNIT(copy_value_test, "copy parse value")
   s = "\"строка\" bla-bla";
   r = range_type( s.begin(), s.end() );
 
-  r = adv(t, r, init_range(result)).first;
+  r = adv(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "\"строка\"", result ) << FAS_TESTING_FILE_LINE;
@@ -158,7 +158,7 @@ UNIT(copy_array_test, "parse array")
   typedef random_access_range<std::string::const_iterator> range_type;
   range_type r( s.begin(), s.end() );
 
-  r = adv(t, r, init_range(result) ).first;
+  r = adv(t, r, orange(result) ).first;
   std::string tail(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "[]", result ) << FAS_TESTING_FILE_LINE;
@@ -167,7 +167,7 @@ UNIT(copy_array_test, "parse array")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = adv(t, r, init_range(result) ).first;
+  r = adv(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "[null]", result ) << FAS_TESTING_FILE_LINE;
@@ -176,7 +176,7 @@ UNIT(copy_array_test, "parse array")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = adv(t, r, init_range(result) ).first;
+  r = adv(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "[1,true,null]", result ) << FAS_TESTING_FILE_LINE;
@@ -184,7 +184,7 @@ UNIT(copy_array_test, "parse array")
   s = "[/*комментарий*/\"1\",   true, -1000 ] bla-bla";
   result.clear();
   r = range_type( s.begin(), s.end() );
-  r = adv(t, r, init_range(result) ).first;
+  r = adv(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "[\"1\",true,-1000]", result ) << FAS_TESTING_FILE_LINE;
@@ -192,7 +192,7 @@ UNIT(copy_array_test, "parse array")
   s = "[[[[]]]] bla-bla";
   result.clear();
   r = range_type( s.begin(), s.end() );
-  r = adv(t, r, init_range(result) ).first;
+  r = adv(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "[[[[]]]]", result ) << FAS_TESTING_FILE_LINE;
@@ -200,7 +200,7 @@ UNIT(copy_array_test, "parse array")
   s = "[[[[null],1]]] bla-bla";
   result.clear();
   r = range_type( s.begin(), s.end() );
-  r = adv(t, r, init_range(result) ).first;
+  r = adv(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "[[[[null],1]]]", result ) << FAS_TESTING_FILE_LINE;
@@ -268,7 +268,7 @@ UNIT(copy_member_test, "copy parse member")
   typedef random_access_range<std::string::const_iterator> range_type;
   range_type r( s.begin(), s.end() );
 
-  r = adm(t, r, init_range(result) ).first;
+  r = adm(t, r, orange(result) ).first;
   std::string tail(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "\"name\":null", result ) << "[" << result << "]" << FAS_TESTING_FILE_LINE;
@@ -277,7 +277,7 @@ UNIT(copy_member_test, "copy parse member")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = adm(t, r, init_range(result) ).first;
+  r = adm(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "\"name\":null", result ) << FAS_TESTING_FILE_LINE;
@@ -286,7 +286,7 @@ UNIT(copy_member_test, "copy parse member")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = adm(t, r, init_range(result) ).first;
+  r = adm(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "\"name\":false", result ) << FAS_TESTING_FILE_LINE;
@@ -295,7 +295,7 @@ UNIT(copy_member_test, "copy parse member")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = adm(t, r, init_range(result) ).first;
+  r = adm(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "\"name\":1234", result ) << FAS_TESTING_FILE_LINE;
@@ -303,7 +303,7 @@ UNIT(copy_member_test, "copy parse member")
   s = "\"name\":[1, 2, 3, \"test\"] bla-bla";
   result.clear();
   r = range_type( s.begin(), s.end() );
-  r = adm(t, r, init_range(result) ).first;
+  r = adm(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "\"name\":[1,2,3,\"test\"]", result ) << FAS_TESTING_FILE_LINE;
@@ -311,7 +311,7 @@ UNIT(copy_member_test, "copy parse member")
   s = "\"name\":[[],[]] bla-bla";
   result.clear();
   r = range_type( s.begin(), s.end() );
-  r = adm(t, r, init_range(result) ).first;
+  r = adm(t, r, orange(result) ).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "\"name\":[[],[]]", result ) << FAS_TESTING_FILE_LINE;
@@ -378,7 +378,7 @@ UNIT(copy_object_test, "copy parse object")
   typedef random_access_range<std::string::const_iterator> range_type;
   range_type r( s.begin(), s.end() );
 
-  r = ado(t, r, init_range(result)).first;
+  r = ado(t, r, orange(result)).first;
   std::string tail(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "{}", result ) << FAS_TESTING_FILE_LINE;
@@ -387,7 +387,7 @@ UNIT(copy_object_test, "copy parse object")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = ado(t, r, init_range(result)).first;
+  r = ado(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "{\"name\":null}", result ) << FAS_TESTING_FILE_LINE;
@@ -396,7 +396,7 @@ UNIT(copy_object_test, "copy parse object")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = ado(t, r, init_range(result)).first;
+  r = ado(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "{\"name\":false,\"name\":{}}", result ) << FAS_TESTING_FILE_LINE;
@@ -405,7 +405,7 @@ UNIT(copy_object_test, "copy parse object")
   result.clear();
   r = range_type( s.begin(), s.end() );
 
-  r = ado(t, r, init_range(result)).first;
+  r = ado(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "{\"name\":1234,\"name\":{\"name\":[1,2,null]}}", result ) << FAS_TESTING_FILE_LINE;
@@ -413,7 +413,7 @@ UNIT(copy_object_test, "copy parse object")
   s = "{\"name\":[1, 2, 3, \"test\"],\"name\":{\"name\":[]}} bla-bla";
   result.clear();
   r = range_type( s.begin(), s.end() );
-  r = ado(t, r, init_range(result)).first;
+  r = ado(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "{\"name\":[1,2,3,\"test\"],\"name\":{\"name\":[]}}", result ) << FAS_TESTING_FILE_LINE;
@@ -421,7 +421,7 @@ UNIT(copy_object_test, "copy parse object")
   s = "{\"name\":[[],[]]} bla-bla";
   result.clear();
   r = range_type( s.begin(), s.end() );
-  r = ado(t, r, init_range(result)).first;
+  r = ado(t, r, orange(result)).first;
   tail = std::string(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
   t << equal<assert>( "{\"name\":[[],[]]}", result ) << FAS_TESTING_FILE_LINE;

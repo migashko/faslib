@@ -37,26 +37,26 @@ UNIT(sequence_deserialize_test, "test sequence_deserialize function")
   
   std::string value;
   std::vector<int> result;
-  deserialize_sequence(  init_range(result), range(value), f_int() );
+  deserialize_sequence(  orange(result), range(value), f_int() );
   t << equal<expect>(result, std::vector<int>()) << FAS_TESTING_FILE_LINE;
 
 
   value="0";
   result.clear();
-  deserialize_sequence(  init_range(result), range(value), f_int() );
+  deserialize_sequence(  orange(result), range(value), f_int() );
   t << equal<assert, int>(result.size(), 1) << FAS_TESTING_FILE_LINE;
   t << equal<expect, int>(result[0], 0 ) << FAS_TESTING_FILE_LINE;
 
   value="0,-1";
   result.clear();
-  deserialize_sequence(  init_range(result), range(value), f_int() );
+  deserialize_sequence(  orange(result), range(value), f_int() );
   t << equal<assert, int>(result.size(), 2) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result[0], 0 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result[1], -1 ) << FAS_TESTING_FILE_LINE;
 
   value="0,-1,1000";
   result.clear();
-  deserialize_sequence(  init_range(result), range(value), deserialize_integer<int, typerange<std::string>::range> );
+  deserialize_sequence(  orange(result), range(value), deserialize_integer<int, typerange<std::string>::range> );
   t << equal<assert, int>(result.size(), 3) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result[0], 0 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result[1], -1 ) << FAS_TESTING_FILE_LINE;

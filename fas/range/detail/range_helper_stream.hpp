@@ -15,12 +15,12 @@ struct range_helper<C, typerange_flag::stream >
 {
   enum { flag = typerange_flag::stream };
 
-  typedef output_range< std::ostreambuf_iterator<char>, char > init_range;
+  typedef output_range< std::ostreambuf_iterator<char>, char > orange;
   typedef input_range< std::istreambuf_iterator<char>, char > range;
   
-  static inline init_range make_init_range(C& cnt, bool)
+  static inline orange make_orange(C& cnt, bool)
   {
-    return init_range( std::ostreambuf_iterator<char>(cnt) );
+    return orange( std::ostreambuf_iterator<char>(cnt) );
   };
 
   static inline range make_range(C& cnt)
