@@ -2,7 +2,7 @@
 #define FAS_RANGE_RANGE_HPP
 
 #include <fas/range/typerange.hpp>
-#include <fas/range/string_range.hpp>
+
 
 namespace fas{
 
@@ -26,28 +26,6 @@ inline typename typerange<IC>::range range(IC& cnt)
 {
   return typerange<IC>::make_range(cnt);
 }
-
-template<typename IC>
-inline typename typerange<IC>::range end_range(IC& cnt)
-{
-  return typerange<IC>::make_end_range(cnt);
-}
-
-
-
-template<typename C>
-inline typename typerange<C>::init_range init_range(C& cnt, bool clear = false)
-{
-  return typerange<C>::make_init_range(cnt, clear);
-}
-
-template<typename C>
-inline string_range<C*> srange(C* str)
-{
-  return string_range<C*>(str);
-}
-
-
 
 }
 

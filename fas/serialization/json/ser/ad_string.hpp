@@ -2,6 +2,7 @@
 #define FAS_SERIALIZATION_JSON_SERIALIZER_AD_STRING_HPP
 
 #include <fas/range/range.hpp>
+#include <fas/range/srange.hpp>
 
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/out_of_range.hpp>

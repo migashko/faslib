@@ -4,6 +4,9 @@
 #include <fas/serialization/json/serializer.hpp>
 #include <fas/serialization/json/meta.hpp>
 
+#include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
+
 #include "../../bar.hpp"
 #include "../../names.hpp"
 

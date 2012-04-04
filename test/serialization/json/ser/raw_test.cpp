@@ -6,6 +6,7 @@
 #include <fas/serialization/json/meta/range.hpp>
 #include <fas/serialization/json/parser/aspect.hpp>
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 
 
 UNIT(raw_test, "raw serialize")

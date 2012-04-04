@@ -4,30 +4,13 @@
 #include <fas/range/typerange.hpp>
 #include <cstddef>
 
-
 namespace fas{
 
-
-  /*
-template<typename P>
-inline std::ptrdiff_t distance(P* t)
+template<typename T>
+inline typename typerange<const T>::difference_type distance(const T& t)
 {
-  return 0;
+  return typerange<const T>::distance(t);
 }
-
-template<typename P>
-inline std::ptrdiff_t distance(const P* t)
-{
-  return 0;
-}
-
-*/
-template<typename C>
-inline typename typerange<const C>::difference_type distance(const C& t)
-{
-  return typerange<const C>::distance(t)/*std::distance( t.begin(), t.end() )*/;
-}
-
 
 }
 

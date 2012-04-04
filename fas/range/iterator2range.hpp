@@ -13,41 +13,41 @@
 
 namespace fas{
 
-template<typename T, typename Tg = empty_type>
+template<typename T, typename ValueType = void, typename Tg = empty_type>
 struct iterator2range;
 
-template<typename T>
-struct iterator2range<T, empty_type>
-  : iterator2range<T, typename std::iterator_traits<T>::iterator_category > 
+template<typename T, typename ValueType>
+struct iterator2range<T, ValueType, empty_type>
+  : iterator2range<T, ValueType, typename std::iterator_traits<T>::iterator_category > 
 {
 };
 
-template<typename T>
-struct iterator2range<T, std::input_iterator_tag>
+template<typename T, typename ValueType>
+struct iterator2range<T, ValueType, std::input_iterator_tag>
 {
-  typedef input_range<T> type;
+  typedef input_range<T, ValueType> type;
 };
 
-template<typename T>
-struct iterator2range<T, std::output_iterator_tag>
+template<typename T, typename ValueType>
+struct iterator2range<T, ValueType, std::output_iterator_tag>
 {
-  typedef output_range<T> type;
+  typedef output_range<T, ValueType> type;
 };
 
-template<typename T>
-struct iterator2range<T, std::forward_iterator_tag>
+template<typename T, typename ValueType>
+struct iterator2range<T, ValueType, std::forward_iterator_tag>
 {
   typedef forward_range<T> type;
 };
 
-template<typename T>
-struct iterator2range<T, std::bidirectional_iterator_tag>
+template<typename T, typename ValueType>
+struct iterator2range<T, ValueType, std::bidirectional_iterator_tag>
 {
   typedef bidirectional_range<T> type;
 };
 
-template<typename T>
-struct iterator2range<T, std::random_access_iterator_tag>
+template<typename T, typename ValueType>
+struct iterator2range<T, ValueType, std::random_access_iterator_tag>
 {
   typedef random_access_range<T> type;
 };

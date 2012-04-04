@@ -5,6 +5,8 @@
 #include <fas/serialization/json/except/out_of_range.hpp>
 
 #include <fas/range/range.hpp>
+#include <fas/range/distance.hpp>
+#include <fas/range/decrease.hpp>
 
 #include <fas/typemanip/is_array.hpp>
 #include <fas/integral/int_.hpp>
@@ -44,8 +46,15 @@ struct ad_sequence
   R _1(T& t, M, const V& v, R r, ISA, int_<N>)
   {
     typename ::fas::typerange< const V>::range rr = ::fas::range( v );
-    if ( rr.distance() > N )
+    /*
+     * if ( rr.distance() > N )
       rr.narrow( rr.distance() - N );
+      */
+#warning 
+
+    if ( ::fas::distance(rr) > N )
+      ::fas::decrease( rr, 0, N );
+      // rr.narrow( rr.distance() - N );
     
     return _( t, M(), rr , r);
   }

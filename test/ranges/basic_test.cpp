@@ -40,7 +40,7 @@ UNIT(input, "input range testing")
   ss << 1 << " " << 2;
   
   typedef std::istream_iterator<int> iterator;
-  typedef input_range< iterator > range_type;
+  typedef input_range< iterator, int> range_type;
   range_type r1 = range_type( iterator(ss), iterator() );
   input_test(t, r1);
 
@@ -93,7 +93,7 @@ UNIT(output2, "output range testing (front_insert_iterator)")
 
   typedef std::list<int> container_type;
   typedef std::front_insert_iterator< container_type > iterator;
-  typedef output_range< iterator > range_type;
+  typedef output_range< iterator, int> range_type;
   
   container_type cnt1;
   
@@ -115,7 +115,7 @@ UNIT(output3, "output range testing (output_iterator)")
 
   std::stringstream ss;
   typedef std::ostream_iterator< int > iterator;
-  typedef output_range< iterator > range_type;
+  typedef output_range< iterator, int> range_type;
   range_type r1 = range_type( iterator(ss, " ") );
   output_test(t, r1);
   t << equal<expect>( std::string("1 2 "), ss.str() ) << "ss.str() == \"1 2\" [[" << ss.str() << "]]";

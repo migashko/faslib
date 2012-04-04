@@ -24,6 +24,7 @@
 
 
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 
 #include <fas/type_list/empty_list.hpp>
 

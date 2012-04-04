@@ -24,7 +24,7 @@ struct integer_digits
 template<typename T, typename R>
 inline R serialize_integer(T value, R r)
 {
-  typedef typename R::value_type value_type;
+  typedef /*typename R::value_type*/char value_type;
 
   value_type buffer[integer_digits<T>::result];
 

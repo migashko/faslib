@@ -9,6 +9,7 @@
 #include <fas/serialization/json/ser/serialize_sequence.hpp>
 #include <fas/serialization/json/ser/serialize_integer.hpp>
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 #include <fas/typemanip/tstring.hpp>
 
 #include <vector>

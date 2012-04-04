@@ -84,7 +84,7 @@ struct output_range_no_const<const T>
   typedef T type;
 };
 
-template<typename T>
+template<typename T, typename ValueType>
 class output_range
 {
 public:
@@ -93,10 +93,10 @@ public:
   
   typedef T iterator;
 
-  
-  typedef typename output_value_type< typename output_range_no_const<T>::type >::value_type value_type;
+  typedef ValueType        value_type;
+  // typedef typename output_value_type< typename output_range_no_const<T>::type >::value_type value_type;
   typedef typename std::iterator_traits<T>::iterator_category iterator_category;
-//  typedef typename std::iterator_traits<T>::value_type        value_type;
+  //typedef typename std::iterator_traits<T>::value_type        value_type;
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
   typedef typename std::iterator_traits<T>::pointer           pointer;
   typedef typename std::iterator_traits<T>::reference         reference;
@@ -116,18 +116,18 @@ public:
   iterator& operator*() { return b; }
 
   template<typename V>
-  output_range<T>& operator=(const V& value)
+  output_range<T, ValueType>& operator=(const V& value)
   {
     *b = value;
     return *this;
   }
 
-  output_range<T>& operator++() 
+  output_range<T, ValueType>& operator++() 
   {
     return *this; 
   }
 
-  output_range<T>& operator++(int) 
+  output_range<T, ValueType>& operator++(int) 
   {
     return *this; 
   }

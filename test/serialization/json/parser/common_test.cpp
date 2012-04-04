@@ -166,9 +166,9 @@ UNIT(null_test, "parse null from file")
   }
 
   typedef std::istreambuf_iterator<char> iterator;
-  typedef input_range< iterator > range_type;
+  typedef input_range< iterator, char > range_type;
   std::ifstream ifs("test_null.txt");
-  range_type r = range( iterator(ifs), iterator() );
+  range_type r = range_type( iterator(ifs), iterator() );
   ad_null an;
   r = an(t, r);
   std::string tail;
@@ -183,9 +183,9 @@ UNIT(copy_null_test, "copy parse null from file")
   using namespace fas::json::parse;
 
   typedef std::istreambuf_iterator<char> iterator;
-  typedef input_range< iterator > range_type;
+  typedef input_range< iterator, char> range_type;
   std::ifstream ifs("test_null.txt");
-  range_type r = range( iterator(ifs), iterator() );
+  range_type r = range_type( iterator(ifs), iterator() );
   ad_null an;
   std::string result;
   r = an(t, r, init_range(result) ).first;

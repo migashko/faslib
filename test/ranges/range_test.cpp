@@ -1,6 +1,7 @@
 #include "basic_test.hpp"
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
+#include <fas/range/init_range.hpp>
 
 #include <fas/static_check/static_check.hpp>
 
@@ -70,6 +71,18 @@ UNIT(range_array_test, "test range( int[2] )")
   bidirectional_test(t, fas::range(v));
   random_access_test(t, fas::range(v));
   random_access_const_test(t, fas::range(v));
+
+  std::stringstream ss;
+
+  fas::typerange< std::stringstream >::init_range isr = fas::init_range(ss);
+  *(isr++) = 'a';
+  *(isr++) = 'b';
+
+  //ss.seekg(0);
+  fas::typerange< std::stringstream >::range osr = fas::range(ss);
+
+  t << equal<expect, char>( 'a', *(osr++) ) << FAS_TESTING_FILE_LINE << std::endl ;
+  t << equal<expect, char>( 'b', *(osr++) ) << FAS_TESTING_FILE_LINE << std::endl ;
 };
 
 

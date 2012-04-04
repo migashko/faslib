@@ -11,6 +11,7 @@
 #include <fas/serialization/json/meta/enum_value.hpp>
 
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 #include <string>
 
 FAS_NAME(value1);

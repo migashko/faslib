@@ -61,7 +61,7 @@ int main() { for (int i =0; i < 3; ++i) {
   std::cout << "sort array1: " <<  finish - start << std::endl;
 
   start = process_nanotime();
-  std::sort( fas::range(array2), fas::end_range(array2) );
+  std::sort( fas::range(array2), fas::erange(array2) );
   finish = process_nanotime();
   std::cout << "sort array2: " <<  finish - start << std::endl;
 
@@ -71,7 +71,7 @@ int main() { for (int i =0; i < 3; ++i) {
   std::cout << "sort vect1: " <<  finish - start << std::endl;
 
   start = process_nanotime();
-  std::sort( fas::range(vect2), fas::end_range(vect2) );
+  std::sort( fas::range(vect2), fas::erange(vect2) );
   finish = process_nanotime();
   std::cout << "sort vect2: " <<  finish - start << std::endl;
   std::cout << std::endl;

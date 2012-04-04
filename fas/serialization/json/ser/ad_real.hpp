@@ -26,7 +26,7 @@ struct ad_real
     std::stringstream ss;
 
     ss << v;
-    for ( register typename R::value_type chr ; ; ++r)
+    for ( register char chr ; ; ++r)
     {
       if (!r)
         return throw_(t, out_of_range(), r);

@@ -2,6 +2,7 @@
 #define FAS_ADV_AD_CONTAINER_MANAGER_HPP
 
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 
 namespace fas{
 

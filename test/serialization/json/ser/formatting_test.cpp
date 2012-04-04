@@ -10,6 +10,7 @@
 #include <fas/serialization/json/meta/block.hpp>
 
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 #include <string>
 
 //namespace test{ namespace formatting{

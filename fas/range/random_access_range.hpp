@@ -52,19 +52,39 @@ public:
 
   /*const T*/ iterator end() const { return e; }
 
-  difference_type distance() const { return std::distance(b, e); }
+  difference_type distance() const { return e-b/*std::distance(b, e)*/; }
 
   random_access_range<T>& advance(difference_type c)
   {
-    std::advance(b, c);
+    b+=c;
+    assert( b <= e);
     return *this;
   }
 
-  random_access_range<T>& narrow(difference_type c)
+  /*random_access_range<T>& decrease(difference_type c)
   {
     e -= c;
     return *this;
+  }*/
+
+  random_access_range<T>& increase(difference_type cbeg, difference_type cend)
+  {
+    s -= cbeg;
+    e += cend;
+    assert( s <= b);
+    assert( e >= b);
+    return *this;
   }
+
+  random_access_range<T>& decrease(difference_type cbeg, difference_type cend)
+  {
+    s += cbeg;
+    e -= cend;
+    assert( s <= b);
+    assert( e >= b);
+    return *this;
+  }
+  
 
   random_access_range<T>& operator++() 
   {

@@ -6,6 +6,7 @@
 
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 
 template<typename T>
 std::ostream& test_serialize_string(T& t, const std::string& from, const std::string& check)

@@ -7,20 +7,27 @@
 
 namespace fas {
 
-template<typename T>
+template<typename T, typename ValueType>
 class input_range
 {
 public:
   typedef input_range_tag range_category;
   
   typedef T iterator;
-  
+
+  typedef ValueType value_type;
   typedef typename std::iterator_traits<T>::iterator_category iterator_category;
-  typedef typename std::iterator_traits<T>::value_type        value_type;
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
   typedef typename std::iterator_traits<T>::pointer           pointer;
   typedef typename std::iterator_traits<T>::reference         reference;
 
+  class proxy {
+    ValueType keep_;
+  public:
+    proxy (ValueType c) : keep_(c){ }
+    ValueType operator*() {return keep_;}
+  };
+  
   input_range()
     : b(), e()
   {};
@@ -41,28 +48,29 @@ public:
   
   /*const T*/ iterator end() const { return e; }
 
-  input_range<T>& operator++() 
+  input_range<T, ValueType>& operator++() 
   {
     // assert(b!=e);
     ++b; 
     return *this; 
   }
 
-  input_range<T> operator++(int) 
+  proxy operator++(int) 
   {
+    proxy p( *b );
     // assert(b!=e);
-    input_range<T> ans = *this;   
+    //input_range<T, ValueType> ans = *this;   
     b++; 
-    return ans; 
+    return p; 
   }
 
   difference_type distance() const { return std::distance(b, e); }
   
-  input_range<T>& advance(difference_type s)  { std::advance(b, s); return *this;}
+  input_range<T, ValueType>& advance(difference_type s)  { std::advance(b, s); return *this;}
   
-  bool operator == (const input_range<T>& r ) const { return b == r.b && e==r.e;  }
+  bool operator == (const input_range<T, ValueType>& r ) const { return b == r.b && e==r.e;  }
 
-  bool operator != (const input_range<T>& r ) const { return !(*this == r); }
+  bool operator != (const input_range<T, ValueType>& r ) const { return !(*this == r); }
 
 protected:
   T b;

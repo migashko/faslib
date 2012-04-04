@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 #include <fas/typemanip/type2type.hpp>
 
 #include <fas/jsonrpc/outgoing/tags.hpp>

@@ -4,6 +4,8 @@
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/serialization/json/meta/tstring.hpp>
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
+#include <fas/range/srange.hpp>
 
 #include <fas/serialization/json/parser/aspect.hpp>
 

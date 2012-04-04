@@ -7,6 +7,7 @@
 #include <fas/serialization/json/parser/tags.hpp>
 
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 
 namespace fas{ namespace json{ namespace deser{
 

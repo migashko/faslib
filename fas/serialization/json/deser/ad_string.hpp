@@ -15,6 +15,7 @@
 //#include <fas/typemanip/type2type.hpp>
 #include <fas/typemanip/is_array.hpp>
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 #include <fas/range/distance.hpp>
 
 namespace fas{ namespace json{ namespace deser{

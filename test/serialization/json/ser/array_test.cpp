@@ -33,6 +33,7 @@
 #include "../../foo.hpp"
 #include "../../names.hpp"
 #include <fas/range/range.hpp>
+#include <fas/range/init_range.hpp>
 #include <fas/typemanip/tstring.hpp>
 #include <vector>
 #include <string>
