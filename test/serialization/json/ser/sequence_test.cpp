@@ -106,7 +106,7 @@ UNIT(ad_sequence_test2, "test ad_sequence advice 2")
   //value.push_back(0);
   t << is_true<expect>( ads.check(t, sequence<integer, 1>(), value) ) << FAS_TESTING_FILE_LINE;
   ads(t, sequence<integer, 1>(), value, init_range(result));
-  t << equal<expect>(result, "0") << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(result, "0") << FAS_TESTING_FILE_LINE << std::endl << result;
 
   result.clear();
   //value.push_back(-1);

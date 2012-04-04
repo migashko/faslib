@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fas/testing.hpp>
 #include <fas/typemanip/tstring.hpp>
 #include <fas/type_list/type_list_n.hpp>
@@ -27,6 +28,7 @@ FAS_STRING(str_foo1, "this is foo1" )
 FAS_STRING(str_foo2, "this is foo2" )
 FAS_STRING(str_foo3, "this is foo3" )
 
+namespace {
 struct foo
 {
   typedef enum { enum1, enum2} foo_enum;
@@ -45,6 +47,7 @@ struct foo
     foo3[2]=enum2;
   }
 };
+}
 //}}
 
 namespace aj = ::fas::json;
@@ -53,7 +56,7 @@ namespace aj = ::fas::json;
     fas::type_list_n<
       aj::comment< str_foo1, aj::member<n_foo1, aj::attr<foo, int, &foo::foo1, aj::integer> > >,
       aj::comment< str_foo2, aj::member<n_foo2, aj::attr<foo, int, &foo::foo2, aj::integer> > >,
-      aj::comment< str_foo3, aj::member<n_foo3, aj::attr<foo, foo::foo_enum_array, &foo::foo3, 
+      aj::comment< str_foo3, aj::member<n_foo3, aj::attr<foo, foo::foo_enum_array, &foo::foo3,
                           aj::array<
                           aj::enumeration<
                             fas::type_list_n<

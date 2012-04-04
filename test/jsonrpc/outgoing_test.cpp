@@ -68,6 +68,12 @@ UNIT(outgoing, "")
 
   int arr[10]={0};
 
+  /*
+  aj::serializer<> ser;
+  std::string tmp;
+  ser( aj::array< aj::sequence< aj::integer, 4> >(), arr, fas::init_range(tmp) );
+  std::cout << tmp << std::endl;*/
+
   send_result = t.get_aspect().template get< ajr::_send_ >()( t, aj::array< aj::sequence< aj::integer, 4> >(), arr );
   t << is_true<expect>( send_result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( 0, fail_count(t) ) << FAS_TESTING_FILE_LINE;

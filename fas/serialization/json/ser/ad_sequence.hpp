@@ -46,16 +46,8 @@ struct ad_sequence
   R _1(T& t, M, const V& v, R r, ISA, int_<N>)
   {
     typename ::fas::typerange< const V>::range rr = ::fas::range( v );
-    /*
-     * if ( rr.distance() > N )
-      rr.narrow( rr.distance() - N );
-      */
-#warning 
-
     if ( ::fas::distance(rr) > N )
-      ::fas::decrease( rr, 0, N );
-      // rr.narrow( rr.distance() - N );
-    
+      rr = ::fas::decrease( rr, 0, ::fas::distance(rr) - N );
     return _( t, M(), rr , r);
   }
 

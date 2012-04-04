@@ -44,12 +44,12 @@ struct typerange_flag
   {
     enum
     {
-      array_flag = is_array<T>::value, 
-      pointer_flag = !array_flag && is_pointer<T>::value, 
-      iterator_flag = !pointer_flag && has_iterator_category<T>::value,
-      container_flag = !iterator_flag && has_iterator<T>::value,
-      range_flag = !iterator_flag && has_range_category<T>::value,
-      stream_flag = !range_flag && is_stream<T>::value
+      range_flag = has_range_category<T>::value,
+      iterator_flag = !range_flag && has_iterator_category<T>::value,
+      stream_flag = !range_flag && !iterator_flag && is_stream<T>::value,
+      container_flag = !range_flag && !iterator_flag && !stream_flag && has_iterator<T>::value,
+      array_flag = is_array<T>::value,
+      pointer_flag = !array_flag && is_pointer<T>::value
     };
 
     enum

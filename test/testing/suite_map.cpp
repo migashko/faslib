@@ -47,7 +47,8 @@ int main(int argc, char* argv[])
 {
   ::fas::testing::suite_counts suite_suite_run(int argc, char* argv[]);
   ::fas::testing::suite_counts result = suite_suite_run(argc, argv);
-  std::cout << result.units << std::endl;
-  return result.units;
+  /*std::cout << result.units << std::endl;
+  std::cout << result.units_total << std::endl;*/
+  return !(result.units == 3 && result.units_total == 4);
 };
 

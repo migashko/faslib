@@ -6,8 +6,8 @@
 
 namespace fas{
 
-template<typename R, typename Distance>
-inline R decrease(R r, Distance cbeg, Distance cend)
+template<typename R, typename Distance1, typename Distance2>
+inline R& decrease(R& r, Distance1 cbeg, Distance2 cend)
 {
   return r.decrease(cbeg, cend);
 }

@@ -29,16 +29,17 @@ struct ad_comment
     typedef typename M::before_comment before_comment;
     typedef typename M::after_comment after_comment;
 
+    
     r = _1(t, r, m, type2type<before_comment>() );
-
+    
     if ( !try_(t) )
       return r;
-
+    
     r = t.get_aspect().template get<serializer_tag>()(t, target(), v, r);
-
+    
     if ( !try_(t) )
       return r;
-
+    
     r = _2(t, r, m, type2type<after_comment>() );
     
     return r;
