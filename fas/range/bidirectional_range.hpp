@@ -15,6 +15,7 @@ class bidirectional_range
 public:
   typedef bidirectional_range_tag range_category;
   typedef T iterator;
+  typedef std::reverse_iterator<T> reverse_iterator;
   typedef typename std::iterator_traits<T>::iterator_category iterator_category;
   typedef typename std::iterator_traits<T>::value_type        value_type;
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
@@ -31,17 +32,17 @@ public:
 
   operator bool () const { return b!=e; }
 
-  /*const*/ reference operator*() const { return *b; }
+  reference operator*() const { return *b; }
 
-  /*reference operator*() { return *b; }*/
+  pointer operator ->() const  { return &(*b);}
 
-  /*pointer operator ->() { return &(*b);}*/
+  iterator begin() const { return b; }
 
-  /*const */pointer operator ->() const  { return &(*b);}
+  iterator end() const { return e; }
 
-  /*const T*/iterator begin() const { return b; }
+  reverse_iterator rbegin() const { return reverse_iterator(e); }
 
-  /*const T*/iterator end() const { return e; }
+  reverse_iterator rend() const { return reverse_iterator(b); }
 
   difference_type distance() const { return std::distance(b, e); }
 

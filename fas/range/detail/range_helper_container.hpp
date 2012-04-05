@@ -12,11 +12,18 @@ template< typename C, int CNST>
 struct range_container_helper
 {
   typedef typename iterator2range< typename C::const_iterator >::type range;
+  typedef typename iterator2range< typename C::const_reverse_iterator >::type rrange;
   
   static inline range make_range(const C& ctn)
   {
     return range( ctn.begin(), ctn.end() );
   }
+
+  static inline range make_rrange(const C& ctn)
+  {
+    return range( ctn.rbegin(), ctn.rend() );
+  }
+
 };
 
 
@@ -24,6 +31,8 @@ template< typename C>
 struct range_container_helper<C, false>
 {
   typedef typename iterator2range< typename C::iterator >::type range;
+  typedef typename iterator2range< typename C::const_reverse_iterator >::type rrange;
+  
   typedef typename iterator2range< std::insert_iterator<C>, typename C::value_type >::type orange;
   
   template<typename CC>
@@ -39,6 +48,13 @@ struct range_container_helper<C, false>
   {
     return range( ctn.begin(), ctn.end() );
   }
+
+  template<typename CC>
+  static inline range make_rrange(CC& ctn)
+  {
+    return rrange( ctn.rbegin(), ctn.rend() );
+  }
+
 };
 
 
