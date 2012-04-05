@@ -16,6 +16,7 @@ public:
   typedef bidirectional_range_tag range_category;
   typedef T iterator;
   typedef std::reverse_iterator<T> reverse_iterator;
+  typedef bidirectional_range<reverse_iterator> reverse_range;
   typedef typename std::iterator_traits<T>::iterator_category iterator_category;
   typedef typename std::iterator_traits<T>::value_type        value_type;
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
@@ -43,10 +44,44 @@ public:
   reverse_iterator rbegin() const { return reverse_iterator(e); }
 
   reverse_iterator rend() const { return reverse_iterator(b); }
+  
+  reverse_range reverse() const { return reverse_range( rbegin(), rend() ); }
 
   difference_type distance() const { return std::distance(b, e); }
 
-  bidirectional_range<T>& advance(difference_type s)  { std::advance(b, s); return *this; }
+  bidirectional_range<T>& advance(difference_type c)  
+  {
+    std::advance(b, c); 
+    return *this; 
+  }
+  
+  bidirectional_range<T>& increase(difference_type cbeg, difference_type cend)
+  {
+    std::advance( s, 0 - cbeg );
+    std::advance( e, cend );
+    
+    /*
+    s -= cbeg;
+    e += cend;
+    assert( s <= b);
+    assert( e >= b);
+    */
+    return *this;
+  }
+
+  bidirectional_range<T>& decrease(difference_type cbeg, difference_type cend)
+  {
+    std::advance( s, cbeg );
+    std::advance( e, 0 - cend );
+
+    /*s += cbeg;
+    e -= cend;
+    assert( s <= b);
+    assert( e >= b);
+    */
+    return *this;
+  }
+
 
   bidirectional_range<T>& operator++() 
   {

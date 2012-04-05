@@ -32,17 +32,13 @@ public:
 
   operator bool () const { return b!=e; }
 
-  /*const*/ reference operator*() const { return *b; }
+  reference operator*() const { return *b; }
 
-  /*reference operator*() { return *b; }*/
+  pointer operator ->() const  { return &(*b);}
 
-  //pointer operator ->() { return &(*b);}
+  iterator begin() const { return b; }
 
-  /*const*/ pointer operator ->() const  { return &(*b);}
-
-  /*const T*/ iterator begin() const { return b; }
-
-  /*const T*/ iterator end() const { return e; }
+  iterator end() const { return e; }
 
   difference_type distance() const { return std::distance(b, e); }
 

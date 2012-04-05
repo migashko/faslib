@@ -3,6 +3,7 @@
 
 #include <fas/range/typerange_flag.hpp>
 #include <fas/range/random_access_range.hpp>
+#include <fas/range/forward_range.hpp>
 
 namespace fas{
 
@@ -11,15 +12,16 @@ struct range_helper<T, typerange_flag::other >
 {
   enum { flag = typerange_flag::other };
   typedef random_access_range<T*> range;
-  typedef random_access_range< std::reverse_iterator<T*> > rrange;
-  typedef range orange;
+  typedef std::reverse_iterator<T*> reverse_iterator;
+  typedef random_access_range< std::reverse_iterator<T*> > reverse_range;
+  typedef forward_range<T*> orange;
   
   typedef typename range::difference_type difference_type;
   
   template<typename TT>
-  static inline range make_rrange(TT* v)
+  static inline reverse_range make_rrange(TT* v)
   {
-    return rrange(&v, &v - 1 );
+    return reverse_range( reverse_iterator(&v), reverse_iterator(&v - 1) );
   }
 
   template<typename TT>

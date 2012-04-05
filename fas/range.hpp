@@ -5,6 +5,7 @@
 #include <fas/range/erange.hpp>
 #include <fas/range/orange.hpp>
 #include <fas/range/srange.hpp>
+#include <fas/range/rrange.hpp>
 
 #include <fas/range/rangeop.hpp>
 #include <fas/range/typerange.hpp>

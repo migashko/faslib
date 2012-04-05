@@ -24,18 +24,15 @@ struct range_helper<R, typerange_flag::range >
 
   template<typename RR /*==R */>
   static inline
-  typename range_helper< typename RR::reverse_iterator, typerange_flag::range >::range
+  typename RR::reverse_range
   make_rrange(RR r)
   {
-    typename range_helper< 
-      typename RR::reverse_iterator, 
-      typerange_flag::range 
-    >::range( r.rbegin(), r.rend() );
+    return r.reverse();
   }
   
   
   template<typename RR /*==R */>
-  static inline range make_orange(RR r, bool clear)
+  static inline forward_range< typename RR::iterator > make_orange(RR r, bool clear)
   {
     enum 
     {
@@ -43,9 +40,16 @@ struct range_helper<R, typerange_flag::range >
       is_intput_range = some_type< input_range_tag, typename RR::range_category_tag >::value,
       not_input_or_output_range = static_check< !(is_output_range || is_intput_range ) >::value
     };
+    
+    typedef forward_range< typename RR::iterator > orange;
+    
     if ( clear )
-      for ( R i = r; i ; ++i) *i = typename RR::value_type();
-    return r;
+    {
+      for ( orange i(r.begin(), r.end()); i ; ++i) 
+        *i = typename RR::value_type();
+    }
+    
+    return orange( r.begin(), r.end() );
   }
 
   static inline range make_erange(R r)

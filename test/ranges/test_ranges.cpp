@@ -3,4 +3,5 @@
 BEGIN_TEST
   RUN_SUITE(basic_range_suite);
   RUN_SUITE(range_suite);
+  RUN_SUITE(array_range_suite)
 END_TEST
