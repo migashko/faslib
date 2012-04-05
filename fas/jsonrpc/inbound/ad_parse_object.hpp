@@ -19,7 +19,7 @@ struct ad_parse_object
     typedef typename T::aspect::template advice_cast<_deserializer_>::type deserializer;
     deserializer ds;
 
-#warning: TODO: выбор объекта по типу range
+//#warning: TODO: выбор объекта по типу range
     raw_object obj;
     r = ds(raw_object_json(), obj, r);
 

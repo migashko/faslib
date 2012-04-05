@@ -1,0 +1,1 @@
+/home/migashko/prj/faslib2/timeout-m -m 1024000 /usr/bin/g++ $@

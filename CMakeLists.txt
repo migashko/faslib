@@ -1,4 +1,4 @@
-
+SET(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/fasg++")
 
 cmake_minimum_required(VERSION 2.6)
 project(faslib)
@@ -12,6 +12,7 @@ if(UNIX)
 
 #-std=c++0x
 #SET(CMAKE_CXX_COMPILER "/usr/bin/g++-3.3")
+
 SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")

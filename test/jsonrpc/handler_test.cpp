@@ -23,7 +23,7 @@ namespace aj = ::fas::json;
  *  client <-- error("Method not found") <-- server
  * 
 */
-
+namespace {
 struct _hi_;
 struct _get_name_;
 
@@ -91,24 +91,29 @@ namespace client
     }
   };
 
-  struct hi_method_aspect: fas::aspect< fas::type_list_n<
+  /*struct hi_method_aspect:*/ typedef fas::aspect< fas::type_list_n<
     ajr::name<n_hi>,
     ajr::local::notify< hi_notify >,
     ajr::remote::notify<>,
     ajr::remote::request<>,
     ajr::remote::error< hi_error >,
     fas::value_advice< ajr::_context_, context >
-  >::type > {};
+  >::type > /*{}*/ hi_method_aspect;
 
-  struct get_name_method_aspect: fas::aspect< fas::type_list_n<
+  /*struct get_name_method_aspect:*/  typedef fas::aspect< fas::type_list_n<
     ajr::name<n_get_name>,
     ajr::local::request< get_name_request >,
     ajr::local::result< std::string, aj::string >,
     ajr::remote::request<  >,
     ajr::remote::result< get_name_result, std::string, aj::string >,
     fas::value_advice< ajr::_context_, context >
-  >::type > {};
+  >::type > /*{}*/  get_name_method_aspect;
 
+  
+  typedef ajr::method< hi_method_aspect > hi_method;
+  typedef ajr::method< get_name_method_aspect > get_name_method;
+
+  /*
   struct hi_method
     : ajr::method< hi_method_aspect >
   {
@@ -118,16 +123,18 @@ namespace client
     : ajr::method< get_name_method_aspect >
   {
   };
+  */
 }
 
-struct client_method_aspect: fas::aspect< fas::type_list_n<
+
+/*struct client_method_aspect:*/ typedef fas::aspect< fas::type_list_n<
   fas::advice<_hi_, client::hi_method>,
   fas::advice<_get_name_, client::get_name_method>,
   fas::group< ajr::_notify_group_ ,  _hi_  >,
   fas::group< ajr::_request_group_,  _get_name_ >,
   fas::group< ajr::_result_group_ ,  _get_name_ >,
   fas::group< ajr::_error_group_ ,  _hi_ >
->::type > {};
+>::type > client_method_aspect /*{}*/;
 
 
 namespace server
@@ -171,22 +178,27 @@ namespace server
 
 
   
-  struct hi_method_aspect: fas::aspect< fas::type_list_n<
+  /*struct hi_method_aspect:*/ typedef fas::aspect< fas::type_list_n<
     ajr::name<n_hi>,
     ajr::local::notify< hi_notify >,
     ajr::remote::notify<>,
     fas::value_advice< ajr::_context_, context >
-  >::type > {};
+  >::type > hi_method_aspect /*{}*/;
 
-  struct get_name_method_aspect: fas::aspect< fas::type_list_n<
+  /*struct get_name_method_aspect:*/ typedef fas::aspect< fas::type_list_n<
     ajr::name<n_get_name>,
     ajr::local::request< get_name_request >,
     ajr::local::result< std::string, aj::string >,
     ajr::remote::request< >,
     ajr::remote::result< get_name_result, std::string, aj::string >,
     fas::value_advice< ajr::_context_, context >
-  >::type > {};
+  >::type > /*{}*/ get_name_method_aspect;
 
+  
+  
+  typedef ajr::method< hi_method_aspect > hi_method;
+  typedef ajr::method< get_name_method_aspect > get_name_method;
+  /*
   struct hi_method
     : ajr::method< hi_method_aspect >
   {
@@ -196,11 +208,21 @@ namespace server
     : ajr::method< get_name_method_aspect >
   {
   };
+  */
 
   
 }
 
 
+typedef fas::aspect< fas::type_list_n<
+  fas::advice<_hi_, server::hi_method>,
+  fas::advice<_get_name_, server::get_name_method>,
+  fas::group< ajr::_notify_group_ ,  _hi_  >,
+  fas::group< ajr::_request_group_,  _get_name_ >,
+  fas::group< ajr::_result_group_ ,  _get_name_ >
+>::type > server_method_aspect;
+
+/*
 struct server_method_aspect: fas::aspect< fas::type_list_n<
   fas::advice<_hi_, server::hi_method>,
   fas::advice<_get_name_, server::get_name_method>,
@@ -208,6 +230,7 @@ struct server_method_aspect: fas::aspect< fas::type_list_n<
   fas::group< ajr::_request_group_,  _get_name_ >,
   fas::group< ajr::_result_group_ ,  _get_name_ >
 >::type > {};
+*/
 
 
 /*
@@ -219,44 +242,57 @@ struct server_method_aspect: fas::aspect< fas::type_list_n<
 {"jsonrpc":"2.0","error":{"code":-32601,"message":"Method not found."},"id":1}
 */
 
-UNIT(handler, "")
+
+/*
+struct handler_client: ajr::handler<client_method_aspect>{};
+struct handler_server: ajr::handler<server_method_aspect>{};
+*/
+
+typedef ajr::handler<client_method_aspect> handler_client;
+typedef ajr::handler<server_method_aspect> handler_server;
+
+  handler_client hclient;
+  handler_server hserver;
+
+  //832532
+}
+
+UNIT(handler_unit, "")
 {
   using namespace ::fas::testing;
 
-  ajr::handler<client_method_aspect> client;
-  ajr::handler<server_method_aspect> server;
 
   std::string result;
   std::string check_result;
   std::string current;
 
-  current = client.notify<_hi_>( fas::empty_type() );
+  current = hclient.notify<_hi_>( fas::empty_type() );
   result+=current;
   t << equal<expect>( current, "{\"jsonrpc\":\"2.0\",\"method\":\"hi\",\"params\":null}" )
     << FAS_TESTING_FILE_LINE << std::endl << current;
   
   
-  current = server.parse( fas::range(current) );
+  current = hserver.parse( fas::range(current) );
   result+=current;
   t << equal<expect>( current, "{\"jsonrpc\":\"2.0\",\"method\":\"hi\",\"params\":null}{\"jsonrpc\":\"2.0\",\"method\":\"get_name\",\"params\":null,\"id\":1}")
     << FAS_TESTING_FILE_LINE << std::endl << current;
 
-  current = client.parse( fas::range(current) );
+  current = hclient.parse( fas::range(current) );
   result+=current;
   t << equal<expect>( current, "{\"jsonrpc\":\"2.0\",\"result\":\"client\",\"id\":1}{\"jsonrpc\":\"2.0\",\"method\":\"get_name\",\"params\":null,\"id\":1}")
     << FAS_TESTING_FILE_LINE << std::endl << current;
   
-  current = server.parse( fas::range(current) );
+  current = hserver.parse( fas::range(current) );
   result+=current;
   t << equal<expect>( current, "{\"jsonrpc\":\"2.0\",\"result\":\"server\",\"id\":1}")
     << FAS_TESTING_FILE_LINE << std::endl << current;
 
-  current = client.parse( fas::range(current) );
+  current = hclient.parse( fas::range(current) );
   result+=current;
   t << equal<expect>( current, "{\"jsonrpc\":\"2.0\",\"method\":\"hi\",\"params\":null,\"id\":1}")
     << FAS_TESTING_FILE_LINE << std::endl << current;
 
-  current = server.parse( fas::range(current) );
+  current = hserver.parse( fas::range(current) );
   result+=current;
   
   t << equal<expect, std::string>(current, "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32601,\"message\":\"Method not found.\"},\"id\":1}")
@@ -265,7 +301,7 @@ UNIT(handler, "")
     ;
 
   std::cout << std::endl << current << std::endl;
-  current = client.parse( fas::range(current) );
+  current = hclient.parse( fas::range(current) );
 
   
   
@@ -281,16 +317,16 @@ UNIT(handler, "")
   */
 }
 
-UNIT(handler_client, "")
+UNIT(handler_client_unit, "")
 {
 }
 
-UNIT(handler_server, "")
+UNIT(handler_server_unit, "")
 {
 }
 
 BEGIN_SUITE(handler_suite, "jsonrpc handler suite")
-  ADD_UNIT(handler)
-  ADD_UNIT(handler_client)
-  ADD_UNIT(handler_server)
+  ADD_UNIT(handler_unit)
+  ADD_UNIT(handler_client_unit)
+  ADD_UNIT(handler_server_unit)
 END_SUITE(handler_suite)
