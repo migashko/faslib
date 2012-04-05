@@ -13,6 +13,8 @@ namespace fas {
 template<typename T>
 class random_access_range;
 
+
+
 template<typename T>
 class random_access_range
 {
@@ -20,8 +22,7 @@ public:
   typedef random_access_range_tag range_category;
   
   typedef T iterator;
-  typedef std::reverse_iterator<iterator> reverse_iterator;
-  
+  /* typedef const T const_iterator; */ 
   typedef typename std::iterator_traits<T>::iterator_category iterator_category;
   typedef typename std::iterator_traits<T>::value_type        value_type;
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
@@ -33,25 +34,25 @@ public:
     : b(), e(), s(b)
   {};
   
-  random_access_range(T b, T e)
+  /*explicit */random_access_range(T b, T e)
     : b(b), e(e), s(b)
   {};
 
   operator bool () const { return b!=e; }
 
+  /*! const reference operator*() const { return *b; } */
+
   reference operator*() const { return *b; }
 
-  pointer operator ->() const  { return &(*b);}
+  /* pointer operator ->() { return &(*b);} */
 
-  iterator begin() const { return b; }
+  /*const */ pointer operator ->() const  { return &(*b);}
 
-  iterator end() const { return e; }
+  /*const T*/ iterator begin() const { return b; }
 
-  reverse_iterator rbegin() const { return reverse_iterator(e); }
+  /*const T*/ iterator end() const { return e; }
 
-  reverse_iterator rend() const { return reverse_iterator(b); }
-
-  difference_type distance() const { return e-b; }
+  difference_type distance() const { return e-b/*std::distance(b, e)*/; }
 
   random_access_range<T>& advance(difference_type c)
   {
@@ -59,6 +60,12 @@ public:
     assert( b <= e);
     return *this;
   }
+
+  /*random_access_range<T>& decrease(difference_type c)
+  {
+    e -= c;
+    return *this;
+  }*/
 
   random_access_range<T>& increase(difference_type cbeg, difference_type cend)
   {
@@ -77,6 +84,7 @@ public:
     assert( e >= b);
     return *this;
   }
+  
 
   random_access_range<T>& operator++() 
   {
@@ -144,12 +152,18 @@ public:
     return *this;
   }
 
-  reference operator[] ( std::ptrdiff_t n ) const
+  /*const value_type&*/reference operator[] ( std::ptrdiff_t n ) const
   {
     return b[n];
   }
 
-    
+  /*value_type& operator[] ( std::ptrdiff_t n )
+  {
+    return *(b+n);
+  }*/
+
+
+  
   template<typename TT, typename PP>
   friend inline random_access_range<TT> operator + ( random_access_range<TT> r, PP n );
 

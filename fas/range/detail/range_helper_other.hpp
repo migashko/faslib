@@ -11,16 +11,9 @@ struct range_helper<T, typerange_flag::other >
 {
   enum { flag = typerange_flag::other };
   typedef random_access_range<T*> range;
-  typedef random_access_range< std::reverse_iterator<T*> > rrange;
   typedef range orange;
   
   typedef typename range::difference_type difference_type;
-  
-  template<typename TT>
-  static inline range make_rrange(TT* v)
-  {
-    return rrange(&v, &v - 1 );
-  }
 
   template<typename TT>
   static inline range make_range(TT& v)

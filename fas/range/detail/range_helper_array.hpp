@@ -23,7 +23,6 @@ struct range_helper<T[N], typerange_flag::array >
   };
   
   typedef random_access_range<T*> range;
-  typedef random_access_range< std::reverse_iterator<T*> > rrange;
   typedef range orange;
   
   typedef typename range::difference_type   difference_type;
@@ -41,21 +40,9 @@ struct range_helper<T[N], typerange_flag::array >
   }
 
   template<typename TT>
-  static inline rrange make_rrange(TT* v)
-  {
-    return rrange(static_cast<TT*>(v) + N - 1 , v - 1 );
-  }
-
-  template<typename TT>
   static inline range make_range(TT* beg, TT* end )
   {
     return range(beg, end);
-  }
-
-  template<typename TT>
-  static inline range make_rrange(TT* beg, TT* end )
-  {
-    return rrange(end, beg);
   }
 
   template<typename TT>
