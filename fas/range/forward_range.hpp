@@ -42,7 +42,12 @@ public:
 
   difference_type distance() const { return std::distance(b, e); }
 
-  forward_range<T>& advance(difference_type s)  { std::advance(b, s); return *this;}
+  /*forward_range<T>&*/
+  void advance(difference_type s)  
+  {
+    std::advance(b, s); 
+    //return *this;
+  }
 
   forward_range<T>& operator++() 
   {

@@ -61,6 +61,25 @@ struct range_helper<R, typerange_flag::range >
   {
     return r.distance();
   }
+
+  static inline difference_type distance( R& r, difference_type s)
+  {
+    r.advance(s);
+  }
+
+  static inline void decrease(R& r, difference_type cbeg, difference_type cend)
+  {
+    r.decrease(cbeg, cend);
+  }
+
+  
+  static inline void increase(R& r, difference_type cbeg, difference_type cend)
+  {
+    r.increase(cbeg, cend);
+  }
+
+  //void increase(difference_type cbeg, difference_type cend)
+
 };
 
 

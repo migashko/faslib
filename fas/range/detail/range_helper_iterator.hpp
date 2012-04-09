@@ -35,10 +35,19 @@ struct range_helper<I, typerange_flag::iterator >
   }
   */
 
-  static inline difference_type distance( I r )
+  template<typename II>
+  static inline typename std::iterator_traits<II>::difference_type 
+  distance( II r )
   {
     return 0;
   }
+  
+  template<typename II>
+  static inline void advance( II& itr, typename std::iterator_traits<II>::difference_type s)
+  {
+    std::advance(itr, s);
+  }
+
 };
 
 };

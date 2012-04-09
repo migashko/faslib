@@ -11,7 +11,7 @@ SUBDIRS(
   aop
   xtime
   testing
-  ranges
+  range
   adv
   serialization
   jsonrpc

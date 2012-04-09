@@ -53,29 +53,32 @@ public:
   
   difference_type distance() const { return e-b; }
 
-  random_access_range<T>& advance(difference_type c)
+  /*random_access_range<T>&*/
+  void advance(difference_type c)
   {
     b+=c;
     assert( b <= e);
-    return *this;
+    //return *this;
   }
 
-  random_access_range<T>& increase(difference_type cbeg, difference_type cend)
+  //random_access_range<T>& 
+  void increase(difference_type cbeg, difference_type cend)
   {
     s -= cbeg;
     e += cend;
     assert( s <= b);
     assert( e >= b);
-    return *this;
+    //return *this;
   }
 
-  random_access_range<T>& decrease(difference_type cbeg, difference_type cend)
+  //random_access_range<T>& 
+  void decrease(difference_type cbeg, difference_type cend)
   {
     s += cbeg;
     e -= cend;
     assert( s <= b);
     assert( e >= b);
-    return *this;
+    //return *this;
   }
 
   random_access_range<T>& operator++() 

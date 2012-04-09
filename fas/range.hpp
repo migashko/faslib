@@ -20,5 +20,10 @@
 #include <fas/range/string_range.hpp>
 
 #include <fas/range/distance.hpp>
+#include <fas/range/advance.hpp>
+#include <fas/range/increase.hpp>
+#include <fas/range/decrease.hpp>
+#include <fas/range/begin.hpp>
+#include <fas/range/end.hpp>
 
 #endif

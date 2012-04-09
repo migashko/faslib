@@ -66,7 +66,12 @@ public:
 
   difference_type distance() const { return std::distance(b, e); }
   
-  input_range<T, ValueType>& advance(difference_type s)  { std::advance(b, s); return *this;}
+  //input_range<T, ValueType>& 
+  void advance(difference_type s)  
+  { 
+    std::advance(b, s); 
+    //return *this;
+  }
   
   bool operator == (const input_range<T, ValueType>& r ) const { return b == r.b && e==r.e;  }
 

@@ -1,4 +1,4 @@
-#include "basic_test.hpp"
+#include "basic_suite.hpp"
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
 #include <fas/static_check/static_check.hpp>

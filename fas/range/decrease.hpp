@@ -6,10 +6,10 @@
 
 namespace fas{
 
-template<typename R, typename Distance1, typename Distance2>
-inline R& decrease(R& r, Distance1 cbeg, Distance2 cend)
+template<typename R>
+inline void decrease(R& r, typename typerange<R>::difference_type cbeg, typename typerange<R>::difference_type cend)
 {
-  return r.decrease(cbeg, cend);
+  typerange<R>::decrease(r, cbeg, cend);
 }
 
 }

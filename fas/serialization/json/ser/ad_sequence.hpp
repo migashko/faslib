@@ -47,7 +47,7 @@ struct ad_sequence
   {
     typename ::fas::typerange< const V>::range rr = ::fas::range( v );
     if ( ::fas::distance(rr) > N )
-      rr = ::fas::decrease( rr, 0, ::fas::distance(rr) - N );
+      /*rr = */   ::fas::decrease( rr, 0, ::fas::distance(rr) - N );
     return _( t, M(), rr , r);
   }
 
@@ -60,7 +60,7 @@ struct ad_sequence
   R _1(T& t, M, const V* v, R r, false_, int_<-1>) { return r; }
 
   template<typename T, typename M, typename V, typename R, int N>
-  R _1(T& t, M, const V* v, R r, false_, int_<N>)
+  R _1(T& t, M, const V* v, R r, false_, int_<N>                                )
   {
     if ( !v ) return r;
     return _( t, M(), ::fas::range( v, v + N ), r);

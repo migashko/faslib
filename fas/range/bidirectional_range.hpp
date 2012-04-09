@@ -49,13 +49,15 @@ public:
 
   difference_type distance() const { return std::distance(b, e); }
 
-  bidirectional_range<T>& advance(difference_type c)  
+  //bidirectional_range<T>& 
+  void advance(difference_type c)  
   {
     std::advance(b, c); 
-    return *this; 
+    /*return *this; */
   }
   
-  bidirectional_range<T>& increase(difference_type cbeg, difference_type cend)
+  /*bidirectional_range<T>& */
+  void increase(difference_type cbeg, difference_type cend)
   {
     std::advance( s, 0 - cbeg );
     std::advance( e, cend );
@@ -66,10 +68,11 @@ public:
     assert( s <= b);
     assert( e >= b);
     */
-    return *this;
+    /*return *this;*/
   }
 
-  bidirectional_range<T>& decrease(difference_type cbeg, difference_type cend)
+  /*bidirectional_range<T>&*/
+  void decrease(difference_type cbeg, difference_type cend)
   {
     std::advance( s, cbeg );
     std::advance( e, 0 - cend );
@@ -79,7 +82,7 @@ public:
     assert( s <= b);
     assert( e >= b);
     */
-    return *this;
+    /*return *this;*/
   }
 
 
