@@ -12,6 +12,7 @@ struct range_helper<T*, typerange_flag::pointer >
   enum { flag = typerange_flag::pointer };
   typedef random_access_range<T*> range;
   typedef typename range::difference_type   difference_type;
+  typedef typename range::reverse_range     reverse_range;
 
   template<typename TT>
   static inline range make_range(TT* beg, TT* end )

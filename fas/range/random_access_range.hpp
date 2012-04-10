@@ -27,7 +27,7 @@ public:
   typedef typename std::iterator_traits<T>::reference         reference;
   
  
-  explicit random_access_range()
+  /*explicit */random_access_range()
     : b(), e(), s(b)
   {};
   
@@ -151,8 +151,8 @@ public:
   {
     return b[n];
   }
-
-    
+  
+   
   template<typename TT, typename PP>
   friend inline random_access_range<TT> operator + ( random_access_range<TT> r, PP n );
 

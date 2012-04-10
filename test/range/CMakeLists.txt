@@ -8,6 +8,10 @@ add_executable(
   basic_suite.cpp 
   basic2_suite.cpp 
   array_range_suite.cpp 
+  other_range_suite.cpp
+  iterator_range_suite.cpp
+  pointer_range_suite.cpp
+  container_range_suite.cpp
 )
 
 add_test(range test_range)

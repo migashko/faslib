@@ -14,6 +14,7 @@ struct range_helper<R, typerange_flag::range >
   enum { flag = typerange_flag::range };
   typedef R range;
   typedef typename range::difference_type   difference_type;
+  typedef typename range::iterator   iterator;
 
   
   
@@ -77,6 +78,17 @@ struct range_helper<R, typerange_flag::range >
   {
     r.increase(cbeg, cend);
   }
+  
+  static inline iterator begin(R r)
+  {
+    return r.begin();
+  }
+
+  static inline iterator end(R r)
+  {
+    return r.end();
+  }
+
 
   //void increase(difference_type cbeg, difference_type cend)
 

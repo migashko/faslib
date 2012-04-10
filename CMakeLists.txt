@@ -4,8 +4,7 @@ cmake_minimum_required(VERSION 2.6)
 project(faslib)
 
 #SUBDIRS(config)
-
-
+SET(CMAKE_BUILD_TYPE "Release")
 #  MSVC UNIX BORLAND APPLE WIN32 CYGWIN
 
 if(UNIX)

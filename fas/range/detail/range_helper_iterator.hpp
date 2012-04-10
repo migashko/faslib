@@ -14,6 +14,7 @@ struct range_helper<I, typerange_flag::iterator >
   typedef typename remove_const<I>::type iterator;
   //typedef typename std::reverse_iterator<iterator> reverse_iterator; 
   typedef typename iterator2range< iterator >::type range;
+  
   //typedef typename iterator2range< reverse_iterator >::type rrange;
   typedef typename range::difference_type   difference_type;
 
