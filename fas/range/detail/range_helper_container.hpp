@@ -62,15 +62,19 @@ template< typename C>
 struct range_helper<C, typerange_flag::container >
   : range_container_helper< C, is_const<C>::value  >
 {
+  typedef range_container_helper< C, is_const<C>::value  > super;
   enum { flag = typerange_flag::container };
-  typedef range_container_helper< C, is_const<C>::value > super;
   typedef typename super::range range;
   typedef typename range::difference_type   difference_type;
 
   template<typename CC>
   static inline range make_erange(CC& ctn)
   {
-    return range( ctn.end(), ctn.end() );
+    range r = super::make_range(ctn);
+    r.advance(ctn.size());
+    return r;
+
+    //return range( ctn.end(), ctn.end() );
   }
 
   static inline difference_type distance( const C& c )

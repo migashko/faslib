@@ -12,6 +12,8 @@ add_executable(
   iterator_range_suite.cpp
   pointer_range_suite.cpp
   container_range_suite.cpp
+  stream_range_suite.cpp
+  range_suite.cpp
 )
 
 add_test(range test_range)

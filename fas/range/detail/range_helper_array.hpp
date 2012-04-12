@@ -75,7 +75,9 @@ struct range_helper<T[N], typerange_flag::array >
   //template<typename TT>
   static inline range make_erange(T* v)
   {
-    return range(v + N , v + N);
+    range r(v , v + N);
+    r.advance(N);
+    return r;
   }
 
   static inline iterator begin(T* v)

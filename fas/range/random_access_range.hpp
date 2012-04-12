@@ -138,17 +138,20 @@ public:
   random_access_range<T>& operator += (std::ptrdiff_t n )
   {
     b += n;
+    assert( e >= b);
     return *this;
   }
 
   random_access_range<T>& operator -= (std::ptrdiff_t n )
   {
     b -= n;
+    assert( s <= b);
     return *this;
   }
 
   reference operator[] ( std::ptrdiff_t n ) const
   {
+    assert( e >= b + n);
     return b[n];
   }
   
@@ -179,25 +182,36 @@ protected:
 template<typename T, typename P>
 inline random_access_range<T> operator + ( random_access_range<T> r, P n )
 {
-  return random_access_range<T>( r.b + n, r.e );
+  //r += n;
+  return r+=n;
+  //return random_access_range<T>( r.b + n, r.e );
 }
 
 template<typename T, typename P>
 inline random_access_range<T> operator + ( P n, random_access_range<T> r )
 {
-  return random_access_range<T>( r.b + n, r.e );
+  //r += n;
+  return r+= n;
+
+ // return random_access_range<T>( r.b + n, r.e );
 }
 
 template<typename T, typename P>
 inline random_access_range<T> operator - ( random_access_range<T> r, P n )
 {
-  return random_access_range<T>( r.b - n, r.e );
+  //r -= n;
+  return r-= n;
+
+  //return random_access_range<T>( r.b - n, r.e );
 }
 
 template<typename T, typename P>
 inline random_access_range<T> operator - ( P n, random_access_range<T> r )
 {
-  return random_access_range<T>( r.b - n, r.e );
+  //r -= n;
+  return r -= n;
+
+//  return random_access_range<T>( r.b - n, r.e );
 }
 
 template<typename T>

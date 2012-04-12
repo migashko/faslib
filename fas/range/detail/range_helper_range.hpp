@@ -55,7 +55,9 @@ struct range_helper<R, typerange_flag::range >
 
   static inline range make_erange(R r)
   {
-    return range( r.end() , r.end() );
+    range rr = r;
+    rr.advance( r.distance() );
+    return rr;
   }
 
   static inline difference_type distance( R r )

@@ -41,7 +41,10 @@ struct range_helper<T, typerange_flag::other >
   template<typename TT>
   static inline range make_erange(TT& v)
   {
-    return range(&v + 1, &v + 1);
+    range r = make_range(v);
+    ++r;
+    return r;
+    //return range(&v + 1, &v + 1);
   }
 
   template<typename TT>
