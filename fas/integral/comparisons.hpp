@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -13,7 +13,6 @@
 #include <fas/integral/less.hpp>
 #include <fas/integral/less_equal.hpp>
 #include <fas/integral/not_equal_to.hpp>
-
 
 #endif
 

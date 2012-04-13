@@ -1,5 +1,5 @@
-// ага
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -13,7 +13,7 @@ namespace fas{
 
 template<typename I, I i>
 struct integral_c
-  :integral2type<I, i>{};
+  : integral2type<I, i>{};
 
 }
 

@@ -1,5 +1,5 @@
-// ага
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -14,7 +14,6 @@ struct integral2type
 {
   typedef I value_type;
   enum { value = i};
-  //static const I value = i;
 };
 
 }

@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,10 +7,8 @@
 #ifndef FAS_INTEGRAL_DIVIDES_HPP
 #define FAS_INTEGRAL_DIVIDES_HPP
 
-
 #include <fas/integral/integral_c.hpp>
 #include <fas/typemanip/max_sizeof.hpp>
-
 
 namespace fas{
 

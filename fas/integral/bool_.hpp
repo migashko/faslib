@@ -1,5 +1,5 @@
-// ага
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -16,10 +16,6 @@ struct bool_: bool2type<i>{};
 
 typedef bool_<true> true_;
 typedef bool_<false> false_;
-
-//struct true_: bool_<true> {};
-
-//struct false_: bool_<false> {};
 
 }
 

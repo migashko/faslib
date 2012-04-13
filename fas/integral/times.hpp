@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -18,7 +18,7 @@ template<typename I1, typename I2>
 struct times
 {
   typedef integral_c<
-      typename max_sizeof<I1, I2>::type,
+    typename max_sizeof<I1, I2>::type,
     I1::value * I2::value
   > type;
   enum { value = type::value };

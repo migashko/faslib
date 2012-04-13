@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -14,7 +14,7 @@ namespace fas{
 template<typename A, typename B>
 struct less
 {
-  enum { value = B::value - A::value > 0 };
+  enum { value = ( B::value - A::value ) > 0 };
   typedef bool_<value> type;
 };
 

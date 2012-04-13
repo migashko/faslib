@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -11,11 +11,6 @@
 #include <fas/integral/int_.hpp>
 #include <fas/integral/integral_c.hpp>
 #include <fas/typemanip/max_sizeof.hpp>
-
-#ifdef _MSC_VER
-#pragma warning( push )
-#pragma warning( disable : 4307 )
-#endif
 
 namespace fas{
 
@@ -31,14 +26,11 @@ struct rand
 
   enum { value = type::value };
 
-  typedef integral_c< typename R::value_type, /*0x50000*/R::value> initial;
+  typedef integral_c< typename R::value_type, R::value> initial;
 };
+
 }
 
 
-
-#ifdef _MSC_VER
-#pragma warning( pop ) 
-#endif
 
 #endif

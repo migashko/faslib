@@ -1,5 +1,5 @@
-// ага
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -12,7 +12,7 @@
 namespace fas{
 
 template<bool i>
-struct bool2type: integral2type<bool, i>{  };
+struct bool2type: integral2type<bool, i> {  };
 
 }
 
