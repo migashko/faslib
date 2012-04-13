@@ -17,7 +17,7 @@ struct is_has_typename
 {
   enum { value = detail::is_has_typename_helper<T, D, F>::value };
   // Ахтунг! не метафункция
-  //typedef bool_< value > type;
+  typedef bool_< value > type;
 };
 
 

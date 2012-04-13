@@ -1,11 +1,15 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_range_BIDIRECTIONAL_RANGE_HPP
 #define FAS_range_BIDIRECTIONAL_RANGE_HPP
 
 #include <fas/range/range_category.hpp>
 #include <iterator>
 #include <cassert>
-
-
 
 namespace fas{
 
@@ -49,40 +53,24 @@ public:
 
   difference_type distance() const { return std::distance(b, e); }
 
-  //bidirectional_range<T>& 
-  void advance(difference_type c)  
-  {
-    std::advance(b, c); 
-    /*return *this; */
-  }
+  void advance(difference_type c)  { std::advance(b, c); }
   
-  /*bidirectional_range<T>& */
   void increase(difference_type cbeg, difference_type cend)
   {
     std::advance( s, 0 - cbeg );
     std::advance( e, cend );
     
-    /*
-    s -= cbeg;
-    e += cend;
     assert( s <= b);
     assert( e >= b);
-    */
-    /*return *this;*/
   }
 
-  /*bidirectional_range<T>&*/
   void decrease(difference_type cbeg, difference_type cend)
   {
     std::advance( s, cbeg );
     std::advance( e, 0 - cend );
 
-    /*s += cbeg;
-    e -= cend;
     assert( s <= b);
     assert( e >= b);
-    */
-    /*return *this;*/
   }
 
 
@@ -115,7 +103,6 @@ public:
     b--; 
     return ans; 
   }
-
 
   bool operator == (const bidirectional_range<T>& r ) const { return b == r.b && e==r.e;  }
 

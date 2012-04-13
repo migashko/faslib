@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_RANGE_DETAIL_RANGE_HELPER_CONTAINER_HPP
 #define FAS_RANGE_DETAIL_RANGE_HELPER_CONTAINER_HPP
 
@@ -73,8 +79,6 @@ struct range_helper<C, typerange_flag::container >
     range r = super::make_range(ctn);
     r.advance(ctn.size());
     return r;
-
-    //return range( ctn.end(), ctn.end() );
   }
 
   static inline difference_type distance( const C& c )

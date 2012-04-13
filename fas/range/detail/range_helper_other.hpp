@@ -1,9 +1,16 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_RANGE_DETAIL_RANGE_HELPER_OTHER_HPP
 #define FAS_RANGE_DETAIL_RANGE_HELPER_OTHER_HPP
 
 #include <fas/range/typerange_flag.hpp>
 #include <fas/range/random_access_range.hpp>
 #include <fas/range/forward_range.hpp>
+#include <iterator>
 
 namespace fas{
 
@@ -44,7 +51,6 @@ struct range_helper<T, typerange_flag::other >
     range r = make_range(v);
     ++r;
     return r;
-    //return range(&v + 1, &v + 1);
   }
 
   template<typename TT>

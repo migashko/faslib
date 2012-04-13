@@ -89,9 +89,10 @@ inline void bidirectional_test(T& t, R r1)
 template<typename R, typename T>
 inline void random_access_test(T& t, R r1)
 {
+  
   using namespace ::fas::testing;
   t << is_true<expect>( r1 ) << FAS_TESTING_FILE_LINE;
-  t << equal<expect>( *(r1 + 1),  2 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect, int>( *(r1 + 1),  2 ) << FAS_TESTING_FILE_LINE;
   R r_tmp = r1 + 1;
   t << is_true<expect>( r_tmp ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( *r_tmp,  2 ) << FAS_TESTING_FILE_LINE;

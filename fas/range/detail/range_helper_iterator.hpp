@@ -1,8 +1,16 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_RANGE_DETAIL_RANGE_HELPER_ITERATOR_HPP
 #define FAS_RANGE_DETAIL_RANGE_HELPER_ITERATOR_HPP
 
 #include <fas/range/iterator2range.hpp>
 #include <fas/range/typerange_flag.hpp>
+#include <fas/typemanip/remove_const.hpp>
+
 #include <iterator>
 
 namespace fas{
@@ -12,13 +20,10 @@ struct range_helper<I, typerange_flag::iterator >
 {
   enum { flag = typerange_flag::iterator };
   typedef typename remove_const<I>::type iterator;
-  //typedef typename std::reverse_iterator<iterator> reverse_iterator; 
   typedef typename iterator2range< iterator >::type range;
   
-  //typedef typename iterator2range< reverse_iterator >::type rrange;
   typedef typename range::difference_type   difference_type;
 
-  // only for output iterator
   static inline range make_range(I beg)
   {
     return range(beg);
@@ -29,22 +34,13 @@ struct range_helper<I, typerange_flag::iterator >
     return range(beg, end);
   }
 
-  // rrange( v.begin(), v.end() ) <=> range( v.rbegin(), v.rend() )
-  /*static inline rrange make_rrange(I beg, I end)
-  {
-    return rrange(end, beg);
-  }
-  */
-
-  template<typename II>
-  static inline typename std::iterator_traits<II>::difference_type 
-  distance( II r )
+  static inline difference_type distance( iterator r )
   {
     return 0;
   }
   
-  template<typename II>
-  static inline void advance( II& itr, typename std::iterator_traits<II>::difference_type s)
+  template<typename Dist>
+  static inline void advance( iterator& itr, Dist s)
   {
     std::advance(itr, s);
   }

@@ -1,11 +1,16 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_range_RANDOM_ACCESS_RANGE_HPP
 #define FAS_range_RANDOM_ACCESS_RANGE_HPP
 
 #include <fas/range/range_category.hpp>
-
 #include <iterator>
 #include <cassert>
-#include <stdexcept>
+
 
 
 namespace fas {
@@ -26,8 +31,7 @@ public:
   typedef typename std::iterator_traits<T>::pointer           pointer;
   typedef typename std::iterator_traits<T>::reference         reference;
   
- 
-  /*explicit */random_access_range()
+  random_access_range()
     : b(), e(), s(b)
   {};
   
@@ -53,32 +57,26 @@ public:
   
   difference_type distance() const { return e-b; }
 
-  /*random_access_range<T>&*/
   void advance(difference_type c)
   {
     b+=c;
     assert( b <= e);
-    //return *this;
   }
 
-  //random_access_range<T>& 
   void increase(difference_type cbeg, difference_type cend)
   {
     s -= cbeg;
     e += cend;
     assert( s <= b);
     assert( e >= b);
-    //return *this;
   }
 
-  //random_access_range<T>& 
   void decrease(difference_type cbeg, difference_type cend)
   {
     s += cbeg;
     e -= cend;
     assert( s <= b);
     assert( e >= b);
-    //return *this;
   }
 
   random_access_range<T>& operator++() 
@@ -111,9 +109,15 @@ public:
     return ans;
   }
 
-  bool operator == (const random_access_range<T>& r ) const { return b == r.b /*&& e==r.e*/;  }
+  bool operator == (const random_access_range<T>& r ) const 
+  {
+    return b == r.b ;  
+  }
 
-  bool operator != (const random_access_range<T>& r ) const { return /*!(*this == r)*/ !this->operator == (r); }
+  bool operator != (const random_access_range<T>& r ) const 
+  {
+    return !this->operator == (r); 
+  }
 
   bool operator < (const random_access_range<T>& r ) const 
   {
@@ -135,43 +139,26 @@ public:
     return !this->operator < ( r );
   }
 
-  random_access_range<T>& operator += (std::ptrdiff_t n )
+  random_access_range<T>& operator += (difference_type n )
   {
     b += n;
     assert( e >= b);
     return *this;
   }
 
-  random_access_range<T>& operator -= (std::ptrdiff_t n )
+  random_access_range<T>& operator -= (difference_type n )
   {
     b -= n;
     assert( s <= b);
     return *this;
   }
 
-  reference operator[] ( std::ptrdiff_t n ) const
+  reference operator[] ( difference_type n ) const
   {
     assert( e >= b + n);
     return b[n];
   }
   
-   
-  template<typename TT, typename PP>
-  friend inline random_access_range<TT> operator + ( random_access_range<TT> r, PP n );
-
-  template<typename TT, typename PP>
-  friend inline random_access_range<TT> operator + ( PP n, random_access_range<TT> r);
-
-  template<typename TT, typename PP>
-  friend inline random_access_range<TT> operator - ( random_access_range<TT> r, PP n );
-
-  template<typename TT, typename PP>
-  friend inline random_access_range<TT> operator - ( PP n, random_access_range<TT> r);
-
-  template<typename TT>
-  friend inline std::ptrdiff_t operator - ( random_access_range<TT> r1, random_access_range<TT> r2);
-  
-
 protected:
   T b;
   T e;
@@ -179,59 +166,55 @@ protected:
 };
 
 
-template<typename T, typename P>
-inline random_access_range<T> operator + ( random_access_range<T> r, P n )
+template<typename T, typename Dist>
+inline random_access_range<T> operator + 
+  ( 
+    random_access_range<T> r, 
+    Dist n 
+  )
 {
-  //r += n;
   return r+=n;
-  //return random_access_range<T>( r.b + n, r.e );
 }
 
-template<typename T, typename P>
-inline random_access_range<T> operator + ( P n, random_access_range<T> r )
+template<typename T, typename Dist>
+inline random_access_range<T> operator + 
+  ( 
+    Dist n, 
+    random_access_range<T> r 
+  )
 {
-  //r += n;
   return r+= n;
-
- // return random_access_range<T>( r.b + n, r.e );
 }
 
-template<typename T, typename P>
-inline random_access_range<T> operator - ( random_access_range<T> r, P n )
+template<typename T, typename Dist>
+inline random_access_range<T> operator - 
+  ( 
+    random_access_range<T> r, 
+    Dist n 
+  )
 {
-  //r -= n;
   return r-= n;
-
-  //return random_access_range<T>( r.b - n, r.e );
 }
 
-template<typename T, typename P>
-inline random_access_range<T> operator - ( P n, random_access_range<T> r )
+template<typename T, typename Dist>
+inline random_access_range<T> operator - 
+  ( 
+    Dist n, 
+    random_access_range<T> r 
+  )
 {
-  //r -= n;
   return r -= n;
-
-//  return random_access_range<T>( r.b - n, r.e );
 }
 
 template<typename T>
-inline std::ptrdiff_t operator - ( random_access_range<T> r1, random_access_range<T> r2 )
+inline typename random_access_range<T>::difference_type operator - 
+  ( 
+    random_access_range<T> r1, 
+    random_access_range<T> r2 
+  )
 {
-  return r1.b - r2.b;
-  /*return std::distance( r2.begin(), r1.begin() );*/
+  return r1.begin() - r2.begin();
 }
-
-
-
-#define FAS_OP(C, OP)\
-template<typename T, typename P>  inline C<T> operator OP (C<T> p1, P p2) { /*static_check<false> operation_is_not_allowed;*/ return p1.b OP p2; };\
-template<typename T, typename P>  inline C<T> operator OP (P p1, C<T> p2) { /*static_check<false> operation_is_not_allowed;*/ return p2.b OP p1; };\
-template<typename T>\
-inline std::ptrdiff_t operator OP (C<T> p1, C<T> p2) \
-{ /*static_check<false> operation_is_not_allowed;*/ return std::distance( p2.begin(), p1.begin() ) ; }
-
-#define FAS_ALL_OP(C) FAS_OP(C, -) FAS_OP(C, +) FAS_OP(C, /)
-
 
 }
 

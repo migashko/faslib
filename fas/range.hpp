@@ -7,9 +7,14 @@
 #include <fas/range/srange.hpp>
 #include <fas/range/rrange.hpp>
 
-#include <fas/range/rangeop.hpp>
 #include <fas/range/typerange.hpp>
 
+#include <fas/range/distance.hpp>
+#include <fas/range/advance.hpp>
+#include <fas/range/increase.hpp>
+#include <fas/range/decrease.hpp>
+#include <fas/range/begin.hpp>
+#include <fas/range/end.hpp>
 
 #include <fas/range/trivial_range.hpp>
 #include <fas/range/output_range.hpp>
@@ -18,12 +23,5 @@
 #include <fas/range/bidirectional_range.hpp>
 #include <fas/range/random_access_range.hpp>
 #include <fas/range/string_range.hpp>
-
-#include <fas/range/distance.hpp>
-#include <fas/range/advance.hpp>
-#include <fas/range/increase.hpp>
-#include <fas/range/decrease.hpp>
-#include <fas/range/begin.hpp>
-#include <fas/range/end.hpp>
 
 #endif

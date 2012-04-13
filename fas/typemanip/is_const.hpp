@@ -14,7 +14,7 @@ template<typename T>
 struct is_const: false_ { typedef false_ type; };
 
 template<typename T>
-struct is_const<const T>: true_ { typedef true_ type; };;
+struct is_const<const T>: true_ { typedef true_ type; };
 
 
 }

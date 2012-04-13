@@ -1,5 +1,11 @@
-#ifndef FAS_range_STRING_RANGE_HPP
-#define FAS_range_STRING_RANGE_HPP
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+#ifndef FAS_RANGE_STRING_RANGE_HPP
+#define FAS_RANGE_STRING_RANGE_HPP
 
 #include <fas/range/range_category.hpp>
 
@@ -9,7 +15,6 @@
 
 namespace fas{
 
-// TODO: сдеать как адаптер к range
 template<typename T>
 class string_range
 {
@@ -17,6 +22,8 @@ public:
   typedef random_access_range_tag range_category;
   
   typedef T iterator;
+  typedef std::reverse_iterator<iterator> reverse_iterator;
+  typedef string_range<reverse_iterator> reverse_range;
   typedef typename std::iterator_traits<T>::iterator_category iterator_category;
   typedef typename std::iterator_traits<T>::value_type        value_type;
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
@@ -33,17 +40,17 @@ public:
 
   operator bool () const { return *b!='\0'; }
 
-  /*const*/ reference operator*() const { return *b; }
+  reference operator*() const { return *b; }
 
-  //reference operator*() { return *b; }
+  pointer operator ->() const  { return &(*b);}
 
-  // pointer operator ->() { return &(*b);}
-
-  /*const*/ pointer operator ->() const  { return &(*b);}
-
-  /*const T*/ iterator begin() const { return b; }
+  iterator begin() const { return b; }
   
-  /*const T*/ iterator end() const { return _end(); }
+  iterator end() const { return _end(); }
+  
+  reverse_iterator rbegin() const { return reverse_iterator( this->end() ); }
+
+  reverse_iterator rend() const { return reverse_iterator( this->begin() ); }
 
   difference_type distance() const { return std::distance(b, _end() ); }
   
@@ -83,7 +90,46 @@ public:
 
   bool operator != (const string_range<T>& r ) const { return !(*this == r); }
 
-// TODO: random access range operation
+  bool operator < (const string_range<T>& r ) const 
+  {
+    return b < r.b;
+  }
+
+  bool operator > (const string_range<T>& r ) const 
+  {
+    return b > r.b;
+  }
+
+  bool operator <= (const string_range<T>& r ) const
+  {
+    return !this->operator >( r );
+  }
+
+  bool operator >= (const string_range<T>& r ) const
+  {
+    return !this->operator < ( r );
+  }
+
+  string_range<T>& operator += (difference_type n )
+  {
+    b += n;
+    assert( _end() >= b);
+    return *this;
+  }
+
+  string_range<T>& operator -= (difference_type n )
+  {
+    b -= n;
+    assert( s <= b);
+    return *this;
+  }
+
+  reference operator[] ( difference_type n ) const
+  {
+    assert( _end() >= b + n);
+    return b[n];
+  }
+
 protected:
 
   T _end() const
@@ -91,9 +137,7 @@ protected:
     if ( !e)
     {
       e = b;
-      // std::advance( e, std::strlen(e) );
-      for ( ;*e!='\0';++e);
-      
+      e += std::strlen(e);
     }
     return e; 
   }
@@ -102,6 +146,56 @@ protected:
   mutable T e;
   T s; // start
 };
+
+template<typename T, typename Dist>
+inline string_range<T> operator + 
+  ( 
+    string_range<T> r, 
+    Dist n 
+  )
+{
+  return r+=n;
+}
+
+template<typename T, typename Dist>
+inline string_range<T> operator + 
+  ( 
+    Dist n, 
+    string_range<T> r 
+  )
+{
+  return r+= n;
+}
+
+template<typename T, typename Dist>
+inline string_range<T> operator - 
+  ( 
+    string_range<T> r, 
+    Dist n 
+  )
+{
+  return r-= n;
+}
+
+template<typename T, typename Dist>
+inline string_range<T> operator - 
+  ( 
+    Dist n, 
+    string_range<T> r 
+  )
+{
+  return r -= n;
+}
+
+template<typename T>
+inline typename string_range<T>::difference_type operator - 
+  ( 
+    string_range<T> r1, 
+    string_range<T> r2 
+  )
+{
+  return r1.begin() - r2.begin();
+}
 
 }
 

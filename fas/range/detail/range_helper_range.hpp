@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_RANGE_DETAIL_RANGE_HELPER_RANGE_HPP
 #define FAS_RANGE_DETAIL_RANGE_HELPER_RANGE_HPP
 
@@ -15,8 +21,6 @@ struct range_helper<R, typerange_flag::range >
   typedef R range;
   typedef typename range::difference_type   difference_type;
   typedef typename range::iterator   iterator;
-
-  
   
   static inline range make_range(R r)
   {
@@ -91,8 +95,11 @@ struct range_helper<R, typerange_flag::range >
     return r.end();
   }
 
-
-  //void increase(difference_type cbeg, difference_type cend)
+  template<typename Dist>
+  static inline void advance( R r, Dist s)
+  {
+    r.advance(s);
+  }
 
 };
 

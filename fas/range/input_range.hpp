@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_range_INPUT_RANGE_HPP
 #define FAS_range_INPUT_RANGE_HPP
 
@@ -40,17 +46,15 @@ public:
 
   value_type operator*() const { return *b; }
 
-  // pointer operator ->() { return &(*b);}
+  pointer operator ->() const  { return &(*b);}
 
-  /*const*/ pointer operator ->() const  { return &(*b);}
-
-  /*const T*/ iterator begin() const { return b; }
+  iterator begin() const { return b; }
   
-  /*const T*/ iterator end() const { return e; }
+  iterator end() const { return e; }
 
   input_range<T, ValueType>& operator++() 
   {
-    // assert(b!=e);
+    assert(b!=e);
     ++b; 
     return *this; 
   }
@@ -58,24 +62,27 @@ public:
   proxy operator++(int) 
   {
     proxy p( *b );
-    // assert(b!=e);
-    //input_range<T, ValueType> ans = *this;   
+    assert(b!=e);
     b++; 
     return p; 
   }
 
   difference_type distance() const { return std::distance(b, e); }
   
-  //input_range<T, ValueType>& 
   void advance(difference_type s)  
   { 
     std::advance(b, s); 
-    //return *this;
   }
   
-  bool operator == (const input_range<T, ValueType>& r ) const { return b == r.b && e==r.e;  }
+  bool operator == (const input_range<T, ValueType>& r ) const 
+  {
+    return b == r.b && e==r.e;  
+  }
 
-  bool operator != (const input_range<T, ValueType>& r ) const { return !(*this == r); }
+  bool operator != (const input_range<T, ValueType>& r ) const 
+  {
+    return !(*this == r); 
+  }
 
 protected:
   T b;

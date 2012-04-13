@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_range_FORWARD_RANGE_HPP
 #define FAS_range_FORWARD_RANGE_HPP
 
@@ -42,11 +48,9 @@ public:
 
   difference_type distance() const { return std::distance(b, e); }
 
-  /*forward_range<T>&*/
   void advance(difference_type s)  
   {
     std::advance(b, s); 
-    //return *this;
   }
 
   forward_range<T>& operator++() 

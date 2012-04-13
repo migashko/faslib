@@ -21,14 +21,6 @@ struct remove_const<const T>
   typedef T type;
 };
 
-/*
-template<typename T>
-struct is_const: false_ { typedef false_ type; };
-
-template<typename T>
-struct is_const<const T>: true_ { typedef true_ type; };;
-*/
-
 
 }
 
