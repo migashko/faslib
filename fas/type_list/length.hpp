@@ -8,7 +8,7 @@
 #define FAS_TYPE_LIST_LENGTH_HPP
 
 #include <fas/integral/int_.hpp>
-#include "detail/length.hpp"
+#include <fas/type_list/detail/length.hpp>
 
 namespace fas{
 

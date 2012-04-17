@@ -15,7 +15,7 @@ template<typename T>
 struct is_pointer { enum { value = 0 }; };
 
 template<typename T >
-struct is_pointer< T* >{ enum { value = 0 }; };
+struct is_pointer< T* >{ enum { value = 1 }; };
 
 
 }

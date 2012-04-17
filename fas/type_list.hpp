@@ -9,13 +9,7 @@
 
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
-
-//#include <fas/type_list/tl.hpp>
-//#include <fas/type_list/el.hpp>
-
 #include <fas/type_list/type_list_n.hpp>
-//#include <fas/type_list/tl_n.hpp>
-
 #include <fas/type_list/intrinsic.hpp>
 
 

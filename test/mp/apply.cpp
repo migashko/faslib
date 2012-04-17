@@ -5,6 +5,7 @@
 //#include <fas/bind.hpp>
 //#include <fas/lambda.hpp>
 #include <fas/typemanip/if_.hpp>
+#include <fas/typemanip/type2type.hpp>
 #include <fas/integral/logical_op.hpp>
 #include <fas/static_check.hpp>
 #include <vector>

@@ -14,7 +14,7 @@ template<typename T>
 struct is_const { enum { value = 0 }; };
 
 template<typename T>
-struct is_const<const T> { enum { value = 0 }; };
+struct is_const<const T> { enum { value = 1 }; };
 
 
 }

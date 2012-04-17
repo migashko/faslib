@@ -7,7 +7,7 @@
 #ifndef FAS_STATIC_CHECK_DETAIL_VERIFYING_HPP
 #define FAS_STATIC_CHECK_DETAIL_VERIFYING_HPP
 
-#include <fas/typemanip.hpp>
+//#include <fas/typemanip.hpp>
 
 namespace fas{ namespace detail{
 

@@ -8,7 +8,7 @@
 #define FAS_IMPLEMENTATION_TYPE_LIST_TYPE_COUNT_HPP
 
 #include <fas/integral/int_.hpp>
-#include "detail/type_count.hpp"
+#include <fas/type_list/detail/type_count.hpp>
 
 namespace fas{
 

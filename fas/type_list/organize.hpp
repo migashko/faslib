@@ -4,10 +4,10 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_TYPE_LIST_ORGANIZE_HPP
-#define FAS_IMPLEMENTATION_TYPE_LIST_ORGANIZE_HPP
+#ifndef FAS_TYPE_LIST_ORGANIZE_HPP
+#define FAS_TYPE_LIST_ORGANIZE_HPP
 
-#include "detail/organize.hpp"
+#include <fas/type_list/detail/organize.hpp>
 
 namespace fas{
 

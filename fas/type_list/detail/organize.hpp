@@ -4,13 +4,17 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_DETAIL_ORGANIZE_HPP
-#define FAS_IMPLEMENTATION_DETAIL_ORGANIZE_HPP
+#ifndef FAS_TYPE_LIST_DETAIL_ORGANIZE_HPP
+#define FAS_TYPE_LIST_DETAIL_ORGANIZE_HPP
 
+#include <fas/type_list/merge.hpp>
 #include <fas/static_check/verifying.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+
 #include <fas/type_list/is_type_list.hpp>
 #include <fas/type_list/is_organized.hpp>
-#include <fas/type_list/merge.hpp>
+
 
 namespace fas{ namespace detail{
 

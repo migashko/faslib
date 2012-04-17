@@ -8,7 +8,7 @@
 #define FAS_TYPE_LIST_CHECK_LIST_HPP
 
 
-#include "detail/check_list.hpp"
+#include <fas/type_list/detail/check_list.hpp>
 #include <fas/integral/bool_.hpp>
 
 

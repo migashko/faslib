@@ -27,7 +27,7 @@ struct ad_sequence
   {
     typedef typename M::target target;
     //return _( t, target(), ::fas::range( v ), r);
-    return _1( t, target(), v , r, typename is_array<V>::type(), int_< M::limit >() );
+    return _1( t, target(), v , r, bool_< is_array<V>::value >(), int_< M::limit >() );
   }
 
   template<typename T, typename M, typename V, typename R, typename ISA>

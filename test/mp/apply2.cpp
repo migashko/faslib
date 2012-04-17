@@ -51,6 +51,8 @@ int main()
 {
   test1();
   test2();
+  
+  enum { value = static_check< apply2< some_type<_,_>, int, int>::type::value >::value };
   return 0;
 }
 

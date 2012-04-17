@@ -7,7 +7,7 @@
 #ifndef FAS_TYPE_LIST_IS_ORGANIZED_HPP
 #define FAS_TYPE_LIST_IS_ORGANIZED_HPP
 
-#include "detail/is_organized.hpp"
+#include <fas/type_list/detail/is_organized.hpp>
 #include <fas/integral/bool_.hpp>
 
 namespace fas{

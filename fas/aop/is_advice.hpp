@@ -16,8 +16,9 @@ namespace fas{
 
 template<typename T>
 struct is_advice
-  : is_has_metatype<T, metalist::advice>
 {
+  enum { value = is_has_metatype<T, metalist::advice>::value };
+  typedef bool_< value > type;
 };
 
 

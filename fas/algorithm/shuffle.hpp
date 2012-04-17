@@ -16,6 +16,7 @@
 #include <fas/typemanip/second.hpp>
 #include <fas/typemanip/first.hpp>
 #include <fas/typemanip/pair.hpp>
+#include <fas/typemanip/make_pair.hpp>
 
 namespace fas{
 

@@ -8,11 +8,8 @@
 #define FAS_INTEGRAL_MAKE_INTEGRAL_HPP
 
 #include <fas/integral/make_bool.hpp>
-
 #include <fas/integral/make_char.hpp>
-
 #include <fas/integral/make_int.hpp>
-
 #include <fas/integral/make_long.hpp>
 
 #endif

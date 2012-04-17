@@ -4,10 +4,10 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_TYPE_LIST_ERASE_C_HPP
-#define FAS_IMPLEMENTATION_TYPE_LIST_ERASE_C_HPP
+#ifndef FAS_TYPE_LIST_ERASE_C_HPP
+#define FAS_TYPE_LIST_ERASE_C_HPP
 
-#include "detail/erase_c.hpp"
+#include <fas/type_list/detail/erase_c.hpp>
 
 namespace fas{
 

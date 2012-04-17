@@ -7,7 +7,7 @@
 #ifndef FAS_IMPLEMENTATION_TYPE_LIST_REVERSE_HPP
 #define FAS_IMPLEMENTATION_TYPE_LIST_REVERSE_HPP
 
-#include "detail/reverse.hpp"
+#include <fas/type_list/detail/reverse.hpp>
 
 namespace fas{
 

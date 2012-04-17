@@ -34,7 +34,7 @@ struct ad_sequence_t
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
-    return _1(t, M(), v, r, typename is_array<V>::type(), int_<M::limit>() );
+    return _1(t, M(), v, r, bool_< is_array<V>::value >(), int_<M::limit>() );
   }
   
 private:
@@ -52,7 +52,7 @@ private:
 
     r = _2( t, M(), vr, r );
 
-    _finalize(vr, typename is_array< V >::type() );
+    _finalize(vr, bool_< is_array< V >::value >() );
 
     return r;
   }
@@ -100,7 +100,7 @@ private:
   R _3(T& t, VR& varr, R r, int& counter )
   {
     typedef typename VR::value_type value_type;
-    return _4<Tg>( t, varr, r, counter, typename is_array<value_type>::type() );
+    return _4<Tg>( t, varr, r, counter, bool_< is_array<value_type>::value > () );
   }
 
   template<typename Tg, typename T, typename VR, typename R>
@@ -154,7 +154,7 @@ private:
   void _finalize( R r, true_ )
   {
     typedef typename R::value_type value_type;
-    typedef typename is_array< value_type >::type is_array_type;
+    typedef bool_<is_array< value_type >::value> is_array_type;
     while ( r )
       _finalize2( *(r++), type2type<value_type>(), is_array_type() );
   }
@@ -169,7 +169,7 @@ private:
   void _finalize2( V* v, type2type<V[N]>, true_ )
   {
     for (register int i=0; i < N; ++i)
-      _finalize2( v[i], type2type<V>(), typename is_array< V >::type() );
+      _finalize2( v[i], type2type<V>(), bool_< is_array< V >::value > () );
   }
 };
 

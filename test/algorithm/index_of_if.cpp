@@ -2,6 +2,8 @@
 #include <fas/static_check.hpp>
 #include <fas/algorithm/index_of_if.hpp>
 #include <fas/mp/lambda.hpp>
+#include <fas/typemanip/super_subclass.hpp>
+#include <fas/typemanip/super_subclass_strict.hpp>
 
 
 using namespace ::fas;

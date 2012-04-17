@@ -7,7 +7,7 @@
 #ifndef FAS_IMPLEMENTATION_TYPE_LIST_SPLIT_C_HPP
 #define FAS_IMPLEMENTATION_TYPE_LIST_SPLIT_C_HPP
 
-#include "detail/split.hpp"
+#include <fas/type_list/detail/split.hpp>
 #include <fas/typemanip/pair.hpp>
 
 namespace fas{

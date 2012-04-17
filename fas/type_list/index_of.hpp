@@ -7,7 +7,7 @@
 #ifndef FAS_IMPLEMENTATION_TYPE_LIST_INDEX_OF_HPP
 #define FAS_IMPLEMENTATION_TYPE_LIST_INDEX_OF_HPP
 
-#include "detail/index_of.hpp"
+#include <fas/type_list/detail/index_of.hpp>
 
 namespace fas{
 

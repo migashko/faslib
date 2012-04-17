@@ -47,6 +47,17 @@ int main()
                 bind< test2<_2, _>, type_list_n<int, char, float>::type >::type 
               >::value == 1
           >::value
+         
+         +  static_check<
+              some_type<
+                some_type<int,char>,
+                bind<
+                  some_type<_,_>,
+                  type_list_n<int, char>::type
+                >::type
+              >::value
+            >::value
+
 
   };
   return 0;

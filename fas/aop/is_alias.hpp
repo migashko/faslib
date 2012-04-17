@@ -15,8 +15,9 @@ namespace fas{
 
 template<typename T>
 struct is_alias
-  : is_has_metatype<T, metalist::alias>
 {
+ enum { value = is_has_metatype<T, metalist::alias>::value };
+ typedef bool_< value > type;
 };
 
 
@@ -29,8 +30,9 @@ struct is_alias< alias<Tg, TTg> >
 
 template<typename T>
 struct is_forward
-  : is_has_metatype<T, metalist::forward>
 {
+  enum { value = is_has_metatype<T, metalist::forward>::value };
+  typedef bool_< value > type;
 };
 
 
@@ -43,8 +45,9 @@ struct is_forward< forward<Tg, TTg> >
 
 template<typename T>
 struct is_del
-  : is_has_metatype<T, metalist::del>
 {
+  enum { value = is_has_metatype<T, metalist::del>::value };
+  typedef bool_< value > type;
 };
 
 template<typename Tg>

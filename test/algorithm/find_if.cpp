@@ -1,6 +1,8 @@
 #include <fas/type_list/type_list.hpp>
 #include <fas/static_check.hpp>
 #include <fas/algorithm/find_if.hpp>
+#include <fas/typemanip/super_subclass.hpp>
+#include <fas/typemanip/super_subclass_strict.hpp>
 
 
 using namespace ::fas;

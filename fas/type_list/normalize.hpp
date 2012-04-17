@@ -7,10 +7,13 @@
 #ifndef FAS_TYPE_LIST_NORMALIZE_HPP
 #define FAS_TYPE_LIST_NORMALIZE_HPP
 
-#include <fas/type_list/type_list.hpp>
-#include <fas/type_list/is_type_list.hpp>
-#include <fas/type_list/organize.hpp>
 #include <fas/type_list/detail/normalize.hpp>
+
+#include <fas/type_list/organize.hpp>
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/typemanip/empty_type.hpp>
 
 namespace fas{
 

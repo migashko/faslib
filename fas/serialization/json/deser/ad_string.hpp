@@ -32,7 +32,7 @@ struct ad_string
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
-    return _1(t, M(), v, r, typename is_array<V>::type() );
+    return _1(t, M(), v, r, bool_<is_array<V>::value> () );
   }
 
     

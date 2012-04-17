@@ -7,7 +7,7 @@
 #ifndef FAS_IMPLEMENTATION_TYPE_LIST_TYPE_AT_C_HPP
 #define FAS_IMPLEMENTATION_TYPE_LIST_TYPE_AT_C_HPP
 
-#include "detail/type_at.hpp"
+#include <fas/type_list/detail/type_at.hpp>
 
 namespace fas{
 

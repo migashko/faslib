@@ -11,9 +11,10 @@
 namespace fas{
 
 template<typename PH, typename PL, int DP = 0>
-struct ps_c
+struct ps_c:
+  detail::ps_helper<PH, PL, DP>
 {
-  typedef typename detail::ps_helper<PH, PL, DP>::type type;
+  // typedef typename detail::ps_helper<PH, PL, DP>::type type;
 };
   
 

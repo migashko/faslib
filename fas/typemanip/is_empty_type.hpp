@@ -16,8 +16,9 @@ namespace fas{
 
 template<typename T>
 struct is_empty_type
-  : is_has_metatype<T, metalist::empty_type>
-{};
+{
+  enum { value = is_has_metatype<T, metalist::empty_type>::value };
+};
 
 template<>
 struct is_empty_type<empty_type>

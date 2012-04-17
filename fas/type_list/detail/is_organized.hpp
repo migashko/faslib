@@ -7,8 +7,11 @@
 #ifndef FAS_TYPE_LIST_DETAIL_IS_ORGANIZED_HPP
 #define FAS_TYPE_LIST_DETAIL_IS_ORGANIZED_HPP
 
-#include <fas/type_list/metalist.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
 #include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/metalist.hpp>
+
 
 namespace fas{ 
 

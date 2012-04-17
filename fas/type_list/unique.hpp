@@ -7,7 +7,7 @@
 #ifndef FAS_IMPLEMENTATION_TYPE_LIST_UNIQUE_HPP
 #define FAS_IMPLEMENTATION_TYPE_LIST_UNIQUE_HPP
 
-#include "detail/unique.hpp"
+#include <fas/type_list/detail/unique.hpp>
 
 namespace fas{
 

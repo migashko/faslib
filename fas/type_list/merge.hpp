@@ -7,7 +7,7 @@
 #ifndef FAS_IMPLEMENTATION_TYPE_LIST_MERGE_HPP
 #define FAS_IMPLEMENTATION_TYPE_LIST_MERGE_HPP
 
-#include "detail/merge.hpp"
+#include <fas/type_list/detail/merge.hpp>
 
 namespace fas{
 
