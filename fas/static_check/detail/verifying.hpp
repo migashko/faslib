@@ -1,13 +1,11 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
 #ifndef FAS_STATIC_CHECK_DETAIL_VERIFYING_HPP
 #define FAS_STATIC_CHECK_DETAIL_VERIFYING_HPP
-
-//#include <fas/typemanip.hpp>
 
 namespace fas{ namespace detail{
 
@@ -33,6 +31,5 @@ struct verifying_impl
 };
 
 }}
-
 
 #endif

@@ -9,6 +9,8 @@
 #include <fas/aop/metalist.hpp>
 #include <fas/type_list/metalist.hpp>
 #include <fas/type_list/merge.hpp>
+#include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/type_list.hpp>
 #include <fas/typemanip/if_c.hpp>
 
 
@@ -49,7 +51,7 @@ struct aspect_select_t_helper< type_list<L, R>, F>
 template<typename L, template<typename> class F>
 struct aspect_select_t_impl< metalist::empty_list, L, F>
 {
-  typedef typename L::final_type type;
+  typedef empty_list type;
 };
 
 template<typename L, template<typename> class F>
@@ -58,7 +60,7 @@ struct aspect_select_t_impl< metalist::type_list, L, F>
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
   typedef typename merge<
-    typename aspect_select_t_impl2< typename head::metatype, head, typename L::final_type, F>::type,
+    typename aspect_select_t_impl2< typename head::metatype, head, empty_list, F>::type,
     typename aspect_select_t_helper< tail, F>::type
   >::type type;
 

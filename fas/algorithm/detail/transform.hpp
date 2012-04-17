@@ -96,10 +96,10 @@ struct transform_impl2<metalist::type_list, L, F>
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
 
-  typedef typename L::template rebind<
-        typename apply<F, head>::type,
-        typename transform_impl< tail, F>::type
-      >::type type;
+  typedef type_list<
+    typename apply<F, head>::type,
+    typename transform_impl< tail, F>::type
+  > type;
 };
 
 template<typename L, typename F>
@@ -173,10 +173,10 @@ struct transform_impl2_t<metalist::type_list, L, F>
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
 
-  typedef typename L::template rebind<
-        typename F<head>::type,
-        typename transform_impl_t< tail, F>::type
-      >::type type;
+  typedef type_list<
+    typename F<head>::type,
+    typename transform_impl_t< tail, F>::type
+  > type;
 };
 
 template<typename L, template<typename> class F>

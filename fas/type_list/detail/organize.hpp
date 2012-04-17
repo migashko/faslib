@@ -147,10 +147,17 @@ struct organize_impl3<L, false, true>
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
 
+  typedef type_list<
+      head,
+      typename organize_impl0<tail>::type
+  > type;
+
+  /*
   typedef typename L::template rebind<
       head,
       typename organize_impl0<tail>::type
   >::type type;
+  */
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
@@ -246,6 +253,14 @@ struct organize_impl3<L, false, false>
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
 
+  typedef type_list<
+    head,
+    type_list<
+      tail,
+      empty_list
+    >
+  > type;
+  /*
   typedef typename L::template rebind< 
       head,
       typename L:: template rebind<
@@ -253,6 +268,7 @@ struct organize_impl3<L, false, false>
           typename L::final_type
       >::type
   >::type type;
+  */
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC

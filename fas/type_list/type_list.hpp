@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -35,11 +35,13 @@ struct type_list
 
   typedef empty_list final_type;
 
+  /*
   template<typename LL=L, typename RR=R>
   struct rebind
   {
     typedef type_list<LL, RR> type;
   };
+  */
 };
 
 template<typename L>

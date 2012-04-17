@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -11,20 +11,11 @@
 
 namespace fas{
 
-template<typename LL, typename RR>
-struct type_list;
-
-/**
- * Пустой тип.
- * Используется в качестве завершающего типа в списке типов.
- */
 struct empty_list
 {
-  /** Метатип.
-   * Значение metalist::
-   */
   typedef metalist::empty_list metatype;
 
+  /*
   typedef empty_list final_type;
   
   template<typename LL, typename RR>
@@ -32,6 +23,7 @@ struct empty_list
   {
     typedef type_list<LL, RR> type;
   };
+  */
 
 };
 

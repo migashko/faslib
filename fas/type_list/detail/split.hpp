@@ -10,6 +10,8 @@
 #include <fas/static_check/verifying.hpp>
 #include <fas/type_list/check_range_c.hpp>
 #include <fas/type_list/length.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
 
 namespace fas{ 
 
@@ -105,7 +107,8 @@ template<typename L, int N>
 struct split_impl<N, L, N>
 {
   typedef L left_list;
-  typedef typename L::final_type right_list;
+  //typedef typename L::final_type right_list;
+  typedef empty_list right_list;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
@@ -154,10 +157,16 @@ struct split_impl2
   typedef split_impl2<I-1, tail> split_type;
 
   typedef typename split_type::right_list right_list;
+  typedef type_list<
+    head,
+    typename split_type::left_list
+  > left_list;
+  /*
   typedef typename L::template rebind<
       head,
       typename split_type::left_list
   >::type left_list;
+  */
 };
 
 
@@ -187,7 +196,8 @@ struct split_impl2<I, tl<L, R> >
 template<typename L>
 struct split_impl2<0, L>
 {
-  typedef typename L::final_type left_list;
+  //typedef typename L::final_type left_list;
+  typedef empty_list left_list;
   typedef L right_list;
 };
 

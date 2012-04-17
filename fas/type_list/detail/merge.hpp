@@ -94,7 +94,8 @@ struct merge_impl1<false, false, L1, L2>
 template<typename T, typename L>
 struct merge_impl1<false, true, T, L>
 {
-  typedef typename L::template rebind< T, L >::type type;
+  typedef type_list<T, L> type;
+  //typedef typename L::template rebind< T, L >::type type;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
@@ -135,7 +136,8 @@ struct merge_impl1<true, false, L, T>
 {
   typedef typename merge_helper< 
         L,
-        typename L::template rebind<T, typename L::final_type>::type
+        type_list<T, empty_list>
+        //typename L::template rebind<T, typename L::final_type>::type
       >::type type;
 };
 
@@ -266,8 +268,9 @@ struct merge_impl4<type_list<L1, R1>, type_list<L2, R2> >
 {
   typedef type_list< 
     L1,
-    typename merge_helper<R1, 
-    type_list<L2, R2>
+    typename merge_helper<
+      R1, 
+      type_list<L2, R2>
     >::type
   > type;
   ///typedef L1 type;
@@ -296,13 +299,21 @@ struct merge_impl5<metalist::empty_list, L1, L2>
 template<typename L1, typename L2>
 struct merge_impl5<metalist::type_list, L1, L2>
 {
-  typedef typename L1::template rebind<
+  typedef type_list<
+      typename L1::left_type,
+      typename merge_helper<
+          typename L1::right_type,
+          L2
+      >::type
+  > type;
+  /*typedef typename L1::template rebind<
       typename L1::left_type,
       typename merge_helper<
           typename L1::right_type,
           L2
       >::type
   >::type type;
+  */
 };
 
   /*

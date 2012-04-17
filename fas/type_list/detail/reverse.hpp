@@ -12,6 +12,8 @@
 #include <fas/type_list/check_list.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/type_list/type_at_c.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
 
 namespace fas{ namespace detail{
 
@@ -114,19 +116,19 @@ struct reverse_impl<el, -1>
 template<typename L, int C>
 struct reverse_impl2<metalist::type_list, L, C>
 {
-  typedef typename L::template rebind<
+  typedef type_list<
       typename type_at_c< C, L>::type,
       typename reverse_impl< L, C-1>::type
-  >::type type;
+  > type;
 };
 
 template<typename L>
 struct reverse_impl2<metalist::type_list, L, 0>
 {
-  typedef typename L::template rebind<
+  typedef type_list<
       typename type_at_c<0, L>::type,
-      typename L::final_type
-  >::type type;
+      empty_list
+  > type;
 };
 
 template<typename L>
