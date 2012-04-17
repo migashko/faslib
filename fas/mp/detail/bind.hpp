@@ -9,6 +9,8 @@
 #include <fas/mp/p.hpp>
 #include <fas/mp/ps.hpp>
 
+#error исправить бинд для плейсхолдера _
+
 namespace fas{ namespace detail{
 
 template<typename F, typename PL, int>
@@ -49,11 +51,10 @@ template<typename F, typename PL>
 struct bind_impl2
   : bind_impl2_4< F, PL >
 {
-  // typedef typename ps< F, PL >::type type;
 };
 
 template<typename F, typename PL>
-struct bind_impl2_1/*: bind_impl2_8 < F, PL >*/ 
+struct bind_impl2_1
 {
   typedef typename ps< F, PL >::type type;
 };

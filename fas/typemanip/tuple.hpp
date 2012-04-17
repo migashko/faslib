@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -25,12 +25,6 @@ struct tuple
   typedef T3 third;
   typedef T4 fourth;
   typedef T5 fifth;
-};
-
-template<typename T1 = empty_type, typename T2 = empty_type, typename T3 = empty_type, typename T4 = empty_type, typename T5 = empty_type>
-struct make_tuple
-{
-  typedef tuple<T1, T2, T3, T4, T5> type;
 };
 
 template<typename T1, typename T2, typename T3, typename T4, typename T5>

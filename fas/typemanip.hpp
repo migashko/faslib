@@ -13,8 +13,12 @@
 #include <fas/typemanip/has_typename.hpp>
 #include <fas/typemanip/has_template.hpp>
 #include <fas/typemanip/has_member_function.hpp>
+#include <fas/typemanip/if_.hpp>
+#include <fas/typemanip/if_c.hpp>
 #include <fas/typemanip/is_has_metatype.hpp>
 #include <fas/typemanip/is_has_typename.hpp>
+#include <fas/typemanip/make_pair.hpp>
+#include <fas/typemanip/max_sizeof.hpp>
 #include <fas/typemanip/metalist.hpp>
 #include <fas/typemanip/pair.hpp>
 #include <fas/typemanip/second.hpp>
@@ -25,10 +29,6 @@
 #include <fas/typemanip/unwrap.hpp>
 #include <fas/typemanip/wrap.hpp>
 #include <fas/typemanip/wrapper.hpp>
-
-#include <fas/typemanip/if_c.hpp>
-#include <fas/typemanip/if_.hpp>
-#include <fas/typemanip/max_sizeof.hpp>
 
 
 #endif

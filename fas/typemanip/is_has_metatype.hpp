@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -15,7 +16,6 @@ template<typename T, typename M>
 struct is_has_metatype
 {
   enum { value = is_has_typename<T, M, has_metatype>::value };
-  typedef bool_< value > type;
 };
 
 

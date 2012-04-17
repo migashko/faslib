@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -18,13 +18,6 @@ struct pair
   typedef T1 first;
   typedef T2 second;
 };
-
-template<typename T1, typename T2>
-struct make_pair
-{
-  typedef pair<T1, T2> type;
-};
-
 
 template<typename T1, typename T2>
 struct first< pair<T1, T2> >

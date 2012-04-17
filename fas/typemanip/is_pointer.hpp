@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2012
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -11,10 +12,10 @@
 namespace fas{
 
 template<typename T>
-struct is_pointer: false_ { typedef false_ type; };
+struct is_pointer { enum { value = 0 }; };
 
 template<typename T >
-struct is_pointer< T* >: true_ { typedef true_ type; };
+struct is_pointer< T* >{ enum { value = 0 }; };
 
 
 }

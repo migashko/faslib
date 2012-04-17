@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,16 +8,18 @@
 #define FAS_TYPEMANIP_IS_ARRAY_HPP
 
 #include <fas/integral/bool_.hpp>
-namespace fas{
+
+namespace fas
+{
 
 template<typename T>
-struct is_array: false_ { typedef false_ type; };
+struct is_array { enum { value = 0 }; };
 
 template<typename T, int N >
-struct is_array< T[N] >: true_ { typedef true_ type; };
+struct is_array< T[N] > { enum { value = 1  }; };
 
 template<typename T >
-struct is_array< T[] >: true_ { typedef true_ type; };
+struct is_array< T[] > { enum { value = 1  }; };
 
 }
 

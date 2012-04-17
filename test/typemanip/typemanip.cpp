@@ -3,6 +3,7 @@
 
 #include <fas/integral/int2type.hpp>
 #include <fas/integral/int_.hpp>
+#include <fas/integral/bool_.hpp>
 #include <fas/integral/char_.hpp>
 #include <fas/integral/bool2type.hpp>
 #include <fas/typemanip/type2type.hpp>

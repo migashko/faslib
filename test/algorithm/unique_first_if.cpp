@@ -3,6 +3,7 @@
 #include <fas/static_check.hpp>
 #include <fas/algorithm/unique_first_if.hpp>
 #include <fas/type_list/type_at.hpp>
+#include <fas/mp/f.hpp>
 
 
 using namespace ::fas;
@@ -44,7 +45,7 @@ struct some_type_metaclass
   template<typename L, typename R>
   struct apply
   {
-    typedef typename some_type<L, R>::type type;
+    typedef typename f< some_type<L, R> >::type type;
     /*
     struct type
     {
@@ -58,12 +59,23 @@ struct some_type_metaclass
   };
 };
 
-typedef unique_first_if_t<list_4, some_type>::type result_list3t;
-typedef unique_first_if<list_4, some_type_metaclass>::type result_list3tm;
+typedef unique_first_if_t<list_4, lambda< some_type<_,_> >::apply >::type result_list3t;
+typedef unique_first_if<list_4, some_type_metaclass >::type result_list3tm;
 typedef unique_first_if<list_4, some_type<_1, _2 > >::type result_list3mp;
 
 int main()
 {
+  // static_check< lambda< some_type<_,_>, 2 >::apply<int, char>::type::value > value;
+  static_check< apply2< some_type<_,_>, int, char>::type::value > value;
+  static_check<
+    some_type<
+      some_type<int,char>,
+      bind<
+        some_type<_,_>,
+        type_list_n<int, char>::type
+      >::type
+    >::value
+  > value2;
   enum {
     test_lenght = static_check< length<result_list1>::value == 4 >::value,
     test0 = static_check< some_type< type_at< int_<0>, result_list1>::type, char>::value >::value,
