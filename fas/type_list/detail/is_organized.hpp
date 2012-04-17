@@ -68,29 +68,19 @@ struct is_organized_impl1< type_list<L, R> >
   enum { value = is_organized_impl3< type_list<L, R>, !left_value && right_value>::value };
 };
 
-/*
-template<typename L, typename R>
-struct is_organized_impl1< tl<L, R> >
-{
-  enum { left_value = is_type_list< L >::value };
-  enum { right_value = is_type_list< R >::value };
-  enum { value = is_organized_impl3< tl<L, R>, !left_value && right_value>::value };
-};
-*/
-
 template<>
 struct is_organized_impl1< empty_list >
 {
   enum { value = 1 };
 };
 
-/*
-template<>
-struct is_organized_impl1< el >
+template<typename L, typename R>
+struct is_organized_impl3< type_list<L, R>, true>
 {
-  enum { value = 1 };
+  enum { value = is_organized<R>::value };
 };
-*/
+
+
 
 #endif // DISABLE_TYPE_LIST_SPEC
 

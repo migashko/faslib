@@ -4,14 +4,16 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_DETAIL_REVERSE_HPP
-#define FAS_IMPLEMENTATION_DETAIL_REVERSE_HPP
+#ifndef FAS_TYPE_LIST_DETAIL_REVERSE_HPP
+#define FAS_TYPE_LIST_DETAIL_REVERSE_HPP
+
+#include <fas/type_list/length.hpp>
+#include <fas/type_list/type_at_c.hpp>
 
 #include <fas/static_check/verifying.hpp>
 #include <fas/type_list/metalist.hpp>
 #include <fas/type_list/check_list.hpp>
-#include <fas/type_list/length.hpp>
-#include <fas/type_list/type_at_c.hpp>
+
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 
@@ -70,45 +72,17 @@ struct reverse_impl<type_list<L, R>, C>
   > type;
 };
 
-/*
-template<typename L, typename R, int C>
-struct reverse_impl<tl<L, R>, C>
-{
-  typedef tl<
-    typename type_at_c< C, tl<L, R> >::type,
-    typename reverse_impl< tl<L, R>, C-1>::type
-  > type;
-};
-*/
-
 template<typename L, typename R>
 struct reverse_impl<type_list<L, R>, 0>
 {
   typedef type_list<L> type;
 };
 
-/*
-template<typename L, typename R>
-struct reverse_impl<tl<L, R>, 0>
-{
-  typedef tl<L> type;
-};
-*/
-
-
 template<>
 struct reverse_impl<empty_list, -1>
 {
   typedef empty_list type;
 };
-
-/*
-template<>
-struct reverse_impl<el, -1>
-{
-  typedef el type;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 
@@ -136,7 +110,6 @@ struct reverse_impl2<metalist::empty_list, L, -1>
 {
   typedef L type;
 };
-
 
 }}
 

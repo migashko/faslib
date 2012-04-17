@@ -177,11 +177,11 @@ struct bubble_sort_impl3<L, F, true>
   typedef typename L::right_type tail;
   // ок, перестановка не требуется
   // не паримся и перестраиваем список 
-  typedef typename L::template rebind<
+  typedef type_list<
     head,
     // барботируем хвост
     typename bubble_sort<tail, F>::type
-  >::type type;
+  > type;
   
 };
 
@@ -212,16 +212,16 @@ struct bubble_sort_impl3<L, F, false>
   typedef typename tail1::left_type head2;
   typedef typename tail1::right_type tail2;
   
-  typedef typename L::template rebind<
+  typedef type_list<
     head1,
     tail2
-  >::type nonbabled;
+  > nonbabled;
   
-  typedef typename L::template rebind<
+  typedef type_list<
     head2,
     // барботируем хвост
     typename bubble_sort<nonbabled, F>::type
-  >::type type;
+  > type;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
@@ -380,10 +380,10 @@ struct bubble_sort_impl3_t<L, F, true>
 {
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
-  typedef typename L::template rebind<
+  typedef type_list<
     head,
     typename bubble_sort_t<tail, F>::type
-  >::type type;
+  > type;
   
 };
 
@@ -405,15 +405,15 @@ struct bubble_sort_impl3_t<L, F, false>
   typedef typename tail1::left_type head2;
   typedef typename tail1::right_type tail2;
   
-  typedef typename L::template rebind<
+  typedef type_list<
     head1,
     tail2
-  >::type nonbabled;
+  > nonbabled;
   
-  typedef typename L::template rebind<
+  typedef type_list<
     head2,
     typename bubble_sort_t<nonbabled, F>::type
-  >::type type;
+  > type;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC

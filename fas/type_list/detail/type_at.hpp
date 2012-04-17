@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_DETAIL_TYPE_AT_HPP
-#define FAS_IMPLEMENTATION_DETAIL_TYPE_AT_HPP
+#ifndef FAS_TYPE_LIST_DETAIL_TYPE_AT_HPP
+#define FAS_TYPE_LIST_DETAIL_TYPE_AT_HPP
 
 #include <fas/static_check/verifying.hpp>
 #include <fas/static_check/static_check.hpp>
@@ -17,7 +17,7 @@ namespace fas{ namespace detail{
 template<int I, typename L>
 struct type_at_impl;
 
-//#ifdef FASLIB_TYPE_LIST_CHECK
+#ifdef FASLIB_TYPE_LIST_CHECK
 
 template<int I, typename L>
 struct type_at_verifying;
@@ -34,7 +34,7 @@ struct type_at_verifying
 {
 };
 
-/*#else
+#else
 
 template<int I,typename L>
 struct type_at_helper
@@ -43,7 +43,7 @@ struct type_at_helper
 };
 
 #endif
-*/
+
 
 template<int I, typename L>
 struct type_at_impl
@@ -74,9 +74,6 @@ struct type_at_impl<0, L>
   typedef typename L::right_type tail;
   typedef L fulltail;
 };
-
-
-
 
 #ifndef DISABLE_TYPE_LIST_SPEC
 

@@ -72,27 +72,11 @@ struct organize_impl0<empty_list>
   typedef empty_list type;
 };
 
-/*
-template<>
-struct organize_impl0<el>
-{
-  typedef el type;
-};
-*/
-
 template<typename L, typename R>
 struct organize_impl0< type_list<L, R> >
 {
   typedef typename organize_impl2< type_list<L, R>, is_organized< type_list<L, R> >::value >::type type;
 };
-
-/*
-template<typename L, typename R>
-struct organize_impl0< tl<L, R> >
-{
-  typedef typename organize_impl2< tl<L, R>, is_organized< tl<L, R> >::value >::type type;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 
@@ -124,19 +108,12 @@ struct organize_impl2<L, false>
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
+
 template< typename L, typename R>
 struct organize_impl2< type_list<L, R>, false>
 {
   typedef typename organize_impl3< type_list<L, R> , is_type_list<L>::value, is_type_list<R>::value>::type type;
 };
-
-/*
-template< typename L, typename R>
-struct organize_impl2< tl<L, R>, false>
-{
-  typedef typename organize_impl3< tl<L, R> , is_type_list<L>::value, is_type_list<R>::value>::type type;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 
@@ -151,29 +128,16 @@ struct organize_impl3<L, false, true>
       head,
       typename organize_impl0<tail>::type
   > type;
-
-  /*
-  typedef typename L::template rebind<
-      head,
-      typename organize_impl0<tail>::type
-  >::type type;
-  */
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
+
 template< typename L, typename R>
 struct organize_impl3< type_list<L, R>, false, true>
 {
   typedef type_list< L, typename organize_impl0<R>::type> type;
 };
 
-/*
-template< typename L, typename R>
-struct organize_impl3< tl<L, R>, false, true>
-{
-  typedef tl< L, typename organize_impl0<R>::type> type;
-};
-*/
 #endif // DISABLE_TYPE_LIST_SPEC
 
 // с двух сторон списки 
@@ -189,6 +153,7 @@ struct organize_impl3<L, true, true>
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
+
 template< typename L, typename R>
 struct organize_impl3< type_list<L, R>, true, true>
 {
@@ -198,17 +163,6 @@ struct organize_impl3< type_list<L, R>, true, true>
   >::type type;
 };
 
-/*
-template< typename L, typename R>
-struct organize_impl3< tl<L, R>, true, true>
-{
-
-  typedef typename merge<
-      typename organize_impl0<L>::type,
-      typename organize_impl0<R>::type
-  >::type type;
-};
-*/
 #endif // DISABLE_TYPE_LIST_SPEC
 
 // список слева, а справа нет
@@ -216,7 +170,10 @@ template< typename L>
 struct organize_impl3<L, true, false>
 {
   typedef typename L::left_type head;
-  typedef typename L::template rebind< typename L::right_type, typename L::final_type >::type tail;
+  typedef type_list< 
+    typename L::right_type, 
+    empty_list 
+  > tail;
 
   typedef typename merge<
       typename organize_impl0<head>::type,
@@ -225,6 +182,7 @@ struct organize_impl3<L, true, false>
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
+
 template< typename L, typename R>
 struct organize_impl3< type_list<L, R>, true, false>
 {
@@ -234,16 +192,6 @@ struct organize_impl3< type_list<L, R>, true, false>
   >::type type;
 };
 
-/*
-template< typename L, typename R>
-struct organize_impl3< tl<L, R>, true, false>
-{
-  typedef typename merge<
-      typename organize_impl0<L>::type,
-      typename organize_impl0<tl<R> >::type
-  >::type type;
-};
-*/
 #endif // DISABLE_TYPE_LIST_SPEC
 
 // с двух сторон не списки типов 
@@ -260,31 +208,15 @@ struct organize_impl3<L, false, false>
       empty_list
     >
   > type;
-  /*
-  typedef typename L::template rebind< 
-      head,
-      typename L:: template rebind<
-          tail,
-          typename L::final_type
-      >::type
-  >::type type;
-  */
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
+
 template< typename L, typename R>
 struct organize_impl3< type_list<L, R>, false, false>
 {
   typedef type_list<L, type_list<R> > type;
 };
-
-/*
-template< typename L, typename R>
-struct organize_impl3< tl<L, R>, false, false>
-{
-  typedef tl<L, tl<R> > type;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 

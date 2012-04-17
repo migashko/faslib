@@ -35,7 +35,7 @@ struct aspect_select_helper
 template<typename L, typename F>
 struct aspect_select_impl< metalist::empty_list, L, F>
 {
-  typedef typename L::final_type type;
+  typedef empty_list type;
 };
 
 template<typename L, typename F>
@@ -44,7 +44,7 @@ struct aspect_select_impl< metalist::type_list, L, F>
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
   typedef typename merge<
-    typename aspect_select_impl2< typename head::metatype, head, typename L::final_type, F>::type,
+    typename aspect_select_impl2< typename head::metatype, head, empty_list, F>::type,
     typename aspect_select_helper< tail, F>::type
   >::type type;
 
@@ -62,11 +62,6 @@ struct aspect_select_impl< metalist::advice, T, F>
   typedef T type;
 };
 
-/*template<typename M, typename T, typename L>
-struct aspect_select_impl
-{
-  typedef typename L::final_type type;
-};*/
 
 template<typename M, typename T, typename EL, typename F>
 struct aspect_select_impl2

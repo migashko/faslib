@@ -8,26 +8,27 @@
 #define FAS_ALGORITHM_DETAIL_GENERATE_HPP
 
 #include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
 
 namespace fas{ namespace detail{
 
 template<int I, typename G, typename P>
 struct generate_helper
 {
-  typedef typename P::template rebind<
+  typedef type_list<
     typename G::type,
     typename generate_helper<
       I-1,
       typename G::next,
       P
     >::type
-  >::type type;
+  > type;
 };
 
 template<typename G, typename P>
 struct generate_helper<0, G, P>
 {
-  typedef typename P::final_type type;
+  typedef empty_list type;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC

@@ -8,8 +8,9 @@
 #define FAS_TYPE_LIST_DETAIL_ERASE_HPP
 
 #include <fas/static_check/verifying.hpp>
-#include <fas/type_list/split_c.hpp>
 #include <fas/type_list/check_range_c.hpp>
+#include <fas/type_list/split_c.hpp>
+#include <fas/type_list/merge.hpp>
 
 namespace fas{ namespace detail{
 

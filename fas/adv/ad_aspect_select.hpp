@@ -25,12 +25,10 @@ namespace detail
   struct aspect_select_helper
   {
     typedef typename switch_<
-      typename type_list_n<
-        case_c< T1::aspect::template has_advice<Tg>::value, pair< T1, int_<1> > >,
-        case_c< T2::aspect::template has_advice<Tg>::value, pair< T2, int_<2> > >,
-        case_c< T3::aspect::template has_advice<Tg>::value, pair< T3, int_<3> > >,
-        default_< pair< T3, int_<3> > >
-      >::type
+      case_c< T1::aspect::template has_advice<Tg>::value, pair< T1, int_<1> > >,
+      case_c< T2::aspect::template has_advice<Tg>::value, pair< T2, int_<2> > >,
+      case_c< T3::aspect::template has_advice<Tg>::value, pair< T3, int_<3> > >,
+      default_< pair< T3, int_<3> > >
     >::type selected;
     
     enum { value = second<selected>::type::value };

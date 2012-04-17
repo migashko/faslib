@@ -7,10 +7,16 @@
 #ifndef FAS_TYPE_LIST_DETAIL_UNIQUE_HPP
 #define FAS_TYPE_LIST_DETAIL_UNIQUE_HPP
 
-#include <fas/type_list/metalist.hpp>
+#include <fas/static_check/verifying.hpp>
+#include <fas/type_list/check_list.hpp>
+
+
+#include <fas/type_list/merge.hpp>
 #include <fas/type_list/type_at_c.hpp>
 #include <fas/type_list/type_count.hpp>
 #include <fas/type_list/split_c.hpp>
+
+#include <fas/type_list/metalist.hpp>
 
 namespace fas{ namespace detail{
 
@@ -69,28 +75,11 @@ struct unique_impl0<type_list<LL, RR>, P, L >
   typedef typename unique_impl2< P, L, (type_count<current, L>::value > 1) >::type type;
 };
 
-/*
-template<typename LL, typename RR, int P, typename L>
-struct unique_impl0<tl<LL, RR>, P, L >
-{
-  typedef typename type_at_c< P, L>::type current;
-  typedef typename unique_impl2< P, L, (type_count<current, L>::value > 1) >::type type;
-};
-*/
-
 template< int P, typename L>
 struct unique_impl0<empty_list, P, L>
 {
   typedef L type;
 };
-
-/*
-template< int P, typename L>
-struct unique_impl0<el, P, L>
-{
-  typedef L type;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 
@@ -115,11 +104,6 @@ struct unique_impl2
   typedef typename splitter::right_list right_list;
   
   typedef typename unique_impl3<P, left_list, right_list>::type type;
-  /*
-  typedef typename right_list::right_type tail;
-  typedef typename merge<left_list, tail>::type result_list;
-  typedef typename unique_impl0<tail, P, result_list>::type type;
-  */
 };
 
 template<int P,typename L>
@@ -147,17 +131,6 @@ struct unique_impl3<P, LL, type_list<L, R> >
     typename merge<LL, R>::type
     >::type type;
 };
-
-/*
-template<int P,typename LL, typename L, typename R>
-struct unique_impl3<P, LL, tl<L, R> >
-{
-  typedef typename unique_impl0<
-    R, P, 
-    typename merge<LL, R>::type
-    >::type type;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 

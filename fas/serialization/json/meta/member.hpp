@@ -27,11 +27,9 @@ struct member
   typedef metalist::member metatype;
 
   typedef typename switch_<
-    typename type_list_n<
-      case_c< is_string< L >::value, L>,
-      case_c< is_has_metatype< L, ::fas::metalist::tstring >::value, tstring<L> >,
-      default_< L >
-    >::type
+    case_c< is_string< L >::value, L>,
+    case_c< is_has_metatype< L, ::fas::metalist::tstring >::value, tstring<L> >,
+    default_< L >
   >::type target1;
   typedef R target2;
   typedef ser::_member_ serializer_tag;

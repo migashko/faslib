@@ -28,11 +28,9 @@ struct enumset_value: int_<value>
   typedef deser::_enumset_value_ deserializer_tag;
 
   typedef typename switch_<
-    typename type_list_n<
-      case_c< is_string< N >::value, N>,
-      case_c< is_has_metatype< N, ::fas::metalist::tstring >::value, tstring<N> >,
-      default_< N >
-    >::type
+    case_c< is_string< N >::value, N>,
+    case_c< is_has_metatype< N, ::fas::metalist::tstring >::value, tstring<N> >,
+    default_< N >
   >::type target;
 };
 

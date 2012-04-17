@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_DETAIL_LENGTH_HPP
-#define FAS_IMPLEMENTATION_DETAIL_LENGTH_HPP
+#ifndef FAS_TYPE_LIST_DETAIL_LENGTH_HPP
+#define FAS_TYPE_LIST_DETAIL_LENGTH_HPP
 
 #include <fas/static_check/verifying.hpp>
 #include <fas/type_list/metalist.hpp>
@@ -60,27 +60,11 @@ struct length_impl< type_list<L, R> >
   enum { value = 1 + length_impl<R>::value };
 };
 
-/*
-template<typename L, typename R>
-struct length_impl< tl<L, R> >
-{
-  enum { value = 1 + length_impl<R>::value };
-};
-*/
-
 template<>
 struct length_impl< empty_list >
 {
   enum { value = 0 };
 };
-
-/*
-template<>
-struct length_impl< el >
-{
-  enum { value = 0 };
-};
-*/
 
 #endif
 
@@ -96,7 +80,6 @@ struct length_impl1<metalist::empty_list, L>
 {
   enum { value = 0 };
 };
-
 
 }}
 

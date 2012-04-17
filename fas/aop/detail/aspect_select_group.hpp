@@ -36,7 +36,7 @@ struct aspect_select_group_helper
 template<typename L, typename Tg>
 struct aspect_select_group_impl< metalist::empty_list, L, Tg>
 {
-  typedef typename L::final_type type;
+  typedef empty_list type;
 };
 
 template<typename L, typename Tg>
@@ -45,7 +45,7 @@ struct aspect_select_group_impl< metalist::type_list, L, Tg>
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
   typedef typename merge<
-    typename aspect_select_group_impl2< typename head::metatype, head, typename L::final_type, Tg>::type,
+    typename aspect_select_group_impl2< typename head::metatype, head, empty_list, Tg>::type,
     typename aspect_select_group_helper< tail, Tg>::type
   >::type type;
 

@@ -3,6 +3,8 @@
 #include <fas/hierarchy/field.hpp>
 #include <fas/hierarchy/field_if.hpp>
 #include <fas/algorithm/transform.hpp>
+#include <fas/typemanip/type2type.hpp>
+#include <fas/typemanip/super_subclass.hpp>
 
 // 
 struct A{};

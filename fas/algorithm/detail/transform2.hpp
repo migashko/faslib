@@ -150,10 +150,10 @@ struct transform2_impl2<metalist::type_list, metalist::type_list, L1, L2, F>
   typedef typename L2::left_type head2;
   typedef typename L2::right_type tail2;
   
-  typedef typename L1::template rebind<
+  typedef type_list<
         typename apply<F, head1, head2>::type,
         typename transform2_impl<tail1, tail2, F>::type
-      >::type type;
+      > type;
 };
 
 template<typename L1, typename L2, typename F>
@@ -162,10 +162,10 @@ struct transform2_impl2<metalist::type_list, metalist::empty_list, L1, L2, F>
   typedef typename L1::left_type head1;
   typedef typename L1::right_type tail1;
   
-  typedef typename L1::template rebind<
+  typedef type_list<
         typename apply<F, head1, empty_type>::type,
         typename transform2_impl<tail1, L2, F>::type
-      >::type type;
+      > type;
 };
 
 template<typename L1, typename L2, typename F>
@@ -174,10 +174,10 @@ struct transform2_impl2< metalist::empty_list, metalist::type_list, L1, L2, F>
   typedef typename L2::left_type head2;
   typedef typename L2::right_type tail2;
   
-  typedef typename L2::template rebind<
+  typedef type_list<
         typename apply< F, empty_type, head2>::type,
         typename transform2_impl< L1, tail2, F>::type
-      >::type type;
+      > type;
 };
 
 
@@ -283,10 +283,10 @@ struct transform2_impl2_t<metalist::type_list, metalist::type_list, L1, L2, F>
   typedef typename L2::left_type head2;
   typedef typename L2::right_type tail2;
   
-  typedef typename L1::template rebind<
+  typedef type_list<
         typename F< head1, head2>::type,
         typename transform2_impl_t<tail1, tail2, F>::type
-      >::type type;
+      > type;
 };
 
 template<typename L1, typename L2, template<typename,typename> class F>
@@ -295,10 +295,10 @@ struct transform2_impl2_t<metalist::type_list, metalist::empty_list, L1, L2, F>
   typedef typename L1::left_type head1;
   typedef typename L1::right_type tail1;
   
-  typedef typename L1::template rebind<
+  typedef type_list<
         typename F<head1, empty_type>::type,
         typename transform2_impl_t<tail1, L2, F>::type
-      >::type type;
+      > type;
 };
 
 template<typename L1, typename L2, template<typename,typename> class F>
@@ -307,10 +307,10 @@ struct transform2_impl2_t< metalist::empty_list, metalist::type_list, L1, L2, F>
   typedef typename L2::left_type head2;
   typedef typename L2::right_type tail2;
   
-  typedef typename L2::template rebind<
+  typedef type_list<
         typename F< empty_type, head2>::type,
         typename transform2_impl_t< L1, tail2, F>::type
-      >::type type;
+      > type;
 };
 
 

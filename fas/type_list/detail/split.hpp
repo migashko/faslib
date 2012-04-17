@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_DETAIL_SPLIT_HPP
-#define FAS_IMPLEMENTATION_DETAIL_SPLIT_HPP
+#ifndef FAS_TYPE_LIST_DETAIL_SPLIT_HPP
+#define FAS_TYPE_LIST_DETAIL_SPLIT_HPP
 
 #include <fas/static_check/verifying.hpp>
 #include <fas/type_list/check_range_c.hpp>
@@ -13,12 +13,7 @@
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 
-namespace fas{ 
-
-/*template<typename L>
-struct length_;*/
-
-namespace detail{
+namespace fas{ namespace detail{
 
 template<int I, typename L, int N>
 struct split_impl;
@@ -63,7 +58,7 @@ struct split_impl
 template<typename L, int N>
 struct split_impl<0, L, N>
 {
-  typedef typename L::final_type left_list;
+  typedef empty_list left_list;
   typedef L right_list;
 };
 
@@ -76,15 +71,6 @@ struct split_impl<0, empty_list, N>
   typedef empty_list right_list;
 };
 
-/*
-template<int N>
-struct split_impl<0, el, N>
-{
-  typedef el left_list;
-  typedef el right_list;
-};
-*/
-
 template<typename L, typename R, int N>
 struct split_impl<0, type_list<L, R>, N>
 {
@@ -92,22 +78,12 @@ struct split_impl<0, type_list<L, R>, N>
   typedef type_list<L, R> right_list;
 };
 
-/*
-template<typename L, typename R, int N>
-struct split_impl<0, tl<L, R>, N>
-{
-  typedef el left_list;
-  typedef tl<L, R> right_list;
-};
-*/
-
 #endif // DISABLE_TYPE_LIST_SPEC
 
 template<typename L, int N>
 struct split_impl<N, L, N>
 {
   typedef L left_list;
-  //typedef typename L::final_type right_list;
   typedef empty_list right_list;
 };
 
@@ -120,30 +96,12 @@ struct split_impl<N, type_list<L, R>, N>
   typedef empty_list right_list;
 };
 
-/*
-template<typename L, typename R, int N>
-struct split_impl<N, tl<L, R>, N>
-{
-  typedef tl<L, R> left_list;
-  typedef el right_list;
-};
-*/
-
 template<int N>
 struct split_impl<N, empty_list, N>
 {
   typedef empty_list left_list;
   typedef empty_list right_list;
 };
-
-/*
-template<int N>
-struct split_impl<N, el, N>
-{
-  typedef el left_list;
-  typedef el right_list;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 
@@ -161,12 +119,6 @@ struct split_impl2
     head,
     typename split_type::left_list
   > left_list;
-  /*
-  typedef typename L::template rebind<
-      head,
-      typename split_type::left_list
-  >::type left_list;
-  */
 };
 
 
@@ -180,38 +132,16 @@ struct split_impl2<I, type_list<L, R> >
   typedef type_list<L, typename helper::left_list> left_list;
 };
 
-/*
-template<int I, typename L, typename R>
-struct split_impl2<I, tl<L, R> >
-{
-  typedef split_impl2<I-1, R> helper;
-  typedef typename helper::right_list right_list;
-  typedef tl<L, typename helper::left_list> left_list;
-};
-*/
-
-
 #endif // DISABLE_TYPE_LIST_SPEC
 
 template<typename L>
 struct split_impl2<0, L>
 {
-  //typedef typename L::final_type left_list;
   typedef empty_list left_list;
   typedef L right_list;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
-
-/*
-template<typename L, typename R>
-struct split_impl2<0, tl<L, R> >
-{
-  typedef el left_list;
-  typedef tl<L, R> right_list;
-};
-*/
-
 
 template<typename L, typename R>
 struct split_impl2<0, type_list<L, R> >
@@ -226,15 +156,6 @@ struct split_impl2<0, empty_list>
   typedef empty_list left_list;
   typedef empty_list right_list;
 };
-
-/*
-template<>
-struct split_impl2<0, el>
-{
-  typedef el left_list;
-  typedef el right_list;
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 

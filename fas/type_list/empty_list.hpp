@@ -14,17 +14,6 @@ namespace fas{
 struct empty_list
 {
   typedef metalist::empty_list metatype;
-
-  /*
-  typedef empty_list final_type;
-  
-  template<typename LL, typename RR>
-  struct rebind
-  {
-    typedef type_list<LL, RR> type;
-  };
-  */
-
 };
 
 }

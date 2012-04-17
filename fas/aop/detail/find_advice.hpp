@@ -16,6 +16,7 @@
 //#include <fas/type_list/make_type_list.hpp>
 //#include <fas/algorithm/find_if.hpp>
 #include <fas/typemanip/if_c.hpp>
+#include <fas/typemanip/pair.hpp>
 #include <fas/algorithm/index_of_if.hpp>
 #include <fas/algorithm/find_if.hpp>
 #include <fas/mp/bind.hpp>

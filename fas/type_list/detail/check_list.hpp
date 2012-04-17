@@ -11,6 +11,7 @@
 #include <fas/type_list/is_type_list.hpp>
 #include <fas/type_list/is_organized.hpp>
 #include <fas/typemanip/if_c.hpp>
+#include <fas/typemanip/has_metatype.hpp>
 
 namespace fas{ 
 

@@ -12,36 +12,12 @@
 
 namespace fas{
 
-//struct empty_list;
-
-/**
- * @brief Список типов.
- * @tparam L - любой допустимый тип данных
- * @tparam R - список типов или empty_list
-*/
 template< typename L, typename R = empty_list >
 struct type_list
 {
-  /** Метатип.
-   * Значение metalist::type_list.
-   */
   typedef metalist::type_list metatype;
-
-  /** Левый тип.*/
   typedef L left_type;
-
-  /** Правый тип.*/
   typedef R right_type;
-
-  typedef empty_list final_type;
-
-  /*
-  template<typename LL=L, typename RR=R>
-  struct rebind
-  {
-    typedef type_list<LL, RR> type;
-  };
-  */
 };
 
 template<typename L>
@@ -87,13 +63,6 @@ struct tail<type_list<L, R> >
   typedef R type;
 };
 
-/*
-namespace metalist{ struct empty_type; }
-struct empty_type
-{ 
-  typedef metalist::empty_type metatype; 
-};
-*/
 
 
 }

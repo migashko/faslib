@@ -4,13 +4,15 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_DETAIL_INDEX_OF_HPP
-#define FAS_IMPLEMENTATION_DETAIL_INDEX_OF_HPP
+#ifndef FAS_TYPE_LIST_DETAIL_INDEX_OF_HPP
+#define FAS_TYPE_LIST_DETAIL_INDEX_OF_HPP
 
-//#include <fas/metalist.hpp>
-#include <fas/typemanip.hpp>
-//#include <fas/implementation/arithmetic.hpp>
 #include <fas/type_list/length.hpp>
+#include <fas/type_list/check_list.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+#include <fas/typemanip/some_type.hpp>
+
 
 namespace fas{ namespace detail{
 
@@ -91,16 +93,17 @@ template<typename T, typename L, typename R >
 struct index_of_impl0<T, type_list<L, R> >
 {
   typedef R tail;
-  enum { value = index_of_impl2< T, type_list<L, R> , some_type<T, L>::value >::value };
+  
+  enum 
+  { 
+    value = index_of_impl2< 
+      T, 
+      type_list<L, R>, 
+      some_type<T, L>::value 
+    >::value 
+  };
 };
 
-/*
-template<typename T, typename L, typename R >
-struct index_of_impl0<T, tl<L, R> >
-{
-  enum { value = index_of_impl2< T, tl<L, R> , some_type<T, L>::value >::value };
-};
-*/
 
 template<typename T>
 struct index_of_impl0<T, empty_list >
@@ -109,21 +112,16 @@ struct index_of_impl0<T, empty_list >
   enum { value = 0 };
 };
 
-/*
-template<typename T>
-struct index_of_impl0<T, el >
-{
-  enum { value = 0 };
-};
-*/
-
 #endif // DISABLE_TYPE_LIST_SPEC
-
 
 template<typename T, typename L>
 struct index_of_impl1<metalist::type_list, T, L>
 {
-  typedef index_of_impl2< T, L, some_type<T, typename L::left_type>::value > index_of_type;
+  typedef index_of_impl2< 
+    T, L, 
+    some_type<T, typename L::left_type>::value 
+  > index_of_type;
+  
   enum { value = index_of_type::value };
   typedef typename index_of_type::tail tail;
 };
@@ -157,14 +155,6 @@ struct index_of_impl2<T, type_list<L, R>, false>
   typedef R tail;
   enum { value = 1 + index_of_impl0<T, R>::value };
 };
-
-/*
-template<typename T, typename L, typename R>
-struct index_of_impl2<T, tl<L, R>, false>
-{
-  enum { value = 1 + index_of_impl0<T, R>::value };
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 

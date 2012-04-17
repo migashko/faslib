@@ -35,7 +35,7 @@ struct make_advice_list_helper
   // выгребаем все сущности 
   typedef typename aspect_select<A>::type entity_list;
   // строим список адвайсов с учетом алиасов
-  typedef typename make_advice_list_impl<entity_list, advice_list::final_type>::type advice_list;
+  typedef typename make_advice_list_impl<entity_list, empty_list>::type advice_list;
   typedef typename unique_first_if<
     advice_list,
     a< some_type< 

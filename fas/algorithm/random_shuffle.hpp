@@ -15,6 +15,9 @@
 #include <fas/algorithm/shuffle.hpp>
 #include <fas/algorithm/algomacro.hpp>
 
+#include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/type_list.hpp>
+
 
 namespace fas{
 
@@ -25,7 +28,7 @@ struct random_shuffle
   typedef typename generate_c< 
     length<L>::value,
     generator_t< FAS_T_SIMPLIFY(R), rand > ,
-    typename L::final_type
+    empty_list
   >::type rand_list;
 
   typedef typename shuffle< L, rand_list>::type type;

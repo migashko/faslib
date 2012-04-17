@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_DETAIL_TYPE_COUNT_HPP
-#define FAS_IMPLEMENTATION_DETAIL_TYPE_COUNT_HPP
+#ifndef FAS_TYPE_LIST_DETAIL_TYPE_COUNT_HPP
+#define FAS_TYPE_LIST_DETAIL_TYPE_COUNT_HPP
 
 #include <fas/static_check/verifying.hpp>
 #include <fas/type_list/check_list.hpp>
@@ -68,31 +68,12 @@ struct type_count_impl1<T, type_list<L, R> >
   };
 };
 
-/*
-template<typename T, typename L, typename R>
-struct type_count_impl1<T, tl<L, R> >
-{
-  enum 
-  {
-    value = type_count_some_type<T, L>::value 
-        + type_count_impl1<T, R>::value 
-  };
-};
-*/
-
 template<typename T>
 struct type_count_impl1<T, empty_list>
 {
   enum { value = 0 };
 };
 
-/*
-template<typename T>
-struct type_count_impl1<T, el>
-{
-  enum { value = 0 };
-};
-*/
 
 #endif // DISABLE_TYPE_LIST_SPEC
 

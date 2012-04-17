@@ -27,13 +27,11 @@ struct array
   typedef metalist::array metatype;
   
   typedef typename switch_< 
-    typename type_list_n<
-      case_< is_type_list<T>, primary_list<T> >,
-      case_< is_sequence<T>, T >,
-      case_< has_serializer_tag<T>, sequence<T> >,
-      case_< has_deserializer_tag<T>, sequence<T> >,
-      default_< empty_type >
-    >::type
+    case_< is_type_list<T>, primary_list<T> >,
+    case_< is_sequence<T>, T >,
+    case_< has_serializer_tag<T>, sequence<T> >,
+    case_< has_deserializer_tag<T>, sequence<T> >,
+    default_< empty_type >
   >::type target;
 
   typedef ser::_array_ serializer_tag;
