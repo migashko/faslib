@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,7 +8,6 @@
 #define FAS_MP_IS_PLACEHOLDERS_HPP
 
 #include <fas/mp/placeholders.hpp>
-
 
 namespace fas{
 

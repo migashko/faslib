@@ -17,6 +17,7 @@
 #include <fas/type_list/split_c.hpp>
 #include <fas/type_list/erase_c.hpp>
 #include <fas/algorithm/count_if.hpp>
+#include <fas/mp/bind1st.hpp>
 
 namespace fas{ namespace detail{
 

@@ -7,8 +7,7 @@
 #ifndef FAS_TYPEMANIP_CONVERSION_HPP
 #define FAS_TYPEMANIP_CONVERSION_HPP
 
-#include "detail/conversion.hpp"
-
+#include <fas/typemanip/detail/conversion.hpp>
 
 namespace fas{
 

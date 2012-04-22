@@ -7,8 +7,7 @@
 #ifndef FAS_TYPEMANIP_UNWRAP_HPP
 #define FAS_TYPEMANIP_UNWRAP_HPP
 
-#include "detail/unwrap.hpp"
-
+#include <fas/typemanip/detail/unwrap.hpp>
 #include <fas/typemanip/wrapper.hpp>
 
 namespace fas{
@@ -24,8 +23,6 @@ struct unwrap< wrapper<T> >
 {
   typedef T type;
 };
-
-
 
 }
 

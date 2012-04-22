@@ -30,6 +30,10 @@
 #include <fas/type_list/empty_list.hpp>
 #include <fas/type_list/tail.hpp>
 #include <fas/type_list/head.hpp>
+
+#include <fas/mp/bind2nd.hpp>
+
+
 namespace fas{
   
 template<typename T>

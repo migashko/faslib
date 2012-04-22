@@ -7,7 +7,7 @@
 #ifndef FAS_TYPEMANIP_IS_HAS_TYPENAME_HPP
 #define FAS_TYPEMANIP_IS_HAS_TYPENAME_HPP
 
-#include "detail/is_has_typename.hpp"
+#include <fas/typemanip/detail/is_has_typename.hpp>
 
 namespace fas{
 

@@ -7,7 +7,7 @@
 #ifndef FAS_INTEGRAL_FACTORIAL_HPP
 #define FAS_INTEGRAL_FACTORIAL_HPP
 
-#include "detail/factorial.hpp"
+#include <fas/integral/detail/factorial.hpp>
 #include <fas/integral/less.hpp>
 #include <fas/integral/int_.hpp>
 

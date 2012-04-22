@@ -9,6 +9,7 @@
 
 #include <fas/mp/apply.hpp>
 #include <fas/mp/lambda.hpp>
+#include <fas/mp/bind1st.hpp>
 #include <fas/static_check/verifying.hpp>
 #include <fas/type_list/check_list.hpp>
 #include <fas/type_list/metalist.hpp>

@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -15,15 +16,7 @@ struct f
 {
   enum { value = T::value };
   typedef int_< value > type;
-
-  /*template<typename TT>
-  struct apply
-  {
-    enum { value = T::value };
-    typedef int_< value > type;
-  };*/
 };
-
 
 }
 

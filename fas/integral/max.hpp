@@ -4,20 +4,19 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_MP_PS_HPP
-#define FAS_MP_PS_HPP
+#ifndef FAS_INTEGRAL_MAX_HPP
+#define FAS_INTEGRAL_MAX_HPP
 
-#include <fas/mp/ps_c.hpp>
 #include <fas/integral/int_.hpp>
 
 namespace fas{
 
-template<typename PH, typename PL, typename DP = int_<0> >
-struct ps:
-  ps_c<PH, PL, DP::value>
+template<typename L, typename R>
+struct max
 {
+  enum { value = ( L::value < R::value ) ? R::value : L::value };
+  typedef int_< value > type;
 };
- 
 
 }
 

@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,7 +8,7 @@
 #define FAS_MP_DETAIL_BIND_HPP
 
 #include <fas/mp/p.hpp>
-#include <fas/mp/ps.hpp>
+#include <fas/mp/ps_c.hpp>
 
 namespace fas{ namespace detail{
 
@@ -40,26 +41,30 @@ struct bind_impl1<F, PL, false, Counter_>
 
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_1;
+
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_2;
+
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_3;
+
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_4;
-
 
 
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_1
 {
   typedef ps_c< F, PL, Counter_ > placeholder_select;
-  
-  // placeholder_select::value == 1 if F is _ ( unnamed placeholder )
   enum { counter = Counter_ + placeholder_select::value };
   typedef typename placeholder_select::type type;
 };
 
-template<template<typename> class F, typename P0, typename PL, int Counter_>
+template<
+  template<typename> class F,
+  typename P0,
+  typename PL, int Counter_
+>
 struct bind_impl2_1< F<P0>, PL, Counter_>
 {
   typedef P0 arg0;
@@ -73,10 +78,15 @@ struct bind_impl2_1< F<P0>, PL, Counter_>
 };
 
 template<typename F, typename PL, int Counter_>
-struct bind_impl2_2: bind_impl2_1 < F, PL, Counter_ > {};
+struct bind_impl2_2
+  : bind_impl2_1 < F, PL, Counter_ > 
+{};
 
-
-template<template<typename, typename> class F, typename P0, typename P1, typename PL, int Counter_>
+template<
+  template<typename, typename> class F,
+  typename P0, typename P1,
+  typename PL, int Counter_
+>
 struct bind_impl2_2< F<P0, P1>, PL, Counter_>
 {
   typedef P0 arg0;
@@ -94,10 +104,18 @@ struct bind_impl2_2< F<P0, P1>, PL, Counter_>
   > type;
 };
 
-template<typename F, typename PL, int Counter_>
-struct bind_impl2_3: bind_impl2_2 < F, PL, Counter_ > {};
 
-template<template<typename, typename, typename> class F, typename P0, typename P1, typename P2, typename PL, int Counter_>
+template<typename F, typename PL, int Counter_>
+struct bind_impl2_3
+  : bind_impl2_2 < F, PL, Counter_ > 
+{};
+
+
+template<
+  template<typename, typename, typename> class F, 
+  typename P0, typename P1, typename P2,
+  typename PL, int Counter_
+>
 struct bind_impl2_3< F<P0, P1, P2>, PL, Counter_>
 {
   typedef P0 arg0;
@@ -121,9 +139,15 @@ struct bind_impl2_3< F<P0, P1, P2>, PL, Counter_>
 };
 
 template<typename F, typename PL, int Counter_>
-struct bind_impl2_4: bind_impl2_3 < F, PL, Counter_ > {};
+struct bind_impl2_4
+  : bind_impl2_3 < F, PL, Counter_ > 
+{};
 
-template<template<typename, typename, typename, typename> class F, typename P0, typename P1, typename P2, typename P3, typename PL, int Counter_>
+template<
+  template<typename, typename, typename, typename> class F, 
+  typename P0, typename P1, typename P2, typename P3, 
+  typename PL, int Counter_
+>
 struct bind_impl2_4< F<P0, P1, P2, P3>, PL, Counter_>
 {
   typedef P0 arg0;
@@ -157,7 +181,11 @@ struct bind_impl2
 {
 };
 
-template<template<typename, typename, typename, typename, typename> class F, typename P0, typename P1, typename P2, typename P3, typename P4, typename PL, int Counter_>
+template<
+  template<typename, typename, typename, typename, typename> class F,
+  typename P0, typename P1, typename P2, typename P3, typename P4,
+  typename PL, int Counter_
+>
 struct bind_impl2< F<P0, P1, P2, P3, P4>, PL, Counter_>
 {
   typedef P0 arg0;
@@ -181,7 +209,6 @@ struct bind_impl2< F<P0, P1, P2, P3, P4>, PL, Counter_>
   typedef bind_impl1< arg4, PL, is_p<arg4>::value, counter3 > P4_bind;
   enum { counter = P4_bind::counter };
 
-  
   typedef F<
     typename P0_bind::type,
     typename P1_bind::type,
@@ -190,8 +217,6 @@ struct bind_impl2< F<P0, P1, P2, P3, P4>, PL, Counter_>
     typename P4_bind::type
   > type;
 };
-
-/// ///////////////////////////
 
 }}
 

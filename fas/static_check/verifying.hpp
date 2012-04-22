@@ -7,7 +7,7 @@
 #ifndef FAS_STATIC_CHECK_VERIFYING_HPP
 #define FAS_STATIC_CHECK_VERIFYING_HPP
 
-#include "detail/verifying.hpp"
+#include <fas/static_check/detail/verifying.hpp>
 
 namespace fas{
 
