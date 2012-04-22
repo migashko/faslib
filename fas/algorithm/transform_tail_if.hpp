@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,8 +7,7 @@
 #ifndef FAS_ALGORITHM_TRANSFORM_TAIL_IF_HPP
 #define FAS_ALGORITHM_TRANSFORM_TAIL_IF_HPP
 
-#include "detail/transform_tail_if.hpp"
-
+#include <fas/algorithm/detail/transform_tail_if.hpp>
 #include <fas/algorithm/algomacro.hpp>
 #include <fas/mp/lambda.hpp>
 
@@ -35,8 +34,6 @@ struct transform_tail_if_t
 
 };
 
-
 }
-
 
 #endif

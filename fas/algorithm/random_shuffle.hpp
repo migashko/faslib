@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,28 +7,28 @@
 #ifndef FAS_ALGORITHM_RANDOM_SHUFFLE_HPP
 #define FAS_ALGORITHM_RANDOM_SHUFFLE_HPP
 
-#include <fas/mp/placeholders.hpp>
-#include <fas/generators/generator.hpp>
 #include <fas/algorithm/generate_c.hpp>
-#include <fas/integral/rand.hpp>
-#include <fas/type_list/length.hpp>
 #include <fas/algorithm/shuffle.hpp>
 #include <fas/algorithm/algomacro.hpp>
 
-#include <fas/type_list/empty_list.hpp>
-#include <fas/type_list/type_list.hpp>
+#include <fas/mp/placeholders.hpp>
 
+#include <fas/type_list/length.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+
+#include <fas/generators/generator.hpp>
+
+#include <fas/integral/rand.hpp>
 
 namespace fas{
-
 
 template<typename R, typename L>
 struct random_shuffle
 {
   typedef typename generate_c< 
     length<L>::value,
-    generator_t< FAS_T_SIMPLIFY(R), rand > ,
-    empty_list
+    generator_t< FAS_T_SIMPLIFY(R), rand >
   >::type rand_list;
 
   typedef typename shuffle< L, rand_list>::type type;
@@ -41,8 +41,7 @@ struct random_shuffle<R, type_list<LL, RR> >
 {
   typedef typename generate_c< 
     length< RR >::value + 1,
-    generator_t< FAS_T_SIMPLIFY(R), rand > ,
-    empty_list
+    generator_t< FAS_T_SIMPLIFY(R), rand >
   >::type rand_list;
 
   typedef typename shuffle< type_list<LL, RR>, rand_list>::type type;
@@ -61,10 +60,6 @@ struct random_shuffle<R, empty_list >
 };
 
 #endif
-
-
-
 }
-
 
 #endif

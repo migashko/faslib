@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -10,37 +10,6 @@
 #include <fas/mp/apply.hpp>
 
 namespace fas{ namespace detail{
-
-template<typename I, typename F, typename P, int B >
-struct do_while_impl;
-
-template<typename I, typename F, typename P >
-struct do_while_helper
-{
-  typedef typename apply<P, I>::type condition;
-  typedef do_while_impl< I, F, P, condition::value > impl_type;
-  typedef typename impl_type::type type;
-  enum { value = impl_type::value };
-};
-
-template<typename I, typename F, typename P, int B >
-struct do_while_impl
-{
-  typedef typename apply<F, I >::type intermediate_type;
-  typedef do_while_helper<intermediate_type, F, P> helper;
-  typedef typename helper::type type;
-  enum { value = 1 + helper::value };
-};
-
-
-template<typename I, typename F, typename P >
-struct do_while_impl<I, F, P, false>
-{
-  enum { value = 0 };
-  typedef I type;
-};
-
-/// ////////////////////////////////////////////////////////
 
 template<typename I, template<typename> class F, template<typename> class P, int B >
 struct do_while_impl_t;

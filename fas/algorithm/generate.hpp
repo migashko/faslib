@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -12,9 +12,9 @@
 
 namespace fas{
 
-template<typename I, typename G, typename P = empty_list >
+template<typename I, typename G>
 struct generate
-  : generate_c<I::value, G, P>
+  : generate_c< I::value, G>
 {
 };
 

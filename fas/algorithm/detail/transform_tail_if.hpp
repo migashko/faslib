@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -40,7 +40,7 @@ struct transform_tail_impl<N, N, L, F, C>
 };
 
 template<int N, int NN, typename L, template<typename> class F, template<typename> class C>
-struct transform_tail_impl/*< N, L, F, C >*/
+struct transform_tail_impl
 {
   typedef typename type_at_c<N, L>::type current;
   typedef typename transform_tail_impl2<N, NN, L, F, C, C< current >::type::value >::type type;
@@ -52,9 +52,8 @@ struct transform_tail_impl2
   typedef typename split_c< N, L >::left_list left_list;
   typedef typename split_c< N, L >::right_list right_list;
   typedef typename F< right_list >::type transform_list;
-  // typedef typename transform_t< right_list, F>::type transform_list;
-  typedef typename merge<left_list, transform_list>::type result_list;
   
+  typedef typename merge<left_list, transform_list>::type result_list;
   typedef typename transform_tail_impl3< N, length<result_list>::value, result_list, F, C>::type type;
 };
 

@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -11,7 +11,6 @@
 #include <fas/algorithm/any.hpp>
 
 namespace fas{
-
 
 template<typename L, typename F>
 struct transform_tail

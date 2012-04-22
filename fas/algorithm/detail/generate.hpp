@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -12,47 +12,23 @@
 
 namespace fas{ namespace detail{
 
-template<int I, typename G, typename P>
+template<int I, typename G>
 struct generate_helper
 {
   typedef type_list<
     typename G::type,
     typename generate_helper<
       I-1,
-      typename G::next,
-      P
-    >::type
-  > type;
-};
-
-template<typename G, typename P>
-struct generate_helper<0, G, P>
-{
-  typedef empty_list type;
-};
-
-#ifndef DISABLE_TYPE_LIST_SPEC
-
-template<int I, typename G>
-struct generate_helper<I, G, empty_list>
-{
-  typedef type_list<
-    typename G::type,
-    typename generate_helper<
-      I-1,
-      typename G::next,
-      empty_list
+      typename G::next
     >::type
   > type;
 };
 
 template<typename G>
-struct generate_helper<0, G, empty_list>
+struct generate_helper<0, G>
 {
   typedef empty_list type;
 };
-
-#endif
 
 }}
 

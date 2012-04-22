@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2012
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -8,6 +8,10 @@
 #define FAS_ALGORITHM_ERASE_IF_HPP
 
 #include <fas/algorithm/select.hpp>
+
+#include <fas/mp/lambda.hpp>
+#include <fas/mp/placeholders.hpp>
+
 #include <fas/integral/not_.hpp>
 
 namespace fas{
@@ -18,16 +22,9 @@ struct erase_if
 {
 };
 
-template<template<typename> class F >
-struct make_not
-{
-  template<typename T>
-  struct make: not_< F<T> > {};
-};
-
 template<typename L, template<typename> class F >
 struct erase_if_t
-  : select_t< L, make_not<F>::template make >
+  : select_t< L, lambda< not_< F<_> > >::template apply >
 {
   
 };

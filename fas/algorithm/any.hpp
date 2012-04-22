@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -14,7 +14,7 @@ namespace fas{
 template<typename>
 struct any
 {
-  enum {value = 1};
+  enum { value = 1 };
   typedef true_ type;
 };
 

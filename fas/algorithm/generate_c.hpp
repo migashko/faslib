@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,15 +7,15 @@
 #ifndef FAS_ALGORITHM_GENERATE_C_HPP
 #define FAS_ALGORITHM_GENERATE_C_HPP
 
-#include "detail/generate.hpp"
+#include <fas/algorithm/detail/generate.hpp>
 #include <fas/type_list/empty_list.hpp>
 
 namespace fas{
 
-template<int I, typename G, typename P = empty_list >
+template<int I, typename G>
 struct generate_c
 {
-  typedef typename detail::generate_helper<I, G, P>::type type;
+  typedef typename detail::generate_helper<I, G>::type type;
 };
 
 }

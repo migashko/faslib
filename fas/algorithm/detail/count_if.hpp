@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -12,91 +12,7 @@
 #include <fas/type_list/check_list.hpp>
 #include <fas/type_list/metalist.hpp>
 
-
 namespace fas{ namespace detail{
-
-template<typename L, typename F >
-struct count_if_impl1;
-
-template<typename M, typename L, typename F >
-struct count_if_impl2;
-
-#ifdef FASLIB_TYPE_LIST_CHECK
-
-template<typename L, typename F>
-struct count_if_verifying;
-
-template<typename L, typename F>
-struct count_if_helper
-  : verifying< count_if_verifying<L, F>, check_list<L> >::type
-{
-};
-
-template<typename L, typename F>
-struct count_if_verifying
-  : count_if_impl1<L, F>
-{
-};
-
-#else
-
-template<typename L, typename F>
-struct count_if_helper
-  : count_if_impl1<L, F>
-{
-};
-
-#endif
-
-template<typename L, typename F >
-struct count_if_impl1
-  : count_if_impl2<typename L::metatype, L, F>
-{
-  
-};
-
-#ifndef DISABLE_TYPE_LIST_SPEC
-
-template<typename L, typename R, typename F>
-struct count_if_impl1< type_list<L, R>, F>
-{
-  enum 
-  {
-    value = apply<F, L>::type::value 
-            + count_if_impl1<R, F>::value
-  };
-};
-
-template<typename F>
-struct count_if_impl1<empty_list, F>
-{
-  enum { value = 0 };
-};
-
-
-#endif // DISABLE_TYPE_LIST_SPEC
-
-
-template<typename L, typename F>
-struct count_if_impl2<metalist::type_list, L, F>
-{
-  typedef typename L::left_type head;
-  typedef typename L::right_type tail;
-  enum 
-  {
-    value = apply<F, head>::type::value + count_if_impl1<tail, F>::value
-  };
-};
-
-template<typename L, typename F>
-struct count_if_impl2<metalist::empty_list, L, F>
-{
-  enum { value = 0 };
-};
-
-
-/// //////////////////////////////////////////////////////////////////
-
 
 template<typename L, template<typename> class F >
 struct count_if_impl1_t;
