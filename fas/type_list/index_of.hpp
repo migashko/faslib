@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -15,7 +15,6 @@ template<typename T, typename L>
 struct index_of
 {
   enum { value = detail::index_of_helper<T, L>::value  };
-  typedef int_<value> type;
   typedef typename detail::index_of_helper<T, L>::tail tail;
 };
 

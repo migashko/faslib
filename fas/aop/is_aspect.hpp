@@ -11,6 +11,8 @@
 #include <fas/aop/aspect.hpp>
 
 #include <fas/typemanip/is_has_metatype.hpp>
+#include <fas/integral/bool_.hpp>
+
 
 namespace fas{
 

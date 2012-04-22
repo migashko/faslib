@@ -7,8 +7,6 @@
 #ifndef FAS_TYPEMANIP_IS_POINTER_HPP
 #define FAS_TYPEMANIP_IS_POINTER_HPP
 
-#include <fas/integral/bool_.hpp>
-
 namespace fas{
 
 template<typename T>

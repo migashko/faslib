@@ -1,11 +1,11 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_IMPLEMENTATION_TYPE_LIST_TYPE_AT_C_HPP
-#define FAS_IMPLEMENTATION_TYPE_LIST_TYPE_AT_C_HPP
+#ifndef FAS_TYPE_LIST_TYPE_AT_C_HPP
+#define FAS_TYPE_LIST_TYPE_AT_C_HPP
 
 #include <fas/type_list/detail/type_at.hpp>
 
@@ -20,7 +20,6 @@ public:
   typedef typename helper::tail tail;
   typedef typename helper::fulltail fulltail;
 };
-
 
 }
 

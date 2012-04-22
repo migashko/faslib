@@ -1,6 +1,8 @@
 #include <fas/type_list.hpp>
 #include <fas/static_check.hpp>
 #include <fas/type_list/erase.hpp>
+#include <fas/integral/int_.hpp>
+
 
 
 using namespace ::fas;

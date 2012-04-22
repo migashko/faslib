@@ -2,6 +2,7 @@
 #include <fas/type_list/intrinsic.hpp>
 #include <fas/mp/apply.hpp>
 #include <fas/mp/lambda.hpp>
+#include <fas/mp/f.hpp>
 #include <fas/algorithm/do_while.hpp>
 #include <fas/integral.hpp>
 #include <fas/integral/make_int.hpp>
@@ -42,7 +43,7 @@ void test1()
     do_while<
       int_<1>,
       a< plus< p<_1>, _1 > >,
-      a< less/*_equal*/< p<_1>, int_<10> > >
+      a< less< p<_1>, int_<10> > >
     >,
     _2
   > pair_test;
@@ -56,7 +57,7 @@ void test1()
       do_while< 
         int_<1>,
         a< inc< p<_1> > >, 
-        a< less/*_equal*/< p<_1>, int_<10> > >
+        a< less< p<_1>, int_<10> > >
       >
     >::type test3;
   enum { result4 = static_check<test3::value == 10>::value };
@@ -90,13 +91,13 @@ void test3()
     make_int<
       inc<
         type_at< 
-          dec< length<_1> > ,
+          dec< f< length<_1> > > ,
         _1 >
       >
     >
     ,
   _1 >  doit;
-  typedef less< length< _1 > , int_<9> > cond;
+  typedef less< f< length< _1 > > , int_<9> > cond;
   typedef do_while< initial, doit, cond > wh;
   typedef wh::type test;
   typedef type_list_n< int_<2>, int_<3>, int_<4>, 
@@ -130,8 +131,8 @@ void test4()
   using namespace ::fas;
 
   typedef type_list< make_int< rand<>::type > > initial;
-  typedef less< length<_1>, int_<10> > cond;
-  typedef push_back< make_int< rand< type_at< dec< length<_1> >, _1 > > > , _1 > doit;
+  typedef less< f< length<_1> >, int_<10> > cond;
+  typedef push_back< make_int< rand< type_at< dec< f< length<_1> > >, _1 > > > , _1 > doit;
 
   
   typedef do_while< initial, doit, cond >::type test;
@@ -157,8 +158,8 @@ void test4()
 template<typename I>
 struct my_do_while
 {
-  typedef less_equal< length< _1 >, int_<10> > cond;
-  typedef push_back< make_int< rand< type_at< dec< length<_1> >, _1 > > > , _1 > doit;
+  typedef less_equal< f< length< _1 > >, int_<10> > cond;
+  typedef push_back< make_int< rand< type_at< dec< f< length<_1> > >, _1 > > > , _1 > doit;
   typedef do_while< I, doit, cond > test1;
   typedef typename test1::type monw_type;
   //typedef typename wrap<monw_type>::type type;
@@ -187,7 +188,7 @@ void test5()
   > doit;
 
   typedef less_equal<
-    length< second<_1> >,
+    f< length< second<_1> > >,
     int_<10>
   > cond;
 
@@ -201,8 +202,8 @@ void test6()
 
   typedef do_while<
     type_list< make_int< rand< first<_1> > > > ,
-    a< push_back< make_int< rand< type_at< dec< length< p<_1> > >, p<_1> > > > , p<_1> > > ,
-    a< less_equal< length< p<_1> >, int_<3> > >
+    a< push_back< make_int< rand< type_at< dec< f< length< p<_1> > > >, p<_1> > > > , p<_1> > > ,
+    a< less_equal< f< length< p<_1> > >, int_<3> > >
   > randsequence_generator;
 
   typedef apply< randsequence_generator, pair< int_<0>, empty_list > >::type test1; 
@@ -220,7 +221,7 @@ void test6()
   typedef apply<doit, pair< int_<0>, empty_list> >::type test2;
   
   typedef pair<int_<0>, empty_list> initial;
-  typedef less_equal< length< second< _1> >, int_<3> > cond;
+  typedef less_equal< f< length< second< _1> > >, int_<3> > cond;
   typedef do_while< initial, doit, cond> dw;
   typedef dw::type test3;
 }

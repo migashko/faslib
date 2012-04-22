@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -13,14 +13,13 @@
 #include <fas/type_list/metalist.hpp>
 
 
+
 namespace fas{ 
 
 template<typename L>
 struct is_organized;
 
-
 namespace detail{
-
 
 template<typename L, bool B>
 struct is_organized_impl0;

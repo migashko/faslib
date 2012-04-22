@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C)2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -13,12 +13,7 @@
 #include <fas/typemanip/if_c.hpp>
 #include <fas/typemanip/has_metatype.hpp>
 
-namespace fas{ 
-
-template<typename L>
-struct is_organized;
-
-namespace detail{
+namespace fas{ namespace detail{
 
 template<typename L, bool B>
 struct check_list_impl_1;

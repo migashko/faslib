@@ -20,51 +20,7 @@ struct type_list
   typedef R right_type;
 };
 
-template<typename L>
-struct head
-{
-  typedef typename L::left_type type;
-  typedef typename L::right_type tail;
-};
-
-template<>
-struct head<empty_list>
-{
-  typedef empty_list type;
-  typedef empty_list tail;
-};
-
-template< typename L, typename R >
-struct head<type_list<L, R> >
-{
-  typedef L type;
-  typedef R tail;
-};
-
-template<typename L>
-struct tail
-{
-  typedef typename L::left_type head;
-  typedef typename L::right_type type;
-};
-
-template<>
-struct tail<empty_list>
-{
-  typedef empty_list head;
-  typedef empty_list type;
   
-};
-
-template< typename L, typename R >
-struct tail<type_list<L, R> >
-{
-  typedef L head;
-  typedef R type;
-};
-
-
-
 }
 
 #endif

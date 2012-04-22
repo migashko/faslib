@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -75,7 +75,10 @@ struct organize_impl0<empty_list>
 template<typename L, typename R>
 struct organize_impl0< type_list<L, R> >
 {
-  typedef typename organize_impl2< type_list<L, R>, is_organized< type_list<L, R> >::value >::type type;
+  typedef typename organize_impl2<
+    type_list<L, R>,
+    is_organized< type_list<L, R> >::value 
+  >::type type;
 };
 
 #endif // DISABLE_TYPE_LIST_SPEC
@@ -104,7 +107,11 @@ struct organize_impl2<L, false>
 {
   typedef typename L::left_type head;
   typedef typename L::right_type tail;
-  typedef typename organize_impl3<L, is_type_list<head>::value, is_type_list<tail>::value>::type type;
+  typedef typename organize_impl3<
+    L,
+    is_type_list<head>::value,
+    is_type_list<tail>::value
+  >::type type;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
@@ -112,7 +119,11 @@ struct organize_impl2<L, false>
 template< typename L, typename R>
 struct organize_impl2< type_list<L, R>, false>
 {
-  typedef typename organize_impl3< type_list<L, R> , is_type_list<L>::value, is_type_list<R>::value>::type type;
+  typedef typename organize_impl3<
+    type_list<L, R>,
+    is_type_list<L>::value,
+    is_type_list<R>::value
+  >::type type;
 };
 
 #endif // DISABLE_TYPE_LIST_SPEC

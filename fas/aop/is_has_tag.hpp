@@ -9,6 +9,8 @@
 #include <fas/aop/has_tag.hpp>
 #include <fas/typemanip/is_has_typename.hpp>
 #include <fas/typemanip/is_has_metatype.hpp>
+#include <fas/integral/bool_.hpp>
+
 
 namespace fas{
 

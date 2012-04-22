@@ -28,6 +28,8 @@
 #include <fas/typemanip/if_c.hpp>
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/tail.hpp>
+#include <fas/type_list/head.hpp>
 namespace fas{
   
 template<typename T>

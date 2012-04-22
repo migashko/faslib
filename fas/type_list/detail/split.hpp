@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -10,6 +10,7 @@
 #include <fas/static_check/verifying.hpp>
 #include <fas/type_list/check_range_c.hpp>
 #include <fas/type_list/length.hpp>
+
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 

@@ -9,7 +9,7 @@
 //#include <fas/system/disable_warnings.hpp>
 
 #include <fas/hierarchy/scatter_hierarchy.hpp>
-#include <fas/type_list/type_at.hpp>
+#include <fas/type_list/type_at_c.hpp>
 #include <fas/type_list/index_of.hpp>
 
 namespace fas{
@@ -18,7 +18,7 @@ template<typename T, typename H>
 T& field(H& h)
 {
   typedef typename H::type_list_type type_list_type;
-  typedef typename type_at< typename index_of<T, type_list_type >::type, type_list_type >::fulltail fulltail;
+  typedef typename type_at_c< index_of<T, type_list_type >::value, type_list_type >::fulltail fulltail;
   return static_cast< detail::sh<fulltail> &>(h);
 };
 
@@ -26,7 +26,7 @@ template<typename T, typename H>
 const T& const_field(const H& h)
 {
   typedef typename H::type_list_type type_list_type;
-  typedef typename type_at< typename index_of<T, type_list_type >::type, type_list_type >::fulltail fulltail;
+  typedef typename type_at_c< index_of<T, type_list_type >::value, type_list_type >::fulltail fulltail;
   return static_cast< const detail::sh<fulltail> &>(h);
 };
 

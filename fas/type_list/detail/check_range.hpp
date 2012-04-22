@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -9,11 +9,8 @@
 
 #include <fas/type_list/errorlist.hpp>
 #include <fas/type_list/length.hpp>
-#include <fas/typemanip/if_c.hpp>
 
-namespace fas{ 
-
-namespace detail{
+namespace fas{ namespace detail{
 
 template<int, int, int>
 struct check_range_impl;
@@ -43,7 +40,6 @@ struct check_range_impl<I, L, false>
   typedef errorlist::out_of_range<I, L> error;
   enum {value = 0};
 };
-
 
 }}
 

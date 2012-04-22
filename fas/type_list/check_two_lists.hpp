@@ -1,12 +1,11 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
 #ifndef FAS_TYPE_LIST_CHECK_TWO_LIST_HPP
 #define FAS_TYPE_LIST_CHECK_TWO_LIST_HPP
-
 
 #include <fas/typemanip/if_c.hpp>
 #include <fas/type_list/check_list.hpp>
@@ -25,7 +24,6 @@ struct check_two_lists
   >::type error;
 
   enum { value = check_first::value && check_second::value};
-  typedef bool_<value> type;
 };
 
 }
