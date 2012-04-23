@@ -1,5 +1,5 @@
 #include <fas/static_check/static_check.hpp>
-#include <fas/static_check/verifying.hpp>
+
 #include <fas/typemanip/if_c.hpp>
 
 using namespace ::fas;
@@ -34,7 +34,8 @@ struct foo_impl
 };
 
 template<int I>
-struct foo: verifying < foo_impl<I>, check_foo< I > >::type {};
+struct foo: /*verifying <*/ foo_impl<I>/*, check_foo< I > >::type*/ {};
+
 
 int main()
 {

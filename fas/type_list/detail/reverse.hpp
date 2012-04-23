@@ -10,10 +10,7 @@
 #include <fas/type_list/length.hpp>
 #include <fas/type_list/type_at_c.hpp>
 
-#include <fas/static_check/verifying.hpp>
 #include <fas/type_list/metalist.hpp>
-#include <fas/type_list/check_list.hpp>
-
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 
@@ -28,32 +25,11 @@ struct reverse_impl;
 template<typename MT, typename L, int C >
 struct reverse_impl2;
 
-#ifdef FASLIB_TYPE_LIST_CHECK
-
-template<typename L>
-struct reverse_verifying;
-
-template<typename L>
-struct reverse_helper
-  : verifying< reverse_verifying<L>, check_list<L> >::type
-{
-};
-
-template<typename L>
-struct reverse_verifying
-  : reverse_impl< L, length<L>::value - 1>
-{
-};
-
-#else
-
 template<typename L>
 struct reverse_helper
   : reverse_impl< L, length<L>::value - 1>
 {
 };
-
-#endif
 
 template<typename L, int C >
 struct reverse_impl

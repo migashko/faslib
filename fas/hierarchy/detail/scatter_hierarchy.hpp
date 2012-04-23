@@ -6,9 +6,17 @@
 #ifndef FAS_HIERARCHY_DETAIL_SCATTER_HIERARCHY_HPP
 #define FAS_HIERARCHY_DETAIL_SCATTER_HIERARCHY_HPP
 
-#include <fas/static_check/verifying.hpp>
 #include <fas/type_list/metalist.hpp>
-#include <fas/type_list/check_list.hpp>
+#include <fas/type_list/errorlist.hpp>
+
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
+
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+
+#include <fas/static_check/static_error.hpp>
+
 
 
 namespace fas{ namespace detail{
@@ -24,18 +32,12 @@ struct scatter_hierarchy_impl1;
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
-template<typename L>
-struct scatter_hierarchy_verifying;
 
 template<typename L>
 struct scatter_hierarchy_helper
-  : verifying< scatter_hierarchy_verifying<L>, check_list<L> >::type
-{
-};
-
-template<typename L>
-struct scatter_hierarchy_verifying
-  : scatter_hierarchy_impl<L>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , scatter_hierarchy_impl<L>
 {
 };
 

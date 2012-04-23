@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,14 +7,19 @@
 #ifndef FAS_ALGORITHM_DETAIL_INDEX_OF_IF_HPP
 #define FAS_ALGORITHM_DETAIL_INDEX_OF_IF_HPP
 
-#include <fas/mp/apply.hpp>
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/check_list.hpp>
-#include <fas/type_list/metalist.hpp>
 #include <fas/type_list/length.hpp>
 
-namespace fas{ namespace detail{
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
+#include <fas/type_list/errorlist.hpp>
+#include <fas/type_list/metalist.hpp>
 
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+
+#include <fas/static_check/static_error.hpp>
+
+namespace fas{ namespace detail{
   
 template<typename L, template<typename> class F >
 struct index_of_if_impl_t;
@@ -28,17 +33,10 @@ struct index_of_if_impl2_t;
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename L, template<typename> class F>
-struct index_of_if_verifying_t;
-
-template<typename L, template<typename> class F>
 struct index_of_if_helper_t
-  : verifying< index_of_if_verifying_t<L, F>, check_list<L> >::type
-{
-};
-
-template<typename L, template<typename> class F>
-struct index_of_if_verifying_t
-  : index_of_if_impl_t<L, F>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , index_of_if_impl_t<L, F>
 {
 };
 

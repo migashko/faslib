@@ -1,24 +1,26 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 #ifndef FAS_TYPE_LIST_DETAIL_UNIQUE_HPP
 #define FAS_TYPE_LIST_DETAIL_UNIQUE_HPP
 
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/check_list.hpp>
-
+#include <fas/type_list/metalist.hpp>
+#include <fas/type_list/errorlist.hpp>
 
 #include <fas/type_list/merge.hpp>
 #include <fas/type_list/type_at_c.hpp>
 #include <fas/type_list/type_count.hpp>
 #include <fas/type_list/split_c.hpp>
 
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 
-#include <fas/type_list/metalist.hpp>
+#include <fas/static_check/static_error.hpp>
+
 
 namespace fas{ namespace detail{
 
@@ -42,13 +44,9 @@ struct unique_verifying;
 
 template<typename L>
 struct unique_helper
-  : verifying< unique_verifying<L>, check_list<L> >::type
-{
-};
-
-template<typename L>
-struct unique_verifying
-  : unique_impl0<L, 0, L>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , unique_impl0<L, 0, L>
 {
 };
 

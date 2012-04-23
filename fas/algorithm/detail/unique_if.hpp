@@ -8,7 +8,6 @@
 #define FAS_ALGORITHM_DETAIL_UNIQUE_IF_HPP
 
 #include <fas/mp/bind1st.hpp>
-#include <fas/static_check/verifying.hpp>
 #include <fas/type_list/type_at_c.hpp>
 #include <fas/type_list/erase_c.hpp>
 #include <fas/algorithm/count_if.hpp>

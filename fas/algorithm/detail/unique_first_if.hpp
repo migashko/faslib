@@ -7,12 +7,18 @@
 #ifndef FAS_ALGORITHM_DETAIL_UNIQUE_FISRT_IF_HPP
 #define FAS_ALGORITHM_DETAIL_UNIQUE_FISRT_IF_HPP
 
-#include <fas/algorithm/count_if.hpp>
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/check_list.hpp>
-#include <fas/type_list/type_at_c.hpp>
 #include <fas/type_list/erase_c.hpp>
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
+#include <fas/type_list/type_at_c.hpp>
+#include <fas/type_list/length.hpp>
+#include <fas/type_list/errorlist.hpp>
+
+#include <fas/algorithm/count_if.hpp>
+
 #include <fas/mp/bind1st.hpp>
+#include <fas/static_check/static_error.hpp>
+
 
 namespace fas{ namespace detail{
 
@@ -25,17 +31,10 @@ struct unique_first_if_impl2_t;
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename L, template<typename, typename> class F>
-struct unique_first_if_verifying_t;
-
-template<typename L, template<typename, typename> class F>
 struct unique_first_if_helper_t
-  : verifying< unique_first_if_verifying_t<L, F>, check_list<L> >::type
-{
-};
-
-template<typename L, template<typename, typename> class F>
-struct unique_first_if_verifying_t
-  : unique_first_if_impl_t< length<L>::value, L, F>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , unique_first_if_impl_t< length<L>::value, L, F>
 {
 };
 
@@ -48,7 +47,6 @@ struct unique_first_if_helper_t
 };
 
 #endif
-
 
 template<int P, typename L, template<typename, typename> class F>
 struct unique_first_if_impl_t

@@ -175,10 +175,12 @@ UNIT(ad_sequence_test2, "test ad_sequence advice")
   t << equal<expect>(result[2], -1 )   << FAS_TESTING_FILE_LINE;
   t << equal<expect>(result[3], 1000 ) << FAS_TESTING_FILE_LINE;
 
-  /*
-   * int *ptr = result;
-   * ads(t, sequence<integer>(), ptr, range(value) );
-   */
+    
+  /*int *ptr = result;
+  ads(t, sequence<integer>(), ptr, range(value) );
+  */
+  
+  
 
 }
 

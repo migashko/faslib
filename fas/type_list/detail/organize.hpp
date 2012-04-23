@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -8,13 +8,15 @@
 #define FAS_TYPE_LIST_DETAIL_ORGANIZE_HPP
 
 #include <fas/type_list/merge.hpp>
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/type_list.hpp>
-#include <fas/type_list/empty_list.hpp>
 
 #include <fas/type_list/is_type_list.hpp>
 #include <fas/type_list/is_organized.hpp>
 
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/errorlist.hpp>
+
+#include <fas/static_check/static_error.hpp>
 
 namespace fas{ namespace detail{
 
@@ -34,17 +36,9 @@ struct organize_impl3;
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename L>
-struct organize_verifying;
-
-template<typename L>
 struct organize_helper
-  : verifying< organize_verifying<L>, is_type_list<L> >::type
-{
-};
-
-template<typename L>
-struct organize_verifying
-  : organize_impl0<L>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , organize_impl0<L>
 {
 };
 

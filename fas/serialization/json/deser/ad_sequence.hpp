@@ -4,22 +4,32 @@
 #include <fas/serialization/json/deser/default_space_parser.hpp>
 #include <fas/serialization/json/deser/deserialize_sequence.hpp>
 #include <fas/serialization/json/deser/f_item_deserialize.hpp>
+#include <fas/static_check/static_error.hpp>
 #include <fas/range/range.hpp>
 
 #include <fas/integral/bool_.hpp>
 #include <fas/typemanip/type2type.hpp>
 #include <fas/typemanip/is_array.hpp>
+#include <fas/typemanip/is_pointer.hpp>
 
-#include <fas/static_check/verifying.hpp>
+// #include <fas/static_check/verifying.hpp>
 
-namespace fas{ namespace json{ namespace deser{
+namespace fas{ namespace json{ 
 
-struct sequence_error
+namespace errorlist
+{
+struct sequence_limit_required;
+}
+
+namespace deser{
+
+/*struct sequence_error
 {
   enum { value = 0 };
   struct sequence_limit_required;
   typedef sequence_limit_required error;
 };
+*/
 
 /// Если элемент не сериализован то пропускает его и берет следующий
 template<char C>
@@ -60,9 +70,12 @@ private:
   template<typename T, typename M, typename V, typename R>
   R _1(T& t, M, V* v, R r, false_, int_<-1> )
   {
-    typedef verifying< false_, sequence_error >::type sequence_limit_required;
+    typedef typename static_error< 
+      ::fas::json::errorlist::sequence_limit_required, 
+      !is_pointer<V*>::value 
+    >::type sequence_limit_required;
     sequence_limit_required();
-    // enum { sequence_limit_required = static_check< 0 >::value };
+    
     return r;
   }
 

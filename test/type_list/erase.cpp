@@ -18,7 +18,9 @@ int main()
 {
   enum {
     test1 = static_check< some_type< erase< int_<0>, list_2>::type, check_0>::value >::value,
-    test2 = static_check< some_type< erase< int_<3>, list_2>::type, check_3>::value >::value,
+    test2 = static_check< some_type< erase< int_<3>, list_2>::type, check_3>::value >::value/*,
+    test3 = static_check< some_type< erase< int_<6>, list_2>::type, check_3>::value >::value,
+    test4 = static_check< some_type< erase< int_<-6>, list_2>::type, check_3>::value >::value*/
   };
   return 0;
 }

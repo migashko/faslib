@@ -17,7 +17,7 @@
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 
-#include <fas/generators/generator.hpp>
+#include <fas/algorithm/generator.hpp>
 
 #include <fas/integral/rand.hpp>
 

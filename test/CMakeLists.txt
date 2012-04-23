@@ -14,7 +14,7 @@ SUBDIRS(
   range
   adv
   serialization
-  jsonrpc
+  # jsonrpc
 )
 
 

@@ -1,4 +1,4 @@
-#include <fas/generators/generator.hpp>
+#include <fas/algorithm/generator.hpp>
 #include <fas/static_check.hpp>
 #include <fas/integral/inc.hpp>
 #include <fas/integral/dec.hpp>

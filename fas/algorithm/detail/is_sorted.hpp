@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,11 +7,16 @@
 #ifndef FAS_ALGORITHM_DETAIL_IS_SORTED_HPP
 #define FAS_ALGORITHM_DETAIL_IS_SORTED_HPP
 
-#include <fas/mp/apply.hpp>
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/check_list.hpp>
-#include <fas/type_list/metalist.hpp>
 #include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/errorlist.hpp>
+#include <fas/type_list/metalist.hpp>
+
+#include <fas/static_check/static_error.hpp>
+
+
 
 namespace fas{ namespace detail{
 
@@ -44,20 +49,14 @@ struct is_sorted_impl_t<L, F, false>
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
-template<typename L, template<typename, typename> class F, int>
-struct is_sorted_verifying_t;
-
 template<typename L, template<typename, typename> class F, int I>
 struct is_sorted_impl_t
-  : verifying< is_sorted_verifying_t<L, F, I>, check_list<L> >::type
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , is_sorted_impl1_t<L, F>
 {
 };
 
-template<typename L, template<typename, typename> class F, int>
-struct is_sorted_verifying_t
-  : is_sorted_impl1_t<L, F>
-{
-};
 
 #else
 

@@ -4,17 +4,14 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_TYPE_LIST_ERRORLIST_HPP
-#define FAS_TYPE_LIST_ERRORLIST_HPP
-
-#include <fas/static_check/errorlist.hpp>
+#ifndef FAS_ALGORITHM_ERRORLIST_HPP
+#define FAS_ALGORITHM_ERRORLIST_HPP
 
 namespace fas{
 
 namespace errorlist
 {
-  struct not_type_list;
-  struct not_organized;
+  struct generator_required;
 };
 
 }

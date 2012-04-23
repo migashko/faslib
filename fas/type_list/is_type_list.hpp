@@ -29,7 +29,7 @@ struct is_type_list
 
   typedef typename if_c<
       value,
-      errorlist::noerror,
+      errorlist::noerror<errorlist::not_type_list>,
       errorlist::not_type_list
   >::type error;
 };
@@ -40,14 +40,14 @@ template<typename L, typename R >
 struct is_type_list< type_list<L, R> >
 {
   enum { value = 1};
-  typedef errorlist::noerror error;
+  typedef errorlist::noerror<errorlist::not_type_list> error;
 };
 
 template<>
 struct is_type_list< empty_list >
 {
   enum { value = 1};
-  typedef errorlist::noerror error;
+  typedef errorlist::noerror<errorlist::not_type_list> error;
 };
 
 #endif //DISABLE_TYPE_LIST_SPEC

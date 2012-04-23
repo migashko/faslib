@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,12 +7,15 @@
 #ifndef FAS_TYPE_LIST_DETAIL_TYPE_COUNT_HPP
 #define FAS_TYPE_LIST_DETAIL_TYPE_COUNT_HPP
 
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/check_list.hpp>
 #include <fas/type_list/metalist.hpp>
+#include <fas/type_list/errorlist.hpp>
 
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
+
+#include <fas/static_check/static_error.hpp>
 
 
 namespace fas{ namespace detail{
@@ -28,18 +31,11 @@ struct type_count_some_type;
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
-template<typename T, typename L>
-struct type_count_verifying;
-
 template<typename T,typename L>
 struct type_count_helper
-  : verifying< type_count_verifying<T, L>, check_list<L> >::type
-{
-};
-
-template<typename T, typename L>
-struct type_count_verifying
-  : type_count_impl1<T, L>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , type_count_impl1<T, L> 
 {
 };
 

@@ -31,6 +31,9 @@ int main()
     test5 = static_check< some_type< split< int_<4>, list_2>::left_list, check_4_left>::value >::value,
     test6 = static_check< some_type< split< int_<4>, list_2>::right_list, check_4_right>::value >::value,
     
+    //test7 = static_check< some_type< split< int_<-1>, list_2>::left_list, check_4_left>::value >::value,
+    //test8 = static_check< some_type< split< int_<60>, list_2>::right_list, check_4_right>::value >::value,
+    
 
   };
   return 0;

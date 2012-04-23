@@ -7,7 +7,6 @@
 #ifndef FAS_ALGORITHM_DETAIL_SELECT_HPP
 #define FAS_ALGORITHM_DETAIL_SELECT_HPP
 
-#include <fas/mp/apply.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/type_list/erase_c.hpp>
 #include <fas/type_list/type_at_c.hpp>

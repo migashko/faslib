@@ -7,12 +7,15 @@
 #ifndef FAS_ALGORITHM_DETAIL_TRANSFORM_HPP
 #define FAS_ALGORITHM_DETAIL_TRANSFORM_HPP
 
-#include <fas/mp/apply.hpp>
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/check_list.hpp>
-#include <fas/type_list/metalist.hpp>
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/errorlist.hpp>
+#include <fas/type_list/metalist.hpp>
+
+#include <fas/static_check/static_error.hpp>
+
 
 namespace fas{ namespace detail{
 
@@ -24,18 +27,12 @@ struct transform_impl2_t;
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
-template<typename L, template<typename> class F>
-struct transform_verifying_t;
 
 template<typename L, template<typename> class F>
 struct transform_helper_t
-  : verifying< transform_verifying_t<L, F>, check_list<L> >::type
-{
-};
-
-template<typename L, template<typename> class F>
-struct transform_verifying_t
-  : transform_impl_t<L, F>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , transform_impl_t<L, F>
 {
 };
 

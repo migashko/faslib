@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,10 +7,14 @@
 #ifndef FAS_TYPE_LIST_DETAIL_ERASE_HPP
 #define FAS_TYPE_LIST_DETAIL_ERASE_HPP
 
-#include <fas/static_check/verifying.hpp>
-#include <fas/type_list/check_range_c.hpp>
+
 #include <fas/type_list/split_c.hpp>
 #include <fas/type_list/merge.hpp>
+
+#include <fas/type_list/errorlist.hpp>
+#include <fas/type_list/length.hpp>
+
+#include <fas/static_check/static_error.hpp>
 
 namespace fas{ namespace detail{
 
@@ -20,18 +24,13 @@ struct erase_impl;
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
-template<int I, typename L>
-struct erase_verifying;
-
 template<int I,typename L>
 struct erase_helper
-  : verifying< erase_verifying<I, L>, check_range_c<I, L> >::type
-{
-};
-
-template<int I, typename L>
-struct erase_verifying
-  : erase_impl< I, L>
+  : static_error< 
+      errorlist::out_of_range< I, length<L>::value >, 
+      ( (I>=0) && (I < length<L>::value) )
+    >::type
+  , erase_impl< I, L>
 {
 };
 

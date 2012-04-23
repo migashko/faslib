@@ -1,13 +1,14 @@
 #include <fas/type_list/length.hpp>
 #include <fas/type_list/organize.hpp>
 #include <fas/algorithm/generate.hpp>
-#include <fas/generators/generator.hpp>
+#include <fas/algorithm/generator.hpp>
 #include <fas/integral/rand.hpp>
 #include <fas/integral/int_.hpp>
 #include <fas/integral/make_int.hpp>
 #include <fas/static_check.hpp>
 
-
+template<typename>
+struct w1{};
 
 int main()
 {

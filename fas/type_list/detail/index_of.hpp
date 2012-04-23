@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,11 +7,16 @@
 #ifndef FAS_TYPE_LIST_DETAIL_INDEX_OF_HPP
 #define FAS_TYPE_LIST_DETAIL_INDEX_OF_HPP
 
+#include <fas/type_list/is_type_list.hpp>
+#include <fas/type_list/is_organized.hpp>
+
 #include <fas/type_list/length.hpp>
-#include <fas/type_list/check_list.hpp>
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
+
 #include <fas/typemanip/some_type.hpp>
+
+#include <fas/static_check/static_error.hpp>
 
 
 namespace fas{ namespace detail{
@@ -44,17 +49,10 @@ struct index_of_impl2;
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename T, typename L>
-struct index_of_verifying;
-
-template<typename T, typename L>
 struct index_of_helper
-  : verifying< index_of_verifying<T, L>, check_list<L> >::type
-{
-};
-
-template<typename T, typename L>
-struct index_of_verifying
-  : index_of_impl<T, L>
+  : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
+  , static_error< errorlist::not_organized, is_organized<L>::value >::type
+  , index_of_impl<T, L>
 {
 };
 

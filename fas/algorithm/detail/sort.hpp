@@ -8,9 +8,10 @@
 #define FAS_ALGORITHM_DETAIL_SORT_HPP
 
 #include <fas/algorithm/is_sorted.hpp>
-#include <fas/mp/apply.hpp>
+
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
 #include <fas/type_list/metalist.hpp>
-#include <fas/static_check/verifying.hpp>
 
 namespace fas{ namespace detail{
 
