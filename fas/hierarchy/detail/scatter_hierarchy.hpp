@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2006, 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -18,7 +19,6 @@
 #include <fas/static_check/static_error.hpp>
 
 
-
 namespace fas{ namespace detail{
 
 template<typename L>
@@ -31,7 +31,6 @@ template<typename MT, typename L>
 struct scatter_hierarchy_impl1;
 
 #ifdef FASLIB_TYPE_LIST_CHECK
-
 
 template<typename L>
 struct scatter_hierarchy_helper
@@ -111,52 +110,6 @@ template<>
 struct sh<empty_list>
 {
 };
-
-
-
-  /*
-template<typename L>
-struct sh;
-
-template<typename M, typename L>
-struct scatter_hierarchy_impl;
-
-template<typename L>
-struct scatter_hierarchy_helper;
-
-template<typename L >
-struct scatter_hierarchy_helper
-{
-  typedef typename scatter_hierarchy_impl<typename L::metatype, L>::type type;
-};
-
-template< typename L>
-struct scatter_hierarchy_impl<metalist::type_list, L>
-{
-  typedef sh<L> type;
-};
-
-template< typename L>
-struct scatter_hierarchy_impl<metalist::empty_list, L>
-{
-  typedef sh<metalist::empty_list> type;
-};
-
-template<typename L>
-struct sh
-  : L::left_type
-  , scatter_hierarchy_impl<typename L::right_type::metatype, typename L::right_type>::type
-{
-  typedef L type_list;
-  typedef typename L::left_type left_base;
-  typedef typename scatter_hierarchy_impl<typename L::right_type::metatype, typename L::right_type>::type right_base;
-};
-
-template<>
-struct sh<metalist::empty_list>
-{
-};
-  */
 
 }}
 

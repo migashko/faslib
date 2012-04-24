@@ -1,22 +1,16 @@
-#project(test)
-SUBDIRS(
-  static_check
-  integral
-  typemanip
-  type_list
-  mp
-  generators
-  algorithm
-  hierarchy
-  aop
-  xtime
-  testing
-  range
-  adv
-  serialization
-  # jsonrpc
-)
 
-
-
-
+add_subdirectory(static_check)
+add_subdirectory(integral)
+add_subdirectory(typemanip)
+add_subdirectory(type_list)
+add_subdirectory(mp)
+add_subdirectory(generators)
+add_subdirectory(algorithm)
+add_subdirectory(hierarchy)
+add_subdirectory(aop)
+add_subdirectory(xtime)
+add_subdirectory(testing)
+add_subdirectory(range)
+add_subdirectory(adv)
+add_subdirectory(serialization)
+add_subdirectory(jsonrpc)

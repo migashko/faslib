@@ -169,7 +169,7 @@ public:
   get() const
   {
     typedef typename find_advice< Tg, advice_list>::type advice_type;
-    return const_field<advice_type>( static_cast<const super&>(*this) ).get_advice();
+    return /*const_*/field<advice_type>( static_cast<const super&>(*this) ).get_advice();
   };
 
   template<typename Tg>
