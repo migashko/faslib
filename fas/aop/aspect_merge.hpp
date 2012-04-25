@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -6,7 +7,7 @@
 #ifndef FAS_AOP_ASPECT_ASPECT_MERGE_HPP
 #define FAS_AOP_ASPECT_ASPECT_MERGE_HPP
 
-#include "detail/aspect_merge.hpp"
+#include <fas/aop/detail/aspect_merge.hpp>
 
 namespace fas{
 

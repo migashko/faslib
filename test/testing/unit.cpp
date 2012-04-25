@@ -36,7 +36,7 @@ int main()
       +
       static_check< 
         some_type<
-          foo_test_type_list::right_type::left_type::target_list, 
+          foo_test_type_list::right_type::left_type::target, 
           type_list<foo_test>
         >::value 
       >::value

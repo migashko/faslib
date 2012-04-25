@@ -1,12 +1,11 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
 #ifndef FAS_AOP_VALUE_ADVICE_HPP
 #define FAS_AOP_VALUE_ADVICE_HPP
-
-#include <fas/system/disable_warnings.hpp>
 
 #include <fas/aop/metalist.hpp>
 
@@ -28,7 +27,5 @@ private:
 };
 
 }
-
-#include <fas/system/enable_warnings.hpp>
 
 #endif

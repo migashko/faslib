@@ -4,17 +4,17 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_AOP_ALIAS_HPP
-#define FAS_AOP_ALIAS_HPP
+#ifndef FAS_AOP_FORWARD_HPP
+#define FAS_AOP_FORWARD_HPP
 
 #include <fas/aop/metalist.hpp>
 
 namespace fas{
 
 template<typename Tg, typename TTg>
-struct alias
+struct forward
 {
-  typedef metalist::alias metatype;
+  typedef metalist::forward metatype;
   typedef Tg tag;
   typedef TTg target;
 };

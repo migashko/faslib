@@ -16,7 +16,7 @@
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
 #include <fas/aop/value_advice.hpp>
-#include <fas/aop/definition.hpp>
+#include <fas/aop/type_advice.hpp>
 #include <fas/aop/value_advice.hpp>
 #include <fas/type_list/type_list_n.hpp>
 
@@ -35,7 +35,7 @@ struct outgoing_list
     advice<_send_notify_, ad_send_notify>,
     advice<_send_request_, ad_send_request>,
     advice<_send_failed_, ad_send_failed>,
-    definition< _serializer_, outgoing_serializer >,
+    type_advice< _serializer_, outgoing_serializer >,
     value_advice< _buffer_, outgoing_buffer >,
     alias<_empty_output_, _output_>,
     stub< _output_>

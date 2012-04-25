@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -6,20 +7,21 @@
 #ifndef FAS_AOP_DETAIL_FIND_ADVICE_HPP
 #define FAS_AOP_DETAIL_FIND_ADVICE_HPP
 
-#include <fas/aop/metalist.hpp>
 #include <fas/aop/is_has_tag.hpp>
+#include <fas/aop/is_forward.hpp>
 #include <fas/aop/is_alias.hpp>
-#include <fas/type_list/metalist.hpp>
-#include <fas/type_list/index_of.hpp>
-//#include <fas/type_list/merge.hpp>
-//#include <fas/type_list/el.hpp>
-//#include <fas/type_list/make_type_list.hpp>
-//#include <fas/algorithm/find_if.hpp>
-#include <fas/typemanip/if_c.hpp>
-#include <fas/typemanip/pair.hpp>
+#include <fas/aop/target_cast.hpp>
+
 #include <fas/algorithm/index_of_if.hpp>
-#include <fas/algorithm/find_if.hpp>
-#include <fas/mp/bind.hpp>
+#include <fas/mp/placeholders.hpp>
+
+#include <fas/type_list/type_at_c.hpp>
+#include <fas/type_list/length.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/type_list/empty_list.hpp>
+
+#include <fas/typemanip/pair.hpp>
+#include <fas/integral/bool_.hpp>
 
 namespace fas{ 
 
@@ -111,77 +113,15 @@ template<typename Tg, typename L, typename ALT, int Pos, int Len>
 struct find_advice_impl_3<Tg, L, ALT, Pos, Len, pair<true_, false_> >
 {
   typedef typename type_at_c<Pos, L>::type alias_type;
-  typedef typename find_advice_impl_1< typename target<alias_type>::type, L, ALT, 0, Len >::type type;
+  typedef typename find_advice_impl_1< typename target_cast<alias_type>::type, L, ALT, 0, Len >::type type;
 };
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len>
 struct find_advice_impl_3<Tg, L, ALT, Pos, Len, pair<false_, true_ > >
 {
   typedef typename type_at_c<Pos, L>::type forward_type;
-  typedef typename find_advice_impl_1< typename target<forward_type>::type, L, ALT, Pos + 1, Len >::type type;
+  typedef typename find_advice_impl_1< typename target_cast<forward_type>::type, L, ALT, Pos + 1, Len >::type type;
 };
-
- /*
-template<typename Tg, typename L, typename C, typename ALT, int B >
-struct find_advice_impl;
-
-
-template<typename Tg, typename L, typename ALT >
-struct find_advice_helper
-{
-  typedef find_if_t< L, bind2nd<is_has_tag, Tg>::template apply > helper;
-  typedef typename helper::type current;
-  typedef typename helper::tail tail;
-
-  //enum { error = advice_not_found<Tg, current>::value };
-  typedef typename find_advice_impl<Tg, tail, current, ALT, is_alias<current>::value >::type type;
-};
-
-template<typename Tg, typename ALT >
-struct find_advice_helper<Tg, empty_list, ALT>
-{
-  enum { error = 0 };
-  typedef ALT type;
-};
-
-template<typename Tg >
-struct find_advice_helper<Tg, empty_list, _no_alternative_>
-{
-  enum { error = advice_not_found<Tg, empty_type>::value };
-};
-
-
-template<typename Tg, typename L, typename C, typename ALT, int B >
-struct find_advice_impl
-{
-  typedef typename find_advice_helper<
-    typename C::target,
-    L,
-    ALT
-  >::type type;
-};
-  
-template<typename Tg, typename L>
-struct find_advice_impl<Tg, L, empty_type, _no_alternative_, false>
-{
-  enum { error = advice_not_found<Tg, empty_type>::value };
-  typedef empty_type type;
-};
-
-template<typename Tg, typename L, typename ALT>
-struct find_advice_impl<Tg, L, empty_type, ALT, false>
-{
-  enum { error = 0 };
-  typedef ALT type;
-};
-
-template<typename Tg, typename L, typename C, typename ALT>
-struct find_advice_impl<Tg, L, C, ALT, false>
-{
-  enum { error = 0 };
-  typedef C type;
-};
-*/
 
 }}
 

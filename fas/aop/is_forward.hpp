@@ -4,25 +4,26 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_AOP_IS_ALIAS_HPP
-#define FAS_AOP_IS_ALIAS_HPP
+#ifndef FAS_AOP_IS_FORWARD_HPP
+#define FAS_AOP_IS_FORWARD_HPP
 
 #include <fas/aop/metalist.hpp>
-#include <fas/aop/alias.hpp>
-#include <fas/integral/bool_.hpp>
+#include <fas/aop/forward.hpp>
 #include <fas/typemanip/is_has_metatype.hpp>
+#include <fas/integral/bool_.hpp>
 
 namespace fas{
 
 template<typename T>
-struct is_alias
+struct is_forward
 {
- enum { value = is_has_metatype<T, metalist::alias>::value };
- typedef bool_< value > type;
+  enum { value = is_has_metatype<T, metalist::forward>::value };
+  typedef bool_< value > type;
 };
 
+
 template<typename Tg, typename TTg>
-struct is_alias< alias<Tg, TTg> >
+struct is_forward< forward<Tg, TTg> >
 {
   enum { value = 1};
   typedef true_ type;

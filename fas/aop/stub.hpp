@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -11,9 +11,6 @@
 
 namespace fas {
 
-/** Авайс-класс - заглушка. 
-  * @param R - тип возвращаемого значения
-  */
 template<typename Tg, typename R = void>
 class stub
 {
@@ -43,9 +40,7 @@ public:
 
   template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
   R operator()(T&, P1, P2, P3, P4, P5) { return R(); }
-
 };
-
 
 }
 

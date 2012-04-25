@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -17,13 +18,7 @@ struct group
 {
   typedef metalist::group metatype;
   typedef Tg tag;
-  typedef typename normalize<TgL>::type target_list;
-};
-
-template <typename G>
-struct target_list
-{
-  typedef typename G::target_list type;
+  typedef typename normalize<TgL>::type target;
 };
 
 }

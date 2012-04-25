@@ -4,19 +4,18 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_AOP_ALIAS_HPP
-#define FAS_AOP_ALIAS_HPP
+#ifndef FAS_AOP_REMOVE_ADVICE_HPP
+#define FAS_AOP_REMOVE_ADVICE_HPP
 
 #include <fas/aop/metalist.hpp>
 
 namespace fas{
 
-template<typename Tg, typename TTg>
-struct alias
+template<typename Tg>
+struct remove_advice
 {
-  typedef metalist::alias metatype;
+  typedef metalist::remove_advice metatype;
   typedef Tg tag;
-  typedef TTg target;
 };
 
 }

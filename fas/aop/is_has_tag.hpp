@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -8,7 +9,6 @@
 
 #include <fas/aop/has_tag.hpp>
 #include <fas/typemanip/is_has_typename.hpp>
-#include <fas/typemanip/is_has_metatype.hpp>
 #include <fas/integral/bool_.hpp>
 
 

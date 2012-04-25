@@ -25,7 +25,7 @@
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
 #include <fas/aop/stub.hpp>
-#include <fas/aop/definition.hpp>
+//#include <fas/aop/type_advice.hpp>
 #include <fas/type_list/type_list_n.hpp>
 
 namespace fas{ namespace jsonrpc{ 

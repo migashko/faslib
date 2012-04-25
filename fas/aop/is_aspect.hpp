@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2011
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,7 +8,6 @@
 #define FAS_AOP_IS_ASPECT_HPP
 
 #include <fas/aop/metalist.hpp>
-#include <fas/aop/stub.hpp>
 #include <fas/aop/aspect.hpp>
 
 #include <fas/typemanip/is_has_metatype.hpp>
@@ -21,7 +21,6 @@ struct is_aspect
   : is_has_metatype<T, metalist::aspect>
 {
 };
-
 
 template<typename L>
 struct is_aspect< aspect<L> >

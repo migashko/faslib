@@ -6,7 +6,7 @@
 #include <fas/aop/aspect_class.hpp>
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/type_list/length.hpp>
-#include <fas/integral/int_.hpp>
+#include <fas/integral.hpp>
 #include <fas/static_check/static_check.hpp>
 #include <fas/algorithm/find_if.hpp>
 #include <fas/typemanip/type2type.hpp>
@@ -119,7 +119,7 @@ struct test_aspect: aspect<test_advice_list> {};
 struct test_class: aspect_class<test_aspect> 
 {
   
-  // Интересный эффект без "::" не работает 
+  // Интересный эффект без "::" не работает, т.к. ad_counters приветный базовый класс aspect_class
   const ::ad_counters& get_counters() const { return this->get_aspect().get< _counters_ >();}
   ::ad_counters& get_counters() { return this->get_aspect().get< _counters_ >();}
   /*
@@ -180,6 +180,12 @@ struct f_test
 
 };
 
+template<typename T>
+struct ad_id
+{
+  typedef int_<T::id> type;
+};
+
 int main()
 {
   ad_counters c;
@@ -220,6 +226,10 @@ int main()
 
   f_test f = test.get_aspect().getg<_group5_>().for_each(test, f_test());
   if ( !test_ids( "test3foreach", f.ids, ids(5, 2, 3, 4) ))
+    return -1;
+
+  f_test f2 = test.get_aspect().getg<_group5_>().for_each_if< equal_to< int_<0>, modulus< ad_id<_>, int_<2> > > >(test, f_test());
+  if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
 
   /*f_test f = test.get_aspect().getg<_group5_>().for_each(test, f_test());

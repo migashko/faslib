@@ -7,6 +7,9 @@
 #include <fas/testing/unit.hpp>
 #include <fas/testing/tags.hpp>
 #include <fas/aop/aspect.hpp>
+#include <fas/aop/advice.hpp>
+#include <fas/aop/type_advice.hpp>
+#include <fas/aop/value_advice.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/group.hpp>
 #include <fas/aop/aspect_class.hpp>
@@ -419,7 +422,7 @@ inline void show_total_result( const suite_counts& sc )
 #define ADD_CLASS(name) , ::fas::advice<name, name>
 #define ADD_ADVICE(tag, name) , ::fas::advice<tag, name>
 #define ADD_VALUE_ADVICE(tag, name) , ::fas::value_advice<tag, name>
-#define ADD_DEFINITION(tag, name) , ::fas::definition<tag, name>
+#define ADD_TYPE_ADVICE(tag, name) , ::fas::type_advice<tag, name>
 #define ADD_GROUP(tag, tag_list) , ::fas::group<tag, tag_list>
 #define ADD_STUB(tag) , ::fas::stub<tag>
 #define ADD_ASPECT(aspect) , aspect

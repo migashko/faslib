@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_range_BIDIRECTIONAL_RANGE_HPP
-#define FAS_range_BIDIRECTIONAL_RANGE_HPP
+#ifndef FAS_RANGE_BIDIRECTIONAL_RANGE_HPP
+#define FAS_RANGE_BIDIRECTIONAL_RANGE_HPP
 
 #include <fas/range/range_category.hpp>
 #include <iterator>

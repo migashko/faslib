@@ -18,7 +18,7 @@
 
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
-#include <fas/aop/definition.hpp>
+#include <fas/aop/type_advice.hpp>
 #include <fas/type_list/type_list_n.hpp>
 
 
@@ -30,8 +30,8 @@ struct inbound_list: type_list_n<
   advice< _parse_object_, ad_parse_object >,
   advice< _parse_array_, ad_parse_array >,
   advice< _process_object_, ad_process_object >,
-  definition< _deserializer_, inbound_deserializer >,
-  definition< _parser_, inbound_parser >,
+  type_advice< _deserializer_, inbound_deserializer >,
+  type_advice< _parser_, inbound_parser >,
   inbound_error_aspect
 >::type {};
 

@@ -1,4 +1,5 @@
-// Author: Vladimir Migashko <migashko@faslib.com>, (C) 2007
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -8,22 +9,13 @@
 
 #include <fas/aop/aspect.hpp>
 #include <fas/type_list/metalist.hpp>
+#include <fas/type_list/empty_list.hpp>
+#include <fas/type_list/type_list.hpp>
+#include <fas/typemanip/empty_type.hpp>
+
 
 
 namespace fas{ namespace detail{
-
-  /*
-template<typename A1, typename A2>
-struct aspect_merge_helper
-{
-  typedef aspect<
-      typename merge<
-        typename A1::type_list,
-        typename A2::type_list
-      >::type
-  > type;
-};
-  */
 
 template<typename L1, typename L2, typename A1, typename A2>
 struct aspect_merge_impl;
@@ -48,6 +40,18 @@ struct aspect_merge_helper< aspect<L1>, aspect<L2> >
       L1, L2,
       aspect<L1>, aspect<L2>
   >::type type;
+};
+
+template<typename A>
+struct aspect_merge_helper< A, empty_type >
+{
+  typedef A type;
+};
+
+template<typename A>
+struct aspect_merge_helper< empty_type, A >
+{
+  typedef A type;
 };
 
 template<typename L1, typename L2, typename A1, typename A2>
