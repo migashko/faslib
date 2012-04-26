@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -19,6 +19,7 @@
 
 
 #include <fas/type_list/unique.hpp>
+#include <fas/type_list/unique_first.hpp>
 #include <fas/type_list/merge.hpp>
 #include <fas/type_list/tail.hpp>
 #include <fas/type_list/head.hpp>
@@ -26,54 +27,70 @@
 #include <fas/algorithm/erase_if.hpp>
 #include <fas/algorithm/transform_tail_if.hpp>
 #include <fas/algorithm/transform.hpp>
+#include <fas/algorithm/transform_if.hpp>
+#include <fas/algorithm/any.hpp>
 
 #include <fas/mp/placeholders.hpp>
 #include <fas/mp/a.hpp>
 #include <fas/mp/p.hpp>
 
+
 #include <fas/integral/or_.hpp>
 
 namespace fas{
-  
+
 template<typename A>
 struct aspect_helper
 {
   typedef A aspect_type;
- 
-  typedef or_< is_alias<_1>, is_forward<_1> > ctrl_marks;
-  typedef or_< is_remove_advice<_1>, ctrl_marks > marks;
-  typedef or_< is_advice<_1>, marks > items;
 
-  typedef typename aspect_select<aspect_type, items >::type advice_list1;
+private:
+  // строим плоский список
+  typedef typename aspect_select_t< 
+    aspect_type, 
+    any
+  >::type flat_list;
   
+  // метафункция удаления из хвоста списка элементов с тегом элемента головы списка 
   typedef erase_if<
-            tail< _1 >,
-            a< is_has_tag< p<_>, tag_cast< head< _1 > > > >
-          > remove_from_tail;
+    tail< _1 >,
+    a< is_has_tag< p<_1>, tag_cast< head< _1 > > > >
+  > remove_from_tail;
   
+  // для каждого remove_advice<_tag_> в списке удаляем элементы _tag_ расположенные за ним
   typedef typename transform_tail_if<
-    advice_list1,
+    flat_list,
     remove_from_tail,
-    is_remove_advice<_>
-  >::type common_list1;
-  
-  typedef typename erase_if< common_list1, ctrl_marks >::type advice_list;
-  
-  typedef typename aspect_select_t<aspect_type, is_group>::type group_list;
-  
-  typedef typename unique<typename transform_t<group_list, tag_cast >::type >::type group_tags;
-  
-  typedef typename transform<group_tags, group_call<_> >::type group_calls;
-  
-  typedef typename merge<group_calls, common_list1>::type common_list2;
-  
-  typedef typename unique<common_list2>::type common_list;
-  
-  typedef typename merge<group_calls, advice_list>::type hierarchy_list2;
-  
-  typedef typename unique<hierarchy_list2>::type hierarchy_list;
-};
+    is_remove_advice<_1>
+  >::type net_list;
 
+public:
+  
+  // заменяем group<_tag_> на group_call<_tag_> и оставляем первое вхождение
+  // это список по которому будет производиться поиск с помощью find_advice
+  typedef typename unique_first<
+    typename transform_if<
+      net_list, 
+      group_call< tag_cast< _1 > > ,
+      is_group<_>
+    >::type 
+  >::type common_list;
+  
+  // удаляем из общего списка элементы alias и forward
+  // на базе этого списка будет строиться иерархия
+  typedef typename erase_if<
+    common_list,
+    or_< is_alias<_1>, is_forward<_1> >
+  >::type hierarchy_list;
+
+  // извлекаем элементы group<_tag_>
+  // этот список использует group_call для групповых вызовов
+  typedef typename aspect_select_t<
+    aspect_type,
+    is_group
+  >::type group_list;
+
+};
 }
 
 #endif

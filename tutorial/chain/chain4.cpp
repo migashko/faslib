@@ -20,9 +20,15 @@ struct aspect: fas::aspect<
 >
 {};
 
+struct chain_aspect
+  : fas::aspect_merge<aspect, fas::aspect_merge<chain_c::aspect, chain_b::aspect>::type >::type
+{
+  
+};
+
 int main()
 {
-  typedef chain< fas::aspect_merge<aspect, fas::aspect_merge<chain_c::aspect, chain_b::aspect>::type >::type > chain_class;
+  typedef chain< chain_aspect > chain_class;
   chain_class c;
   c.doit(0);
   std::cout << "------------------" << std::endl;

@@ -46,6 +46,14 @@ struct _group1_;
 struct _group3_;
 struct _group5_;
 
+struct _overlapped_;
+struct _overlapped2_;
+
+struct ad_overlapped
+{
+  enum { value = 1};
+};
+
 template<int ID>
 struct ad_test
 {
@@ -94,6 +102,7 @@ struct ad_test
 };
 
 typedef type_list_n<
+  advice< _overlapped_, ad_overlapped>,
   advice< _counters_, ad_counters>,
   advice< _test1_, ad_test<1> >,
   advice< _test2_, ad_test<2> >,
@@ -109,7 +118,12 @@ typedef type_list_n<
   group< _group5_, _test5_ >,
   group< _group5_, type_list_n<_test2_, _test3_>::type >,
   group< _group5_, type_list_n<_test4_, _test5_>::type >,
-  group< _group5_, _test2_ >
+  group< _group5_, _test2_ >,
+  group< _overlapped_, _test2_ >,
+  
+  group< _overlapped2_, _test2_ >,
+  advice< _overlapped2_, ad_overlapped>,
+  group< _overlapped2_, _test3_ >
 
 
 >::type test_advice_list;
@@ -188,6 +202,15 @@ struct ad_id
 
 int main()
 {
+  enum { value = test_class::aspect::advice_cast<_overlapped_>::type::value };
+  enum { value2 = /*test_class::aspect::advice_cast<_overlapped2_>::type::value*/
+        static_check<
+          some_type<
+            test_class::aspect::advice_cast<_overlapped2_>::type,
+            group_call<_overlapped2_>
+          >::value
+        >::value
+  };
   ad_counters c;
   test_class test;
 
@@ -228,17 +251,14 @@ int main()
   if ( !test_ids( "test3foreach", f.ids, ids(5, 2, 3, 4) ))
     return -1;
 
+  f = test.get_aspect().getg<_overlapped2_>().for_each(test, f_test());
+  if ( !test_ids( "_overlapped2_ test3foreach", f.ids, ids(2, 3) ))
+    return -1;
+
   f_test f2 = test.get_aspect().getg<_group5_>().for_each_if< equal_to< int_<0>, modulus< ad_id<_>, int_<2> > > >(test, f_test());
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
 
-  /*f_test f = test.get_aspect().getg<_group5_>().for_each(test, f_test());
-
-  if ( f.c != 5234000)
-  {
-    std::cout << f.c << std::endl;
-    return -1;
-  }*/
 
   return 0;
 }

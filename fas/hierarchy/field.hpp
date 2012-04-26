@@ -10,6 +10,7 @@
 #include <fas/hierarchy/scatter_hierarchy.hpp>
 #include <fas/type_list/type_at_c.hpp>
 #include <fas/type_list/index_of.hpp>
+#include <fas/type_list/length.hpp>
 
 namespace fas{
 
@@ -20,7 +21,6 @@ inline T& field(H& h)
   typedef typename type_at_c< index_of<T, type_list_type >::value, type_list_type >::fulltail fulltail;
   return static_cast< detail::sh<fulltail> &>(h);
 };
-
 
 template<typename T, typename H>
 inline const T& field(const H& h)
