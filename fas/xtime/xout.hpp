@@ -1,3 +1,8 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
 
 #ifndef FAS_XTIME_XOUT_HPP
 #define FAS_XTIME_XOUT_HPP
@@ -13,7 +18,6 @@ template<> struct x_width<FAS_NANOSEC> { enum {value = 9}; };
 template<> struct x_width<FAS_MICROSEC>{ enum {value = 6}; };
 template<> struct x_width<FAS_MILLISEC>{ enum {value = 3}; };
 
-  
 }
 
 
@@ -31,6 +35,5 @@ namespace std
     return os;
   }
 }
-
 
 #endif
