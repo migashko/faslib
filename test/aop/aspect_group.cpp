@@ -2,7 +2,7 @@
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/alias.hpp>
 #include <fas/aop/has_tag.hpp>
-#include <fas/aop/aspect_select.hpp>
+#include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/aspect_class.hpp>
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/type_list/length.hpp>

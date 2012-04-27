@@ -7,8 +7,8 @@
 #ifndef FAS_AOP_ASPECT_HELPER_HPP
 #define FAS_AOP_ASPECT_HELPER_HPP
 
-#include <fas/aop/aspect_select.hpp>
-#include <fas/aop/group_call.hpp>
+#include <fas/aop/private/aspect_select.hpp>
+#include <fas/aop/private/group_call.hpp>
 #include <fas/aop/is_advice.hpp>
 #include <fas/aop/is_alias.hpp>
 #include <fas/aop/is_group.hpp>

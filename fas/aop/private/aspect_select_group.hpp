@@ -7,7 +7,7 @@
 #ifndef FAS_AOP_ASPECT_SELECT_GROUP_HPP
 #define FAS_AOP_ASPECT_SELECT_GROUP_HPP
 
-#include <fas/aop/aspect_select.hpp>
+#include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/is_group.hpp>
 #include <fas/aop/is_has_tag.hpp>
 #include <fas/aop/target_cast.hpp>

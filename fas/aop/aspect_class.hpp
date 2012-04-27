@@ -9,7 +9,7 @@
 
 #include <fas/typemanip/empty_type.hpp>
 #include <fas/aop/aspect_merge.hpp>
-#include <fas/aop/aspect_hierarchy.hpp>
+#include <fas/aop/private/aspect_hierarchy.hpp>
 
 namespace fas{
 

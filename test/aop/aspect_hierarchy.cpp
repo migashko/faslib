@@ -1,8 +1,8 @@
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/has_tag.hpp>
-#include <fas/aop/aspect_select.hpp>
-#include <fas/aop/aspect_hierarchy.hpp>
+#include <fas/aop/private/aspect_select.hpp>
+#include <fas/aop/private/aspect_hierarchy.hpp>
 //#include <fas/type_list/tl_n.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/integral/int_.hpp>
