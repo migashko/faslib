@@ -6,7 +6,11 @@
 #include <algorithm>
 #include <numeric>
 
+#ifdef NDEBUG
 #define TOTAL_OP 10000000
+#else
+#define TOTAL_OP 1000
+#endif
 #define ONE_TIME_OP 1000
 #define RNG 10
 

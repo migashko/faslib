@@ -76,6 +76,7 @@ int main()
       >::type
     >::value
   > value2;
+  
   enum {
     test_lenght = static_check< length<result_list1>::value == 4 >::value,
     test0 = static_check< some_type< type_at< int_<0>, result_list1>::type, char>::value >::value,

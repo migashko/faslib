@@ -59,10 +59,6 @@ add_executable(jsoncpp_si jsoncpp_si.cpp jsoncpp/src/json_writer.cpp jsoncpp/src
 add_executable(jsoncpp_d jsoncpp_d.cpp jsoncpp/src/json_reader.cpp jsoncpp/src/json_value.cpp jsoncpp/src/json_writer.cpp)
 add_executable(jsoncpp_di jsoncpp_di.cpp jsoncpp/src/json_reader.cpp jsoncpp/src/json_value.cpp jsoncpp/src/json_writer.cpp)
 
-
-
-
-
 include_directories( jsoncpp )
 
 if (PROTOBUF_FOUND)
@@ -125,3 +121,11 @@ if (HAVE_RT_LIB AND FAS_USE_RT_LIB)
   target_link_libraries(jsoncpp_di rt)
 endif (HAVE_RT_LIB AND FAS_USE_RT_LIB)
 
+add_custom_command(
+    TARGET fasjson1_sa
+    POST_BUILD
+    COMMAND copy ARGS 
+    ${CMAKE_CURRENT_SOURCE_DIR}/benchmark.sh
+    ${CMAKE_CURRENT_BINARY_DIR}
+
+)

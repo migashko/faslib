@@ -19,7 +19,8 @@ check_function_exists("isatty" HAVE_ISATTY_FUNC)
 check_function_exists("_isatty" HAVE__ISATTY_FUNC)
 check_function_exists("getrusage" HAVE_GETRUSAGE_FUNC)
 check_function_exists("SetConsoleTextAttribute" HAVE_SETCONSOLETEXTATTRIBUTE_FUNC)
-check_function_exists(rt clock_gettime "time.h" HAVE_RT_LIB)
+
+check_library_exists(rt clock_gettime "time.h" HAVE_RT_LIB)
 
 if(HAVE_RT_LIB)
   message(STATUS "FAS_USE_RT_LIB ON ")

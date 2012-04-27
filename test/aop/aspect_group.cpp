@@ -200,6 +200,15 @@ struct ad_id
   typedef int_<T::id> type;
 };
 
+
+  template<typename T>
+  struct t
+  {
+    typedef typename equal_to< int_<0>, modulus< typename ad_id<T>::type , int_<2> > >::type type;
+  };
+  
+
+
 int main()
 {
   enum { value = test_class::aspect::advice_cast<_overlapped_>::type::value };
@@ -255,7 +264,11 @@ int main()
   if ( !test_ids( "_overlapped2_ test3foreach", f.ids, ids(2, 3) ))
     return -1;
 
-  f_test f2 = test.get_aspect().getg<_group5_>().for_each_if< equal_to< int_<0>, modulus< ad_id<_>, int_<2> > > >(test, f_test());
+  /*template<typename T>
+  template t: equal_to< int_<0>, modulus< ad_id<T>, int_<2> > >
+  {};*/
+  f_test f2 = test.get_aspect().getg<_group5_>().for_each_if_t< t >(test, f_test());
+//  f_test f2 = test.get_aspect().getg<_group5_>().for_each_if< equal_to< int_<0>, modulus< ad_id<_>, int_<2> > > >(test, f_test());
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
 
