@@ -121,11 +121,12 @@ if (HAVE_RT_LIB AND FAS_USE_RT_LIB)
   target_link_libraries(jsoncpp_di rt)
 endif (HAVE_RT_LIB AND FAS_USE_RT_LIB)
 
+if(UNIX)
 add_custom_command(
     TARGET fasjson1_sa
     POST_BUILD
-    COMMAND copy ARGS 
+    COMMAND cp ARGS 
     ${CMAKE_CURRENT_SOURCE_DIR}/benchmark.sh
     ${CMAKE_CURRENT_BINARY_DIR}
-
 )
+endif(UNIX)
