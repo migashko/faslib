@@ -29,5 +29,4 @@
 #cmakedefine HAVE__ISATTY_FUNC
 #cmakedefine HAVE_GETRUSAGE_FUNC
 #cmakedefine HAVE_SETCONSOLETEXTATTRIBUTE_FUNC
-
 #cmakedefine HAVE_RT_LIB

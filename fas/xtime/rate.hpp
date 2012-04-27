@@ -8,6 +8,7 @@
 #define FAS_XTIME_RATE_HPP
 
 #include <fas/xtime/nanospan.hpp>
+#include <fas/xtime/xop.hpp>
 
 namespace fas {
 
