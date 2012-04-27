@@ -9,6 +9,12 @@
 
 #include <fas/integral/int_.hpp>
 
+#ifndef FAS_NO_MINMAX_UNDEF
+#  ifdef max
+#    undef max
+#  endif
+#endif
+
 namespace fas{
 
 template<typename L, typename R>
