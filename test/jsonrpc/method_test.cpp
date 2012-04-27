@@ -77,7 +77,7 @@ UNIT(notify, "")
   std::string jsonstring = "[1,2]";
 
   garbage(t, "garbage");
-  n.get_aspect().get< ajr::local::_parse_notify_>()( t, n, fas::range(jsonstring) );
+  n.get_aspect().template get< ajr::local::_parse_notify_>()( t, n, fas::range(jsonstring) );
   t << equal<expect>( 3, n.get_aspect().get< ajr::local::_notify_>().result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( buffer(t), "" ) << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
   clear(t);
@@ -111,7 +111,7 @@ UNIT(request, "")
   std::string jsonstring = "[1,2]";
 
   garbage(t, "garbage");
-  n.get_aspect().get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
+  n.get_aspect().template get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
   t << equal<expect>( 3, n.get_aspect().get< ajr::local::_request_>().result ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"result\":3,\"id\":42}" ) << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
   clear(t);
@@ -176,7 +176,7 @@ UNIT(request_error, "")
 
   std::string jsonstring = "1";
   garbage(t, "garbage");
-  n.get_aspect().get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
+  n.get_aspect().template get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
   t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32602,\"message\":\"Invalid params.\"},\"id\":42}" )
     << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
   clear(t);
@@ -191,7 +191,7 @@ UNIT(request_error, "")
 
   jsonstring = "3";
   garbage(t, "garbage");
-  n.get_aspect().get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
+  n.get_aspect().template get< ajr::local::_parse_request_>()( t, n, fas::range(jsonstring), 42 );
   
   t << equal<expect>( buffer(t), "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":44,\"message\":\"User Error\",\"data\":{\"foo\":41,\"bar\":\"bar\"}},\"id\":42}" )
     << FAS_TESTING_FILE_LINE << std::endl << buffer(t);
@@ -263,18 +263,18 @@ UNIT(remote_request, "")
   clear(t);
   
   
-  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("1"), 1 );
+  n.get_aspect().template get< ajr::remote::_parse_result_>()( t, n, fas::range("1"), 1 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
 
   // invalid id
-  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("2"), 1 );
+  n.get_aspect().template get< ajr::remote::_parse_result_>()( t, n, fas::range("2"), 1 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
 
-  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("2"), 2 );
+  n.get_aspect().template get< ajr::remote::_parse_result_>()( t, n, fas::range("2"), 2 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
 
   // invalid id
-  n.get_aspect().get< ajr::remote::_parse_result_>()( t, n, fas::range("3"), 2 );
+  n.get_aspect().template get< ajr::remote::_parse_result_>()( t, n, fas::range("3"), 2 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_result_>().result, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
 }
 
@@ -315,18 +315,18 @@ UNIT(remote_error, "")
   clear(t);
   
   
-  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 1 );
+  n.get_aspect().template get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 1 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
 
   // invalid id
-  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 1 );
+  n.get_aspect().template get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 1 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 1 ) << FAS_TESTING_FILE_LINE << std::endl;
 
-  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 2 );
+  n.get_aspect().template get< ajr::remote::_parse_error_>()( t, n, fas::range("2"), 2 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
 
   // invalid id
-  n.get_aspect().get< ajr::remote::_parse_error_>()( t, n, fas::range("3"), 2 );
+  n.get_aspect().template get< ajr::remote::_parse_error_>()( t, n, fas::range("3"), 2 );
   t << equal<expect>( n.get_aspect().get< ajr::remote::_error_>().error, 2 ) << FAS_TESTING_FILE_LINE << std::endl;
 }
 
