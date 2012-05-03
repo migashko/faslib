@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_SERIALIZATION_JSON_META_BLOCK_HPP
 #define FAS_SERIALIZATION_JSON_META_BLOCK_HPP
 
@@ -6,13 +12,14 @@
 
 namespace fas{ namespace json{
 
-template<typename M>
+template<typename J>
 struct block
-  : M
+  : J
 {
   typedef ser::_block_ serializer_tag;
   typedef deser::_stub_ deserializer_tag;
-  typedef M target;
+  typedef J target;
+
 };
 
 }}

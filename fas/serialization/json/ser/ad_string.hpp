@@ -4,6 +4,9 @@
 #include <fas/range/range.hpp>
 #include <fas/range/srange.hpp>
 
+#include <fas/integral/bool_.hpp>
+#include <fas/typemanip/is_array.hpp>
+
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/out_of_range.hpp>
 #include <fas/serialization/json/ser/tags.hpp>
@@ -67,9 +70,21 @@ struct ad_string
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, const V& v, R r)
   {
-    return super::serialize_string( t, ::fas::range<V>(v), r);
+    return _(t, M(), v, r, bool_<is_array<const V&>::value>() );
+    // return super::serialize_string( t, ::fas::range<V>(v), r);
   }
 
+  template<typename T, typename M, typename V, typename R>
+  R _(T& t, M, const V& v, R r, true_)
+  {
+    return super::serialize_string( t, ::fas::srange<V>(v), r);
+  }
+
+  template<typename T, typename M, typename V, typename R>
+  R _(T& t, M, const V& v, R r, false_)
+  {
+    return super::serialize_string( t, ::fas::range<V>(v), r);
+  }
   
   template<typename T, typename M, typename R>
   R operator()(T& t, M, const char* v, R r)

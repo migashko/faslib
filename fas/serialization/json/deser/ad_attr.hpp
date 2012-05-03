@@ -8,22 +8,22 @@ namespace fas{ namespace json{ namespace deser{
 
 struct ad_attr
 {
-  template<typename T, typename M, typename R>
-  bool check(T& t, M m, R r)
+  template<typename T, typename J, typename R>
+  bool check(T& t, J, R r)
   {
-    typedef typename M::target target;
+    typedef typename J::target target;
     typedef typename target::deserializer_tag deserializer_tag;
     return t.get_aspect().template get<deserializer_tag>().check(t, target(), r );
   };
 
 
-  template<typename T, typename M, typename V, typename R>
-  R operator()(T& t, M m, V& v, R r)
+  template<typename T, typename J, typename V, typename R>
+  R operator()(T& t, J, V& v, R r)
   {
-    typedef typename M::target target;
+    typedef typename J::target target;
     typedef typename target::deserializer_tag deserializer_tag;
 
-    return t.get_aspect().template get<deserializer_tag>()(t, target(), m.ref(v), r );
+    return t.get_aspect().template get<deserializer_tag>()(t, target(), J()(v), r );
   }
 };
 

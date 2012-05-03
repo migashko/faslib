@@ -16,6 +16,7 @@ struct case_c
   typedef T type;
 };
 
+
 }
 
 #endif
