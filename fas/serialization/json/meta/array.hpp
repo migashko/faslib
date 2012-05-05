@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_SERIALIZATION_JSON_META_ARRAY_HPP
 #define FAS_SERIALIZATION_JSON_META_ARRAY_HPP
 
@@ -16,21 +22,20 @@
 #include <fas/typemanip/default_.hpp>
 #include <fas/typemanip/empty_type.hpp>
 
-#include <fas/type_list/type_list_n.hpp>
 #include <fas/type_list/is_type_list.hpp>
 
-namespace fas{ namespace json{
+namespace fas { namespace json {
 
-template<typename T>
+template<typename J>
 struct array
 {
   typedef metalist::array metatype;
   
   typedef typename switch_< 
-    case_< is_type_list<T>, primary_list<T> >,
-    case_< is_sequence<T>, T >,
-    case_< has_serializer_tag<T>, sequence<T> >,
-    case_< has_deserializer_tag<T>, sequence<T> >,
+    case_< is_type_list<J>, primary_list<J> >,
+    case_< is_sequence<J>, J >,
+    case_< has_serializer_tag<J>, sequence<J> >,
+    case_< has_deserializer_tag<J>, sequence<J> >,
     default_< empty_type >
   >::type target;
 

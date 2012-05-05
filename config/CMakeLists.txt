@@ -4,10 +4,24 @@ INCLUDE (${CMAKE_ROOT}/Modules/CheckLibraryExists.cmake)
 
 check_include_file("sys/time.h" HAVE_SYS_TIME_H)
 check_include_file("sys/resource.h" HAVE_SYS_RESORCE_H)
-check_include_file("unistd.h" HAVE_UNISTD_H)
 check_include_file("sys/timeb.h" HAVE_SYS_TIMEB_H)
-check_include_file("Windows.h" HAVE_WINDOWS_H)
+
+check_include_file("unistd.h" HAVE_UNISTD_H)
 check_include_file("io.h" HAVE_IO_H)
+check_include_file("Windows.h" HAVE_WINDOWS_H)
+check_include_file("Wincon.h" HAVE_WINCON_H)
+
+set(
+  CMAKE_REQUIRED_INCLUDES 
+  ${CMAKE_REQUIRED_INCLUDES} 
+  "sys/time.h"
+  "sys/resource.h"
+  "sys/timeb.h"
+  "unistd.h"
+  "io.h"
+  "Windows.h" 
+  "Wincon.h"
+)
 
 check_function_exists("gettimeofday" HAVE_GETTIMEOFDAY_FUNC)
 check_function_exists("socket" HAVE_SOCKET_FUNC)

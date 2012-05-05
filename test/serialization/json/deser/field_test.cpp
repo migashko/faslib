@@ -35,30 +35,30 @@ UNIT(attr_test, "test fas::json::attr meta")
   foo f(0);
   
   typedef attr<foo, int, &foo::foo1, integer> foo_foo1;
-  foo_foo1().ref(f) = -1;
-  t << equal<expect>(foo_foo1().ref(f), -1 ) << FAS_TESTING_FILE_LINE;
+  foo_foo1()(f) = -1;
+  t << equal<expect>(foo_foo1()(f), -1 ) << FAS_TESTING_FILE_LINE;
   
   typedef attr<foo, std::string, &foo::foo2, string> foo_foo2;
-  foo_foo2().ref(f) = "test-foo2";
-  t << equal<expect>(foo_foo2().ref(f), "test-foo2" ) <<  FAS_TESTING_FILE_LINE;
+  foo_foo2()(f) = "test-foo2";
+  t << equal<expect>(foo_foo2()(f), "test-foo2" ) <<  FAS_TESTING_FILE_LINE;
   
   typedef attr<foo, foo::foo3type, &foo::foo3, string> foo_foo3;
-  std::strcpy( foo_foo3().ref(f), "test-foo3" );
-  t << equal<expect>(foo_foo3().ref(f), std::string("test-foo3") ) << "[" << foo_foo3().ref(f) << "]" << FAS_TESTING_FILE_LINE;
+  std::strcpy( foo_foo3()(f), "test-foo3" );
+  t << equal<expect>(foo_foo3()(f), std::string("test-foo3") ) << "[" << foo_foo3()(f) << "]" << FAS_TESTING_FILE_LINE;
   
   bar b(0);
   
   typedef attr<bar::baz, int, &bar::baz::baz1, integer> bar_baz_baz1;
-  bar_baz_baz1().ref(b.bar1) = 42;
-  t << equal<expect>(bar_baz_baz1().ref(b.bar1), 42 ) << FAS_TESTING_FILE_LINE;
+  bar_baz_baz1()(b.bar1) = 42;
+  t << equal<expect>(bar_baz_baz1()(b.bar1), 42 ) << FAS_TESTING_FILE_LINE;
   
   typedef attr<bar, bar::baz, &bar::bar1, bar_baz_baz1> bar_bar1_baz1;
-  bar_bar1_baz1().ref(b).baz1 = 42;
-  t << equal<expect>(bar_bar1_baz1().ref(b).baz1, 42 ) << FAS_TESTING_FILE_LINE;
+  bar_bar1_baz1()(b).baz1 = 42;
+  t << equal<expect>(bar_bar1_baz1()(b).baz1, 42 ) << FAS_TESTING_FILE_LINE;
   
   typedef attr<bar, foo, &bar::bar2, foo_foo2> bar_bar1_foo2;
-  bar_bar1_foo2().ref(b).foo2 = "test-foo2";
-  t << equal<expect>( bar_bar1_foo2().ref(b).foo2, "test-foo2" ) << FAS_TESTING_FILE_LINE;
+  bar_bar1_foo2()(b).foo2 = "test-foo2";
+  t << equal<expect>( bar_bar1_foo2()(b).foo2, "test-foo2" ) << FAS_TESTING_FILE_LINE;
 }
 
 UNIT(ad_field_test1, "test fas::json::deser::ad_field advice")

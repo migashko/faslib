@@ -5,22 +5,22 @@ namespace fas{ namespace json{ namespace ser{
 
 struct ad_attr
 {
-  template<typename T, typename M, typename V>
-  bool check(T& t, M m, const V& v)
+  template<typename T, typename J, typename V>
+  bool check(T& t, J, const V& v)
   {
-    typedef typename M::target target;
+    typedef typename J::target target;
     typedef typename target::serializer_tag serializer_tag;
 
-    return t.get_aspect().template get<serializer_tag>().check(t, target(), m.ref(v) );
+    return t.get_aspect().template get<serializer_tag>().check(t, target(), J()(v) );
   };
 
-  template<typename T, typename M, typename V, typename R>
-  R operator()(T& t, M m, const V& v, R r)
+  template<typename T, typename J, typename V, typename R>
+  R operator()(T& t, J, const V& v, R r)
   {
-    typedef typename M::target target;
+    typedef typename J::target target;
     typedef typename target::serializer_tag serializer_tag;
 
-    return t.get_aspect().template get<serializer_tag>()(t, target(), m.ref(v), r );
+    return t.get_aspect().template get<serializer_tag>()(t, target(), J()(v), r );
   }
 };
 

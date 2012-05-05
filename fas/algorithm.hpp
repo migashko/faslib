@@ -10,9 +10,9 @@
 #include <fas/algorithm/any.hpp>
 #include <fas/algorithm/count.hpp>
 #include <fas/algorithm/count_if.hpp>
-#include <fas/algorithm/do_while.hpp>
 #include <fas/algorithm/erase_if.hpp>
 #include <fas/algorithm/find_if.hpp>
+#include <fas/algorithm/for_.hpp>
 #include <fas/algorithm/generate.hpp>
 #include <fas/algorithm/generate_c.hpp>
 #include <fas/algorithm/generator.hpp>

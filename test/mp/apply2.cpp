@@ -28,17 +28,17 @@ int test1()
 
 int test2()
 {
-  typedef do_while<
+  typedef for_<
         int_<10>,
-        a< dec< p<_1> > >,
-        a< greater< p<_1>, int_<0> > >
+        a< greater< p<_1>, int_<0> > >,
+        a< dec< p<_1> > >
       > func;
   typedef apply<func>::type result1;
 
-  typedef do_while<
+  typedef for_<
         _1,
-        a< dec< p<_1> > >,
-        a< greater< p<_1>, int_<0> > >
+        a< greater< p<_1>, int_<0> > >,
+        a< dec< p<_1> > >
       > func2;
   typedef apply<func, int_<10> >::type result2;
 

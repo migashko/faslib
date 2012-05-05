@@ -3,7 +3,7 @@
 #include <fas/mp/apply.hpp>
 #include <fas/mp/lambda.hpp>
 #include <fas/mp/f.hpp>
-#include <fas/algorithm/do_while.hpp>
+#include <fas/algorithm/for_.hpp>
 #include <fas/integral.hpp>
 #include <fas/integral/make_int.hpp>
 #include <fas/static_check.hpp>
@@ -22,16 +22,16 @@ void test1()
 {
   using namespace ::fas;
 
-  typedef do_while<
+  typedef for_<
     int_<1>,
-    inc< _1 >,
-    less_equal<_1, int_<10> >
+    less_equal<_1, int_<10> >,
+    inc< _1 >
   >::type test;
 
-  typedef do_while_t<
+  typedef for_t<
     int_<1>,
-    inc,
-    lambda< less_equal<_1, int_<10> > >::apply
+    lambda< less_equal<_1, int_<10> > >::apply,
+    inc
   >::type test1;
 
   enum { result = static_check<test::value == 11>::value,
@@ -40,10 +40,10 @@ void test1()
 
   
   typedef pair<
-    do_while<
+    for_<
       int_<1>,
-      a< plus< p<_1>, _1 > >,
-      a< less< p<_1>, int_<10> > >
+      a< less< p<_1>, int_<10> > >,
+      a< plus< p<_1>, _1 > >
     >,
     _2
   > pair_test;
@@ -54,10 +54,10 @@ void test1()
                   + static_check< test2::first::value == 11 >::value};
 
   typedef apply<
-      do_while< 
+      for_< 
         int_<1>,
-        a< inc< p<_1> > >, 
-        a< less< p<_1>, int_<10> > >
+        a< less< p<_1>, int_<10> > >,
+        a< inc< p<_1> > >
       >
     >::type test3;
   enum { result4 = static_check<test3::value == 10>::value };
@@ -70,10 +70,10 @@ void test2()
   // TODO: сделать протект
   using namespace ::fas;
   
-  typedef do_while<
+  typedef for_<
     int_<1>, 
-    plus< _1, int_<2> > , 
-    less_equal< _1, int_<10> > 
+    less_equal< _1, int_<10> >,
+    plus< _1, int_<2> >
   >::type test;
   enum { result = static_check<test::value == 11>::value };
 }
@@ -98,7 +98,7 @@ void test3()
     ,
   _1 >  doit;
   typedef less< f< length< _1 > > , int_<9> > cond;
-  typedef do_while< initial, doit, cond > wh;
+  typedef for_< initial, cond, doit > wh;
   typedef wh::type test;
   typedef type_list_n< int_<2>, int_<3>, int_<4>, 
                        int_<5>, int_<6>, int_<7>,
@@ -135,7 +135,7 @@ void test4()
   typedef push_back< make_int< rand< type_at< dec< f< length<_1> > >, _1 > > > , _1 > doit;
 
   
-  typedef do_while< initial, doit, cond >::type test;
+  typedef for_< initial, cond, doit>::type test;
   
   // 11837123 8949370 9722709 4858052 5065847 12997982 235177 12762824 13664875 11895682 760893
   enum {
@@ -160,7 +160,7 @@ struct my_do_while
 {
   typedef less_equal< f< length< _1 > >, int_<10> > cond;
   typedef push_back< make_int< rand< type_at< dec< f< length<_1> > >, _1 > > > , _1 > doit;
-  typedef do_while< I, doit, cond > test1;
+  typedef for_< I, cond, doit> test1;
   typedef typename test1::type monw_type;
   //typedef typename wrap<monw_type>::type type;
   typedef monw_type type;
@@ -192,7 +192,7 @@ void test5()
     int_<10>
   > cond;
 
-  typedef do_while< initial, doit, cond > dw;
+  typedef for_< initial, cond, doit > dw;
   typedef dw::type test;
 }
 
@@ -200,10 +200,10 @@ void test6()
 {
   using namespace ::fas;
 
-  typedef do_while<
+  typedef for_<
     type_list< make_int< rand< first<_1> > > > ,
-    a< push_back< make_int< rand< type_at< dec< f< length< p<_1> > > >, p<_1> > > > , p<_1> > > ,
-    a< less_equal< f< length< p<_1> > >, int_<3> > >
+    a< less_equal< f< length< p<_1> > >, int_<3> > >,
+    a< push_back< make_int< rand< type_at< dec< f< length< p<_1> > > >, p<_1> > > > , p<_1> > >
   > randsequence_generator;
 
   typedef apply< randsequence_generator, pair< int_<0>, empty_list > >::type test1; 
@@ -222,7 +222,7 @@ void test6()
   
   typedef pair<int_<0>, empty_list> initial;
   typedef less_equal< f< length< second< _1> > >, int_<3> > cond;
-  typedef do_while< initial, doit, cond> dw;
+  typedef for_< initial, cond, doit> dw;
   typedef dw::type test3;
 }
 

@@ -8,6 +8,7 @@
 #include <fas/integral/bool2type.hpp>
 #include <fas/typemanip/type2type.hpp>
 #include <fas/typemanip/remove_cvrp.hpp>
+#include <fas/typemanip/if_c.hpp>
 
 using namespace ::fas;
 
@@ -30,8 +31,8 @@ int main()
     test2_pair = static_check< some_type< second<long_char>::type, char>::value >::value,
     test1_if_c = static_check< some_type< if_c<1, long, char>::type, long>::value >::value,
     test2_if_c = static_check< some_type< if_c<0, long, char>::type, char>::value >::value,
-    test1_if_ = static_check< some_type< if_< int_<1>, long, char>::type, long>::value >::value,
-    test2_if_ = static_check< some_type< if_< false_, long, char>::type, char>::value >::value,
+    test1_if_ = static_check< some_type< if_c< 1, long, char>::type, long>::value >::value,
+    test2_if_ = static_check< some_type< if_c< 0, long, char>::type, char>::value >::value,
 //#warning !!
     /// TODO: Не логично! 
     test2_max_sizeof = static_check< some_type< max_sizeof< int_<1>, char_<'x'> >::type, int >::value >::value,

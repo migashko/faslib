@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_SERIALIZATION_JSON_META_BRUTE_PAIR_HPP
 #define FAS_SERIALIZATION_JSON_META_BRUTE_PAIR_HPP
 
@@ -9,6 +15,7 @@
 #include <fas/serialization/json/meta/metalist.hpp>
 
 #include <fas/type_list/is_type_list.hpp>
+#include <fas/typemanip/if_c.hpp>
 
 namespace fas{ namespace json{
 

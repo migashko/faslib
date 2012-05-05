@@ -1,10 +1,15 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_SERIALIZATION_JSON_META_COMMENT_HPP
 #define FAS_SERIALIZATION_JSON_META_COMMENT_HPP
 
 #include <fas/serialization/json/ser/tags.hpp>
 #include <fas/serialization/json/deser/tags.hpp>
 
-//#include <fas/range/range.hpp>
 #include <fas/range/string_range.hpp>
 
 #include <fas/typemanip/is_has_metatype.hpp>
@@ -12,16 +17,16 @@
 
 namespace fas{ namespace json{
 
-template<typename C1, typename M, typename C2 = empty_type >
+template<typename C1, typename J, typename C2 = empty_type >
 struct comment;
 
   
-template<typename C1, typename M, typename C2 >
-struct comment: M
+template<typename C1, typename J, typename C2 >
+struct comment: J
 {
   typedef ser::_comment_ serializer_tag;
   typedef deser::_stub_ deserializer_tag;
-  typedef M target;
+  typedef J target;
   
   typedef C1 before_comment;
   typedef C2 after_comment;
@@ -40,14 +45,14 @@ struct comment: M
   }
 };
 
-template<typename C1, typename M>
-struct comment<C1, M, empty_type>
-  : M
+template<typename C1, typename J>
+struct comment<C1, J, empty_type>
+  : J
 {
   typedef ser::_comment_ serializer_tag;
   typedef deser::_stub_ deserializer_tag;
-  typedef M target;
   
+  typedef J target;
   typedef C1 before_comment;
   typedef empty_type after_comment;
   
@@ -59,13 +64,13 @@ struct comment<C1, M, empty_type>
   }
 };
 
-template<typename M, typename C2 >
-struct comment<empty_type, M, C2>
-  : M
+template<typename J, typename C2 >
+struct comment<empty_type, J, C2>
+  : J
 {
   typedef ser::_comment_ serializer_tag;
   typedef deser::_stub_ deserializer_tag;
-  typedef M target;
+  typedef J target;
   
   typedef empty_type before_comment;
   typedef C2 after_comment;
@@ -77,14 +82,14 @@ struct comment<empty_type, M, C2>
   }
 };
 
-template<typename M>
-struct comment<empty_type, M, empty_type>
-  : M
+template<typename J>
+struct comment<empty_type, J, empty_type>
+  : J
 {
   typedef ser::_comment_ serializer_tag;
   typedef deser::_stub_ deserializer_tag;
   
-  typedef M target;
+  typedef J target;
   
   typedef empty_type before_comment;
   typedef empty_type after_comment;
