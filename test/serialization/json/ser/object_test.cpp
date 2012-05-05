@@ -321,7 +321,7 @@ UNIT(ad_object_test7, "test ad_object advice")
 
   typedef member<
     attr< foo_pair, std::string, &foo_pair::first, string>,
-    attr< foo_pair, foo, &foo_pair::second, foo_json>
+	    attr< foo_pair, foo, &foo_pair::second, foo_json>
   > foo_member_json;
 
 

@@ -66,8 +66,9 @@ typedef unique_first_if<list_4, some_type<_1, _2 > >::type result_list3mp;
 int main()
 {
   // static_check< lambda< some_type<_,_>, 2 >::apply<int, char>::type::value > value;
-  static_check< apply2< some_type<_,_>, int, int>::type::value > value;
-  static_check<
+  enum {
+	  value = static_check< apply2< some_type<_,_>, int, int>::type::value >::value
+			+ static_check<
     some_type<
       some_type<int,char>,
       bind<
@@ -75,7 +76,8 @@ int main()
         type_list_n<int, char>::type
       >::type
     >::value
-  > value2;
+			>::value
+  };
   
   enum {
     test_lenght = static_check< length<result_list1>::value == 4 >::value,
