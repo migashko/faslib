@@ -39,8 +39,9 @@
 #include <string>
 #include <cstring>
 
-using namespace ::fas;
-using namespace ::fas::json;
+
+namespace aj = ::fas::json;
+
 
 UNIT(array_serialize_test, "test array_serialize function")
 {
@@ -166,6 +167,28 @@ UNIT(ad_array_test4, "test ad_array advice")
   t << equal<expect>(result, "[-1,\"test-foo2\",\"test-foo3\",0,1,2,3,4,20,30,40,\"test-foo6-1\",\"test-foo6-2\"]") << FAS_TESTING_FILE_LINE;
 }
 
+UNIT(ad_array_test5, "test ad_array advice")
+{
+  using namespace ::fas::testing;
+  using namespace ::fas::json::ser;
+  
+  //typedef aj::array< aj::string> one_item_json;
+  /*std::string svalue="value";
+  std::vector<std::string> value;
+  value.push_back(svalue);
+  */
+  typedef aj::array< aj::integer > one_item_json;
+  int value=10;
+  
+  std::string result;
+  ad_array ada;
+  ada(t, one_item_json(), value, fas::orange(result) );
+  t << equal<expect>(result, "[\"value\"]") << FAS_TESTING_FILE_LINE 
+    << std::endl << result;
+  
+}
+
+
 namespace test_array{ 
 FAS_NAME(value1);
 FAS_NAME(value2);
@@ -217,6 +240,7 @@ BEGIN_SUITE(array_serializer_suite, "array serializer suite")
   ADD_UNIT(ad_array_test2)
   ADD_UNIT(ad_array_test3)
   ADD_UNIT(ad_array_test4)
+  ADD_UNIT(ad_array_test5)
   ADD_UNIT(ad_enumset_test)
   ADD_ADVICE( ::fas::json::ser::_string_, ::fas::json::ser::ad_string)
   ADD_ADVICE( ::fas::json::ser::_integer_, ::fas::json::ser::ad_integer)
