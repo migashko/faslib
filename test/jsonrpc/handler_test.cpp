@@ -53,7 +53,7 @@ namespace client
   struct hi_error
   {
     template<typename T, typename M, typename E>
-    void operator()(T&t, M& m, E& e, id_t id)
+    void operator()(T&t, M& m, E& e, ajr::id_t id)
     {
     }
   };

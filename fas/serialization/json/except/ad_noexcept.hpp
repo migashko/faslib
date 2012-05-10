@@ -9,7 +9,7 @@ namespace fas{ namespace json{
 struct ad_noexcept
 {
   ad_noexcept()
-    : _except(false)
+    : _except_fmm(false)
     , _error("")
   {
   }
@@ -18,25 +18,25 @@ struct ad_noexcept
   void clear(T&) 
   {
     _error = json_error("");
-    _except = false; 
+    _except_fmm = false; 
   }
   
   operator bool () const 
   {
-    return _except;
+    return _except_fmm;
   }
 
   template<typename T>
   void operator()(T&, const json_error& e )
   {
-    _except = true;
+    _except_fmm = true;
     _error = e;
   }
 
   template<typename T, typename R>
   R operator()(T&, const json_error& e, R r )
   {
-    _except = true;
+    _except_fmm = true;
     _error = e;
     return r;
   }
@@ -58,7 +58,8 @@ struct ad_noexcept
   }
 
 private:
-  bool _except;
+  // fucking microsoft macro
+  bool _except_fmm;
   json_error _error;
 };
 

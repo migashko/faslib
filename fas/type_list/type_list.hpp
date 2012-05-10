@@ -15,7 +15,7 @@ namespace fas{
 template< typename L, typename R = empty_list >
 struct type_list
 {
-  typedef metalist::type_list metatype;
+  typedef ::fas::metalist::type_list metatype;
   typedef L left_type;
   typedef R right_type;
 };

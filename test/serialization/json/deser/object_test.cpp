@@ -224,16 +224,19 @@ UNIT(ad_object_test6, "test ad_object advice")
 
   typedef object<
       brute_pair<
-        member< n_key, attr< foo_pair, std::string, &foo_pair::first, string> >,
-        member< n_value, attr< foo_pair, foo, &foo_pair::second, foo_json> >
+        member< n_key, field< std::string, aj::first, aj::string>/*attr< foo_pair, std::string, &foo_pair::first, string> */ >,
+        member< n_value, field< std::string, aj::second, foo_json>/*attr< foo_pair, foo, &foo_pair::second, foo_json>*/ >
       >
   > foo6_map_json;
 
   typedef object<
       member<
+	  field< std::string, aj::first, aj::string>,
+	  field< std::string, aj::second, foo_json>
+	  /*
         attr< foo_pair, std::string, &foo_pair::first, string>,
         attr< foo_pair, foo, &foo_pair::second, foo_json>
-      >
+      */>
   > foo7_map_json;
 
 
@@ -284,8 +287,12 @@ UNIT(ad_object_test7, "test ad_object advice")
 
 
   typedef member<
+	  field< std::string, ajr::first, aj::string>,
+	  field< std::string, ajr::second, aj::string>
+	  /*
     attr< foo_pair, std::string, &foo_pair::first, string>,
-    attr< foo_pair, foo, &foo_pair::second, foo_json>
+    attr< foo_pair, foo, &foo_pair::second, foo_json>*/
+
   > foo_member_json;
 
 
