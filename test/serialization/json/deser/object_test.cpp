@@ -21,6 +21,9 @@
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/serialization/json/meta/member.hpp>
 #include <fas/serialization/json/meta/attr.hpp>
+#include <fas/serialization/json/meta/field.hpp>
+#include <fas/serialization/json/meta/first.hpp>
+#include <fas/serialization/json/meta/second.hpp>
 #include <fas/serialization/json/meta/object.hpp>
 #include <fas/serialization/json/meta/brute_pair.hpp>
 
@@ -35,6 +38,7 @@
 #include <string>
 #include <cstring>
 
+namespace aj = ::fas::json;
 UNIT(ad_object_test1, "test ad_object advice")
 {
   using namespace ::fas;
@@ -224,15 +228,15 @@ UNIT(ad_object_test6, "test ad_object advice")
 
   typedef object<
       brute_pair<
-        member< n_key, field< std::string, aj::first, aj::string>/*attr< foo_pair, std::string, &foo_pair::first, string> */ >,
-        member< n_value, field< std::string, aj::second, foo_json>/*attr< foo_pair, foo, &foo_pair::second, foo_json>*/ >
+        member< n_key, aj::field< std::string, aj::first, aj::string>/*attr< foo_pair, std::string, &foo_pair::first, string> */ >,
+        member< n_value, aj::field< std::string, aj::second, foo_json>/*attr< foo_pair, foo, &foo_pair::second, foo_json>*/ >
       >
   > foo6_map_json;
 
   typedef object<
       member<
-	  field< std::string, aj::first, aj::string>,
-	  field< std::string, aj::second, foo_json>
+        aj::field< std::string, aj::first, aj::string>,
+        aj::field< std::string, aj::second, foo_json>
 	  /*
         attr< foo_pair, std::string, &foo_pair::first, string>,
         attr< foo_pair, foo, &foo_pair::second, foo_json>
@@ -287,8 +291,8 @@ UNIT(ad_object_test7, "test ad_object advice")
 
 
   typedef member<
-	  field< std::string, ajr::first, aj::string>,
-	  field< std::string, ajr::second, aj::string>
+	  aj::field< std::string, aj::first, aj::string>,
+	  aj::field< std::string, aj::second, aj::string>
 	  /*
     attr< foo_pair, std::string, &foo_pair::first, string>,
     attr< foo_pair, foo, &foo_pair::second, foo_json>*/

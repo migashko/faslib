@@ -3,6 +3,7 @@
 
 #include <fas/aop/aspect_class.hpp>
 #include <fas/serialization/json/ser/aspect.hpp>
+#include <fas/serialization/json/except/json_error.hpp>
 
 namespace fas{ namespace json{
 

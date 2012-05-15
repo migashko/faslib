@@ -1,16 +1,16 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_SERIALIZATION_JSON_EXCEPT_AD_NOEXCEPT_HPP
-#define FAS_SERIALIZATION_JSON_EXCEPT_AD_NOEXCEPT_HPP
+#ifndef FAS_SERIALIZATION_COMMON_EXCEPT_AD_NOEXCEPT_HPP
+#define FAS_SERIALIZATION_COMMON_EXCEPT_AD_NOEXCEPT_HPP
 
 #include <string>
-#include <fas/serialization/json/except/json_error.hpp>
+#include <fas/serialization/common/except/common_error.hpp>
 
-namespace fas{ namespace json{
+namespace fas{ namespace serialization{
 
 struct ad_noexcept
 {
@@ -23,7 +23,7 @@ struct ad_noexcept
   template<typename T>
   void clear(T&) 
   {
-    _error = json_error("");
+    _error = common_error("");
     _except_fmm = false; 
   }
   
@@ -33,14 +33,14 @@ struct ad_noexcept
   }
 
   template<typename T>
-  void operator()(T&, const json_error& e )
+  void operator()(T&, const common_error& e )
   {
     _except_fmm = true;
     _error = e;
   }
 
   template<typename T, typename R>
-  R operator()(T&, const json_error& e, R r )
+  R operator()(T&, const common_error& e, R r )
   {
     _except_fmm = true;
     _error = e;
@@ -58,15 +58,15 @@ struct ad_noexcept
     return _error.message(r);
   }
 
-  const json_error& exception() const
+  const common_error& exception() const
   {
     return _error;
   }
 
 private:
-  // fmm: fucking microsoft macro
+  // fucking microsoft macro
   bool _except_fmm;
-  json_error _error;
+  common_error _error;
 };
 
 }}
