@@ -57,7 +57,7 @@ struct index_of_if_impl_t
   {
     first = index_of_if_impl1_t<typename L::metatype, L, F>::value,
     second = length<L>::value,
-    value = (first == second || second == 0)? -1 : first
+    value = ( static_cast<int>(first) == static_cast<int>(second) || second == 0)? -1 : first
   };
 };
 
@@ -70,7 +70,7 @@ struct index_of_if_impl_t< type_list<L, R>, F >
   {
     first = index_of_if_impl2_t< type_list<L, R>, F, F<L>::type::value >::value,
     second = length< type_list<L, R> >::value,
-    value = (first == second || second == 0 )? -1 : first
+    value = ( static_cast<int>(first) == static_cast<int>(second) || second == 0 )? -1 : first
   };
 };
 
