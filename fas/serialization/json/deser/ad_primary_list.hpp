@@ -48,13 +48,14 @@ private:
   R __(T& t,  V& v, R r, type_list<H, L> )
   {
     typedef typename H::deserializer_tag deserializer_tag;
+    
     R income = r;
     r = t.get_aspect().template get<deserializer_tag>()(t, H(), v, r);
     if ( r && r == income)
-    {
       return _trouble(t, v, r, type_list<H, L>() );
-    }
+    
     r = t.get_aspect().template get< parse::_space_>()(t, r);
+    
     if ( !r || *r!=',')
       return r;
     return _(t, v, r, L() );
