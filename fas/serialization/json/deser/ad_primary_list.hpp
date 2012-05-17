@@ -3,16 +3,48 @@
 
 #include <fas/serialization/json/except.hpp>
 #include <fas/serialization/json/parser/tags.hpp>
+#include <fas/serialization/json/deser/tags.hpp>
 
 #include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/tchars.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/type_list/type_at_c.hpp>
 #include <iostream>
 
+#include <fas/range/string_range.hpp>
 namespace fas{ namespace json{ namespace deser{
 
-struct ad_primary_list
+template<typename SEP = tchars<','> >
+struct ad_separator_t
 {
+	typedef SEP separator;
+	typedef string_range< typename separator::value_type > range_type;
+	
+	template<typename T, typename M, typename R>
+  bool check(T& , M, R r)
+  {
+		range_type rr = range_type( separator()() );
+		for ( ;r && rr && *r == *rr; ++r, ++rr);
+    return !rr;
+  };
+
+	template<typename T, typename M, typename V, typename R>
+  R operator()(T&, M, V&, R r)
+  {
+		R income = r;
+		range_type rr = range_type( separator()() );
+		for ( ;r && rr && *r == *rr; ++r, ++rr);
+		return !rr ? r : income;
+	}
+};
+
+struct ad_separator: ad_separator_t<>{};
+
+template<typename SepTag>
+struct ad_primary_list_t
+{
+	typedef SepTag _separator_;
+	
   template<typename T, typename M, typename R>
   bool check(T& , M, R )
   {
@@ -38,8 +70,11 @@ private:
   template<typename T, typename V, typename R, typename H, typename L >
   R _(T& t,  V& v, R r, type_list<H, L> )
   {
-    if ( *r == ',' )
-      r = t.get_aspect().template get< parse::_space_>()(t, ++r);
+		R income = r;
+		r = t.get_aspect().template get< _separator_ >()(t, H(), v, r);
+		if ( r != income )
+			r = t.get_aspect().template get< parse::_space_>()(t, r);
+		
     r = __(t, v, r, type_list<H, L>()  );
     return  r ;
   }
@@ -56,7 +91,7 @@ private:
     
     r = t.get_aspect().template get< parse::_space_>()(t, r);
     
-    if ( !r || *r!=',')
+    if ( !r || /**r!=','*/ !t.get_aspect().template get< _separator_ >().check(t, H(), r) )
       return r;
     return _(t, v, r, L() );
   }
@@ -71,7 +106,7 @@ private:
     r = _0(t, v, r, L(), pos);
     if ( r && r != income)
     {
-      if ( *r == ',')
+      if ( /**r == ','*/ t.get_aspect().template get< _separator_ >().check(t, H(), r) )
         r = _1(t, v, r, type_list<H, L>(), pos );
       return r;
     }
@@ -131,8 +166,15 @@ private:
   template<typename T, typename V, typename R, typename TL, int I, int N >
   R _1_(T& t,  V& v, R r, TL, bool* flags, int_<I>, int_<N> )
   {
-    if ( *r == ',' )
+		R income = r;
+		r = t.get_aspect().template get< _separator_ >()(t, typename TL::left_type(), v, r);
+		if ( r != income )
+			r = t.get_aspect().template get< parse::_space_>()(t, r);
+
+    /*if ( *r == ',' )
       r = t.get_aspect().template get< parse::_space_>()(t, ++r);
+      */
+		
 
     return _2_(t, v, r, TL(), flags, int_<I>(), int_<N>() );
   }
@@ -172,15 +214,31 @@ private:
     return _1_(t, v, r, TL(), flags, int_<0>(), int_<N>() ) ;
   }
 
+  	/*R income = r;
+		r = t.get_aspect().template get< _separator_ >()(t, H(), v, r);
+		if ( r != income )
+			r = t.get_aspect().template get< parse::_space_>()(t, r);
+		*/
+
   template<typename T, typename V, typename R, typename TL >
   R _3_(T& t,  V& v, R r, TL, bool* flags )
   {
     r = t.get_aspect().template get< parse::_space_>()(t, r);
-    if ( !r || *r!=',')
+		if ( !r ) return r;
+
+		R income = r;
+		r = t.get_aspect().template get< _separator_ >()(t, typename TL::left_type(), v, r);
+		if ( income == r )
+			return r;
+		r = t.get_aspect().template get< parse::_space_>()(t, r);
+
+    /*if ( !r || *r!=',')
       return r;
     
     if ( *r == ',' )
       r = t.get_aspect().template get< parse::_space_>()(t, ++r);
+		*/
+		
     
     // todo: Проверить flags на предмет возобновления обычного поиска
       
@@ -201,6 +259,8 @@ private:
     return r;
   }
 };
+
+struct ad_primary_list: ad_primary_list_t<_separator_>{};
 
 }}}
 

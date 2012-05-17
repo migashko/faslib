@@ -29,6 +29,7 @@ struct _field_list2_;
 */
 /* end deprecated */
 
+struct _separator_;
 struct _primary_list_;
 struct _brute_list_;
 struct _brute_pair_;

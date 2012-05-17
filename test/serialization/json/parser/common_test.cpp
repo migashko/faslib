@@ -226,6 +226,7 @@ UNIT(bool_test, "parse bool")
   }
   catch(const unexpected_end_fragment& )
   {
+		std::cout << "catch(const fas::serialization::unexpected_end_fragment& )" << std::endl;
   }
 }
 

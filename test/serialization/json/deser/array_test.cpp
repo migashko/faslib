@@ -328,6 +328,7 @@ BEGIN_SUITE(array_deserialize_suite, "array serializer suite")
   ADD_ADVICE( ::fas::json::deser::_primary_list_, ::fas::json::deser::ad_primary_list)
   ADD_ADVICE( ::fas::json::deser::_brute_list_, ::fas::json::deser::ad_brute_list)
   ADD_ADVICE( ::fas::json::deser::_brute_pair_, ::fas::json::deser::ad_brute_pair)
+	ADD_ADVICE( ::fas::json::deser::_separator_, ::fas::json::deser::ad_separator)
   ADD_ADVICE( ::fas::json::deser::_stub_, ::fas::json::deser::ad_stub)
   ADD_ADVICE( ::fas::json::deser::_enumset_value_, ::fas::json::deser::ad_enumset_value)
 

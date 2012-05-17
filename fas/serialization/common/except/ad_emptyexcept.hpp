@@ -7,8 +7,8 @@
 #ifndef FAS_SERIALIZATION_COMMON_EXCEPT_AD_EMPTYEXCEPT_HPP
 #define FAS_SERIALIZATION_COMMON_EXCEPT_AD_EMPTYEXCEPT_HPP
 
-#include <string>
 #include <fas/serialization/common/except/common_error.hpp>
+#include <string>
 
 namespace fas{ namespace serialization{
 
@@ -34,14 +34,14 @@ public:
     return _except;
   }
 
-  template<typename T>
-  void operator()(T&, const common_error& e )
+  template<typename T, typename E>
+  void operator()(T&, const E& e )
   {
     _except = true;
   }
 
-  template<typename T, typename R>
-  R operator()(T&, const common_error& e, R r )
+  template<typename T, typename R, typename E>
+  R operator()(T&, const E& e, R r )
   {
     _except = true;
     return r;

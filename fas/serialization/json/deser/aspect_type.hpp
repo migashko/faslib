@@ -54,6 +54,7 @@ typedef
       advice< deser::_brute_pair_, deser::ad_brute_pair>,
       advice< deser::_brute_list_, deser::ad_brute_list>,
       advice< deser::_primary_list_, deser::ad_primary_list>,
+			advice< deser::_separator_, deser::ad_separator>,
       advice< deser::_array_, deser::ad_array>,
       advice< deser::_sequence_, deser::ad_sequence>,
       advice< deser::_object_, deser::ad_object>,

@@ -10,6 +10,7 @@
 #include <string>
 #include <fas/serialization/common/except/common_error.hpp>
 
+
 namespace fas{ namespace serialization{
 
 struct ad_except
@@ -20,14 +21,14 @@ struct ad_except
   
   operator bool () const { return false;}
 
-  template<typename T>
-  void operator()(T&, const common_error& e)
+  template<typename T, typename E>
+  void operator()(T&, const E& e)
   {
     throw e;
   }
 
-  template<typename T, typename R>
-  R operator()(T&, const common_error& e, R )
+  template<typename T, typename R, typename E>
+  R operator()(T&, const E& e, R )
   {
     throw e;
   }
