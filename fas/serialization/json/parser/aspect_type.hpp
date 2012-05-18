@@ -7,6 +7,7 @@
 #include <fas/serialization/json/parser/ad_number.hpp>
 #include <fas/serialization/json/parser/ad_string.hpp>
 #include <fas/serialization/json/parser/ad_value.hpp>
+#include <fas/serialization/json/parser/ad_item.hpp>
 #include <fas/serialization/json/parser/ad_array.hpp>
 
 #include <fas/serialization/json/parser/ad_member.hpp>
@@ -35,6 +36,7 @@ typedef
       advice<_value_, ad_value>,
       //advice<_sequence_, ad_sequence>,
       advice<_array_, ad_array>,
+      advice<_item_, ad_item>,
       advice<_object_, ad_object>,
       advice<_space_, ad_space>,
       advice<_name_, ad_string>,

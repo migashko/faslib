@@ -3,6 +3,7 @@
 
 #include <fas/aop/aspect_class.hpp>
 #include <fas/serialization/json/parser/aspect.hpp>
+#include <utility>
 
 namespace fas{ namespace json{
 
@@ -24,11 +25,23 @@ public:
   {
     return parse(*this,r);
   }
+  
+  template<typename R, typename RD>
+  std::pair<R, RD> operator()(R r, RD rd)
+  {
+    return copy(*this,r, rd);
+  }
 
   template<typename R>
   R parse(R r)
   {
     return parse(*this,r);
+  }
+
+  template<typename R, typename RD>
+  std::pair<R, RD> copy(R r, RD rd)
+  {
+    return copy(*this,r, rd);
   }
 
   template<typename R>
@@ -81,7 +94,14 @@ public:
     r = t.get_aspect().template get< parse::_value_>()(t, r);
     return r;
   }
-  
+
+  template<typename T, typename R, typename RD>
+  std::pair<R, RD> copy(T& t, R r, RD rd)
+  {
+    r = t.get_aspect().template get< parse::_space_>()(t, r);
+    return t.get_aspect().template get< parse::_value_>()(t, r, rd);
+  }
+
 };
 
 }}

@@ -18,6 +18,7 @@ struct _enumset_value_;
 struct _string_;
 struct _cstring_;
 struct _array_;
+struct _item_;
 struct _object_;
 struct _pointer_;
 

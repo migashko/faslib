@@ -37,6 +37,8 @@
 #include <string>
 #include <cstring>
 
+namespace{
+  
 using namespace ::fas;
 using namespace ::fas::json;
 
@@ -183,14 +185,8 @@ UNIT(ad_array_test3, "test ad_array advice")
 
 }
 
-UNIT(ad_array_test4, "test ad_array advice")
+namespace test4
 {
-  using namespace ::fas;
-  using namespace ::fas::testing;
-  using namespace ::fas::json;
-  using namespace ::fas::json::deser;
-
-  
   typedef array<
     brute_pair<
     type_list_n<
@@ -206,6 +202,15 @@ UNIT(ad_array_test4, "test ad_array advice")
     >::type
     >
   > foo_json;
+  
+}
+
+UNIT(ad_array_test4, "test ad_array advice")
+{
+  using namespace ::fas;
+  using namespace ::fas::testing;
+  using namespace ::fas::json;
+  using namespace ::fas::json::deser;
 
   foo f(0);
   ad_array ada;
@@ -213,7 +218,8 @@ UNIT(ad_array_test4, "test ad_array advice")
   string_range<const char*> r = string_range<const char*>("[-1,\"test-foo2\",\"test-foo3\",1,2,3,4,5,20,30,40,\"test-foo6-1\",\"test-foo6-2\"]");
   try
   {
-    r = ada(t, foo_json(), f, r );
+    
+    r = ada(t, test4::foo_json(), f, r );
   }
   catch(const json_error& e)
   {
@@ -221,7 +227,8 @@ UNIT(ad_array_test4, "test ad_array advice")
     throw;
   }
 
-  t << equal<expect>(f.foo1, -1 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo1, -1) << FAS_TESTING_FILE_LINE;
+  
   t << equal<expect>(f.foo2, "test-foo2" ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(f.foo3, std::string("test-foo3") ) << FAS_TESTING_FILE_LINE;
 
@@ -232,18 +239,17 @@ UNIT(ad_array_test4, "test ad_array advice")
   t << equal<expect>(f.foo5[4], 5 ) << FAS_TESTING_FILE_LINE;
 
   
-  t << equal<assert, int>(f.foo4.size(), 3 ) << FAS_TESTING_FILE_LINE
-    << stop;
+  t << equal<assert, int>(f.foo4.size(), 3 ) << FAS_TESTING_FILE_LINE;
+  t << stop;
   
   t << equal<expect>(f.foo4[0], 20 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(f.foo4[1], 30 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(f.foo4[2], 40 ) << FAS_TESTING_FILE_LINE;
 
-  t << equal<assert, int>(f.foo6.size(), 2 ) << FAS_TESTING_FILE_LINE
-    << stop;
+  t << equal<assert, int>(f.foo6.size(), 2 ) << FAS_TESTING_FILE_LINE;
+  t << stop;
   t << equal<expect>(f.foo6[0], "test-foo6-1" ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(f.foo6[1], "test-foo6-2" ) << FAS_TESTING_FILE_LINE;
-
 
 /*  std::cout << separator<>()() << std::endl;
   std::cout << separator<'a'>()() << std::endl;
@@ -308,6 +314,8 @@ UNIT(ad_enumset_test, "test fas::serialization::json::ser::enumset")
 
 }
 
+}
+
 BEGIN_SUITE(array_deserialize_suite, "array serializer suite")
   ADD_UNIT(array_deserialize_test1)
   ADD_UNIT(array_deserialize_test2)
@@ -334,3 +342,4 @@ BEGIN_SUITE(array_deserialize_suite, "array serializer suite")
 
   ADD_ASPECT(::fas::json::parse::aspect)
 END_SUITE(array_deserialize_suite)
+
