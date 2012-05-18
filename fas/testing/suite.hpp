@@ -27,11 +27,13 @@ struct suite_counts
 {
   int units;
   int units_total;
+  int units_passed;
   
   suite_counts()
     : unit_counts()
     , units()
     , units_total()
+    , units_passed()
   {
   }
   
@@ -40,11 +42,17 @@ struct suite_counts
     unit_counts::operator += (c);
     units += c.units;
     units_total += c.units_total;
+    units_passed += c.units_passed;
   }
   
   void operator += ( const unit_counts& c )
   {
     unit_counts::operator += (c);
+  }
+  
+  operator bool () const
+  {
+    return units - units_passed == 0;
   }
 };
 
@@ -105,7 +113,9 @@ struct f_unit_run
     }
     catch(const fail_error& )
     {
-      //this->print_fail(t, u);
+      // this->print_fail(t, u);
+      t.unit_end(u);
+      //throw;
     }
     catch(const fatal_error&)
     {
@@ -138,9 +148,14 @@ struct f_unit_run
   {
     t.out() << UNIT_FAIL << u.name() << std::endl;
     if ( !u.desc().empty() )
-    t.out() << UNIT_FAIL << u.desc() << std::endl;
-    t.out() << UNIT_FAIL << "Statements: " << u.counts().statements << std::endl;
-    t.out() << UNIT_FAIL << light_red << "Errors: " << u.counts().errors << restore << std::endl;
+      t.out() << UNIT_FAIL << u.desc() << std::endl;
+    t.out() << UNIT_FAIL << "statements: " << u.counts().statements << std::endl;
+    if ( u.counts().errors!=0)
+      t.out() << UNIT_FAIL << light_red << "errors: " << u.counts().errors << restore << std::endl;
+    if ( u.counts().fails!=0)
+      t.out() << UNIT_FAIL << light_red << "fails: " << u.counts().fails << restore << std::endl;
+    if ( u.counts().fatals!=0)
+      t.out() << UNIT_FAIL << light_red << "fatals: " << u.counts().fatals << restore << std::endl;
   }
 
 };
@@ -169,10 +184,10 @@ public:
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
-    , _errors(0)
-    , _fails(0)
-    , _fatals(0)
-    , _statements(0)
+    , _unit_errors(0)
+    , _unit_fails(0)
+    , _unit_fatals(0)
+    , _unit_statements(0)
   {
   }
   
@@ -182,11 +197,11 @@ public:
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
-    , _count(0)
-    , _errors(0)
-    , _fails(0)
-    , _fatals(0)
-    , _statements(0)
+    , _unit_count(0)
+    , _unit_errors(0)
+    , _unit_fails(0)
+    , _unit_fatals(0)
+    , _unit_statements(0)
   {
   }
 
@@ -198,26 +213,28 @@ public:
   template<typename U>
   void unit_begin(U& /*u*/)
   {
-    _count++;
-    _errors = 0;
-    _fails = 0;
-    _fatals = 0;
-    _statements = 0;
+    _unit_count++;
+    _unit_errors = 0;
+    _unit_fails = 0;
+    _unit_fatals = 0;
+    _unit_statements = 0;
     _status = unit_status::noerror;
   }
 
   template<typename U>
   void unit_end(U& u)
   {
-    u.counts().errors += _errors;
-    u.counts().fails += _fails;
-    u.counts().fatals += _fatals;
-    u.counts().statements += _statements;
+    u.counts().errors += _unit_errors;
+    u.counts().fails += _unit_fails;
+    u.counts().fatals += _unit_fatals;
+    u.counts().statements += _unit_statements;
     if ( _status != unit_status::noerror )
-      _out <<std::endl;
-    _counts += u.counts();
-    _counts.units++;
-    _status_check();
+      /*_out <<std::endl*/;
+    else
+      _suite_counts.units_passed++;
+    _suite_counts += u.counts();
+    _suite_counts.units++;
+    //_status_check();
 
   }
   
@@ -238,7 +255,7 @@ public:
   
   void statement_begin()
   {
-    ++_statements;
+    ++_unit_statements;
     if ( _status != unit_status::noerror )
       _out << std::endl;
     _status_check();
@@ -255,7 +272,7 @@ public:
     statement_begin();
     if ( st.result == false)
     {
-      _errors++;
+      _unit_errors++;
       _status = unit_status::error;
       _out << ERROR_MESSAGE << st.text;
       return _out;
@@ -268,7 +285,7 @@ public:
     statement_begin();
     if ( st.result == false)
     {
-      _fails++;
+      _unit_fails++;
       _status = unit_status::fail;
       _out << FAIL << st.text;
       return _out;
@@ -282,7 +299,7 @@ public:
     if ( st.result == false)
     {
       _status = unit_status::fatal;
-      _fatals++;
+      _unit_fatals++;
       _out << FATAL << st.text;
       return _out;
     }
@@ -329,16 +346,17 @@ public:
     return _out;
   }
 
-  operator bool () const { return _errors == 0 &&  _fails==0 && _fatals==0;}
+  operator bool () const { return _suite_counts.errors == 0 &&  _suite_counts.fails==0 && _suite_counts.fatals==0;}
 
   bool run()
   {
-    _count = 0;
-    _errors = 0;
-    _fails = 0;
-    _fatals = 0;
+    _unit_count = 0;
+    _unit_errors = 0;
+    _unit_fails = 0;
+    _unit_fatals = 0;
+    _unit_statements = 0;
 
-    _counts.units_total = size();
+    _suite_counts.units_total = size();
     _out << SUITE_BEG << size() << " tests";
     if (!_name.empty()) _out << " from " << _name;
     _out << "." << std::endl;
@@ -346,9 +364,8 @@ public:
     {
       super::get_aspect().template getg<_units_>().for_each(*this, f_unit_run() );
     }
-    catch(const fail_error& /*e*/)
+    catch(const fail_error& )
     {
-      
     }
     catch(const fatal_error& e)
     {
@@ -358,24 +375,27 @@ public:
     if ( *this )
     {
       _out << SUITE_END << std::endl;
-      _out << PASSED << _count << " tests." << std::endl;
+      _out << PASSED << _suite_counts.units_passed << " tests." << std::endl;
     }
     else
     {
       _out << SUITE_FAIL << _name << ". " << _desc << std::endl;
+      _out << PASSED << _suite_counts.units_passed << " tests." << std::endl;
+      _out << FAIL << _suite_counts.units - _suite_counts.units_passed << " tests." << std::endl;
+      
     }
     
     return *this;
   }
 
   int size() const { return length<unit_tag_list>::value;};
-  int count() const { return _count; }
+  int count() const { return _suite_counts.units; }
   
-  int errors() const { return _errors; }
-  int fails() const { return _fails; }
-  int fatals() const { return _fatals; }
+  int errors() const { return _suite_counts.errors; }
+  int fails() const { return _suite_counts.fails; }
+  int fatals() const { return _suite_counts.fatals; }
 
-  const suite_counts& counts() const { return _counts; };
+  const suite_counts& counts() const { return _suite_counts; };
 
 private:
 
@@ -386,12 +406,13 @@ private:
   std::string _desc;
   unit_status::type _status;
  
-  int _count;
-  int _errors;
-  int _fails;
-  int _fatals;
-  int _statements;
-  suite_counts _counts;
+  int _unit_count;
+  int _unit_errors;
+  int _unit_fails;
+  int _unit_fatals;
+  int _unit_statements;
+  
+  suite_counts _suite_counts;
  /*
  std::string_stream _current;
  bool _current_result;
@@ -400,15 +421,35 @@ private:
 
 inline void show_total_result( const suite_counts& sc )
 {
+  if (!sc)
+    std::cout << ::fas::light_red ;
+  else
+    std::cout << ::fas::green ;
   
   std::cout << "**************************************" << std::endl;
   std::cout << "units: " << sc.units << std::endl;
+  if (!sc)
+  {
+    //std::cout << "units passed: " << sc.units_passed << std::endl;
+    //std::cout << ::fas::red ;
+    std::cout << ::fas::red  << "units fails: " << sc.units-sc.units_passed << ::fas::light_red  << std::endl;
+    //std::cout << ::fas::light_red ;
+  }
+  
   std::cout << "statements: " << sc.statements << std::endl;
-  std::cout << "errors: " << sc.errors << std::endl;
-  std::cout << "fails: " << sc.fails << std::endl;
-  std::cout << "fatals: " << sc.fatals << std::endl;
+  if (!sc)
+  {
+    if (sc.errors!=0) std::cout << ::fas::red ;
+    std::cout << "errors: " << sc.errors << ::fas::light_red << std::endl;
+    if (sc.fails!=0) std::cout << ::fas::red ;
+    std::cout << "fails: " << sc.fails << ::fas::light_red << std::endl;
+    if (sc.fatals!=0) std::cout << ::fas::red ;
+    std::cout << "fatals: " << sc.fatals << ::fas::light_red << std::endl;
+  }
   std::cout << "**************************************" << std::endl;
+  std::cout << ::fas::restore ;
   std::cout << std::endl;
+  
   
 }
 
@@ -468,3 +509,4 @@ int name_suite_run(int argc, char* argv[])
 
 
 #endif
+

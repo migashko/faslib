@@ -110,7 +110,7 @@ namespace std
 
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_stop_) )
   {
-    return o << ::fas::red << "PUSH" << fas::restore << " error: use t<<push" << std::endl;
+    return o << std::endl << ::fas::red << "STOP" << fas::restore << " error: use t << stop" << std::endl;
   }
 
 }

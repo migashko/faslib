@@ -27,6 +27,11 @@ struct counts
     fails += c.fails;
     fatals += c.fatals;
   }
+  
+  operator bool () const
+  {
+    return errors==0 && fails==0 && fatals==0;
+  }
 };
 
 struct unit_counts 
