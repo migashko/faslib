@@ -4,6 +4,7 @@
 #include "../../bar.hpp"
 
 #include <fas/serialization/json/deser/ad_primary_list.hpp>
+#include <fas/serialization/json/deser/ad_separator.hpp>
 #include <fas/serialization/json/deser/ad_brute_list.hpp>
 #include <fas/serialization/json/deser/ad_brute_pair.hpp>
 
