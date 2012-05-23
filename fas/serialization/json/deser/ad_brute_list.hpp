@@ -42,13 +42,15 @@ private:
   template<typename T, typename R>
   R _parse(T& t, R r)
   {
-    r = t.get_aspect().template get< parse::_value_>()(t, r);
+    return t.get_aspect().template get< parse::_item_>()(t, r);
+    /*r = t.get_aspect().template get< parse::_value_>()(t, r);
     r = t.get_aspect().template get< parse::_space_>()(t, r);
     if ( !r ) return r;
     if ( *r!=':') return r;
     r = t.get_aspect().template get< parse::_space_>()(t, ++r);
     r = t.get_aspect().template get< parse::_value_>()(t, r);
     return r;
+    */
   }
   
   template<typename T, typename V, typename R>
