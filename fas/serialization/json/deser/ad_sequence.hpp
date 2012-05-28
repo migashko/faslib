@@ -15,6 +15,9 @@
 
 // #include <fas/static_check/verifying.hpp>
 
+
+#include <iostream>
+
 namespace fas{ namespace json{ 
 
 namespace errorlist
@@ -53,11 +56,11 @@ private:
   template<typename T, typename M, typename V, typename R, typename ISA>
   R _1(T&, M, V& , R r, ISA, int_<0> ) { return r; }
   
-  template<typename T, typename M, typename V, typename R, typename ISA>
-  R _1(T& t, M, V& v, R r, ISA, int_<-1> )
+  template<typename T, typename M, typename V, typename R, typename ISA, int N>
+  R _1(T& t, M, V& v, R r, ISA, int_<N> )
   {
     if (!r) return r;
-
+    
     typedef typename typerange<V>::orange range_type;
     range_type vr = orange(v);
 

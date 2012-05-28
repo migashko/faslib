@@ -169,8 +169,8 @@ UNIT(ad_brute_list_test1, "test fas::json::deser::ad_brute_list advice")
   t << equal<expect>(b.foo3, std::string("test-foo3") ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(b.bar1.baz1, 47 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(b.bar2.foo2, "test-foo2" ) << FAS_TESTING_FILE_LINE;
-
 }
+
 
 UNIT(ad_pair_test1, "test fas::json::deser::ad_brute_list advice")
 {

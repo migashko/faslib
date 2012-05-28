@@ -198,8 +198,8 @@ namespace test4
     >::type 
     ,
     type_list_n<
-      attr<foo, std::vector<int>, &foo::foo4, sequence<integer> >,
-      attr<foo, std::vector<std::string>, &foo::foo6, sequence<string> >
+      attr<foo, std::vector<int>, &foo::foo4, sequence<integer, 1> >,
+      attr<foo, std::vector<std::string>, &foo::foo6, sequence<string, 1> >
     >::type
     >
   > foo_json;
@@ -219,7 +219,6 @@ UNIT(ad_array_test4, "test ad_array advice")
   string_range<const char*> r = string_range<const char*>("[-1,\"test-foo2\",\"test-foo3\",1,2,3,4,5,20,30,40,\"test-foo6-1\",\"test-foo6-2\"]");
   try
   {
-    
     r = ada(t, test4::foo_json(), f, r );
   }
   catch(const json_error& e)
@@ -240,17 +239,25 @@ UNIT(ad_array_test4, "test ad_array advice")
   t << equal<expect>(f.foo5[4], 5 ) << FAS_TESTING_FILE_LINE;
 
   
-  t << equal<assert, int>(f.foo4.size(), 3 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, int>(f.foo4.size(), 9 ) << FAS_TESTING_FILE_LINE << std::endl << f.foo4.size();
   t << stop;
   
-  t << equal<expect>(f.foo4[0], 20 ) << FAS_TESTING_FILE_LINE;
-  t << equal<expect>(f.foo4[1], 30 ) << FAS_TESTING_FILE_LINE;
-  t << equal<expect>(f.foo4[2], 40 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[0], -1 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[1], 1 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[2], 2 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[3], 3 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[4], 4 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[5], 5 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[6], 20 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[7], 30 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[8], 40 ) << FAS_TESTING_FILE_LINE;
 
-  t << equal<assert, int>(f.foo6.size(), 2 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, int>(f.foo6.size(), 4 ) << FAS_TESTING_FILE_LINE;
   t << stop;
-  t << equal<expect>(f.foo6[0], "test-foo6-1" ) << FAS_TESTING_FILE_LINE;
-  t << equal<expect>(f.foo6[1], "test-foo6-2" ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo6[0], "test-foo2" ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo6[1], "test-foo3" ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo6[2], "test-foo6-1" ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo6[3], "test-foo6-2" ) << FAS_TESTING_FILE_LINE;
 
 /*  std::cout << separator<>()() << std::endl;
   std::cout << separator<'a'>()() << std::endl;

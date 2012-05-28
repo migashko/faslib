@@ -11,6 +11,7 @@
 #include <fas/serialization/json/deser/tags.hpp>
 
 #include <fas/typemanip/remove_cvrp.hpp>
+#include <fas/typemanip/const_if_const.hpp>
 
 namespace fas{ namespace json{
 
@@ -24,15 +25,21 @@ struct attr
   
   typedef typename remove_cvrp<VT>::type value_type;
 
+  template<typename VV>
+  typename const_if_const<VT, VV>::type& operator()(VV& v) const
+  {
+    return v.*m;
+  }
+  /*
   VT& operator()(V& v) const
   {
     return v.*m;
-  }
+  }*/
 
-  const VT& operator()(const V& v) const
+  /*const VT& operator()(const V& v) const
   {
     return v.*m;
-  }
+  }*/
 };
 
 }}

@@ -11,7 +11,7 @@
 
 namespace fas{ namespace json{
 
-typedef ::fas::serialization::syntax_error syntax_error;
+typedef ::fas::serialization::syntax_error invalid_json;
 
 }}
 
