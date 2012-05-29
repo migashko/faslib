@@ -17,12 +17,19 @@ FAS_NAME(id)
 FAS_NAME(name)
 FAS_NAME(email)
 
+typedef aj::mem_fun_set_static<benchmark::Person, ::google::protobuf::int32, &benchmark::Person::set_id> mem_fun_id;
+typedef aj::mem_fun_set_static<benchmark::Person, const ::std::string&, &benchmark::Person::set_name> mem_fun_name;
+typedef aj::mem_fun_set_static<benchmark::Person, const ::std::string&, &benchmark::Person::set_email> mem_fun_email;
+
+template<> int mem_fun_id::value = 0;
+template<> std::string mem_fun_name::value = std::string();
+template<> std::string mem_fun_email::value = std::string();
 
 typedef aj::object<
   fas::type_list_n<
-    aj::field< n_id, aj::setter< benchmark::Person, ::google::protobuf::int32, &benchmark::Person::set_id, aj::integer > >,
-    aj::field< n_name, aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_name, aj::string >  >,
-    aj::field< n_email, aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_email, aj::string >  >
+    aj::field< n_id, aj::setter< mem_fun_id, aj::integer > >,
+    aj::field< n_name, aj::setter< mem_fun_name, aj::string >  >,
+    aj::field< n_email, aj::setter< mem_fun_email, aj::string >  >
   >::type
 > fasproto_json;
 
@@ -31,6 +38,8 @@ buffer_type buffer = "{\"id\":100,\"name\":\"Name\",\"email\":\"email@example.co
 
 int main()
 {
+  mem_fun_name::value.reserve(100);
+  mem_fun_email::value.reserve(100);
   benchmark::Person t;
   t.set_id(100);
   t.set_name("Name");

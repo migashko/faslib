@@ -39,12 +39,10 @@ struct ad_string
   template<typename T, typename M, typename V, typename R, typename ISA>
   R _1(T& t, M, V& v, R r, ISA)
   {
-    //using namespace ::fas::json;
-    
     if ( t.get_aspect().template get<parse::_null_>().check(r) )
       r = t.get_aspect().template get<parse::_null_>()(t, r);
     else if ( t.get_aspect().template get<parse::_string_>().check(r) )
-      r = _(t, orange(v, !ISA::value), r, /*typename is_array<V>::type*/ISA() );
+      r = _(t, orange(v, !ISA::value), r, ISA() );
     
     return r;
   }
@@ -66,14 +64,14 @@ struct ad_string
 
 protected:
 
-  template<typename T, typename Rout, typename Rin/*, typename S*/ >
-  Rin _( T& t, Rout r_out, Rin r_in, /*type2type<S> */ false_ )
+  template<typename T, typename Rout, typename Rin >
+  Rin _( T& t, Rout r_out, Rin r_in, false_ )
   {
     return deserialize_string(t, r_out, r_in);
   }
 
-  template<typename T, typename Rout, typename Rin/*, typename S, int N*/ >
-  Rin _( T& t, Rout r_out, Rin r_in, /*type2type<S[N]>*/ true_   )
+  template<typename T, typename Rout, typename Rin >
+  Rin _( T& t, Rout r_out, Rin r_in, true_   )
   {
     r_in = deserialize_string(t, r_out, r_in);
     

@@ -12,6 +12,8 @@
 
 #include <fas/typemanip/remove_cvrp.hpp>
 #include <fas/typemanip/const_if_const.hpp>
+#include <fas/typemanip/if_c.hpp>
+#include <fas/typemanip/is_const.hpp>
 
 namespace fas{ namespace json{
 
@@ -59,6 +61,8 @@ template<typename V, typename VT, void (V::* mg)(VT), typename VVT = typename re
 struct mem_fun_set
 {
 	typedef VVT value_type;
+  
+  mem_fun_set():_obj() {}
 
 	value_type& operator()(V& v)
   {
@@ -67,12 +71,40 @@ struct mem_fun_set
   }
 
   ~mem_fun_set()
-	{
-		(_obj->*mg)(_value);
-	}
+  {
+    if ( _obj )
+      (_obj->*mg)(_value);
+  }
 private:
-	V* 				 _obj;
-	value_type _value;
+  V*         _obj;
+  value_type _value;
+};
+
+template<typename V, typename VT, void (V::* mg)(VT), typename VVT = typename remove_cvrp<VT>::type >
+struct mem_fun_set_static
+{
+  typedef VVT value_type;
+  
+  mem_fun_set_static():_obj() {}
+
+  value_type& operator()(V& v)
+  {
+    _obj = &v;
+    orange(value, true);
+    return value;
+  }
+
+  ~mem_fun_set_static()
+  {
+    if ( _obj )
+      (_obj->*mg)(value);
+  }
+  
+  static value_type value;
+  
+private:
+  V*         _obj;
+  
 };
 
 template<typename G, typename M>

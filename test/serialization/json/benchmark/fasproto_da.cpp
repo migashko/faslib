@@ -14,9 +14,9 @@ namespace aj = ::fas::json;
 
 typedef aj::array<
   fas::type_list_n<
-    aj::setter< benchmark::Person, ::google::protobuf::int32, &benchmark::Person::set_id, aj::integer >,
-    aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_name, aj::string >,
-    aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_email, aj::string >
+    aj::setter< aj::mem_fun_set<benchmark::Person, ::google::protobuf::int32, &benchmark::Person::set_id> , aj::integer >,
+    aj::setter< aj::mem_fun_set<benchmark::Person, const ::std::string&, &benchmark::Person::set_name> , aj::string >,
+    aj::setter< aj::mem_fun_set<benchmark::Person, const ::std::string&, &benchmark::Person::set_email> , aj::string >
   >::type
 > fasproto_array_json;
 
