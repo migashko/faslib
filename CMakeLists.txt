@@ -50,7 +50,7 @@ include_directories(./)
 add_subdirectory(test)
 #add_subdirectory(example)
 add_subdirectory(tutorial)
-#add_subdirectory(probe )
+add_subdirectory(probe)
 
 SET(CPACK_PACKAGE_VERSION "0.2.0")
 

@@ -1,5 +1,5 @@
 project(probe)
-subdirs(meta)
+add_subdirectory(meta)
 include_directories(../)
 #add_executable(algorithms algorithms.cpp)
 
