@@ -14,9 +14,9 @@ FAS_NAME(email)
 
 typedef aj::object<
   fas::type_list_n<
-    aj::member< n_id, aj::attr< Person2, int, &Person2::id, aj::integer > >,
-    aj::member< n_name,aj::attr< Person2, Person2::name_type, &Person2::name, aj::string > >,
-    aj::member< n_email,aj::attr< Person2, Person2::email_type, &Person2::email, aj::string > >
+    aj::field< n_id, aj::attr< Person2, int, &Person2::id, aj::integer > >,
+    aj::field< n_name,aj::attr< Person2, Person2::name_type, &Person2::name, aj::string > >,
+    aj::field< n_email,aj::attr< Person2, Person2::email_type, &Person2::email, aj::string > >
   >::type
 > Person2_json;
 

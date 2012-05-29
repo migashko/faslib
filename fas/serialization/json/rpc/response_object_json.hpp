@@ -14,9 +14,9 @@ template<typename RO>
 struct response_object_json_t
   : object<
       typename type_list_n<
-        member< n_jsonrpc, tstring<version> >,
-        member< n_result,  attr< RO, typename RO::range_type, &RO::result, ::fas::json::range > >,
-        member< n_id,      attr< RO, int, &RO::id, integer > >
+        field< n_jsonrpc, tstring<version> >,
+        field< n_result,  attr< RO, typename RO::range_type, &RO::result, ::fas::json::range > >,
+        field< n_id,      attr< RO, int, &RO::id, integer > >
       >::type
     >
 {};
@@ -26,17 +26,17 @@ template<typename RO, typename O, typename J>
 struct response_object_json1
   : object<
       typename type_list_n<
-        member< n_jsonrpc, tstring<version> >,
-        member< n_result,  attr< RO, O, &RO::result, J > >,
-        member< n_id,      attr< RO, int, &RO::id, integer > >
+        field< n_jsonrpc, tstring<version> >,
+        field< n_result,  attr< RO, O, &RO::result, J > >,
+        field< n_id,      attr< RO, int, &RO::id, integer > >
       >::type
     >
 {
   /*typedef object<
       typename type_list_n<
-        member< n_jsonrpc, tstring<version> >,
-        member< n_result,  attr< RO, O, &RO::result, J > >,
-        member< n_id,      attr< RO, int, &RO::id, integer > >
+        field< n_jsonrpc, tstring<version> >,
+        field< n_result,  attr< RO, O, &RO::result, J > >,
+        field< n_id,      attr< RO, int, &RO::id, integer > >
       >::type
     > type;
     */
@@ -50,9 +50,9 @@ struct response_object_json_temp
   //typedef typename response_object_json1<RO, O, J>::type type;
   /*typedef object<
       typename type_list_n<
-        member< n_jsonrpc, tstring<version> >,
-        member< n_result,  attr< RO, O, &RO::result, J > >,
-        member< n_id,      attr< RO, int, &RO::id, integer > >
+        field< n_jsonrpc, tstring<version> >,
+        field< n_result,  attr< RO, O, &RO::result, J > >,
+        field< n_id,      attr< RO, int, &RO::id, integer > >
       >::type
     > type;
     */
@@ -61,12 +61,12 @@ struct response_object_json_temp
   /*
 typedef object<
   type_list_n<
-    member< n_jsonrpc,attr< raw_object, raw_object::version_type, &raw_object::version, string  > >,
-    member< n_method, attr< raw_object, raw_object::method_type, &raw_object::method, string  > >,
-    member< n_params, attr< raw_object, raw_object::raw_type,    &raw_object::params, raw     > >,
-    member< n_id,     attr< raw_object, int,                     &raw_object::id,     integer > >,
-    member< n_result, attr< raw_object, raw_object::raw_type,    &raw_object::result, raw     > >,
-    member< n_error,  attr< raw_object, raw_object::raw_type,    &raw_object::error,  raw     > >
+    field< n_jsonrpc,attr< raw_object, raw_object::version_type, &raw_object::version, string  > >,
+    field< n_method, attr< raw_object, raw_object::method_type, &raw_object::method, string  > >,
+    field< n_params, attr< raw_object, raw_object::raw_type,    &raw_object::params, raw     > >,
+    field< n_id,     attr< raw_object, int,                     &raw_object::id,     integer > >,
+    field< n_result, attr< raw_object, raw_object::raw_type,    &raw_object::result, raw     > >,
+    field< n_error,  attr< raw_object, raw_object::raw_type,    &raw_object::error,  raw     > >
   >::type
 > raw_object_json_type;
 

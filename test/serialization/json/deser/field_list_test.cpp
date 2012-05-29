@@ -17,7 +17,7 @@
 #include <fas/serialization/json/meta/attr.hpp>
 #include <fas/serialization/json/meta/integer.hpp>
 #include <fas/serialization/json/meta/string.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/sequence.hpp>
 
 #include <fas/serialization/json/parser/aspect.hpp>

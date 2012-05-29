@@ -6,7 +6,7 @@
 #include <fas/serialization/json/deser/tags.hpp>
 #include <fas/serialization/json/meta/stub.hpp>
 #include <fas/serialization/has_serializer_tag.hpp>
-#include <fas/serialization/json/meta/member_list.hpp>
+#include <fas/serialization/json/meta/field_list.hpp>
 #include <fas/typemanip/empty_type.hpp>
 #include <fas/typemanip/if_c.hpp>
 #include <fas/static_check/static_check.hpp>

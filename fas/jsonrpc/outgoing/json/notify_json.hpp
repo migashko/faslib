@@ -4,7 +4,7 @@
 #include <fas/jsonrpc/names.hpp>
 
 #include <fas/serialization/json/meta/object.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/tstring.hpp>
 #include <fas/serialization/json/meta/null.hpp>
 
@@ -20,9 +20,9 @@ template< typename Name, typename J >
 struct notify_json:
   aj::object<
     typename type_list_n<
-      aj::member< n_jsonrpc, aj::tstring<version> >,
-      aj::member< n_method, aj::tstring<Name> >,
-      aj::member< n_params,   J >
+      aj::field< n_jsonrpc, aj::tstring<version> >,
+      aj::field< n_method, aj::tstring<Name> >,
+      aj::field< n_params,   J >
     >::type
   >
 {

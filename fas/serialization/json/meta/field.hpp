@@ -1,73 +1,41 @@
-//
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-
 #ifndef FAS_SERIALIZATION_JSON_META_FIELD_HPP
 #define FAS_SERIALIZATION_JSON_META_FIELD_HPP
 
 #include <fas/serialization/json/ser/tags.hpp>
 #include <fas/serialization/json/deser/tags.hpp>
 
-#include <fas/typemanip/remove_cvrp.hpp>
-#include <fas/typemanip/const_if_const.hpp>
+#include <fas/serialization/json/meta/tstring.hpp>
+
+#include <fas/typemanip/metalist.hpp>
+#include <fas/typemanip/is_has_metatype.hpp>
+#include <fas/typemanip/empty_type.hpp>
+#include <fas/typemanip/switch_.hpp>
+
+#include <fas/typemanip/case_.hpp>
+#include <fas/typemanip/default_.hpp>
+#include <fas/serialization/json/meta/is_string.hpp>
+#include <fas/serialization/json/meta/metalist.hpp>
+
+#include <fas/type_list/type_list_n.hpp>
 
 namespace fas{ namespace json{
 
-template<typename VT, typename FG, typename FS,  typename J = empty_type>
+
+template<typename L, typename R>
 struct field
 {
-  typedef typename J::metatype metatype;
-  typedef J target;
-  typedef ser::_attr_ serializer_tag;
-  typedef deser::_attr_ deserializer_tag;
+  typedef metalist::field metatype;
 
-  typedef typename remove_cvrp<VT>::type value_type;
-
-  /*template<typename V>
-  const VT& operator()(const V& v) const
-  {
-    return FG()(v);
-  }*/
-
-  template<typename V>
-  VT& operator()(V& v) const
-  {
-    return FS()(v);
-  }
+  typedef typename switch_<
+    case_c< is_string< L >::value, L>,
+    case_c< is_has_metatype< L, ::fas::metalist::tstring >::value, tstring<L> >,
+    default_< L >
+  >::type target1;
+  typedef R target2;
+  typedef ser::_field_ serializer_tag;
+  typedef deser::_field_ deserializer_tag;
 };
 
-template<typename VT, typename F, typename J >
-struct field<VT, F, J, empty_type>
-{
-  typedef typename J::metatype metatype;
-  typedef J target;
-  typedef ser::_attr_ serializer_tag;
-  typedef deser::_attr_ deserializer_tag;
-
-  typedef typename remove_cvrp<VT>::type value_type;
-
-  /*
-  template<typename V>
-  const VT& operator()(const V& v) const
-  {
-    return F()(v);
-  }*/
-
-  template<typename V>
-  /*typename if_c<
-    is_const<V>::value,
-    const VT,
-    VT
-  >::type& 
-  */
-  typename const_if_const<VT, V>::type&
-  operator()(V& v) const
-  {
-    return F()(v);
-  }
-};
 
 }}
 

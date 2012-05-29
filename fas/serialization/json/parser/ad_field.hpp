@@ -1,5 +1,5 @@
-#ifndef FAS_SERIALIZATION_JSON_PARSER_AD_MEMBER_HPP
-#define FAS_SERIALIZATION_JSON_PARSER_AD_MEMBER_HPP
+#ifndef FAS_SERIALIZATION_JSON_PARSER_AD_FIELD_HPP
+#define FAS_SERIALIZATION_JSON_PARSER_AD_FIELD_HPP
 
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/unexpected_end_fragment.hpp>
@@ -10,7 +10,7 @@
 
 namespace fas{ namespace json{ namespace parse{
 
-struct ad_member
+struct ad_field
 {
   template<typename T, typename R>
   R operator()(T& t, R r)

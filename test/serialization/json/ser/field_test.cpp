@@ -132,7 +132,7 @@ UNIT(ad_field_test5, "test fas::json::ser::ad_field advice")
   
 }
 
-BEGIN_SUITE(field_serialize_suite, "field serializer suite")
+BEGIN_SUITE(attr_serialize_suite, "field serializer suite")
   ADD_UNIT(attr_test)
   ADD_UNIT(ad_field_test1)
   ADD_UNIT(ad_field_test2)
@@ -142,4 +142,4 @@ BEGIN_SUITE(field_serialize_suite, "field serializer suite")
   ADD_ADVICE( ::fas::json::ser::_attr_, ::fas::json::ser::ad_attr)
   ADD_ADVICE( ::fas::json::ser::_null_, ::fas::json::ser::ad_null)
   ADD_ADVICE( ::fas::json::_except_, ::fas::json::ad_except)
-END_SUITE(field_serialize_suite)
+END_SUITE(attr_serialize_suite)

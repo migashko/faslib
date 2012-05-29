@@ -1,12 +1,12 @@
-#ifndef FAS_SERIALIZATION_JSON_SERIALIZER_AD_MEMBER_HPP
-#define FAS_SERIALIZATION_JSON_SERIALIZER_AD_MEMBER_HPP
+#ifndef FAS_SERIALIZATION_JSON_SERIALIZER_AD_FIELD_HPP
+#define FAS_SERIALIZATION_JSON_SERIALIZER_AD_FIELD_HPP
 
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/out_of_range.hpp>
 
 namespace fas{ namespace json{ namespace ser{
 
-struct ad_member
+struct ad_field
 {
   template<typename T, typename M, typename V>
   bool check(T& t, M, const V& v)

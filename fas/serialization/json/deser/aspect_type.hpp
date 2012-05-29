@@ -10,7 +10,7 @@
 #include <fas/serialization/json/deser/ad_array.hpp>
 #include <fas/serialization/json/deser/ad_sequence.hpp>
 #include <fas/serialization/json/deser/ad_string.hpp>
-#include <fas/serialization/json/deser/ad_member.hpp>
+#include <fas/serialization/json/deser/ad_field.hpp>
 #include <fas/serialization/json/deser/ad_enumeration.hpp>
 
 #include <fas/serialization/json/deser/ad_object.hpp>
@@ -46,10 +46,10 @@ typedef
       advice< deser::_real_, deser::ad_real>,
       advice< deser::_string_, deser::ad_string>,
       advice< deser::_cstring_, deser::ad_cstring>,
-      advice< deser::_member_, deser::ad_member>,
+      advice< deser::_field_, deser::ad_field>,
       advice< deser::_attr_, deser::ad_attr>,
       advice< deser::_prop_, deser::ad_prop>,
-      // advice< deser::_member_list_, deser::ad_member_list>,
+      // advice< deser::_field_list_, deser::ad_field_list>,
       //advice< deser::_field_list_, deser::ad_field_list>,
       //advice< deser::_field_list2_, deser::ad_field_list2>,
       advice< deser::_brute_pair_, deser::ad_brute_pair>,

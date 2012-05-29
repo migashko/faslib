@@ -9,7 +9,6 @@
 
 UNIT(deserializer_test, "test deserializer")
 {
-  using namespace ::fas;
   using namespace ::fas::testing;
   using namespace ::fas::json;
   using namespace ::fas::json::deser;
@@ -18,16 +17,16 @@ UNIT(deserializer_test, "test deserializer")
 
   typedef object<
     brute_pair<
-    type_list_n<
-      member< n_foo1, attr<foo, int, &foo::foo1, integer> >,
-      member< n_foo2, attr<foo, std::string, &foo::foo2, string> >,
-      member< n_foo3, attr<foo, foo::foo3type, &foo::foo3, string> >,
-      member< n_foo5, attr<foo, foo::foo5type, &foo::foo5, array<integer> > >,
-      member< n_foo4, attr<foo, std::vector<int>, &foo::foo4, array<integer> >  >,
-      member< n_foo6, attr<foo, std::vector<std::string>, &foo::foo6, array<string> >  >
+    fas::type_list_n<
+      field< n_foo1, attr<foo, int, &foo::foo1, integer> >,
+      field< n_foo2, attr<foo, std::string, &foo::foo2, string> >,
+      field< n_foo3, attr<foo, foo::foo3type, &foo::foo3, string> >,
+      field< n_foo5, attr<foo, foo::foo5type, &foo::foo5, array<integer> > >,
+      field< n_foo4, attr<foo, std::vector<int>, &foo::foo4, array<integer> >  >,
+      field< n_foo6, attr<foo, std::vector<std::string>, &foo::foo6, array<string> >  >
     >::type
     ,
-    type_list_n<
+    fas::type_list_n<
     >::type
     >
   > foo_json;

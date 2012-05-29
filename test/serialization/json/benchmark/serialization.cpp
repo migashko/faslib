@@ -10,7 +10,7 @@
 #include <fas/serialization/json/ser/ad_sequence.hpp>
 #include <fas/serialization/json/ser/ad_attr.hpp>
 #include <fas/serialization/json/ser/ad_string.hpp>
-#include <fas/serialization/json/ser/ad_member.hpp>
+#include <fas/serialization/json/ser/ad_field.hpp>
 #include <fas/serialization/json/ser/ad_object.hpp>
 #include <fas/serialization/json/ser/ad_stub.hpp>
 #include <fas/serialization/json/ser/ad_field.hpp>
@@ -18,7 +18,7 @@
 
 
 #include <fas/serialization/json/meta/object.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/integer.hpp>
 #include <fas/serialization/json/meta/attr.hpp>
 #include <fas/type_list/type_list_n.hpp>
@@ -52,7 +52,7 @@ struct json_serializer_aspect
         advice< ajs::_string_, ajs::ad_string>,
         advice< ajs::_cstring_, ajs::ad_cstring>,
         advice< ajs::_integer_, ajs::ad_integer>,
-        advice< ajs::_member_, ajs::ad_member>,
+        advice< ajs::_field_, ajs::ad_field>,
         advice< ajs::_field_, ajs::ad_field>,
         advice< ajs::_field_list_, ajs::ad_field_list>,
         advice< ajs::_array_, ajs::ad_array>,
@@ -92,8 +92,8 @@ struct test1
 typedef
   aj::object<
     type_list_n<
-      aj::attr< n_f1, aj::member<test1, int, &test1::field1, aj::integer/*<int>*/ > >,
-      aj::attr< n_f2, aj::member<test1, int, &test1::field2, aj::integer/*<int>*/ > >
+      aj::attr< n_f1, aj::field<test1, int, &test1::field1, aj::integer/*<int>*/ > >,
+      aj::attr< n_f2, aj::field<test1, int, &test1::field2, aj::integer/*<int>*/ > >
     >::type
   > test1_json;
   

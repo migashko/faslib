@@ -18,7 +18,7 @@ namespace metalist
   struct array;
   struct any;  // for user define
   
-  struct member;
+  struct field;
   struct sequence;
 }
 

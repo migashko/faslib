@@ -141,9 +141,9 @@ FAS_NAME(bar);
 
 typedef aj::object< fas::type_list_n<
   ajr::custom_error_json::target,
-  aj::member< n_data, aj::object< fas::type_list_n<
-    aj::member< n_foo, aj::attr< user_error, int, &user_error::foo, aj::integer > >,
-    aj::member< n_bar, aj::attr< user_error, std::string, &user_error::bar, aj::string > >
+  aj::field< n_data, aj::object< fas::type_list_n<
+    aj::field< n_foo, aj::attr< user_error, int, &user_error::foo, aj::integer > >,
+    aj::field< n_bar, aj::attr< user_error, std::string, &user_error::bar, aj::string > >
   >::type > >
 >::type > user_error_json;
 

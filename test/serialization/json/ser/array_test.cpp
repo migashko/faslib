@@ -14,7 +14,7 @@
 #include <fas/serialization/json/ser/ad_enumeration.hpp>
 #include <fas/serialization/json/ser/ad_enumset_value.hpp>
 #include <fas/serialization/json/ser/ad_integer.hpp>
-#include <fas/serialization/json/ser/ad_member.hpp>
+#include <fas/serialization/json/ser/ad_field.hpp>
 
 #include <fas/serialization/json/except/ad_except.hpp>
 
@@ -24,7 +24,7 @@
 #include <fas/serialization/json/meta/array.hpp>
 #include <fas/serialization/json/meta/enumeration.hpp>
 #include <fas/serialization/json/meta/string.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/attr.hpp>
 #include <fas/serialization/json/meta/brute_pair.hpp>
 #include <fas/serialization/json/meta/enumset.hpp>
@@ -246,7 +246,7 @@ BEGIN_SUITE(array_serializer_suite, "array serializer suite")
   ADD_ADVICE( ::fas::json::ser::_integer_, ::fas::json::ser::ad_integer)
   ADD_ADVICE( ::fas::json::ser::_sequence_, ::fas::json::ser::ad_sequence)
   ADD_ADVICE( ::fas::json::ser::_array_, ::fas::json::ser::ad_array)
-  //ADD_ADVICE( ::fas::json::ser::_member_list_, ::fas::json::ser::ad_member_list)
+  //ADD_ADVICE( ::fas::json::ser::_field_list_, ::fas::json::ser::ad_field_list)
   ADD_ADVICE( ::fas::json::ser::_enumset_value_, ::fas::json::ser::ad_enumset_value)
   ADD_ADVICE( ::fas::json::ser::_attr_, ::fas::json::ser::ad_attr)
   ADD_ADVICE( ::fas::json::ser::_brute_list_, ::fas::json::ser::ad_brute_list)

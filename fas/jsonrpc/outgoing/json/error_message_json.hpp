@@ -4,7 +4,7 @@
 #include <fas/jsonrpc/names.hpp>
 
 #include <fas/serialization/json/meta/object.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/attr.hpp>
 #include <fas/serialization/json/meta/pointer.hpp>
 #include <fas/serialization/json/meta/integer.hpp>
@@ -20,9 +20,9 @@ template< typename O, typename V, typename J >
 struct error_message_json:
   aj::object<
     typename type_list_n<
-      aj::member< n_jsonrpc, aj::tstring<version> >,
-      aj::member< n_error,   aj::attr< O, const V* ,  &O::error,  aj::pointer<J> > >,
-      aj::member< n_id,      aj::attr< O, int, &O::id,      aj::integer > >
+      aj::field< n_jsonrpc, aj::tstring<version> >,
+      aj::field< n_error,   aj::attr< O, const V* ,  &O::error,  aj::pointer<J> > >,
+      aj::field< n_id,      aj::attr< O, int, &O::id,      aj::integer > >
     >::type
   >
 {

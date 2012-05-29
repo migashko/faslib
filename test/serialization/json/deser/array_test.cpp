@@ -13,14 +13,14 @@
 #include <fas/serialization/json/deser/ad_string.hpp>
 #include <fas/serialization/json/deser/ad_integer.hpp>
 #include <fas/serialization/json/deser/ad_enumeration.hpp>
-#include <fas/serialization/json/deser/ad_member.hpp>
+#include <fas/serialization/json/deser/ad_field.hpp>
 
 #include <fas/serialization/json/deser/deserialize_integer.hpp>
 #include <fas/serialization/json/deser/deserialize_array.hpp>
 #include <fas/serialization/json/meta/integer.hpp>
 #include <fas/serialization/json/meta/array.hpp>
 #include <fas/serialization/json/meta/string.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/attr.hpp>
 #include <fas/serialization/json/meta/enumeration.hpp>
 #include <fas/serialization/json/meta/brute_list.hpp>
@@ -337,7 +337,7 @@ BEGIN_SUITE(array_deserialize_suite, "array serializer suite")
   ADD_ADVICE( ::fas::json::deser::_integer_, ::fas::json::deser::ad_integer)
   ADD_ADVICE( ::fas::json::deser::_sequence_, ::fas::json::deser::ad_sequence)
   ADD_ADVICE( ::fas::json::deser::_array_, ::fas::json::deser::ad_array)
-  //ADD_ADVICE( ::fas::json::deser::_member_list_, ::fas::json::deser::ad_member_list)
+  //ADD_ADVICE( ::fas::json::deser::_field_list_, ::fas::json::deser::ad_field_list)
   //ADD_ADVICE( ::fas::json::deser::_field_list_, ::fas::json::deser::ad_field_list)
   //ADD_ADVICE( ::fas::json::deser::_field_list2_, ::fas::json::deser::ad_field_list2)
   ADD_ADVICE( ::fas::json::deser::_attr_, ::fas::json::deser::ad_attr)

@@ -12,12 +12,12 @@ namespace fas{ namespace json{ namespace rpc{
 
 typedef object<
   type_list_n<
-    member< n_jsonrpc,attr< raw_object, raw_object::version_type, &raw_object::version, string  > >,
-    member< n_method, attr< raw_object, raw_object::method_type, &raw_object::method, string  > >,
-    member< n_params, attr< raw_object, raw_object::raw_type,    &raw_object::params, raw     > >,
-    member< n_id,     attr< raw_object, int,                     &raw_object::id,     integer > >,
-    member< n_result, attr< raw_object, raw_object::raw_type,    &raw_object::result, raw     > >,
-    member< n_error,  attr< raw_object, raw_object::raw_type,    &raw_object::error,  raw     > >
+    field< n_jsonrpc,attr< raw_object, raw_object::version_type, &raw_object::version, string  > >,
+    field< n_method, attr< raw_object, raw_object::method_type, &raw_object::method, string  > >,
+    field< n_params, attr< raw_object, raw_object::raw_type,    &raw_object::params, raw     > >,
+    field< n_id,     attr< raw_object, int,                     &raw_object::id,     integer > >,
+    field< n_result, attr< raw_object, raw_object::raw_type,    &raw_object::result, raw     > >,
+    field< n_error,  attr< raw_object, raw_object::raw_type,    &raw_object::error,  raw     > >
   >::type
 > raw_object_json_type;
 

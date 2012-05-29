@@ -16,15 +16,15 @@ struct _integer_;
 struct _real_;
 struct _string_;
 struct _field_;
-struct _member_list_;
+struct _field_list_;
 
 struct _object_;
-struct _membeributes_;
+struct _fieldibutes_;
 struct _array_;
 struct _sequence_; // последовательность без разделителей
 
 struct _attr_;
-struct _member_;
+struct _field_;
 struct _name_;
 struct _value_;
 */

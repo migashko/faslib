@@ -20,9 +20,9 @@ FAS_NAME(email)
 
 typedef aj::object<
   fas::type_list_n<
-    aj::member< n_id, aj::setter< benchmark::Person, ::google::protobuf::int32, &benchmark::Person::set_id, aj::integer > >,
-    aj::member< n_name, aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_name, aj::string >  >,
-    aj::member< n_email, aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_email, aj::string >  >
+    aj::field< n_id, aj::setter< benchmark::Person, ::google::protobuf::int32, &benchmark::Person::set_id, aj::integer > >,
+    aj::field< n_name, aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_name, aj::string >  >,
+    aj::field< n_email, aj::setter< benchmark::Person, const ::std::string&, &benchmark::Person::set_email, aj::string >  >
   >::type
 > fasproto_json;
 

@@ -111,18 +111,18 @@ FAS_NAME(description)
 
 typedef ajr::custom_error_json::target custom_error_list;
 typedef fas::type_list_n<
-          aj::member< n_position, aj::attr< user_error, size_t, &user_error::position, aj::integer > >,
-          aj::member< n_description, aj::attr< user_error, std::string, &user_error::description, aj::string > >
+          aj::field< n_position, aj::attr< user_error, size_t, &user_error::position, aj::integer > >,
+          aj::field< n_description, aj::attr< user_error, std::string, &user_error::description, aj::string > >
         >::type
 user_error_list;
 
-typedef aj::member< n_data, aj::object<user_error_list> > user_error_member;
+typedef aj::field< n_data, aj::object<user_error_list> > user_error_field;
     
 
 typedef aj::object<
   fas::type_list_n<
     custom_error_list,
-    user_error_member
+    user_error_field
   >::type
 > user_error_json;
 

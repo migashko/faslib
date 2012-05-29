@@ -24,7 +24,7 @@ struct _pointer_;
 
 /* deprecated */
 /*
-struct _member_list_;
+struct _field_list_;
 struct _field_list_;
 struct _field_list2_;
 */
@@ -38,7 +38,7 @@ struct _brute_pair_;
 
 
 struct _sequence_;
-struct _member_;
+struct _field_;
 struct _attr_;
 struct _getter_;
 struct _setter_;

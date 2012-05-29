@@ -13,7 +13,7 @@
 #include <fas/serialization/json/ser/ad_attr.hpp>
 #include <fas/serialization/json/ser/ad_enumeration.hpp>
 #include <fas/serialization/json/ser/ad_string.hpp>
-#include <fas/serialization/json/ser/ad_member.hpp>
+#include <fas/serialization/json/ser/ad_field.hpp>
 #include <fas/serialization/json/ser/ad_object.hpp>
 #include <fas/serialization/json/ser/ad_stub.hpp>
 #include <fas/serialization/json/ser/ad_raw.hpp>
@@ -53,8 +53,8 @@ typedef
       advice< ser::_enum_value_, ser::ad_enum_value>,
       advice< ser::_attr_, ser::ad_attr>,
       advice< ser::_prop_, ser::ad_prop>,
-      advice< ser::_member_, ser::ad_member>,
-      //advice< ser::_member_list_, ser::ad_member_list>,
+      advice< ser::_field_, ser::ad_field>,
+      //advice< ser::_field_list_, ser::ad_field_list>,
       //advice< ser::_field_list_, ser::ad_field_list>,
       advice< ser::_primary_list_, ser::ad_primary_list>,
       advice< ser::_brute_list_, ser::ad_brute_list>,

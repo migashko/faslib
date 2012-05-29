@@ -10,6 +10,33 @@
 
 namespace fas{ namespace json{
 
+	/*
+template<typename V, typename VT, VT (V::* mg)(void), void (V::* ms)(VT), typename M>
+struct getset
+{
+  typedef M target;
+
+  typedef typename M::metatype metatype;
+
+  typedef ser::_getter_ serializer_tag;
+  typedef deser::_setter_ deserializer_tag;
+
+  // typedef VT value_type;
+  typedef typename remove_cvrp<VT>::type value_type;
+
+  VT get(const V& v) const
+  {
+    return (v.*mg)();
+  }
+
+  void set(V& v, VT value) const
+  {
+    (v.*ms)(value);
+  }
+};
+*/
+
+	
 template<typename V, typename VT, VT (V::* mg)(void), void (V::* ms)(VT), typename M>
 struct getset
 {
@@ -33,6 +60,7 @@ struct getset
     (v.*ms)(value);
   }
 };
+
 
 template< typename VT, typename FG, typename FS, typename M = empty_type>
 struct getset_f

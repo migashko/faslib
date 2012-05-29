@@ -3,7 +3,7 @@
 
 #include <fas/serialization/json/meta/stub.hpp>
 #include <fas/serialization/json/meta/object.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/enumeration.hpp>
 #include <fas/serialization/json/meta/enum_value.hpp>
 #include <fas/serialization/json/meta/enumset.hpp>

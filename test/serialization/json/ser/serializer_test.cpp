@@ -14,12 +14,12 @@ namespace aj = ::fas::json;
 typedef aj::object<
   aj::brute_pair<
     fas::type_list_n<
-      aj::member< n_foo1, aj::attr<foo, int, &foo::foo1, aj::integer> >,
-      aj::member< n_foo2, aj::attr<foo, std::string, &foo::foo2, aj::string> >,
-      aj::member< n_foo3, aj::attr<foo, foo::foo3type, &foo::foo3, aj::string> >,
-      aj::member< n_foo5, aj::attr<foo, foo::foo5type, &foo::foo5, aj::array<aj::integer> > >,
-      aj::member< n_foo4, aj::attr<foo, std::vector<int>, &foo::foo4, aj::array<aj::integer> >  >,
-      aj::member< n_foo6, aj::attr<foo, std::vector<std::string>, &foo::foo6, aj::array<aj::string> >  >
+      aj::field< n_foo1, aj::attr<foo, int, &foo::foo1, aj::integer> >,
+      aj::field< n_foo2, aj::attr<foo, std::string, &foo::foo2, aj::string> >,
+      aj::field< n_foo3, aj::attr<foo, foo::foo3type, &foo::foo3, aj::string> >,
+      aj::field< n_foo5, aj::attr<foo, foo::foo5type, &foo::foo5, aj::array<aj::integer> > >,
+      aj::field< n_foo4, aj::attr<foo, std::vector<int>, &foo::foo4, aj::array<aj::integer> >  >,
+      aj::field< n_foo6, aj::attr<foo, std::vector<std::string>, &foo::foo6, aj::array<aj::string> >  >
     >::type
     ,
     fas::type_list_n<
@@ -59,13 +59,13 @@ typedef aj::object<
     aj::block<
     aj::brute_pair<
     fas::type_list_n<
-      aj::block< aj::member< n_foo1, aj::block< aj::attr<foo, int, &foo::foo1, aj::integer> > > >,
-      aj::block< aj::member< n_foo2, aj::attr<foo, std::string, &foo::foo2, aj::string> > >,
-      aj::block< aj::member< n_foo3, aj::attr<foo, foo::foo3type, &foo::foo3, aj::string> > >,
-      aj::block< aj::member< n_foo5, aj::attr<foo, foo::foo5type, &foo::foo5, aj::array< aj::integer> > > >,
-      aj::block< aj::member< n_foo4, aj::attr<foo, std::vector<int>, &foo::foo4, aj::block< aj::array< aj::block< aj::sequence< aj::block<aj::integer> > > > > > > >,
+      aj::block< aj::field< n_foo1, aj::block< aj::attr<foo, int, &foo::foo1, aj::integer> > > >,
+      aj::block< aj::field< n_foo2, aj::attr<foo, std::string, &foo::foo2, aj::string> > >,
+      aj::block< aj::field< n_foo3, aj::attr<foo, foo::foo3type, &foo::foo3, aj::string> > >,
+      aj::block< aj::field< n_foo5, aj::attr<foo, foo::foo5type, &foo::foo5, aj::array< aj::integer> > > >,
+      aj::block< aj::field< n_foo4, aj::attr<foo, std::vector<int>, &foo::foo4, aj::block< aj::array< aj::block< aj::sequence< aj::block<aj::integer> > > > > > > >,
       aj::block<
-        aj::member<
+        aj::field<
           n_foo6, 
           aj::attr<
             foo, 

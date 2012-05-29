@@ -1,5 +1,5 @@
-#ifndef FAS_SERIALIZATION_JSON_DESER_AD_MEMBER_HPP
-#define FAS_SERIALIZATION_JSON_DESER_AD_MEMBER_HPP
+#ifndef FAS_SERIALIZATION_JSON_DESER_AD_FIELD_HPP
+#define FAS_SERIALIZATION_JSON_DESER_AD_FIELD_HPP
 
 #include <fas/serialization/json/except.hpp>
 #include <fas/serialization/json/deser/default_space_parser.hpp>
@@ -10,7 +10,7 @@
 namespace fas{ namespace json{ namespace deser{
 
 
-struct ad_member
+struct ad_field
 {
   template<typename T, typename M, typename R>
   bool check(T& , M, R )
@@ -19,7 +19,7 @@ struct ad_member
     return t.get_aspect().template get<parse::_number_>().check(r)
            || t.get_aspect().template get<parse::_null_>().check(r);
 
-    #warning проверить на null member и sequence
+    #warning проверить на null field и sequence
     #warning сделать тесты на проверить на null для всех сущностей
     */
     return true;

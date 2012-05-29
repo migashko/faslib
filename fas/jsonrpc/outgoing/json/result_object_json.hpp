@@ -13,9 +13,9 @@ template< typename O, typename V, typename J >
 struct result_object_json:
   aj::object<
     typename type_list_n<
-      aj::member< n_jsonrpc, aj::tstring<version> >,
-      aj::member< n_result,  aj::attr< O, const V* ,  &O::result,  aj::pointer<J> > >,
-      aj::member< n_id,      aj::attr< O, int, &O::id,      aj::integer > >
+      aj::field< n_jsonrpc, aj::tstring<version> >,
+      aj::field< n_result,  aj::attr< O, const V* ,  &O::result,  aj::pointer<J> > >,
+      aj::field< n_id,      aj::attr< O, int, &O::id,      aj::integer > >
     >::type
   >
 {

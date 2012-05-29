@@ -8,7 +8,7 @@
 #include <fas/serialization/json/meta/integer.hpp>
 #include <fas/serialization/json/meta/raw.hpp>
 #include <fas/serialization/json/meta/attr.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/object.hpp>
 #include <fas/serialization/json/meta/readonly.hpp>
 
@@ -21,12 +21,12 @@ namespace aj = ::fas::json;
   
 typedef aj::object<
   type_list_n<
-    aj::member< n_jsonrpc, aj::attr< raw_object, raw_object::version_type, &raw_object::version, aj::string  > >,
-    aj::member< n_method,  aj::attr< raw_object, raw_object::method_type,  &raw_object::method,  aj::string  > >,
-    aj::member< n_params,  aj::attr< raw_object, raw_object::raw_type,     &raw_object::params,  aj::raw     > >,
-    aj::member< n_id,      aj::attr< raw_object, int,                      &raw_object::id,      aj::integer > >,
-    aj::member< n_result,  aj::attr< raw_object, raw_object::raw_type,     &raw_object::result,  aj::raw     > >,
-    aj::member< n_error,   aj::attr< raw_object, raw_object::raw_type,     &raw_object::error,   aj::raw     > >
+    aj::field< n_jsonrpc, aj::attr< raw_object, raw_object::version_type, &raw_object::version, aj::string  > >,
+    aj::field< n_method,  aj::attr< raw_object, raw_object::method_type,  &raw_object::method,  aj::string  > >,
+    aj::field< n_params,  aj::attr< raw_object, raw_object::raw_type,     &raw_object::params,  aj::raw     > >,
+    aj::field< n_id,      aj::attr< raw_object, int,                      &raw_object::id,      aj::integer > >,
+    aj::field< n_result,  aj::attr< raw_object, raw_object::raw_type,     &raw_object::result,  aj::raw     > >,
+    aj::field< n_error,   aj::attr< raw_object, raw_object::raw_type,     &raw_object::error,   aj::raw     > >
   >::type
 > raw_object_json_type;
 

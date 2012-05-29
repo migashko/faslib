@@ -49,7 +49,7 @@ struct ad_object
     for ( ;r && *r==',';)
     {
       r = t.get_aspect().template get< parse::_space_>()(t, ++r);
-      r = t.get_aspect().template get< parse::_member_>()(t, r);
+      r = t.get_aspect().template get< parse::_field_>()(t, r);
       r = t.get_aspect().template get< parse::_space_>()(t, r);
     }
 

@@ -5,7 +5,7 @@
 #include <fas/jsonrpc/names.hpp>
 
 #include <fas/serialization/json/meta/object.hpp>
-#include <fas/serialization/json/meta/member.hpp>
+#include <fas/serialization/json/meta/field.hpp>
 #include <fas/serialization/json/meta/tstring.hpp>
 #include <fas/serialization/json/meta/null.hpp>
 
@@ -17,9 +17,9 @@ namespace aj = ::fas::json;
 
 typedef aj::object<
   type_list_n<
-    aj::member< n_jsonrpc, aj::tstring<version> >,
-    aj::member< n_error, common_error_code_json >,
-    aj::member< n_id, aj::null >
+    aj::field< n_jsonrpc, aj::tstring<version> >,
+    aj::field< n_error, common_error_code_json >,
+    aj::field< n_id, aj::null >
   >::type
 > common_error_notify_json;
   

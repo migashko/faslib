@@ -33,7 +33,7 @@ struct ad_object
     
     for ( ; r && *r!='}'; )
     {
-      r = t.get_aspect().template get<_member_>()(t, r);
+      r = t.get_aspect().template get<_field_>()(t, r);
       
       if ( !try_(t) )
         return r;
@@ -88,7 +88,7 @@ struct ad_object
     
     for ( ; rr.first && *rr.first!='}'; )
     {
-      rr = t.get_aspect().template get<_member_>()(t, rr.first, rr.second);
+      rr = t.get_aspect().template get<_field_>()(t, rr.first, rr.second);
       
       if ( !try_(t) )
         return rr;

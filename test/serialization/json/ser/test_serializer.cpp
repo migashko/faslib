@@ -6,9 +6,11 @@ BEGIN_TEST
   RUN_SUITE(enumeration_serialize_suite)
   RUN_SUITE(sequence_serializer_suite)
   RUN_SUITE(field_serialize_suite)
+	RUN_SUITE(attr_serialize_suite)
+	
   RUN_SUITE(field_list_serialize_suite)
-  RUN_SUITE(member_serialize_suite)
-  RUN_SUITE(member_list_serialize_suite)
+  //RUN_SUITE(field_serialize_suite)
+  //RUN_SUITE(field_list_serialize_suite)
   RUN_SUITE(array_serializer_suite)
   RUN_SUITE(object_serializer_suite)
   RUN_SUITE(raw_serializer_suite)

@@ -10,7 +10,7 @@
 #include <fas/serialization/json/parser/ad_item.hpp>
 #include <fas/serialization/json/parser/ad_array.hpp>
 
-#include <fas/serialization/json/parser/ad_member.hpp>
+#include <fas/serialization/json/parser/ad_field.hpp>
 #include <fas/serialization/json/parser/ad_object.hpp>
 #include <fas/serialization/json/parser/ad_space.hpp>
 #include <fas/serialization/json/except/ad_except.hpp>
@@ -40,7 +40,7 @@ typedef
       advice<_object_, ad_object>,
       advice<_space_, ad_space>,
       advice<_name_, ad_string>,
-      advice<_member_, ad_member>,
+      advice<_field_, ad_field>,
       advice<_except_, ad_except>
     >::type
   > aspect_type;

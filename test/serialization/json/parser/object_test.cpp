@@ -2,8 +2,8 @@
 
 #include <fas/serialization/json/parser/ad_value.hpp>
 #include <fas/serialization/json/parser/ad_array.hpp>
-#include <fas/serialization/json/parser/ad_member.hpp>
-#include <fas/serialization/json/parser/ad_member.hpp>
+#include <fas/serialization/json/parser/ad_field.hpp>
+#include <fas/serialization/json/parser/ad_field.hpp>
 #include <fas/serialization/json/parser/ad_boolean.hpp>
 #include <fas/serialization/json/parser/ad_object.hpp>
 
@@ -207,13 +207,13 @@ UNIT(copy_array_test, "parse array")
 }
 
 
-UNIT(member_test, "parse member")
+UNIT(field_test, "parse field")
 {
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json::parse;
 
-  ad_member adm;
+  ad_field adm;
   std::string s = "\"name\":null bla-bla";
   typedef random_access_range<std::string::const_iterator> range_type;
   range_type r( s.begin(), s.end() );
@@ -256,13 +256,13 @@ UNIT(member_test, "parse member")
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
 }
 
-UNIT(copy_member_test, "copy parse member")
+UNIT(copy_field_test, "copy parse field")
 {
   using namespace fas;
   using namespace fas::testing;
   using namespace fas::json::parse;
 
-  ad_member adm;
+  ad_field adm;
   std::string s = "\"name\":null bla-bla";
   std::string result;
   typedef random_access_range<std::string::const_iterator> range_type;
@@ -439,8 +439,8 @@ BEGIN_SUITE(object_parser_suite, "object json parser suite")
   ADD_UNIT(copy_value_test)
   ADD_UNIT(array_test)
   ADD_UNIT(copy_array_test)
-  ADD_UNIT(member_test)
-  ADD_UNIT(copy_member_test)
+  ADD_UNIT(field_test)
+  ADD_UNIT(copy_field_test)
   ADD_UNIT(object_test)
   ADD_UNIT(copy_object_test)
   ADD_ADVICE( ::fas::json::parse::_null_, ::fas::json::parse::ad_null)
@@ -451,7 +451,7 @@ BEGIN_SUITE(object_parser_suite, "object json parser suite")
   ADD_ADVICE( ::fas::json::parse::_value_, ::fas::json::parse::ad_value)
   ADD_ADVICE( ::fas::json::parse::_array_, ::fas::json::parse::ad_array)
   ADD_ADVICE( ::fas::json::parse::_space_, ::fas::json::parse::ad_space)
-  ADD_ADVICE( ::fas::json::parse::_member_, ::fas::json::parse::ad_member)
+  ADD_ADVICE( ::fas::json::parse::_field_, ::fas::json::parse::ad_field)
   ADD_ADVICE( ::fas::json::parse::_name_, ::fas::json::parse::ad_string)
 
   ADD_ADVICE( ::fas::json::parse::_object_, ::fas::json::parse::ad_object)

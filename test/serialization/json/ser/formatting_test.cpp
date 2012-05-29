@@ -54,9 +54,9 @@ namespace aj = ::fas::json;
 
   typedef aj::object<
     fas::type_list_n<
-      aj::comment< str_foo1, aj::member<n_foo1, aj::attr<foo, int, &foo::foo1, aj::integer> > >,
-      aj::comment< str_foo2, aj::member<n_foo2, aj::attr<foo, int, &foo::foo2, aj::integer> > >,
-      aj::comment< str_foo3, aj::member<n_foo3, aj::attr<foo, foo::foo_enum_array, &foo::foo3,
+      aj::comment< str_foo1, aj::field<n_foo1, aj::attr<foo, int, &foo::foo1, aj::integer> > >,
+      aj::comment< str_foo2, aj::field<n_foo2, aj::attr<foo, int, &foo::foo2, aj::integer> > >,
+      aj::comment< str_foo3, aj::field<n_foo3, aj::attr<foo, foo::foo_enum_array, &foo::foo3,
                           aj::array<
                           aj::enumeration<
                             fas::type_list_n<
