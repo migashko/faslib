@@ -1,6 +1,7 @@
 #include <fas/testing.hpp>
 #include <fas/serialization/json/deser/deserialize_string.hpp>
 #include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/ad_separator.hpp>
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/serialization/json/meta/tstring.hpp>
 #include <fas/range/range.hpp>
@@ -52,7 +53,16 @@ std::ostream& test_ad_string(T& t, const char* from, const std::string& check)
   ad_string ads;
   t << is_true<expect>( ads.check(t, string(), from) ) << FAS_TESTING_FILE_LINE;
 
-  ads(t, string(), result, srange(from) );
+  try
+  {
+    ads(t, string(), result, srange(from) );
+  }
+  catch(json_error& e)
+  {
+    std::cout << "[" << from << "]" << std::endl;
+    t << fatal( e.message(srange(from)) ) << std::endl;
+    t << stop;
+  }
 
   return t << equal<expect>(check, std::string(result) ) << "[" << check <<"!=" << result << "]";
 }
@@ -89,5 +99,6 @@ UNIT(ad_string_test, "test ad_string advice")
 BEGIN_SUITE(string_deserialize_suite, "string deserializer suite")
   ADD_UNIT(deserialize_string_test)
   ADD_UNIT(ad_string_test)
+  ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT(::fas::json::parse::aspect)
 END_SUITE(string_deserialize_suite)

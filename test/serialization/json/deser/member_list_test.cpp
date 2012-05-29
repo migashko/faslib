@@ -382,6 +382,7 @@ BEGIN_SUITE(member_list_deserialize_suite, "field_list deserializer suite")
   ADD_ADVICE( ::fas::json::deser::_primary_list_, ::fas::json::deser::ad_primary_list)
   ADD_ADVICE( ::fas::json::deser::_brute_list_, ::fas::json::deser::ad_brute_list)
 	ADD_ADVICE( ::fas::json::deser::_separator_, ::fas::json::deser::ad_separator)
+  ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT(::fas::json::parse::aspect)
 
 END_SUITE(member_list_deserialize_suite)

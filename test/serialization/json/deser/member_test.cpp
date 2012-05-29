@@ -8,6 +8,7 @@
 #include <fas/serialization/json/deser/ad_attr.hpp>
 #include <fas/serialization/json/deser/ad_field.hpp>
 #include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/ad_separator.hpp>
 
 #include <fas/serialization/json/meta/integer.hpp>
 #include <fas/serialization/json/meta/string.hpp>
@@ -100,5 +101,6 @@ BEGIN_SUITE(member_deserialize_suite, "field deserializer suite")
   ADD_ADVICE( ::fas::json::deser::_integer_, ::fas::json::deser::ad_integer)
   ADD_ADVICE( ::fas::json::deser::_attr_, ::fas::json::deser::ad_attr)
   ADD_ADVICE( ::fas::json::deser::_field_, ::fas::json::deser::ad_field)
+  ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT(::fas::json::parse::aspect)
 END_SUITE(member_deserialize_suite)

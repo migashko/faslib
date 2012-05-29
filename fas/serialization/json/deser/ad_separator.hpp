@@ -9,6 +9,9 @@ namespace fas{ namespace json{ namespace deser{
 struct ad_separator: 
   ::fas::serialization::deser::ad_separator_t< tchars<','> >{};
 
+struct ad_quotes: 
+  ::fas::serialization::deser::ad_separator_t< tchars<'"'> >{};
+
 }}}
 
 #endif

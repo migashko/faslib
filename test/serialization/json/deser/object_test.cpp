@@ -345,6 +345,6 @@ BEGIN_SUITE(object_deserialize_suite, "object deserializer suite")
   ADD_ADVICE( ::fas::json::deser::_brute_pair_, ::fas::json::deser::ad_brute_pair)
   ADD_ADVICE( ::fas::json::deser::_stub_, ::fas::json::deser::ad_stub)
 	ADD_ADVICE( ::fas::json::deser::_separator_, ::fas::json::deser::ad_separator)
-
+  ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT(::fas::json::parse::aspect)
 END_SUITE(object_deserialize_suite)

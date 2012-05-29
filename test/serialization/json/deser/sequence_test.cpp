@@ -5,6 +5,7 @@
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/serialization/json/deser/ad_integer.hpp>
 #include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/ad_separator.hpp>
 
 #include <fas/serialization/json/deser/ad_sequence.hpp>
 #include <fas/serialization/json/deser/deserialize_sequence.hpp>
@@ -222,6 +223,7 @@ BEGIN_SUITE(sequence_deserialize_suite, "sequence deserializer suite")
   ADD_ADVICE( ::fas::json::deser::_integer_, ::fas::json::deser::ad_integer)
   ADD_ADVICE( ::fas::json::deser::_sequence_, ::fas::json::deser::ad_sequence)
   ADD_ADVICE( ::fas::json::deser::_string_, ::fas::json::deser::ad_string)
+  ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT(::fas::json::parse::aspect)
   
 END_SUITE(sequence_deserialize_suite)

@@ -49,4 +49,6 @@ struct _name_;
 struct _block_;
 struct _comment_;
 
+struct _quotes_;
+
 
