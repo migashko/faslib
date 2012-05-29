@@ -38,7 +38,7 @@ struct getset
 
 	
 template<typename V, typename VT, VT (V::* mg)(void), void (V::* ms)(VT), typename M>
-struct getset
+struct getsetx
 {
   typedef M target;
   

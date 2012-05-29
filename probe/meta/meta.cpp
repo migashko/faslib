@@ -1,6 +1,7 @@
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/typemanip/remove_cvrp.hpp>
+#include <fas/typemanip/const_if_const.hpp>
 #include <string>
 #include <iostream>
 
@@ -24,6 +25,7 @@ public:
 	const std::string&  get_b() { return _b;}
 	const std::string&  get_b() const { return _b;}
 
+	int xxx;
 private:
 	int _a;
 	std::string _b;
@@ -44,6 +46,8 @@ struct mem_fun_set
 private:
 	typedef VVT value_type;
 public:
+	// mem_fun_set(): _obj(0){}
+	
 	value_type& operator()(V& v)
   {
 		_obj = &v;
@@ -68,18 +72,45 @@ struct getter { };
 template<typename FG, typename M>
 struct setter { };
 
+template<typename V, typename VT, VT V::* m>
+struct mem_attr
+{
+
+  template<typename VV>
+  typename const_if_const<VT, VV>::type& operator()(VV& v) const
+  {
+    return v.*m;
+  }
+};
 }
+
+/*
+ * attr<typename V, typename VT, VT V::* m, integer >
+ * member< typename V, typename VT, VT V::* m >, member_set, member_get
+ * getter< mem_attr_get, integer >
+ * setter< mem_attr_set, integer >
+ * accessor< member_get<>, member_set<>, integer >
+ * accessor< member<>, integer >
+ */
 
 int main()
 {
 	
 	typedef test::mem_fun_get< test::access, const std::string&, &test::access::get_b> getter_b;
 	typedef test::mem_fun_set< test::access, const std::string&, &test::access::set_b> setter_b;
+
+	typedef test::mem_attr<test::access, int, &test::access::xxx> attr_xxx;
 	
 	typedef test::mem_fun_set< test::access, const char*, &test::access::set_b> setter_b2;
 	test::access ac;
 	std::cout << getter_b()(ac) << std::endl;
 	setter_b()(ac) = "Hello world" ;
 	std::cout << getter_b()(ac) << std::endl;
+
+	const attr_xxx xxx;
+	xxx(ac) = 10;
+
+	/*const setter_b sb;
+	sb(ac) = "Hello world" ;*/
   return 0;
 }

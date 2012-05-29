@@ -12,7 +12,7 @@ namespace fas{ namespace json{
 
 
 template<typename V, typename VT, VT (V::* m)(void) const, typename M>
-struct getter
+struct getterx
 {
   typedef typename M::metatype metatype;
   typedef M target;

@@ -10,7 +10,7 @@
 namespace fas{ namespace json{
 
 template<typename V, typename VT, void (V::* m)(VT), typename M>
-struct setter
+struct setterx
 {
   typedef typename M::metatype metatype;
   typedef M target;
