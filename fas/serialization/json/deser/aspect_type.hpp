@@ -39,6 +39,7 @@ namespace fas{ namespace json{ namespace deser{
 typedef
   aspect<
     type_list_n<
+			string_aspect,
       //advice< deser::_except_, deser::ad_except>,
       advice< deser::_stub_, deser::ad_stub>,
       advice< deser::_boolean_, deser::ad_boolean>,

@@ -225,5 +225,5 @@ BEGIN_SUITE(sequence_deserialize_suite, "sequence deserializer suite")
   ADD_ADVICE( ::fas::json::deser::_string_, ::fas::json::deser::ad_string)
   ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT(::fas::json::parse::aspect)
-  
+	ADD_ASPECT( ::fas::json::deser::string_aspect )
 END_SUITE(sequence_deserialize_suite)

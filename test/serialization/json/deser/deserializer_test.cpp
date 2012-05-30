@@ -48,4 +48,5 @@ UNIT(deserializer_test, "test deserializer")
 
 BEGIN_SUITE(deserializer_suite, "deserializer suite")
   ADD_UNIT(deserializer_test)
+	// ADD_ASPECT( ::fas::json::deser::string_aspect )
 END_SUITE(deserializer_suite)

@@ -384,5 +384,5 @@ BEGIN_SUITE(member_list_deserialize_suite, "field_list deserializer suite")
 	ADD_ADVICE( ::fas::json::deser::_separator_, ::fas::json::deser::ad_separator)
   ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT(::fas::json::parse::aspect)
-
+	ADD_ASPECT( ::fas::json::deser::string_aspect )
 END_SUITE(member_list_deserialize_suite)

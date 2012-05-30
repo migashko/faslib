@@ -21,6 +21,10 @@ struct _array_;
 struct _item_;
 struct _object_;
 struct _pointer_;
+struct _content_string_;
+struct _escape_;
+struct _uhex_;
+struct _utf8_;
 
 /* deprecated */
 /*
