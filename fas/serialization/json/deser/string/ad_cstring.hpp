@@ -1,5 +1,5 @@
-#ifndef FAS_SERIALIZATION_JSON_DESER_AD_STRING_HPP
-#define FAS_SERIALIZATION_JSON_DESER_AD_STRING_HPP
+#ifndef FAS_SERIALIZATION_JSON_DESER_STRING_AD_CSTRING_HPP
+#define FAS_SERIALIZATION_JSON_DESER_STRING_AD_CSTRING_HPP
 
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/out_of_range.hpp>
@@ -10,63 +10,8 @@
 #include <fas/serialization/json/deser/tags.hpp>
 #include <fas/serialization/json/parser/tags.hpp>
 
-// #include <fas/range/range.hpp>
-
-//#include <fas/typemanip/type2type.hpp>
-
-#include <fas/typemanip/is_array.hpp>
-#include <fas/range/range.hpp>
-#include <fas/range/orange.hpp>
-#include <fas/range/distance.hpp>
-
-
-
-
-
-#include <fas/serialization/common/deser/ad_string.hpp>
-/*
-using ::fas::serialization::throw_t;
-using ::fas::serialization::try_t;
-*/
 
 namespace fas{ namespace json{ namespace deser{
-
-struct ad_uhex:
-	::fas::serialization::deser::ad_json_uhex<_except_>
-{
-	
-};
-
-struct ad_utf8:
-	::fas::serialization::deser::ad_utf8<_except_>
-{
-
-};
-
-struct ad_escape:
-	::fas::serialization::deser::ad_json_escape<_uhex_, _except_>
-{
-	
-};
-	
-struct ad_content_string:
-	::fas::serialization::deser::ad_jsonbase_string_t<_quotes_, _utf8_, _escape_, _except_>
-{
-};
-
-	
-struct ad_string:
-	::fas::serialization::deser::ad_json_string_t<_content_string_, _quotes_, parse::_string_, parse::_null_, _except_>
-{
-};
-
-struct string_aspect:	aspect< type_list_n<
-	advice< _uhex_, ad_uhex>,
-	advice< _utf8_, ad_utf8>,
-	advice< _escape_, ad_escape>,
-	advice< _content_string_, ad_content_string>,
-	advice< _string_, ad_string>
->::type> {};
 
 struct ad_cstring
 {

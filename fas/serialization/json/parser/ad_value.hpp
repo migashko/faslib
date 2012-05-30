@@ -1,6 +1,7 @@
 #ifndef FAS_SERIALIZATION_JSON_PARSER_AD_VALUE_HPP
 #define FAS_SERIALIZATION_JSON_PARSER_AD_VALUE_HPP
 
+#include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except.hpp>
 #include <fas/serialization/json/parser/tags.hpp>
 #include <fas/range/distance.hpp>
@@ -44,7 +45,8 @@ struct ad_value
     if ( t.get_aspect().template get<_object_>().check(r) )
       return t.get_aspect().template get<_object_>()(t, r);
 
-    throw parse_error( distance(r) );
+    //throw parse_error( distance(r) );
+    return throw_(t, parse_error( distance(r) ), r );
   }
 
   template<typename T, typename R, typename RD>
@@ -68,7 +70,7 @@ struct ad_value
     if ( t.get_aspect().template get<_object_>().check(r) )
       return t.get_aspect().template get<_object_>()(t, r, rd);
 
-    throw parse_error( distance(r) );
+    return throw_(t, parse_error( distance(r) ), r, rd );
   }
 
 };

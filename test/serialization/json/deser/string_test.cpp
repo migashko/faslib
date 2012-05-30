@@ -1,6 +1,6 @@
 #include <fas/testing.hpp>
 #include <fas/serialization/json/deser/deserialize_string.hpp>
-#include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/aspect_string.hpp>
 #include <fas/serialization/json/deser/ad_separator.hpp>
 #include <fas/serialization/json/meta/string.hpp>
 #include <fas/serialization/json/meta/tstring.hpp>
@@ -99,7 +99,6 @@ UNIT(ad_string_test, "test ad_string advice")
 BEGIN_SUITE(string_deserialize_suite, "string deserializer suite")
   ADD_UNIT(deserialize_string_test)
   ADD_UNIT(ad_string_test)
-  ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
   ADD_ASPECT( ::fas::json::parse::aspect)
 	ADD_ASPECT( ::fas::json::deser::string_aspect )
 END_SUITE(string_deserialize_suite)

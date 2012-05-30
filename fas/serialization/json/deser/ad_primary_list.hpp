@@ -9,7 +9,7 @@
 namespace fas{ namespace json{ namespace deser{
 
 struct ad_primary_list: 
-  ::fas::serialization::deser::ad_primary_list_t< _separator_, parse::_space_, parse::_item_>
+  ::fas::serialization::deser::ad_primary_list_t< _comma_, parse::_space_, parse::_item_>
 {};
 
 }}}

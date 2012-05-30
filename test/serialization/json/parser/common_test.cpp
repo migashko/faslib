@@ -224,7 +224,7 @@ UNIT(bool_test, "parse bool")
     r = ads(t, r);
     t << fail("expected unexpected_end_fragment")  << FAS_TESTING_FILE_LINE;
   }
-  catch(const unexpected_end_fragment& )
+  catch(const expected_of& )
   {
 		std::cout << "catch(const fas::serialization::unexpected_end_fragment& )" << std::endl;
   }

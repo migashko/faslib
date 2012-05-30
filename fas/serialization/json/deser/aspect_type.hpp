@@ -6,10 +6,10 @@
 #include <fas/serialization/json/deser/ad_integer.hpp>
 #include <fas/serialization/json/deser/ad_real.hpp>
 #include <fas/serialization/json/deser/ad_stub.hpp>
-#include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/aspect_string.hpp>
 #include <fas/serialization/json/deser/ad_array.hpp>
 #include <fas/serialization/json/deser/ad_sequence.hpp>
-#include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/aspect_string.hpp>
 #include <fas/serialization/json/deser/ad_field.hpp>
 #include <fas/serialization/json/deser/ad_enumeration.hpp>
 
@@ -56,8 +56,8 @@ typedef
       advice< deser::_brute_pair_, deser::ad_brute_pair>,
       advice< deser::_brute_list_, deser::ad_brute_list>,
       advice< deser::_primary_list_, deser::ad_primary_list>,
-			advice< deser::_separator_, deser::ad_separator>,
-      advice< deser::_quotes_, deser::ad_quotes>,
+			advice< deser::_comma_, deser::ad_comma>,
+      //advice< deser::_quotes_, deser::ad_quotes>,
       advice< deser::_array_, deser::ad_array>,
       advice< deser::_sequence_, deser::ad_sequence>,
       advice< deser::_object_, deser::ad_object>,

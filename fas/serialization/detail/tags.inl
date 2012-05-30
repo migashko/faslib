@@ -21,7 +21,7 @@ struct _array_;
 struct _item_;
 struct _object_;
 struct _pointer_;
-struct _content_string_;
+struct _string_content_;
 struct _escape_;
 struct _uhex_;
 struct _utf8_;
@@ -34,7 +34,7 @@ struct _field_list2_;
 */
 /* end deprecated */
 
-struct _separator_;
+struct _comma_;
 struct _primary_list_;
 struct _brute_list_;
 struct _brute_pair_;
@@ -53,6 +53,6 @@ struct _name_;
 struct _block_;
 struct _comment_;
 
-struct _quotes_;
+struct _quote_;
 
 

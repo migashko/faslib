@@ -2,7 +2,7 @@
 #include <fas/typemanip/tstring.hpp>
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/serialization/json/deser/ad_enumeration.hpp>
-#include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/aspect_string.hpp>
 #include <fas/serialization/json/meta/enumeration.hpp>
 #include <fas/serialization/json/meta/enum_value.hpp>
 

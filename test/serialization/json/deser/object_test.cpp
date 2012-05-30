@@ -11,7 +11,7 @@
 
 #include <fas/serialization/json/deser/ad_stub.hpp>
 #include <fas/serialization/json/deser/ad_sequence.hpp>
-#include <fas/serialization/json/deser/ad_string.hpp>
+#include <fas/serialization/json/deser/aspect_string.hpp>
 #include <fas/serialization/json/deser/ad_integer.hpp>
 #include <fas/serialization/json/deser/ad_field.hpp>
 
@@ -344,8 +344,7 @@ BEGIN_SUITE(object_deserialize_suite, "object deserializer suite")
   ADD_ADVICE( ::fas::json::deser::_brute_list_, ::fas::json::deser::ad_brute_list)
   ADD_ADVICE( ::fas::json::deser::_brute_pair_, ::fas::json::deser::ad_brute_pair)
   ADD_ADVICE( ::fas::json::deser::_stub_, ::fas::json::deser::ad_stub)
-	ADD_ADVICE( ::fas::json::deser::_separator_, ::fas::json::deser::ad_separator)
-  ADD_ADVICE( ::fas::json::deser::_quotes_,  ::fas::json::deser::ad_quotes)
+	ADD_ADVICE( ::fas::json::deser::_comma_, ::fas::json::deser::ad_comma)
   ADD_ASPECT(::fas::json::parse::aspect)
 	ADD_ASPECT( ::fas::json::deser::string_aspect )
 END_SUITE(object_deserialize_suite)
