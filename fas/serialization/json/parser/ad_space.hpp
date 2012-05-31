@@ -1,12 +1,61 @@
 #ifndef FAS_SERIALIZATION_JSON_PARSER_AD_SPACE_HPP
 #define FAS_SERIALIZATION_JSON_PARSER_AD_SPACE_HPP
 
+#include <fas/serialization/common/parse/ad_space_chars_t.hpp>
+#include <fas/serialization/common/parse/ad_cstring_list_t.hpp>
+#include <fas/serialization/common/parse/ad_space_t.hpp>
+#include <fas/serialization/common/parse/ad_comment_t.hpp>
+#include <fas/serialization/json/parser/tags.hpp>
+#include <fas/serialization/json/except/tags.hpp>
+
+
+namespace fas{ namespace json{ namespace parse{
+
+struct ad_begin_comment:
+  ::fas::serialization::parse::ad_cstring_list_t< tchars<'/', '*'>, _except_>
+{};
+
+struct ad_end_comment:
+  ::fas::serialization::parse::ad_cstring_list_t< tchars<'*', '/'>, _except_>
+{};
+
+struct ad_space_chars:
+  ::fas::serialization::parse::ad_space_chars_t<_except_>
+{};
+
+struct ad_comment:
+  ::fas::serialization::parse::ad_comment_t<_begin_comment_, _end_comment_, _except_>
+{};
+
+struct ad_space:
+  ::fas::serialization::parse::ad_space_t<_space_chars_, _comment_, _except_>
+{};
+
+struct aspect_space: aspect< type_list_n<
+  advice<_begin_comment_,ad_begin_comment>,
+  advice<_end_comment_,ad_end_comment>,
+  advice<_space_chars_,ad_space_chars>,
+  advice<_comment_,ad_comment>,
+  advice<_space_,ad_space>
+>::type>
+{
+};
+
+
+}}}
+
+#endif
+
+/*#ifndef FAS_SERIALIZATION_JSON_PARSER_AD_SPACE_HPP
+#define FAS_SERIALIZATION_JSON_PARSER_AD_SPACE_HPP
+
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/unexpected_end_fragment.hpp>
 #include <fas/serialization/json/parser/tags.hpp>
 
 namespace fas{ namespace json{ namespace parse{
 
+  
 struct ad_space
 {
   template<typename R>
@@ -91,10 +140,10 @@ private:
   {
     return std::make_pair(parse(t, r), rd);
   }
-  
-
 };
+
 
 }}}
 
 #endif
+*/

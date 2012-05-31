@@ -27,13 +27,13 @@ public:
   template<typename T, typename M, typename R>
   bool check(T& t, M, R r)
   {
-    return t.get_aspect().template get<parse::_string_>().check(r);
+    return t.get_aspect().template get<parse::_string_>().check(t, r);
   };
 
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V&, R r)
   {
-    if ( !t.get_aspect().template get<parse::_string_>().check(r) )
+    if ( !t.get_aspect().template get<parse::_string_>().check(t, r) )
       return r;
 
     R income =  r;

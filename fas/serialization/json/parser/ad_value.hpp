@@ -13,12 +13,12 @@ struct ad_value
   template<typename T, typename R>
   bool check(T& t, R r) 
   { 
-    return t.get_aspect().template get<_null_>().check(r)
-           || t.get_aspect().template get<_boolean_>().check(r)
-           || t.get_aspect().template get<_number_>().check(r)
-           || t.get_aspect().template get<_string_>().check(r)
-           || t.get_aspect().template get<_array_>().check(r)
-           || t.get_aspect().template get<_object_>().check(r);
+    return t.get_aspect().template get<_null_>().check(t, r)
+           || t.get_aspect().template get<_boolean_>().check(t, r)
+           || t.get_aspect().template get<_number_>().check(t, r)
+           || t.get_aspect().template get<_string_>().check(t, r)
+           || t.get_aspect().template get<_array_>().check(t, r)
+           || t.get_aspect().template get<_object_>().check(t, r);
 
     
   }
@@ -27,22 +27,22 @@ struct ad_value
   template<typename T, typename R>
   R operator()(T& t, R r)
   {
-    if ( t.get_aspect().template get<_null_>().check(r) )
+    if ( t.get_aspect().template get<_null_>().check(t, r) )
       return t.get_aspect().template get<_null_>()(t, r);
 
-    if ( t.get_aspect().template get<_boolean_>().check(r) )
+    if ( t.get_aspect().template get<_boolean_>().check(t, r) )
       return t.get_aspect().template get<_boolean_>()(t, r);
 
-    if ( t.get_aspect().template get<_number_>().check(r) )
+    if ( t.get_aspect().template get<_number_>().check(t, r) )
       return t.get_aspect().template get<_number_>()(t, r);
 
-    if ( t.get_aspect().template get<_string_>().check(r) )
+    if ( t.get_aspect().template get<_string_>().check(t, r) )
       return t.get_aspect().template get<_string_>()(t, r);
 
-    if ( t.get_aspect().template get<_array_>().check(r) )
+    if ( t.get_aspect().template get<_array_>().check(t, r) )
       return t.get_aspect().template get<_array_>()(t, r);
 
-    if ( t.get_aspect().template get<_object_>().check(r) )
+    if ( t.get_aspect().template get<_object_>().check(t, r) )
       return t.get_aspect().template get<_object_>()(t, r);
 
     //throw parse_error( distance(r) );
@@ -52,22 +52,22 @@ struct ad_value
   template<typename T, typename R, typename RD>
   std::pair<R, RD> operator()(T& t, R r, RD rd)
   {
-    if ( t.get_aspect().template get<_null_>().check(r) )
+    if ( t.get_aspect().template get<_null_>().check(t, r) )
       return t.get_aspect().template get<_null_>()(t, r, rd);
 
-    if ( t.get_aspect().template get<_boolean_>().check(r) )
+    if ( t.get_aspect().template get<_boolean_>().check(t, r) )
       return t.get_aspect().template get<_boolean_>()(t, r, rd);
 
-    if ( t.get_aspect().template get<_number_>().check(r) )
+    if ( t.get_aspect().template get<_number_>().check(t, r) )
       return t.get_aspect().template get<_number_>()(t, r, rd);
 
-    if ( t.get_aspect().template get<_string_>().check(r) )
+    if ( t.get_aspect().template get<_string_>().check(t, r) )
       return t.get_aspect().template get<_string_>()(t, r, rd);
 
-    if ( t.get_aspect().template get<_array_>().check(r) )
+    if ( t.get_aspect().template get<_array_>().check(t, r) )
       return t.get_aspect().template get<_array_>()(t, r, rd);
 
-    if ( t.get_aspect().template get<_object_>().check(r) )
+    if ( t.get_aspect().template get<_object_>().check(t, r) )
       return t.get_aspect().template get<_object_>()(t, r, rd);
 
     return throw_(t, parse_error( distance(r) ), r, rd );

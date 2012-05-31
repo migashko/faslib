@@ -1,6 +1,23 @@
 #ifndef FAS_SERIALIZATION_JSON_PARSER_AD_NULL_HPP
 #define FAS_SERIALIZATION_JSON_PARSER_AD_NULL_HPP
 
+#include <fas/serialization/common/parse/ad_json_null_t.hpp>
+#include <fas/serialization/json/except/tags.hpp>
+
+namespace fas{ namespace json{ namespace parse{
+
+struct ad_null:
+	::fas::serialization::parse::ad_json_null_t<_except_>
+{};
+
+}}}
+
+#endif
+
+/*
+ #ifndef FAS_SERIALIZATION_JSON_PARSER_AD_NULL_HPP
+#define FAS_SERIALIZATION_JSON_PARSER_AD_NULL_HPP
+
 #include <fas/serialization/json/except/try_throw.hpp>
 #include <fas/serialization/json/except/unexpected_end_fragment.hpp>
 #include <fas/serialization/json/except/expected_of.hpp>
@@ -74,3 +91,4 @@ private:
 }}}
 
 #endif
+*/

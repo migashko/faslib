@@ -61,8 +61,8 @@ public:
 
   proxy operator++(int) 
   {
-    proxy p( *b );
     assert(b!=e);
+    proxy p( *b );
     b++; 
     return p; 
   }
@@ -88,6 +88,100 @@ protected:
   T b;
   T e;
 };
+
+}
+
+/*#include <fas/range/advance.hpp>
+#include <fas/range/distance.hpp>
+*/
+
+namespace fas {
+
+template<typename T, typename WR>
+class input_range_wrapper
+{
+public:
+  typedef input_range_tag range_category;
+
+  typedef T input_range;
+  typedef WR wrapper_range;
+
+  typedef typename wrapper_range::value_type value_type;
+  typedef typename wrapper_range::iterator iterator;
+  typedef typename input_range::iterator input_iterator;
+  typedef typename std::iterator_traits<input_iterator>::iterator_category iterator_category;
+  typedef typename std::iterator_traits<input_iterator>::difference_type   difference_type;
+  typedef typename std::iterator_traits<input_iterator>::pointer           pointer;
+  typedef typename std::iterator_traits<input_iterator>::reference         reference;
+
+  class proxy {
+    value_type keep_;
+  public:
+    proxy (value_type c) : keep_(c){ }
+    value_type operator*() {return keep_;}
+  };
+
+  /*
+  input_range_wrapper()
+    : ir(), wr()
+  {};
+  */
+
+  explicit input_range_wrapper(input_range ir, wrapper_range wr)
+    : ir(ir), wr(wr)
+  {
+    *wr = *ir;
+  };
+
+  operator bool () const { return ir; }
+
+  value_type operator*() const
+  {
+    *wr = static_cast<value_type>(*ir);
+    return *wr;
+  }
+
+  pointer operator ->() const  { return &(*wr);}
+
+  iterator begin() const { return wr.begin(); }
+
+  iterator end() const { return wr.end(); }
+
+  input_range_wrapper<T, WR>& operator++()
+  {
+    *(wr++) = *(ir++);
+    return *this;
+  }
+
+  proxy operator++(int)
+  {
+    proxy p( *wr );
+    *(wr++) = *(ir++);
+    return p;
+  }
+
+  difference_type distance() const { /*return distance(ir);*/ return 0; }
+
+  void advance(difference_type s)
+  {
+    //advance(ir, s);
+  }
+
+  bool operator == (const input_range_wrapper<T, WR>& r ) const
+  {
+    return wr == r.wr;
+  }
+
+  bool operator != (const input_range_wrapper<T, WR>& r ) const
+  {
+    return !(*this == r);
+  }
+
+protected:
+  T  ir;
+  mutable WR wr;
+};
+
 
 }
 

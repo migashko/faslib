@@ -29,6 +29,7 @@ namespace fas{ namespace json{ namespace parse{
 typedef
   ::fas::aspect<
     type_list_n<
+      aspect_space,
       advice<_null_, ad_null>,
       advice<_boolean_, ad_boolean>,
       advice<_number_, ad_number>,
@@ -38,7 +39,7 @@ typedef
       advice<_array_, ad_array>,
       advice<_item_, ad_item>,
       advice<_object_, ad_object>,
-      advice<_space_, ad_space>,
+      // advice<_space_, ad_space>,
       advice<_name_, ad_string>,
       advice<_field_, ad_field>,
       advice<_except_, ad_except>

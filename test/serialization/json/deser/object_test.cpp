@@ -33,11 +33,12 @@
 #include "../../foo.hpp"
 #include "../../bar.hpp"
 #include "../../names.hpp"
-#include <fas/range/range.hpp>
+#include <fas/range.hpp>
 #include <fas/typemanip/tstring.hpp>
 #include <vector>
 #include <string>
 #include <cstring>
+#include <fstream>
 
 namespace aj = ::fas::json;
 UNIT(ad_object_test1, "test ad_object advice")
@@ -142,6 +143,88 @@ UNIT(ad_object_test3, "test ad_object advice")
                      "\"foo5\":[0,1,2,3,4],\"foo4\":[20,30,40],\"foo6\":[\"test-foo6-1\",\"test-foo6-2\"]}"
                     ) << FAS_TESTING_FILE_LINE;
     */
+}
+
+UNIT(ad_object_test3f, "test ad_object advice")
+{
+  using namespace ::fas::testing;
+  using namespace ::fas::json;
+  using namespace ::fas::json::deser;
+
+  typedef object<
+    brute_pair<
+    fas::type_list_n<
+      field< n_foo1, attr<foo, int, &foo::foo1, integer> >,
+      field< n_foo2, attr<foo, std::string, &foo::foo2, string> >,
+      field< n_foo3, attr<foo, foo::foo3type, &foo::foo3, string> >,
+      field< n_foo5, attr<foo, foo::foo5type, &foo::foo5, array<integer> > >,
+      field< n_foo4, attr<foo, std::vector<int>, &foo::foo4, array<integer> >  >,
+      field< n_foo6, attr<foo, std::vector<std::string>, &foo::foo6, array<string> >  >
+    >::type
+    ,
+    fas::type_list_n<
+    >::type
+    >
+  > foo_json;
+
+  foo f(0);
+  ad_object ado;
+  const char json[] =
+      "{\"foo1\":-1,\"foo2\":\"test-foo2\",\"foo3\":\"test-foo3\","
+      "\"foo5\":[6,5,4,3,2],\"foo4\":[20,30,40],\"foo6\":[\"test-foo6-1\",\"test-foo6-2\"]}";
+
+  /*std::stringstream fi;
+  fi << json;*/
+  std::ofstream fo("ad_object_test3f.txt");
+  fo << json;
+  fo.close();
+  std::ifstream fi("ad_object_test3f.txt");
+  
+  
+  std::string ostr;
+
+  /*fas::typerange<std::string>::orange ora(ostr);
+  *(ora++) = '1';
+  *(ora++) = '2';*/
+  
+  typedef fas::input_range_wrapper<
+    fas::typerange<std::ifstream>::range,
+    fas::typerange<std::string>::orange
+  > irw_type;
+
+  irw_type trt( fas::range(fi), fas::orange(ostr) );
+  try{
+    ado(t, foo_json(), f, trt );
+  }
+  catch(json_error& e)
+  {
+    //std::cout<<
+    std::copy( std::istreambuf_iterator<char>(fi),  std::istreambuf_iterator<char>(), std::ostreambuf_iterator<char>(std::cout) ) ;
+    t << fail( e.message(fas::range(fi)) );
+  }
+  
+
+  t << equal<expect>(f.foo1, -1 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo2, "test-foo2" ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo3, std::string("test-foo3") ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo5[0], 6 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo5[1], 5 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo5[2], 4 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo5[3], 3 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo5[4], 2 ) << FAS_TESTING_FILE_LINE;
+
+  t << equal<assert, int>(f.foo4.size(), 3 ) << FAS_TESTING_FILE_LINE
+    << stop;
+
+  t << equal<expect>(f.foo4[0], 20 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[1], 30 ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo4[2], 40 ) << FAS_TESTING_FILE_LINE;
+
+  t << equal<assert, int>(f.foo6.size(), 2 ) << FAS_TESTING_FILE_LINE
+    << stop;
+
+  t << equal<expect>(f.foo6[0], "test-foo6-1" ) << FAS_TESTING_FILE_LINE;
+  t << equal<expect>(f.foo6[1], "test-foo6-2" ) << FAS_TESTING_FILE_LINE;
 }
 
 UNIT(ad_object_test4, "test ad_object advice")
@@ -325,6 +408,7 @@ BEGIN_SUITE(object_deserialize_suite, "object deserializer suite")
   ADD_UNIT(ad_object_test1)
   ADD_UNIT(ad_object_test2)
   ADD_UNIT(ad_object_test3)
+  ADD_UNIT(ad_object_test3f)
   ADD_UNIT(ad_object_test4)
   ADD_UNIT(ad_object_test5)
   ADD_UNIT(ad_object_test6)

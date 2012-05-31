@@ -15,20 +15,20 @@ struct ad_integer
   bool check(T& t, M, R r)
   {
 
-    return t.get_aspect().template get<parse::_number_>().check(r)
-           || t.get_aspect().template get<parse::_null_>().check(r);
+    return t.get_aspect().template get<parse::_number_>().check(t, r)
+           || t.get_aspect().template get<parse::_null_>().check(t, r);
   };
 
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
     using namespace ::fas::json;
-    if ( t.get_aspect().template get<parse::_null_>().check(r) )
+    if ( t.get_aspect().template get<parse::_null_>().check(t, r) )
     {
       r = t.get_aspect().template get<parse::_null_>()(t, r);
       v = V();
     }
-    else if ( t.get_aspect().template get<parse::_number_>().check(r) )
+    else if ( t.get_aspect().template get<parse::_number_>().check(t, r) )
     {
       r = _(v, r);
     }

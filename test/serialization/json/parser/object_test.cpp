@@ -450,7 +450,7 @@ BEGIN_SUITE(object_parser_suite, "object json parser suite")
 
   ADD_ADVICE( ::fas::json::parse::_value_, ::fas::json::parse::ad_value)
   ADD_ADVICE( ::fas::json::parse::_array_, ::fas::json::parse::ad_array)
-  ADD_ADVICE( ::fas::json::parse::_space_, ::fas::json::parse::ad_space)
+  ADD_ASPECT( ::fas::json::parse::aspect_space)
   ADD_ADVICE( ::fas::json::parse::_field_, ::fas::json::parse::ad_field)
   ADD_ADVICE( ::fas::json::parse::_name_, ::fas::json::parse::ad_string)
 

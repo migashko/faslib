@@ -32,17 +32,20 @@ UNIT(space_test, "parse space")
   r = range_type( s.begin(), s.end() );
   r = ads(t, r);
   t << equal<assert>( s, std::string(r.begin(), r.end()) ) << s  << FAS_TESTING_FILE_LINE;
-
+  t << stop;
   s = "\t 10";
   r = range_type( s.begin(), s.end() );
   r = ads(t, r);
   t << equal<assert>( std::string("10"), std::string(r.begin(), r.end()) ) << s  << FAS_TESTING_FILE_LINE;
+  std::cout << "[" << std::string(r.begin(), r.end()) << "]" << std::endl;
+  t << stop;
 
   s = "/**/ 10";
   r = range_type( s.begin(), s.end() );
   r = ads(t, r);
   t << equal<assert>( "10", std::string(r.begin(), r.end()) ) << s  << FAS_TESTING_FILE_LINE;
-
+  t << stop;
+  
   s = "\t /**/ 10";
   r = range_type( s.begin(), s.end() );
   r = ads(t, r);
@@ -52,11 +55,13 @@ UNIT(space_test, "parse space")
   r = range_type( s.begin(), s.end() );
   r = ads(t, r);
   t << equal<assert>( "10", std::string(r.begin(), r.end()) ) << s << FAS_TESTING_FILE_LINE;
-
+  t << stop;
+  
   s = "\t/* \t aaa */ /*<*/ 10";
   r = range_type( s.begin(), s.end() );
   r = ads(t, r);
   t << equal<assert>( "10", std::string(r.begin(), r.end()) ) << s << FAS_TESTING_FILE_LINE;
+  t << stop;
 }
 
 UNIT(copy_space_test, "copy parse space")
@@ -169,6 +174,7 @@ UNIT(null_test, "parse null from file")
   typedef input_range< iterator, char > range_type;
   std::ifstream ifs("test_null.txt");
   range_type r = range_type( iterator(ifs), iterator() );
+
   ad_null an;
   r = an(t, r);
   std::string tail;
@@ -435,4 +441,5 @@ BEGIN_SUITE(basic_parser_suite, "basic json parser suite")
   ADD_UNIT(simple_string_test)
   ADD_UNIT(copy_simple_string_test)
   ADD_ADVICE( ::fas::json::_except_, ::fas::json::ad_except)
+  ADD_ASPECT( ::fas::json::parse::aspect_space )
 END_SUITE(basic_parser_suite)

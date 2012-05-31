@@ -55,4 +55,10 @@ struct _comment_;
 
 struct _quote_;
 
+struct _begin_comment_;
+struct _end_comment_;
+struct _space_chars_;
+struct _comment_;
+
+
 

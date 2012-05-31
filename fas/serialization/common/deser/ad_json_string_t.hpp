@@ -23,21 +23,21 @@ struct ad_json_string_t
   template<typename T, typename M, typename R>
   bool check(T& t, M, R r)
   {
-    return t.get_aspect().template get<_parse_string_>().check(r)
-           || t.get_aspect().template get<_parse_null_>().check(r);
+    return t.get_aspect().template get<_parse_string_>().check(t, r)
+           || t.get_aspect().template get<_parse_null_>().check(t, r);
 
   };
 
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
-    if ( t.get_aspect().template get<_parse_null_>().check(r) )
+    if ( t.get_aspect().template get<_parse_null_>().check(t, r) )
     {
       _clear(v);
       return t.get_aspect().template get<_parse_null_>()(t, r);
     }
     
-    if ( !t.get_aspect().template get<_parse_string_>().check(r) )
+    if ( !t.get_aspect().template get<_parse_string_>().check(t, r) )
       return r;
     
     typedef typename T::aspect::template advice_cast<_quote_>::type::separator separator;

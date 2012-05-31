@@ -14,8 +14,8 @@ namespace fas{ namespace json{ namespace parse{
 struct ad_string
 {
 
-  template<typename R>
-  bool check( R r) { return r && *r=='"' ; }
+  template<typename T, typename R>
+  bool check( T&, R r) { return r && *r=='"' ; }
 
   template<typename T, typename R>
   R operator()(T& t, R r)

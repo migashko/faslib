@@ -13,6 +13,7 @@ template< typename T, int  >
 struct range_helper;
 
 }
+#endif
 
 #include <fas/range/detail/range_helper_other.hpp>
 #include <fas/range/detail/range_helper_array.hpp>
@@ -22,5 +23,4 @@ struct range_helper;
 #include <fas/range/detail/range_helper_range.hpp>
 #include <fas/range/detail/range_helper_stream.hpp>
 
-#endif
 

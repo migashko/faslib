@@ -16,8 +16,9 @@ struct ad_separator_t
   bool check(T& , M, R r)
   {
 		range_type rr = range_type( separator()() );
-		for ( ;r && rr && *r == *rr; ++r, ++rr);
-    return !rr;
+    return r && rr && *r == *rr;
+		//for ( ;r && rr && *r == *rr; ++r, ++rr);
+    //return !rr;
   };
 
 	template<typename T, typename M, typename V, typename R>

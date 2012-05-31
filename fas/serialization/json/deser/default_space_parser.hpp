@@ -11,8 +11,11 @@ struct default_space_parser
   R operator()(R r) const
   {
     // TDOD: сделать функции для парсера
-    parse::ad_space ads;
-    return ads.parse(r);
+    // Удалить нафиг
+    /*parse::ad_space ads;
+    return ads(*this, r);
+    */
+    return r;
   }
 };
 

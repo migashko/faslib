@@ -104,26 +104,26 @@ struct ad_enumeration
   template<typename T, typename M, typename R>
   bool check(T& t, M, R r)
   {
-    return t.get_aspect().template get<parse::_string_>().check(r)
-           || t.get_aspect().template get<parse::_number_>().check(r);
+    return t.get_aspect().template get<parse::_string_>().check(t, r)
+           || t.get_aspect().template get<parse::_number_>().check(t, r);
   };
 
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, V& v, R r)
   {
     using namespace ::fas::json;
-    if ( t.get_aspect().template get<parse::_null_>().check(r) )
+    if ( t.get_aspect().template get<parse::_null_>().check(t, r) )
     {
       r = t.get_aspect().template get<parse::_null_>()(t, r);
       v = V();
     }
-    else if ( t.get_aspect().template get<parse::_number_>().check(r) )
+    else if ( t.get_aspect().template get<parse::_number_>().check(t, r) )
     {
       int value;
       r = deserialize_integer( value, r);
       v = static_cast<V>(value);
     }
-    else if ( t.get_aspect().template get<parse::_string_>().check(r) )
+    else if ( t.get_aspect().template get<parse::_string_>().check(t, r) )
     {
       typedef typename M::target_list target_list;
       r = _(t, target_list(), v, r);
