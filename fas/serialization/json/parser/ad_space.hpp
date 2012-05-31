@@ -1,10 +1,10 @@
 #ifndef FAS_SERIALIZATION_JSON_PARSER_AD_SPACE_HPP
 #define FAS_SERIALIZATION_JSON_PARSER_AD_SPACE_HPP
 
-#include <fas/serialization/common/parse/ad_space_chars_t.hpp>
-#include <fas/serialization/common/parse/ad_cstring_list_t.hpp>
-#include <fas/serialization/common/parse/ad_space_t.hpp>
-#include <fas/serialization/common/parse/ad_comment_t.hpp>
+#include <fas/serialization/common/parser/ad_space_chars_t.hpp>
+#include <fas/serialization/common/parser/ad_cstring_list_t.hpp>
+#include <fas/serialization/common/parser/ad_space_t.hpp>
+#include <fas/serialization/common/parser/ad_comment_t.hpp>
 #include <fas/serialization/json/parser/tags.hpp>
 #include <fas/serialization/json/except/tags.hpp>
 

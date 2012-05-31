@@ -1,7 +1,7 @@
 #ifndef FAS_SERIALIZATION_COMMON_PARSER_AD_JSON_BOOLEAN_T_HPP
 #define FAS_SERIALIZATION_COMMON_PARSER_AD_JSON_BOOLEAN_T_HPP
 
-#include <fas/serialization/common/parse/ad_cstring_list_t.hpp>
+#include <fas/serialization/common/parser/ad_cstring_list_t.hpp>
 #include <fas/typemanip/tchars.hpp>
 
 

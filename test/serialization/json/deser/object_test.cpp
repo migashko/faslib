@@ -173,28 +173,14 @@ UNIT(ad_object_test3f, "test ad_object advice")
       "{\"foo1\":-1,\"foo2\":\"test-foo2\",\"foo3\":\"test-foo3\","
       "\"foo5\":[6,5,4,3,2],\"foo4\":[20,30,40],\"foo6\":[\"test-foo6-1\",\"test-foo6-2\"]}";
 
-  /*std::stringstream fi;
-  fi << json;*/
   std::ofstream fo("ad_object_test3f.txt");
   fo << json;
   fo.close();
   std::ifstream fi("ad_object_test3f.txt");
   
   
-  std::string ostr;
-
-  /*fas::typerange<std::string>::orange ora(ostr);
-  *(ora++) = '1';
-  *(ora++) = '2';*/
-  
-  typedef fas::input_range_wrapper<
-    fas::typerange<std::ifstream>::range,
-    fas::typerange<std::string>::orange
-  > irw_type;
-
-  irw_type trt( fas::range(fi), fas::orange(ostr) );
   try{
-    ado(t, foo_json(), f, trt );
+    ado(t, foo_json(), f, fas::range(fi) );
   }
   catch(json_error& e)
   {
