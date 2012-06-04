@@ -154,12 +154,13 @@ UNIT(ad_object_test3f, "test ad_object advice")
   typedef object<
     brute_pair<
     fas::type_list_n<
-      field< n_foo1, attr<foo, int, &foo::foo1, integer> >,
+      field< n_foo1, attr<foo, int, &foo::foo1, integer> >/*,
       field< n_foo2, attr<foo, std::string, &foo::foo2, string> >,
       field< n_foo3, attr<foo, foo::foo3type, &foo::foo3, string> >,
       field< n_foo5, attr<foo, foo::foo5type, &foo::foo5, array<integer> > >,
       field< n_foo4, attr<foo, std::vector<int>, &foo::foo4, array<integer> >  >,
       field< n_foo6, attr<foo, std::vector<std::string>, &foo::foo6, array<string> >  >
+      */
     >::type
     ,
     fas::type_list_n<
@@ -392,14 +393,14 @@ UNIT(ad_object_test7, "test ad_object advice")
 }
 
 BEGIN_SUITE(object_deserialize_suite, "object deserializer suite")
-  ADD_UNIT(ad_object_test1)
+  /*ADD_UNIT(ad_object_test1)
   ADD_UNIT(ad_object_test2)
-  ADD_UNIT(ad_object_test3)
+  ADD_UNIT(ad_object_test3)*/
   ADD_UNIT(ad_object_test3f)
-  ADD_UNIT(ad_object_test4)
+  /*ADD_UNIT(ad_object_test4)
   ADD_UNIT(ad_object_test5)
   ADD_UNIT(ad_object_test6)
-  ADD_UNIT(ad_object_test7)
+  ADD_UNIT(ad_object_test7)*/
   ADD_ADVICE( ::fas::json::deser::_string_, ::fas::json::deser::ad_string)
   ADD_ADVICE( ::fas::json::deser::_cstring_, ::fas::json::deser::ad_cstring)
   ADD_ADVICE( ::fas::json::deser::_integer_, ::fas::json::deser::ad_integer)

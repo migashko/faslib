@@ -23,7 +23,10 @@ struct ad_string
   template<typename T, typename R>
   R operator()(T& t, R r)
   {
-    return this->parse(t, r);
+    std::cout << "ad_string 1 " << *r << std::endl;
+    r = this->parse(t, r);
+    std::cout << "ad_string 2 " << *r << std::endl;
+    return r;
   }
 
   template<typename T, typename R, typename RD>
@@ -212,14 +215,31 @@ private:
   template<typename T, typename R>
   R parse(T& t, R r)
   {
+    /*std::cout << "ad_string parse " << *r << std::endl;
+    R rx = r;
+    std::cout << std::endl;
+    for ( ;rx; ++rx)
+      std::cout << *rx;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    */
+    
+    std::cout << "ad_string 1.1 " << *r << std::endl;
     if (!r)
       return throw_( t, unexpected_end_fragment(), r);
 
+    std::cout << "ad_string 1.2 " << *r << std::endl;
     if (*r!='"') 
       return throw_( t, expected_of("\"",  distance(r) ), r);
 
-    for ( ++r; r && *r!='"'; )
+    std::cout << "ad_string 1.3 " << bool(r) << std::endl;
+    std::cout << "ad_string 1.3 " << *r << r.distance() << std::endl;
+    r++;
+    std::cout << "ad_string 1.3 " << bool(r) << std::endl;
+    std::cout << "ad_string 1.3 " << *r << r.distance() << std::endl;
+    for ( /*++r*/; r && *r!='"'; )
     {
+      std::cout << "ad_string 1.3.1" << std::endl;
       if (*r=='\\')
       {
         if ( !(++r) )
@@ -247,13 +267,18 @@ private:
       }
     }
 
+    std::cout << "ad_string 1.4 " << *r << std::endl;
     if (!r)
       return throw_( t, unexpected_end_fragment(), r);
 
+    std::cout << "ad_string 1.5 " << *r << std::endl;
     if (*r!='"')
       return throw_( t, expected_of("\"", distance(r) ), r);
 
-    return ++r;
+    std::cout << "ad_string 1.6 " << *r << std::endl;
+    ++r;
+    std::cout << "ad_string 1.7 " << *r << std::endl;
+    return r;
   }
 
   template<typename T, typename R, typename RD>
@@ -618,7 +643,8 @@ struct ad_string1:
 
 struct aspect_string: aspect< type_list_n<
   /*advice<_quote_, ad_quote>,
-  advice<_unquoted_string_, ad_unquoted_string>,*/
+  advice<_unquoted_string_, ad_unquoted_string>,
+  */
   advice<_string_, ad_string>
 >::type
 > {};
