@@ -21,8 +21,16 @@ UNIT(parser_test, "testing default parser")
       {\"jsonrpc\": \"2.0\", \"method\": \"foo.get\", \"params\": {\"name\": \"myself\"}, \"id\": \"5\"},\
       {\"jsonrpc\": \"2.0\", \"method\": \"get_data\", \"id\": \"9\"} ]/*next*/";
 
-  std::string::iterator next = jp.parse( range(s.begin(), s.end() ) ).begin();
+  std::string::iterator next;
+  typerange<std::string>::range sr = range(s);
+  try{
+  next = jp.parse( sr ).begin();
   t << equal<expect>("/*next*/", std::string(next, s.end()) );
+  }
+  catch(const json_error& e)
+  {
+    t << fail( e.message(sr) );
+  }
 }
 
 UNIT(copy_parse_unit, "")

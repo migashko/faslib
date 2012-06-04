@@ -30,15 +30,18 @@ typedef
   ::fas::aspect<
     type_list_n<
       aspect_space,
+      aspect_string,
+      aspect_enclosed,
       advice<_null_, ad_null>,
       advice<_boolean_, ad_boolean>,
       advice<_number_, ad_number>,
-      advice<_string_, ad_string>,
+      //advice<_string_, ad_string>,
+      
       advice<_value_, ad_value>,
       //advice<_sequence_, ad_sequence>,
-      advice<_array_, ad_array>,
+      //advice<_array_, ad_array>,
       advice<_item_, ad_item>,
-      advice<_object_, ad_object>,
+      //advice<_object_, ad_object>,
       // advice<_space_, ad_space>,
       advice<_name_, ad_string>,
       advice<_field_, ad_field>,

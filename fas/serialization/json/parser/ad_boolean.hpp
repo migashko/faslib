@@ -5,9 +5,9 @@
 #include <fas/serialization/json/except/tags.hpp>
 
 namespace fas{ namespace json{ namespace parse{
-	
+  
 struct ad_boolean:
-	::fas::serialization::parse::ad_json_boolean_t<_except_>
+  ::fas::serialization::parse::ad_json_boolean_t<_except_>
 {};
 
 }}}

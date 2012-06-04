@@ -13,7 +13,7 @@
 namespace fas{ namespace serialization{ namespace parse{
 	
 template<typename CharT, CharT CH, typename TgExcept>
-struct ad_char_list_t
+struct ad_char_t
 {
 	typedef TgExcept _except_;
   
@@ -31,23 +31,23 @@ struct ad_char_list_t
     
     if ( *r == CH )
       return ++r;
-    return throw_t<_except_>( t, expected_of( tchars()(), distance(r) ), r );
+    return throw_t<_except_>( t, expected_of( CH, distance(r) ), r );
   }
   
   template<typename T, typename R, typename RO>
   std::pair<R, RO> operator()(T& t, R r, RO ro)
   {
-    if (!r) return throw_t<_except_>( t, unexpected_end_fragment(), r );
+    if (!r) return throw_t<_except_>( t, unexpected_end_fragment(), r, ro );
 
     if ( *r == CH )
     {
       if (!ro)
-        return throw_t<_except_>( t, out_of_range( tchars()(), distance(r) ), r, ro );
+        return throw_t<_except_>( t, out_of_range( distance(r) ), r, ro );
       *(ro++) = CH;
       return std::make_pair(++r, ro);
     }
     
-    return throw_t<_except_>( t, expected_of( tchars()(), distance(r) ), r, ro );
+    return throw_t<_except_>( t, expected_of( CH, distance(r) ), r, ro );
   }
   
 };

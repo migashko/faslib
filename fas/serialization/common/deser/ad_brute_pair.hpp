@@ -22,7 +22,6 @@ struct ad_brute_pair
     
     t.get_aspect().template get<first_tag>()(t, first_target(), v, r);
     r = t.get_aspect().template get<second_tag>()(t, second_target(), v, r);
-    
     return r;
   }
 };

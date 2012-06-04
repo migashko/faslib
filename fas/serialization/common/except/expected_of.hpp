@@ -19,6 +19,8 @@ public:
   typedef syntax_error::size_type size_type; 
   expected_of(const std::string& str, size_type tail_of = 0)
     : syntax_error( std::string("expected of '") + str + std::string("'"), tail_of) {}
+  expected_of(char ch, size_type tail_of = 0)
+    : syntax_error( std::string("expected of '") + ch + std::string("'"), tail_of) {}
 };
 
 

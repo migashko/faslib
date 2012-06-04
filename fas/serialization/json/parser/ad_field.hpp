@@ -13,6 +13,13 @@ namespace fas{ namespace json{ namespace parse{
 struct ad_field
 {
   template<typename T, typename R>
+  bool check(T& t, R r)
+  {
+    
+    return t.get_aspect().template get<_name_>().check(t, r);
+  }
+  
+  template<typename T, typename R>
   R operator()(T& t, R r)
   {
     r = t.get_aspect().template get<_name_>()(t, r);

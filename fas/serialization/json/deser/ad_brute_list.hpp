@@ -9,7 +9,7 @@
 namespace fas{ namespace json{ namespace deser{
 
 struct ad_brute_list: 
-  ::fas::serialization::deser::ad_brute_list_t< _comma_, parse::_space_, parse::_item_>
+  ::fas::serialization::deser::ad_brute_list_t< _comma_, parse::_space_, parse::_item_, _except_>
 {};
 
 }}}

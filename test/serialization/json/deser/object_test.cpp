@@ -186,7 +186,8 @@ UNIT(ad_object_test3f, "test ad_object advice")
   {
     //std::cout<<
     std::copy( std::istreambuf_iterator<char>(fi),  std::istreambuf_iterator<char>(), std::ostreambuf_iterator<char>(std::cout) ) ;
-    t << fail( e.message(fas::range(fi)) );
+    std::cout<<std::endl;
+    t << fail( e.message(fas::range(json)) );
   }
   
 

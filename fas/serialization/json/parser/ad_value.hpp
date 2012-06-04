@@ -13,6 +13,13 @@ struct ad_value
   template<typename T, typename R>
   bool check(T& t, R r) 
   { 
+    t.get_aspect().template get<_null_>().check(t, r);
+    t.get_aspect().template get<_boolean_>().check(t, r);
+    t.get_aspect().template get<_number_>().check(t, r);
+    t.get_aspect().template get<_string_>().check(t, r);
+    t.get_aspect().template get<_array_>().check(t, r);
+    t.get_aspect().template get<_object_>().check(t, r);
+    
     return t.get_aspect().template get<_null_>().check(t, r)
            || t.get_aspect().template get<_boolean_>().check(t, r)
            || t.get_aspect().template get<_number_>().check(t, r)

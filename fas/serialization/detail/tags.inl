@@ -60,5 +60,13 @@ struct _end_comment_;
 struct _space_chars_;
 struct _comment_;
 
+struct _left_brace_;
+struct _right_brace_;
+struct _field_sequence_;
+struct _left_bracket_;
+struct _right_bracket_;
+struct _value_sequence_;
+struct _unquoted_string_;
+
 
 
