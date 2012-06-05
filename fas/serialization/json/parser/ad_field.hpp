@@ -48,6 +48,7 @@ struct ad_field
     return r;
   }
 
+  /*
   template<typename T, typename R, typename RD>
   std::pair<R, RD> operator()(T& t, R r, RD rd)
   {
@@ -82,6 +83,7 @@ struct ad_field
     
     return rr;
   }
+  */
 };
 
 }}}

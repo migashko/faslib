@@ -76,6 +76,16 @@ struct range_helper<T[N], typerange_flag::array >
     return v + N;
   }
 
+  static inline reverse_iterator rbegin(T* v)
+  {
+    return reverse_iterator(static_cast<T*>(v) + N);
+  }
+
+  static inline reverse_iterator rend(T* v)
+  {
+    return reverse_iterator(v);
+  }
+
 private:
   
   template<typename TT, typename V, int NN>

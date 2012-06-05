@@ -18,6 +18,12 @@ inline typename typerange<T>::iterator end(T& t)
   return typerange<T>::end(t);
 }
 
+template<typename T>
+inline typename typerange<T>::iterator rend(T& t)
+{
+  return typerange<T>::rend(t);
+}
+
 }
 
 #endif

@@ -18,6 +18,13 @@ inline typename typerange<T>::iterator begin(T& t)
   return typerange<T>::begin(t);
 }
 
+template<typename T>
+inline typename typerange<T>::iterator rbegin(T& t)
+{
+  return typerange<T>::rbegin(t);
+}
+
+
 }
 
 #endif

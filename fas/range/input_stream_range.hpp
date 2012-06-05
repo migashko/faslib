@@ -73,34 +73,4 @@ private:
 
 }
 
-/*#include <fas/range/advance.hpp>
-#include <fas/range/distance.hpp>
-*/
-
-/*
-#include <vector>
-namespace fas {
-
-template<typename R, typename Cont = std::vector<typename R::value_type> >
-class input_range_adaptor
-  : public R
-{
-public:
-  typedef R range_type;
-  typedef Cont adaptor_container;
-  typedef typename adaptor_container::size_type size_type;
-  
-  explicit input_range_adaptor(range_type r, adaptor_container& c)
-    : range_type(r), _container(c), _position(0)
-  {};
-
-  
-private:
-  //range_type _range;
-  adaptor_container& _container;
-  size_type _position;
-};
-}
-*/
-
 #endif

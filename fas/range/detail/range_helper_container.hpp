@@ -19,6 +19,7 @@ struct range_container_helper
 {
   typedef typename iterator2range< typename C::const_iterator >::type range;
   typedef typename iterator2range< typename C::const_reverse_iterator >::type reverse_range;
+  typedef typename C::const_reverse_iterator reverse_iterator; 
   
   static inline range make_range(const C& ctn)
   {
@@ -30,6 +31,15 @@ struct range_container_helper
     return reverse_range( ctn.rbegin(), ctn.rend() );
   }
 
+  static inline reverse_iterator rbegin(const C& ctn)
+  {
+    return reverse_iterator(ctn.end());
+  }
+
+  static inline reverse_iterator rend(const C& ctn)
+  {
+    return reverse_iterator(ctn.begin());
+  }
 };
 
 
@@ -38,8 +48,8 @@ struct range_container_helper<C, false>
 {
   typedef typename iterator2range< typename C::iterator >::type range;
   typedef typename iterator2range< typename C::reverse_iterator >::type reverse_range;
-  
   typedef typename iterator2range< std::insert_iterator<C>, typename C::value_type >::type orange;
+  typedef typename C::const_reverse_iterator reverse_iterator; 
   
   template<typename CC>
   static inline orange make_orange(CC& cnt, bool clear = false)
@@ -59,6 +69,18 @@ struct range_container_helper<C, false>
   static inline reverse_range make_rrange(CC& ctn)
   {
     return reverse_range( ctn.rbegin(), ctn.rend() );
+  }
+
+  template<typename CC>
+  static inline reverse_iterator rbegin(CC& ctn)
+  {
+    return reverse_iterator(ctn.end());
+  }
+
+  template<typename CC>
+  static inline reverse_iterator rend(CC& ctn)
+  {
+    return reverse_iterator(ctn.begin());
   }
 
 };

@@ -20,23 +20,16 @@ struct ad_item
   template<typename T, typename R>
   R operator()(T& t, R r)
   {
-    std::cout << "ad_item 1 " << *r << std::endl;
+    
     if ( !t.get_aspect().template get<_value_>().check(t, r) )
       return throw_(t, parse_error( distance(r) ), r );
-    std::cout << "ad_item 2 " << *r << std::endl;
     r = t.get_aspect().template get<_value_>()(t, r);
-    std::cout << "ad_item 3 " << *r << std::endl;
     r = t.get_aspect().template get<_space_>()(t, r);
-    std::cout << "ad_item 4 " << *r << std::endl;
     if (!r || *r!=':') return r;
-    std::cout << "ad_item 5" << std::endl;
     r = t.get_aspect().template get<_space_>()(t, ++r);
-    std::cout << "ad_item 6" << std::endl;
     if (!r) return throw_(t, unexpected_end_fragment( ), r );
-    std::cout << "ad_item 7" << std::endl;
     if ( !t.get_aspect().template get<_value_>().check(t, r) )
       return throw_(t, parse_error( distance(r) ), r );
-    std::cout << "ad_item 8" << std::endl;
     return t.get_aspect().template get<_value_>()(t, r);
 
     /*

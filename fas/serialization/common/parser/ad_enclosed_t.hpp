@@ -36,6 +36,7 @@ struct ad_enclosed_t
     return t.get_aspect().template get<_close_>()(t, r);
   }
 
+  /*
   template<typename T, typename R, typename RO>
   std::pair<R, RO> operator()(T& t, R r, RO ro)
   {
@@ -54,6 +55,7 @@ struct ad_enclosed_t
     
     return t.get_aspect().template get<_close_>()(t, rr.first, rr.second);
   }
+  */
 };
 
 }}}

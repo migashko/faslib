@@ -5,7 +5,7 @@
 #include <fas/serialization/json/except/out_of_range.hpp>
 
 #include <fas/serialization/json/parser/tags.hpp>
-#include <fas/range/range.hpp>
+#include <fas/range/irange.hpp>
 
 namespace fas{ namespace json{ namespace ser{
 
@@ -21,7 +21,10 @@ struct ad_raw
   template<typename T, typename M, typename V, typename R>
   R operator()(T& t, M, const V& v, R r)
   {
-    return t.get_aspect().template get<parse::_value_>()(t, ::fas::range(v), r).second;
+    //return t.get_aspect().template get<parse::_value_>()(t, ::fas::range(v), r).second;
+    return static_cast<R>(
+      t.get_aspect().template get<parse::_value_>()(t,  ::fas::crange( ::fas::range(v), r) )
+    );
   }
 };
 

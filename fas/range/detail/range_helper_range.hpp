@@ -64,7 +64,8 @@ struct range_helper<R, typerange_flag::range >
     return rr;
   }
 
-  static inline difference_type distance( R r )
+  template<typename RR>
+  static inline typename RR::difference_type distance( RR r )
   {
     return r.distance();
   }
@@ -76,13 +77,15 @@ struct range_helper<R, typerange_flag::range >
     r.advance(s);
   }*/
 
-  static inline void decrease(R& r, difference_type cbeg, difference_type cend)
+  template<typename RR>
+  static inline void decrease(RR& r, typename RR::difference_type cbeg, typename RR::difference_type cend)
   {
     r.decrease(cbeg, cend);
   }
 
-  
-  static inline void increase(R& r, difference_type cbeg, difference_type cend)
+
+  template<typename RR>
+  static inline void increase(RR& r, typename RR::difference_type cbeg, typename RR::difference_type cend)
   {
     r.increase(cbeg, cend);
   }
@@ -97,8 +100,8 @@ struct range_helper<R, typerange_flag::range >
     return r.end();
   }
 
-  template<typename Dist>
-  static inline void advance( R r, Dist s)
+  template<typename RR, typename Dist>
+  static inline void advance( RR r, Dist s)
   {
     r.advance(s);
   }

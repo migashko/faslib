@@ -7,6 +7,7 @@
 #include <fas/serialization/json/parser/aspect.hpp>
 #include <fas/range/range.hpp>
 #include <fas/range/orange.hpp>
+#include <fas/range/irange.hpp>
 
 
 UNIT(raw_test, "raw serialize")
@@ -35,8 +36,9 @@ UNIT(raw_range_test, "raw range serialize")
   random_access_range<const char*> r = ::fas::range(rawstr);
   std::string result;
   ad_range adr;
+  //adr(t, /*raw(),*/ fas::irange( rawstr, result) );
   adr(t, raw(), r, orange(result) );
-  t << equal<assert>( std::string(result.begin(), result.end()) , std::string("{\"name\":[\"str\",1,2,false]}") ) << "["<<result <<"]"<< FAS_TESTING_FILE_LINE;
+  t << equal<assert>( std::string(result.begin(), result.end()) , std::string(rawstr/*"{\"name\":[\"str\",1,2,false]}"*/) ) << "["<<result <<"]"<< FAS_TESTING_FILE_LINE;
 }
 
 

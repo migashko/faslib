@@ -40,6 +40,7 @@
 #include <cstring>
 #include <fstream>
 
+#include <fas/range/range_adapter.hpp>
 namespace aj = ::fas::json;
 UNIT(ad_object_test1, "test ad_object advice")
 {
@@ -154,13 +155,12 @@ UNIT(ad_object_test3f, "test ad_object advice")
   typedef object<
     brute_pair<
     fas::type_list_n<
-      field< n_foo1, attr<foo, int, &foo::foo1, integer> >/*,
+      field< n_foo1, attr<foo, int, &foo::foo1, integer> >,
       field< n_foo2, attr<foo, std::string, &foo::foo2, string> >,
       field< n_foo3, attr<foo, foo::foo3type, &foo::foo3, string> >,
       field< n_foo5, attr<foo, foo::foo5type, &foo::foo5, array<integer> > >,
       field< n_foo4, attr<foo, std::vector<int>, &foo::foo4, array<integer> >  >,
       field< n_foo6, attr<foo, std::vector<std::string>, &foo::foo6, array<string> >  >
-      */
     >::type
     ,
     fas::type_list_n<
@@ -179,13 +179,14 @@ UNIT(ad_object_test3f, "test ad_object advice")
   fo.close();
   std::ifstream fi("ad_object_test3f.txt");
   
-  
+  typedef fas::input_range_adapter< fas::typerange<std::ifstream>::range, std::string > range_adapter;
+  std::string buffer;
   try{
-    ado(t, foo_json(), f, fas::range(fi) );
+    ado(t, foo_json(), f, range_adapter( fas::range(fi), buffer) );
   }
   catch(json_error& e)
   {
-    //std::cout<<
+    std::cout << "buffer: " << buffer << std::endl;
     std::copy( std::istreambuf_iterator<char>(fi),  std::istreambuf_iterator<char>(), std::ostreambuf_iterator<char>(std::cout) ) ;
     std::cout<<std::endl;
     t << fail( e.message(fas::range(json)) );

@@ -23,9 +23,7 @@ struct ad_string
   template<typename T, typename R>
   R operator()(T& t, R r)
   {
-    std::cout << "ad_string 1 " << *r << std::endl;
     r = this->parse(t, r);
-    std::cout << "ad_string 2 " << *r << std::endl;
     return r;
   }
 
@@ -224,22 +222,22 @@ private:
     std::cout << std::endl;
     */
     
-    std::cout << "ad_string 1.1 " << *r << std::endl;
+    //std::cout << "ad_string 1.1 " << *r << std::endl;
     if (!r)
       return throw_( t, unexpected_end_fragment(), r);
 
-    std::cout << "ad_string 1.2 " << *r << std::endl;
+    //std::cout << "ad_string 1.2 " << *r << std::endl;
     if (*r!='"') 
       return throw_( t, expected_of("\"",  distance(r) ), r);
 
-    std::cout << "ad_string 1.3 " << bool(r) << std::endl;
-    std::cout << "ad_string 1.3 " << *r << r.distance() << std::endl;
+    //std::cout << "ad_string 1.3 " << bool(r) << std::endl;
+    //std::cout << "ad_string 1.3 " << *r << distance(r) << std::endl;
     r++;
-    std::cout << "ad_string 1.3 " << bool(r) << std::endl;
-    std::cout << "ad_string 1.3 " << *r << r.distance() << std::endl;
+    //std::cout << "ad_string 1.3 " << bool(r) << std::endl;
+    //std::cout << "ad_string 1.3 " << *r << distance(r) << std::endl;
     for ( /*++r*/; r && *r!='"'; )
     {
-      std::cout << "ad_string 1.3.1" << std::endl;
+      //std::cout << "ad_string 1.3.1" << std::endl;
       if (*r=='\\')
       {
         if ( !(++r) )
@@ -267,18 +265,13 @@ private:
       }
     }
 
-    std::cout << "ad_string 1.4 " << *r << std::endl;
     if (!r)
       return throw_( t, unexpected_end_fragment(), r);
 
-    std::cout << "ad_string 1.5 " << *r << std::endl;
     if (*r!='"')
       return throw_( t, expected_of("\"", distance(r) ), r);
 
-    std::cout << "ad_string 1.6 " << *r << std::endl;
-    ++r;
-    std::cout << "ad_string 1.7 " << *r << std::endl;
-    return r;
+    return ++r;;
   }
 
   template<typename T, typename R, typename RD>
@@ -349,6 +342,87 @@ private:
   }
 };
 
+template<typename TgUhex, typename TgExcept>
+struct ad_json_uhex_t
+{
+};
+
+/*
+template<typename TgUhex, typename TgExcept>
+struct ad_json_escape_t
+{
+  typedef TgUhex   _json_uhex_;
+  typedef TgExcept _except_;
+  
+  template<typename R>
+  bool check(R r)
+  {
+    return *r=='\\';
+  }
+
+  template<typename T, typename R>
+  R operator()( T& t, R r)
+  {
+    if ( !r || *r!='\\')
+      return r;
+
+    if (!(++r))
+      return throw_t<_except_>(t, unexpected_end_fragment( distance(r) ), r );
+
+    switch (*r)
+    {
+      case '"' :
+      case '\\':
+      case '/' : 
+      case 't' : 
+      case 'b' : 
+      case 'r' : 
+      case 'n' : 
+      case 'f' : ++r; break;
+      case 'u' : r = t.get_aspect().template get<_json_uhex_>()(t,  ++r); break;
+      default:
+        return throw_t<_except_>(t, invalid_string( distance(r_in) ), r_in );
+    } // case
+
+    return r;
+  }
+
+  template<typename T, typename R, typename RO>
+  std::pair<R, RO> copy(T& t, R r, RO& ro)
+  {
+    std::pair<R, RO> rr(r, ro);
+    
+    if ( !rr.first || *rr.first!='\\')
+      return rr;
+
+    if (!(++rr.first))
+      return throw_t<_except_>(t, unexpected_end_fragment( distance(rr.first) ), rr.first, rr.second );
+
+    *(rr.second)++ = *rr.first;
+
+    switch (*rr.first)
+    {
+      case '"' :
+      case '\\':
+      case '/' :
+      case 't' :
+      case 'b' :
+      case 'r' :
+      case 'n' :
+      case 'f' : *(rr.second++) = *(rr.first++); break;
+      case 'u' :
+        *(rr.second++) = *(rr.first++);
+        r = t.get_aspect().template get<_json_uhex_>()(t, rr.first, rr.second);
+        break;
+      default:
+        return throw_t<_except_>(t, invalid_string( distance(r.first) ), r.first, r.second );
+    } // case
+
+    return rr;
+  }
+};
+*/
+
 struct ad_unquoted_string
 {
   template<typename T, typename R>
@@ -357,11 +431,7 @@ struct ad_unquoted_string
   template<typename T, typename R>
   R operator()(T& t, R r)
   {
-    std::cout << "ad_unquoted_string{" << ( r ? *r : '?' ) << std::endl;
-    std::cout << "distance: " << r.distance() << std::endl;
-    r = this->parse(t, r);
-    std::cout << "}ad_unquoted_string " << ( r ? *r : '?' ) << std::endl;
-    return r;
+    return this->parse(t, r);
   }
 
   template<typename T, typename R, typename RD>
@@ -375,7 +445,6 @@ private:
   template<typename T, typename R>
   R parse_hex(T& t, R r)
   {
-    std::cout << "parse_hex{"<< std::endl;
     if (!r)
       return throw_( t, unexpected_end_fragment(), r);
 
@@ -389,7 +458,6 @@ private:
              && (*r < 'a' || *r>'f') )
                return throw_( t, invalid_json_string( distance(r) ), r);
     }
-    std::cout << "}parse_hex"<< std::endl;
     return r;
   }
 
@@ -421,7 +489,6 @@ private:
   template<typename T, typename R>
   R parse_symbol(T& t, R r)
   {
-    std::cout << "parse_symbol{"<< *r << "}" << std::endl;
     /*
     0x00000000 — 0x0000007F: 0xxxxxxx
     0x00000080 — 0x000007FF: 110xxxxx 10xxxxxx
@@ -551,13 +618,10 @@ private:
   template<typename T, typename R>
   R parse(T& t, R r)
   {
-    std::cout << "parse { "<< std::endl;    
     for ( ; r && *r!='"'; )
     {
-      std::cout << "parse for(;;) " << *r << std::endl;    
       if (*r=='\\')
       {
-        std::cout << "parse for(;;) esc " << *r << std::endl;    
         if ( !(++r) )
           return throw_( t, unexpected_end_fragment(), r);
 
@@ -577,14 +641,12 @@ private:
       }
       else
       {
-        std::cout << "parse for(;;) else " << *r << std::endl;    
         r = this->parse_symbol(t, r);
         if ( !try_(t) )
           return r;
       }
     }
 
-    std::cout << "} parse"<< std::endl;    
     return r;
   }
 
@@ -642,10 +704,9 @@ struct ad_string1:
 {};
 
 struct aspect_string: aspect< type_list_n<
-  /*advice<_quote_, ad_quote>,
+  advice<_quote_, ad_quote>,
   advice<_unquoted_string_, ad_unquoted_string>,
-  */
-  advice<_string_, ad_string>
+  advice<_string_, ad_string1>
 >::type
 > {};
 
