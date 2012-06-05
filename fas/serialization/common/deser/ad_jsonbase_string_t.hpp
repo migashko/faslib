@@ -69,7 +69,7 @@ private:
       if (!r_out)
         return throw_t<_except_>(t, out_of_range( distance(r_in) ), r_in );
 
-      if ( t.get_aspect().template get<_separator_>().check(t, M(), r_in) )
+      if ( t.get_aspect().template get<_separator_>().check(t, /*M(),*/ r_in) )
         return r_in;
       
       if ( t.get_aspect().template get<_escape_>().check(r_in) )

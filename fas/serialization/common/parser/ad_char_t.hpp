@@ -34,6 +34,7 @@ struct ad_char_t
     return throw_t<_except_>( t, expected_of( CH, distance(r) ), r );
   }
   
+  /*
   template<typename T, typename R, typename RO>
   std::pair<R, RO> operator()(T& t, R r, RO ro)
   {
@@ -49,6 +50,7 @@ struct ad_char_t
     
     return throw_t<_except_>( t, expected_of( CH, distance(r) ), r, ro );
   }
+  */
   
 };
 

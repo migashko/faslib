@@ -33,7 +33,7 @@ struct ad_primary_list_t
     
     r = t.get_aspect().template get< _parse_space_ >()(t, r);
     
-    if ( !try_t<_except_>(t) ) return r;
+    // if ( !try_t<_except_>(t) ) return r;
     
     if ( r ) 
       r = _( t, v, r, target_list(), int_<length<target_list>::value>() );
@@ -55,15 +55,22 @@ private:
     enum { position = length<L>::value - N };
     typedef typename type_at_c<position, L>::type target;
     
+    if (t.get_aspect().template get< _separator_ >().check(t, r))
+    {
+      r = t.get_aspect().template get< _separator_ >()(t, r);
+      r = t.get_aspect().template get< _parse_space_ >()(t, r);
+    }
+    /*
     R income = r;
-    r = t.get_aspect().template get< _separator_ >()(t, target(), v, r);
-    if ( !try_t<_except_>(t) ) return r;
+    r = t.get_aspect().template get< _separator_ >()(t, r);
+    //if ( !try_t<_except_>(t) ) return r;
     
     if ( r != income )
     {
       r = t.get_aspect().template get< _parse_space_ >()(t, r);
-      if ( !try_t<_except_>(t) ) return r;
+      //if ( !try_t<_except_>(t) ) return r;
     }
+    */
     
     typedef typename target::deserializer_tag deserializer_tag;
     
@@ -85,9 +92,9 @@ private:
       return __(t, v, r, L(), int_<N-1>() );
     
     r = t.get_aspect().template get< _parse_space_ >()(t, r);
-    if ( !try_t<_except_>(t) ) return r;
+    //if ( !try_t<_except_>(t) ) return r;
     
-    if ( !r || !t.get_aspect().template get< _separator_ >().check(t, target(), r) )
+    if ( !r || !t.get_aspect().template get< _separator_ >().check(t, /*target(),*/ r) )
       return r;
     
     typedef typename erase_c<position, L>::type target_list;
@@ -99,10 +106,10 @@ private:
   R __(T& t, V& v, R r, L, int_<0> )
   {
     r = t.get_aspect().template get< _parse_item_ >()(t, r);
-    if ( !try_t<_except_>(t) ) return r;
+    //if ( !try_t<_except_>(t) ) return r;
     
     r = t.get_aspect().template get< _parse_space_>()(t, r);
-    if ( !try_t<_except_>(t) ) return r;
+    //if ( !try_t<_except_>(t) ) return r;
     
     return _(t, v, r, L(), int_<length<L>::value>());
   }

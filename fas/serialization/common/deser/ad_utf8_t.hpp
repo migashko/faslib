@@ -18,8 +18,9 @@ struct ad_utf8_t
   template<typename T, typename Rin, typename Rout>
   Rin operator()(T& t, Rin r_in, Rout& r_out)
   {
-    if (!r_in)
+    /*if (!r_in)
       return throw_t<_except_>(t, unexpected_end_fragment(), r_in );
+      */
 
     if ( (*r_in & 128)==0 )
       *(r_out++) = *(r_in++);
@@ -39,16 +40,29 @@ private:
   template<int N, typename T, typename Rin, typename Rout>
   Rin utf8_copy_n(T& t, Rin r_in, Rout& r_out)
   {
-    for (register int i = 0; i < N; ++i)
+    register int i = 0;
+    for (; i < N && r_in && r_out ; ++i)
+    {
+      /*
+      if (!r_in)
+        return throw_t<_except_>(t, unexpected_end_fragment(), r_in );
+
+      if (!r_out)
+        return throw_t<_except_>(t, out_of_range( distance(r_in) ), r_in );
+      */
+
+      *(r_out++) = *(r_in++);
+    }
+    
+    if ( i < N)
     {
       if (!r_in)
         return throw_t<_except_>(t, unexpected_end_fragment(), r_in );
 
       if (!r_out)
         return throw_t<_except_>(t, out_of_range( distance(r_in) ), r_in );
-
-      *(r_out++) = *(r_in++);
     }
+    
     return r_in;
   }
 };

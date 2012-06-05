@@ -7,7 +7,7 @@
 namespace fas{ namespace json{ namespace deser{
 
 struct ad_comma: 
-  ::fas::serialization::deser::ad_separator_t< tchars<','> >{};
+  ::fas::serialization::deser::ad_char_t< char, ',' >{};
 
 /*struct ad_quotes: 
   ::fas::serialization::deser::ad_separator_t< tchars<'"'> >{};

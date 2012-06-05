@@ -14,6 +14,7 @@ typedef aj::array<
   >::type
 > Person_array_json;
 
+
 buffer_type buffer = "[100,\"Name\",\"email@example.com\"]";
 
 int main()

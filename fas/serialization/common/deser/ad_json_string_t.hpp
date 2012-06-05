@@ -40,23 +40,28 @@ struct ad_json_string_t
     if ( !t.get_aspect().template get<_parse_string_>().check(t, r) )
       return r;
     
-    typedef typename T::aspect::template advice_cast<_quote_>::type::separator separator;
+    // typedef typename T::aspect::template advice_cast<_quote_>::type::separator separator;
 
     if (!r)
       return throw_t<_except_>(t, unexpected_end_fragment(), r );
 
-    if ( !t.get_aspect().template get<_quote_>().check(t, M(), r) )
-      return throw_t< _except_ >( t, expected_of( separator()(), distance(r) ), r );
-    R beg_string = r;
-    r = t.get_aspect().template get<_quote_>()(t, M(), v, r);
+    if ( !t.get_aspect().template get<_quote_>().check(t, /*M(),*/ r) )
+      return throw_t< _except_ >( t, expected_of( /*separator()()*/'"', distance(r) ), r );
+    /*R beg_string = r;
+    r = t.get_aspect().template get<_quote_>()(t, r);
     R income = r;
     r = t.get_aspect().template get<_content_string_>()(t, M(), v, r);
     if ( r == income )
       return t.get_aspect().template get<_parse_string_>()(t, beg_string);
+    */
       
-    if ( !t.get_aspect().template get<_quote_>().check(t, M(), r) )
-      return throw_t< _except_ >( t, expected_of( separator()(), distance(r) ), r );
-    r = t.get_aspect().template get<_quote_>()(t, M(), v, r);
+    r = t.get_aspect().template get<_quote_>()(t, r);
+    r = t.get_aspect().template get<_content_string_>()(t, M(), v, r);
+    if (!r)
+      return throw_t<_except_>(t, unexpected_end_fragment(), r );
+    if ( !t.get_aspect().template get<_quote_>().check(t, /*M(),*/ r) )
+      return throw_t< _except_ >( t, expected_of( /*separator()()*/'"', distance(r) ), r );
+    r = t.get_aspect().template get<_quote_>()(t, /*M(), v,*/ r);
     
     return r;
   }

@@ -703,12 +703,14 @@ struct ad_string1:
   ::fas::serialization::parse::ad_enclosed_t<_quote_, _unquoted_string_, _quote_, _except_>
 {};
 
-struct aspect_string: aspect< type_list_n<
+/*struct aspect_string: aspect< type_list_n<
   advice<_quote_, ad_quote>,
   advice<_unquoted_string_, ad_unquoted_string>,
   advice<_string_, ad_string1>
 >::type
 > {};
+*/
+typedef advice<_string_, ad_string> aspect_string;
 
 }}}
 

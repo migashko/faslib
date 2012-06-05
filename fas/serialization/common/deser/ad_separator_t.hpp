@@ -31,6 +31,23 @@ struct ad_separator_t
 	}
 };
 
+template<typename CharT, CharT CH>
+struct ad_char_t
+{
+  template<typename T, typename R>
+  bool check(T& t, R r) 
+  {
+    return r && *r == CH;
+  }
+  
+  template<typename T, typename R>
+  R operator()(T& t, R r)
+  {
+    return r && *r == CH ? ++r : r;
+  }
+  
+};
+
 
 }}}
 

@@ -31,7 +31,7 @@ struct ad_brute_list_t
     r = t.get_aspect().template get< _parse_space_ >()(t, r);
     if ( !r || !try_t<_except_>(t) ) return r;
     R income = r;
-    r = t.get_aspect().template get< _separator_ >()(t, target_list(), v, r);
+    r = t.get_aspect().template get< _separator_ >()(t, /*target_list(), v,*/ r);
     if ( !r || !try_t<_except_>(t) ) return r;
     if ( r != income )
     {
@@ -47,7 +47,7 @@ struct ad_brute_list_t
       if ( !try_t<_except_>(t) ) return r;
       if ( !r ) return r;
       R income = r;
-      r = t.get_aspect().template get< _separator_ >()(t, M(), v, r);
+      r = t.get_aspect().template get< _separator_ >()(t, /*M(), v,*/ r);
       if ( income == r || !r || !try_t<_except_>(t) )
         return r;
       r = t.get_aspect().template get< _parse_space_ >()(t, r);
@@ -74,9 +74,9 @@ private:
       if (current == income)
         current = t.get_aspect().template get< _parse_item_ >()(t, current);
       current = t.get_aspect().template get< _parse_space_ >()(t, current);
-      if ( !current || !t.get_aspect().template get< _separator_ >().check(t, H(), current) )
+      if ( !current || !t.get_aspect().template get< _separator_ >().check(t, /*H(),*/ current) )
         break;
-      current = t.get_aspect().template get< _separator_ >()(t, H(), v, current);
+      current = t.get_aspect().template get< _separator_ >()(t, /*H(), v,*/ current);
       current = t.get_aspect().template get< _parse_space_ >()(t, current);
       
     }

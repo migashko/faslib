@@ -129,6 +129,7 @@ public:
     : _input_range(ri)
     , _output_range(ro)
   {
+    if (ri) _value = *_input_range;
   }
 
   operator input_range () const  { return  _input_range; }
@@ -153,14 +154,16 @@ public:
 
   copy_range_adapter<InputRange, OutputRange>& operator++()
   {
-    *(_output_range++) = *(_input_range++);
+    *(_output_range++) = _value;
+    _value = *(_input_range++);
     return *this;
   }
 
   copy_range_adapter<InputRange, OutputRange> operator++(int)
   {
     copy_range_adapter<InputRange, OutputRange> ans = *this;
-    *(_output_range++) = *(_input_range++);
+    *(_output_range++) = _value;
+    _value = *(_input_range++);
     return ans;
   }
 
@@ -172,6 +175,7 @@ public:
 private:
   input_range      _input_range;
   output_range     _output_range;
+  value_type       _value;
 };
 
 }

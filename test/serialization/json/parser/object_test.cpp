@@ -68,7 +68,7 @@ UNIT(copy_value_test, "copy parse value")
   r = adv(t, irange( r, result ) );
   std::string tail(r.begin(), r.end());
   t << equal<assert>( " bla-bla", tail ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert>( "null", result ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert>( "null", result ) << FAS_TESTING_FILE_LINE << std::endl << "[" << result << "]" << std::endl;
 
   result.clear();
   s = "false bla-bla";

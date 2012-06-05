@@ -9,6 +9,7 @@
 
 #include <fas/system/system.hpp>
 #include <fas/xtime/nanospan.hpp>
+#include <fas/xtime/xop.hpp>
 #include <fas/xtime/types.hpp>
 
 namespace fas {
