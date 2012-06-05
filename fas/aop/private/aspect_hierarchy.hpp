@@ -12,6 +12,8 @@
 #include <fas/aop/private/group_call.hpp>
 #include <fas/aop/private/aspect_select_group.hpp>
 
+#include <fas/aop/aspect.hpp>
+
 #include <fas/hierarchy/scatter_hierarchy.hpp>
 #include <fas/hierarchy/field.hpp>
 
@@ -19,18 +21,37 @@
 #include <fas/mp/bind2nd.hpp>
 
 namespace fas{
-  
+
+ 
+template<typename A>
+struct aspect_common_helper
+{
+  typedef aspect_helper<A> helper;
+  struct common_list: helper::common_list{};
+  struct group_list: helper::group_list{};
+};
+
+template<typename L>
+struct aspect_common_helper< aspect<L> > 
+{
+  typedef aspect_helper< aspect<L> > helper;
+  typedef typename helper::common_list common_list;
+  typedef typename helper::group_list group_list;
+};
 
 template<typename A>
 class aspect_hierarchy
   : public scatter_hierarchy< typename aspect_helper<A>::hierarchy_list >
+  
 {
   typedef aspect_helper<A> helper;
 public:
 
   typedef typename helper::hierarchy_list hierarchy_list;
-  typedef typename helper::common_list common_list;
-  typedef typename helper::group_list group_list;
+  typedef typename aspect_common_helper<A>::common_list common_list;
+  //typedef typename helper::common_list common_list;
+  //typedef typename helper::group_list group_list;
+  typedef typename aspect_common_helper<A>::group_list group_list;
   typedef scatter_hierarchy< hierarchy_list > super;
 
   template<typename Tg>

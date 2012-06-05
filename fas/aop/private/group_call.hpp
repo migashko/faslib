@@ -8,14 +8,32 @@
 #define FAS_AOP_GROUP_CALL_HPP
 
 #include <fas/aop/detail/group_call.hpp>
-
 #include <fas/aop/metalist.hpp>
 #include <fas/aop/advice_cast.hpp>
+#include <fas/aop/aspect.hpp>
+
 #include <fas/algorithm/select.hpp>
+
 #include <fas/mp/lambda.hpp>
 #include <fas/mp/placeholders.hpp>
 
+#include <fas/type_list/length.hpp>
+#include <fas/integral/int_.hpp>
+
+
 namespace fas {
+
+template<typename Tg, typename T>
+struct group_call_helper
+{
+  struct group_tags: T::aspect::template select_group<Tg>::type {};
+};
+
+template<typename Tg, template<typename> class T, typename A>
+struct group_call_helper<Tg, T< aspect<A> > >
+{
+  typedef typename T< aspect<A> >::aspect::template select_group<Tg>::type group_tags;
+};
 
 template<typename Tg>
 class group_call
@@ -32,8 +50,9 @@ public:
   template<typename T, typename F>
   F for_each(T& t, F f)
   {
-    typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    return detail::for_each_group( group_tags(), t, f );
+    //typedef typename T::aspect::template select_group<Tg>::type group_tags;
+    typedef typename group_call_helper<Tg, T>::group_tags group_tags;
+    return detail::for_each_group( group_tags(), t, f, int_<0>(), int_< length<group_tags>::value >() );
   }
 
   template< template<typename> class IF, typename T, typename F>
@@ -41,7 +60,7 @@ public:
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     typedef typename select< group_tags, IF< advice_cast< _ , typename T::aspect  > > >::type selected_tags;
-    return detail::for_each_group( selected_tags(), t, f );
+    return detail::for_each_group( selected_tags(), t, f, int_<0>(), int_< length<selected_tags>::value >() );
   }
   
   template< class IF, typename T, typename F>

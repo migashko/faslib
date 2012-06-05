@@ -10,9 +10,25 @@
 #include <fas/aop/tag.hpp>
 #include <fas/type_list/empty_list.hpp>
 #include <fas/type_list/type_list.hpp>
+#include <fas/type_list/type_at_c.hpp>
+#include <fas/integral/int_.hpp>
 
 namespace fas { namespace detail {
-  
+
+template<typename L, typename T, typename F, int N >
+inline F for_each_group(L, T&, F f, int_<N>, int_<N>) 
+{
+  return f; 
+}
+
+template<typename L, typename T, typename F, int C, int N  >
+inline F for_each_group(L, T& t, F f, int_<C>, int_<N> )
+{
+  typedef typename type_at_c< C, L>::type head;
+  f(t, tag<head>() );
+  return for_each_group( L(), t, f, int_<C+1>(), int_<N>() );
+}
+  /*
 template<typename T, typename F >
 inline F for_each_group(empty_list, T&, F f) 
 {
@@ -25,6 +41,7 @@ inline F for_each_group(type_list<L, R>, T& t, F f )
   f(t, tag<L>() );
   return for_each_group( R(), t, f);
 }
+*/
 
 /// 0
 template<typename T >

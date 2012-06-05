@@ -350,6 +350,12 @@ public:
 
   bool run()
   {
+    return _run(*this);
+  }
+  
+  template<typename T>
+  bool _run(T& t)
+  {
     _unit_count = 0;
     _unit_errors = 0;
     _unit_fails = 0;
@@ -362,7 +368,7 @@ public:
     _out << "." << std::endl;
     try
     {
-      super::get_aspect().template getg<_units_>().for_each(*this, f_unit_run() );
+      super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
     }
     catch(const fail_error& )
     {
@@ -479,13 +485,28 @@ struct name##_suite_aspect: ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fa
 
 // #define END_SUITE(name) >::type > > name##_suite;
 
-#define END_SUITE(name) >::type > {}; typedef ::fas::testing::suite<name##_suite_aspect> name##_suite;\
-::fas::testing::suite_counts name##_suite_run(int /*argc*/, char* /*argv*/[])\
+
+#define END_SUITE(name) >::type > {}; \
+struct name##_suite: ::fas::testing::suite<name##_suite_aspect> {\
+  typedef ::fas::testing::suite<name##_suite_aspect> super;\
+  bool run() { return super::_run(*this); }\
+  name##_suite(const std::string& name = "", const std::string& desc = ""): super(name, desc) {}\
+  name##_suite(std::ostream& os, const std::string& name = "", const std::string& desc = ""): super(os, name, desc) {}\
+};\
+::fas::testing::suite_counts name##_suite_run(int , char*[])\
 {\
   name##_suite s(#name, name##_suite_desc() );\
   s.run(); \
   return s.counts();\
 }
+/*
+#define END_SUITE(name) >::type > {}; typedef ::fas::testing::suite<name##_suite_aspect> name##_suite;\
+::fas::testing::suite_counts name##_suite_run(int , char*[])\
+{\
+  name##_suite s(#name, name##_suite_desc() );\
+  s.run(); \
+  return s.counts();\
+}*/
 
 
 

@@ -24,6 +24,7 @@ struct test_data
 
 UNIT(trivial, "")
 {
+  //t.get_aspect().template get<int>();
   using namespace fas;
   int v1 = 1;
   typedef trivial_range<int*> range_type;
