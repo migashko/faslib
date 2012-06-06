@@ -1,0 +1,5 @@
+project(examples)
+add_subdirectory(misc)
+add_subdirectory(pattern)
+add_subdirectory(range)
+add_subdirectory(serialization)
