@@ -1,3 +1,10 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+
 #include <fas/typemanip.hpp>
 #include <fas/static_check.hpp>
 
@@ -35,7 +42,7 @@ int main()
     test2_if_ = static_check< some_type< if_c< 0, long, char>::type, char>::value >::value,
 //#warning !!
     /// TODO: Не логично! 
-    test2_max_sizeof = static_check< some_type< max_sizeof< int_<1>, char_<'x'> >::type, int >::value >::value,
+    test2_max_sizeof = static_check< some_type< max_sizeof< int_<1>::value_type, char_<'x'>::value_type >::type, int >::value >::value,
     
     remove_cvrp_ = static_check< some_type<  remove_cvrp<const int>::type, int >::value >::value
                    + static_check< some_type<  remove_cvrp<volatile int const * const&>::type, int >::value >::value,

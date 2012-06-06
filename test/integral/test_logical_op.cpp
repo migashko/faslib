@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/integral/types.hpp>
 #include <fas/integral/logical_op.hpp>
 #include <fas/static_check.hpp>
@@ -20,8 +26,6 @@ int main()
   
     test9 = static_check< not_< int_<0> >::type::value == true >::value,
     test10 = static_check< not_< int_<10> >::value == false >::value,
-};
+  };
   return 0;
 }
-
-

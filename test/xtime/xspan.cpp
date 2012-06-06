@@ -19,7 +19,7 @@ bool test_xspan()
   
   if ( span.sec!=10 || span.xsec!=1 )  return false;
   
-  /// сложение 
+  /// ----------------
   
   span = span + 1;
   span += -2;
@@ -51,7 +51,7 @@ bool test_xspan()
   
   if ( span.sec!=24 || span.xsec!=X::xmax/2)  return false;
   
-  /// вычитание 
+  /// ---------------- 
   
   span = span - 1;
   span -= -2;
@@ -79,7 +79,7 @@ bool test_xspan()
   
   if ( span.sec!=10 || span.xsec!=X::xmax/2)  return false;
   
-  /// деление 
+  /// ---------------- 
   
   span = span / 2;
   
@@ -93,7 +93,7 @@ bool test_xspan()
   
   if ( span.sec!=5 || span.xsec!=0)  return false;
   
-  /// умножение 
+  /// ----------------
   
   span = span * 5;
   if ( span.sec!=25 || span.xsec!=0)  return false;

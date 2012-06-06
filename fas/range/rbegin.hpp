@@ -4,17 +4,17 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_RANGE_ADVANCE_HPP
-#define FAS_RANGE_ADVANCE_HPP
+#ifndef FAS_RANGE_RBEGIN_HPP
+#define FAS_RANGE_RBEGIN_HPP
 
 #include <fas/range/typerange.hpp>
 
 namespace fas{
 
-template<typename R, typename Dist>
-inline void advance(R& r, Dist s)
+template<typename T>
+inline typename typerange<T>::iterator rbegin(T& t)
 {
-   typerange<R>::advance(r, s);
+  return typerange<T>::rbegin(t);
 }
 
 }

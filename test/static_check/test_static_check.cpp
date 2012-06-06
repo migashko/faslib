@@ -1,6 +1,13 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/static_check.hpp>
 
 using namespace ::fas;
+
 int main()
 {
   static_check< true > test1obj;

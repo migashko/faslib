@@ -1,10 +1,14 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/integral/types.hpp>
 #include <fas/integral/arithmetic.hpp>
 #include <fas/static_check.hpp>
 
 using namespace ::fas;
-
-
 
 int main()
 {
@@ -52,9 +56,7 @@ int main()
     test_fact_1 = static_check< factorial< int_<1> >::value == 1 >::value,
     test_fact_2 = static_check< factorial< int_<2> >::value == 2 >::value,
     test_fact_3 = static_check< factorial< int_<3> >::value == 6 >::value,
-
   };
   return 0;
 }
-
 

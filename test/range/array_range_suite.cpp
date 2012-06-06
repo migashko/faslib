@@ -82,6 +82,7 @@ UNIT(array_range2_test, "")
 UNIT(array_range3_test, "")
 {
   using namespace ::fas::testing;
+
   std::string first = *fas::begin( *fas::begin(array1) );
   t << equal<expect, std::string>( first, "1" )  << FAS_TESTING_FILE_LINE << std::endl << first;
   std::string last = *(fas::end( *(fas::end(array1)-1) )-1);

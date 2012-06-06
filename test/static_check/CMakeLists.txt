@@ -1,7 +1,7 @@
-add_executable(static_check static_check.cpp)
-add_executable(verifying verifying.cpp)
+add_executable(test_static_check test_static_check.cpp)
+add_executable(test_static_error test_static_error.cpp)
 
-add_test(static_check static_check)
-add_test(static_check_verifying verifying)
+add_test(static_check test_static_check)
+add_test(static_error test_static_error)
 
 

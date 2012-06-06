@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/typemanip.hpp>
 #include <fas/static_check.hpp>
 
