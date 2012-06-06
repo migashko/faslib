@@ -1,7 +1,0 @@
-project(helloworld)
-add_executable(helloworld0 helloworld0.cpp)
-add_executable(helloworld0s helloworld0s.cpp)
-add_executable(helloworld1 helloworld1.cpp)
-add_executable(helloworld2 helloworld2.cpp)
-add_executable(helloworld3 helloworld3.cpp)
-add_executable(helloworld4 helloworld4.cpp)
