@@ -1,6 +1,11 @@
-#include <fas/type_list/type_list.hpp>
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+#include <fas/type_list.hpp>
 #include <fas/static_check.hpp>
-#include <fas/type_list/push_front.hpp>
 
 using namespace ::fas;
 
@@ -20,5 +25,4 @@ int main()
   
   return 0;
 }
-
 
