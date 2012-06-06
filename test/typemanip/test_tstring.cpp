@@ -5,9 +5,17 @@
 //
 
 #include <fas/typemanip/tchars.hpp>
+#include <fas/typemanip/tstring.hpp>
 
 #include <string>
 #include <iostream>
+
+FAS_NAME(test_name)
+FAS_STRING( test_string, "test-string" )
+
+FAS_WNAME( test_wname )
+FAS_WSTRING( test_wstring, L"test-wstring" )
+
 using namespace ::fas;
 
 int main()
@@ -36,6 +44,19 @@ int main()
     return 1;
   if ( std::wstring(L"abcde")!=twchars< L'a', L'b', L'c', L'd', L'e'>()() )
     return 1;
+
+  if ( std::string("test_name")!=n_test_name()() )
+    return 1;
+
+  if ( std::wstring(L"test_wname")!=n_test_wname()() )
+    return 1;
+
+  if ( std::string("test-string")!=test_string()() )
+    return 1;
+
+  if ( std::wstring(L"test-wstring")!=test_wstring()() )
+    return 1;
+
   return 0;
 }
 

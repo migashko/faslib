@@ -9,6 +9,7 @@
 
 #include <fas/typemanip/switch_.hpp>
 #include <fas/typemanip/case_.hpp>
+#include <fas/typemanip/default_.hpp>
 
 #include <string>
 
@@ -37,12 +38,18 @@ int main()
   typedef switch_<
     case_c<2, char>
   >::type result4;
-  
+
+  typedef switch_<
+    case_c<0, char>,
+    default_<int>
+  >::type result5;
+
   enum {
     result = static_check< some_type<result1, std::string>::value >::value
              + static_check< some_type<result2, empty_type>::value >::value
              + static_check< some_type<result3, empty_type>::value >::value
              + static_check< some_type<result4, char>::value >::value
+             + static_check< some_type<result5, int>::value >::value
   };
   return 0;
 }
