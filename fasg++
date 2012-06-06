@@ -1,1 +1,2 @@
-/home/migashko/prj/faslib2/timeout-m -m 1024000 /usr/bin/g++ $@
+SCRIPT_PATH=$(cd $(dirname $0) && pwd);
+$SCRIPT_PATH/timeout-m -m 1024000 /usr/bin/g++ $@
