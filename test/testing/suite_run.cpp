@@ -13,7 +13,9 @@ bool test_run0()
   suite<> su(ss);
   su.run();
   std::cout << ss.str() << std::endl;
-  sst << "[ --BEG-- ] 0 tests."<<std::endl<<"[ --END-- ] "<<std::endl<< "[ PASSED  ] 0 tests." << std::endl;
+  sst << "[ --BEG-- ] 0 tests." << std::endl
+      << "[ --END-- ] " <<std::endl
+      << "[ PASSED  ] 0 tests." << std::endl;
   if ( ss.str() != sst.str() ) return false;
   if ( su.size() != 0) return false;
   if ( su.errors() != 0) return false;
@@ -39,7 +41,10 @@ bool test_run1()
   suite< suite_aspect1 > su(ss);
   su.run();
   std::cout << ss.str() << std::endl;
-  sst << "[ --BEG-- ] 1 tests."<<std::endl<<"[ RUN     ] unit1"<< std::endl << "[      OK ] " << std::endl<<"[ --END-- ] "<<std::endl
+  sst << "[ --BEG-- ] 1 tests."<< std::endl
+      << "[ RUN     ] unit1"<< std::endl
+      << "[      OK ] " << std::endl
+      << "[ --END-- ] " <<std::endl
       << "[ PASSED  ] 1 tests." << std::endl;
   if ( ss.str() != sst.str() ) return false;
   if ( su.size() != 1) return false;
@@ -73,7 +78,7 @@ bool test_run2()
       << "[ RUN     ] unit2"<< std::endl
       << "[ MESSAGE ] hello"<< std::endl
       << "[      OK ] " << std::endl
-      << "[ --END-- ] "<<std::endl
+      << "[ --END-- ] " << std::endl
       << "[ PASSED  ] 2 tests." << std::endl;
 
   if ( ss.str() != sst.str() ) return false;
@@ -88,9 +93,13 @@ bool test_run2()
 
 int main()
 {
+  std::cout << 1 << std::endl;
   if (!test_run0()) return -1;
+  std::cout << 2 << std::endl;
   if (!test_run1()) return -1;
+  std::cout << 3 << std::endl;
   if (!test_run2()) return -1;
+  std::cout << 4 << std::endl;
   return 0;
 };
 
