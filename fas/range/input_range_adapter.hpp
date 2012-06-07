@@ -73,7 +73,8 @@ public:
 
   input_range_adapter<InputRange, SequenceContainer>& operator++()
   {
-    ++_input_range;
+    if (_input_range)
+      ++_input_range;
     ++_pos;
     if (_input_range)
       *(_output_range++) = *(_input_range);
@@ -83,7 +84,8 @@ public:
   input_range_adapter<InputRange, SequenceContainer> operator++(int)
   {
     input_range_adapter<InputRange, SequenceContainer> ans = *this;
-    ++_input_range;
+    if (_input_range)
+      ++_input_range;
     ++_pos;
     if (_input_range)
       *(_output_range++) = *(_input_range);

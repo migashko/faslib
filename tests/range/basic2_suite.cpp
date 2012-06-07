@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include "basic_suite.hpp"
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
@@ -13,7 +19,7 @@
 #include <iostream>
 
 
-UNIT(range_vector_test, "")
+UNIT(range_vector_unit, "")
 {
   using namespace ::fas::testing;
   
@@ -33,7 +39,7 @@ UNIT(range_vector_test, "")
   random_access_const_test(t, fas::range(v));
 };
 
-UNIT(range_set_test, "")
+UNIT(range_set_unit, "")
 {
   using namespace ::fas::testing;
 
@@ -51,7 +57,7 @@ UNIT(range_set_test, "")
 typedef int int_array[2];
 typedef fas::typerange< int_array  >::orange range_type;
 
-UNIT(range_array_test, "")
+UNIT(range_array_unit, "")
 {
   using namespace ::fas::testing;
 
@@ -85,7 +91,7 @@ UNIT(range_array_test, "")
 
 
 BEGIN_SUITE(basic2_suite, "")
-  ADD_UNIT(range_vector_test)
-  ADD_UNIT(range_set_test)
-  ADD_UNIT(range_array_test)
+  ADD_UNIT(range_vector_unit)
+  ADD_UNIT(range_set_unit)
+  ADD_UNIT(range_array_unit)
 END_SUITE(basic2_suite)

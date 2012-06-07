@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/mp/placeholders.hpp>
 #include <fas/mp/ps.hpp>
 #include <fas/type_list/type_list_n.hpp>
@@ -10,8 +16,6 @@ typedef type_list_n<int, char, long>::type list;
 
 int main()
 {
-  
-
   enum
   {
     result = static_check< some_type< float, ps<float, list>::type >::value >::value

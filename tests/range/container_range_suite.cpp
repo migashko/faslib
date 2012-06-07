@@ -1,11 +1,15 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <iostream>
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
 #include <fas/static_check/static_check.hpp>
 #include <string>
 #include <list>
-
-
 
 UNIT(container_range_unit, "")
 {

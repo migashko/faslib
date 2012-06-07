@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <iostream>
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
@@ -19,7 +25,7 @@ array2_type array2r1 = { {"9"}, {"8"}, {"7"}, {"6"}, {"5"}, {"4"}, {"3"}, {"2"},
 array2_type array2r2 = { {"7"}, {"8"}, {"9"}, {"4"}, {"5"}, {"6"}, {"1"}, {"2"}, {"3"} };
 array2_type array2r2c = { "7", "8", "9", "4", "5", "6", "1", "2", "3" };
 
-UNIT(array_range_test, "")
+UNIT(array_range_unit, "")
 {
   using namespace ::fas::testing;
   
@@ -41,7 +47,7 @@ UNIT(array_range_test, "")
   }
 };
 
-UNIT(array_rrange_test, "")
+UNIT(array_rrange_unit, "")
 {
   using namespace ::fas::testing;
   
@@ -58,7 +64,7 @@ UNIT(array_rrange_test, "")
   }
 };
 
-UNIT(array_range2_test, "")
+UNIT(array_range2_unit, "")
 {
   using namespace ::fas::testing;
   
@@ -79,7 +85,7 @@ UNIT(array_range2_test, "")
   }
 };
 
-UNIT(array_range3_test, "")
+UNIT(array_range3_unit, "")
 {
   using namespace ::fas::testing;
 
@@ -110,7 +116,7 @@ UNIT(array_range3_test, "")
 }
 
 
-UNIT(array_range4_test, "")
+UNIT(array_range4_unit, "")
 {
   using namespace ::fas::testing;
   typedef fas::typerange<array2_type>::orange or2_type;
@@ -132,7 +138,7 @@ UNIT(array_range4_test, "")
 }  
 
 
-UNIT(array_range5_test, "")
+UNIT(array_range5_unit, "")
 {
   using namespace ::fas::testing;
   
@@ -154,10 +160,10 @@ UNIT(array_range5_test, "")
 
 
 BEGIN_SUITE(array_range_suite, "")
-  ADD_UNIT(array_range_test)
-  ADD_UNIT(array_rrange_test)
-  ADD_UNIT(array_range2_test)
-  ADD_UNIT(array_range3_test)
-  ADD_UNIT(array_range4_test)
-  ADD_UNIT(array_range5_test)
+  ADD_UNIT(array_range_unit)
+  ADD_UNIT(array_rrange_unit)
+  ADD_UNIT(array_range2_unit)
+  ADD_UNIT(array_range3_unit)
+  ADD_UNIT(array_range4_unit)
+  ADD_UNIT(array_range5_unit)
 END_SUITE(array_range_suite)

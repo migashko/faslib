@@ -1,7 +1,11 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/testing/statements.hpp>
 #include <fas/range.hpp>
-
-// &(*r1) + 1 == &(*r2) *r1 == 1 *r2==2
 
 template<typename R, typename T>
 inline void trivial_test(T& t, R r1)
@@ -71,8 +75,6 @@ inline void forward_test(T& t, R r1)
   t << is_false<expect>( r1 ) << FAS_TESTING_FILE_LINE;
 }
 
-
-
 template<typename R, typename T>
 inline void bidirectional_test(T& t, R r1)
 {
@@ -89,7 +91,6 @@ inline void bidirectional_test(T& t, R r1)
 template<typename R, typename T>
 inline void random_access_test(T& t, R r1)
 {
-  
   using namespace ::fas::testing;
   t << is_true<expect>( r1 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect, int>( *(r1 + 1),  2 ) << FAS_TESTING_FILE_LINE;
@@ -119,4 +120,3 @@ inline void random_access_const_test(T& t, R r1)
   t << is_true<expect>( r_tmp[0] == 2 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( r_tmp[0],  2 ) << FAS_TESTING_FILE_LINE;
 }
-

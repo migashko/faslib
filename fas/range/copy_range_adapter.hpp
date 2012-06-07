@@ -11,7 +11,6 @@
 #include <fas/range/orange.hpp>
 #include <fas/range/range.hpp>
 #include <fas/range/distance.hpp>
-#include <vector>
 
 namespace fas {
 
@@ -41,7 +40,7 @@ public:
     , _output_range(ro)
   {
     if ( _input_range )
-      _value = *_input_range;
+      *(_output_range++) = *_input_range;
   }
 
   operator input_range () const  { return  _input_range; }
@@ -59,23 +58,20 @@ public:
 
   difference_type distance() const { return ::fas::distance(_input_range); }
 
-  /*void advance(difference_type s)  {
-    _input_range->advance(s);
-  }
-  */
-
   copy_range_adapter<InputRange, OutputRange>& operator++()
   {
-    *(_output_range++) = _value;
-    _value = *(_input_range++);
+    ++_input_range;
+    if ( _input_range )
+      *(_output_range++) = *_input_range;
     return *this;
   }
 
   copy_range_adapter<InputRange, OutputRange> operator++(int)
   {
     copy_range_adapter<InputRange, OutputRange> ans = *this;
-    *(_output_range++) = _value;
-    _value = *(_input_range++);
+    ++_input_range;
+    if ( _input_range )
+      *(_output_range++) = *_input_range;
     return ans;
   }
 

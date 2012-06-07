@@ -1,3 +1,10 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+
 #include "basic_suite.hpp"
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
@@ -22,7 +29,7 @@ struct test_data
 
 
 
-UNIT(trivial, "")
+UNIT(trivial_unit, "")
 {
   //t.get_aspect().template get<int>();
   using namespace fas;
@@ -34,7 +41,7 @@ UNIT(trivial, "")
   trivial_const_test(t, const_range_type(&v1));
 };
 
-UNIT(input, "")
+UNIT(input_unit, "")
 {
   using namespace fas;
   std::stringstream ss;
@@ -46,7 +53,7 @@ UNIT(input, "")
   input_test(t, r1);
 }
 
-UNIT(output1, "")
+UNIT(output1_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -70,7 +77,7 @@ UNIT(output1, "")
   
 };
 
-UNIT(output2, "")
+UNIT(output2_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -92,7 +99,7 @@ UNIT(output2, "")
 };
 
 
-UNIT(output3, "")
+UNIT(output3_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -105,7 +112,7 @@ UNIT(output3, "")
   t << equal<expect>( std::string("1 2 "), ss.str() ) << FAS_TESTING_FILE_LINE;
 };
 
-UNIT(forward, "")
+UNIT(forward_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -119,7 +126,7 @@ UNIT(forward, "")
   forward_test(t, r1);
 };
 
-UNIT(forward_const, "")
+UNIT(forward_const_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -131,7 +138,7 @@ UNIT(forward_const, "")
   forward_test(t, r1);
 };
 
-UNIT(bidirectional, "")
+UNIT(bidirectional_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -152,7 +159,7 @@ UNIT(bidirectional, "")
   bidirectional_test(t, r1);
 };
 
-UNIT(random_access, "")
+UNIT(random_access_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -173,7 +180,7 @@ UNIT(random_access, "")
   random_access_test(t, r1);
 };
 
-UNIT(random_access_const, "")
+UNIT(random_access_const_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -198,7 +205,7 @@ UNIT(random_access_const, "")
 };
 
 
-UNIT(initial_range_sequence, "")
+UNIT(initial_range_sequence_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -217,7 +224,7 @@ UNIT(initial_range_sequence, "")
   t << equal<expect>( cnt[2], 3 ) << FAS_TESTING_FILE_LINE;
 }
 
-UNIT(initial_range_associative, "")
+UNIT(initial_range_associative_unit, "")
 {
   using namespace fas;
   using namespace fas::testing;
@@ -237,16 +244,16 @@ UNIT(initial_range_associative, "")
 }
 
 BEGIN_SUITE(basic_range_suite, "")
-  ADD_UNIT(trivial)
-  ADD_UNIT(input)
-  ADD_UNIT(output1)
-  ADD_UNIT(output2)
-  ADD_UNIT(output3)
-  ADD_UNIT(forward)
-  ADD_UNIT(forward_const)
-  ADD_UNIT(bidirectional)
-  ADD_UNIT(random_access)
-  ADD_UNIT(random_access_const)
-  ADD_UNIT(initial_range_sequence)
-  ADD_UNIT(initial_range_associative)
+  ADD_UNIT(trivial_unit)
+  ADD_UNIT(input_unit)
+  ADD_UNIT(output1_unit)
+  ADD_UNIT(output2_unit)
+  ADD_UNIT(output3_unit)
+  ADD_UNIT(forward_unit)
+  ADD_UNIT(forward_const_unit)
+  ADD_UNIT(bidirectional_unit)
+  ADD_UNIT(random_access_unit)
+  ADD_UNIT(random_access_const_unit)
+  ADD_UNIT(initial_range_sequence_unit)
+  ADD_UNIT(initial_range_associative_unit)
 END_SUITE(basic_range_suite)

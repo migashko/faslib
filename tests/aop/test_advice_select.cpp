@@ -1,10 +1,16 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/has_tag.hpp>
 #include <fas/aop/is_has_tag.hpp>
-
 #include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/is_advice.hpp>
+
 #include <fas/type_list/length.hpp>
 #include <fas/integral/int_.hpp>
 #include <fas/static_check/static_check.hpp>

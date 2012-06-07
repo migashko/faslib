@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/alias.hpp>
@@ -132,14 +138,9 @@ struct test_aspect: aspect<test_advice_list> {};
 
 struct test_class: aspect_class<test_aspect> 
 {
-  
-  // Интересный эффект без "::" не работает, т.к. ad_counters приветный базовый класс aspect_class
+  // without the "::" will not work because the base class private ad_counters aspect_class
   const ::ad_counters& get_counters() const { return this->get_aspect().get< _counters_ >();}
   ::ad_counters& get_counters() { return this->get_aspect().get< _counters_ >();}
-  /*
-  const aspect_class<test_aspect>::advice_cast<_counters_ >::type&
-  get_counters() const { return this->get_aspect().get< _counters_ >();}
-  */
 };
 
 bool test_c( const std::string& text, ad_counters c, int c0, int c1, int c2, int c3, int c4, int c5)
@@ -177,14 +178,6 @@ struct f_test
 {
   std::vector<int> ids;
 
-  /*
-  template<typename T, typename Tg, typename A>
-  void operator()(T&, Tg, A&)
-  {
-    ids.push_back(A::id);
-  }
-  */
-
   template<typename T, typename Tg>
   void operator()(T&, ::fas::tag<Tg> )
   {
@@ -212,7 +205,7 @@ struct ad_id
 int main()
 {
   enum { value = test_class::aspect::advice_cast<_overlapped_>::type::value };
-  enum { value2 = /*test_class::aspect::advice_cast<_overlapped2_>::type::value*/
+  enum { value2 =
         static_check<
           some_type<
             test_class::aspect::advice_cast<_overlapped2_>::type,
@@ -264,16 +257,10 @@ int main()
   if ( !test_ids( "_overlapped2_ test3foreach", f.ids, ids(2, 3) ))
     return -1;
 
-  /*template<typename T>
-  template t: equal_to< int_<0>, modulus< ad_id<T>, int_<2> > >
-  {};*/
   f_test f2 = test.get_aspect().getg<_group5_>().for_each_if_t< t >(test, f_test());
-//  f_test f2 = test.get_aspect().getg<_group5_>().for_each_if< equal_to< int_<0>, modulus< ad_id<_>, int_<2> > > >(test, f_test());
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
 
 
   return 0;
 }
-
-

@@ -1,21 +1,19 @@
-//#include <fas/utility.hpp>
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
 
-#include <fas/integral/make_integral.hpp>
+#include <fas/integral.hpp>
 #include <fas/static_check.hpp>
-#include <fas/integral/arithmetic.hpp>
 #include <fas/typemanip.hpp>
-#include <fas/integral/comparisons.hpp>
 #include <fas/mp/simplify.hpp>
 #include <vector>
 
 using namespace ::fas;
 
-
-
 int main()
 {
-  // enum { x = 2 > 3 ? 3 : 2 };
- 
   enum  { value = static_check< 
                     some_type<
                       simplify< 

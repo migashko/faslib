@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/mp/placeholders.hpp>
 #include <fas/mp/ph_max.hpp>
 #include <fas/type_list/type_list_n.hpp>
@@ -6,7 +12,6 @@
 
 using namespace ::fas;
 
-//typedef type_list_n<int, char, long>::type list;
 template<typename>
 struct test1{};
 

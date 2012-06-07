@@ -1,9 +1,14 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/has_tag.hpp>
 #include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/private/aspect_hierarchy.hpp>
-//#include <fas/type_list/tl_n.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/integral/int_.hpp>
 #include <fas/static_check/static_check.hpp>
@@ -49,13 +54,11 @@ template<typename T>
 struct X { enum {value=1};};
 
 typedef aspect_select<test_aspect3, any<_> >::type result;
-//typedef aspect_select_t<test_aspect3, any >::type result;
 
 typedef aspect_hierarchy<test_aspect3> aspect_hierarchy_type;
 
 int main()
 {
-  //int x = lambda< or_< is_advice<_1>, is_alias<_1> > >::apply<int>::value;
   aspect_hierarchy_type ah;
   enum 
   { 
@@ -76,5 +79,3 @@ int main()
   
   return 0;
 }
-
-

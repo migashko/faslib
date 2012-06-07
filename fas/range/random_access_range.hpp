@@ -32,11 +32,17 @@ public:
   typedef typename std::iterator_traits<T>::reference         reference;
   
   random_access_range()
-    : b(), e(), s(b)
+    : b(), e()
+#ifndef NDEBUG
+    , s(b)
+#endif
   {};
   
   random_access_range(T b, T e)
-    : b(b), e(e), s(b)
+    : b(b), e(e)
+#ifndef NDEBUG
+    , s(b)
+#endif
   {};
 
   operator bool () const { return b!=e; }
@@ -65,17 +71,21 @@ public:
 
   void increase(difference_type cbeg, difference_type cend)
   {
+#ifndef NDEBUG
     s -= cbeg;
-    e += cend;
     assert( s <= b);
+#endif
+    e += cend;
     assert( e >= b);
   }
 
   void decrease(difference_type cbeg, difference_type cend)
   {
+#ifndef NDEBUG
     s += cbeg;
-    e -= cend;
     assert( s <= b);
+#endif
+    e -= cend;
     assert( e >= b);
   }
 
@@ -96,14 +106,18 @@ public:
 
   random_access_range<T>& operator--()
   {
+#ifndef NDEBUG
     assert(b!=s);
+#endif
     --b;
     return *this;
   }
 
   random_access_range<T> operator--(int)
   {
+#ifndef NDEBUG
     assert(b!=s);
+#endif
     random_access_range<T> ans = *this;
     b--;
     return ans;
@@ -149,20 +163,24 @@ public:
   random_access_range<T>& operator -= (difference_type n )
   {
     b -= n;
+#ifndef NDEBUG
     assert( s <= b);
+#endif
     return *this;
   }
 
   reference operator[] ( difference_type n ) const
   {
-    assert( e >= b + n);
+    //assert( e >= b + n);
     return b[n];
   }
   
 protected:
   T b;
   T e;
+#ifndef NDEBUG
   T s; // start
+#endif
 };
 
 
