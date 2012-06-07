@@ -48,7 +48,11 @@ ENABLE_TESTING()
 include_directories(./)
 
 add_subdirectory(test)
-#add_subdirectory(example)
+add_subdirectory(examples)
+
+
+add_custom_target( examples ALL make WORKING_DIRECTORY examples )
+add_custom_target( test ALL make WORKING_DIRECTORY test )
 #add_subdirectory(tutorial)
 #add_subdirectory(probe)
 

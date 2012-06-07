@@ -9,5 +9,3 @@ add_test(testing_statements statements)
 add_test(testing_suite      suite)
 add_test(testing_suite_run  suite_run)
 add_test(testing_suite_map  suite_map)
-
-SUBDIRS(final)

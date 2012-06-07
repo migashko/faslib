@@ -1,4 +1,5 @@
-project(test)
+project(test1)
+
 add_subdirectory(static_check)
 add_subdirectory(integral)
 add_subdirectory(typemanip)
