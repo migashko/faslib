@@ -8,6 +8,7 @@
 #define FAS_INTEGRAL_MAX_HPP
 
 #include <fas/integral/int_.hpp>
+#include <fas/typename/if_c.hpp>
 
 #ifndef FAS_NO_MINMAX_UNDEF
 #  ifdef max
@@ -20,8 +21,15 @@ namespace fas{
 template<typename L, typename R>
 struct max
 {
+  typedef typename if_c<
+    ( L::value < R::value ),
+    R, L
+  >::type type;
+  enum { value = type::value };
+  /*
   enum { value = ( L::value < R::value ) ? R::value : L::value };
   typedef int_< value > type;
+  */
 };
 
 }

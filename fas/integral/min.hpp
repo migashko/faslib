@@ -8,6 +8,7 @@
 #define FAS_INTEGRAL_MIN_HPP
 
 #include <fas/integral/int_.hpp>
+#include <fas/typename/if_c.hpp>
 
 #ifndef FAS_NO_MINMAX_UNDEF
 #  ifdef mix
@@ -20,8 +21,12 @@ namespace fas{
 template<typename L, typename R>
 struct min
 {
-  enum { value = ( L::value < R::value ) ? L::value  : R::value  };
-  typedef int_< value > type;
+  typedef typename if_c<
+    ( L::value < R::value ),
+    L, R
+  >::type type;
+  enum { value = type::value };
+  
 };
 
 }

@@ -1,0 +1,16 @@
+add_executable(test_ps        test_ps.cpp)
+add_executable(test_ph_max    test_ph_max.cpp)
+add_executable(test_bind      test_bind.cpp)
+add_executable(test_apply     test_apply.cpp)
+add_executable(test_apply2    test_apply2.cpp)
+add_executable(test_lambda    test_lambda.cpp)
+add_executable(test_simplify  test_simplify.cpp)
+
+add_test(mp_ps        test_ps)
+add_test(mp_ph_max    test_ph_max)
+add_test(mp_bind      test_bind)
+add_test(mp_apply     test_apply)
+add_test(mp_apply2    test_apply2)
+add_test(mp_lambda    test_lambda)
+add_test(mp_simplify  test_simplify)
+

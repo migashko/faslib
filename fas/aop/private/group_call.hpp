@@ -24,13 +24,13 @@
 namespace fas {
 
 template<typename Tg, typename T>
-struct group_call_helper
+struct gth
 {
   struct group_tags: T::aspect::template select_group<Tg>::type {};
 };
 
 template<typename Tg, template<typename> class T, typename A>
-struct group_call_helper<Tg, T< aspect<A> > >
+struct gth<Tg, T< aspect<A> > >
 {
   typedef typename T< aspect<A> >::aspect::template select_group<Tg>::type group_tags;
 };
@@ -50,8 +50,7 @@ public:
   template<typename T, typename F>
   F for_each(T& t, F f)
   {
-    //typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    typedef typename group_call_helper<Tg, T>::group_tags group_tags;
+    typedef typename gth<Tg, T>::group_tags group_tags;
     return detail::for_each_group( group_tags(), t, f, int_<0>(), int_< length<group_tags>::value >() );
   }
 
@@ -111,7 +110,6 @@ public:
     detail::group_call_helper( group_tags(), t, p1, p2, p3, p4, p5);
   }
 };
-
 
 }
 

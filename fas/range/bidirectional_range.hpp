@@ -28,11 +28,17 @@ public:
   typedef typename std::iterator_traits<T>::reference         reference;
 
   bidirectional_range()
-    : b(), e(), s(b)
+    : b(), e()
+#ifndef NDEBUG
+    , s(b)
+#endif
   {};
 
   explicit bidirectional_range(T b, T e)
-    : b(b), e(e), s(b)
+    : b(b), e(e)
+#ifndef NDEBUG
+    , s(b)
+#endif
   {};
 
   operator bool () const { return b!=e; }
@@ -57,19 +63,21 @@ public:
   
   void increase(difference_type cbeg, difference_type cend)
   {
+#ifndef NDEBUG
     std::advance( s, 0 - cbeg );
-    std::advance( e, cend );
-    
     assert( s <= b);
+#endif
+    std::advance( e, cend );
     assert( e >= b);
   }
 
   void decrease(difference_type cbeg, difference_type cend)
   {
+#ifndef NDEBUG
     std::advance( s, cbeg );
-    std::advance( e, 0 - cend );
-
     assert( s <= b);
+#endif    
+    std::advance( e, 0 - cend );
     assert( e >= b);
   }
 
@@ -91,14 +99,18 @@ public:
 
   bidirectional_range<T>& operator--() 
   {
+#ifndef NDEBUG
     assert(b!=s);
+#endif
     --b; 
     return *this; 
   }
 
   bidirectional_range<T> operator--(int) 
   {
+#ifndef NDEBUG
     assert(b!=s);
+#endif
     bidirectional_range<T> ans = *this;   
     b--; 
     return ans; 
@@ -111,7 +123,9 @@ public:
 protected:
   T b;
   T e;
+#ifndef NDEBUG
   T s; // start
+#endif
 };
 
 }

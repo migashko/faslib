@@ -13,6 +13,7 @@
 #include <fas/testing/suite.hpp>
 #include <fas/testing/tags.hpp>
 #include <fas/testing/unit.hpp>
+#include <fas/testing/testing.hpp>
 
 #endif
 

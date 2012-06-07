@@ -9,7 +9,7 @@
 #include <ostream>
 #include <iostream>
 
-namespace fas {
+namespace fas { namespace console{
   
   template<int C1=0, int C2=-1, int C3=-1, int C4=-1, int C5=-1>
   struct color_list {};
@@ -37,7 +37,7 @@ namespace fas {
 
   inline make_color<-1, -1, -1, -1, -1>::type color() { return 0; };
 
-  inline void restore(color_list<colors::restore>){};
+  inline void restore_colors(color_list<colors::restore>){};
   inline void black( color_list<colors::foreground::black>){}
   inline void red( color_list<colors::foreground::red>){}
   inline void green( color_list<colors::foreground::green>){}
@@ -85,13 +85,13 @@ namespace fas {
   inline void noblink(color_list<colors::noblink>){}
   inline void noreverse_color(color_list<colors::noreverse>){}
   
-} // namespace fas
+}} // namespace fas
 
 namespace std {
   template<int C1, int C2, int C3, int C4, int C5>
   ostream& operator << ( 
     ostream& os, 
-    void (*)( fas::color_list<C1, C2, C3, C4, C5> ) 
+    void (*)( ::fas::console::color_list<C1, C2, C3, C4, C5> )
   )
   {
     // если переопределить rdbuf в cout, clog, или cerr, то все равно будет пытаться установить цвета
