@@ -68,11 +68,11 @@ struct f_unit_run
       t.out() << "." << u.desc();
     t.out() << std::endl << UNIT_FAIL << "statements: " << u.counts().statements;
     if ( u.counts().errors!=0)
-      t.out() << std::endl << UNIT_FAIL << light_red << "errors: " << u.counts().errors << restore;
+      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "errors: " << u.counts().errors << ::fas::console::restore_colors;
     if ( u.counts().fails!=0)
-      t.out() << std::endl << UNIT_FAIL << light_red << "fails: " << u.counts().fails << restore;
+      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fails: " << u.counts().fails << ::fas::console::restore_colors;
     if ( u.counts().fatals!=0)
-      t.out() << std::endl << UNIT_FAIL << light_red << "fatals: " << u.counts().fatals << restore;
+      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fatals: " << u.counts().fatals << ::fas::console::restore_colors;
   }
 };
 

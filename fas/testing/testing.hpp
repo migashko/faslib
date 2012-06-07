@@ -15,30 +15,31 @@ namespace fas{ namespace testing{
 
 inline void show_total_result( const suite_counts& sc )
 {
+  using namespace ::fas::console;
   if (!sc)
-    std::cout << ::fas::light_red ;
+    std::cout << light_red ;
   else
-    std::cout << ::fas::green ;
+    std::cout << green ;
   
   std::cout << "**************************************" << std::endl;
   std::cout << "units: " << sc.units << std::endl;
   if (!sc)
   {
-    std::cout << ::fas::red  << "units fails: " << sc.units-sc.units_passed << ::fas::light_red  << std::endl;
+    std::cout << red  << "units fails: " << sc.units-sc.units_passed << light_red  << std::endl;
   }
   
   std::cout << "statements: " << sc.statements << std::endl;
   if (!sc)
   {
-    if (sc.errors!=0) std::cout << ::fas::red ;
-    std::cout << "errors: " << sc.errors << ::fas::light_red << std::endl;
-    if (sc.fails!=0) std::cout << ::fas::red ;
-    std::cout << "fails: " << sc.fails << ::fas::light_red << std::endl;
-    if (sc.fatals!=0) std::cout << ::fas::red ;
-    std::cout << "fatals: " << sc.fatals << ::fas::light_red << std::endl;
+    if (sc.errors!=0) std::cout << red ;
+    std::cout << "errors: " << sc.errors << light_red << std::endl;
+    if (sc.fails!=0) std::cout << red ;
+    std::cout << "fails: " << sc.fails << light_red << std::endl;
+    if (sc.fatals!=0) std::cout << red ;
+    std::cout << "fatals: " << sc.fatals << light_red << std::endl;
   }
   std::cout << "**************************************" << std::endl;
-  std::cout << ::fas::restore ;
+  std::cout << restore_colors ;
   std::cout << std::endl;
 }
 

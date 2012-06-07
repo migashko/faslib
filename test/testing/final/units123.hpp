@@ -4,10 +4,10 @@
 
 UNIT(unit1, "testing unit1")
 {
-  using namespace fas;
+  using namespace fas::console;
   using namespace fas::testing;
   t << is_false<expect>(true) << "is_false<expect>(true)";
-  t << message("This is message.") << "This is "<< magenta << "color" << restore <<" message description.";
+  t << message("This is message.") << "This is "<< magenta << "color" << restore_colors <<" message description.";
 }
 
 UNIT(unit2, "testing unit2")
