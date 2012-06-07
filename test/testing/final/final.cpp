@@ -1,4 +1,4 @@
-#include <fas/testing/suite.hpp>
+#include <fas/testing/testing.hpp>
 
 BEGIN_TEST
   RUN_SUITE(suite16);

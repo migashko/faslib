@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/testing/suite.hpp>
 #include <fas/testing/unit.hpp>
 #include <fas/testing/statements.hpp>
@@ -59,6 +65,8 @@ UNIT(unit2, "unit2 testing")
   t << message("hello");
 };
 
+
+
 typedef aspect<
   type_list_n<
     unit1_type_list,
@@ -89,17 +97,11 @@ bool test_run2()
   return true;
 }
 
-
-
 int main()
 {
-  std::cout << 1 << std::endl;
   if (!test_run0()) return -1;
-  std::cout << 2 << std::endl;
   if (!test_run1()) return -1;
-  std::cout << 3 << std::endl;
   if (!test_run2()) return -1;
-  std::cout << 4 << std::endl;
   return 0;
 };
 

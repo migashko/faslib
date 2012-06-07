@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/testing/suite.hpp>
 #include <fas/testing/unit.hpp>
 #include <fas/testing/statements.hpp>
@@ -18,14 +24,14 @@ UNIT(unit1, "testing unit 1")
 UNIT(unit2, "testing unit 2")
 {
   t << is_true<expect>( false ) << "is_true<expect>( false ) first";
-  t << is_true<expect>( false ) << "is_true<expect>( false ) second";
-  t << is_true<expect>( false ) << "is_true<expect>( false ) third";
+  t << is_true<assert>( false ) << "is_true<expect>( false ) second";
+  t << is_true<assert>( false ) << "is_true<expect>( false ) third";
 }
 
 UNIT(unit3, "testing unit 3")
 {
-  t << is_true<assert>( false ) << "is_true<assert>( false ) first";
-  t << is_true<assert>( false ) << "is_true<assert>( false ) second";
+  t << is_true<expect>( false ) << "is_true<assert>( false ) first";
+  t << is_true<critical>( false ) << "is_true<assert>( false ) second";
   t << is_true<assert>( false ) << "is_true<assert>( false ) third";
 }
 
@@ -47,8 +53,6 @@ int main(int argc, char* argv[])
 {
   ::fas::testing::suite_counts suite_suite_run(int argc, char* argv[]);
   ::fas::testing::suite_counts result = suite_suite_run(argc, argv);
-  /*std::cout << result.units << std::endl;
-  std::cout << result.units_total << std::endl;*/
-  return !(result.units == 3 && result.units_total == 4);
+ return !(result.units == 3 && result.units_total == 4);
 };
 

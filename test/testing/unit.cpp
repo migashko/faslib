@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/testing/unit.hpp>
 #include <fas/static_check/static_check.hpp>
 
@@ -45,8 +51,6 @@ int main()
   foo_test_unit f;
   if ( f.name() != "foo_test") return -1;
   if ( f.desc() != "foo testing") return -1;
-  
-  
   
   return 0;
 };

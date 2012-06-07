@@ -1,14 +1,16 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_TESTING_FORMATTING_HPP
 #define FAS_TESTING_FORMATTING_HPP
 
 #include <fas/system/colorized.hpp>
 #include <fas/testing/tags.hpp>
 
-
-
 namespace fas{ namespace testing{
-
-
 
 inline void PASSED(_passed_) {};
 inline void OK(_ok_) {};
@@ -27,8 +29,6 @@ inline void UNIT_FAIL(_unit_fail_res_){};
 inline void SUITE_FAIL(_suite_fail_res_){};
 inline void TEST_FAIL(_test_fail_res_){};
 
-
-
 }}
 
 namespace std
@@ -39,7 +39,6 @@ namespace std
     return o << ::fas::green << "[ PASSED  ] " << fas::restore;
   }
 
-  
   inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_ok_) )
   {
     return o << ::fas::green << "[      OK ] " << fas::restore;
@@ -50,7 +49,6 @@ namespace std
     return o << ::fas::green << "[ RUN     ] " << fas::restore;
   }
 
-  
   inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_fail_) )
   {
     return o << ::fas::light_red << "[    FAIL ] " << fas::restore;
@@ -60,13 +58,11 @@ namespace std
   {
     return o << ::fas::light_red << "[  EXCEPT ] " << fas::restore;
   }
-
   
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_fatal_) )
   {
     return o << ::fas::red << "[   FATAL ] " << fas::restore;
   }
-
   
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_warning_) )
   {
@@ -112,7 +108,6 @@ namespace std
   {
     return o << std::endl << ::fas::red << "STOP" << fas::restore << " error: use t << stop" << std::endl;
   }
-
 }
 
 #endif

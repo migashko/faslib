@@ -1,10 +1,14 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_TESTING_EXCEPTIONS_HPP
 #define FAS_TESTING_EXCEPTIONS_HPP
 
 #include <stdexcept>
 #include <string>
-
-#define FAS_TESTING_FILE_LINE __FILE__ << ": " << __LINE__
 
 namespace fas{ namespace testing{
 
@@ -17,18 +21,7 @@ public:
   {}
 };
 
-/** Не перывает suite*/
-/*class statment_error
-  : public exception
-{
-public:
-  statment_error(const std::string& what="")
-    : exception(what)
-  {}
-};
-*/
-
-/** Перывает unit, но не перывает suite*/
+// abort unit
 class fail_error
   : public exception
 {
@@ -38,8 +31,7 @@ public:
   {}
 };
 
-/**-- Перывает тестирование */
-/** Перывает suite и переходит на следующий */
+// abort suite
 class fatal_error
   : public exception
 {
@@ -48,7 +40,6 @@ public:
     : exception(what)
   {}
 };
-
 
 }}
 
