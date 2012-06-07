@@ -1,4 +1,4 @@
-project(test1)
+project(tests)
 
 add_subdirectory(static_check)
 add_subdirectory(integral)
