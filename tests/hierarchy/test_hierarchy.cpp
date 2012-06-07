@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/hierarchy/scatter_hierarchy.hpp>
 #include <fas/hierarchy/field.hpp>
@@ -28,19 +34,12 @@ void test1()
   hierarchy h;
 
   field< type2type<char> >(h) = type2type<char>();
-//  field< char, type2type<_1> >(h) = type2type<char>();
   field< apply< type2type<_1>, char>::type >(h) = type2type<char>();
   field< C >(h) = C();
   field< B >(h) = B();
   field_if< some_type<B, _1> >(h) = B();
   field_if< super_subclass< A, _1 > >(h) = C();
   field_if< super_subclass< B, _1 > >(h) = C();
-
-  /*
-  typedef scatter_hierarchy< transform<list, holder<_1> >::type > hierarchy1;
-  hierarchy1 h1;
-  field< holder<type2type<char> > >(h1).value_ = type2type<char>();
-  */
 }
 
 template<typename T>
@@ -75,12 +74,8 @@ int test2()
   return (get<char>(h) == 'A' && get<double>(h) == 3.14 && get<int>(h) == 0 ) ? 0 : -1;
 }
 
-
-
 int main()
 {
   test1();
   return test2();
 }
-
-

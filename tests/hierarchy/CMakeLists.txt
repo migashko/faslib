@@ -1,2 +1,2 @@
-add_executable(scatter_hierarchy scatter_hierarchy.cpp)
-add_test(scatter_hierarchy scatter_hierarchy)
+add_executable(test_hierarchy test_hierarchy.cpp)
+add_test(hierarchy test_hierarchy)

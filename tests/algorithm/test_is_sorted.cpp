@@ -1,10 +1,13 @@
-#include <fas/type_list/type_list_n.hpp>
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+#include <fas/type_list.hpp>
 #include <fas/algorithm/is_sorted.hpp>
 #include <fas/static_check.hpp>
-#include <fas/integral/less.hpp>
-#include <fas/integral/greater.hpp>
-#include <fas/integral/less_equal.hpp>
-
+#include <fas/integral.hpp>
 
 int main()
 {

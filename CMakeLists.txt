@@ -47,18 +47,18 @@ ENABLE_TESTING()
 
 include_directories(./)
 
-add_subdirectory(test)
+add_subdirectory(tests)
 add_subdirectory(examples)
 
 
-add_custom_target( examples ALL make WORKING_DIRECTORY examples )
-add_custom_target( test ALL make WORKING_DIRECTORY test )
+add_custom_target( examples make WORKING_DIRECTORY examples )
+add_custom_target( tests make WORKING_DIRECTORY tests )
 #add_subdirectory(tutorial)
 #add_subdirectory(probe)
 
 SET(CPACK_PACKAGE_VERSION "0.2.0")
 
-install(DIRECTORY fas test DESTINATION faslib
+install(DIRECTORY fas DESTINATION include
 	PATTERN "*.cmake" EXCLUDE
 	PATTERN "*~" EXCLUDE
 	PATTERN ".*" EXCLUDE

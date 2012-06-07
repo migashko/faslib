@@ -1,22 +1,17 @@
-#include <fas/type_list.hpp>
-#include <fas/type_list/intrinsic.hpp>
-#include <fas/mp/apply.hpp>
-#include <fas/mp/lambda.hpp>
-#include <fas/mp/f.hpp>
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/algorithm/for_.hpp>
+#include <fas/type_list.hpp>
+#include <fas/mp.hpp>
 #include <fas/integral.hpp>
-#include <fas/integral/make_int.hpp>
 #include <fas/static_check.hpp>
-#include <fas/integral/less_equal.hpp>
-#include <fas/integral/less.hpp>
-#include <fas/integral/rand.hpp>
-#include <fas/integral/inc.hpp>
-#include <fas/integral/plus.hpp>
-#include <fas/typemanip/first.hpp>
-#include <fas/typemanip/second.hpp>
+#include <fas/typemanip.hpp>
 
 using namespace ::fas;
-
 
 void test1()
 {
@@ -34,8 +29,8 @@ void test1()
     inc
   >::type test1;
 
-  enum { result = static_check<test::value == 11>::value,
-         result1 = static_check<test1::value == 11>::value
+  enum { result = static_check<test::value == 11>::value
+                + static_check<test1::value == 11>::value
   };
 
   
@@ -51,7 +46,8 @@ void test1()
   typedef apply<pair_test, int_<2>, int_<15> >::type test2;
 
   enum { result2 = static_check< test2::second::value == 15 >::value
-                  + static_check< test2::first::value == 11 >::value};
+                 + static_check< test2::first::value == 11 >::value
+  };
 
   typedef apply<
       for_< 
@@ -61,13 +57,12 @@ void test1()
       >
     >::type test3;
   enum { result4 = static_check<test3::value == 10>::value };
-  
 }
 
 
 void test2()
 {
-  // TODO: сделать протект
+  
   using namespace ::fas;
   
   typedef for_<
@@ -83,9 +78,6 @@ void test3()
 {
   using namespace ::fas;
 
-  //static_check< 1 == placeholders_extract< type_at<dec<length<fas::pattern::_1> >, fas::pattern::_1> >::value > x;
-
-
   typedef type_list< int_<2> > initial;
   typedef push_back<
     make_int<
@@ -96,32 +88,23 @@ void test3()
       >
     >
     ,
-  _1 >  doit;
+  _1
+  >  doit;
+  
   typedef less< f< length< _1 > > , int_<9> > cond;
   typedef for_< initial, cond, doit > wh;
-  typedef wh::type test;
+  typedef wh::type result;
   typedef type_list_n< int_<2>, int_<3>, int_<4>, 
                        int_<5>, int_<6>, int_<7>,
                        int_<8>, int_<9>, int_<10>
   >::type check_list;
   
-  
-  //static_check< length<test>::value - length<check_list>::value  > zz;
-
   enum 
   {
-    /*test_type_list = static_check< 
-        bind<
-          less< length< _1 >, int_<10> >
-        >::apply<
-            type_list<int>
-        >::type::value == 1
-     >::value,*/
-    // test0 = static_check< length_< placeholders_extract< doit >::type >::value == 1 >::value,
-    //test1 = static_check< bind<cond>::apply< type_list<int> >::type::value == 1>::value,
-    //test2 = static_check< length< bind< doit >::apply< type_list< int_<2> > >::type >::value == 2 >::value,
-    test_lenght = static_check< length<test>::value - length<check_list>::value == 0 >::value,
-    test_list_0 = static_check< some_type< type_at_c<0, test>::type, int_<2> >::value  >::value 
+    test = static_check< lambda< cond >::apply< type_list<int> >::type::value == 1>::value
+         + static_check< length< lambda< doit >::apply< type_list< int_<2> > >::type >::value == 2 >::value
+         + static_check< length<result>::value - length<check_list>::value == 0 >::value
+         + static_check< some_type< type_at_c<0, result>::type, int_<2> >::value  >::value 
   };
   
 }
@@ -135,22 +118,21 @@ void test4()
   typedef push_back< make_int< rand< type_at< dec< f< length<_1> > >, _1 > > > , _1 > doit;
 
   
-  typedef for_< initial, cond, doit>::type test;
+  typedef for_< initial, cond, doit>::type result;
   
   // 11837123 8949370 9722709 4858052 5065847 12997982 235177 12762824 13664875 11895682 760893
   enum {
-    test_length = static_check< length< test >::value == 10>::value,
-    test0 = static_check< some_type< int_<11837123>, type_at_c<0, test>::type >::value >::value,
-    test1 = static_check< some_type< int_<8949370>,  type_at_c<1, test>::type >::value >::value,
-    test2 = static_check< some_type< int_<9722709>,  type_at_c<2, test>::type >::value >::value,
-    test3 = static_check< some_type< int_<4858052>,  type_at_c<3, test>::type >::value >::value,
-    test4 = static_check< some_type< int_<5065847>,  type_at_c<4, test>::type >::value >::value,
-    test5 = static_check< some_type< int_<12997982>, type_at_c<5, test>::type >::value >::value,
-    test6 = static_check< some_type< int_<235177>,   type_at_c<6, test>::type >::value >::value,
-    test7 = static_check< some_type< int_<12762824>, type_at_c<7, test>::type >::value >::value,
-    test8 = static_check< some_type< int_<13664875>, type_at_c<8, test>::type >::value >::value,
-    test9 = static_check< some_type< int_<11895682>, type_at_c<9, test>::type >::value >::value,
-    // test10 = static_check< some_type< int_<760893>,   type_at_c<9, test>::type >::value >::value,
+    test = static_check< length< result >::value == 10>::value
+         + static_check< some_type< int_<11837123>, type_at_c<0, result>::type >::value >::value
+         + static_check< some_type< int_<8949370>,  type_at_c<1, result>::type >::value >::value
+         + static_check< some_type< int_<9722709>,  type_at_c<2, result>::type >::value >::value
+         + static_check< some_type< int_<4858052>,  type_at_c<3, result>::type >::value >::value
+         + static_check< some_type< int_<5065847>,  type_at_c<4, result>::type >::value >::value
+         + static_check< some_type< int_<12997982>, type_at_c<5, result>::type >::value >::value
+         + static_check< some_type< int_<235177>,   type_at_c<6, result>::type >::value >::value
+         + static_check< some_type< int_<12762824>, type_at_c<7, result>::type >::value >::value
+         + static_check< some_type< int_<13664875>, type_at_c<8, result>::type >::value >::value
+         + static_check< some_type< int_<11895682>, type_at_c<9, result>::type >::value >::value
   };
   
 }

@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/algorithm/sort.hpp>
 #include <fas/mp/f.hpp>
@@ -12,12 +18,9 @@ using namespace ::fas;
 template<typename L, typename F = less<_1, _2> >
 struct test
 {
-  enum { result = static_check< 
-                    is_sorted<
-                       typename sort<L, F>::type,
-                       F
-                    >::value 
-                  >::value 
+  enum
+  {
+    result = static_check< is_sorted< typename sort<L, F>::type, F >::value >::value
   };
 };
 
@@ -56,12 +59,9 @@ int main()
              + static_check< some_type<check1_2, sort<list1, greater<_1, _2> >::type >::value  >::value
              + static_check< some_type<check1_2, sort_t<list1, greater >::type >::value  >::value
              + static_check< some_type<check1_2, sort<list1, less<_2, _1> >::type >::value  >::value
-
              + static_check< some_type<check2_1, sort<list2, f< super_subclass<_1, _2> > >::type >::value  >::value
              + static_check< some_type<check2_1, sort_t<list2, lambda< super_subclass<_1, _2> >::apply  >::type >::value  >::value
              + static_check< some_type<check2_2, sort<list2, f< super_subclass<_2, _1> > >::type >::value  >::value
   };
   return 0;
 }
-
-
