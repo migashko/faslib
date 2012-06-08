@@ -8,11 +8,12 @@
 #define FAS_RANGE_HPP
 
 #include <fas/range/range.hpp>
-#include <fas/range/erange.hpp>
 #include <fas/range/orange.hpp>
+#include <fas/range/erange.hpp>
 #include <fas/range/srange.hpp>
 #include <fas/range/rrange.hpp>
 #include <fas/range/irange.hpp>
+#include <fas/range/crange.hpp>
 
 #include <fas/range/typerange.hpp>
 
@@ -22,6 +23,11 @@
 #include <fas/range/decrease.hpp>
 #include <fas/range/begin.hpp>
 #include <fas/range/end.hpp>
+#include <fas/range/rbegin.hpp>
+#include <fas/range/rend.hpp>
+
+#include <fas/range/input_range_adapter.hpp>
+#include <fas/range/copy_range_adapter.hpp>
 
 #include <fas/range/trivial_range.hpp>
 #include <fas/range/output_range.hpp>

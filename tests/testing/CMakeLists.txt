@@ -1,0 +1,11 @@
+add_executable(test_unit       test_unit.cpp)
+add_executable(test_statements test_statements.cpp)
+add_executable(test_suite      test_suite.cpp)
+add_executable(test_suite_run  test_suite_run.cpp)
+add_executable(test_suite_map  test_suite_map.cpp)
+
+add_test(testing_unit       test_unit)
+add_test(testing_statements test_statements)
+add_test(testing_suite      test_suite)
+add_test(testing_suite_run  test_suite_run)
+add_test(testing_suite_map  test_suite_map)

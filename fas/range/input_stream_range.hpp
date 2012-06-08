@@ -26,7 +26,6 @@ public:
   typedef typename super::pointer           pointer;
   typedef typename super::reference         reference;
   typedef typename super::proxy             proxy;
-
   
   input_stream_range()
     : super(), _pos()

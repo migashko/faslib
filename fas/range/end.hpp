@@ -8,7 +8,6 @@
 #define FAS_RANGE_END_HPP
 
 #include <fas/range/typerange.hpp>
-#include <cstddef>
 
 namespace fas{
 
@@ -16,12 +15,6 @@ template<typename T>
 inline typename typerange<T>::iterator end(T& t)
 {
   return typerange<T>::end(t);
-}
-
-template<typename T>
-inline typename typerange<T>::iterator rend(T& t)
-{
-  return typerange<T>::rend(t);
 }
 
 }

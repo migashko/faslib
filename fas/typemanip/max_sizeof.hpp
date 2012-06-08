@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -14,10 +14,10 @@ namespace fas{
 template<typename I1, typename I2>
 struct max_sizeof
 {
-  typedef typename if_c< 
-    (sizeof(I1::value) < sizeof(I2::value)),
-    typename I2::value_type,
-    typename I1::value_type
+  typedef typename if_c<
+    ( sizeof(I1) < sizeof(I2) ),
+    I2,
+    I1
   >::type type;
 };
 

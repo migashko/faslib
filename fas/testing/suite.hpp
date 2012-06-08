@@ -1,11 +1,20 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_TESTING_SUITE_HPP
 #define FAS_TESTING_SUITE_HPP
 
 #include <fas/testing/statements.hpp>
 #include <fas/testing/formatting.hpp>
 #include <fas/testing/exceptions.hpp>
-#include <fas/testing/unit.hpp>
+#include <fas/testing/suite_counts.hpp>
+#include <fas/testing/f_unit_run.hpp>
+#include <fas/testing/unit_status.hpp>
 #include <fas/testing/tags.hpp>
+
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
 #include <fas/aop/type_advice.hpp>
@@ -20,151 +29,7 @@
 
 namespace fas{ namespace testing{
 
-
-
-struct suite_counts
-  : unit_counts
-{
-  int units;
-  int units_total;
-  int units_passed;
   
-  suite_counts()
-    : unit_counts()
-    , units()
-    , units_total()
-    , units_passed()
-  {
-  }
-  
-  void operator += ( const suite_counts& c )
-  {
-    unit_counts::operator += (c);
-    units += c.units;
-    units_total += c.units_total;
-    units_passed += c.units_passed;
-  }
-  
-  void operator += ( const unit_counts& c )
-  {
-    unit_counts::operator += (c);
-  }
-  
-  operator bool () const
-  {
-    return units - units_passed == 0;
-  }
-};
-
-struct f_unit_run
-{
-  /*
-  template<typename T, typename Tg, typename U>
-  void operator()(T& t, tag<Tg>, U& u)
-  {
-    t.out() << RUN << u.name() << std::endl;
-    try
-    {
-      t.unit_begin(u);
-      u(t);
-      t.unit_end(u);
-    }
-    catch(const fail_error& )
-    {
-      //this->print_fail(t, u);
-    }
-    catch(const fatal_error&)
-    {
-      this->print_fail(t, u);
-      throw;
-    }
-    catch(const std::exception& e)
-    {
-      t.out() << EXCEPT << e.what() << std::endl;
-      this->print_fail(t, u);
-      throw;
-    }
-    catch(...)
-    {
-      t.out() << EXCEPT << "Unhandled exception." << std::endl;
-      this->print_fail(t, u);
-      throw;
-    }
-    
-    if (u)
-      t.out() << OK << std::endl;
-    else
-      this->print_fail(t, u);
-    // t.out() << UNIT_FAIL << u.desc()<< std::endl;
-  }
-  */
-
-  template<typename T, typename Tg>
-  void operator()(T& t, tag<Tg> )
-  {
-    typename T::aspect::template advice_cast<Tg>::type &u = t.get_aspect().template get<Tg>();
-    
-    t.out() << RUN << u.name() << std::endl;
-    try
-    {
-      t.unit_begin(u);
-      u(t);
-      t.unit_end(u);
-    }
-    catch(const fail_error& )
-    {
-      // this->print_fail(t, u);
-      t.unit_end(u);
-      //throw;
-    }
-    catch(const fatal_error&)
-    {
-      this->print_fail(t, u);
-      throw;
-    }
-    catch(const std::exception& e)
-    {
-      t.out() << EXCEPT << e.what() << std::endl;
-      this->print_fail(t, u);
-      throw;
-    }
-    catch(...)
-    {
-      t.out() << EXCEPT << "Unhandled exception." << std::endl;
-      this->print_fail(t, u);
-      throw;
-    }
-    
-    if (u)
-      t.out() << OK << std::endl;
-    else
-      this->print_fail(t, u);
-    
-    // t.out() << UNIT_FAIL << u.desc()<< std::endl;
-  }
-
-  template<typename T, typename U>
-  void print_fail(T& t, U& u)
-  {
-    t.out() << UNIT_FAIL << u.name() << std::endl;
-    if ( !u.desc().empty() )
-      t.out() << UNIT_FAIL << u.desc() << std::endl;
-    t.out() << UNIT_FAIL << "statements: " << u.counts().statements << std::endl;
-    if ( u.counts().errors!=0)
-      t.out() << UNIT_FAIL << light_red << "errors: " << u.counts().errors << restore << std::endl;
-    if ( u.counts().fails!=0)
-      t.out() << UNIT_FAIL << light_red << "fails: " << u.counts().fails << restore << std::endl;
-    if ( u.counts().fatals!=0)
-      t.out() << UNIT_FAIL << light_red << "fatals: " << u.counts().fatals << restore << std::endl;
-  }
-
-};
-  
-struct unit_status
-{
-  typedef enum { noerror, trace, error, fail, fatal} type;
-};
-
 template<typename A = ::fas::aspect<> >
 class suite
   : public aspect_class< ::fas::aspect<>, A>
@@ -190,7 +55,6 @@ public:
     , _unit_statements(0)
   {
   }
-  
 
   suite(std::ostream& os, const std::string& name = "", const std::string& desc = "")
     : _out(os)
@@ -228,13 +92,11 @@ public:
     u.counts().fails += _unit_fails;
     u.counts().fatals += _unit_fatals;
     u.counts().statements += _unit_statements;
-    if ( _status != unit_status::noerror )
-      /*_out <<std::endl*/;
-    else
+    if ( _status == unit_status::noerror )
       _suite_counts.units_passed++;
     _suite_counts += u.counts();
     _suite_counts.units++;
-    //_status_check();
+    
 
   }
   
@@ -256,15 +118,13 @@ public:
   void statement_begin()
   {
     ++_unit_statements;
-    if ( _status != unit_status::noerror )
-      _out << std::endl;
     _status_check();
     _status = unit_status::noerror;
   }
 
   void operator << ( void (*)( _stop_ ) )
   {
-    statement_begin();
+    _status_check();
   }
 
   std::ostream& operator << ( const statement<expect>& st )
@@ -274,7 +134,7 @@ public:
     {
       _unit_errors++;
       _status = unit_status::error;
-      _out << ERROR_MESSAGE << st.text;
+      _out << std::endl << ERROR_MESSAGE << st.text;
       return _out;
     }
     return _stub;
@@ -287,7 +147,7 @@ public:
     {
       _unit_fails++;
       _status = unit_status::fail;
-      _out << FAIL << st.text;
+      _out << std::endl << FAIL << st.text;
       return _out;
     }
     return _stub;
@@ -300,7 +160,7 @@ public:
     {
       _status = unit_status::fatal;
       _unit_fatals++;
-      _out << FATAL << st.text;
+      _out << std::endl << FATAL << st.text;
       return _out;
     }
     return _stub;
@@ -309,40 +169,41 @@ public:
   template<typename F>
   std::ostream& operator << ( const info<trace, F>& st )
   {
-    statement_begin();
-    _status = unit_status::trace;
+    _status_check();
     typename info<expect, F>::manip manip = 0;
-    _out << manip << st.text;
+    _out << std::endl << manip << st.text;
     return _out;
   }
 
   template<typename F>
   std::ostream& operator << ( const info<expect, F>& st )
   {
-    statement_begin();
+    _status_check();
     _status = unit_status::error;
     typename info<expect, F>::manip manip = 0;
-    _out << manip << st.text;
+    _out << std::endl << manip << st.text;
     return _out;
   }
 
   template<typename F>
   std::ostream& operator << ( const info<assert, F>& st )
   {
-    statement_begin();
+    _status_check();
     _status = unit_status::fail;
+    _unit_fails++;
     typename info<assert, F>::manip manip = 0;
-    _out << manip << st.text;
+    _out << std::endl << manip << st.text;
     return _out;
   }
 
   template<typename F>
   std::ostream& operator << ( const info<critical, F>& st )
   {
-    statement_begin();
+    _status_check();
     _status = unit_status::fatal;
+    _unit_fatals++;
     typename info<critical, F>::manip manip = 0;
-    _out << manip << st.text;
+    _out << std::endl << manip << st.text;
     return _out;
   }
 
@@ -365,7 +226,8 @@ public:
     _suite_counts.units_total = size();
     _out << SUITE_BEG << size() << " tests";
     if (!_name.empty()) _out << " from " << _name;
-    _out << "." << std::endl;
+    _out << ".";
+    
     try
     {
       super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
@@ -375,8 +237,9 @@ public:
     }
     catch(const fatal_error& e)
     {
-      throw e;
     }
+
+    _out << std::endl;
    
     if ( *this )
     {
@@ -419,51 +282,18 @@ private:
   int _unit_statements;
   
   suite_counts _suite_counts;
- /*
- std::string_stream _current;
- bool _current_result;
- */
 };
-
-inline void show_total_result( const suite_counts& sc )
-{
-  if (!sc)
-    std::cout << ::fas::light_red ;
-  else
-    std::cout << ::fas::green ;
-  
-  std::cout << "**************************************" << std::endl;
-  std::cout << "units: " << sc.units << std::endl;
-  if (!sc)
-  {
-    //std::cout << "units passed: " << sc.units_passed << std::endl;
-    //std::cout << ::fas::red ;
-    std::cout << ::fas::red  << "units fails: " << sc.units-sc.units_passed << ::fas::light_red  << std::endl;
-    //std::cout << ::fas::light_red ;
-  }
-  
-  std::cout << "statements: " << sc.statements << std::endl;
-  if (!sc)
-  {
-    if (sc.errors!=0) std::cout << ::fas::red ;
-    std::cout << "errors: " << sc.errors << ::fas::light_red << std::endl;
-    if (sc.fails!=0) std::cout << ::fas::red ;
-    std::cout << "fails: " << sc.fails << ::fas::light_red << std::endl;
-    if (sc.fatals!=0) std::cout << ::fas::red ;
-    std::cout << "fatals: " << sc.fatals << ::fas::light_red << std::endl;
-  }
-  std::cout << "**************************************" << std::endl;
-  std::cout << ::fas::restore ;
-  std::cout << std::endl;
-  
-  
-}
-
 
 }}
 
 #include <fas/aop/aspect.hpp>
-//#include <fas/type_list/tl.hpp>
+
+#define GET_REF(name) t.get_aspect().template get<name>()
+#define GET_TYPE(name) typename T::aspect::template advice_cast<name>::type
+
+#define BEGIN_SUITE(name, desc)\
+  inline const char* name##_suite_desc() { return desc;}\
+  struct name##_suite_aspect: ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
 
 #define ADD_UNIT(name) ,name##_type_list
 #define ADD_CLASS(name) , ::fas::advice<name, name>
@@ -473,18 +303,6 @@ inline void show_total_result( const suite_counts& sc )
 #define ADD_GROUP(tag, tag_list) , ::fas::group<tag, tag_list>
 #define ADD_STUB(tag) , ::fas::stub<tag>
 #define ADD_ASPECT(aspect) , aspect
-
-#define GET_REF(name) t.get_aspect().template get<name>()
-#define GET_TYPE(name) typename T::aspect::template advice_cast<name>::type
-
-
-#define BEGIN_SUITE(name, desc)\
-inline const char* name##_suite_desc() { return desc;}\
-struct name##_suite_aspect: ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
-// typedef ::fas::testing::suite< ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
-
-// #define END_SUITE(name) >::type > > name##_suite;
-
 
 #define END_SUITE(name) >::type > {}; \
 struct name##_suite: ::fas::testing::suite<name##_suite_aspect> {\
@@ -499,35 +317,6 @@ struct name##_suite: ::fas::testing::suite<name##_suite_aspect> {\
   s.run(); \
   return s.counts();\
 }
-/*
-#define END_SUITE(name) >::type > {}; typedef ::fas::testing::suite<name##_suite_aspect> name##_suite;\
-::fas::testing::suite_counts name##_suite_run(int , char*[])\
-{\
-  name##_suite s(#name, name##_suite_desc() );\
-  s.run(); \
-  return s.counts();\
-}*/
-
-
-
-#define BEGIN_TEST ::fas::testing::suite_counts fas_testing(int argc, char* argv[]) { ::fas::testing::suite_counts sc;
-#define END_TEST show_total_result(sc); return sc;}
-
-#define RUN_SUITE(name) ::fas::testing::suite_counts name##_suite_run(int argc, char* argv[]); sc+=name##_suite_run(argc, argv);
-/*
-inline const char* name_suite_desc() { return #desc;}
-typedef suite< aspect< tl_n< el
-
->::type > >  name_suite;
-
-int name_suite_run(int argc, char* argv[])
-{
-  name_suite s(#name, name_suite_desc() );
-  s.run();
-}
-*/
-
-
 
 #endif
 

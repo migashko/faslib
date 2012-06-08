@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_TESTING_STATEMENTS_HPP
 #define FAS_TESTING_STATEMENTS_HPP
 
@@ -8,8 +14,6 @@
 #define FAS_TESTING_FILE_LINE __FILE__ << ": " << __LINE__
 
 namespace fas{ namespace testing{
-
-
 
 struct trace;
 struct expect;

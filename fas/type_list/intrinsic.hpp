@@ -22,5 +22,6 @@
 #include <fas/type_list/type_at.hpp>
 #include <fas/type_list/type_count.hpp>
 #include <fas/type_list/unique.hpp>
+#include <fas/type_list/unique_first.hpp>
 
 #endif
