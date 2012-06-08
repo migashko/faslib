@@ -1,0 +1,6 @@
+project(intro)
+add_executable(intro0 intro0.cpp)
+add_executable(intro2 intro2.cpp)
+add_executable(intro3 intro3.cpp)
+add_executable(intro4 intro4.cpp)
+add_executable(intro5 intro5.cpp)

@@ -49,6 +49,7 @@ include_directories(./)
 
 add_subdirectory(tests)
 add_subdirectory(examples)
+add_subdirectory(tutorial)
 
 
 add_custom_target( examples make WORKING_DIRECTORY examples )
