@@ -1,5 +1,12 @@
 #include <iostream>
 
+class isay
+{
+public:
+  virtual ~isay(){}
+  virtual void say() = 0;
+};
+
 
 struct say_one
 {
@@ -28,6 +35,7 @@ template<
   typename Three = say_three,
   typename Strike  = say_strike>
 class judge_dredd
+  : public isay
 {
 public:
   virtual void say()

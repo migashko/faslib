@@ -1,7 +1,3 @@
-import copy
-
-# ----------------------------
-
 class judge_dredd:
   
   def one(self):
@@ -67,6 +63,8 @@ judge_sam.three = say_three
 judge_sam.three1 = say_three1
 judge_sam.three2 = say_three2
 judge_sam.three3 = say_three3
+
+# ----------------------------
 
 dredd = judge_dredd()
 print "Dredd:",
