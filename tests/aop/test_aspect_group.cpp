@@ -51,6 +51,7 @@ struct _group0_;
 struct _group1_;
 struct _group3_;
 struct _group5_;
+struct _group6_;
 
 struct _overlapped_;
 struct _overlapped2_;
@@ -129,8 +130,8 @@ typedef type_list_n<
   
   group< _overlapped2_, _test2_ >,
   advice< _overlapped2_, ad_overlapped>,
-  group< _overlapped2_, _test3_ >
-
+  group< _overlapped2_, _test3_ >,
+  advice< _group6_, ad_test<6> >
 
 >::type test_advice_list;
 
@@ -260,6 +261,13 @@ int main()
   f_test f2 = test.get_aspect().getg<_group5_>().for_each_if_t< t >(test, f_test());
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
+
+  test = test_class();
+  test.get_aspect().getg<_group6_>()(test);
+  c = test.get_counters();
+  if ( !test_c( "_group6_(advice)", c, 1, 0, 0, 0, 0, 0 ) )
+    return -1;
+  
 
 
   return 0;

@@ -11,11 +11,13 @@
 
 namespace fas {
 
+  /*
 template<typename Tg, typename A>
 struct select_group
 {
   typedef typename aspect_select_group< A, Tg >::type type;
 };
+*/
 
 }
 

@@ -56,6 +56,8 @@ private:
     tail< _1 >,
     a< is_has_tag< p<_1>, tag_cast< head< _1 > > > >
   > remove_from_tail;
+
+public:
   
   // для каждого remove_advice<_tag_> в списке удаляем элементы _tag_ расположенные за ним
   typedef typename transform_tail_if<
@@ -64,8 +66,6 @@ private:
     is_remove_advice<_1>
   >::type net_list;
 
-public:
-  
   // заменяем group<_tag_> на group_call<_tag_> и оставляем первое вхождение
   // это список по которому будет производиться поиск с помощью find_advice
   typedef typename unique_first<
@@ -85,8 +85,14 @@ public:
 
   // извлекаем элементы group<_tag_>
   // этот список использует group_call для групповых вызовов
-  typedef typename aspect_select_t<
+  /*typedef typename aspect_select_t<
     aspect_type,
+    is_group
+  >::type group_list;
+  */
+
+  typedef typename select_t<
+    net_list,
     is_group
   >::type group_list;
 
