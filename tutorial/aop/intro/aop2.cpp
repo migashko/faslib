@@ -4,17 +4,22 @@ class dredd
 {
 public:
   
-  /* other dredd code */
+  // ...
   
   void dredd_say()
+  {
+    this->say();
+  }
+  
+protected:
+  
+  virtual void say()
   {
     this->one();
     this->two();
     this->three();
     this->strike();
   }
-  
-protected:
   
   virtual void one()    {  std::cout<<"one, ";   }
   virtual void two()    {  std::cout<<"two, ";   }
@@ -26,11 +31,14 @@ class jon:
   public virtual dredd
 {
 public:
+  
   void jon_say()
   {
-    dredd::dredd_say();
+    dredd::say();
   }
+  
 protected:
+
   virtual void one()
   {
     std::cout<<"ONE, ";
@@ -40,24 +48,30 @@ protected:
 class bob:
   public virtual dredd
 {
+  
 public:
+  
   void bob_say()
   {
-    dredd::dredd_say();
+    this->say();
   }
 
 protected:
-  virtual void strike()
+  
+  virtual void say()
   {
-    std::cout<<"four, ";
+    dredd::say();
+    four();
     five();
     six();
     seven();
   }
 
-  virtual void five() { std::cout<<"five, "; }
-  virtual void six() { std::cout<<"six, "; }
+  virtual void four()  { std::cout<<"four, "; }
+  virtual void five()  { std::cout<<"five, "; }
+  virtual void six()   { std::cout<<"six, "; }
   virtual void seven() { std::cout<<"seven!"; }
+  virtual void strike(){ }
 };
 
 class sam:
@@ -67,9 +81,8 @@ class sam:
 public:
   void sam_say()
   {
-    dredd::dredd_say();
+    bob::say();
   }
-
 };
 
 int main()

@@ -4,7 +4,7 @@ class dredd
 {
 public:
   
-  /* other dredd code */
+  // ...
   
   void dredd_say()
   {

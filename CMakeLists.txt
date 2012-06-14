@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(faslib CXX)
+project(faslib)
 
 SET(CPACK_PACKAGE_NAME "faslib")
 SET(CPACK_PACKAGE_VERSION "0.2.0")

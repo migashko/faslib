@@ -1,6 +1,3 @@
-class judge:
-  def say(self):
-    pass
 
 def say_one(self):
   print "one,",
@@ -14,23 +11,23 @@ def say_three(self):
 def say_strike(self):
   print "strike!"
 
-def say_say(self):
+def say_123s(self):
   self.one()
   self.two()
   self.three()
   self.strike()
 
-class aspect_dredd:
+class aspect_123s:
   pass
 
-aspect_dredd.one = say_one
-aspect_dredd.two = say_two
-aspect_dredd.three = say_three
-aspect_dredd.strike = say_strike
-aspect_dredd.say = say_say
+aspect_123s.one = say_one
+aspect_123s.two = say_two
+aspect_123s.three = say_three
+aspect_123s.strike = say_strike
+aspect_123s.say = say_say
 
 
-class judge_dredd( aspect_dredd, judge):
+class judge_dredd( aspect_123s ):
   pass
 
 # ----------------------------

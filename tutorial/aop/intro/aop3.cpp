@@ -1,6 +1,6 @@
 #include <iostream>
 
-/// Интерфейсы стратегий
+/// interfaces
 
 struct ione
 {
@@ -30,7 +30,7 @@ struct istrike
   virtual istrike* clone() = 0;
 };
 
-/// Реализация стратегий 
+/// concrete strategies
 
 struct say_one: ione
 {
@@ -60,7 +60,7 @@ struct say_strike: istrike
   virtual istrike* clone() { return new say_strike; };
 };
 
-/// Собственно класс судьи Дредда
+/// dredd
 
 class dredd
 {
@@ -82,32 +82,28 @@ public:
   {}
 
   dredd(const dredd& jd)
-    : _one(0)
-    , _two(0)
-    , _three(0)
-    , _strike(0)
+    : _one   ( jd._one    ? jd._one->clone()    : 0 )
+    , _two   ( jd._two    ? jd._two->clone()    : 0 )
+    , _three ( jd._three  ? jd._three->clone()  : 0 )
+    , _strike( jd._strike ? jd._strike->clone() : 0 )
   {
-    this->set_one( jd._one->clone() );
-    this->set_two( jd._two->clone() );
-    this->set_three( jd._three->clone() );
-    this->set_strike( jd._strike->clone() );
   }
 
   dredd& operator = (const dredd& jd)
   {
-    this->set_one( jd._one->clone() );
-    this->set_two( jd._two->clone() );
-    this->set_three( jd._three->clone() );
-    this->set_strike( jd._strike->clone() );
+    this->set_one(    jd._one    ? jd._one->clone()    : 0 );
+    this->set_two(    jd._two    ? jd._two->clone()    : 0 );
+    this->set_three(  jd._three  ? jd._three->clone()  : 0 );
+    this->set_strike( jd._strike ? jd._strike->clone() : 0 );
     return *this;
   }
 
-  virtual void dredd_say()
+  void dredd_say()
   {
-    _one->one();
-    _two->two();
-    _three->three();
-    _strike->strike();
+    if (_one)    _one->one();
+    if (_two)    _two->two();
+    if (_three)  _three->three();
+    if (_strike) _strike->strike();
   }
 
   void set_one(ione* one)
@@ -141,7 +137,7 @@ private:
   istrike* _strike;
 };
 
-/// Стратегия для Джона
+/// concrete strategies for jon
 
 struct say_ONE: ione
 {
@@ -150,7 +146,7 @@ struct say_ONE: ione
   virtual ione* clone() { return new say_ONE; };
 };
 
-/// Интерфейсы стратегий для three, three and 0.5, three and 0.75, three and 0.99
+/// strategies intefaces for from5to7
 
 struct ifive
 {
@@ -173,6 +169,8 @@ struct iseven
   virtual iseven* clone() = 0;
 };
 
+/// strategies for from5to7
+
 struct say_five: ifive
 {
   virtual ~say_five() {};
@@ -190,57 +188,56 @@ struct say_six: isix
 struct say_seven: iseven
 {
   virtual ~say_seven() {};
-  virtual void seven() {  std::cout<<"seven, "; }
+  virtual void seven() {  std::cout<<"seven!"; }
   virtual iseven* clone() { return new say_seven; };
 };
 
 /// Cтратегий для three
 
-class from4to7
+class from5to7
   : public istrike
 {
 public:
 
-  virtual ~from4to7()
+  virtual ~from5to7()
   {
     delete _five;
     delete _six;
     delete _seven;
   }
 
-  from4to7()
-    : _five(new say_five)
-    , _six(new say_six)
+  from5to7()
+    : _five( new say_five)
+    , _six(  new say_six)
     , _seven(new say_seven)
   {}
 
-  from4to7(const from4to7& jd)
-    : _five(0)
-    , _six(0)
-    , _seven(0)
+  from5to7(const from5to7& jd)
+    : _five ( jd._five  ? jd._five->clone()  : 0 )
+    , _six  ( jd._six   ? jd._six->clone()   : 0 )
+    , _seven( jd._seven ? jd._seven->clone() : 0 )
   {
-    this->set_five( jd._five->clone() );
-    this->set_six( jd._six->clone() );
-    this->set_seven( jd._seven->clone() );
   }
 
-  from4to7& operator = (const from4to7& jd)
+  from5to7& operator = (const from5to7& jd)
   {
-    this->set_five( jd._five->clone() );
-    this->set_six( jd._six->clone() );
-    this->set_seven( jd._seven->clone() );
+    this->set_five ( jd._five  ? jd._five->clone()  : 0 );
+    this->set_six  ( jd._six   ? jd._six->clone()   : 0 );
+    this->set_seven( jd._seven ? jd._seven->clone() : 0 );
     return *this;
   }
 
   istrike* clone()
   {
-    return new from4to7(*this);
+    return new from5to7(*this);
   }
 
   virtual void strike()
   {
     std::cout<<"four, ";
-    this->say();
+    if (_five) _five->five();
+    if (_six)  _six->six();
+    if (_seven)  _seven->seven();
   }
 
   virtual void say()
@@ -274,6 +271,11 @@ private:
   iseven* _seven;
 };
 
+/// TODO:
+///   class jon and jon::jon_say
+///   class bob and bob::bob_say
+///   class sam and sam::sam_say
+
 int main()
 {
   dredd d;
@@ -288,14 +290,14 @@ int main()
   std::cout << std::endl;
 
   dredd b;
-  b.set_strike(new from4to7);
+  b.set_strike(new from5to7);
   std::cout << "Bob: ";
   b.dredd_say();
   std::cout << std::endl;
   
   dredd s;
   s.set_one(new say_ONE);
-  s.set_strike(new from4to7);
+  s.set_strike(new from5to7);
   std::cout << "Sam: ";
   s.dredd_say();
   std::cout << std::endl;
