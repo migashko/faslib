@@ -15,18 +15,27 @@
 #include <fas/algorithm/transform.hpp>
 
 #include <fas/type_list/organize.hpp>
-#include <fas/type_list/unique_first.hpp>
+#include <fas/type_list/organize.hpp>
+#include <fas/type_list/length.hpp>
+#include <fas/typemanip/if_c.hpp>
 #include <fas/integral/and_.hpp>
 
 namespace fas{
 
-template<typename A, typename Tg>
+template<typename L, typename Tg, bool IsAdvice>
 struct aspect_select_group
 {
-  typedef typename aspect_select< A, and_< is_group<_1>, is_has_tag<_1, Tg> > >::type type1;
+  typedef typename select<L, is_has_tag<_1, Tg> >::type type1;
   typedef typename transform_t<type1, target_cast>::type type2;
   typedef typename organize<type2>::type type3;
   typedef typename unique_first<type3>::type type;
+
+};
+
+template<typename L, typename Tg>
+struct aspect_select_group<L, Tg, true>
+{
+  typedef type_list<Tg> type;
 };
 
 }

@@ -17,6 +17,7 @@
 #include <fas/hierarchy/scatter_hierarchy.hpp>
 #include <fas/hierarchy/field.hpp>
 
+#include <fas/type_list/type_list.hpp>
 #include <fas/algorithm/index_of_if.hpp>
 #include <fas/mp/bind2nd.hpp>
 
@@ -29,6 +30,7 @@ struct aspect_common_helper
   typedef aspect_helper<A> helper;
   struct common_list: helper::common_list{};
   struct group_list: helper::group_list{};
+  
 };
 
 template<typename L>
@@ -38,6 +40,8 @@ struct aspect_common_helper< aspect<L> >
   typedef typename helper::common_list common_list;
   typedef typename helper::group_list group_list;
 };
+
+
 
 template<typename A>
 class aspect_hierarchy
@@ -49,9 +53,8 @@ public:
 
   typedef typename helper::hierarchy_list hierarchy_list;
   typedef typename aspect_common_helper<A>::common_list common_list;
-  //typedef typename helper::common_list common_list;
-  //typedef typename helper::group_list group_list;
   typedef typename aspect_common_helper<A>::group_list group_list;
+  
   typedef scatter_hierarchy< hierarchy_list > super;
 
   template<typename Tg>
@@ -97,7 +100,29 @@ public:
   template<typename Tg>
   struct select_group
   {
-    typedef typename aspect_select_group<group_list, Tg>::type type;
+    typedef typename find_advice< Tg, typename helper::net_list, empty_type >::type type1;
+    
+    typedef typename aspect_select_group<
+      group_list,
+      Tg,
+      is_advice<type1>::value && !some_type< type1, empty_type>::value
+    >::type type;
+    /*
+    typedef typename find_advice< Tg, typename helper::net_list, empty_type >::type type1;
+    typedef typename aspect_select_group<group_list, Tg>::type type2;
+
+    typedef typename if_c<
+      is_advice<type1>::value,
+      type_list<typename type1::tag>,
+      type2
+    >::type type;
+    */
+    /*typedef typename switch_c<
+      case_c< some_type< type1, empty_type > >
+    >::type type;
+    */
+    
+    
   };
 };
 
