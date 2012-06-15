@@ -64,6 +64,7 @@ struct say_strike: istrike
 
 class dredd
 {
+  // ...
 public:
 
   virtual ~dredd()
@@ -148,6 +149,13 @@ struct say_ONE: ione
 
 /// strategies intefaces for from5to7
 
+struct ifour
+{
+  virtual ~ifour() {};
+  virtual void four() = 0;
+  virtual ifour* clone() = 0;
+};
+
 struct ifive
 {
   virtual ~ifive() {};
@@ -169,12 +177,19 @@ struct iseven
   virtual iseven* clone() = 0;
 };
 
-/// strategies for from5to7
+/// strategies for say_4567
+
+struct say_four: ifour
+{
+  virtual ~say_four() {};
+  virtual void four() {  std::cout<<"four, "; }
+  virtual ifour* clone() { return new say_four; };
+};
 
 struct say_five: ifive
 {
   virtual ~say_five() {};
-  virtual void five() {  std::cout<<"five"; }
+  virtual void five() {  std::cout<<"five, "; }
   virtual ifive* clone() { return new say_five; };
 };
 
@@ -194,33 +209,37 @@ struct say_seven: iseven
 
 /// Cтратегий для three
 
-class from5to7
+class say_4567
   : public istrike
 {
 public:
 
-  virtual ~from5to7()
+  virtual ~say_4567()
   {
+    delete _four;
     delete _five;
     delete _six;
     delete _seven;
   }
 
-  from5to7()
-    : _five( new say_five)
+  say_4567()
+    : _four( new say_four)
+    , _five( new say_five)
     , _six(  new say_six)
     , _seven(new say_seven)
   {}
 
-  from5to7(const from5to7& jd)
-    : _five ( jd._five  ? jd._five->clone()  : 0 )
+  say_4567(const say_4567& jd)
+    : _four ( jd._four  ? jd._four->clone()  : 0 )
+    , _five ( jd._five  ? jd._five->clone()  : 0 )
     , _six  ( jd._six   ? jd._six->clone()   : 0 )
     , _seven( jd._seven ? jd._seven->clone() : 0 )
   {
   }
 
-  from5to7& operator = (const from5to7& jd)
+  say_4567& operator = (const say_4567& jd)
   {
+    this->set_four ( jd._four  ? jd._four->clone()  : 0 );
     this->set_five ( jd._five  ? jd._five->clone()  : 0 );
     this->set_six  ( jd._six   ? jd._six->clone()   : 0 );
     this->set_seven( jd._seven ? jd._seven->clone() : 0 );
@@ -229,22 +248,26 @@ public:
 
   istrike* clone()
   {
-    return new from5to7(*this);
+    return new say_4567(*this);
   }
 
   virtual void strike()
   {
-    std::cout<<"four, ";
+    this->say();
+  }
+
+  virtual void say()
+  {
+    if (_four) _four->four();
     if (_five) _five->five();
     if (_six)  _six->six();
     if (_seven)  _seven->seven();
   }
 
-  virtual void say()
+  void set_four(ifour* four)
   {
-    _five->five();
-    _six->six();
-    _seven->seven();
+    delete _four;
+    _four = four;
   }
 
   void set_five(ifive* five)
@@ -266,6 +289,7 @@ public:
   }
 
 private:
+  ifour* _four;
   ifive* _five;
   isix* _six;
   iseven* _seven;
@@ -290,14 +314,14 @@ int main()
   std::cout << std::endl;
 
   dredd b;
-  b.set_strike(new from5to7);
+  b.set_strike(new say_4567);
   std::cout << "Bob: ";
   b.dredd_say();
   std::cout << std::endl;
   
   dredd s;
   s.set_one(new say_ONE);
-  s.set_strike(new from5to7);
+  s.set_strike(new say_4567);
   std::cout << "Sam: ";
   s.dredd_say();
   std::cout << std::endl;

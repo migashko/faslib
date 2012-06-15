@@ -2,9 +2,8 @@
 
 class dredd
 {
-public:
-  
   // ...
+public:
   
   void dredd_say()
   {
@@ -28,8 +27,9 @@ protected:
 };
 
 class jon:
-  public virtual dredd
+  protected virtual dredd
 {
+  // ...
 public:
   
   void jon_say()
@@ -46,9 +46,9 @@ protected:
 };
 
 class bob:
-  public virtual dredd
+  protected virtual dredd
 {
-  
+  // ...
 public:
   
   void bob_say()
@@ -75,9 +75,10 @@ protected:
 };
 
 class sam:
-  public virtual jon,
-  public virtual bob
+  protected virtual jon,
+  protected virtual bob
 {
+  // ...
 public:
   void sam_say()
   {

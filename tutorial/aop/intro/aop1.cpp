@@ -14,7 +14,7 @@ public:
     this->strike();
   }
   
-protected:
+private:
   
   void one()    {  std::cout<<"one, ";   }
   void two()    {  std::cout<<"two, ";   }

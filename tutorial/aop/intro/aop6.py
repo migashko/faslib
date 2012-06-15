@@ -18,6 +18,7 @@ def say_123s(self):
 
 
 class dredd:
+# ...
   def dredd_say(self):
     self.say()
 
@@ -33,6 +34,7 @@ def say_ONE(self):
   print "ONE,",
 
 class jon:
+# ...
   def jon_say(self):
     self.say()
 
@@ -69,6 +71,7 @@ def say_1234567(self):
 
 
 class bob(dredd):
+# ...
   def bob_say(self):
     self.say()
 
@@ -84,6 +87,7 @@ bob.say = say_1234567
 # ----------------------------
 
 class sam:
+# ...
   def sam_say(self):
     self.say()
 
