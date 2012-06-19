@@ -58,6 +58,7 @@ template< typename A = fas::aspect<> >
 class dredd:
   public fas::aspect_class<A, aspect_123s>
 {
+  // ...
 public:
   void dredd_say()
   {
@@ -79,6 +80,7 @@ template< typename A = fas::aspect<> >
 class jon:
   public fas::aspect_class<A, aspect_ONE, aspect_123s >
 {
+  // ...
 public:
   void jon_say()
   {
@@ -148,18 +150,21 @@ struct aspect_1234567: fas::aspect< fas::type_list_n<
 >::type >
 {};
 
-
+/// /////////////////////////////////////////////////
 
 template< typename A = fas::aspect<> >
 class bob:
   public fas::aspect_class<A, aspect_1234567 >
 {
+  // ...
 public:
   void bob_say()
   {
     this->get_aspect().template get<_say_>()(*this);
   }
 };
+
+/// /////////////////////////////////////////////////
 
 struct aspect_ONE234567:
   fas::aspect_merge<aspect_ONE, aspect_1234567>::type
@@ -175,7 +180,6 @@ public:
     this->get_aspect().template get<_say_>()(*this);
   }
 };
-
 
 int main()
 {
@@ -199,5 +203,9 @@ int main()
   s.sam_say();
   std::cout << std::endl;
 
+  std::cout << "sizeof(d): " << sizeof(d) << std::endl;
+  std::cout << "sizeof(j): " << sizeof(j) << std::endl;
+  std::cout << "sizeof(b): " << sizeof(b) << std::endl;
+  std::cout << "sizeof(s): " << sizeof(s) << std::endl;
   return 0;
 }

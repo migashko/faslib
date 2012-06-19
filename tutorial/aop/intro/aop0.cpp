@@ -2,9 +2,8 @@
 
 class dredd
 {
-public:
-  
   // ...
+public:
   
   void dredd_say()
   {

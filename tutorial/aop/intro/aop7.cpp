@@ -45,6 +45,7 @@ template<
 >
 class dredd
 {
+  // ...
 public:
   void dredd_say()
   {
@@ -77,6 +78,7 @@ template<
 >
 class jon
 {
+  // ...
 public:
   void jon_say()
   {
@@ -144,6 +146,7 @@ template<
 >
 class bob
 {
+  // ...
 public:
   void bob_say()
   {
@@ -173,6 +176,7 @@ template<
 >
 class sam
 {
+  // ...
 public:
   void sam_say()
   {
