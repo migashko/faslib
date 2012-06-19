@@ -1,22 +1,20 @@
 #include <fas/aop.hpp>
 #include <fas/type_list.hpp>
-
-//#include <iostream>
-#include <stdio.h>
+#include <cstdio>
 
 struct _stateA_;
 struct _stateB_;
 struct _stateC_;
 struct _state_;
 struct _state_context_;
+struct _clear_;
 
 struct stateA
 {
   template<typename T>
   void operator()(T& t, int value )
   {
-    printf("A%d ", value);
-    // std::cout << "A" << value << " ";
+    std::printf("A%d ", value);
     if (value > 1)
       t.get_aspect().template get<_state_context_>()
                     .template set_state<_stateB_>(t);
@@ -29,7 +27,6 @@ struct stateB
   void operator()(T& t, int value )
   {
     printf("B%d ", value);
-    //std::cout << "B" << value << " ";
     if ( value == 2)
       t.template set_state<_stateA_>();
     else if (value > 6)
@@ -39,12 +36,18 @@ struct stateB
 
 struct stateC
 {
+  stateC(): last_value(-1) {}
+
+  template<typename T>
+  void clear(T&) { last_value = -1; }
+  
   template<typename T>
   void operator()(T& t, int value )
   {
     printf("C%d ", value);
-    //std::cout << "C" << value << " ";
   }
+
+  int last_value;
 };
 
 struct f_state
@@ -64,10 +67,10 @@ private:
   int _value;
 };
 
-class state
+class state_context
 {
 public:
-  state(): _state(0) {};
+  state_context(): _state(0) {};
   
   template<typename T>
   void clear(T&) { _state = 0;}
@@ -91,12 +94,13 @@ private:
 
 
 struct aspect_state: fas::aspect< fas::type_list_n<
-  fas::advice<_state_context_, state >,
+  fas::advice<_state_context_, state_context >,
   fas::advice<_stateA_, stateA >,
   fas::advice<_stateB_, stateB >,
   fas::advice<_stateC_, stateC >,
   fas::group<_state_, _stateA_>, 
-  fas::group<_state_, fas::type_list_n<_stateB_, _stateC_>::type >
+  fas::group<_state_, fas::type_list_n<_stateB_, _stateC_>::type >,
+  fas::group<_clear_, fas::type_list_n<_state_context_, _stateC_>::type >
 >::type > {};
 
 template<typename A = fas::empty_type >
@@ -120,6 +124,24 @@ public:
   {
     this->get_aspect().template get<_state_context_>().set_state<Tg>(*this);
   }
+
+private:
+  
+  struct f_clear
+  {
+    template<typename T, typename Tg>
+    void operator()(T& t, fas::tag<Tg> )
+    {
+      t.get_aspect().template get<Tg>().clear(t);
+    }
+  };
+
+public:
+
+  void clear()
+  {
+    this->get_aspect().template getg<_clear_>().for_each(*this, f_clear() );
+  }
 };
 
 int main()
@@ -127,7 +149,7 @@ int main()
   test_state<> ts;
   for (int i = 0; i < 10; ++i)
     ts.test(i);
-  //std::cout << std::endl;
+  ts.clear();
   printf("\n");
   return 0;
 }

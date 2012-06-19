@@ -29,6 +29,7 @@ aspect_123s.say = say_123s
 # ----------------------------
 
 class dredd( aspect_123s ):
+# ...
   def dredd_say(self):
     self.say()
 
@@ -45,6 +46,7 @@ aspect_ONE.one = say_ONE
 # ----------------------------
 
 class jon(aspect_ONE, aspect_123s):
+# ...
   def jon_say(self):
     self.say()
 
@@ -86,6 +88,7 @@ aspect_1234567.say = say_123567
 # ----------------------------
 
 class bob(aspect_1234567):
+# ...
   def bob_say(self):
     self.say()
 
@@ -95,6 +98,7 @@ class aspect_ONE234567(aspect_ONE, aspect_1234567):
   pass
   
 class sam(aspect_ONE234567):
+# ...
   def sam_say(self):
     self.say()
 
