@@ -170,9 +170,11 @@ struct aspect_ONE234567:
   fas::aspect_merge<aspect_ONE, aspect_1234567>::type
 {};
 
+/// /////////////////////////////////////////////////
+
 template< typename A = fas::aspect<> >
 class sam:
-  public fas::aspect_class<A, aspect_ONE, aspect_1234567 >
+  public fas::aspect_class<A, aspect_ONE234567>
 {
 public:
   void sam_say()

@@ -92,6 +92,12 @@ private:
   int _state; 
 };
 
+template<typename ... A>
+struct aaa
+{
+  
+};
+
 
 struct aspect_state: fas::aspect< fas::type_list_n<
   fas::advice<_state_context_, state_context >,
@@ -113,11 +119,11 @@ public:
     this->get_aspect().template get<_state_context_>()(*this, value);
   }
 
-// typedef fas::aspect_class<A, aspect_state> super;
-// friend class super::aspect::template advice_cast<_stateA_>::type;
-// friend class super::aspect::template advice_cast<_stateB_>::type;
-// friend class super::aspect::template advice_cast<_stateC_>::type;
-// protected:
+typedef fas::aspect_class<A, aspect_state> super;
+friend class super::aspect::template advice_cast<_stateA_>::type;
+friend class super::aspect::template advice_cast<_stateB_>::type;
+friend class super::aspect::template advice_cast<_stateC_>::type;
+protected:
 
   template<typename Tg>
   void set_state()
