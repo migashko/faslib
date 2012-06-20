@@ -7,14 +7,13 @@ struct _stateB_;
 struct _stateC_;
 struct _state_;
 struct _state_context_;
-struct _clear_;
 
 struct stateA
 {
   template<typename T>
   void operator()(T& t, int value )
   {
-    std::printf("A%d ", value);
+    printf("A%d ", value);
     if (value > 1)
       t.get_aspect().template get<_state_context_>()
                     .template set_state<_stateB_>(t);
@@ -27,7 +26,7 @@ struct stateB
   void operator()(T& t, int value )
   {
     printf("B%d ", value);
-    if ( value == 2)
+    if ( value == 3)
       t.template set_state<_stateA_>();
     else if (value > 6)
       t.template set_state<_stateC_>();
@@ -36,19 +35,11 @@ struct stateB
 
 struct stateC
 {
-  stateC(): last_value(-1) {}
-
   template<typename T>
-  void clear(T&) { last_value = -1; }
-  
-  template<typename T>
-  void operator()(T& t, int value )
+  void operator()(T&, int value )
   {
-    last_value = value;
     printf("C%d ", value);
   }
-
-  int last_value;
 };
 
 struct f_state
@@ -73,9 +64,6 @@ class state_context
 public:
   state_context(): _state(0) {};
   
-  template<typename T>
-  void clear(T&) { _state = 0;}
-  
   template<typename Tg, typename T>
   void set_state(T& t)
   {
@@ -93,12 +81,6 @@ private:
   int _state; 
 };
 
-template<typename ... A>
-struct aaa
-{
-  
-};
-
 
 struct aspect_state: fas::aspect< fas::type_list_n<
   fas::advice<_state_context_, state_context >,
@@ -106,8 +88,7 @@ struct aspect_state: fas::aspect< fas::type_list_n<
   fas::advice<_stateB_, stateB >,
   fas::advice<_stateC_, stateC >,
   fas::group<_state_, _stateA_>, 
-  fas::group<_state_, fas::type_list_n<_stateB_, _stateC_>::type >,
-  fas::group<_clear_, fas::type_list_n<_state_context_, _stateC_>::type >
+  fas::group<_state_, fas::type_list_n<_stateB_, _stateC_>::type >
 >::type > {};
 
 template<typename A = fas::empty_type >
@@ -120,34 +101,16 @@ public:
     this->get_aspect().template get<_state_context_>()(*this, value);
   }
 
-typedef fas::aspect_class<A, aspect_state> super;
-friend class super::aspect::template advice_cast<_stateA_>::type;
-friend class super::aspect::template advice_cast<_stateB_>::type;
-friend class super::aspect::template advice_cast<_stateC_>::type;
-protected:
+//typedef fas::aspect_class<A, aspect_state> super;
+//friend class super::aspect::template advice_cast<_stateA_>::type;
+//friend class super::aspect::template advice_cast<_stateB_>::type;
+//friend class super::aspect::template advice_cast<_stateC_>::type;
+//protected:
 
   template<typename Tg>
   void set_state()
   {
-    this->get_aspect().template get<_state_context_>().set_state<Tg>(*this);
-  }
-
-private:
-  
-  struct f_clear
-  {
-    template<typename T, typename Tg>
-    void operator()(T& t, fas::tag<Tg> )
-    {
-      t.get_aspect().template get<Tg>().clear(t);
-    }
-  };
-
-public:
-
-  void clear()
-  {
-    this->get_aspect().template getg<_clear_>().for_each(*this, f_clear() );
+    this->get_aspect().template get<_state_context_>().template set_state<Tg>(*this);
   }
 };
 
@@ -156,7 +119,6 @@ int main()
   test_state<> ts;
   for (int i = 0; i < 10; ++i)
     ts.test(i);
-  ts.clear();
   printf("\n");
   return 0;
 }

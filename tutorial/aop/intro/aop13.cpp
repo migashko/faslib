@@ -69,13 +69,6 @@ public:
 
 /// /////////////////////////////////////////////////
 
-/*
-struct say_ONE
-{
-  template<typename T>
-  void operator()(T&) {  std::cout<<"ONE, "; };
-};
-*/
 struct left_bracket
 {
   template<typename T>
@@ -88,7 +81,7 @@ struct right_bracket
   void operator()(T&) { std::cout<<"]"; };
 };
 
-struct _say2_;
+struct _same_say_;
 struct _before_say_;
 struct _after_say_;
 
@@ -98,9 +91,9 @@ struct _before2_;
 struct _after1_;
 struct _after2_;
 
-struct aspect_123s_in_brackets: fas::aspect< fas::type_list_n<
-  fas::group<_say_, fas::type_list_n<_before_say_, _say2_, _after_say_>::type >,
-  fas::forward<_say2_, _say_>,
+struct aspect_in_brackets: fas::aspect< fas::type_list_n<
+  fas::group<_say_, fas::type_list_n<_before_say_, _same_say_, _after_say_>::type >,
+  fas::forward<_same_say_, _say_>,
   fas::group<_before_say_, fas::type_list_n<_before1_, _before2_>::type >,
   fas::group<_after_say_, fas::type_list_n<_after1_, _after2_>::type>,
   fas::advice<_before1_, left_bracket >,
@@ -123,24 +116,36 @@ struct right_brace
   void operator()(T&) { std::cout<<"}"; };
 };
 
-struct aspect_123s_in_braces: fas::aspect< fas::type_list_n<
+struct aspect_in_braces: fas::aspect< fas::type_list_n<
   fas::advice<_before1_, left_brace >,
-  fas::advice<_after1_, right_brace >,
-  fas::stub<_before2_>,
-  fas::stub<_after2_>,
-  aspect_123s_in_brackets
+  fas::advice<_after2_, right_brace >,
+  aspect_in_brackets
 >::type > {};
+
+/// /////////////////////////////////////////////////
+
+struct aspect_in_braces_only: fas::aspect< fas::type_list_n<
+  fas::advice<_before_say_, left_brace >,
+  fas::advice<_after_say_, right_brace >,
+  aspect_in_brackets
+>::type > {};
+
 
 int main()
 {
-  dredd<aspect_123s_in_brackets> d1;
+  dredd<aspect_in_brackets> d1;
   std::cout << "Dredd1: ";
   d1.dredd_say();
   std::cout << std::endl;
 
-  dredd<aspect_123s_in_braces> d2;
+  dredd<aspect_in_braces> d2;
   std::cout << "Dredd2: ";
   d2.dredd_say();
+  std::cout << std::endl;
+
+  dredd<aspect_in_braces_only> d3;
+  std::cout << "Dredd3: ";
+  d3.dredd_say();
   std::cout << std::endl;
 
   return 0;

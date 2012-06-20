@@ -76,12 +76,6 @@ public:
 
 /// /////////////////////////////////////////////////
 
-struct say_ONE
-{
-  template<typename T>
-  void operator()(T&) {  std::cout<<"ONE, "; };
-};
-
 struct left_bracket
 {
   template<typename T>
@@ -100,8 +94,7 @@ struct _before2_;
 struct _after1_;
 struct _after2_;
 
-struct aspect_ONE_ws_bracket: fas::aspect< fas::type_list_n<
-  fas::advice<_one_, say_ONE >,
+struct aspect_in_brackets: fas::aspect< fas::type_list_n<
   fas::advice<_before1_, left_bracket >,
   fas::advice<_before2_, left_bracket >,
   fas::advice<_after1_, right_bracket >,
@@ -113,11 +106,9 @@ struct aspect_ONE_ws_bracket: fas::aspect< fas::type_list_n<
 
 int main()
 {
-  dredd<aspect_ONE_ws_bracket> d;
+  dredd<aspect_in_brackets> d;
   std::cout << "Dredd: ";
   d.dredd_say();
   std::cout << std::endl;
- 
-
   return 0;
 }
