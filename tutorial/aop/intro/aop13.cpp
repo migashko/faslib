@@ -69,12 +69,13 @@ public:
 
 /// /////////////////////////////////////////////////
 
+/*
 struct say_ONE
 {
   template<typename T>
   void operator()(T&) {  std::cout<<"ONE, "; };
 };
-
+*/
 struct left_bracket
 {
   template<typename T>
@@ -97,7 +98,7 @@ struct _before2_;
 struct _after1_;
 struct _after2_;
 
-struct aspect_ONE_in_brackets: fas::aspect< fas::type_list_n<
+struct aspect_123s_in_brackets: fas::aspect< fas::type_list_n<
   fas::group<_say_, fas::type_list_n<_before_say_, _say2_, _after_say_>::type >,
   fas::forward<_say2_, _say_>,
   fas::group<_before_say_, fas::type_list_n<_before1_, _before2_>::type >,
@@ -122,22 +123,22 @@ struct right_brace
   void operator()(T&) { std::cout<<"}"; };
 };
 
-struct aspect_ONE_in_braces: fas::aspect< fas::type_list_n<
+struct aspect_123s_in_braces: fas::aspect< fas::type_list_n<
   fas::advice<_before1_, left_brace >,
   fas::advice<_after1_, right_brace >,
   fas::stub<_before2_>,
   fas::stub<_after2_>,
-  aspect_ONE_in_brackets
+  aspect_123s_in_brackets
 >::type > {};
 
 int main()
 {
-  dredd<aspect_ONE_in_brackets> d1;
+  dredd<aspect_123s_in_brackets> d1;
   std::cout << "Dredd1: ";
   d1.dredd_say();
   std::cout << std::endl;
 
-  dredd<aspect_ONE_in_braces> d2;
+  dredd<aspect_123s_in_braces> d2;
   std::cout << "Dredd2: ";
   d2.dredd_say();
   std::cout << std::endl;

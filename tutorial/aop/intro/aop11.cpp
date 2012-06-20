@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+namespace dredd {
+
 struct _one_;
 struct _two_;
 struct _three_;
@@ -33,37 +35,24 @@ struct say_strike
   void operator()(T&) {  std::cout<<"strike!"; }
 };
 
-
-namespace foo {
-  
-struct _foo1_;
-struct _foo2_;
-struct _foo3_;
-struct _foo4_;
-  
-struct foo1234
+struct say_123s
 {
   template<typename T>
   void operator()(T& t)
   {
-    t.get_aspect().template get<_foo1_>()(t);
-    t.get_aspect().template get<_foo2_>()(t);
-    t.get_aspect().template get<_foo3_>()(t);
-    t.get_aspect().template get<_foo4_>()(t);
+    t.get_aspect().template get<_one_>()(t);
+    t.get_aspect().template get<_two_>()(t);
+    t.get_aspect().template get<_three_>()(t);
+    t.get_aspect().template get<_strike_>()(t);
   }
 };
-}
 
 struct aspect_123s: fas::aspect< fas::type_list_n<
   fas::advice<_one_, say_one>,
   fas::advice<_two_, say_two>,
   fas::advice<_three_, say_three>,
   fas::advice<_strike_, say_strike>,
-  fas::advice<_say_, foo::foo1234>,
-  fas::alias<foo::_foo1_, _one_>,
-  fas::alias<foo::_foo2_, _two_>,
-  fas::alias<foo::_foo3_, _three_>,
-  fas::alias<foo::_foo4_, _strike_>
+  fas::advice<_say_, say_123s>
 >::type >
 {};
 
@@ -79,7 +68,14 @@ public:
   }
 };
 
+} // namespace dredd
+
 /// /////////////////////////////////////////////////
+
+namespace jon {
+
+struct _one_;
+struct _say_;
 
 struct say_ONE
 {
@@ -87,13 +83,166 @@ struct say_ONE
   void operator()(T&) {  std::cout<<"ONE, "; };
 };
 
-struct aspect_ONE: fas::aspect< fas::advice<_one_, say_ONE > > {};
+
+struct aspect_ONE: fas::aspect< fas::type_list_n<
+  fas::advice< _one_, say_ONE>,
+  fas::alias< dredd::_one_, _one_ >,
+  fas::alias< _say_, dredd::_say_ >
+>::type > {};
+
+struct aspect_ONE23s:
+  fas::aspect_merge<aspect_ONE, dredd::aspect_123s >::type
+{};
+
+template< typename A = fas::aspect<> >
+class jon:
+  public fas::aspect_class<A, aspect_ONE23s >
+{
+  // ...
+public:
+  void jon_say()
+  {
+    this->get_aspect().template get< _say_ >()(*this);
+  }
+};
+
+} // namespace jon
+
+/// /////////////////////////////////////////////////
+
+namespace bob {
+
+struct _say_;
+struct _say123_;
+
+struct _four_;
+struct _five_;
+struct _six_;
+struct _seven_;
+
+
+struct say_four
+{
+  template<typename T>
+  void operator()(T&) {  std::cout<<"four, "; }
+};
+
+struct say_five
+{
+  template<typename T>
+  void operator()(T&) {  std::cout<<"five, "; }
+};
+
+struct say_six
+{
+  template<typename T>
+  void operator()(T&) {  std::cout<<"six, "; }
+};
+
+struct say_seven
+{
+  template<typename T>
+  void operator()(T&) {  std::cout<<"seven!"; }
+};
+
+struct say_1234567
+{
+  template<typename T>
+  void operator()(T& t)
+  {
+    t.get_aspect().template get<_say123_>()(t);
+    t.get_aspect().template get<_four_>()(t);
+    t.get_aspect().template get<_five_>()(t);
+    t.get_aspect().template get<_six_>()(t);
+    t.get_aspect().template get<_seven_>()(t);
+  }
+};
+
+struct aspect_4567: fas::aspect< fas::type_list_n<
+  fas::stub<dredd::_strike_>,
+  fas::advice<_four_,  say_four>,
+  fas::advice<_five_,  say_five>,
+  fas::advice<_six_,   say_six>,
+  fas::advice<_seven_, say_seven>,
+  fas::advice<_say_,   say_1234567>,
+  fas::forward<_say123_, dredd::_say_>
+>::type >
+{};
+
+
+struct aspect_1234567:
+  fas::aspect_merge< aspect_4567, dredd::aspect_123s>::type
+{};
+
+/// /////////////////////////////////////////////////
+
+template< typename A = fas::aspect<> >
+class bob:
+  public fas::aspect_class<A, aspect_1234567 >
+{
+  // ...
+public:
+  void bob_say()
+  {
+    this->get_aspect().template get<_say_>()(*this);
+  }
+};
+
+} // namespace bob
+
+/// /////////////////////////////////////////////////
+
+namespace sam
+{
+
+struct _say_;
+
+struct aspect_ONE234567:
+  fas::aspect_merge<
+    fas::aspect< fas::alias<_say_, bob::_say_> >,
+    jon::aspect_ONE,
+    bob::aspect_1234567
+  >::type
+{};
+
+template< typename A = fas::aspect<> >
+class sam:
+  public fas::aspect_class<A, aspect_ONE234567 >
+{
+public:
+  void sam_say()
+  {
+    this->get_aspect().template get<_say_>()(*this);
+  }
+};
+
+} //namespace sam
 
 int main()
 {
-  dredd< aspect_ONE > d;
+  dredd::dredd<> d;
   std::cout << "Dredd: ";
   d.dredd_say();
   std::cout << std::endl;
+
+  jon::jon<> j;
+  std::cout << "Jon: ";
+  j.jon_say();
+  std::cout << std::endl;
+
+  bob::bob<> b;
+  std::cout << "Bob: ";
+  b.bob_say();
+  std::cout << std::endl;
+
+  sam::sam<> s;
+  std::cout << "Sam: ";
+  s.sam_say();
+  std::cout << std::endl;
+
+  std::cout << "sizeof(d): " << sizeof(d) << std::endl;
+  std::cout << "sizeof(j): " << sizeof(j) << std::endl;
+  std::cout << "sizeof(b): " << sizeof(b) << std::endl;
+  std::cout << "sizeof(s): " << sizeof(s) << std::endl;
   return 0;
 }
