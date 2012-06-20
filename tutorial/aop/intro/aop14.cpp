@@ -44,6 +44,7 @@ struct stateC
   template<typename T>
   void operator()(T& t, int value )
   {
+    last_value = value;
     printf("C%d ", value);
   }
 
