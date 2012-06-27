@@ -44,7 +44,11 @@ struct stateC
 
 struct f_state
 {
-  f_state(int state, int value): _counter(0), _state(state), _value(value) {}
+  f_state(int state, int value)
+    : _counter(0)
+    , _state(state)
+    , _value(value)
+  {}
   
   template<typename T, typename Tg>
   void operator()(T& t, fas::tag<Tg> )
@@ -58,6 +62,7 @@ private:
   int _state;
   int _value;
 };
+
 
 class state_context
 {
@@ -84,11 +89,9 @@ private:
 
 struct aspect_state: fas::aspect< fas::type_list_n<
   fas::advice<_state_context_, state_context >,
-  fas::advice<_stateA_, stateA >,
-  fas::advice<_stateB_, stateB >,
-  fas::advice<_stateC_, stateC >,
-  fas::group<_state_, _stateA_>, 
-  fas::group<_state_, fas::type_list_n<_stateB_, _stateC_>::type >
+  fas::advice<_stateA_, stateA >, fas::group<_state_, _stateA_>,
+  fas::advice<_stateB_, stateB >, fas::group<_state_, _stateB_>,
+  fas::advice<_stateC_, stateC >, fas::group<_state_, _stateC_> 
 >::type > {};
 
 template<typename A = fas::empty_type >

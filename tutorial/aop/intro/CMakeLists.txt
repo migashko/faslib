@@ -1,6 +1,7 @@
 project(intro)
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x")
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
+set( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --no-inline")
 
 add_executable(aop0 aop0.cpp)
 add_executable(aop1 aop1.cpp)
