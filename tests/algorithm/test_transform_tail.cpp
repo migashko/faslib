@@ -53,8 +53,8 @@ int main()
   typedef fas::any< fas::_> any;
   typedef fas::not_< any > nobody;
   typedef fas::nothing< fas::_> nothing;
-  typedef fas::a < fas::make_int< fas::inc< fas::p< fas::_> > > > increment;
-  typedef fas::transform< fas::_ , increment > increment_list;
+  typedef fas::a< fas::make_int< fas::inc< fas::p< fas::_> > > > increment;
+  typedef fas::transform< fas::_1, increment > increment_list;
   
   typedef fas::transform_tail_if< list1, increment_list, any >::type result_list;
   typedef fas::transform_tail_if< list1, nothing, nobody >::type nothing_list;
