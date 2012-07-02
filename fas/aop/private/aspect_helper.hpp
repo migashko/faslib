@@ -53,8 +53,8 @@ private:
   
   // метафункция удаления из хвоста списка элементов с тегом элемента головы списка 
   typedef erase_if<
-    tail< _1 >,
-    a< is_has_tag< p<_1>, tag_cast< head< _1 > > > >
+    /*tail<*/ a<_1> /*>*/,
+    a< is_has_tag< p<_1>, tag_cast< head< a<_1> > > > >
   > remove_from_tail;
 
 public:

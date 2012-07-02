@@ -1,5 +1,8 @@
 #include <fas/aop.hpp>
+#include <fas/aop/is_has_tag.hpp>
+#include <fas/algorithm.hpp>
 #include <fas/type_list.hpp>
+#include <fas/static_check.hpp>
 #include <map>
 #include <string>
 #include <iostream>
@@ -40,10 +43,10 @@ struct ad_find
 */
 
 typedef fas::aspect< fas::type_list_n<
-  fas::type_advice<_value_, a< std::pair<_1, _2> > >,
-  fas::type_advice<_compare_, a< std::less<_1> > >,
-  fas::type_advice<_allocator_, a< std::allocator<_1> > >,
-  fas::type_advice<_container_, a< std::map<_1, _2, _3, _4> > >,
+  fas::type_advice<_value_, w< std::pair< _1, _2 > > >,
+  fas::type_advice<_compare_, w< std::less< _1 > > >,
+  fas::type_advice<_allocator_, w< std::allocator< _1 > > >,
+  fas::type_advice<_container_, w< std::map< _1, _2, _3, _4 > > >,
   fas::advice<_find_, ad_find>
 >::type >  aspect_key_value_container;
 
@@ -110,6 +113,8 @@ struct key_value_container_helper
   >::type > > super;
   
   typedef typename super::aspect::common_list common_list;
+  enum { value = fas::count_if< common_list, fas::is_has_tag<_1,_container_> >::value };
+  enum { result = fas::static_check< value == 0 >::value };
   
 };
 
@@ -132,10 +137,31 @@ public:
 int main()
 {
   typedef key_value_container<int, std::string> dict_type;
-  
-  
-  /*dict_type::mapped_type sss = "aaa";
-  dict_type dict;
+  typedef typename fas::lambda<
+    fas::not_<
+      fas::is_has_tag<
+        fas::_1, 
+        fas::tag_cast<
+          fas::head<
+            fas::a<
+              fas::type_list<
+              fas::remove_advice<_allocator_>, fas::type_list<
+              fas::remove_advice<_compare_>, fas::type_list<
+              fas::remove_advice<_value_>, fas::type_list<
+              fas::remove_advice<_container_>, fas::type_list<
+              fas::type_advice<_value_, std::pair< p<fas::_1>,  p<fas::_2>  > >, fas::type_list<
+              fas::type_advice<_compare_, std::less<  p<fas::_1> > >, fas::type_list<
+              fas::type_advice<_allocator_, std::allocator<  p<fas::_1> >  >, fas::type_list<
+              fas::type_advice<_container_, std::map<  p<fas::_1> ,  p<fas::_2>,  p<fas::_3>,  p<fas::_4> > >, fas::type_list<
+              fas::advice<_find_, ad_find>, fas::empty_list> > > > > > > > > 
+            > 
+          > 
+        > 
+      > 
+    >
+  >::apply<_container_>::type aaa;
+  dict_type::mapped_type sss = "aaa";
+  /*dict_type dict;
   dict[1] = "aaa";
   dict.find(1);
   */

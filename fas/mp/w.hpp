@@ -9,6 +9,7 @@
 
 namespace fas{
 
+
 template<typename T>
 struct w{};
 
@@ -23,7 +24,6 @@ struct is_w { enum {value = 0}; };
 
 template<typename T>
 struct is_w< w<T> > { enum {value = 1}; };
-
 
 }
 
