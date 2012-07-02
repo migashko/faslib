@@ -15,11 +15,4 @@ add_executable(aop11 aop11.cpp)
 add_executable(aop12 aop12.cpp)
 add_executable(aop13 aop13.cpp)
 add_executable(aop14 aop14.cpp)
-
-add_executable(intro0 intro0.cpp)
-add_executable(intro2 intro2.cpp)
-add_executable(intro3 intro3.cpp)
-add_executable(intro4 intro4.cpp)
-add_executable(intro5 intro5.cpp)
-
-
+add_executable(aop15 aop15.cpp)
