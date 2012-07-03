@@ -69,15 +69,17 @@ public:
   {
     typedef typename find_advice< Tg, common_list>::type advice_type;
 /*#warning*/
+/*
     typedef typename super::type_list_type type_list_type;
     typedef typename type_at_c< index_of<advice_type, type_list_type >::value, type_list_type >::fulltail fulltail;
 
     return static_cast<advice_type&>( static_cast< detail::sh<fulltail> &>(static_cast<super&>(*this) ) ).get_advice();
+    */
     
      /*super& sup = static_cast<super&>(*this);
      advice_type& adv = field<advice_type>( sup );
      return adv.get_advice();*/
-     //return field<advice_type>( static_cast<super&>(*this) ).get_advice();
+     return field<advice_type>( static_cast<super&>(*this) ).get_advice();
     //return static_cast<advice_type&>( static_cast<super&>(*this) ).get_advice();
   };
 

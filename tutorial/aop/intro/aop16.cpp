@@ -169,27 +169,37 @@ int main()
         fas::_1, 
         fas::tag_cast<
           fas::head<
-            fas::a<
+            
               fas::type_list<
               fas::remove_advice<_allocator_>, fas::type_list<
               fas::remove_advice<_compare_>, fas::type_list<
               fas::remove_advice<_value_>, fas::type_list<
               fas::remove_advice<_container_>, fas::type_list<
-              fas::type_advice<_value_, std::pair< p<fas::_1>,  p<fas::_2>  > >, fas::type_list<
-              fas::type_advice<_compare_, std::less<  p<fas::_1> > >, fas::type_list<
-              fas::type_advice<_allocator_, std::allocator<  p<fas::_1> >  >, fas::type_list<
-              fas::type_advice<_container_, std::map<  p<fas::_1> ,  p<fas::_2>,  p<fas::_3>,  p<fas::_4> > >, fas::type_list<
+              fas::type_advice<_value_, w<std::pair< fas::_1,  fas::_2 > > >, fas::type_list<
+              fas::type_advice<_compare_, w<std::less<  fas::_1 > > >, fas::type_list<
+              fas::type_advice<_allocator_, w<std::allocator< fas::_1 > > >, fas::type_list<
+              fas::type_advice<_container_, w<std::map< fas::_1 ,  fas::_2,  fas::_3,  fas::_4 > > >, fas::type_list<
               fas::advice<_find_, ad_find>, fas::empty_list> > > > > > > > > 
-            > 
+            
           > 
         > 
       > 
     >
   >::apply<_container_>::type aaa;
-  dict_type::mapped_type sss = "aaa";
+  aaa a;
+  typedef fas::type_advice<_container_, w<std::map< fas::_1 ,  fas::_2,  fas::_3,  fas::_4 > > > ta;
+  typedef fas::value_advice<_find_, int > va;
+  typedef fas::type_list_n< va, /*fas::remove_advice<_container_>,*/ fas::aspect<>, fas::aspect<ta>  >::type ll;
+  typedef fas::aspect_class< fas::aspect<ll> > sh;
+  sh s;
+  fas::field<va>( s.get_aspect() ).get_advice() = 10;
+  s.get_aspect().get<_find_>() = 20;
+  //fas::field<ta>( s.get_aspect() ) = ta();
+  
+  /*dict_type::mapped_type sss = "aaa";
   dict_type dict;
   dict[1] = "aaa";
-  dict.find(1);
+  dict.find(1);*/
   
   return 0;
 }
