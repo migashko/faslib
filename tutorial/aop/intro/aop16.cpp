@@ -3,6 +3,7 @@
 #include <fas/algorithm.hpp>
 #include <fas/type_list.hpp>
 #include <fas/static_check.hpp>
+#include <fas/typemanip.hpp>
 #include <map>
 #include <string>
 #include <iostream>
@@ -28,7 +29,8 @@ struct ad_find
   template<typename T>
   typename T::iterator operator()(T& t, const typename T::key_type& key)
   {
-    typename T::iterator itr =  t.find(key);
+    std::cout << "find" << std::endl;
+    typename T::iterator itr =  t.get_container().find(key);
     return itr;
   }
 };
@@ -43,10 +45,10 @@ struct ad_find
 */
 
 typedef fas::aspect< fas::type_list_n<
-  fas::type_advice<_value_, w< std::pair< _1, _2 > > >,
-  fas::type_advice<_compare_, w< std::less< _1 > > >,
-  fas::type_advice<_allocator_, w< std::allocator< _1 > > >,
-  fas::type_advice<_container_, w< std::map< _1, _2, _3, _4 > > >,
+  fas::type_advice<_value_,  w< std::pair< _1, _2 > > >,
+  fas::type_advice<_compare_, w<  std::less< _1 > > >,
+  fas::type_advice<_allocator_, w<  std::allocator< _1 > > >,
+  fas::type_advice<_container_, w<  std::map< _1, _2, _3, _4 > > >,
   fas::advice<_find_, ad_find>
 >::type >  aspect_key_value_container;
 
@@ -73,23 +75,23 @@ struct key_value_container_helper
   typedef Value mapped_type;
 
   typedef typename fas::apply<
-    typename aspect::template advice_cast<_value_>::type,
+    typename fas::unwrap< typename aspect::template advice_cast<_value_>::type  >::type,
     const key_type,
     mapped_type
   >::type value_type;
 
   typedef typename fas::apply<
-    typename aspect::template advice_cast<_compare_>::type,
+    typename fas::unwrap< typename aspect::template advice_cast<_compare_>::type >::type,
     key_type
   >::type key_compare;
 
   typedef typename fas::apply<
-    typename aspect::template advice_cast<_allocator_>::type,
+    typename fas::unwrap< typename aspect::template advice_cast<_allocator_>::type >::type,
     key_type
   >::type allocator_type;
 
   typedef typename fas::apply<
-    typename aspect::template advice_cast<_container_>::type,
+    typename fas::unwrap< typename aspect::template advice_cast<_container_>::type >::type,
     key_type,
     mapped_type, 
     key_compare,
@@ -113,9 +115,31 @@ struct key_value_container_helper
   >::type > > super;
   
   typedef typename super::aspect::common_list common_list;
+  typedef typename super::aspect::net_list net_list;
+  typedef typename super::aspect::flat_list flat_list;
+  typedef typename super::aspect::hierarchy_list hierarchy_list;
   enum { value = fas::count_if< common_list, fas::is_has_tag<_1,_container_> >::value };
-  enum { result = fas::static_check< value == 0 >::value };
-  
+  enum { net_value = fas::count_if< net_list, fas::is_has_tag<_1,_container_> >::value };
+  enum { result = fas::static_check< value == 2 >::value };
+  enum { result2 = fas::static_check< net_value == 2 >::value };
+
+  enum { result3 = fas::static_check< fas::length<net_list>::value == 8 >::value };
+  enum { result4 = fas::static_check< fas::length<common_list>::value == 8 >::value };
+  enum { result5 = fas::static_check< fas::length<hierarchy_list>::value == 8 >::value };
+
+  typedef fas::erase_if<
+    /*tail< */_1 /*>*/,
+    a< fas::is_has_tag< p<_1>, fas::tag_cast< fas::head< _1 > > > >
+  > remove_from_tail;
+
+  typedef typename fas::transform_tail_if<
+    flat_list,
+    remove_from_tail,
+    fas::is_remove_advice<_1>
+  >::type net_list2;
+
+  enum { result6 = fas::static_check< fas::length<net_list2>::value == 8 >::value };
+
 };
 
 
@@ -126,6 +150,8 @@ class key_value_container
 {
 public:
   typedef typename key_value_container_helper<Key, Value, A>::container container;
+
+  container& get_container() { return *this;}
   
   typename container::iterator find(const typename container::key_type& key)
   {
@@ -161,9 +187,9 @@ int main()
     >
   >::apply<_container_>::type aaa;
   dict_type::mapped_type sss = "aaa";
-  /*dict_type dict;
+  dict_type dict;
   dict[1] = "aaa";
   dict.find(1);
-  */
+  
   return 0;
 }
