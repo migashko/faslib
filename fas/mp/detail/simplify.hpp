@@ -11,6 +11,8 @@
 #include <fas/mp/has_type.hpp>
 #include <fas/mp/a.hpp>
 
+#include <fas/typemanip/wrapper.hpp>
+
 namespace fas{ namespace detail{
 
 template<typename F, int>
@@ -68,6 +70,13 @@ struct simplify_impl2_1
 {
   enum { value = 0};
   typedef typename simplify_impl3<F, value >::type type;
+};
+
+template<typename F>
+struct simplify_impl2_1< w<F> >
+{
+  enum { value = 0};
+  typedef w<F> type;
 };
 
 

@@ -12,11 +12,14 @@
 namespace fas{
 
 template<typename T>
-struct wrapper
-{
+struct w;
+/*{
   typedef metalist::wrapper metatype;
   typedef T original_type;
 };
+*/
+
+
 
 }
 
