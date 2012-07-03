@@ -9,6 +9,7 @@
 
 #include <fas/mp/apply.hpp>
 #include <fas/mp/has_apply.hpp>
+#include <fas/typemanip/empty_type.hpp>
 
 namespace fas{ namespace detail{
 
@@ -21,6 +22,7 @@ struct lambda_impl0: F { };
 template<typename F>
 struct lambda_impl0<F, 0>
 {
+  template<typename Temp = empty_type>
   struct apply
   {
     typedef typename apply0<F>::type type;

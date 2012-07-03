@@ -99,7 +99,6 @@ int main()
   test<> t;
   std::cout << t.method(2) << std::endl;
   if (t.method(2) != 5 ) return 1;
-  std::cout << "yo" << std::endl;
   test<aspect2> t2;
   std::cout << t2.method(2) << std::endl;
   return 0;
