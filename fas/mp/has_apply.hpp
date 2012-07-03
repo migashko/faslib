@@ -8,6 +8,7 @@
 #define FAS_MP_HAS_APPLY_HPP
 
 #include <fas/typemanip/has_template.hpp>
+#include <fas/typemanip/wrapper.hpp>
 
 namespace fas{
 
@@ -20,6 +21,12 @@ FAS_HAS_TEMPLATE5(has_apply5, apply);
 
 template<typename T, int C = 1>
 struct has_apply;
+
+template<typename T, int C>
+struct has_apply< w<T>, C >
+{
+  enum { value = 0 };
+};
 
 template<typename T>
 struct has_apply<T, 0>

@@ -11,24 +11,21 @@
 #include <map>
 
 using fas::w;
-using fas::_1;
-using fas::_2;
-using fas::_3;
-using fas::_4;
+using fas::_;
 
 
 struct _map_;
+struct _value_;
 
 struct aspect1: fas::aspect< fas::type_list_n<
-  fas::advice<_map_, w < std::map<_1, _2, _3, _4> > >
+  fas::type_advice<_map_, w < std::map<_,_,_,_> > >,
+  fas::value_advice<_value_, int>
 >::type>{};
-
-
-
 
 int main()
 {
   typedef fas::aspect_class<aspect1> class1;
   class1 c1;
+  c1.get_aspect().get<_value_>() = 10;
   return 0;
 }

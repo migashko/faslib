@@ -11,10 +11,10 @@
 
 namespace fas{
 
-template<typename T>
+template<typename T >
 struct wrap
 {
-  typedef wrapper<T> type;
+  typedef w<T> type;
 };
 
 }

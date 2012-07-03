@@ -8,7 +8,8 @@
 #define FAS_MP_DETAIL_BIND_HPP
 
 #include <fas/mp/p.hpp>
-#include <fas/mp/ps_c.hpp>
+#include <fas/mp/private/ps_c.hpp>
+#include <fas/typemanip/wrapper.hpp>
 
 namespace fas{ namespace detail{
 
@@ -58,6 +59,13 @@ struct bind_impl2_1
   typedef ps_c< F, PL, Counter_ > placeholder_select;
   enum { counter = Counter_ + placeholder_select::value };
   typedef typename placeholder_select::type type;
+};
+
+template<typename F, typename PL, int Counter_>
+struct bind_impl2_1< w<F>, PL, Counter_>
+{
+  enum { counter = Counter_ };
+  typedef w<F> type;
 };
 
 template<

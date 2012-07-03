@@ -7,11 +7,11 @@
 #ifndef FAS_MP_DETAIL_PH_MAX_HPP
 #define FAS_MP_DETAIL_PH_MAX_HPP
 
-#include <fas/integral/max_c.hpp>
-
 #include <fas/mp/p.hpp>
-#include <fas/mp/ph_num.hpp>
+#include <fas/mp/private/ph_num.hpp>
 
+#include <fas/integral/max_c.hpp>
+#include <fas/typemanip/wrapper.hpp>
 
 namespace fas{ namespace detail{
   
@@ -65,6 +65,17 @@ struct ph_max_impl_1
     count = ph_num<F, _C>::next 
   };
 };
+
+template<typename F, int _C>
+struct ph_max_impl_1< w<F>, _C >
+{
+  enum
+  {
+    value = 0,
+    count = _C
+  };
+};
+
 
 template<
   template<typename> class F,

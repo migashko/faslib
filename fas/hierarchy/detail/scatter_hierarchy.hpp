@@ -87,7 +87,7 @@ struct sh
   : L::left_type
   , scatter_hierarchy_impl<typename L::right_type>::type
 {
-  typedef L type_list_type;
+  typedef L hierarchy_list;
   typedef typename L::left_type left_base;
   typedef typename scatter_hierarchy_impl<typename L::right_type>::type right_base;
 };
@@ -99,7 +99,7 @@ struct sh< type_list<L, R> >
   : L
   , scatter_hierarchy_impl<R>::type
 {
-  typedef type_list<L, R> type_list_type;
+  typedef type_list<L, R> hierarchy_list;
   typedef L left_base;
   typedef typename scatter_hierarchy_impl<R>::type right_base;
 };

@@ -7,7 +7,7 @@
 #ifndef FAS_MP_PS_HPP
 #define FAS_MP_PS_HPP
 
-#include <fas/mp/ps_c.hpp>
+#include <fas/mp/private/ps_c.hpp>
 #include <fas/integral/int_.hpp>
 
 namespace fas{

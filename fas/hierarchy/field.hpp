@@ -13,23 +13,29 @@
 #include <fas/type_list/length.hpp>
 
 namespace fas {
+
+
+template<typename T>
+struct field
+{
+  template<typename H>
+  inline static T& get(H& h)
+  {
+    typedef typename H::hierarchy_list hierarchy_list;
+    typedef typename type_at_c< index_of<T, hierarchy_list >::value, hierarchy_list >::fulltail fulltail;
+    return static_cast<T&>( static_cast< detail::sh<fulltail> &>(h) );
+  }
   
-template<typename T, typename H>
-inline T& field(H& h)
-{
-  typedef typename H::type_list_type type_list_type;
-  typedef typename type_at_c< index_of<T, type_list_type >::value, type_list_type >::fulltail fulltail;
-  return static_cast< detail::sh<fulltail> &>(h);
+  template<typename H>
+  inline static const T& get_const(const H& h)
+  {
+    typedef typename H::hierarchy_list hierarchy_list;
+    typedef typename type_at_c< index_of<T, hierarchy_list >::value, hierarchy_list >::fulltail fulltail;
+    return static_cast<const T&>( static_cast< const detail::sh<fulltail> &>(h) );
+  };
+
 };
 
-
-template<typename T, typename H>
-inline const T& cfield(const H& h)
-{
-  typedef typename H::type_list_type type_list_type;
-  typedef typename type_at_c< index_of<T, type_list_type >::value, type_list_type >::fulltail fulltail;
-  return static_cast< const detail::sh<fulltail> &>(h);
-};
 
 
 
