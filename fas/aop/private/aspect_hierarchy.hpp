@@ -30,6 +30,8 @@ struct aspect_common_helper
   typedef aspect_helper<A> helper;
   struct common_list: helper::common_list{};
   struct group_list: helper::group_list{};
+  struct net_list: helper::net_list{};
+  struct flat_list: helper::flat_list{};
   
 };
 
@@ -39,6 +41,8 @@ struct aspect_common_helper< aspect<L> >
   typedef aspect_helper< aspect<L> > helper;
   typedef typename helper::common_list common_list;
   typedef typename helper::group_list group_list;
+  typedef typename helper::net_list net_list;
+  typedef typename helper::flat_list flat_list;
 };
 
 
@@ -51,6 +55,8 @@ class aspect_hierarchy
   typedef aspect_helper<A> helper;
 public:
 
+  typedef typename aspect_common_helper<A>::net_list net_list; // удалить
+  typedef typename aspect_common_helper<A>::flat_list flat_list; // удалить
   typedef typename helper::hierarchy_list hierarchy_list;
   typedef typename aspect_common_helper<A>::common_list common_list;
   typedef typename aspect_common_helper<A>::group_list group_list;
@@ -62,7 +68,17 @@ public:
   get()
   {
     typedef typename find_advice< Tg, common_list>::type advice_type;
-    return field<advice_type>( static_cast<super&>(*this) ).get_advice();
+/*#warning*/
+    typedef typename super::type_list_type type_list_type;
+    typedef typename type_at_c< index_of<advice_type, type_list_type >::value, type_list_type >::fulltail fulltail;
+
+    return static_cast<advice_type&>( static_cast< detail::sh<fulltail> &>(static_cast<super&>(*this) ) ).get_advice();
+    
+     /*super& sup = static_cast<super&>(*this);
+     advice_type& adv = field<advice_type>( sup );
+     return adv.get_advice();*/
+     //return field<advice_type>( static_cast<super&>(*this) ).get_advice();
+    //return static_cast<advice_type&>( static_cast<super&>(*this) ).get_advice();
   };
 
   template<typename Tg>

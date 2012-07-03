@@ -10,7 +10,22 @@
 namespace fas{
 
 template<typename T>
-struct w{};
+struct arg {};
+
+template<typename T>
+struct arg_extract { typedef T type; };
+
+template< typename T >
+struct arg_extract< arg<T> > { typedef T type; };
+
+template<typename T>
+struct is_arg { enum {value = 0}; };
+
+template<typename T>
+struct is_arg< arg<T> > { enum {value = 1}; };
+/*
+template<typename T>
+struct w {};
 
 template<typename T>
 struct unw { typedef T type; };
@@ -23,6 +38,7 @@ struct is_w { enum {value = 0}; };
 
 template<typename T>
 struct is_w< w<T> > { enum {value = 1}; };
+*/
 
 
 }

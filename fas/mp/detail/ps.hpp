@@ -59,7 +59,7 @@ template<typename PH, typename PL, int PD>
 struct ps_impl2
 {
   typedef typename ps_impl3< PH::value - 1, PL, is_type_list<PL>::value >::type wtype;
-  typedef typename unw<wtype>::type type;
+  typedef typename arg_extract<wtype>::type type;
   enum { value = 0 };
 };
 
@@ -67,7 +67,7 @@ template<typename PL, int PD>
 struct ps_impl2<_, PL, PD>
 {
   typedef typename ps_impl3< PD, PL, is_type_list<PL>::value >::type wtype;
-  typedef typename unw<wtype>::type type;
+  typedef typename arg_extract<wtype>::type type;
   enum { value = 1 };
 };
 
