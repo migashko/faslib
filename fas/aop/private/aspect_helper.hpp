@@ -1,4 +1,4 @@
-  //
+//
 // Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
@@ -36,6 +36,8 @@
 
 
 #include <fas/integral/or_.hpp>
+#include <fas/typemanip/empty_type.hpp>
+#include <fas/typemanip/is_empty_type.hpp>
 
 namespace fas{
 
@@ -45,28 +47,43 @@ struct aspect_helper
   typedef A aspect_type;
 
 public:
-  // строим плоский список
+  // выбираем все элементы всех аспектов (любого уровня вложенности)
+  // и строим плоский список эементов 
   typedef typename aspect_select_t< 
     aspect_type, 
     any
   >::type flat_list;
   
-  // метафункция удаления из хвоста списка элементов с тегом элемента головы списка 
-  typedef erase_if<
-    /*tail< */_1 /*>*/,
+  // метафункция заменяет все элемнты в списке, тег которых совпадает с тегом первого 
+  // элемента списка на empty_type (в том числе и первый элемент)
+  typedef transform_if<
+    _1,
+    empty_type,
     a< is_has_tag< p<_1>, tag_cast< head< _1 > > > >
-  > remove_from_tail;
+  > replace_removed;
 
 public:
   
-  // для каждого remove_advice<_tag_> в списке удаляем элементы _tag_ расположенные за ним
+  // заменяем remove_advice и следующие за ним элементы с такми же тегом на empty_type
   typedef typename transform_tail_if<
     flat_list,
-    remove_from_tail,
+    // метафункция заменяет все элемнты в списке, тег которых совпадает с тегом первого 
+    // элемента списка на empty_type (в том числе и первый элемент)
+    transform_if<
+      _1,
+      empty_type,
+      a< is_has_tag< p<_1>, tag_cast< head< _1 > > > >
+    >,
     is_remove_advice<_1>
+  >::type replaced_list;
+  
+  // удаляем empty_type из списка
+  typedef typename erase_if_t<
+    replaced_list,
+    is_empty_type
   >::type net_list;
 
-  // заменяем group<_tag_> на group_call<_tag_> и оставляем первое вхождение
+  // заменяем group<_tag_> на group_call<_tag_> и удаляем дубликаты элементов, оставляя первое вхождение
   // это список по которому будет производиться поиск с помощью find_advice
   typedef typename unique_first<
     typename transform_if<
@@ -83,14 +100,7 @@ public:
     or_< is_alias<_1>, is_forward<_1> >
   >::type hierarchy_list;
 
-  // извлекаем элементы group<_tag_>
-  // этот список использует group_call для групповых вызовов
-  /*typedef typename aspect_select_t<
-    aspect_type,
-    is_group
-  >::type group_list;
-  */
-
+  // формируем список состоящий только из груп
   typedef typename select_t<
     net_list,
     is_group

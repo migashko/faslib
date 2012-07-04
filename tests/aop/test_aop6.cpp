@@ -15,37 +15,52 @@
 
 struct _tag1_;
 struct _tag2_;
+struct _tag3_;
+struct _tag4_;
+struct _tag5_;
+struct _tag6_;
+
+
 
 struct aspect1: fas::aspect< fas::type_list_n<
-  fas::value_advice< _tag1_, int >,
-  fas::value_advice< _tag2_, int >
+  fas::stub<_tag1_>,
+  fas::stub<_tag2_>,
+  fas::stub<_tag3_>,
+  fas::stub<_tag4_>,
+  fas::stub<_tag5_>,
+  fas::stub<_tag6_>
 >::type >
 {};
 
 struct aspect2: fas::aspect< fas::type_list_n<
-  fas::value_advice< _tag1_, long long >,
+  fas::value_advice< _tag4_, int >,
+  fas::type_advice< _tag5_, int >,
+  fas::stub<_tag6_>
+>::type >
+{};
+
+struct aspect3: fas::aspect< fas::type_list_n<
   fas::remove_advice<_tag1_>,
-  aspect1
+  fas::remove_advice<_tag3_>,
+  fas::remove_advice<_tag5_>,
+  aspect1,
+  aspect2
 >::type >
 {};
 
 
-
-
 int main()
 {
-  typedef fas::aspect_class<aspect1> class1;
-  typedef fas::aspect_class<aspect2> class2;
-  
+  typedef fas::aspect_class<aspect3> class3;
   
   enum 
   { 
-    result = fas::static_check< sizeof(class1)==sizeof(int)*2 >::value
-           + fas::static_check< fas::length<typename class2::aspect::common_list>::value == 2 >::value
-           + fas::static_check< fas::length<typename class2::aspect::hierarchy_list>::value == 2 >::value
-           + fas::static_check<  sizeof( fas::type_at_c< 0, typename class2::aspect::hierarchy_list>::type ) == sizeof(long long) >::value
-           + fas::static_check<  sizeof( fas::type_at_c< 1, typename class2::aspect::hierarchy_list>::type ) == sizeof(int) >::value
-           + fas::static_check< sizeof(class2)== ( sizeof(int)*2 /*aligment*/ + sizeof(long long) )>::value
+    result = fas::static_check< class3::aspect::has_advice<_tag1_>::value == 0 >::value
+           + fas::static_check< class3::aspect::has_advice<_tag2_>::value == 1 >::value
+           + fas::static_check< class3::aspect::has_advice<_tag3_>::value == 0 >::value
+           + fas::static_check< class3::aspect::has_advice<_tag4_>::value == 1 >::value
+           + fas::static_check< class3::aspect::has_advice<_tag5_>::value == 0 >::value
+           + fas::static_check< class3::aspect::has_advice<_tag6_>::value == 1 >::value
   };
   /*
 enum 

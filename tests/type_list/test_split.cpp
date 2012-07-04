@@ -19,6 +19,9 @@ typedef list_2 check_0_right;
 typedef type_list<float> check_1_left;
 typedef type_list<int, list_1> check_1_right;
 
+typedef type_list<float, type_list<int> > check_2_left;
+typedef list_1 check_2_right;
+
 
 typedef list_2 check_4_left;
 typedef empty_list check_4_right;
@@ -32,6 +35,8 @@ int main()
          + static_check< some_type< split< int_<0>, list_2>::right_list, check_0_right>::value >::value
          + static_check< some_type< split< int_<1>, list_2>::left_list, check_1_left>::value >::value
          + static_check< some_type< split< int_<1>, list_2>::right_list, check_1_right>::value >::value
+         + static_check< some_type< split< int_<2>, list_2>::left_list, check_2_left>::value >::value
+         + static_check< some_type< split< int_<2>, list_2>::right_list, check_2_right>::value >::value
          + static_check< some_type< split< int_<4>, list_2>::left_list, check_4_left>::value >::value
          + static_check< some_type< split< int_<4>, list_2>::right_list, check_4_right>::value >::value
          // -DFASLIB_TYPE_LIST_CHECK for human readable error

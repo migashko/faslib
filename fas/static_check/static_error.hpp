@@ -13,17 +13,14 @@ namespace fas{
 
 template<typename E, int V>
 struct static_error
-  //: errorlist::noerror<E>
 {
-  /*enum { value = V };*/
   typedef errorlist::noerror<E> type;
   
 };
 
 template<typename E>
-struct static_error<E, false> /*: E*/
+struct static_error<E, false>
 {
-  /*enum { value = 0 };*/
   typedef E type;
 };
   
