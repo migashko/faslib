@@ -106,6 +106,7 @@ struct key_value_container_helper
     fas::type_advice<_value_, value_type >,
     fas::type_advice<_compare_, key_compare >,
     fas::type_advice<_allocator_, allocator_type >,
+    
     fas::remove_advice<_allocator_>,
     fas::remove_advice<_compare_>,
     fas::remove_advice<_value_>,
@@ -126,6 +127,7 @@ struct key_value_container_helper
   enum { result3 = fas::static_check< fas::length<net_list>::value == 8 >::value };
   enum { result4 = fas::static_check< fas::length<common_list>::value == 8 >::value };
   enum { result5 = fas::static_check< fas::length<hierarchy_list>::value == 8 >::value };
+  enum { result5_1 = fas::static_check< super::aspect::template has_advice<_container_>::value >::value };
 
   typedef fas::erase_if<
     /*tail< */_1 /*>*/,
@@ -192,7 +194,7 @@ int main()
   typedef fas::type_list_n< va, /*fas::remove_advice<_container_>,*/ fas::aspect<>, fas::aspect<ta>  >::type ll;
   typedef fas::aspect_class< fas::aspect<ll> > sh;
   sh s;
-  fas::field<va>( s.get_aspect() ).get_advice() = 10;
+  fas::field<va>::get( s.get_aspect() ).get_advice() = 10;
   s.get_aspect().get<_find_>() = 20;
   //fas::field<ta>( s.get_aspect() ) = ta();
   

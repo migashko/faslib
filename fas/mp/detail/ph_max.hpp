@@ -8,7 +8,7 @@
 #define FAS_MP_DETAIL_PH_MAX_HPP
 
 #include <fas/mp/p.hpp>
-#include <fas/mp/ph_num.hpp>
+#include <fas/mp/private/ph_num.hpp>
 
 #include <fas/integral/max_c.hpp>
 #include <fas/typemanip/wrapper.hpp>

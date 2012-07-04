@@ -9,7 +9,7 @@
 
 #include <fas/mp/detail/lambda.hpp>
 
-#include <fas/mp/ph_max.hpp>
+#include <fas/mp/private/ph_max.hpp>
 #include <fas/mp/has_apply.hpp>
 
 namespace fas{
