@@ -26,10 +26,6 @@ struct max
     R, L
   >::type type;
   enum { value = type::value };
-  /*
-  enum { value = ( L::value < R::value ) ? R::value : L::value };
-  typedef int_< value > type;
-  */
 };
 
 }

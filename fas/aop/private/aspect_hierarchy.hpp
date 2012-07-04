@@ -77,7 +77,6 @@ public:
   {
     typedef typename find_advice< Tg, common_list>::type advice_type;
     return field<advice_type>::get_const( static_cast<const super&>(*this) ).get_advice();
-    //return cfield<advice_type>( static_cast<const super&>(*this) ).get_advice();
   };
 
   template<typename Tg>
@@ -114,22 +113,6 @@ public:
       Tg,
       is_advice<type1>::value && !some_type< type1, empty_type>::value
     >::type type;
-    /*
-    typedef typename find_advice< Tg, typename helper::net_list, empty_type >::type type1;
-    typedef typename aspect_select_group<group_list, Tg>::type type2;
-
-    typedef typename if_c<
-      is_advice<type1>::value,
-      type_list<typename type1::tag>,
-      type2
-    >::type type;
-    */
-    /*typedef typename switch_c<
-      case_c< some_type< type1, empty_type > >
-    >::type type;
-    */
-    
-    
   };
 };
 

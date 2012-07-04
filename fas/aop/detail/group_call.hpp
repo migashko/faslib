@@ -28,20 +28,6 @@ inline F for_each_group(L, T& t, F f, int_<C>, int_<N> )
   f(t, tag<head>() );
   return for_each_group( L(), t, f, int_<C+1>(), int_<N>() );
 }
-  /*
-template<typename T, typename F >
-inline F for_each_group(empty_list, T&, F f) 
-{
-  return f; 
-}
-
-template<typename L, typename R, typename T, typename F >
-inline F for_each_group(type_list<L, R>, T& t, F f )
-{
-  f(t, tag<L>() );
-  return for_each_group( R(), t, f);
-}
-*/
 
 /// 0
 template<typename T >

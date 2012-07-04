@@ -4,6 +4,7 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
+
 #ifndef FAS_AOP_ASPECT_SELECT_GROUP_HPP
 #define FAS_AOP_ASPECT_SELECT_GROUP_HPP
 

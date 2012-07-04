@@ -18,6 +18,7 @@ struct inc
   enum { value = type::value };
 };
 
+
 }
 
 #endif
