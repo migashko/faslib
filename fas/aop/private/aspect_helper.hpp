@@ -44,7 +44,7 @@ struct aspect_helper
 {
   typedef A aspect_type;
 
-private:
+public:
   // строим плоский список
   typedef typename aspect_select_t< 
     aspect_type, 
@@ -53,7 +53,7 @@ private:
   
   // метафункция удаления из хвоста списка элементов с тегом элемента головы списка 
   typedef erase_if<
-    tail< _1 >,
+    /*tail< */_1 /*>*/,
     a< is_has_tag< p<_1>, tag_cast< head< _1 > > > >
   > remove_from_tail;
 

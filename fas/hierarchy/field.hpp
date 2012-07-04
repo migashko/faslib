@@ -14,7 +14,6 @@
 
 namespace fas {
 
-
 template<typename T>
 struct field
 {
@@ -33,12 +32,7 @@ struct field
     typedef typename type_at_c< index_of<T, hierarchy_list >::value, hierarchy_list >::fulltail fulltail;
     return static_cast<const T&>( static_cast< const detail::sh<fulltail> &>(h) );
   };
-
 };
-
-
-
-
 
 }
 
