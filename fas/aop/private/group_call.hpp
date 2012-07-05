@@ -51,7 +51,7 @@ public:
   F for_each(T& t, F f)
   {
     typedef typename gth<Tg, T>::group_tags group_tags;
-    return detail::for_each_group( group_tags(), t, f, int_<0>(), int_< length<group_tags>::value >() );
+    return detail::group_helper::for_each_group( group_tags(), t, f, int_<0>(), int_< length<group_tags>::value >() );
   }
 
   template< template<typename> class IF, typename T, typename F>
@@ -59,7 +59,7 @@ public:
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     typedef typename select< group_tags, IF< advice_cast< _ , typename T::aspect  > > >::type selected_tags;
-    return detail::for_each_group( selected_tags(), t, f, int_<0>(), int_< length<selected_tags>::value >() );
+    return detail::group_helper::for_each_group( selected_tags(), t, f, int_<0>(), int_< length<selected_tags>::value >() );
   }
   
   template< class IF, typename T, typename F>
@@ -72,42 +72,42 @@ public:
   void operator()(T& t)
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    detail::group_call_helper( group_tags(), t);
+    detail::group_helper::group_call_helper( group_tags(), t);
   }
 
   template<typename T, typename P1>
   void operator()(T& t, P1 p1)
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    detail::group_call_helper( group_tags(), t, p1);
+    detail::group_helper::group_call_helper( group_tags(), t, p1);
   }
 
   template<typename T, typename P1, typename P2>
   void operator()(T& t, P1 p1, P2 p2)
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    detail::group_call_helper( group_tags(), t, p1, p2);
+    detail::group_helper::group_call_helper( group_tags(), t, p1, p2);
   }
 
   template<typename T, typename P1, typename P2, typename P3>
   void operator()(T& t, P1 p1, P2 p2, P3 p3) 
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    detail::group_call_helper( group_tags(), t, p1, p2, p3);
+    detail::group_helper::group_call_helper( group_tags(), t, p1, p2, p3);
   }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4>
   void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4) 
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    detail::group_call_helper( group_tags(), t, p1, p2, p3, p4);
+    detail::group_helper::group_call_helper( group_tags(), t, p1, p2, p3, p4);
   }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
   void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
-    detail::group_call_helper( group_tags(), t, p1, p2, p3, p4, p5);
+    detail::group_helper::group_call_helper( group_tags(), t, p1, p2, p3, p4, p5);
   }
 };
 
