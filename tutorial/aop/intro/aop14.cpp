@@ -7,6 +7,7 @@ struct _stateB_;
 struct _stateC_;
 struct _state_;
 struct _state_context_;
+struct _change_state_;
 
 struct stateA
 {
@@ -72,8 +73,9 @@ public:
   template<typename Tg, typename T>
   void set_state(T& t)
   {
-    typedef typename T::aspect::template select_group<_state_>::type state_list; 
+    typedef typename T::aspect::template select_group<_state_>::type state_list;
     _state = fas::index_of<Tg, state_list>::value;
+    t.get_aspect().template getg<_change_state_>()(t, fas::tag<Tg>() );
   }
   
   template<typename T>
@@ -85,7 +87,6 @@ public:
 private:
   int _state; 
 };
-
 
 struct aspect_state: fas::aspect< fas::type_list_n<
   fas::advice<_state_context_, state_context >,
@@ -117,11 +118,35 @@ public:
   }
 };
 
+/// /////////////////////////////////
+
+struct _show_change_state_;
+
+struct ad_change_state
+{
+  template<typename T, typename Tg>
+  void operator()(T& t, fas::tag<Tg>)
+  {
+    printf("| ");  
+  }
+};
+
+struct aspect_change_state: fas::aspect< fas::type_list_n<
+  fas::advice<_show_change_state_, ad_change_state>,
+  fas::group<_change_state_, _show_change_state_>
+>::type > {};
+
 int main()
 {
   test_state<> ts;
   for (int i = 0; i < 10; ++i)
     ts.test(i);
   printf("\n");
+
+  test_state<aspect_change_state> ts2;
+  for (int i = 0; i < 10; ++i)
+    ts2.test(i);
+  printf("\n");
+  
   return 0;
 }

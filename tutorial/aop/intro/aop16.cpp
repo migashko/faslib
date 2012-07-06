@@ -32,20 +32,20 @@ struct ad_find
   template<typename T>
   typename T::container_type::iterator operator()(T& t, const typename T::container_type::key_type& key)
   {
-    //t.get_aspect().template getg<_before_find_>()( t, key );
+    t.get_aspect().template getg<_before_find_>()( t, key );
     typename T::container_type::iterator itr =  t.container().find(key);
     typedef typename T::container_type::value_type value_type;
-    //t.get_aspect().template getg<_after_find_>()( t, static_cast<value_type&>(*itr) );
+    t.get_aspect().template getg<_after_find_>()( t, static_cast<value_type&>(*itr) );
     return itr;
   }
 
   template<typename T>
   typename T::container_type::const_iterator operator()(T& t, const typename T::container_type::key_type& key) const
   {
-    //t.get_aspect().template getg<_before_find_>()( t, key );
+    t.get_aspect().template getg<_before_find_>()( t, key );
     typename T::container_type::const_iterator itr =  t.get_container().find(key);
     typedef typename T::container_type::value_type value_type;
-    //t.get_aspect().template getg<_after_find_>()( t, static_cast<const value_type&>(*itr) );
+    t.get_aspect().template getg<_after_find_>()( t, static_cast<const value_type&>(*itr) );
     return itr;
   }
 
@@ -101,47 +101,78 @@ struct make_aspect
   >::type > > featured_aspect_class;
 
   typedef fas::aspect< typename featured_aspect_class::aspect::common_list > type;
- 
 };
 
+template<typename A>
+struct kv_helper
+{
+  typedef fas::aspect_class< A > aspect_class;
+  typedef typename aspect_class::aspect::template advice_cast<_container_>::type container;
+};
 
 template<class Key, class Value, class A = typename make_aspect<Key, Value, fas::aspect<> >::type >
-class key_value_container
-  : public fas::aspect_class< typename make_aspect<Key, Value, fas::aspect<> >::type >
-  , public fas::aspect_class< typename make_aspect<Key, Value, fas::aspect<> >::type >::aspect::template advice_cast<_container_>::type
+class kv_container
+  : public kv_helper< A >::aspect_class
+  , public kv_helper< A >::container
 {
+  
 public:
-  /*typedef typename key_value_container_helper<Key, Value, A>::super super;
-  super _super;
-  typename super::aspect& get_aspect() { return _super.get_aspect();}
-  const typename super::aspect& get_aspect() const { return _super.get_aspect();}
-  */
-  
-  // typedef typename key_value_container_helper<Key, Value, A>::container container_type;
-  typedef typename fas::aspect_class< typename make_aspect<Key, Value, fas::aspect<> >::type >::aspect::template advice_cast<_container_>::type container_type;
 
-  container_type& container() { return *this;}
+  typedef typename kv_helper< A >::container container_type;
+  typedef typename container_type::key_type key_type;
+  typedef typename container_type::key_compare key_compare;
+  typedef typename container_type::allocator_type allocator_type;
+  typedef typename container_type::iterator iterator;
+  typedef typename container_type::const_iterator const_iterator;
+      
+  explicit kv_container( const key_type& comp = key_type(), 
+                         const allocator_type& alloc = allocator_type() )
+  {
+  }
+
+  template< class InputIterator >
+  kv_container(
+    InputIterator first,
+    InputIterator last,
+    const key_compare& comp = key_compare(),
+    const allocator_type& alloc = allocator_type() )
+  {
+  }
+
+  kv_container( const kv_container& other )
+    : container_type(other)
+  {
+    
+  }
+
+  container_type& container() { return *this; }
   
-  typename container_type::iterator find(const typename container_type::key_type& key)
+  iterator find(const key_type& key)
   {
     return this->get_aspect().template get<_find_>()(*this, key);
   }
-  
+
+  const_iterator find(const key_type& key) const
+  {
+    return this->get_aspect().template get<_find_>()(*this, key);
+  }
+
 };
 
 int main()
 {
-  typedef key_value_container<int, std::string > dict_type;
+  typedef kv_container<int, std::string > dict_type;
   dict_type dict;
   dict[1] = "10";
   
   typedef fas::type_advice<_container_, w< std::multimap<_,_,_,_> > > multimap_advice;
 
-  typedef key_value_container<int, std::string, make_aspect< int, std::string, fas::aspect< fas::type_list_n<multimap_advice>::type> >::type > multidict_type;
+  typedef kv_container<int, std::string, make_aspect< int, std::string, fas::aspect< fas::type_list_n<multimap_advice>::type> >::type > multidict_type;
   multidict_type multidict;
   std::cout << multidict.find(1)->second << std::endl;;
-  multidict.container() = dict.container();
-  multidict[1] = std::string("10");
+  multidict_type multidict2(dict.begin(), dict.end() );
+  /*multidict.container() = dict.container();
+  multidict[1] = std::string("10");*/
   
   /*
   typedef fas::value_advice<_find_, int > va;
