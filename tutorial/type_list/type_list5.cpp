@@ -15,20 +15,24 @@ namespace std
 }
 
 typedef fas::type_list_n<
-  fas::int_<-1>, 
   fas::int_<1>, 
-  fas::int_<-1>,
-  fas::int_<2>,
-  fas::int_<-1>
+  fas::int_<2>, 
+  fas::int_<3>,
+  fas::int_<4>,
+  fas::int_<5>,
+  fas::int_<6>
 >::type list;
+
+typedef fas::split_c< fas::length<list>::value / 2, list>::type split_list;
+
+typedef fas::merge< 
+  fas::erase_c< fas::length< split_list::first >::value-1, split_list::first>::type,
+  fas::erase_c< 0, split_list::second>::type
+>::type list1;
 
 int main()
 {
   std::cout << "list : " << list() << std::endl;
-  std::cout << "type_count<int_<-1>>: " << fas::type_count<fas::int_<-1>, list >::value << std::endl;
-  std::cout << "unique<list>: " << fas::unique<list>::type() << std::endl;
-  std::cout << "unique_first<list>: " << fas::unique_first<list>::type() << std::endl;
-  
-  
+  std::cout << "list1: " << list1() << std::endl;
   return 0;
 }
