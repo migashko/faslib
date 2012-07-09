@@ -28,7 +28,7 @@ struct random_shuffle
 {
   typedef typename generate_c< 
     length<L>::value,
-    generator_t< FAS_T_SIMPLIFY(R), rand >
+    generator_t< FAS_T_SIMPLIFY(rand<R>), rand >
   >::type rand_list;
 
   typedef typename shuffle< L, rand_list>::type type;
@@ -41,7 +41,7 @@ struct random_shuffle<R, type_list<LL, RR> >
 {
   typedef typename generate_c< 
     length< RR >::value + 1,
-    generator_t< FAS_T_SIMPLIFY(R), rand >
+    generator_t< FAS_T_SIMPLIFY(rand<R>), rand >
   >::type rand_list;
 
   typedef typename shuffle< type_list<LL, RR>, rand_list>::type type;
