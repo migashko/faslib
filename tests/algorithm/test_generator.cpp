@@ -16,18 +16,18 @@ int main()
   typedef generator< rand<>::initial, rand<_1> > gen_rand;
   
   enum {
-    test = static_check< gen_inc::type::value == 1  >::value
-         + static_check< gen_inc::next::type::value == 2  >::value
-         + static_check< gen_inc::next::next::type::value == 3  >::value
+    test = static_check< gen_inc::type::value == 0  >::value
+         + static_check< gen_inc::next::type::value == 1  >::value
+         + static_check< gen_inc::next::next::type::value == 2  >::value
 
-         + static_check< gen_dec::type::value == 9  >::value
-         + static_check< gen_dec::next::type::value == 8  >::value
-         + static_check< gen_dec::next::next::type::value == 7  >::value
+         + static_check< gen_dec::type::value == 10  >::value
+         + static_check< gen_dec::next::type::value == 9  >::value
+         + static_check< gen_dec::next::next::type::value == 8  >::value
 
     // 11837123 8949370 9722709 4858052 5065847 12997982 235177 12762824 13664875 11895682 760893
-         + static_check< gen_rand::type::value == 11837123  >::value
-         + static_check< gen_rand::next::type::value == 8949370  >::value
-         + static_check< gen_rand::next::next::type::value == 9722709  >::value
+         + static_check< gen_rand::type::value == rand<>::initial::value/*11837123*/  >::value
+         + static_check< gen_rand::next::type::value == 11837123/*8949370*/  >::value
+         + static_check< gen_rand::next::next::type::value == 8949370/*9722709*/  >::value
   };
   
   return 0;
