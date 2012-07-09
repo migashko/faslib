@@ -24,6 +24,7 @@
 #include <fas/algorithm/shuffle.hpp>
 #include <fas/algorithm/sort.hpp>
 #include <fas/algorithm/transform.hpp>
+#include <fas/algorithm/transform_if.hpp>
 #include <fas/algorithm/transform2.hpp>
 #include <fas/algorithm/transform_tail.hpp>
 #include <fas/algorithm/transform_tail_if.hpp>
