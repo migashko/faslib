@@ -14,7 +14,7 @@ namespace fas{
 template<typename T >
 struct wrap
 {
-  typedef w<T> type;
+  typedef wrapper<T> type;
 };
 
 }

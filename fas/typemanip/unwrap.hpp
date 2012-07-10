@@ -11,11 +11,12 @@
 
 namespace fas{
 
+
 template<typename T>
 struct unwrap;
 
 template<typename T>
-struct unwrap< w<T> >
+struct unwrap< wrapper<T> >
 {
   typedef T type;
 };

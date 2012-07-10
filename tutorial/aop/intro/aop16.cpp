@@ -73,17 +73,17 @@ struct make_aspect
   typedef Value mapped_type;
 
   typedef typename fas::apply<
-    typename fas::unwrap< typename original_aspect::template advice_cast<_compare_>::type >::type,
+    typename original_aspect::template advice_cast<_compare_>::type::type,
     key_type
   >::type key_compare;
 
   typedef typename fas::apply<
-    typename fas::unwrap< typename original_aspect::template advice_cast<_allocator_>::type >::type,
+    typename original_aspect::template advice_cast<_allocator_>::type::type,
     key_type
   >::type allocator_type;
 
   typedef typename fas::apply<
-    typename fas::unwrap< typename original_aspect::template advice_cast<_container_>::type >::type,
+    typename original_aspect::template advice_cast<_container_>::type::type,
     key_type,
     mapped_type, 
     key_compare,
