@@ -12,7 +12,7 @@
 #include <fas/mp/a.hpp>
 #include <fas/mp/has_type.hpp>
 
-#include <fas/typemanip/wrapper.hpp>
+#include <fas/mp/w.hpp>
 
 namespace fas{ namespace detail{
 

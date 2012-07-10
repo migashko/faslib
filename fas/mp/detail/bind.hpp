@@ -9,7 +9,7 @@
 
 #include <fas/mp/p.hpp>
 #include <fas/mp/ps_c.hpp>
-#include <fas/typemanip/wrapper.hpp>
+#include <fas/mp/w.hpp>
 
 namespace fas{ namespace detail{
 

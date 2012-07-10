@@ -7,19 +7,10 @@
 #ifndef FAS_TYPEMANIP_WRAPPER_HPP
 #define FAS_TYPEMANIP_WRAPPER_HPP
 
-#include <fas/typemanip/metalist.hpp>
-
 namespace fas{
 
 template<typename T>
-struct w;
-/*{
-  typedef metalist::wrapper metatype;
-  typedef T original_type;
-};
-*/
-
-
+struct wrapper;
 
 }
 
