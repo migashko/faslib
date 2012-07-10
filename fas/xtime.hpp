@@ -4,7 +4,6 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-
 #ifndef FAS_XTIME_HPP
 #define FAS_XTIME_HPP
 
