@@ -8,8 +8,9 @@
 #define FAS_MP_DETAIL_BIND_HPP
 
 #include <fas/mp/p.hpp>
-#include <fas/mp/ps_c.hpp>
 #include <fas/mp/w.hpp>
+#include <fas/mp/private/ps_c.hpp>
+
 
 namespace fas{ namespace detail{
 

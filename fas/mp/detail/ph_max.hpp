@@ -9,8 +9,7 @@
 
 #include <fas/mp/p.hpp>
 #include <fas/mp/w.hpp>
-#include <fas/mp/ph_num.hpp>
-
+#include <fas/mp/private/ph_num.hpp>
 #include <fas/integral/max_c.hpp>
 
 
