@@ -26,7 +26,6 @@
 #include <fas/aop/is_remove_advice.hpp>
 #include <fas/aop/metalist.hpp>
 #include <fas/aop/remove_advice.hpp>
-#include <fas/aop/select_group.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/tag_cast.hpp>
 #include <fas/aop/tag.hpp>
