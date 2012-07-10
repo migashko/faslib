@@ -28,7 +28,6 @@ int main()
   finish = process_nanotime();
   if (finish == 0) return 1;
   if (finish == start) return 1;
-
   return 0;
 }
 

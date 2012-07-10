@@ -17,17 +17,17 @@ namespace fas{
 template<typename T, template<typename> class F>
 struct generator_t
 {
-  typedef T initial;
-  typedef typename F<T>::type type;
-  typedef generator_t< type, F > next;
+  typedef T type;
+  typedef typename F<T>::type next_type;
+  typedef generator_t< next_type, F > next;
 };
 
 template<typename T, typename F>
 struct generator
 {
-  typedef T initial;
+  typedef T type;
   typedef generator_t<T, lambda< FAS_T_SIMPLIFY(F)>::template apply > gt;
-  typedef typename gt::type type;
+  typedef typename gt::next_type next_type;
   typedef typename gt::next next;
 };
 

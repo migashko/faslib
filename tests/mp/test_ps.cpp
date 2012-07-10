@@ -5,7 +5,7 @@
 //
 
 #include <fas/mp/placeholders.hpp>
-#include <fas/mp/ps.hpp>
+#include <fas/mp/private/ps.hpp>
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/static_check.hpp>
 #include <fas/typemanip/some_type.hpp>

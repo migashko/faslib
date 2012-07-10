@@ -15,56 +15,69 @@
 
 namespace fas{
 
-template<typename F, typename H>
-inline typename find_if< typename H::type_list_type, F>::type& field_if(H& h)
+template<typename F>
+struct field_if
 {
-  typedef typename H::type_list_type type_list_type;
+  template<typename H>
+  static inline 
+  typename find_if< typename H::hierarchy_list, F>::type& 
+  get(H& h)
+  {
+    typedef typename H::hierarchy_list hierarchy_list;
   
-  typedef typename type_at< 
-    typename index_of_if<type_list_type, F>::type, 
-    type_list_type 
-  >::fulltail fulltail;
+    typedef typename type_at< 
+      typename index_of_if<hierarchy_list, F>::type, 
+      hierarchy_list 
+    >::fulltail fulltail;
   
-  return static_cast< detail::sh<fulltail> &>(h);
+    return static_cast< detail::sh<fulltail> &>(h);
+  }
+
+  template<typename H>
+  inline const 
+  typename find_if< typename H::hierarchy_list, F>::type& 
+  get_const(const H& h)
+  {
+    typedef typename H::hierarchy_list hierarchy_list;
+  
+    typedef typename type_at< 
+      typename index_of_if<hierarchy_list, F>::type, 
+      hierarchy_list
+    >::fulltail fulltail;
+  
+    return static_cast< const detail::sh<fulltail> &>(h);
+  }
 };
 
-template<typename F, typename H>
-inline const typename find_if< typename H::type_list_type, F>::type& field_if(const H& h)
+template< template<typename> class F >
+struct field_if_t
 {
-  typedef typename H::type_list_type type_list_type;
-  
-  typedef typename type_at< 
-    typename index_of_if<type_list_type, F>::type, 
-    type_list_type 
-  >::fulltail fulltail;
-  
-  return static_cast< const detail::sh<fulltail> &>(h);
+  template<typename H>
+  static inline 
+  typename find_if_t< typename H::hierarchy_list, F>::type& 
+  get(H& h)
+  {
+    typedef typename H::hierarchy_list hierarchy_list;
+    typedef typename type_at< 
+      typename index_of_if_t<hierarchy_list, F>::type, 
+      hierarchy_list
+    >::fulltail fulltail;
+    return static_cast< detail::sh<fulltail> &>(h);
+  };
+
+  template<typename H>
+  static inline 
+  const typename find_if_t< typename H::hierarchy_list, F>::type& 
+  get_const(const H& h)
+  {
+    typedef typename H::hierarchy_list hierarchy_list;
+    typedef typename type_at< 
+      typename index_of_if_t<hierarchy_list, F>::type, 
+      hierarchy_list
+    >::fulltail fulltail;
+    return static_cast< const detail::sh<fulltail> &>(h);
+  };
 };
-
-
-
-template<template<typename> class F, typename H>
-typename find_if_t< typename H::type_list_type, F>::type& field_if_t(H& h)
-{
-  typedef typename H::type_list_type type_list_type;
-  typedef typename type_at< 
-    typename index_of_if_t<type_list_type, F>::type, 
-    type_list_type 
-  >::fulltail fulltail;
-  return static_cast< detail::sh<fulltail> &>(h);
-};
-
-template<template<typename> class F, typename H>
-const typename find_if_t< typename H::type_list_type, F>::type& field_if_t(const H& h)
-{
-  typedef typename H::type_list_type type_list_type;
-  typedef typename type_at< 
-    typename index_of_if_t<type_list_type, F>::type, 
-    type_list_type 
-  >::fulltail fulltail;
-  return static_cast< const detail::sh<fulltail> &>(h);
-};
-
 
 }
 

@@ -33,13 +33,13 @@ void test1()
   typedef scatter_hierarchy<list> hierarchy;
   hierarchy h;
 
-  field< type2type<char> >(h) = type2type<char>();
-  field< apply< type2type<_1>, char>::type >(h) = type2type<char>();
-  field< C >(h) = C();
-  field< B >(h) = B();
-  field_if< some_type<B, _1> >(h) = B();
-  field_if< super_subclass< A, _1 > >(h) = C();
-  field_if< super_subclass< B, _1 > >(h) = C();
+  field< type2type<char> >::get(h) = type2type<char>();
+  field< apply< type2type<_1>, char>::type >::get(h) = type2type<char>();
+  field< C >::get(h) = C();
+  field< B >::get(h) = B();
+  field_if< some_type<B, _1> >::get(h) = B();
+  field_if< super_subclass< A, _1 > >::get(h) = C();
+  field_if< super_subclass< B, _1 > >::get(h) = C();
 }
 
 template<typename T>
@@ -53,7 +53,7 @@ template<typename T, typename H>
 T& get(H& h)
 {
   using namespace ::fas;
-  return field< holder<T> >(h).value_;
+  return field< holder<T> >::get(h).value_;
 };
 
 int test2()

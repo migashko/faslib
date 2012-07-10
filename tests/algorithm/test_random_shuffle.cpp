@@ -38,7 +38,7 @@ using namespace ::fas;
 
 typedef type_list_n< int_<1>, int_<2>,  int_<3>, int_<4>, int_<5>, int_<6>, int_<7>, int_<8>,  int_<9>, int_<10>, int_<11> >::type list;
 typedef type_list_n< int_<7>, int_<11>, int_<4>, int_<5>, int_<2>, int_<3>, int_<1>, int_<10>, int_<8>, int_<6>,  int_<9>  >::type check;
-typedef random_shuffle< int_<0x50000>, list>::type shuffled;
+typedef random_shuffle< int_<0x50000>/*rand<>::type*/, list>::type shuffled;
 
 int main()
 {

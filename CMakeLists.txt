@@ -65,9 +65,11 @@ include_directories(./)
 
 add_subdirectory(tests)
 add_subdirectory(examples)
+add_subdirectory(tutorial)
 
 add_custom_target( tests make WORKING_DIRECTORY tests )
 add_custom_target( examples make WORKING_DIRECTORY examples )
+add_custom_target( tutorial make WORKING_DIRECTORY tutorial )
 
 install(DIRECTORY fas DESTINATION include
   PATTERN "*.cmake" EXCLUDE
