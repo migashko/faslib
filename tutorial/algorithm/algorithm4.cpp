@@ -74,10 +74,7 @@ struct lcm_n
 
   typedef typename result::first type;
   enum { value = type::value };
-
 };
-
-
 
 int main()
 {
