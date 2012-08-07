@@ -1,3 +1,4 @@
+project(config CXX C)
 
 INCLUDE (${CMAKE_ROOT}/Modules/CheckIncludeFile.cmake)
 INCLUDE (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
@@ -48,5 +49,5 @@ else(HAVE_RT_LIB)
   SET(FAS_USE_RT_LIB OFF PARENT_SCOPE)
 endif(HAVE_RT_LIB)
 
-configure_file("${PROJECT_SOURCE_DIR}/config/config.h.in"
-               "${PROJECT_SOURCE_DIR}/fas/system/config.h" )
+configure_file("${CMAKE_SOURCE_DIR}/config/config.h.in"
+               "${CMAKE_SOURCE_DIR}/fas/system/config.h" )
