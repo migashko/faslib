@@ -235,7 +235,7 @@ public:
     catch(const fail_error& )
     {
     }
-    catch(const fatal_error& e)
+    catch(const fatal_error& )
     {
     }
 
