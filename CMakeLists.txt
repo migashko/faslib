@@ -50,7 +50,7 @@ add_subdirectory(config)
 # Disable warnings for non-optimal code
 add_definitions(-DFAS_DISABLE_WARNINGS)
 
-if (FAS_USE_RT_LIB )
+if (FAS_USE_RT_LIB)
   message(STATUS "ADD_DEFINITIONS(-DFAS_USE_RT_LIB)")
   add_definitions(-DFAS_USE_RT_LIB)
 else(FAS_USE_RT_LIB)

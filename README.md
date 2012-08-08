@@ -16,11 +16,10 @@ git clone git://github.com/migashko/faslib.github
 For compile tests, tutorial and examples (cmake required):
 
 ```
-git clone git://github.com/migashko/faslib.github
+git clone git://github.com/migashko/faslib.git
 cd faslib
 mkdir build
 cd build
 cmake ..
 make
 ```
-
