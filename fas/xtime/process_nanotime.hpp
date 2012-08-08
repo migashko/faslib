@@ -9,6 +9,7 @@
 
 #include <fas/system/system.hpp>
 #include <fas/xtime/nanospan.hpp>
+#include <fas/xtime/nanotime.hpp>
 #include <fas/xtime/xop.hpp>
 #include <fas/xtime/types.hpp>
 
@@ -30,7 +31,7 @@ inline nanospan process_nanotime()
            microspan(ru.ru_stime.tv_sec, ru.ru_stime.tv_usec);
   }
 #endif
-  return nanospan(0, 0);
+  return nanotime();
 
 }
 
