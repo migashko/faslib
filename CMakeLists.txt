@@ -71,11 +71,29 @@ add_custom_target( tests make WORKING_DIRECTORY tests )
 add_custom_target( examples make WORKING_DIRECTORY examples )
 add_custom_target( tutorial make WORKING_DIRECTORY tutorial )
 
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "2")
+set(CPACK_PACKAGE_VERSION_PATCH "0")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(CPACK_PACKAGE_CONTACT "migashko@gmail.com")
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 install(DIRECTORY fas DESTINATION include
   PATTERN "*.cmake" EXCLUDE
   PATTERN "*~" EXCLUDE
   PATTERN ".*" EXCLUDE
   PATTERN "Makefile" EXCLUDE
-  PATTERN "CMakeFiles" EXCLUDE)
+  PATTERN "CMakeFiles" EXCLUDE
+)
+
+install(DIRECTORY . DESTINATION share/faslib
+  PATTERN "fas" EXCLUDE
+  PATTERN "*.cmake" EXCLUDE
+  PATTERN "*~" EXCLUDE
+  PATTERN "*kdev*" EXCLUDE
+  PATTERN ".git*" EXCLUDE
+)
 
 include(CPack)

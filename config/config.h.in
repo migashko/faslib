@@ -11,6 +11,9 @@
 /* Define to 1 if you have the <windows.h> header file. */
 #cmakedefine HAVE_WINDOWS_H
 
+/* Define to 1 if you have the <wincon.h> header file. */
+#cmakedefine HAVE_WINCON_H
+
 /* Define to 1 if you have the <io.h> header file. */
 #cmakedefine HAVE_IO_H
 
