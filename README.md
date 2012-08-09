@@ -6,6 +6,18 @@ For aspect-oriented programming on native C++
 * without macros
 * header only
 * more efficient code than object-oriented approach
+* effective construction of the chains of responsibilities at compile-time
+* compile-time state-mashine
+* much time was devoted to minimize the compile-time
+
+
+faslib was successfully tested with:
+
+* VC8, VC9, VC10
+* g++ 3.3 and higher
+* MinGW
+
+
 
 ## Getting Started
 
@@ -22,4 +34,9 @@ mkdir build
 cd build
 cmake ..
 make
+```
+
+Installation:
+```
+make install
 ```

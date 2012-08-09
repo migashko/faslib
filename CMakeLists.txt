@@ -29,7 +29,7 @@ elseif(MSVC)
   SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "/Yd /O2 /DNDEBUG")
 
 else(UNIX)
-  
+
 endif(UNIX)
 
 
@@ -94,6 +94,8 @@ install(DIRECTORY . DESTINATION share/faslib
   PATTERN "*~" EXCLUDE
   PATTERN "*kdev*" EXCLUDE
   PATTERN ".git*" EXCLUDE
+  PATTERN "README.md" EXCLUDE
+  PATTERN timeout EXCLUDE
 )
 
 include(CPack)
