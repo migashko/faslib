@@ -14,7 +14,7 @@ struct _say_;
 struct say_one
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"one, "; };
+  void operator()(T&) {  std::cout<<"one, "; }
 };
 
 struct say_two
@@ -80,7 +80,7 @@ struct _say_;
 struct say_ONE
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"ONE, "; };
+  void operator()(T&) {  std::cout<<"ONE, "; }
 };
 
 

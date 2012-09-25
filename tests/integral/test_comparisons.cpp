@@ -12,7 +12,7 @@ using namespace ::fas;
 
 int main()
 {
-  enum 
+  enum
   {
     test1_1 = static_check< equal_to< int_<1>, int_<1> >::type::value >::value,
     test1_2 = static_check< equal_to< int_<-1>, int_<-1> >::type::value >::value,
@@ -48,7 +48,7 @@ int main()
     test6_2 = static_check< greater_equal< int_<-1>, int_<-2> >::type::value >::value,
     test6_3 = static_check< greater_equal< int_<0>, int_<0> >::type::value >::value,
     test6_4 = static_check< greater_equal< int_<-1>, int_<0> >::type::value == 0 >::value,
-    test6_5 = static_check< greater_equal< int_<-1>, int_<-1> >::type::value >::value,
+    test6_5 = static_check< greater_equal< int_<-1>, int_<-1> >::type::value >::value
   };
   return 0;
 }

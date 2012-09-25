@@ -16,7 +16,7 @@ struct ad_cell
 /// -------------------------------------------------------------------------
 
 namespace chain1{
-  
+
 struct _input_;
 struct _output_;
 struct _incoming_;
@@ -46,7 +46,7 @@ struct aspect_chain: fas::aspect< fas::type_list_n<
 /// -------------------------------------------------------------------------
 
 namespace chain2{
-  
+
 struct _input_;
 struct _output_;
 struct _incoming_;
@@ -77,7 +77,7 @@ struct aspect_chain: fas::aspect< fas::type_list_n<
 /// -------------------------------------------------------------------------
 
 namespace chain3{
-  
+
 struct _input_;
 struct _output_;
 struct _incoming_;
@@ -113,7 +113,7 @@ struct _output_;
 struct ad_final_chain
 {
   template<typename T>
-  void operator()(T& t, int value)
+  void operator()(T& , int value)
   {
     std::cout << "Done(" << value << ")" << std::endl;
   }

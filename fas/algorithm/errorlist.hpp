@@ -12,7 +12,7 @@ namespace fas{
 namespace errorlist
 {
   struct generator_required;
-};
+}
 
 }
 

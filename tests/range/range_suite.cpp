@@ -26,7 +26,7 @@ UNIT(range_unit, "")
       t << equal<assert>( r[j], arr[i+j] ) << FAS_TESTING_FILE_LINE;
     }
   }
-};
+}
 
 UNIT(range2_unit, "")
 {
@@ -41,7 +41,7 @@ UNIT(range2_unit, "")
   for (; r; ++i, ++r)
     t << equal<assert, char>( *r, '0' + i ) << FAS_TESTING_FILE_LINE << std::endl << (int)*r;
   t << equal<assert, size_t>( i, 10 ) << FAS_TESTING_FILE_LINE;
-};
+}
 
 UNIT(irange_unit, "")
 {
@@ -63,7 +63,7 @@ UNIT(irange_unit, "")
       t << equal<assert>( *rr, '0' + arr[i+j] ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i << " j==" << j << ", "<< (int)*rr << "!=" << '0' + arr[i];
   }
   t << equal<assert, size_t>( i, 10 ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i ;
-};
+}
 
 UNIT(crange_unit, "")
 {
@@ -75,12 +75,12 @@ UNIT(crange_unit, "")
     ss << i ;
 
   std::vector<int> vect;
-  
+
   typedef fas::copy_range_adapter<
     fas::typerange<std::stringstream>::range,
     fas::typerange< std::vector<int> >::orange
   >  copy_adapter;
-  
+
   copy_adapter r  = copy_adapter( fas::range(ss), fas::orange(vect) );
   size_t i=0;
   for (; r; ++i, ++r)
@@ -92,7 +92,7 @@ UNIT(crange_unit, "")
     }
   }
   t << equal<assert, size_t>( i, 10 ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i ;
-};
+}
 
 
 BEGIN_SUITE(range_suite, "")

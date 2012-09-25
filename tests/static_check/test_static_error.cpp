@@ -38,7 +38,7 @@ int main()
 
   enum {
     test1 = static_check< foo1::value == 100 >::value,
-    test2 = static_check< foo2::value == 50 >::value,
+    test2 = static_check< foo2::value == 50 >::value
     // test3 = static_check< foo3::value == -100 >::value, // invalid use of incomplete type 'struct foo_param_is_less_zero'
     // test4 = static_check< foo4::value == -0 >::value, // error: invalid use of incomplete type 'struct foo_param_is_zero'
   };

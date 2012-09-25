@@ -30,7 +30,7 @@ struct range_helper<T*, typerange_flag::pointer >
   {
     return 0;
   }
-  
+
   template<typename Dist>
   static inline void advance( T*& ptr, Dist s)
   {
@@ -39,6 +39,6 @@ struct range_helper<T*, typerange_flag::pointer >
 
 };
 
-};
+}
 
 #endif

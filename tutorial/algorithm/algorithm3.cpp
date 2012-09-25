@@ -16,11 +16,11 @@ int ffactorial(int i)
   int result = 1;
   for ( ; i > 0; result*=i, --i);
   return result;
-};
+}
 
 /*
   This is demonstrate for_ only as analogue ffactorial, really:
-  
+
   template<int N>
   struct factorial { enum { value = N * factorial<N-1>::value }; };
   template<>
@@ -43,7 +43,7 @@ struct factorial:
     fas::pair<
       fas::dec< fas::first< _1 > >,
       fas::times< fas::second< _1 >, fas::first< _1 > >
-    > 
+    >
   >::type result;
 
   typedef typename result::first  first;  // always int_<0>

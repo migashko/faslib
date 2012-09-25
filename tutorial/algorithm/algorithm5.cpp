@@ -32,7 +32,7 @@ std::vector< std::vector<int> > fbrute_combinations(std::vector<int> v)
     result.resize( std::distance(result.begin(), itr) );
   }
   return result;
-};
+}
 
 using fas::_1;
 using fas::wrapper;
@@ -69,16 +69,16 @@ template<typename L>
 struct brute_combinations
 {
   enum { count = fas::factorial< int_<fas::length<L>::value> >::value };
-  
+
   typedef typename fas::for_<
-  
+
     // initial and result
     fas::pair<
       int_<1>,
       fas::type_list< wrapper< L> >
     >,
-    
-    // condition 
+
+    // condition
     fas::less<
       fas::length< fas::second<_1> >,
       int_<count>

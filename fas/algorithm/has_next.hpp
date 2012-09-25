@@ -11,7 +11,7 @@
 
 namespace fas{
 
-FAS_HAS_TYPENAME(has_next, next);
+FAS_HAS_TYPENAME(has_next, next)
 
 }
 

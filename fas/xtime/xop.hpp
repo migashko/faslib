@@ -41,7 +41,7 @@ inline nanospan operator / (const nanospan& s, const nanospan& f)
   }
   else
     return nanospan( s.to_double() / f.to_double() );
-};
+}
 
 inline nanospan operator * (const nanospan& s, const nanospan& f)
 {
@@ -55,7 +55,7 @@ inline nanospan operator * (const nanospan& s, const nanospan& f)
   }
   else
     return nanospan( s.to_double() * f.to_double() );
-};
+}
 
 inline bool operator == (const nanospan& f,  const nanospan& s)
 {

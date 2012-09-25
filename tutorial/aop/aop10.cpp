@@ -14,7 +14,7 @@ struct _say_;
 struct say_one
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"one, "; };
+  void operator()(T&) {  std::cout<<"one, "; }
 };
 
 struct say_two
@@ -77,7 +77,7 @@ namespace jon {
 struct say_ONE
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"ONE, "; };
+  void operator()(T&) {  std::cout<<"ONE, "; }
 };
 
 struct aspect_ONE: fas::aspect< fas::advice< dredd::_one_, say_ONE> > {};
@@ -99,7 +99,7 @@ public:
 /// /////////////////////////////////////////////////
 
 namespace bob {
-  
+
 struct _four_;
 struct _five_;
 struct _six_;
@@ -181,7 +181,7 @@ public:
 
 namespace sam
 {
-  
+
 struct aspect_ONE234567:
   fas::aspect_merge< jon::aspect_ONE, bob::aspect_1234567>::type
 {};
@@ -207,17 +207,17 @@ int main()
   std::cout << "Dredd: ";
   d.dredd_say();
   std::cout << std::endl;
-  
+
   jon::jon<> j;
   std::cout << "Jon: ";
   j.jon_say();
   std::cout << std::endl;
-  
+
   bob::bob<> b;
   std::cout << "Bob: ";
   b.bob_say();
   std::cout << std::endl;
-  
+
   sam::sam<> s;
   std::cout << "Sam: ";
   s.sam_say();

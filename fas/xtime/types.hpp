@@ -14,18 +14,10 @@
 #define FAS_MICROSEC 1000000L
 #define FAS_MILLISEC 1000L
 
-#ifdef LLONG_MAX
-  #if LLONG_MAX != 9223372036854775807
-    #error
-  #endif
-#else
-  #error
-#endif
-
 
 namespace fas
 {
-  typedef long long xsec_t;
+  typedef long int xsec_t;
 }
 
 

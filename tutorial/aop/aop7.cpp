@@ -3,7 +3,7 @@
 struct say_one
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"one, "; };
+  void operator()(T&) {  std::cout<<"one, "; }
 };
 
 struct say_two
@@ -51,7 +51,7 @@ public:
   {
     _say(*this);
   }
-  
+
   One _one;
   Two _two;
   Three _three;
@@ -64,7 +64,7 @@ public:
 struct say_ONE
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"ONE, "; };
+  void operator()(T&) {  std::cout<<"ONE, "; }
 };
 
 /// /////////////////////////////////////////////////
@@ -205,7 +205,7 @@ int main()
   std::cout << "Jon: ";
   j.jon_say();
   std::cout << std::endl;
-  
+
   bob<> b;
   std::cout << "Bob: ";
   b.bob_say();

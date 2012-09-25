@@ -16,7 +16,7 @@ struct _after_say_;
 struct say_one
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"one, "; };
+  void operator()(T&) {  std::cout<<"one, "; }
 };
 
 struct say_two
@@ -43,12 +43,12 @@ struct say_123s
   void operator()(T& t)
   {
     t.get_aspect().template getg<_before_say_>()(t);
-    
+
     t.get_aspect().template get<_one_>()(t);
     t.get_aspect().template get<_two_>()(t);
     t.get_aspect().template get<_three_>()(t);
     t.get_aspect().template get<_strike_>()(t);
-    
+
     t.get_aspect().template getg<_after_say_>()(t);
   }
 };
@@ -79,13 +79,13 @@ public:
 struct left_bracket
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"["; };
+  void operator()(T&) { std::cout<<"["; }
 };
 
 struct right_bracket
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"]"; };
+  void operator()(T&) { std::cout<<"]"; }
 };
 
 struct _before1_;

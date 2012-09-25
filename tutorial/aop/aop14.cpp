@@ -50,14 +50,14 @@ struct f_state
     , _state(state)
     , _value(value)
   {}
-  
+
   template<typename T, typename Tg>
   void operator()(T& t, fas::tag<Tg> )
   {
     if ( _counter++ == _state )
       t.get_aspect().template get<Tg>()(t, _value);
   }
-  
+
 private:
   int _counter;
   int _state;
@@ -69,7 +69,7 @@ class state_context
 {
 public:
   state_context(): _state(0) {};
-  
+
   template<typename Tg, typename T>
   void set_state(T& t)
   {
@@ -77,22 +77,22 @@ public:
     _state = fas::index_of<Tg, state_list>::value;
     t.get_aspect().template getg<_change_state_>()(t, fas::tag<Tg>() );
   }
-  
+
   template<typename T>
   void operator()(T& t, int value )
   {
     t.get_aspect().template getg<_state_>().for_each( t, f_state(_state, value) );
   }
-  
+
 private:
-  int _state; 
+  int _state;
 };
 
 struct aspect_state: fas::aspect< fas::type_list_n<
   fas::advice<_state_context_, state_context >,
   fas::advice<_stateA_, stateA >, fas::group<_state_, _stateA_>,
   fas::advice<_stateB_, stateB >, fas::group<_state_, _stateB_>,
-  fas::advice<_stateC_, stateC >, fas::group<_state_, _stateC_> 
+  fas::advice<_stateC_, stateC >, fas::group<_state_, _stateC_>
 >::type > {};
 
 template<typename A = fas::empty_type >
@@ -125,9 +125,9 @@ struct _show_change_state_;
 struct ad_change_state
 {
   template<typename T, typename Tg>
-  void operator()(T& t, fas::tag<Tg>)
+  void operator()(T& , fas::tag<Tg>)
   {
-    printf("| ");  
+    printf("| ");
   }
 };
 
@@ -147,6 +147,6 @@ int main()
   for (int i = 0; i < 10; ++i)
     ts2.test(i);
   printf("\n");
-  
+
   return 0;
 }

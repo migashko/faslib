@@ -66,42 +66,42 @@ struct ad_test
 {
   enum { id = ID };
   template<typename T>
-  void operator()(T& t) 
+  void operator()(T& t)
   {
     t.get_aspect().template get< _counters_ >().c0++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int ) 
+  void operator()(T& t, int )
   {
     t.get_aspect().template get< _counters_ >().c1++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int ) 
+  void operator()(T& t, int, int )
   {
     t.get_aspect().template get< _counters_ >().c2++;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int ) 
+  void operator()(T& t, int, int, int )
   {
     t.get_aspect().template get< _counters_ >().c3++;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int, int ) 
+  void operator()(T& t, int, int, int, int )
   {
     t.get_aspect().template get< _counters_ >().c4++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int, int, int ) 
+  void operator()(T& t, int, int, int, int, int )
   {
     t.get_aspect().template get< _counters_ >().c5++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID);
@@ -127,7 +127,7 @@ typedef type_list_n<
   group< _group5_, type_list_n<_test4_, _test5_>::type >,
   group< _group5_, _test2_ >,
   group< _overlapped_, _test2_ >,
-  
+
   group< _overlapped2_, _test2_ >,
   advice< _overlapped2_, ad_overlapped>,
   group< _overlapped2_, _test3_ >,
@@ -137,7 +137,7 @@ typedef type_list_n<
 
 struct test_aspect: aspect<test_advice_list> {};
 
-struct test_class: aspect_class<test_aspect> 
+struct test_class: aspect_class<test_aspect>
 {
   // without the "::" will not work because the base class private ad_counters aspect_class
   const ::ad_counters& get_counters() const { return this->get_aspect().get< _counters_ >();}
@@ -173,7 +173,7 @@ bool test_ids( const std::string& text, std::vector<int> ids1, std::vector<int> 
     return true;
   std::cout << text << " fail" << std::endl;
   return false;
-};
+}
 
 struct f_test
 {
@@ -200,7 +200,7 @@ struct ad_id
   {
     typedef typename equal_to< int_<0>, modulus< typename ad_id<T>::type , int_<2> > >::type type;
   };
-  
+
 
 
 int main()
@@ -267,7 +267,7 @@ int main()
   c = test.get_counters();
   if ( !test_c( "_group6_(advice)", c, 1, 0, 0, 0, 0, 0 ) )
     return -1;
-  
+
 
 
   return 0;

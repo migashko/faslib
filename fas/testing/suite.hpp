@@ -29,7 +29,7 @@
 
 namespace fas{ namespace testing{
 
-  
+
 template<typename A = ::fas::aspect<> >
 class suite
   : public aspect_class< ::fas::aspect<>, A>
@@ -70,10 +70,10 @@ public:
   }
 
   std::ostream& out() { return _out;}
-  
+
   const std::stringstream& stub() const { return _stub;}
 
-  
+
   template<typename U>
   void unit_begin(U& /*u*/)
   {
@@ -96,10 +96,10 @@ public:
       _suite_counts.units_passed++;
     _suite_counts += u.counts();
     _suite_counts.units++;
-    
+
 
   }
-  
+
   void _status_check()
   {
     if ( _status == unit_status::error )
@@ -114,7 +114,7 @@ public:
       throw fatal_error();
     }
   }
-  
+
   void statement_begin()
   {
     ++_unit_statements;
@@ -207,13 +207,18 @@ public:
     return _out;
   }
 
+  std::ostream& operator <<( nothing )
+  {
+    return _out;
+  }
+
   operator bool () const { return _suite_counts.errors == 0 &&  _suite_counts.fails==0 && _suite_counts.fatals==0;}
 
   bool run()
   {
     return _run(*this);
   }
-  
+
   template<typename T>
   bool _run(T& t)
   {
@@ -227,7 +232,7 @@ public:
     _out << SUITE_BEG << size() << " tests";
     if (!_name.empty()) _out << " from " << _name;
     _out << ".";
-    
+
     try
     {
       super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
@@ -240,7 +245,7 @@ public:
     }
 
     _out << std::endl;
-   
+
     if ( *this )
     {
       _out << SUITE_END << std::endl;
@@ -251,15 +256,15 @@ public:
       _out << SUITE_FAIL << _name << ". " << _desc << std::endl;
       _out << PASSED << _suite_counts.units_passed << " tests." << std::endl;
       _out << FAIL << _suite_counts.units - _suite_counts.units_passed << " tests." << std::endl;
-      
+
     }
-    
+
     return *this;
   }
 
   int size() const { return length<unit_tag_list>::value;};
   int count() const { return _suite_counts.units; }
-  
+
   int errors() const { return _suite_counts.errors; }
   int fails() const { return _suite_counts.fails; }
   int fatals() const { return _suite_counts.fatals; }
@@ -274,13 +279,13 @@ private:
   std::string _name;
   std::string _desc;
   unit_status::type _status;
- 
+
   int _unit_count;
   int _unit_errors;
   int _unit_fails;
   int _unit_fatals;
   int _unit_statements;
-  
+
   suite_counts _suite_counts;
 };
 

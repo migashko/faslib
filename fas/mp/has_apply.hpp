@@ -12,12 +12,12 @@
 
 namespace fas{
 
-FAS_HAS_TEMPLATE0(has_apply0, apply);
-FAS_HAS_TEMPLATE1(has_apply1, apply);
-FAS_HAS_TEMPLATE2(has_apply2, apply);
-FAS_HAS_TEMPLATE3(has_apply3, apply);
-FAS_HAS_TEMPLATE4(has_apply4, apply);
-FAS_HAS_TEMPLATE5(has_apply5, apply);
+FAS_HAS_TEMPLATE0(has_apply0, apply)
+FAS_HAS_TEMPLATE1(has_apply1, apply)
+FAS_HAS_TEMPLATE2(has_apply2, apply)
+FAS_HAS_TEMPLATE3(has_apply3, apply)
+FAS_HAS_TEMPLATE4(has_apply4, apply)
+FAS_HAS_TEMPLATE5(has_apply5, apply)
 
 template<typename T, int C = 1>
 struct has_apply;

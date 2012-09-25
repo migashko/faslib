@@ -25,7 +25,7 @@ inline bool is_atty_stdout()
 #else
   return false;
 #endif
-};
+}
 
 inline bool is_atty_stderr()
 {
@@ -34,7 +34,7 @@ inline bool is_atty_stderr()
 #else
 #endif
   return false;
-};
+}
 
 
 inline void sleep( int millisec )

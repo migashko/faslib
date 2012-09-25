@@ -25,20 +25,20 @@ inline nanospan nanotime()
   ::gettimeofday(&tv, 0);
   return nanospan(tv.tv_sec, tv.tv_usec*1000L);
 #elif defined(HAVE__FTIME_S_FUNC)
-  struct _timeb timebuffer; 
+  struct _timeb timebuffer;
   _ftime_s( &timebuffer );
   return millispan(static_cast<long>(timebuffer.time), timebuffer.millitm);
 #elif defined(HAVE__FTIME_FUNC)
-  struct _timeb timebuffer; 
+  struct _timeb timebuffer;
   _ftime( &timebuffer );
   return millispan(static_cast<long>(timebuffer.time), timebuffer.millitm);
 #elif defined(HAVE_FTIME_FUNC)
-	struct timeb timebuffer; 
+	struct timeb timebuffer;
 	ftime( &timebuffer );
 	return millispan(static_cast<long>(timebuffer.time), timebuffer.millitm);
 #endif //HAVE_CLOCK_GETTIME_FUNC
   return nanospan(0, 0);
-};
+}
 
 }
 

@@ -24,14 +24,14 @@ struct field
     typedef typename type_at_c< index_of<T, hierarchy_list >::value, hierarchy_list >::fulltail fulltail;
     return static_cast<T&>( static_cast< detail::sh<fulltail> &>(h) );
   }
-  
+
   template<typename H>
   inline static const T& get_const(const H& h)
   {
     typedef typename H::hierarchy_list hierarchy_list;
     typedef typename type_at_c< index_of<T, hierarchy_list >::value, hierarchy_list >::fulltail fulltail;
     return static_cast<const T&>( static_cast< const detail::sh<fulltail> &>(h) );
-  };
+  }
 };
 
 }

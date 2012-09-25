@@ -36,27 +36,27 @@ struct advice_list:
 
 
   typedef find_advice<
-                      _tag1_, 
-                      advice_list 
+                      _tag1_,
+                      advice_list
                     >::type aaa;
 
 int main()
 {
-enum 
-  { 
-      value = static_check< 
-                  some_type< 
-                    int_<1>, 
+enum
+  {
+      value = static_check<
+                  some_type<
+                    int_<1>,
                     find_advice<_tag1_, advice_list>::type::advice_class
-                  >::value 
+                  >::value
                 >::value
               +
-              static_check< 
-                  some_type< 
-                    int_<2>, 
+              static_check<
+                  some_type<
+                    int_<2>,
                     find_advice<_tag4_, advice_list>::type::advice_class
-                  >::value 
-                >::value,
+                  >::value
+                >::value
   };
 
   return 0;

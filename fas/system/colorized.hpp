@@ -10,10 +10,10 @@
 #include <iostream>
 
 namespace fas { namespace console{
-  
+
   template<int C1=0, int C2=-1, int C3=-1, int C4=-1, int C5=-1>
   struct color_list {};
-  
+
   template<int C1=-1, int C2=-1, int C3=-1, int C4=-1, int C5=-1>
   struct make_color
   {
@@ -21,23 +21,23 @@ namespace fas { namespace console{
   };
 
   template<int C1, int C2, int C3, int C4, int C5>
-  inline typename make_color<C1, C2, C3, C4, C5>::type color() { return 0; };
+  inline typename make_color<C1, C2, C3, C4, C5>::type color() { return 0; }
 
   template<int C1, int C2, int C3, int C4>
-  inline typename make_color<C1, C2, C3, C4, -1>::type color() { return 0; };
+  inline typename make_color<C1, C2, C3, C4, -1>::type color() { return 0; }
 
   template<int C1, int C2, int C3>
-  inline typename make_color<C1, C2, C3, -1, -1>::type color() { return 0; };
+  inline typename make_color<C1, C2, C3, -1, -1>::type color() { return 0; }
 
   template<int C1, int C2>
-  inline typename make_color<C1, C2, -1, -1, -1>::type color() { return 0; };
+  inline typename make_color<C1, C2, -1, -1, -1>::type color() { return 0; }
 
   template<int C1>
-  inline typename make_color<C1, -1, -1, -1, -1>::type color() { return 0; };
+  inline typename make_color<C1, -1, -1, -1, -1>::type color() { return 0; }
 
-  inline make_color<-1, -1, -1, -1, -1>::type color() { return 0; };
+  inline make_color<-1, -1, -1, -1, -1>::type color() { return 0; }
 
-  inline void restore_colors(color_list<colors::restore>){};
+  inline void restore_colors(color_list<colors::restore>){}
   inline void black( color_list<colors::foreground::black>){}
   inline void red( color_list<colors::foreground::red>){}
   inline void green( color_list<colors::foreground::green>){}
@@ -84,22 +84,22 @@ namespace fas { namespace console{
   inline void nounderline(color_list<colors::nounderline>){}
   inline void noblink(color_list<colors::noblink>){}
   inline void noreverse_color(color_list<colors::noreverse>){}
-  
+
 }} // namespace fas
 
 namespace std {
   template<int C1, int C2, int C3, int C4, int C5>
-  ostream& operator << ( 
-    ostream& os, 
+  ostream& operator << (
+    ostream& os,
     void (*)( ::fas::console::color_list<C1, C2, C3, C4, C5> )
   )
   {
     // если переопределить rdbuf в cout, clog, или cerr, то все равно будет пытаться установить цвета
     if ( (::fas::system::is_atty_stdout() && ( cout.rdbuf() == os.rdbuf() || clog.rdbuf() == os.rdbuf() ) )
-         || ( ::fas::system::is_atty_stderr() && cerr.rdbuf() == os.rdbuf() ) 
+         || ( ::fas::system::is_atty_stderr() && cerr.rdbuf() == os.rdbuf() )
        )
     {
-      
+
 #if defined(CWINDOWSCONSOLE)
       ::fas::detail::CWindowsConsole::Instance().SetAttributes(C1);
       ::fas::detail::CWindowsConsole::Instance().SetAttributes(C2);
@@ -108,7 +108,8 @@ namespace std {
       ::fas::detail::CWindowsConsole::Instance().SetAttributes(C5);
       return os
 #elif defined(_POSIX_VERSION)
-      os << "\e["<<C1;
+      os << "\033["<<C1;
+      //os << "\e["<<C1;
       if (C2!=-1) os << ";" << C2;
       if (C3!=-1) os << ";" << C3;
       if (C4!=-1) os << ";" << C4;
