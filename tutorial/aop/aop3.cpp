@@ -118,19 +118,19 @@ public:
     delete _two;
     _two = two;
   }
-  
+
   void set_three(ithree* three)
   {
     delete _three;
     _three = three;
   }
-  
+
   void set_strike(istrike* strike)
   {
     delete _strike;
     _strike = strike;
   }
-  
+
 private:
   ione* _one;
   itwo* _two;
@@ -306,7 +306,7 @@ int main()
   std::cout << "Dredd: ";
   d.dredd_say();
   std::cout << std::endl;
-  
+
   dredd j;
   j.set_one(new say_ONE);
   std::cout << "Jon: ";
@@ -318,7 +318,7 @@ int main()
   std::cout << "Bob: ";
   b.dredd_say();
   std::cout << std::endl;
-  
+
   dredd s;
   s.set_one(new say_ONE);
   s.set_strike(new say_4567);

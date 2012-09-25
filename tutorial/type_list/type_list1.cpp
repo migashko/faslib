@@ -7,10 +7,10 @@ namespace std
 {
   template<typename L, typename R>
   ostream& operator << ( ostream& os, fas::type_list<L,R> )  { os << L::value << ", " << R(); return os;}
-  
+
   template<typename L>
   ostream& operator << ( ostream& os, fas::type_list<L,fas::empty_list> )  { os << L::value; return os; }
-  
+
   ostream& operator << ( ostream& os, fas::empty_list )  { return os; }
 }
 

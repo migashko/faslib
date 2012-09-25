@@ -12,9 +12,9 @@ public:
     this->three();
     this->strike();
   }
-  
+
 private:
-  
+
   void one()    {  std::cout<<"one, ";   }
   void two()    {  std::cout<<"two, ";   }
   void three()  {  std::cout<<"three, "; }
