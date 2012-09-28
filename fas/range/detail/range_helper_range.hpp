@@ -94,7 +94,7 @@ struct range_helper<R, typerange_flag::range >
   }
 
   template<typename RR, typename Dist>
-  static inline void advance( RR r, Dist s)
+  static inline void advance( RR& r, Dist s)
   {
     r.advance(s);
   }
