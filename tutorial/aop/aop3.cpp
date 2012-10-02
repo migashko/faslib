@@ -230,7 +230,8 @@ public:
   {}
 
   say_4567(const say_4567& jd)
-    : _four ( jd._four  ? jd._four->clone()  : 0 )
+    : istrike(jd)
+    , _four ( jd._four  ? jd._four->clone()  : 0 )
     , _five ( jd._five  ? jd._five->clone()  : 0 )
     , _six  ( jd._six   ? jd._six->clone()   : 0 )
     , _seven( jd._seven ? jd._seven->clone() : 0 )
