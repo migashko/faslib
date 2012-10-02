@@ -100,13 +100,13 @@ namespace std {
        )
     {
       
-#if defined(CWINDOWSCONSOLE)
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C1);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C2);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C3);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C4);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C5);
-      return os
+#if defined(HAVE_WINDOWS_H)
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C1);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C2);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C3);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C4);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C5);
+      return os;
 #elif defined(_POSIX_VERSION)
       os << "\e["<<C1;
       if (C2!=-1) os << ";" << C2;

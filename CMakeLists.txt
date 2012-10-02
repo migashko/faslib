@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(faslib CXX)
+project(faslib C CXX)
 
-SET(CPACK_PACKAGE_NAME "faslib")
-SET(CPACK_PACKAGE_VERSION "0.2.0")
 
 if (NOT DEFINED CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")
@@ -71,6 +69,7 @@ add_custom_target( tests make WORKING_DIRECTORY tests )
 add_custom_target( examples make WORKING_DIRECTORY examples )
 add_custom_target( tutorial make WORKING_DIRECTORY tutorial )
 
+SET(CPACK_PACKAGE_NAME "faslib")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "2")
 set(CPACK_PACKAGE_VERSION_PATCH "0")

@@ -4,11 +4,9 @@
 #include <fas/system/colors.hpp>
 #include <fas/system/unp.hpp>
 
-namespace fas { namespace detail{
+namespace fas { namespace console{ namespace detail{
 
-#if defined(HAVE_SETCONSOLETEXTATTRIBUTE_FUNC)
-
-#define CWINDOWSCONSOLE 1
+#if defined(HAVE_WINDOWS_H)
 
 class CWindowsConsole
 {
@@ -45,7 +43,7 @@ public:
             &consoleScreenBufferInfo
         );
 
-    if ( m_bGetConsoleScreenBufferInfoResul )
+    if ( m_bGetConsoleScreenBufferInfoResult )
       return consoleScreenBufferInfo.wAttributes;
     
     return 0;
@@ -131,19 +129,19 @@ public:
     }
     else if ( member == colors::underline)
     {
-      mask |=COMMON_LVB_UNDERSCORE;
+      // mask |=COMMON_LVB_UNDERSCORE;
     }
     else if ( member == colors::nounderline)
     {
-      mask &=~COMMON_LVB_UNDERSCORE;
+      // mask &=~COMMON_LVB_UNDERSCORE;
     }
     else if ( member == colors::reverse)
     {
-      mask |= COMMON_LVB_REVERSE_VIDEO;
+      // mask |= COMMON_LVB_REVERSE_VIDEO;
     }
     else if ( member == colors::noreverse)
     {
-      mask &=~ COMMON_LVB_REVERSE_VIDEO;
+      // mask &=~ COMMON_LVB_REVERSE_VIDEO;
     }
     else
       return;
@@ -168,8 +166,8 @@ public:
 public:
 };
 
-#endif // HAVE_SETCONSOLETEXTATTRIBUTE_FUNC
+#endif // HAVE_WINDOWS_H
 
-}}
+}}}
 
 #endif

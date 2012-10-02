@@ -1,4 +1,4 @@
-project(config CXX C)
+project(config C CXX)
 
 INCLUDE (${CMAKE_ROOT}/Modules/CheckIncludeFile.cmake)
 INCLUDE (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
@@ -11,7 +11,7 @@ check_include_file("sys/timeb.h" HAVE_SYS_TIMEB_H)
 check_include_file("unistd.h" HAVE_UNISTD_H)
 check_include_file("io.h" HAVE_IO_H)
 check_include_file("Windows.h" HAVE_WINDOWS_H)
-check_include_file("Wincon.h" HAVE_WINCON_H)
+
 
 set(
   CMAKE_REQUIRED_INCLUDES 
@@ -21,8 +21,7 @@ set(
   "sys/timeb.h"
   "unistd.h"
   "io.h"
-  "Windows.h" 
-  "Wincon.h"
+  "Windows.h"
 )
 
 check_function_exists("gettimeofday" HAVE_GETTIMEOFDAY_FUNC)
@@ -34,7 +33,6 @@ check_function_exists("_ftime64_s" HAVE__FTIME_S_FUNC)
 check_function_exists("isatty" HAVE_ISATTY_FUNC)
 check_function_exists("_isatty" HAVE__ISATTY_FUNC)
 check_function_exists("getrusage" HAVE_GETRUSAGE_FUNC)
-check_function_exists("SetConsoleTextAttribute" HAVE_SETCONSOLETEXTATTRIBUTE_FUNC)
 
 check_library_exists(rt clock_gettime "time.h" HAVE_RT_LIB)
 

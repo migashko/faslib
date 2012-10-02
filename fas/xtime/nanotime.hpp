@@ -36,6 +36,8 @@ inline nanospan nanotime()
 	struct timeb timebuffer; 
 	ftime( &timebuffer );
 	return millispan(static_cast<long>(timebuffer.time), timebuffer.millitm);
+#else
+#error FAIL
 #endif //HAVE_CLOCK_GETTIME_FUNC
   return nanospan(0, 0);
 };
