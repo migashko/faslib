@@ -14,9 +14,9 @@
 
 namespace fas{
 
-FAS_HAS_TYPENAME(has_iterator_category, iterator_category);
-FAS_HAS_TYPENAME(has_range_category, range_category);
-FAS_HAS_TYPENAME(has_iterator, iterator);
+FAS_HAS_TYPENAME(has_iterator_category, iterator_category)
+FAS_HAS_TYPENAME(has_range_category, range_category)
+FAS_HAS_TYPENAME(has_iterator, iterator)
 
 struct typerange_flag
 {
@@ -33,7 +33,7 @@ struct typerange_flag
       stream    = 6
     };
   };
-  
+
   enum
   {
     other     = 0,                      // 0
@@ -72,6 +72,6 @@ struct typerange_flag
 };
 
 
-};
+}
 
 #endif

@@ -11,7 +11,7 @@
 
 namespace fas{
 
-FAS_HAS_TYPENAME(has_metatype, metatype);
+FAS_HAS_TYPENAME(has_metatype, metatype)
 
 }
 #endif

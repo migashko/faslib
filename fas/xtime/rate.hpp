@@ -15,7 +15,7 @@ namespace fas {
 inline nanospan rate(const nanospan& s)
 {
   return s == 0 ? nanospan::xmax : 1/s;
-};
+}
 
 }
 

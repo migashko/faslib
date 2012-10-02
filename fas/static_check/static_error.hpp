@@ -15,7 +15,7 @@ template<typename E, int V>
 struct static_error
 {
   typedef errorlist::noerror<E> type;
-  
+
 };
 
 template<typename E>
@@ -23,7 +23,7 @@ struct static_error<E, false>
 {
   typedef E type;
 };
-  
+
 }
 
 #endif

@@ -12,7 +12,7 @@
 
 namespace fas{
 
-FAS_HAS_TYPENAME(has_tag, tag);
+FAS_HAS_TYPENAME(has_tag, tag)
 
 }
 

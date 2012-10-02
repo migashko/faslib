@@ -21,7 +21,7 @@ struct range_helper<I, typerange_flag::iterator >
   enum { flag = typerange_flag::iterator };
   typedef typename remove_const<I>::type iterator;
   typedef typename iterator2range< iterator >::type range;
-  
+
   typedef typename range::difference_type   difference_type;
 
   static inline range make_range(I beg)
@@ -38,7 +38,7 @@ struct range_helper<I, typerange_flag::iterator >
   {
     return 0;
   }
-  
+
   template<typename Dist>
   static inline void advance( iterator& itr, Dist s)
   {
@@ -47,6 +47,6 @@ struct range_helper<I, typerange_flag::iterator >
 
 };
 
-};
+}
 
 #endif

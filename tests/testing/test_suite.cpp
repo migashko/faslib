@@ -22,7 +22,7 @@ bool test_expect_out1()
   if ( !ss.str().empty() ) return false;
   if ( su.stub().str() != "Test message." ) return false;
   return true;
-};
+}
 
 bool test_expect_out2()
 {
@@ -33,7 +33,7 @@ bool test_expect_out2()
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[   ERROR ] Is true statement. Test message." ) return false;
   return true;
-};
+}
 
 bool test_assert_out1()
 {
@@ -43,7 +43,7 @@ bool test_assert_out1()
   if ( !ss.str().empty() ) return false;
   if ( su.stub().str() != "Test message." ) return false;
   return true;
-};
+}
 
 bool test_assert_out2()
 {
@@ -54,7 +54,7 @@ bool test_assert_out2()
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[    FAIL ] Is true statement. Test message." ) return false;
   return true;
-};
+}
 
 bool test_critical_out1()
 {
@@ -64,7 +64,7 @@ bool test_critical_out1()
   if ( !ss.str().empty() ) return false;
   if ( su.stub().str() != "Test message." ) return false;
   return true;
-};
+}
 
 bool test_critical_out2()
 {
@@ -75,7 +75,7 @@ bool test_critical_out2()
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[   FATAL ] Is true statement. Test message." ) return false;
   return true;
-};
+}
 
 bool test_message_out()
 {
@@ -86,7 +86,7 @@ bool test_message_out()
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[ MESSAGE ] Message1. Message2. Message3." ) return false;
   return true;
-};
+}
 
 bool test_warning_out()
 {
@@ -97,7 +97,7 @@ bool test_warning_out()
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[ WARNING ] Message1. Message2." ) return false;
   return true;
-};
+}
 
 bool test_error_out()
 {
@@ -109,7 +109,7 @@ bool test_error_out()
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[   ERROR ] Message1. Message2." ) return false;
   return true;
-};
+}
 
 bool test_fatal_out()
 {
@@ -121,8 +121,7 @@ bool test_fatal_out()
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[   FATAL ] Message1. Message2." ) return false;
   return true;
-};
-
+}
 
 int main()
 {
@@ -138,5 +137,4 @@ int main()
   if (!test_fatal_out()) return -1;
   std::cout << "OK" << std::endl;
   return 0;
-};
-
+}

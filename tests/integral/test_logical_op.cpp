@@ -12,7 +12,7 @@ using namespace ::fas;
 
 int main()
 {
-  enum 
+  enum
   {
     test1 = static_check< and_< bool_<true>, bool_<true> >::type::value >::value,
     test2 = static_check< and_< true_, true_ >::value >::value,
@@ -23,9 +23,9 @@ int main()
 
     test7 = static_check< or_< int_<0>, int_<0>  >::type::value == false >::value,
     test8 = static_check< or_< int_<10>, int_<0>  >::value == true >::value,
-  
+
     test9 = static_check< not_< int_<0> >::type::value == true >::value,
-    test10 = static_check< not_< int_<10> >::value == false >::value,
+    test10 = static_check< not_< int_<10> >::value == false >::value
   };
   return 0;
 }

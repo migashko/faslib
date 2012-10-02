@@ -18,11 +18,11 @@ typedef push_front<list_1, list_2>::type result_list;
 
 int main()
 {
-  enum 
+  enum
   {
-    test = static_check< some_type< check_list1, result_list>::value >::value,
+    test = static_check< some_type< check_list1, result_list>::value >::value
   };
-  
+
   return 0;
 }
 

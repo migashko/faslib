@@ -39,7 +39,7 @@ struct ad_advice1
 struct ad_advice2
 {
   template<typename T>
-  int operator()(T& t, int value)
+  int operator()(T&, int value)
   {
     std::cout << "ad_advice2" << std::endl;
     return value*2;
@@ -67,14 +67,14 @@ private:
 
   friend class super::aspect::template advice_cast< _tag1_ >::type;
 #endif
-  
+
   void private_method()
   {
-    
+
   };
 };
 
-/// 
+///
 struct ad_advice3
 {
   template<typename T>

@@ -12,7 +12,7 @@ struct _say_;
 struct say_one
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"one, "; };
+  void operator()(T&) {  std::cout<<"one, "; }
 };
 
 struct say_two
@@ -72,13 +72,13 @@ public:
 struct left_bracket
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"["; };
+  void operator()(T&) { std::cout<<"["; }
 };
 
 struct right_bracket
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"]"; };
+  void operator()(T&) { std::cout<<"]"; }
 };
 
 struct _same_say_;
@@ -107,13 +107,13 @@ struct aspect_in_brackets: fas::aspect< fas::type_list_n<
 struct left_brace
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"{"; };
+  void operator()(T&) { std::cout<<"{"; }
 };
 
 struct right_brace
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"}"; };
+  void operator()(T&) { std::cout<<"}"; }
 };
 
 struct aspect_in_braces: fas::aspect< fas::type_list_n<

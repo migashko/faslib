@@ -22,9 +22,9 @@ struct range_helper<T, typerange_flag::other >
   typedef std::reverse_iterator<T*> reverse_iterator;
   typedef random_access_range< std::reverse_iterator<T*> > reverse_range;
   typedef forward_range<T*> orange;
-  
+
   typedef typename range::difference_type difference_type;
-  
+
   template<typename TT>
   static inline reverse_range make_rrange(TT* v)
   {
@@ -60,6 +60,6 @@ struct range_helper<T, typerange_flag::other >
   }
 };
 
-};
+}
 
 #endif

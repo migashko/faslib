@@ -21,7 +21,7 @@ struct range_helper<R, typerange_flag::range >
   typedef R range;
   typedef typename range::difference_type   difference_type;
   typedef typename range::iterator   iterator;
-  
+
   static inline range make_range(R r)
   {
     return r;
@@ -34,26 +34,26 @@ struct range_helper<R, typerange_flag::range >
   {
     return r.reverse();
   }
-  
-  
+
+
   template<typename RR /*==R */>
   static inline forward_range< typename RR::iterator > make_orange(RR r, bool clear)
   {
-    enum 
+    enum
     {
       is_output_range = some_type< output_range_tag, typename RR::range_category_tag >::value,
       is_intput_range = some_type< input_range_tag, typename RR::range_category_tag >::value,
       not_input_or_output_range = static_check< !(is_output_range || is_intput_range ) >::value
     };
-    
+
     typedef forward_range< typename RR::iterator > orange;
-    
+
     if ( clear )
     {
-      for ( orange i(r.begin(), r.end()); i ; ++i) 
+      for ( orange i(r.begin(), r.end()); i ; ++i)
         *i = typename RR::value_type();
     }
-    
+
     return orange( r.begin(), r.end() );
   }
 
@@ -82,7 +82,7 @@ struct range_helper<R, typerange_flag::range >
   {
     r.increase(cbeg, cend);
   }
-  
+
   static inline iterator begin(R r)
   {
     return r.begin();
@@ -94,7 +94,7 @@ struct range_helper<R, typerange_flag::range >
   }
 
   template<typename RR, typename Dist>
-  static inline void advance( RR r, Dist s)
+  static inline void advance( RR& r, Dist s)
   {
     r.advance(s);
   }
@@ -102,6 +102,6 @@ struct range_helper<R, typerange_flag::range >
 };
 
 
-};
+}
 
 #endif

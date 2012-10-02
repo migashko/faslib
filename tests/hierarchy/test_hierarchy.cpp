@@ -12,7 +12,7 @@
 #include <fas/typemanip/type2type.hpp>
 #include <fas/typemanip/super_subclass.hpp>
 
-// 
+//
 struct A{};
 struct B:A{};
 struct C:B{};
@@ -22,7 +22,7 @@ void test1()
   using namespace ::fas;
 
   typedef type_list_n<
-    type2type<char>, 
+    type2type<char>,
     type2type<int>,
     type2type<long>,
     type2type<double>,
@@ -54,7 +54,7 @@ T& get(H& h)
 {
   using namespace ::fas;
   return field< holder<T> >::get(h).value_;
-};
+}
 
 int test2()
 {

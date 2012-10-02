@@ -22,7 +22,19 @@ struct remove_const_reference<const T>
 };
 
 template<typename T>
+struct remove_const_reference<const T*>
+{
+  typedef typename remove_const_reference<T*>::type type;
+};
+
+template<typename T>
 struct remove_const_reference<T&>
+{
+  typedef typename remove_const_reference<T>::type type;
+};
+
+template<typename T>
+struct remove_const_reference<const T&>
 {
   typedef typename remove_const_reference<T>::type type;
 };

@@ -3,6 +3,7 @@
 #include <fas/mp.hpp>
 #include <fas/integral.hpp>
 #include <fas/typemanip.hpp>
+#include <fas/static_check.hpp>
 
 #include <iostream>
 
@@ -16,20 +17,21 @@ int ffactorial(int i)
   int result = 1;
   for ( ; i > 0; result*=i, --i);
   return result;
-};
+}
 
 /*
   This is demonstrate for_ only as analogue ffactorial, really:
-  
+
   template<int N>
   struct factorial { enum { value = N * factorial<N-1>::value }; };
   template<>
   struct factorial<1> { enum { value = 1 };};
 */
-struct nan;
+struct factorial_nan;
+
 template<int I>
 struct factorial:
-  fas::static_error<nan, (I>=0) >::type
+  fas::static_error<factorial_nan, I>=0 >::type
 {
   typedef typename fas::for_<
     // initial and current result
@@ -43,7 +45,7 @@ struct factorial:
     fas::pair<
       fas::dec< fas::first< _1 > >,
       fas::times< fas::second< _1 >, fas::first< _1 > >
-    > 
+    >
   >::type result;
 
   typedef typename result::first  first;  // always int_<0>
@@ -102,11 +104,13 @@ struct lcm2:
   fas::apply< fas::divides< fas::times<A, B>, gcd<A, B> > >::type
 {};
 
-
+struct tmp{};
 int main()
 {
   std::cout << "ffactorial(4):" << ffactorial(4) << std::endl;
   std::cout << "factorial<4>:" << factorial<4>::value << std::endl;
+  //class `factorial_nan' has incomplete type
+  //std::cout << "factorial<-1>:" << factorial<-1>::value << std::endl;
   std::cout << "fgcd(5,15): " << fgcd(5,15) << std::endl;
   std::cout << "flcm(18,45): " << flcm(18,45) << std::endl;
 

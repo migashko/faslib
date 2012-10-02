@@ -22,7 +22,7 @@ UNIT(container_range_unit, "")
   reverse_range rr = fas::rrange(lst);
   for (int i = 0; i < 10; i++)
     t << equal<expect>( *rr++, 9 - i ) << FAS_TESTING_FILE_LINE;
-};
+}
 
 
 BEGIN_SUITE(container_range_suite, "")

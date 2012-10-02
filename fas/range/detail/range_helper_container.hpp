@@ -19,8 +19,8 @@ struct range_container_helper
 {
   typedef typename iterator2range< typename C::const_iterator >::type range;
   typedef typename iterator2range< typename C::const_reverse_iterator >::type reverse_range;
-  typedef typename C::const_reverse_iterator reverse_iterator; 
-  
+  typedef typename C::const_reverse_iterator reverse_iterator;
+
   static inline range make_range(const C& ctn)
   {
     return range( ctn.begin(), ctn.end() );
@@ -49,8 +49,8 @@ struct range_container_helper<C, false>
   typedef typename iterator2range< typename C::iterator >::type range;
   typedef typename iterator2range< typename C::reverse_iterator >::type reverse_range;
   typedef typename iterator2range< std::insert_iterator<C>, typename C::value_type >::type orange;
-  typedef typename C::const_reverse_iterator reverse_iterator; 
-  
+  typedef typename C::const_reverse_iterator reverse_iterator;
+
   template<typename CC>
   static inline orange make_orange(CC& cnt, bool clear = false)
   {
@@ -109,6 +109,6 @@ struct range_helper<C, typerange_flag::container >
   }
 };
 
-};
+}
 
 #endif

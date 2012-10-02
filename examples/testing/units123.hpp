@@ -18,5 +18,6 @@ UNIT(unit2, "testing unit2")
 
 UNIT(unit3, "testing unit3")
 {
-  
+  using namespace fas::testing;
+  t << nothing();
 }

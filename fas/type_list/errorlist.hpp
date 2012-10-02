@@ -15,7 +15,7 @@ namespace errorlist
 {
   struct not_type_list;
   struct not_organized;
-};
+}
 
 }
 

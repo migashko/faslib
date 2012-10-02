@@ -24,7 +24,7 @@ struct iterator2range;
 
 template<typename T, typename ValueType>
 struct iterator2range<T, ValueType, empty_type>
-  : iterator2range<T, ValueType, typename std::iterator_traits<T>::iterator_category > 
+  : iterator2range<T, ValueType, typename std::iterator_traits<T>::iterator_category >
 {
 };
 
@@ -58,6 +58,6 @@ struct iterator2range<T, ValueType, std::random_access_iterator_tag>
   typedef random_access_range<T> type;
 };
 
-};
+}
 
 #endif

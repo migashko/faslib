@@ -52,11 +52,11 @@ struct equal<M, empty_type>: statement<M>
 template<typename M = assert>
 struct equal_str: statement<M>
 {
-    
+
   equal_str(std::string left, std::string right): statement<M>( left == right, "Equal string statement. " ) {}
-  
+
   equal_str(std::string left, std::string right, const std::string& text): statement<M>( left == right, text ) {}
-  
+
   template<typename R>
   equal_str(std::string left, R right): statement<M>( left == right, "Equal string statement. " ) {}
 
@@ -78,6 +78,7 @@ struct is_false: statement<M>
   is_false(bool value, const std::string& text): statement<M>(!value, text){}
 };
 
+struct nothing{};
 
 template<typename M = expect, typename F = _message_ >
 struct info: statement<M>
@@ -93,7 +94,7 @@ struct message
   : info< trace, _message_ >
 {
    message(const std::string& text)
-    : info< trace, _message_ >(true, text) 
+    : info< trace, _message_ >(true, text)
    {}
 };
 

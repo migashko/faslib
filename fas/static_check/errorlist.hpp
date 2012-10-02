@@ -13,12 +13,12 @@ namespace errorlist
 {
   template<typename ERR>
   struct noerror { };
-  
+
   struct type_without_metatype;
   struct bad_metatype;
   template<int I, int L>
   struct out_of_range;
-};
+}
 
 }
 

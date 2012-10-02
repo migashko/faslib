@@ -20,7 +20,7 @@ using namespace fas;
 
 struct _tag_;
 
-struct test_aspect1: aspect< 
+struct test_aspect1: aspect<
     type_list_n<
       advice< int_<1>, int_<1> >,
       advice< int_<2>, int_<2> >,
@@ -30,7 +30,7 @@ struct test_aspect1: aspect<
   >
 {};
 
-struct test_aspect2: aspect< 
+struct test_aspect2: aspect<
     type_list_n<
       advice< int_<3>, int_<33> >,
       advice< int_<4>, int_<4> >,
@@ -40,7 +40,7 @@ struct test_aspect2: aspect<
   >
 {};
 
-struct test_aspect3: aspect< 
+struct test_aspect3: aspect<
     type_list_n<
       advice< int_<6>, int_<6> >,
       advice< int_<7>, int_<7> >,
@@ -60,22 +60,22 @@ typedef aspect_hierarchy<test_aspect3> aspect_hierarchy_type;
 int main()
 {
   aspect_hierarchy_type ah;
-  enum 
-  { 
+  enum
+  {
       value = static_check< length<result>::value == 10 >::value
-              + static_check< 
-                  some_type< 
-                    int_<55>, 
+              + static_check<
+                  some_type<
+                    int_<55>,
                     find_if<
-                      result, 
-                      some_type< has_tag<_1>, int_<5> > 
-                    >::type::advice_class  
-                  >::value 
-                >::value,
+                      result,
+                      some_type< has_tag<_1>, int_<5> >
+                    >::type::advice_class
+                  >::value
+                >::value
   };
 
   if (ah.get< int_<3> >().value != 33)
     return 1;
-  
+
   return 0;
 }

@@ -12,22 +12,22 @@
 
 namespace fas{ namespace testing{
 
-inline void PASSED(_passed_) {};
-inline void OK(_ok_) {};
-inline void FAIL(_fail_) {};
-inline void EXCEPT(_except_) {};
-inline void FATAL(_fatal_) {};
-inline void RUN(_run_) {};
-inline void WARNING(_warning_) {};
-inline void MESSAGE(_message_) {};
-inline void ERROR_MESSAGE(_error_) {};
+inline void PASSED(_passed_) {}
+inline void OK(_ok_) {}
+inline void FAIL(_fail_) {}
+inline void EXCEPT(_except_) {}
+inline void FATAL(_fatal_) {}
+inline void RUN(_run_) {}
+inline void WARNING(_warning_) {}
+inline void MESSAGE(_message_) {}
+inline void ERROR_MESSAGE(_error_) {}
 
-inline void SUITE_BEG(_suite_beg_) {};
-inline void SUITE_END(_suite_end_) {};
+inline void SUITE_BEG(_suite_beg_) {}
+inline void SUITE_END(_suite_end_) {}
 
-inline void UNIT_FAIL(_unit_fail_res_){};
-inline void SUITE_FAIL(_suite_fail_res_){};
-inline void TEST_FAIL(_test_fail_res_){};
+inline void UNIT_FAIL(_unit_fail_res_){}
+inline void SUITE_FAIL(_suite_fail_res_){}
+inline void TEST_FAIL(_test_fail_res_){}
 
 }}
 
@@ -58,12 +58,12 @@ namespace std
   {
     return o << ::fas::console::light_red << "[  EXCEPT ] " << fas::console::restore_colors;
   }
-  
+
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_fatal_) )
   {
     return o << ::fas::console::red << "[   FATAL ] " << fas::console::restore_colors;
   }
-  
+
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_warning_) )
   {
     return o << ::fas::console::yellow <<"[ WARNING ] " << fas::console::restore_colors;
@@ -88,17 +88,17 @@ namespace std
   {
     return o << ::fas::console::cyan << "[ --END-- ] " << fas::console::restore_colors;
   }
-  
+
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_unit_fail_res_) )
   {
     return o << ::fas::console::red <<  "[ ------- ] " << fas::console::restore_colors;
-  };
-  
+  }
+
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_suite_fail_res_))
   {
     return o << ::fas::console::red << "[ ======= ] " << fas::console::restore_colors;
-  };
-  
+  }
+
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_test_fail_res_))
   {
     return o << ::fas::console::red << "[ ******* ] " << fas::console::restore_colors;

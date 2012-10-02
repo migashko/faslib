@@ -28,12 +28,12 @@ bool test_run0()
   if ( su.fails() != 0) return false;
   if ( su.fatals() != 0) return false;
   return true;
-};
+}
 
 UNIT(unit1, "unit1 testing")
 {
-  
-};
+  t << nothing();
+}
 
 typedef aspect<
   type_list_n<
@@ -63,7 +63,7 @@ bool test_run1()
 UNIT(unit2, "unit2 testing")
 {
   t << message("hello");
-};
+}
 
 
 
@@ -103,5 +103,5 @@ int main()
   if (!test_run1()) return -1;
   if (!test_run2()) return -1;
   return 0;
-};
+}
 

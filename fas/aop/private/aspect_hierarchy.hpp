@@ -23,7 +23,7 @@
 
 namespace fas{
 
- 
+
 template<typename A>
 struct aspect_common_helper
 {
@@ -32,11 +32,11 @@ struct aspect_common_helper
   struct group_list: helper::group_list{};
   struct net_list: helper::net_list{};
   struct flat_list: helper::flat_list{};
-  
+
 };
 
 template<typename L>
-struct aspect_common_helper< aspect<L> > 
+struct aspect_common_helper< aspect<L> >
 {
   typedef aspect_helper< aspect<L> > helper;
   typedef typename helper::common_list common_list;
@@ -50,7 +50,7 @@ struct aspect_common_helper< aspect<L> >
 template<typename A>
 class aspect_hierarchy
   : public scatter_hierarchy< typename aspect_helper<A>::hierarchy_list >
-  
+
 {
   typedef aspect_helper<A> helper;
 public:
@@ -60,7 +60,7 @@ public:
   typedef typename helper::hierarchy_list hierarchy_list;
   typedef typename aspect_common_helper<A>::common_list common_list;
   typedef typename aspect_common_helper<A>::group_list group_list;
-  
+
   typedef scatter_hierarchy< hierarchy_list > super;
 
   template<typename Tg>
@@ -69,7 +69,7 @@ public:
   {
     typedef typename find_advice< Tg, common_list>::type advice_type;
     return field<advice_type>::get( static_cast<super&>(*this) ).get_advice();
-  };
+  }
 
   template<typename Tg>
   const typename find_advice< Tg, common_list>::type::advice_class&
@@ -77,26 +77,26 @@ public:
   {
     typedef typename find_advice< Tg, common_list>::type advice_type;
     return field<advice_type>::get_const( static_cast<const super&>(*this) ).get_advice();
-  };
+  }
 
   template<typename Tg>
   struct advice_cast
   {
     typedef typename find_advice< Tg, common_list>::type::advice_class type;
   };
-  
+
   template<typename Tg>
   struct has_advice
   {
-    typedef index_of_if_t< 
-      common_list, 
-      bind2nd<is_has_tag, Tg>::template apply 
+    typedef index_of_if_t<
+      common_list,
+      bind2nd<is_has_tag, Tg>::template apply
     > helper;
-    
+
     enum { value = helper::value!=-1 };
     typedef bool_< value!=0 > type;
   };
-  
+
   template<typename Tg>
   group_call<Tg> getg() const
   {
@@ -107,7 +107,7 @@ public:
   struct select_group
   {
     typedef typename find_advice< Tg, typename helper::net_list, empty_type >::type type1;
-    
+
     typedef typename aspect_select_group<
       group_list,
       Tg,

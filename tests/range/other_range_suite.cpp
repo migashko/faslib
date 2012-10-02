@@ -36,19 +36,18 @@ UNIT(other_range_unit, "")
   t << is_true<expect>( r ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(*r, 22) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(value, 22) << FAS_TESTING_FILE_LINE;
-  
+
   int_orange ro = fas::orange(value);
   t << equal<expect>(*ro, 22) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(value, 22) << FAS_TESTING_FILE_LINE;
   *ro = 23;
   t << equal<expect>(*ro, 23) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(value, 23) << FAS_TESTING_FILE_LINE;
-  
+
   ro = fas::orange(value, true);
   t << equal<expect>(*ro, 0) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(value, 0) << FAS_TESTING_FILE_LINE;
-  
-};
+}
 
 
 BEGIN_SUITE(other_range_suite, "")

@@ -22,7 +22,7 @@ int main()
   enum {
     test1 = static_check< A::value == 10 >::value,
     test2 = static_check< B::value == false >::value,
-    test3 = static_check< C::value == 'z' >::value,
+    test3 = static_check< C::value == 'z' >::value
   };
   return 0;
 }

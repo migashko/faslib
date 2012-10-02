@@ -15,13 +15,13 @@
 
 namespace fas {
 
-  
+
 template<typename T>
 class random_access_range
 {
 public:
   typedef random_access_range_tag range_category;
-  
+
   typedef T iterator;
   typedef std::reverse_iterator<iterator> reverse_iterator;
   typedef random_access_range<reverse_iterator> reverse_range;
@@ -30,14 +30,14 @@ public:
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
   typedef typename std::iterator_traits<T>::pointer           pointer;
   typedef typename std::iterator_traits<T>::reference         reference;
-  
+
   random_access_range()
     : b(), e()
 #ifndef NDEBUG
     , s(b)
 #endif
   {};
-  
+
   random_access_range(T b, T e)
     : b(b), e(e)
 #ifndef NDEBUG
@@ -60,7 +60,7 @@ public:
   reverse_iterator rend() const { return reverse_iterator(b); }
 
   reverse_range reverse() const { return reverse_range( rbegin(), rend() ); }
-  
+
   difference_type distance() const { return e-b; }
 
   void advance(difference_type c)
@@ -69,39 +69,52 @@ public:
     assert( b <= e);
   }
 
+#ifndef NDEBUG
   void increase(difference_type cbeg, difference_type cend)
   {
-#ifndef NDEBUG
     s -= cbeg;
     assert( s <= b);
-#endif
     e += cend;
     assert( e >= b);
   }
+#else
+  void increase(difference_type, difference_type cend)
+  {
+    e += cend;
+    assert( e >= b);
+  }
+#endif
 
+
+ #ifndef NDEBUG
   void decrease(difference_type cbeg, difference_type cend)
   {
-#ifndef NDEBUG
     s += cbeg;
     assert( s <= b);
-#endif
     e -= cend;
     assert( e >= b);
   }
+#else
+  void decrease(difference_type, difference_type cend)
+  {
+    e -= cend;
+    assert( e >= b);
+  }
+#endif
 
-  random_access_range<T>& operator++() 
+  random_access_range<T>& operator++()
   {
     assert(b!=e);
     ++b;
-    return *this; 
+    return *this;
   }
 
-  random_access_range<T> operator++(int) 
+  random_access_range<T> operator++(int)
   {
     assert(b!=e);
     random_access_range<T> ans = *this;
     b++;
-    return ans; 
+    return ans;
   }
 
   random_access_range<T>& operator--()
@@ -123,22 +136,22 @@ public:
     return ans;
   }
 
-  bool operator == (const random_access_range<T>& r ) const 
+  bool operator == (const random_access_range<T>& r ) const
   {
-    return b == r.b ;  
+    return b == r.b ;
   }
 
-  bool operator != (const random_access_range<T>& r ) const 
+  bool operator != (const random_access_range<T>& r ) const
   {
-    return !this->operator == (r); 
+    return !this->operator == (r);
   }
 
-  bool operator < (const random_access_range<T>& r ) const 
+  bool operator < (const random_access_range<T>& r ) const
   {
     return b < r.b;
   }
 
-  bool operator > (const random_access_range<T>& r ) const 
+  bool operator > (const random_access_range<T>& r ) const
   {
     return b > r.b;
   }
@@ -174,7 +187,7 @@ public:
     //assert( e >= b + n);
     return b[n];
   }
-  
+
 protected:
   T b;
   T e;
@@ -185,50 +198,50 @@ protected:
 
 
 template<typename T, typename Dist>
-inline random_access_range<T> operator + 
-  ( 
-    random_access_range<T> r, 
-    Dist n 
+inline random_access_range<T> operator +
+  (
+    random_access_range<T> r,
+    Dist n
   )
 {
   return r+=n;
 }
 
 template<typename T, typename Dist>
-inline random_access_range<T> operator + 
-  ( 
-    Dist n, 
-    random_access_range<T> r 
+inline random_access_range<T> operator +
+  (
+    Dist n,
+    random_access_range<T> r
   )
 {
   return r+= n;
 }
 
 template<typename T, typename Dist>
-inline random_access_range<T> operator - 
-  ( 
-    random_access_range<T> r, 
-    Dist n 
+inline random_access_range<T> operator -
+  (
+    random_access_range<T> r,
+    Dist n
   )
 {
   return r-= n;
 }
 
 template<typename T, typename Dist>
-inline random_access_range<T> operator - 
-  ( 
-    Dist n, 
-    random_access_range<T> r 
+inline random_access_range<T> operator -
+  (
+    Dist n,
+    random_access_range<T> r
   )
 {
   return r -= n;
 }
 
 template<typename T>
-inline typename random_access_range<T>::difference_type operator - 
-  ( 
-    random_access_range<T> r1, 
-    random_access_range<T> r2 
+inline typename random_access_range<T>::difference_type operator -
+  (
+    random_access_range<T> r1,
+    random_access_range<T> r2
   )
 {
   return r1.begin() - r2.begin();

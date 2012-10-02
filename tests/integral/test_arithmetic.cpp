@@ -13,7 +13,7 @@ using namespace ::fas;
 int main()
 {
 
-  enum 
+  enum
   {
     test_plus_0 = static_check< plus< int_<0>, int_<0> >::value == 0 >::value,
     test_plus_1 = static_check< plus< int_<0>, int_<1> >::value == 1 >::value,
@@ -55,7 +55,7 @@ int main()
     test_fact_0 = static_check< factorial< int_<0> >::value == 1 >::value,
     test_fact_1 = static_check< factorial< int_<1> >::value == 1 >::value,
     test_fact_2 = static_check< factorial< int_<2> >::value == 2 >::value,
-    test_fact_3 = static_check< factorial< int_<3> >::value == 6 >::value,
+    test_fact_3 = static_check< factorial< int_<3> >::value == 6 >::value
   };
   return 0;
 }

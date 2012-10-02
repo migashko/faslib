@@ -4,14 +4,14 @@ class dredd
 {
   // ...
 public:
-  
+
   void dredd_say()
   {
     this->say();
   }
-  
+
 protected:
-  
+
   virtual void say()
   {
     this->one();
@@ -19,7 +19,7 @@ protected:
     this->three();
     this->strike();
   }
-  
+
   virtual void one()    {  std::cout<<"one, ";   }
   virtual void two()    {  std::cout<<"two, ";   }
   virtual void three()  {  std::cout<<"three, "; }
@@ -31,12 +31,12 @@ class jon:
 {
   // ...
 public:
-  
+
   void jon_say()
   {
     dredd::say();
   }
-  
+
 protected:
 
   virtual void one()
@@ -50,14 +50,14 @@ class bob:
 {
   // ...
 public:
-  
+
   void bob_say()
   {
     this->say();
   }
 
 protected:
-  
+
   virtual void say()
   {
     dredd::say();
