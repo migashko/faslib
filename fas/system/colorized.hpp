@@ -99,8 +99,6 @@ namespace std {
          || ( ::fas::system::is_atty_stderr() && cerr.rdbuf() == os.rdbuf() )
        )
     {
-<<<<<<< HEAD
-      
 #if defined(HAVE_WINDOWS_H)
       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C1);
       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C2);
@@ -108,16 +106,7 @@ namespace std {
       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C4);
       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C5);
       return os;
-=======
 
-#if defined(CWINDOWSCONSOLE)
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C1);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C2);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C3);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C4);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C5);
-      return os
->>>>>>> 5d5fbf978ce6f9c8311b907ba9d21fa9d1e7b613
 #elif defined(_POSIX_VERSION)
       os << "\033["<<C1;
       //os << "\e["<<C1;
