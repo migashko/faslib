@@ -25,7 +25,10 @@ struct xspan
   template<long F>
   static long convert(long xsec)
   {
-    return static_cast<long> ( static_cast<xsec_t>( xsec ) * xmax / F );
+	  std::cout << "xsec " << xsec << std::endl;
+	  std::cout << "xmax " << xmax << std::endl;
+	  std::cout << "F " << F << std::endl;
+    return static_cast<long> ( /*static_cast<xsec_t>*/( xsec ) * xmax / F );
   }
 
   long sec;

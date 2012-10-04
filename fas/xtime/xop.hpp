@@ -22,6 +22,10 @@ inline nanospan operator - (const nanospan& f,  const nanospan& s)
 
 inline nanospan operator + (const nanospan& f,  const nanospan& s)
 {
+  std::cout << "+sec1 " << f.sec << std::endl;
+  std::cout << "+xsec1 " << f.xsec << std::endl;
+  std::cout << "+sec2 " << s.sec << std::endl;
+  std::cout << "+xsec2 " << s.xsec << std::endl;
   bool flag = (f.xsec + s.xsec >= FAS_NANOSEC);
   return nanospan(
     f.sec + s.sec + flag,
