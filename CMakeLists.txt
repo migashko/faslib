@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(faslib C CXX)
+project(faslib CXX)
 
 if(UNIX)
-  SET(CMAKE_CXX_FLAGS "-W -Wall -Werror -pedantic -fno-rtti")
+  SET(CMAKE_CXX_FLAGS "-W -Wall -Werror -pedantic -fno-rtti -Wno-long-long")
   SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ")
   SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O2 -g -DNDEBUG")
   SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
@@ -20,28 +20,23 @@ endif(UNIX)
 add_subdirectory(config)
 
 # Enable compile-time check type_list and generate human readable error (increases compile time)
-add_definitions(-DFASLIB_TYPE_LIST_CHECK)
+#add_definitions(-DFASLIB_TYPE_LIST_CHECK)
 
 # Experimental disable type_list specialization (increases compile time)
-add_definitions(-DDISABLE_TYPE_LIST_SPEC)
+#add_definitions(-DDISABLE_TYPE_LIST_SPEC)
 
 # Deprecated
-add_definitions(-DFAS_ALGORITHM_LAMBDA_CAST)
+#add_definitions(-DFAS_ALGORITHM_LAMBDA_CAST)
 
 # Enable simplify  expressions for algorithms (experimental)
-add_definitions(-DFAS_ALGORITHM_SIMPLIFY)
+#add_definitions(-DFAS_ALGORITHM_SIMPLIFY)
 
 # Disable warnings for non-optimal code
 add_definitions(-DFAS_DISABLE_WARNINGS)
 
 if (FAS_USE_RT_LIB)
-  message(STATUS "ADD_DEFINITIONS(-DFAS_USE_RT_LIB)")
   add_definitions(-DFAS_USE_RT_LIB)
-else(FAS_USE_RT_LIB)
-  message(STATUS "NOT ADD_DEFINITIONS(-DFAS_USE_RT_LIB)")
 endif(FAS_USE_RT_LIB)
-
-message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
 ENABLE_TESTING()
 

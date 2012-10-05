@@ -11,44 +11,37 @@
 
 namespace fas {
 
-template<long F, long T>
-inline long xsec_convert(long xsec)
-{
-  return static_cast<long> ( static_cast<xsec_t>( xsec ) * T / F );
-}
+template<xsec_t T, xsec_t F>
+struct xconverter;
 
-template<long I>
+template<xsec_t I>
 struct xspan
 {
   static const xsec_t xmax = I;
 
-  template<long F>
-  static long convert(long xsec)
-  {
-	  std::cout << "xsec " << xsec << std::endl;
-	  std::cout << "xmax " << xmax << std::endl;
-	  std::cout << "F " << F << std::endl;
-    return static_cast<long> ( /*static_cast<xsec_t>*/( xsec ) * xmax / F );
-  }
+  xsec_t sec;
 
-  long sec;
-
-  long xsec;
+  xsec_t xsec;
 
   xspan()
     : sec(0)
     , xsec(0)
   {}
 
-  template<long X>
+  template<xsec_t X>
   xspan(const xspan<X>& span )
     : sec(span.sec)
     , xsec( convert<xspan<X>::xmax>(span.xsec))
   {}
 
-  xspan(long sec, long xsec)
+  xspan(xsec_t sec, xsec_t xsec)
     : sec(sec)
     , xsec(xsec)
+  {}
+
+  xspan(xsec_t sec)
+    : sec(sec)
+    , xsec(0)
   {}
 
   xspan(int sec)
@@ -62,13 +55,13 @@ struct xspan
   {}
 
   xspan(float s)
-    : sec( static_cast<long>(s) )
-    , xsec( static_cast<long>( (s - sec)*xmax ) )
+    : sec( static_cast<xsec_t>(s) )
+    , xsec( static_cast<xsec_t>( (s - sec)*xmax ) )
   {}
 
   xspan(double s)
-    : sec( static_cast<long>(s) )
-    , xsec( static_cast<long>( (s - sec)*xmax  ) )
+    : sec( static_cast<xsec_t>(s) )
+    , xsec( static_cast<xsec_t>( (s - sec)*xmax  ) )
   {}
 
   xsec_t to_nanosec() const
@@ -106,7 +99,7 @@ struct xspan
     return static_cast<double>( to_nanosec() ) / xmax;
   }
 
-  template<long X>
+  template<xsec_t X>
   xspan& operator += (const xspan<X>& s)
   {
     *this = *this + s;
@@ -120,7 +113,7 @@ struct xspan
     return *this;
   }
 
-  template<long X>
+  template<xsec_t X>
   xspan& operator -= (const xspan<X>& s)
   {
     *this = *this - s;
@@ -134,7 +127,7 @@ struct xspan
     return *this;
   }
 
-  template<long X>
+  template<xsec_t X>
   xspan& operator /= (const xspan<X>& s)
   {
     *this = *this / s;
@@ -148,7 +141,7 @@ struct xspan
     return *this;
   }
 
-  template<long X>
+  template<xsec_t X>
   xspan& operator *= (const xspan<X>& s)
   {
     *this = *this * s;
@@ -161,7 +154,43 @@ struct xspan
     *this = *this * xspan<I>(s);
     return *this;
   }
+
+  template<xsec_t F>
+  static xsec_t convert(xsec_t xsec)
+  {
+    return xconverter< I,  F>::convert(xsec);
+  }
 };
+
+namespace detail
+{
+
+  template<xsec_t M, xsec_t F, int Less>
+  struct xconverter
+  {
+    static xsec_t convert(xsec_t xsec)
+    {
+      return (xsec * M) / F;
+    }
+  };
+
+  template<xsec_t M, xsec_t F>
+  struct xconverter<M, F, false>
+  {
+    static xsec_t convert(xsec_t xsec)
+    {
+      return xsec * (M / F);
+    }
+  };
+}
+
+template<xsec_t T, xsec_t F>
+struct xconverter
+  : detail::xconverter<T, F, (T < F ) >
+{
+
+};
+
 
 }
 

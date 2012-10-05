@@ -23,7 +23,7 @@ template<> struct x_width<FAS_MILLISEC>{ enum {value = 3}; };
 
 namespace std
 {
-  template<long I>
+  template< ::fas::xsec_t I>
   ostream& operator << ( ostream& os, const ::fas::xspan<I>& s )
   {
     os << s.sec << ".";

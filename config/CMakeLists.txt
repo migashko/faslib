@@ -1,4 +1,4 @@
-project(config C CXX)
+project(config)
 
 INCLUDE (${CMAKE_ROOT}/Modules/CheckIncludeFile.cmake)
 INCLUDE (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
@@ -14,8 +14,8 @@ check_include_file("Windows.h" HAVE_WINDOWS_H)
 
 
 set(
-  CMAKE_REQUIRED_INCLUDES 
-  ${CMAKE_REQUIRED_INCLUDES} 
+  CMAKE_REQUIRED_INCLUDES
+  ${CMAKE_REQUIRED_INCLUDES}
   "sys/time.h"
   "sys/resource.h"
   "sys/timeb.h"
@@ -37,13 +37,11 @@ check_function_exists("getrusage" HAVE_GETRUSAGE_FUNC)
 check_library_exists(rt clock_gettime "time.h" HAVE_RT_LIB)
 
 if(HAVE_RT_LIB)
-  message(STATUS "FAS_USE_RT_LIB ON ")
   SET(FAS_USE_RT_LIB ON PARENT_SCOPE)
   SET (CMAKE_REQUIRED_LIBRARIES rt)
   check_function_exists(clock_gettime HAVE_CLOCK_GETTIME_FUNC)
   SET (CMAKE_REQUIRED_LIBRARIES)
 else(HAVE_RT_LIB)
-  message(STATUS "FAS_USE_RT_LIB OFF")
   SET(FAS_USE_RT_LIB OFF PARENT_SCOPE)
 endif(HAVE_RT_LIB)
 

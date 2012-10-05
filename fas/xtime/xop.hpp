@@ -22,10 +22,6 @@ inline nanospan operator - (const nanospan& f,  const nanospan& s)
 
 inline nanospan operator + (const nanospan& f,  const nanospan& s)
 {
-  std::cout << "+sec1 " << f.sec << std::endl;
-  std::cout << "+xsec1 " << f.xsec << std::endl;
-  std::cout << "+sec2 " << s.sec << std::endl;
-  std::cout << "+xsec2 " << s.xsec << std::endl;
   bool flag = (f.xsec + s.xsec >= FAS_NANOSEC);
   return nanospan(
     f.sec + s.sec + flag,
@@ -39,8 +35,8 @@ inline nanospan operator / (const nanospan& s, const nanospan& f)
   {
     xsec_t xsec = s.to_nanosec()/f.sec;
     return nanospan(
-          static_cast< long > (xsec / FAS_NANOSEC ),
-          static_cast< long > (xsec % FAS_NANOSEC )
+          static_cast< xsec_t > (xsec / FAS_NANOSEC ),
+          static_cast< xsec_t > (xsec % FAS_NANOSEC )
     );
   }
   else
@@ -53,8 +49,8 @@ inline nanospan operator * (const nanospan& s, const nanospan& f)
   {
     xsec_t xsec = s.to_nanosec()*f.sec;
     return nanospan(
-          static_cast<long> ( xsec / FAS_NANOSEC ),
-          static_cast<long> ( xsec % FAS_NANOSEC )
+          static_cast<xsec_t> ( xsec / FAS_NANOSEC ),
+          static_cast<xsec_t> ( xsec % FAS_NANOSEC )
     );
   }
   else
