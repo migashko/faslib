@@ -12,24 +12,23 @@
 #include <fas/mp/private/ph_num.hpp>
 #include <fas/integral/max_c.hpp>
 
-
 namespace fas{ namespace detail{
-  
+
 template<typename F, int _C>
 struct ph_max_impl;
 
 template<typename F>
 struct ph_max_helper
 {
-  enum 
-  { 
-    value = max_c< 
-      ph_max_impl<F, 0>::value, 
+  enum
+  {
+    value = max_c<
+      ph_max_impl<F, 0>::value,
       ph_max_impl<F, 0>::count
-    >::value 
+    >::value
   };
 };
-  
+
 template<typename F, int _C>
 struct ph_max_impl_1;
 
@@ -44,11 +43,11 @@ struct ph_max_impl_4;
 
 template<typename F, int _C>
 struct ph_max_impl
-  : ph_max_impl_4< F, _C> 
+  : ph_max_impl_4< F, _C>
 {};
 
 template< typename P1, int _C>
-struct ph_max_impl< p<P1>, _C > 
+struct ph_max_impl< p<P1>, _C >
 {
   enum { value = 0, count = _C };
 };
@@ -56,13 +55,13 @@ struct ph_max_impl< p<P1>, _C >
 template<typename F, int _C>
 struct ph_max_impl_1
 {
-  enum 
+  enum
   {
     value = max_c<
       ph_num<F, _C>::value,
       _C
-    >::value, 
-    count = ph_num<F, _C>::next 
+    >::value,
+    count = ph_num<F, _C>::next
   };
 };
 
@@ -81,12 +80,12 @@ template<
   template<typename> class F,
   typename P1, int _C
 >
-struct ph_max_impl_1< F<P1>, _C > 
+struct ph_max_impl_1< F<P1>, _C >
 {
-  enum 
-  { 
+  enum
+  {
     count = ph_max_impl< P1, _C>::count,
-    
+
     value = max_c<
       ph_max_impl< P1, _C>::value,
       _C
@@ -101,13 +100,13 @@ struct ph_max_impl_2
 
 template<
   template<typename, typename> class F,
-  typename P1, typename P2, 
+  typename P1, typename P2,
   int _C
 >
-struct ph_max_impl_2< F<P1, P2>, _C > 
+struct ph_max_impl_2< F<P1, P2>, _C >
 {
-  enum 
-  { 
+  enum
+  {
     count = ph_max_impl< P2, ph_max_impl<P1, _C>::count>::count,
     p1 = ph_max_impl< P1, _C>::value,
     p2 = ph_max_impl< P2, _C>::value,
@@ -121,23 +120,23 @@ struct ph_max_impl_3
 {};
 
 template<
-  template<typename, typename, typename> class F, 
-  typename P1, typename P2, typename P3, 
+  template<typename, typename, typename> class F,
+  typename P1, typename P2, typename P3,
   int _C
 >
-struct ph_max_impl_3< F<P1, P2, P3>, _C > 
+struct ph_max_impl_3< F<P1, P2, P3>, _C >
 {
-  enum 
-  { 
+  enum
+  {
     count = ph_max_impl< P3,
             ph_max_impl< P2,
             ph_max_impl< P1,
             _C >::count >::count >::count,
-    
+
     p1 = ph_max_impl< P1, _C>::value,
     p2 = ph_max_impl< P2, _C>::value,
     p3 = ph_max_impl< P3, _C>::value,
-    
+
     value = max_c< p1, max_c<p2, p3>::value >::value
   };
 };
@@ -146,56 +145,56 @@ template<typename F, int _C>
 struct ph_max_impl_4
   : ph_max_impl_3< F, _C>
 {};
-  
+
 template<
-  template<typename, typename, typename, typename> class F, 
+  template<typename, typename, typename, typename> class F,
   typename P1,
   typename P2,
   typename P3,
   typename P4,
   int _C
 >
-struct ph_max_impl_4< F<P1, P2, P3, P4>, _C > 
+struct ph_max_impl_4< F<P1, P2, P3, P4>, _C >
 {
-  enum 
-  { 
+  enum
+  {
     count = ph_max_impl< P4,
             ph_max_impl< P3,
-            ph_max_impl< P2, 
-            ph_max_impl< P1, 
+            ph_max_impl< P2,
+            ph_max_impl< P1,
             _C >::count >::count >::count >::count,
-            
+
     p1 = ph_max_impl< P1, _C>::value,
     p2 = ph_max_impl< P2, _C>::value,
     p3 = ph_max_impl< P3, _C>::value,
     p4 = ph_max_impl< P4, _C>::value,
-    
+
     value = max_c< p1, max_c< p2, max_c< p3, p4 >::value >::value >::value
   };
 };
 
 template<
-  template<typename, typename, typename, typename, typename> class F, 
+  template<typename, typename, typename, typename, typename> class F,
   typename P1, typename P2, typename P3, typename P4, typename P5,
   int _C
 >
-struct ph_max_impl< F<P1, P2, P3, P4, P5>, _C > 
+struct ph_max_impl< F<P1, P2, P3, P4, P5>, _C >
 {
-  enum 
-  { 
-    count = ph_max_impl< P5, 
+  enum
+  {
+    count = ph_max_impl< P5,
             ph_max_impl< P4,
             ph_max_impl< P3,
             ph_max_impl< P2,
-            ph_max_impl< P1, 
+            ph_max_impl< P1,
             _C >::count >::count >::count >::count>::count,
-            
+
     p1 = ph_max_impl< P1, _C>::value,
     p2 = ph_max_impl< P2, _C>::value,
     p3 = ph_max_impl< P3, _C>::value,
     p4 = ph_max_impl< P4, _C>::value,
     p5 = ph_max_impl< P5, _C>::value,
-    
+
     value = max_c< p1, max_c<p2, max_c<p3, max_c<p4, p5>::value>::value>::value >::value
   };
 };
