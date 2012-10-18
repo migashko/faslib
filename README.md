@@ -60,12 +60,12 @@ public:
 
 Для наглядности изобразим этот класс на картинке в виде монолитного блока:
 
-![foo](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image00.png?raw=true)
+![foo](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image05.png?raw=true)
 
 Для демонстрации возможностей разработаем класс foo2 с аналогичным функционалом, но используя концепции АОП.
 Сначала разобьем его на составляющие, выделив каждый метод в отдельные сущности которые в faslib называются адвайс-классами:
 
-![ad_method](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image01.png?raw=true)
+![ad_method](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image00.png?raw=true)
 
 ```cpp
 struct ad_method1
@@ -105,7 +105,7 @@ struct _method3_;
 Использование знака “_” для обрамления имени тега, чертовски удобная штука.
 Следующим этапом необходимо связать теги и адвайс-классы, создав таким образом собственно адвайсы:
 
-![advices](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image02.png?raw=true)
+![advices](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image07.png?raw=true)
 
 ```cpp
 typedef fas::advice<_method1_, ad_method1> method1_advice;
@@ -115,7 +115,7 @@ typedef fas::advice<_method3_, ad_method3> method3_advice;
 
 Далее, необходимо объединить  разрозненные адвайсы в список типов:
 
-![advice list](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image03.png?raw=true)
+![advice list](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image01.png?raw=true)
 
 ```cpp
 typedef fas::type_list_n<
@@ -127,7 +127,7 @@ typedef fas::type_list_n<
 
 Cформируем аспект foo2_aspect:
 
-![foo2_aspect](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image04.png?raw=true)
+![foo2_aspect](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image06.png?raw=true)
 
 ```cpp
 struct foo2_aspect: fas::aspect< advice_list >{};
@@ -159,6 +159,6 @@ public:
 
 Класс   foo2<> изобразим следующим образом:
 
-![foo2_aspect](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image05.png?raw=true)
+![foo2_aspect](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image03.png?raw=true)
 
 Полный пример [здесь](https://github.com/migashko/faslib/blob/master/examples/aop/foo.cpp)
