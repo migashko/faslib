@@ -126,7 +126,8 @@ struct aspect_MallardDuck: fas::aspect< fas::type_list_n<
 >::type >{};
 
 template<typename A = fas::aspect<> >
-class MallardDuck : public Duck< typename fas::aspect_merge<A, aspect_MallardDuck>::type >
+class MallardDuck
+  : public Duck< typename fas::aspect_merge<A, aspect_MallardDuck>::type >
 {
   public:
     MallardDuck()
@@ -195,7 +196,6 @@ int main()
   rubber->floatAround();
   rubber->performFly();
   rubber->performQuack();
-
 
   cout << endl << endl;
 
