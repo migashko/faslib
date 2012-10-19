@@ -60,12 +60,14 @@ public:
 
 Для наглядности изобразим этот класс на картинке в виде монолитного блока:
 
-![foo](http://i.imgur.com/UIg9u)
+
+
+![foo](http://i.imgur.com/ovInI.png)
 
 Для демонстрации возможностей разработаем класс foo2 с аналогичным функционалом, но используя концепции АОП.
 Сначала разобьем его на составляющие, выделив каждый метод в отдельные сущности которые в faslib называются адвайс-классами:
 
-![ad_method](http://i.imgur.com/nD6ja.png)
+![ad_method](http://i.imgur.com/n2diQ.png)
 
 ```cpp
 struct ad_method1
@@ -105,7 +107,7 @@ struct _method3_;
 Использование знака “_” для обрамления имени тега, чертовски удобная штука.
 Следующим этапом необходимо связать теги и адвайс-классы, создав таким образом собственно адвайсы:
 
-![advices](http://i.imgur.com/Nl35d.png)
+![advices](http://i.imgur.com/mof7U.png)
 
 ```cpp
 typedef fas::advice<_method1_, ad_method1> method1_advice;
@@ -115,7 +117,7 @@ typedef fas::advice<_method3_, ad_method3> method3_advice;
 
 Далее, необходимо объединить  разрозненные адвайсы в список типов:
 
-![advice_list](http://i.imgur.com/JIzvK.png)
+![advice_list](http://i.imgur.com/69b5W.png)
 
 ```cpp
 typedef fas::type_list_n<
@@ -127,7 +129,7 @@ typedef fas::type_list_n<
 
 Cформируем аспект foo2_aspect:
 
-![foo2_aspect](http://i.imgur.com/sk9o9.png)
+![foo2_aspect](http://i.imgur.com/KJeJq.png)
 
 ```cpp
 struct foo2_aspect: fas::aspect< advice_list >{};
@@ -159,7 +161,7 @@ public:
 
 Класс   foo2<> изобразим следующим образом:
 
-![foo2_aspect](http://i.imgur.com/sk9o9.png)
+![foo2_aspect](http://i.imgur.com/BNWNa.png)
 
 Полный пример [здесь](https://github.com/migashko/faslib/blob/master/examples/aop/foo.cpp)
 
@@ -167,7 +169,7 @@ public:
 
 Для этого аналогично сформируем аспект foo3_aspect
 
-![foo3_aspect](http://i.imgur.com/FvuG9.png)
+![foo3_aspect](http://i.imgur.com/I0dIb.png)
 
 ```cpp
 struct ad_method3_2
@@ -200,7 +202,7 @@ struct foo3_aspect: fas::aspect< fas::type_list_n<
 После внедрения произошло неявное объединение аспектов, в результате старый функционал, реализованный в адвайс-классах 
 стал недоступен, но физически он остался аспекте. 
 
-![foo3](http://i.imgur.com/IjmJI.png)
+![foo3](http://i.imgur.com/WRiqK.png)
 
 В большинстве случаев это не проблема, но при необходимости его можно удалить с помощью конструкции remove_advice 
 или же наоборот обеспечить к нему доступ по другим тегам с помощью forward. Также имеется возможность связывать с 
