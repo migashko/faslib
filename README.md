@@ -60,12 +60,12 @@ public:
 
 Для наглядности изобразим этот класс на картинке в виде монолитного блока:
 
-![foo](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image05.png?raw=true)
+![foo](http://i.imgur.com/UIg9u)
 
 Для демонстрации возможностей разработаем класс foo2 с аналогичным функционалом, но используя концепции АОП.
 Сначала разобьем его на составляющие, выделив каждый метод в отдельные сущности которые в faslib называются адвайс-классами:
 
-![ad_method](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image00.png?raw=true)
+![ad_method](http://i.imgur.com/nD6ja.png)
 
 ```cpp
 struct ad_method1
@@ -105,7 +105,7 @@ struct _method3_;
 Использование знака “_” для обрамления имени тега, чертовски удобная штука.
 Следующим этапом необходимо связать теги и адвайс-классы, создав таким образом собственно адвайсы:
 
-![advices](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image07.png?raw=true)
+![advices](http://i.imgur.com/Nl35d.png)
 
 ```cpp
 typedef fas::advice<_method1_, ad_method1> method1_advice;
@@ -115,7 +115,7 @@ typedef fas::advice<_method3_, ad_method3> method3_advice;
 
 Далее, необходимо объединить  разрозненные адвайсы в список типов:
 
-![advice list](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image01.png?raw=true)
+![advice_list](http://i.imgur.com/JIzvK.png)
 
 ```cpp
 typedef fas::type_list_n<
@@ -127,7 +127,7 @@ typedef fas::type_list_n<
 
 Cформируем аспект foo2_aspect:
 
-![foo2_aspect](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image06.png?raw=true)
+![foo2_aspect](http://i.imgur.com/sk9o9.png)
 
 ```cpp
 struct foo2_aspect: fas::aspect< advice_list >{};
@@ -159,6 +159,61 @@ public:
 
 Класс   foo2<> изобразим следующим образом:
 
-![foo2_aspect](https://github.com/migashko/faslib/blob/gh-pages/images/fas/image03.png?raw=true)
+![foo2_aspect](http://i.imgur.com/sk9o9.png)
 
 Полный пример [здесь](https://github.com/migashko/faslib/blob/master/examples/aop/foo.cpp)
+
+Теперь попробуем заменить функционал method2 и method3, чтобы он выводил вместо строк "method-2.2" и "method-2.3", строки "method-3.2" и "method-3.3" соответственно. 
+
+Для этого аналогично сформируем аспект foo3_aspect
+
+![foo3_aspect](http://i.imgur.com/FvuG9.png)
+
+```cpp
+struct ad_method3_2
+{
+  template<typename T>
+  void operator()(T&) { std::cout << "method-3.2" << std::endl; }
+};
+
+struct ad_method3_3
+{
+  template<typename T>
+  void operator()(T&) { std::cout << "method-3.3" << std::endl; }
+};
+
+struct foo3_aspect: fas::aspect< fas::type_list_n<
+  fas::advice<_method2_, ad_method3_2>,
+  fas::advice<_method3_, ad_method3_3>
+>::type >{};
+```
+
+И внедрим его в класс foo2
+
+```cpp
+  foo2<foo3_aspect> f3;
+  f3.method1();
+  f3.method2();
+  f3.method3();
+```
+
+После внедрения произошло неявное объединение аспектов, в результате старый функционал, реализованный в адвайс-классах 
+стал недоступен, но физически он остался аспекте. 
+
+![foo3](http://i.imgur.com/IjmJI.png)
+
+В большинстве случаев это не проблема, но при необходимости его можно удалить с помощью конструкции remove_advice 
+или же наоборот обеспечить к нему доступ по другим тегам с помощью forward. Также имеется возможность связывать с 
+одним адвайсом несколько тегов, с помощью псевдонимов (alias). Объединив несколько адвайсов в логическую группу (group) 
+у вас появляется возможность группового вызова (аналог событий, но на этапе компиляции). Специальные адвайсы-значения 
+(value_advice) в отличии от обычных адвайсов не наследуют тип, а агрегируют его, что позволяет включить в аспект 
+простые типы, такие как int. А с помощью type_advice, вы можете включить в аспект определение типа, например контейнера, 
+и соответственно, пользователь может его заменить. 
+
+Для более сложных классов имеет смысл разработать несколько аспектов из адвайсов реализующих определенный функционал. 
+Аспекты можно объединять явно, используя конструкцию aspect_merge.  Это позволит вам повторно использовать аспекты и/или 
+комбинировать их.
+
+Классы конструируются на этапе компиляции - это влияет на общее время компиляции. Было приложено достаточно много усилий 
+в этом направлении и где-то приходилось идти на компромиссы. Например оставление в результирующем аспекте недоступных более 
+адвайсов связанно именно с этим. 
