@@ -19,9 +19,10 @@ public:
   typedef Tg tag;
   typedef T advice_class;
 
+  value_advice():_value(){}
   advice_class& get_advice() { return _value;}
   const advice_class& get_advice() const { return _value;}
-  
+
 private:
    T _value;
 };

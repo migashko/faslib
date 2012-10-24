@@ -52,7 +52,8 @@ struct foo2_aspect: fas::aspect< advice_list >{};
   public:
     void method1() { this->get_aspect().template get<_method1_>()(*this); }
     void method2() { this->get_aspect().template get<_method2_>()(*this); }
-    void method3() { this->get_aspect().template get<_method3_>()(*this);  }
+    void method3() { this->get_aspect().template get<_method3_>()(*this); }
+
   };
 
 /// /////////////////////////////////////////////////////
