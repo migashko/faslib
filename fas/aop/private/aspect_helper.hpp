@@ -48,13 +48,13 @@ struct aspect_helper
 
 public:
   // выбираем все элементы всех аспектов (любого уровня вложенности)
-  // и строим плоский список эементов 
-  typedef typename aspect_select_t< 
-    aspect_type, 
+  // и строим плоский список эементов
+  typedef typename aspect_select_t<
+    aspect_type,
     any
   >::type flat_list;
-  
-  // метафункция заменяет все элемнты в списке, тег которых совпадает с тегом первого 
+
+  // метафункция заменяет все элемнты в списке, тег которых совпадает с тегом первого
   // элемента списка на empty_type (в том числе и первый элемент)
   typedef transform_if<
     _1,
@@ -63,11 +63,11 @@ public:
   > replace_removed;
 
 public:
-  
+
   // заменяем remove_advice и следующие за ним элементы с такми же тегом на empty_type
   typedef typename transform_tail_if<
     flat_list,
-    // метафункция заменяет все элемнты в списке, тег которых совпадает с тегом первого 
+    // метафункция заменяет все элемнты в списке, тег которых совпадает с тегом первого
     // элемента списка на empty_type (в том числе и первый элемент)
     transform_if<
       _1,
@@ -76,7 +76,7 @@ public:
     >,
     is_remove_advice<_1>
   >::type replaced_list;
-  
+
   // удаляем empty_type из списка
   typedef typename erase_if_t<
     replaced_list,
@@ -87,12 +87,12 @@ public:
   // это список по которому будет производиться поиск с помощью find_advice
   typedef typename unique_first<
     typename transform_if<
-      net_list, 
+      net_list,
       group_call< tag_cast< _1 > > ,
       is_group<_>
-    >::type 
+    >::type
   >::type common_list;
-  
+
   // удаляем из общего списка элементы alias и forward
   // на базе этого списка будет строиться иерархия
   typedef typename erase_if<

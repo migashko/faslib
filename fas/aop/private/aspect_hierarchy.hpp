@@ -23,16 +23,12 @@
 
 namespace fas{
 
-
 template<typename A>
 struct aspect_common_helper
 {
   typedef aspect_helper<A> helper;
   struct common_list: helper::common_list{};
   struct group_list: helper::group_list{};
-  struct net_list: helper::net_list{};
-  struct flat_list: helper::flat_list{};
-
 };
 
 template<typename L>
@@ -41,22 +37,14 @@ struct aspect_common_helper< aspect<L> >
   typedef aspect_helper< aspect<L> > helper;
   typedef typename helper::common_list common_list;
   typedef typename helper::group_list group_list;
-  typedef typename helper::net_list net_list;
-  typedef typename helper::flat_list flat_list;
 };
-
-
 
 template<typename A>
 class aspect_hierarchy
   : public scatter_hierarchy< typename aspect_helper<A>::hierarchy_list >
-
 {
   typedef aspect_helper<A> helper;
 public:
-
-  typedef typename aspect_common_helper<A>::net_list net_list; // удалить
-  typedef typename aspect_common_helper<A>::flat_list flat_list; // удалить
   typedef typename helper::hierarchy_list hierarchy_list;
   typedef typename aspect_common_helper<A>::common_list common_list;
   typedef typename aspect_common_helper<A>::group_list group_list;
@@ -115,7 +103,6 @@ public:
     >::type type;
   };
 };
-
 
 }
 
