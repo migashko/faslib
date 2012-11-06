@@ -62,23 +62,5 @@ int main()
            + fas::static_check< class3::aspect::has_advice<_tag5_>::value == 0 >::value
            + fas::static_check< class3::aspect::has_advice<_tag6_>::value == 1 >::value
   };
-  /*
-enum 
-  { 
-      value = static_check< 
-                  some_type< 
-                    int_<1>, 
-                    find_advice<_tag1_, advice_list>::type::advice_class
-                  >::value 
-                >::value
-              +
-              static_check< 
-                  some_type< 
-                    int_<2>, 
-                    find_advice<_tag4_, advice_list>::type::advice_class
-                  >::value 
-                >::value,
-  };
-  */
   return 0;
 }

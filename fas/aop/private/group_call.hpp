@@ -48,14 +48,14 @@ public:
   const advice_class& get_advice() const { return *this;}
 
   template<typename T, typename F>
-  F for_each(T& t, F f)
+  F for_each(T& t, F f) const
   {
     typedef typename gth<Tg, T>::group_tags group_tags;
     return detail::group_helper::for_each_group( group_tags(), t, f, int_<0>(), int_< length<group_tags>::value >() );
   }
 
   template< template<typename> class IF, typename T, typename F>
-  F for_each_if_t(T& t, F f)
+  F for_each_if_t(T& t, F f) const
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     typedef typename select< group_tags, IF< advice_cast< _ , typename T::aspect  > > >::type selected_tags;
@@ -63,48 +63,48 @@ public:
   }
   
   template< class IF, typename T, typename F>
-  F for_each_if(T& t, F f)
+  F for_each_if(T& t, F f) const
   {
     return for_each_if_t< lambda< FAS_T_SIMPLIFY(IF) >::template apply >(t, f);
   }
 
   template<typename T>
-  void operator()(T& t)
+  void operator()(T& t) const
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     detail::group_helper::group_call_helper( group_tags(), t);
   }
 
   template<typename T, typename P1>
-  void operator()(T& t, P1 p1)
+  void operator()(T& t, P1 p1)  const
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     detail::group_helper::group_call_helper( group_tags(), t, p1);
   }
 
   template<typename T, typename P1, typename P2>
-  void operator()(T& t, P1 p1, P2 p2)
+  void operator()(T& t, P1 p1, P2 p2)  const
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     detail::group_helper::group_call_helper( group_tags(), t, p1, p2);
   }
 
   template<typename T, typename P1, typename P2, typename P3>
-  void operator()(T& t, P1 p1, P2 p2, P3 p3) 
+  void operator()(T& t, P1 p1, P2 p2, P3 p3)  const 
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     detail::group_helper::group_call_helper( group_tags(), t, p1, p2, p3);
   }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4>
-  void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4) 
+  void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4) const
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     detail::group_helper::group_call_helper( group_tags(), t, p1, p2, p3, p4);
   }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
-  void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
+  void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5) const
   {
     typedef typename T::aspect::template select_group<Tg>::type group_tags;
     detail::group_helper::group_call_helper( group_tags(), t, p1, p2, p3, p4, p5);

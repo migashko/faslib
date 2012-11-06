@@ -66,42 +66,42 @@ struct ad_test
 {
   enum { id = ID };
   template<typename T>
-  void operator()(T& t)
+  void operator()(T& t) const
   {
     t.get_aspect().template get< _counters_ >().c0++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int )
+  void operator()(T& t, int ) const
   {
     t.get_aspect().template get< _counters_ >().c1++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int )
+  void operator()(T& t, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c2++;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int )
+  void operator()(T& t, int, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c3++;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int, int )
+  void operator()(T& t, int, int, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c4++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int, int, int )
+  void operator()(T& t, int, int, int, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c5++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID);
@@ -139,7 +139,6 @@ struct test_aspect: aspect<test_advice_list> {};
 
 struct test_class: aspect_class<test_aspect>
 {
-  // without the "::" will not work because the base class private ad_counters aspect_class
   const ::ad_counters& get_counters() const { return this->get_aspect().get< _counters_ >();}
   ::ad_counters& get_counters() { return this->get_aspect().get< _counters_ >();}
 };
