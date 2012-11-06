@@ -209,7 +209,7 @@ int main()
         static_check<
           some_type<
             test_class::aspect::advice_cast<_overlapped2_>::type,
-            group_call<_overlapped2_>
+            group_caller<_overlapped2_>
           >::value
         >::value
   };

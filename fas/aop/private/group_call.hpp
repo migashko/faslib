@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_AOP_GROUP_CALL_HPP
-#define FAS_AOP_GROUP_CALL_HPP
+#ifndef FAS_AOP_PRIVATE_GROUP_CALLER_HPP
+#define FAS_AOP_PRIVATE_GROUP_CALLER_HPP
 
 #include <fas/aop/detail/group_call.hpp>
 #include <fas/aop/metalist.hpp>
@@ -36,13 +36,13 @@ struct gth<Tg, T< aspect<A> > >
 };
 
 template<typename Tg>
-class group_call
+class group_caller
 {
 public:
   
   typedef metalist::advice metatype;
   typedef Tg tag;
-  typedef group_call<Tg> advice_class;
+  typedef group_caller<Tg> advice_class;
 
   advice_class& get_advice() { return *this;}
   const advice_class& get_advice() const { return *this;}

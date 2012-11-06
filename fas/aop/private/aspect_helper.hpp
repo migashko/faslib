@@ -88,7 +88,7 @@ public:
   typedef typename unique_first<
     typename transform_if<
       net_list,
-      group_call< tag_cast< _1 > > ,
+      group_caller< tag_cast< _1 > > ,
       is_group<_>
     >::type
   >::type common_list;

@@ -86,9 +86,9 @@ public:
   };
 
   template<typename Tg>
-  group_call<Tg> getg() const
+  group_caller<Tg> getg() const
   {
-    return group_call<Tg>();
+    return group_caller<Tg>();
   }
 
   template<typename Tg>
