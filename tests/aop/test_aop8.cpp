@@ -50,13 +50,13 @@ struct test_aspect: fas::aspect< fas::type_list_n<
 static inline void show(const std::vector<int>& f, const std::vector<int>& s )
 {
   std::cout << f.size() << " " << s.size() << std::endl;
-  
+
   typedef std::vector<int>::const_iterator const_iterator;
   const_iterator fbeg = f.begin();
   const_iterator fend = f.end();
   const_iterator sbeg = s.begin();
   const_iterator send = s.end();
-  
+
   for(;fbeg!=fend && sbeg!=send; ++fbeg, ++sbeg)
   {
     std::cout << *fbeg << "==" << *sbeg << std::endl;
@@ -67,29 +67,29 @@ int main()
 {
   std::vector<int> check_values;
   fas::aspect_class<test_aspect> test;
-  
+
   test_values.clear();
   check_values.clear();
   for (int i=1; i < 4; ++i ) check_values.push_back(i);
-  fas::group_call<_group1_>( test.get_aspect(), test );
+  fas::group_call<_group1_>( test );
   if (test_values!=check_values)
   {
     show(test_values, check_values);
     return 1;
   }
-  
+
   test_values.clear();
   check_values.clear();
   for (int i=1; i < 6; ++i ) check_values.push_back(i);
   for (int i=1; i < 4; ++i ) check_values.push_back(i);
   check_values.push_back(1);
-  fas::group_call< fas::type_list_n<_group1_, _group2_, _group1_, _tag1_>::type >( test.get_aspect(), test );
+  fas::group_call< fas::type_list_n<_group1_, _group2_, _group1_, _tag1_>::type >( test );
   if (test_values!=check_values)
   {
     show(test_values, check_values);
     return 1;
   }
-  
+
 
   return 0;
 }

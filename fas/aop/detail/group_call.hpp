@@ -15,13 +15,13 @@
 
 namespace fas { namespace detail {
 
-struct group_helper
+struct group_helper1
 {
 
 template<typename L, typename T, typename F, int N >
-static inline F for_each_group(L, T&, F f, int_<N>, int_<N>) 
+static inline F for_each_group(L, T&, F f, int_<N>, int_<N>)
 {
-  return f; 
+  return f;
 }
 
 template<typename L, typename T, typename F, int C, int N  >
@@ -34,7 +34,7 @@ static inline F for_each_group(L, T& t, F f, int_<C>, int_<N> )
 
 /// 0
 template<typename T >
-static inline void group_call_helper(empty_list, T&) 
+static inline void group_call_helper(empty_list, T&)
 {
 }
 
@@ -60,7 +60,7 @@ static inline void group_call_helper(type_list<L, R>, T& t, P1 p1)
 
 /// 2
 template<typename T, typename P1, typename P2 >
-static inline void group_call_helper(empty_list, T&, P1, P2) 
+static inline void group_call_helper(empty_list, T&, P1, P2)
 {
 }
 
@@ -86,7 +86,7 @@ static inline void group_call_helper(type_list<L, R>, T& t, P1 p1, P2 p2, P3 p3)
 
 /// 4
 template<typename T, typename P1, typename P2, typename P3, typename P4 >
-static inline void group_call_helper(empty_list, T&, P1, P2, P3, P4) 
+static inline void group_call_helper(empty_list, T&, P1, P2, P3, P4)
 {
 }
 
@@ -111,7 +111,7 @@ static inline void group_call_helper(type_list<L, R>, T& t, P1 p1, P2 p2, P3 p3,
 }
 
 }; // group_helper
-  
+
 }}
 
 #endif
