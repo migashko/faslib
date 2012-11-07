@@ -10,6 +10,7 @@
 #include <fas/aop/is_has_tag.hpp>
 #include <fas/aop/is_forward.hpp>
 #include <fas/aop/is_alias.hpp>
+#include <fas/aop/is_remove_advice.hpp>
 #include <fas/aop/target_cast.hpp>
 
 #include <fas/algorithm/index_of_if.hpp>
@@ -38,6 +39,13 @@ struct advice_not_found { enum { value = 0 }; };
 template<typename Tg>
 struct advice_not_found<Tg, empty_type>;
 
+template<typename Tg, typename T>
+struct advice_has_been_removed { enum { value = 0 }; };
+
+template<typename Tg>
+struct advice_has_been_removed<Tg, empty_type>;
+
+
 template<typename Tg, typename AliasList, typename T>
 struct recursive_alias{ enum { value = 0 }; };
 
@@ -46,6 +54,16 @@ struct recursive_alias<Tg, AliasList, empty_type>;
 
 namespace detail
 {
+
+struct advace_category
+{
+  typedef enum{
+    advice = 0,
+    alias = 1,
+    forward = 2,
+    removed = 4
+  } type;
+};
 
 template<typename Tg, typename L, typename ALT >
 struct find_advice_helper;
@@ -110,18 +128,23 @@ template<typename Tg, typename L, typename ALT, int Pos, int Len, typename Alias
 struct find_advice_impl_2
 {
   typedef typename type_at_c<Pos, L>::type current;
-  typedef pair< typename is_alias<current>::type, typename is_forward<current>::type > condition;
+  // typedef pair< typename is_alias<current>::type, typename is_forward<current>::type > condition;
+  typedef int_<
+    is_alias<current>::value
+    + (is_forward<current>::value<<1)
+    + (is_remove_advice<current>::value<<2)
+  > condition;
   typedef typename find_advice_impl_3< Tg, L, ALT, Pos, Len, condition, AliasList >::type type;
 };
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
-struct find_advice_impl_3<Tg, L, ALT, Pos, Len, pair<false_, false_>, AliasList >
+struct find_advice_impl_3<Tg, L, ALT, Pos, Len, /*pair<false_, false_>*/int_<advace_category::advice>, AliasList >
 {
   typedef typename type_at_c<Pos, L>::type type;
 };
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
-struct find_advice_impl_3<Tg, L, ALT, Pos, Len, pair<true_, false_>, AliasList >
+struct find_advice_impl_3<Tg, L, ALT, Pos, Len, /*pair<true_, false_>*/int_<advace_category::alias>, AliasList >
 {
   typedef typename type_at_c<Pos, L>::type alias_type;
   typedef typename target_cast<alias_type>::type alias_tag;
@@ -130,10 +153,20 @@ struct find_advice_impl_3<Tg, L, ALT, Pos, Len, pair<true_, false_>, AliasList >
 };
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
-struct find_advice_impl_3<Tg, L, ALT, Pos, Len, pair<false_, true_ >, AliasList >
+struct find_advice_impl_3<Tg, L, ALT, Pos, Len, /*pair<false_, true_ >*/int_<advace_category::forward>, AliasList >
 {
   typedef typename type_at_c<Pos, L>::type forward_type;
   typedef typename find_advice_impl_1< typename target_cast<forward_type>::type, L, ALT, Pos + 1, Len, AliasList >::type type;
+};
+
+template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
+struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::removed>, AliasList >
+{
+  enum { error = advice_has_been_removed<Tg, empty_type>::value };
+  typedef empty_type type;
+
+  /*typedef typename type_at_c<Pos, L>::type forward_type;
+  typedef typename find_advice_impl_1< typename target_cast<forward_type>::type, L, ALT, Pos + 1, Len, AliasList >::type type;*/
 };
 
 template<typename Tg, typename L, typename ALT, int Len, typename AliasList, int RecursiveAlias>

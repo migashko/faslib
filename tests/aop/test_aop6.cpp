@@ -62,5 +62,6 @@ int main()
            + fas::static_check< class3::aspect::has_advice<_tag5_>::value == 0 >::value
            + fas::static_check< class3::aspect::has_advice<_tag6_>::value == 1 >::value
   };
+  
   return 0;
 }

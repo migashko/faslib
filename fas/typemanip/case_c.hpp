@@ -13,7 +13,7 @@ template<int C, typename T>
 struct case_c
 {
   enum { value = C };
-  typedef T type;
+  typedef T case_type;
 };
 
 

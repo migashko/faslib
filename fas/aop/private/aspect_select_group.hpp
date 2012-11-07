@@ -23,6 +23,7 @@
 
 namespace fas{
 
+  /*
 template<typename L, typename Tg, bool IsAdvice>
 struct aspect_select_group
 {
@@ -30,14 +31,13 @@ struct aspect_select_group
   typedef typename transform_t<type1, target_cast>::type type2;
   typedef typename organize<type2>::type type3;
   typedef typename unique_first<type3>::type type;
-
 };
 
 template<typename L, typename Tg>
 struct aspect_select_group<L, Tg, true>
 {
   typedef type_list<Tg> type;
-};
+};*/
 
 }
 

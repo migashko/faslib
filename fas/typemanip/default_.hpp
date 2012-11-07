@@ -15,7 +15,7 @@ template<typename T>
 struct default_
 {
   enum { value = 1 };
-  typedef T type;
+  typedef T case_type;
 };
 
 }

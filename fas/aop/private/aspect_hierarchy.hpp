@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -20,6 +20,8 @@
 #include <fas/type_list/type_list.hpp>
 #include <fas/algorithm/index_of_if.hpp>
 #include <fas/mp/bind2nd.hpp>
+#include <fas/typemanip/if_.hpp>
+
 
 namespace fas{
 
@@ -76,6 +78,15 @@ public:
   template<typename Tg>
   struct has_advice
   {
+    typedef index_of_if<
+      common_list,
+      and_< is_has_tag< _1, Tg>, not_< is_remove_advice<_1> > >
+    > helper;
+
+    enum { value = helper::value!=-1 };
+    typedef bool_< value!=0 > type;
+
+    /*
     typedef index_of_if_t<
       common_list,
       bind2nd<is_has_tag, Tg>::template apply
@@ -83,6 +94,7 @@ public:
 
     enum { value = helper::value!=-1 };
     typedef bool_< value!=0 > type;
+    */
   };
 
   template<typename Tg>
@@ -94,13 +106,25 @@ public:
   template<typename Tg>
   struct select_group
   {
+    typedef typename find_advice< Tg, group_list, empty_type >::type group_advice;
+    typedef typename if_c<
+      is_empty_type<group_advice>::value,
+      typename if_c< has_advice<Tg>::value, type_list<Tg>, empty_list >::type,
+      target_cast<_1>
+    >::type type1;
+    typedef typename apply<type1, group_advice>::type type;
+    // typedef typename target_cast<group_advice>::type type;
+    /*
     typedef typename find_advice< Tg, typename helper::net_list, empty_type >::type type1;
 
+    
     typedef typename aspect_select_group<
       group_list,
       Tg,
       is_advice<type1>::value && !some_type< type1, empty_type>::value
     >::type type;
+    */
+    
   };
 };
 

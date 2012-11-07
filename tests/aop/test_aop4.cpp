@@ -194,11 +194,11 @@ struct ad_id
 };
 
 
-  template<typename T>
-  struct t
-  {
-    typedef typename equal_to< int_<0>, modulus< typename ad_id<T>::type , int_<2> > >::type type;
-  };
+template<typename T>
+struct t
+{
+  typedef typename equal_to< int_<0>, modulus< typename ad_id<T>::type , int_<2> > >::type type;
+};
 
 
 
@@ -258,6 +258,8 @@ int main()
     return -1;
 
   f_test f2 = test.get_aspect().getg<_group5_>().for_each_if_t< t >(test, f_test());
+  /*typedef select< test_class::aspect::select_group<_group5_>::type, t >::type f2_type_list;
+  f_test f2 = group_call<f2_type_list>( test, f_test() );*/
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
 

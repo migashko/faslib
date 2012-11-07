@@ -72,92 +72,91 @@ struct group_tags_getter
 struct group_helper
 {
 
-template<typename TgList, typename T, typename F>
-static inline void foreach( TgList, T& t, F f)
-{
-  f(t, fas::tag<typename fas::head<TgList>::type>() );
-  return foreach( typename fas::tail<TgList>::type(), t, f);
-}
+  template<typename TgList, typename T, typename F>
+  static inline F for_each( TgList, T& t, F f)
+  {
+    f(t, fas::tag<typename fas::head<TgList>::type>() );
+    return for_each( typename fas::tail<TgList>::type(), t, f);
+  }
 
-template<typename T, typename F>
-static inline void foreach( fas::empty_list, T&, F f ) { return f; }
+  template<typename T, typename F>
+  static inline F for_each( fas::empty_list, T&, F f ) { return f; }
 
 
-/// 0
-template<typename TgList, typename T>
-static inline void call( TgList, T& t)
-{
-  t.get_aspect().template get< typename fas::head<TgList>::type >()(t);
-  call( typename fas::tail<TgList>::type(), t);
-}
+  /// 0
+  template<typename TgList, typename T>
+  static inline void call( TgList, T& t)
+  {
+    t.get_aspect().template get< typename fas::head<TgList>::type >()(t);
+    call( typename fas::tail<TgList>::type(), t);
+  }
 
-template<typename T>
-static inline void call( fas::empty_list, T& ) { }
+  template<typename T>
+  static inline void call( fas::empty_list, T& ) { }
 
-/// 1
-template<typename TgList, typename T, typename P1>
-static inline void group_call_helper( TgList, T& t, P1 p1)
-{
-  t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1);
-  call( typename fas::tail<TgList>::type(), t, p1);
-}
+  /// 1
+  template<typename TgList, typename T, typename P1>
+  static inline void call( TgList, T& t, P1 p1)
+  {
+    t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1);
+    call( typename fas::tail<TgList>::type(), t, p1);
+  }
 
-template<typename T, typename P1>
-static inline void call( fas::empty_list, T&, P1 ) { }
+  template<typename T, typename P1>
+  static inline void call( fas::empty_list, T&, P1 ) { }
 
-/// 2
-template<typename TgList, typename T, typename P1, typename P2>
-static inline void call( TgList, T& t, P1 p1, P2 p2)
-{
-  t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2);
-  call( typename fas::tail<TgList>::type(), t, p1, p2);
-}
+  /// 2
+  template<typename TgList, typename T, typename P1, typename P2>
+  static inline void call( TgList, T& t, P1 p1, P2 p2)
+  {
+    t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2);
+    call( typename fas::tail<TgList>::type(), t, p1, p2);
+  }
 
-template<typename T, typename P1, typename P2>
-static inline void call( fas::empty_list, T&, P1, P2 ) { }
+  template<typename T, typename P1, typename P2>
+  static inline void call( fas::empty_list, T&, P1, P2 ) { }
 
-/// 3
-template<typename TgList, typename T, typename P1, typename P2, typename P3>
-static inline void call( TgList, T& t, P1 p1, P2 p2, P3 p3)
-{
-  t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2, p3);
-  call( typename fas::tail<TgList>::type(), t, p1, p2, p3);
-}
+  /// 3
+  template<typename TgList, typename T, typename P1, typename P2, typename P3>
+  static inline void call( TgList, T& t, P1 p1, P2 p2, P3 p3)
+  {
+    t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2, p3);
+    call( typename fas::tail<TgList>::type(), t, p1, p2, p3);
+  }
 
-template<typename T, typename P1, typename P2, typename P3>
-static inline void call( fas::empty_list, T&, P1, P2, P3 ) { }
+  template<typename T, typename P1, typename P2, typename P3>
+  static inline void call( fas::empty_list, T&, P1, P2, P3 ) { }
 
-/// 4
-template<typename TgList, typename T, typename P1, typename P2, typename P3, typename P4>
-static inline void call( TgList, T& t, P1 p1, P2 p2, P3 p3, P4 p4)
-{
-  t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2, p3, p4);
-  call( typename fas::tail<TgList>::type(), t, p1, p2, p3, p4);
-}
+  /// 4
+  template<typename TgList, typename T, typename P1, typename P2, typename P3, typename P4>
+  static inline void call( TgList, T& t, P1 p1, P2 p2, P3 p3, P4 p4)
+  {
+    t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2, p3, p4);
+    call( typename fas::tail<TgList>::type(), t, p1, p2, p3, p4);
+  }
 
-template<typename T, typename P1, typename P2, typename P3, typename P4>
-static inline void call( fas::empty_list, T&, P1, P2, P3, P4 ) { }
+  template<typename T, typename P1, typename P2, typename P3, typename P4>
+  static inline void call( fas::empty_list, T&, P1, P2, P3, P4 ) { }
 
-/// 5
-template<typename TgList, typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
-static inline void call( TgList, T& t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
-{
-  t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2, p3, p4, p5);
-  call( typename fas::tail<TgList>::type(), t, p1, p2, p3, p4, p5);
-}
+  /// 5
+  template<typename TgList, typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
+  static inline void call( TgList, T& t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
+  {
+    t.get_aspect().template get< typename fas::head<TgList>::type >()(t, p1, p2, p3, p4, p5);
+    call( typename fas::tail<TgList>::type(), t, p1, p2, p3, p4, p5);
+  }
 
-template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
-static inline void call( fas::empty_list, T&, P1, P2, P3, P4, P5) { }
-
+  template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
+  static inline void call( fas::empty_list, T&, P1, P2, P3, P4, P5) { }
 };
 
 } // detail
 
 template<typename TgList, typename T, typename F>
-inline F group_foreach(T& t, F f)
+inline F group_for_each(T& t, F f)
 {
   typedef typename detail::group_tags_getter< TgList, T>::type tag_list;
-  return detail::group_helper::foreach( tag_list(), t, f);
+  return detail::group_helper::for_each( tag_list(), t, f);
 }
 
 template<typename TgList, typename T>
