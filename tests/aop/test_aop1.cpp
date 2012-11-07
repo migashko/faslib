@@ -6,19 +6,19 @@
 
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
-#include <fas/aop/has_tag.hpp>
-#include <fas/aop/is_has_tag.hpp>
+#include <fas/aop/private/has_tag.hpp>
+#include <fas/aop/private/is_has_tag.hpp>
+#include <fas/aop/private/is_advice.hpp>
 #include <fas/aop/private/aspect_select.hpp>
-#include <fas/aop/is_advice.hpp>
 
-#include <fas/type_list/length.hpp>
-#include <fas/integral/int_.hpp>
 #include <fas/static_check/static_check.hpp>
-#include <fas/algorithm/find_if.hpp>
+#include <fas/integral/int_.hpp>
 #include <fas/typemanip/type2type.hpp>
+#include <fas/type_list/length.hpp>
+#include <fas/algorithm/find_if.hpp>
+
 
 using namespace fas;
-
 
 struct _tag_;
 

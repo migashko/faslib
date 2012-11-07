@@ -9,21 +9,15 @@
 
 #include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/private/group_object.hpp>
-#include <fas/aop/is_advice.hpp>
-#include <fas/aop/is_alias.hpp>
-#include <fas/aop/is_group.hpp>
-#include <fas/aop/is_aspect.hpp>
-#include <fas/aop/is_remove_advice.hpp>
-#include <fas/aop/is_forward.hpp>
-#include <fas/aop/is_has_tag.hpp>
-#include <fas/aop/tag_cast.hpp>
-
-
-#include <fas/type_list/unique.hpp>
-#include <fas/type_list/unique_first.hpp>
-#include <fas/type_list/merge.hpp>
-#include <fas/type_list/tail.hpp>
-#include <fas/type_list/head.hpp>
+#include <fas/aop/private/is_advice.hpp>
+#include <fas/aop/private/is_alias.hpp>
+#include <fas/aop/private/is_group.hpp>
+#include <fas/aop/private/is_aspect.hpp>
+#include <fas/aop/private/is_remove_advice.hpp>
+#include <fas/aop/private/is_forward.hpp>
+#include <fas/aop/private/is_has_tag.hpp>
+#include <fas/aop/private/tag_cast.hpp>
+#include <fas/aop/private/target_cast.hpp>
 
 #include <fas/algorithm/erase_if.hpp>
 #include <fas/algorithm/transform_tail_if.hpp>
@@ -36,14 +30,21 @@
 #include <fas/mp/a.hpp>
 #include <fas/mp/p.hpp>
 
+#include <fas/type_list/unique.hpp>
+#include <fas/type_list/unique_first.hpp>
+#include <fas/type_list/merge.hpp>
+#include <fas/type_list/tail.hpp>
+#include <fas/type_list/head.hpp>
 
-#include <fas/integral/or_.hpp>
-#include <fas/integral/and_.hpp>
 #include <fas/typemanip/empty_type.hpp>
 #include <fas/typemanip/is_empty_type.hpp>
 #include <fas/typemanip/switch_.hpp>
 #include <fas/typemanip/case_.hpp>
 #include <fas/typemanip/default_.hpp>
+
+#include <fas/integral/or_.hpp>
+#include <fas/integral/and_.hpp>
+
 
 
 namespace fas{

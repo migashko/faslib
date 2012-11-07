@@ -7,8 +7,8 @@
 #ifndef FAS_AOP_DETAIL_HAS_ADVICE_HPP
 #define FAS_AOP_DETAIL_HAS_ADVICE_HPP
 
-#include <fas/aop/is_has_tag.hpp>
-#include <fas/aop/is_remove_advice.hpp>
+#include <fas/aop/private/is_has_tag.hpp>
+#include <fas/aop/private/is_remove_advice.hpp>
 #include <fas/algorithm/index_of_if.hpp>
 #include <fas/mp/placeholders.hpp>
 #include <fas/integral/and_.hpp>

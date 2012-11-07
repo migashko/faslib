@@ -7,7 +7,7 @@
 #ifndef FAS_AOP_IS_HAS_TAG_HPP
 #define FAS_AOP_IS_HAS_TAG_HPP
 
-#include <fas/aop/has_tag.hpp>
+#include <fas/aop/private/has_tag.hpp>
 #include <fas/typemanip/is_has_typename.hpp>
 #include <fas/integral/bool_.hpp>
 

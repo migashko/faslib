@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_AOP_PRIVATE_GROUP_OBJECT_HPP
-#define FAS_AOP_PRIVATE_GROUP_OBJECT_HPP
+#ifndef FAS_AOP_GROUP_OBJECT_HPP
+#define FAS_AOP_GROUP_OBJECT_HPP
 
 #include <fas/aop/detail/group_helper.hpp>
 #include <fas/aop/metalist.hpp>

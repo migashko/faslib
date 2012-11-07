@@ -7,7 +7,7 @@
 #ifndef FAS_AOP_DETAIL_SELECT_GROUP_HPP
 #define FAS_AOP_DETAIL_SELECT_GROUP_HPP
 
-#include <fas/aop/target_cast.hpp>
+#include <fas/aop/private/target_cast.hpp>
 #include <fas/aop/private/find_advice.hpp>
 #include <fas/aop/detail/has_advice.hpp>
 

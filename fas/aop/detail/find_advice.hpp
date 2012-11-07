@@ -7,26 +7,21 @@
 #ifndef FAS_AOP_DETAIL_FIND_ADVICE_HPP
 #define FAS_AOP_DETAIL_FIND_ADVICE_HPP
 
-#include <fas/aop/is_has_tag.hpp>
-#include <fas/aop/is_forward.hpp>
-#include <fas/aop/is_alias.hpp>
-#include <fas/aop/is_remove_advice.hpp>
-#include <fas/aop/target_cast.hpp>
+#include <fas/aop/private/is_has_tag.hpp>
+#include <fas/aop/private/is_forward.hpp>
+#include <fas/aop/private/is_alias.hpp>
+#include <fas/aop/private/is_remove_advice.hpp>
+#include <fas/aop/private/target_cast.hpp>
 
 #include <fas/algorithm/index_of_if.hpp>
 #include <fas/mp/placeholders.hpp>
 
 #include <fas/type_list/type_at_c.hpp>
 #include <fas/type_list/length.hpp>
-#include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 #include <fas/type_list/index_of.hpp>
-#include <fas/type_list/head.hpp>
-#include <fas/type_list/tail.hpp>
 #include <fas/type_list/push_front.hpp>
 
-#include <fas/typemanip/pair.hpp>
-#include <fas/integral/bool_.hpp>
 
 namespace fas{
 
