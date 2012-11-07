@@ -128,7 +128,6 @@ template<typename Tg, typename L, typename ALT, int Pos, int Len, typename Alias
 struct find_advice_impl_2
 {
   typedef typename type_at_c<Pos, L>::type current;
-  // typedef pair< typename is_alias<current>::type, typename is_forward<current>::type > condition;
   typedef int_<
     is_alias<current>::value
     + (is_forward<current>::value<<1)
@@ -138,13 +137,13 @@ struct find_advice_impl_2
 };
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
-struct find_advice_impl_3<Tg, L, ALT, Pos, Len, /*pair<false_, false_>*/int_<advace_category::advice>, AliasList >
+struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::advice>, AliasList >
 {
   typedef typename type_at_c<Pos, L>::type type;
 };
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
-struct find_advice_impl_3<Tg, L, ALT, Pos, Len, /*pair<true_, false_>*/int_<advace_category::alias>, AliasList >
+struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::alias>, AliasList >
 {
   typedef typename type_at_c<Pos, L>::type alias_type;
   typedef typename target_cast<alias_type>::type alias_tag;
@@ -153,7 +152,7 @@ struct find_advice_impl_3<Tg, L, ALT, Pos, Len, /*pair<true_, false_>*/int_<adva
 };
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
-struct find_advice_impl_3<Tg, L, ALT, Pos, Len, /*pair<false_, true_ >*/int_<advace_category::forward>, AliasList >
+struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::forward>, AliasList >
 {
   typedef typename type_at_c<Pos, L>::type forward_type;
   typedef typename find_advice_impl_1< typename target_cast<forward_type>::type, L, ALT, Pos + 1, Len, AliasList >::type type;
@@ -164,9 +163,6 @@ struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::removed>, 
 {
   enum { error = advice_has_been_removed<Tg, empty_type>::value };
   typedef empty_type type;
-
-  /*typedef typename type_at_c<Pos, L>::type forward_type;
-  typedef typename find_advice_impl_1< typename target_cast<forward_type>::type, L, ALT, Pos + 1, Len, AliasList >::type type;*/
 };
 
 template<typename Tg, typename L, typename ALT, int Len, typename AliasList, int RecursiveAlias>

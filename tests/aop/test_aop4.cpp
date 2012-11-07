@@ -10,6 +10,7 @@
 #include <fas/aop/has_tag.hpp>
 #include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/aspect_class.hpp>
+#include <fas/aop/advice_cast.hpp>
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/integral.hpp>
@@ -209,7 +210,7 @@ int main()
         static_check<
           some_type<
             test_class::aspect::advice_cast<_overlapped2_>::type,
-            group_caller<_overlapped2_>
+            group_object<_overlapped2_>
           >::value
         >::value
   };
@@ -257,9 +258,9 @@ int main()
   if ( !test_ids( "_overlapped2_ test3foreach", f.ids, ids(2, 3) ))
     return -1;
 
-  f_test f2 = test.get_aspect().getg<_group5_>().for_each_if_t< t >(test, f_test());
-  /*typedef select< test_class::aspect::select_group<_group5_>::type, t >::type f2_type_list;
-  f_test f2 = group_call<f2_type_list>( test, f_test() );*/
+  typedef select_group<_group5_, test_class>::type group5_tags;
+  typedef typename select< group5_tags, t< fas::advice_cast<_1, test_class> > >::type group5_tags_selected;
+  f_test f2 = test.get_aspect().getg<group5_tags_selected>().for_each(test, f_test());
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
 
