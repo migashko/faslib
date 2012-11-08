@@ -7,9 +7,10 @@
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/type_list/type_at_c.hpp>
-#include <fas/aop/remove_advice.hpp>
+#include <fas/aop/remover.hpp>
 #include <fas/aop/value_advice.hpp>
 #include <fas/aop/aspect.hpp>
+#include <fas/aop/stub.hpp>
 #include <fas/aop/aspect_class.hpp>
 #include <fas/static_check/static_check.hpp>
 
@@ -40,9 +41,9 @@ struct aspect2: fas::aspect< fas::type_list_n<
 {};
 
 struct aspect3: fas::aspect< fas::type_list_n<
-  fas::remove_advice<_tag1_>,
-  fas::remove_advice<_tag3_>,
-  fas::remove_advice<_tag5_>,
+  fas::remover<_tag1_>,
+  fas::remover<_tag3_>,
+  fas::remover<_tag5_>,
   aspect1,
   aspect2
 >::type >

@@ -7,8 +7,8 @@
 #ifndef FAS_AOP_ASPECT_HIERARCHY_HPP
 #define FAS_AOP_ASPECT_HIERARCHY_HPP
 
-#include <fas/aop/private/aspect_helper.hpp>
 #include <fas/aop/private/find_advice.hpp>
+#include <fas/aop/detail/aspect_helper.hpp>
 #include <fas/aop/detail/select_group.hpp>
 #include <fas/aop/detail/has_advice.hpp>
 
@@ -19,9 +19,9 @@ namespace fas{
 
 template<typename A>
 class aspect_hierarchy
-  : public scatter_hierarchy< typename aspect_helper<A>::hierarchy_list >
+  : public scatter_hierarchy< typename detail::aspect_helper<A>::hierarchy_list >
 {
-  typedef aspect_helper<A> helper;
+  typedef detail::aspect_helper<A> helper;
 public:
   typedef typename helper::hierarchy_list hierarchy_list;
   typedef typename helper::common_list common_list;

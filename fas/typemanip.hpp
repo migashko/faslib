@@ -27,6 +27,7 @@
 #include <fas/typemanip/is_has_metatype.hpp>
 #include <fas/typemanip/is_has_typename.hpp>
 #include <fas/typemanip/is_pointer.hpp>
+#include <fas/typemanip/is_wrapper.hpp>
 #include <fas/typemanip/make_pair.hpp>
 #include <fas/typemanip/make_tuple.hpp>
 #include <fas/typemanip/max_sizeof.hpp>

@@ -8,7 +8,7 @@
 #define FAS_AOP_TYPE_ADVICE_HPP
 
 #include <fas/aop/metalist.hpp>
-#include <fas/aop/private/is_remove_advice.hpp>
+#include <fas/aop/private/is_remover.hpp>
 #include <fas/integral/bool_.hpp>
 
 namespace fas{
@@ -22,12 +22,6 @@ public:
   typedef T advice_class;
 };
 
-template<typename Tg, typename T>
-struct is_remove_advice< type_advice<Tg, T> >
-{
-  enum { value = 0};
-  typedef false_ type;
-};
 
 }
 

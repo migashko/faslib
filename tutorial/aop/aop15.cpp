@@ -46,7 +46,7 @@ struct aspect_chain: fas::aspect< fas::type_list_n<
 /// -------------------------------------------------------------------------
 
 namespace chain2{
-
+  
 struct _input_;
 struct _output_;
 struct _incoming_;

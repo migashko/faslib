@@ -12,7 +12,6 @@ namespace fas{
 namespace metalist
 {
   struct empty_type;
-  struct wrapper;
   struct tstring;
 }
 

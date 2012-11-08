@@ -10,7 +10,7 @@
 #include <fas/aop/private/is_has_tag.hpp>
 #include <fas/aop/private/is_forward.hpp>
 #include <fas/aop/private/is_alias.hpp>
-#include <fas/aop/private/is_remove_advice.hpp>
+#include <fas/aop/private/is_remover.hpp>
 #include <fas/aop/private/target_cast.hpp>
 
 #include <fas/algorithm/index_of_if.hpp>
@@ -126,7 +126,7 @@ struct find_advice_impl_2
   typedef int_<
     is_alias<current>::value
     + (is_forward<current>::value<<1)
-    + (is_remove_advice<current>::value<<2)
+    + (is_remover<current>::value<<2)
   > condition;
   typedef typename find_advice_impl_3< Tg, L, ALT, Pos, Len, condition, AliasList >::type type;
 };

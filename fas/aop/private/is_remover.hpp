@@ -1,11 +1,11 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_AOP_IS_GROUP_HPP
-#define FAS_AOP_IS_GROUP_HPP
+#ifndef FAS_AOP_IS_REMOVER_HPP
+#define FAS_AOP_IS_REMOVER_HPP
 
 #include <fas/aop/metalist.hpp>
 #include <fas/typemanip/is_has_metatype.hpp>
@@ -14,7 +14,7 @@
 namespace fas{
 
 template<typename T>
-struct is_group: f< is_has_metatype<T, metalist::group> > {};
+struct is_remover: f< is_has_metatype<T, metalist::remover> >{};
 
 }
 

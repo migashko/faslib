@@ -44,13 +44,14 @@ struct test_aspect2: aspect<
 
 struct test_aspect3: aspect<
     type_list_n<
-      advice< int_<6>, int_<6> >,
-      advice< int_<7>, int_<7> >,
-      advice< int_<5>, int_<55> >,
+      aspect< aspect< advice< int_<6>, int_<6> > > >,
+      aspect< aspect< advice< int_<7>, int_<7> > > >,
+      aspect< aspect< advice< int_<5>, int_<55> >  > >,
       test_aspect2
     >::type
   >
 {};
+
 
 typedef aspect_select<test_aspect3, is_advice< a< _1 > > >::type result;
 

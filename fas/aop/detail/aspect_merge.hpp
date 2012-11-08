@@ -42,8 +42,8 @@ template<typename A1, typename A2>
 struct aspect_merge_helper<A1, A2, empty_type, empty_type, empty_type>
 {
   typedef typename aspect_merge_impl<
-      typename A1::type_list,
-      typename A2::type_list,
+      typename A1::advice_list,
+      typename A2::advice_list,
       A1, A2
   >::type type;
 };

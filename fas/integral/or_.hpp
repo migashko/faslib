@@ -13,8 +13,21 @@ namespace fas{
 
 template<typename A, typename B>
 struct or_
+  : or_< bool_< A::value!=0 >, B >
 {
-  enum { value = A::value || B::value };
+};
+
+template<typename B>
+struct or_<true_, B>
+{
+  enum { value = 1 };
+  typedef true_ type;
+};
+
+template<typename B>
+struct or_<false_, B>
+{
+  enum { value = (B::value!=0) };
   typedef bool_< value > type;
 };
 

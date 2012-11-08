@@ -4,19 +4,19 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_MP_HPP
-#define FAS_MP_HPP
+#ifndef FAS_AOP_HPP
+#define FAS_AOP_HPP
 
-#include <fas/aop/advice_cast.hpp>
 #include <fas/aop/advice.hpp>
+#include <fas/aop/advice_cast.hpp>
 #include <fas/aop/alias.hpp>
-#include <fas/aop/aspect_class.hpp>
 #include <fas/aop/aspect.hpp>
+#include <fas/aop/aspect_class.hpp>
 #include <fas/aop/aspect_merge.hpp>
 #include <fas/aop/forward.hpp>
 #include <fas/aop/group.hpp>
-#include <fas/aop/metalist.hpp>
-#include <fas/aop/remove_advice.hpp>
+#include <fas/aop/group_call.hpp>
+#include <fas/aop/remover.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/tag.hpp>
 #include <fas/aop/type_advice.hpp>

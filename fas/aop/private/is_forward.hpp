@@ -8,26 +8,13 @@
 #define FAS_AOP_IS_FORWARD_HPP
 
 #include <fas/aop/metalist.hpp>
-#include <fas/aop/forward.hpp>
 #include <fas/typemanip/is_has_metatype.hpp>
-#include <fas/integral/bool_.hpp>
+#include <fas/mp/f.hpp>
 
 namespace fas{
 
 template<typename T>
-struct is_forward
-{
-  enum { value = is_has_metatype<T, metalist::forward>::value };
-  typedef bool_< value > type;
-};
-
-
-template<typename Tg, typename TTg>
-struct is_forward< forward<Tg, TTg> >
-{
-  enum { value = 1};
-  typedef true_ type;
-};
+struct is_forward: f< is_has_metatype<T, metalist::forward> >{};
 
 }
 

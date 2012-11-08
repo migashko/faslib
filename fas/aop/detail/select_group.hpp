@@ -22,7 +22,6 @@
 #include <fas/typemanip/if_c.hpp>
 #include <fas/typemanip/empty_type.hpp>
 
-
 namespace fas{ namespace detail{
 
 template< typename TgList, typename A >
@@ -74,7 +73,7 @@ struct select_group_aspect
 {
   typedef typename normalize<TgList>::type tag_list;
   typedef typename organize<
-    typename detail::select_group_helper<tag_list, A>::type
+    typename select_group_helper<tag_list, A>::type
   >::type type;
 };
 

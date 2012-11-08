@@ -14,7 +14,7 @@
 #include <fas/aop/value_advice.hpp>
 #include <fas/aop/alias.hpp>
 #include <fas/aop/forward.hpp>
-#include <fas/aop/remove_advice.hpp>
+#include <fas/aop/remover.hpp>
 #include <fas/aop/group.hpp>
 #include <fas/aop/tag.hpp>
 
@@ -26,6 +26,7 @@ struct tag_cast
   typedef typename T::tag type;
 };
 
+/*
 template<typename Tg, typename T>
 struct tag_cast< advice<Tg, T> >
 {
@@ -73,6 +74,7 @@ struct tag_cast< stub<Tg, R> >
 {
   typedef Tg type;
 };
+*/
 
 
 }

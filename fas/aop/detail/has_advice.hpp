@@ -8,7 +8,7 @@
 #define FAS_AOP_DETAIL_HAS_ADVICE_HPP
 
 #include <fas/aop/private/is_has_tag.hpp>
-#include <fas/aop/private/is_remove_advice.hpp>
+#include <fas/aop/private/is_remover.hpp>
 #include <fas/algorithm/index_of_if.hpp>
 #include <fas/mp/placeholders.hpp>
 #include <fas/integral/and_.hpp>
@@ -21,7 +21,7 @@ struct has_advice_helper
 {
   typedef index_of_if<
     typename A::common_list,
-    and_< is_has_tag< _1, Tg>, not_< is_remove_advice<_1> > >
+    and_< is_has_tag< _1, Tg>, not_< is_remover<_1> > >
   > helper;
 
   enum { value = helper::value!=-1 };

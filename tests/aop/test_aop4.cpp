@@ -16,6 +16,7 @@
 #include <fas/integral.hpp>
 #include <fas/static_check/static_check.hpp>
 #include <fas/algorithm/find_if.hpp>
+#include <fas/algorithm/select.hpp>
 #include <fas/typemanip/type2type.hpp>
 #include <iostream>
 #include <string>
@@ -259,7 +260,7 @@ int main()
     return -1;
 
   typedef select_group<_group5_, test_class>::type group5_tags;
-  typedef typename select< group5_tags, t< fas::advice_cast<_1, test_class> > >::type group5_tags_selected;
+  typedef fas::select< group5_tags, t< fas::advice_cast<_1, test_class> > >::type group5_tags_selected;
   f_test f2 = test.get_aspect().getg<group5_tags_selected>().for_each(test, f_test());
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
