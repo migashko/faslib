@@ -12,7 +12,6 @@ using namespace ::fas;
 
 int main()
 {
-
   enum
   {
     test_plus_0 = static_check< plus< int_<0>, int_<0> >::value == 0 >::value,

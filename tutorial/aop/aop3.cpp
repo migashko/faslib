@@ -207,8 +207,6 @@ struct say_seven: iseven
   virtual iseven* clone() { return new say_seven; };
 };
 
-/// Cтратегий для three
-
 class say_4567
   : public istrike
 {

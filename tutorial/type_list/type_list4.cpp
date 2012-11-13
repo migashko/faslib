@@ -29,6 +29,5 @@ int main()
   std::cout << "unique<list>: " << fas::unique<list>::type() << std::endl;
   std::cout << "unique_first<list>: " << fas::unique_first<list>::type() << std::endl;
 
-
   return 0;
 }
