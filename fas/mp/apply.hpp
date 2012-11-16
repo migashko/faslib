@@ -7,6 +7,7 @@
 #ifndef FAS_PS_APPLY_HPP
 #define FAS_PS_APPLY_HPP
 
+#include <fas/mp/private/arg.hpp>
 #include <fas/mp/detail/apply.hpp>
 
 #include <fas/mp/w.hpp>

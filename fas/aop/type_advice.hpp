@@ -22,7 +22,6 @@ public:
   typedef T advice_class;
 };
 
-
 }
 
 #endif
