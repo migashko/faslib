@@ -8,12 +8,17 @@
 #define FAS_AOP_ASPECT_HIERARCHY_HPP
 
 #include <fas/aop/private/find_advice.hpp>
+#include <fas/aop/private/group_object.hpp>
+#include <fas/aop/private/event_object.hpp>
+
 #include <fas/aop/detail/aspect_helper.hpp>
 #include <fas/aop/detail/select_group.hpp>
 #include <fas/aop/detail/has_advice.hpp>
 
 #include <fas/hierarchy/scatter_hierarchy.hpp>
 #include <fas/hierarchy/field.hpp>
+
+#include <fas/type_list/reverse.hpp>
 
 namespace fas{
 
@@ -66,10 +71,25 @@ public:
   }
 
   template<typename Tg>
+  event_object<Tg> gete() const
+  {
+    return event_object<Tg>();
+  }
+
+  template<typename Tg>
   struct select_group
   {
     typedef typename detail::select_group_aspect< Tg, aspect_hierarchy<A> >::type type;
   };
+
+  template<typename Tg>
+  struct select_event
+  {
+    typedef typename reverse<
+      typename detail::select_group_aspect< Tg, aspect_hierarchy<A> >::type
+    >::type type;
+  };
+
 };
 
 }

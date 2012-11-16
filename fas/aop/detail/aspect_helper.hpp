@@ -24,19 +24,22 @@
 #include <fas/algorithm/transform_tail.hpp>
 #include <fas/algorithm/transform.hpp>
 #include <fas/algorithm/transform_if.hpp>
+#include <fas/algorithm/unique_first_if.hpp>
+#include <fas/algorithm/find_if.hpp>
 
 #include <fas/mp/placeholders.hpp>
 #include <fas/mp/a.hpp>
 #include <fas/mp/p.hpp>
 
 #include <fas/type_list/unique_first.hpp>
+#include <fas/type_list/unique.hpp>
+#include <fas/type_list/reverse.hpp>
 #include <fas/type_list/merge.hpp>
 #include <fas/type_list/tail.hpp>
 #include <fas/type_list/head.hpp>
 
 namespace fas{ namespace detail{
 
-  
 template<typename A>
 struct aspect_helper
 {
@@ -107,7 +110,11 @@ private:
   // новый элемент group, который вноситься в список, а остальные элементы удаляются
   typedef typename transform_tail<
     // Извлекаем из списка элементы group
-    typename select_t< net_list_type, is_group >::type,
+    typename select_t<
+      net_list_type,
+      is_group
+    >::type,
+
     // Объеденяем новый элемент group с хвостом списка, из которого убраны
     // старые элементы group
     merge<
@@ -117,24 +124,37 @@ private:
         tag_cast< head< _1 > >,
         // удаляем дубликаты из общего списка целей
         unique_first<
-          // после трансформации список может быть "поломатым" - чиним его
-          organize<
-            // преобразум список из элеметов group в список списков целей
-            // это не корректный список который нужно организовать
-            transform<
-              // извлекаем из списка нужные элементы group
-              select< _1, equal_head_tag >,
-              // для каждого элемента извлекаем список целей
-              a< target_cast< p<_1> > >
-            >  // transform
-          >  // organize
-        >  // unique_first
+          // Реверсируем список, чтобы список был порядке их добавления в аспект
+          //reverse<
+            // после трансформации список может быть "поломатым" - чиним его
+            organize<
+              // преобразум список из элеметов group в список списков целей
+              // это не корректный список который нужно организовать
+              transform<
+                // извлекаем из списка нужные элементы group
+                select< _1, equal_head_tag >,
+                // для каждого элемента извлекаем список целей
+                a< target_cast< p<_1> > >
+              >  // transform
+            >  // organize
+          // > // reverse
+        >  // unique
       >, // group
       // Удаляем все элементы с тегом, как у первого элемента в списке
       erase_if< _1, equal_head_tag >
     > // merge
+  >::type native_group_list_type;
+
+  typedef typename select<
+    native_group_list_type,
+    is_group<
+      find_if<
+        flat_list_type,
+        a< is_has_tag< p<_1>, tag_cast<_1> > >
+      >
+    >
   >::type group_list_type;
- 
+
 public:
   typedef common_list_type common_list;
   typedef hierarchy_list_type hierarchy_list;
