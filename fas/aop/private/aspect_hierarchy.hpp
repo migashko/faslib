@@ -9,7 +9,7 @@
 
 #include <fas/aop/private/find_advice.hpp>
 #include <fas/aop/private/group_object.hpp>
-#include <fas/aop/private/event_object.hpp>
+#include <fas/aop/private/reverse_group_object.hpp>
 
 #include <fas/aop/detail/aspect_helper.hpp>
 #include <fas/aop/detail/select_group.hpp>
@@ -71,9 +71,9 @@ public:
   }
 
   template<typename Tg>
-  event_object<Tg> gete() const
+  reverse_group_object<Tg> gete() const
   {
-    return event_object<Tg>();
+    return reverse_group_object<Tg>();
   }
 
   template<typename Tg>
@@ -83,7 +83,7 @@ public:
   };
 
   template<typename Tg>
-  struct select_event
+  struct select_group_reverse
   {
     typedef typename reverse<
       typename detail::select_group_aspect< Tg, aspect_hierarchy<A> >::type

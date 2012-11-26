@@ -42,8 +42,7 @@ struct aspect2: fas::aspect< fas::type_list_n<
 
 struct aspect3: fas::aspect< fas::type_list_n<
   fas::remover<_tag1_>,
-  fas::remover<_tag3_>,
-  fas::remover<_tag5_>,
+  fas::remover< fas::type_list_n<_tag3_, _tag5_>::type >,
   aspect1,
   aspect2
 >::type >
@@ -53,9 +52,9 @@ struct aspect3: fas::aspect< fas::type_list_n<
 int main()
 {
   typedef fas::aspect_class<aspect3> class3;
-  
-  enum 
-  { 
+
+  enum
+  {
     result = fas::static_check< class3::aspect::has_advice<_tag1_>::value == 0 >::value
            + fas::static_check< class3::aspect::has_advice<_tag2_>::value == 1 >::value
            + fas::static_check< class3::aspect::has_advice<_tag3_>::value == 0 >::value
@@ -63,6 +62,6 @@ int main()
            + fas::static_check< class3::aspect::has_advice<_tag5_>::value == 0 >::value
            + fas::static_check< class3::aspect::has_advice<_tag6_>::value == 1 >::value
   };
-  
+
   return 0;
 }

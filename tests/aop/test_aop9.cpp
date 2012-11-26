@@ -6,7 +6,7 @@
 
 #include <fas/type_list.hpp>
 #include <fas/aop.hpp>
-#include <fas/aop/event_call.hpp>
+#include <fas/aop/group_call_reverse.hpp>
 #include <fas/mp.hpp>
 #include <fas/typemanip.hpp>
 #include <fas/static_check/static_check.hpp>
@@ -72,7 +72,7 @@ int main()
   test_values.clear();
   check_values.clear();
   for (int i=1; i < 4; ++i ) check_values.push_front(i);
-  fas::event_call<_group1_>( test );
+  fas::group_call_reverse<_group1_>( test );
   if (test_values!=check_values)
   {
     show(test_values, check_values);
@@ -84,7 +84,7 @@ int main()
   for (int i=1; i < 6; ++i ) check_values.push_front(i);
   for (int i=1; i < 4; ++i ) check_values.push_front(i);
   check_values.push_front(1);
-  fas::event_call< fas::type_list_n<_group1_, _group2_, _group1_, _tag1_>::type >( test );
+  fas::group_call_reverse< fas::type_list_n<_group1_, _group2_, _group1_, _tag1_>::type >( test );
   if (test_values!=check_values)
   {
     show(test_values, check_values);

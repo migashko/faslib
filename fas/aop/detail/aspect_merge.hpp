@@ -8,6 +8,7 @@
 #define FAS_AOP_ASPECT_ASPECT_MERGE_HELPER_HPP
 
 #include <fas/aop/aspect.hpp>
+#include <fas/aop/private/is_aspect.hpp>
 #include <fas/type_list/metalist.hpp>
 #include <fas/type_list/empty_list.hpp>
 #include <fas/type_list/type_list.hpp>
@@ -20,6 +21,59 @@
 
 namespace fas{ namespace detail{
 
+template<typename T, bool IsAspect>
+struct aspect_pre
+{
+  typedef aspect<T> type;
+};
+
+template<>
+struct aspect_pre<empty_list, false>
+{
+  typedef empty_list type;
+};
+
+template<>
+struct aspect_pre<empty_type, false>
+{
+  typedef empty_list type;
+};
+
+template<typename A>
+struct aspect_pre<A, true>
+{
+  typedef A type;
+};
+
+template<>
+struct aspect_pre< aspect<empty_list>, true>
+{
+  typedef empty_list type;
+};
+
+template<>
+struct aspect_pre< aspect<empty_type>, true>
+{
+  typedef empty_list type;
+};
+
+
+template<typename A1, typename A2, typename A3, typename A4, typename A5>
+struct aspect_merge_helper
+{
+  typedef aspect<
+    typename type_list_n<
+      typename aspect_pre<A1, is_aspect<A1>::value >::type,
+      typename aspect_pre<A2, is_aspect<A2>::value >::type,
+      typename aspect_pre<A3, is_aspect<A3>::value >::type,
+      typename aspect_pre<A4, is_aspect<A4>::value >::type,
+      typename aspect_pre<A5, is_aspect<A5>::value >::type
+    >::type
+  > type;
+};
+
+
+/*
 template<typename A1, typename A2, typename A3, typename A4, typename A5>
 struct aspect_merge_helper
 {
@@ -31,10 +85,10 @@ struct aspect_merge_helper
   > type;
 };
 
-  
+
 template<typename L1, typename L2, typename A1, typename A2>
 struct aspect_merge_impl;
-  
+
 template<typename M1, typename M2, typename A1, typename A2>
 struct aspect_merge_impl2;
 
@@ -116,6 +170,8 @@ struct aspect_merge_impl2<metalist::type_list, metalist::type_list, A1, A2>
 {
   typedef aspect< type_list<A1, type_list<A2> > > type;
 };
+
+*/
 
 
 }}

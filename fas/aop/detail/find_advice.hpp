@@ -28,17 +28,21 @@ namespace fas{
 struct _alternative_;
 struct _no_alternative_;
 
+/*
 template<typename Tg, typename T>
 struct advice_not_found { enum { value = 0 }; };
+*/
 
 template<typename Tg>
-struct advice_not_found<Tg, empty_type>;
+struct advice_not_found/*<Tg, empty_type>*/;
 
+/*
 template<typename Tg, typename T>
 struct advice_has_been_removed { enum { value = 0 }; };
+*/
 
 template<typename Tg>
-struct advice_has_been_removed<Tg, empty_type>;
+struct advice_has_been_removed/*<Tg, empty_type>*/;
 
 
 template<typename Tg, typename AliasList, typename T>
@@ -85,7 +89,7 @@ struct find_advice_helper<Tg, empty_list, ALT>
 template<typename Tg >
 struct find_advice_helper<Tg, empty_list, _no_alternative_>
 {
-  enum { error = advice_not_found<Tg, empty_type>::value };
+  enum { error = advice_not_found<Tg/*, empty_type*/>::value };
 };
 
 template<typename Tg, typename L, typename ALT >
@@ -109,7 +113,7 @@ struct find_advice_impl_1
 template<typename Tg, typename L, int Len, typename AliasList>
 struct find_advice_impl_2<Tg, L, _no_alternative_, Len, Len, AliasList>
 {
-  enum { error = advice_not_found<Tg, empty_type>::value };
+  enum { error = advice_not_found<Tg/*, empty_type*/>::value };
   typedef empty_type type;
 };
 
@@ -156,7 +160,7 @@ struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::forward>, 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
 struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::removed>, AliasList >
 {
-  enum { error = advice_has_been_removed<Tg, empty_type>::value };
+  enum { error = advice_has_been_removed<Tg/*, empty_type*/>::value };
   typedef empty_type type;
 };
 
