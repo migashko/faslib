@@ -59,8 +59,8 @@ struct ad_method3a
 struct error_aspect: fas::aspect< fas::type_list_n<
   fas::advice<_method3_, ad_method3a>,
   fas::forward<_method3_orig_, _method3_>
-  // ,fas::remover<_method3_> // error: incomplete type ‘fas::advice_has_been_removed<_method3_>’ used in nested name specifier
-  , fas::alias<_method3_, _method3_orig_> // error: incomplete type ‘fas::recursive_alias<_method3_orig_, fas::type_list<_method3_orig_, fas::empty_list>, fas::empty_type>’ used in nested name specifier
+  //,fas::remover<_method3_> // error: invalid use of incomplete type ‘fas::static_error<fas::errorlist::advice_has_been_removed<_method3_>, 0>::type ...
+  //, fas::alias<_method3_, _method3_orig_> // error: invalid use of incomplete type ‘fas::static_error<fas::errorlist::recursive_alias<fas::type_list<_method3_orig_, fas::empty_list> >, 0>::type ...
 
 >::type >{};
 
@@ -71,7 +71,7 @@ int main()
   f1.method1();
   f1.method2();
   f1.method3();
-  // f1.get_aspect().get<_methodX_>(); // error: incomplete type ‘fas::advice_not_found<_methodX_>’ used in nested name specifier
+  // f1.get_aspect().get<_methodX_>(); // error: error: invalid use of incomplete type ‘fas::static_error<fas::errorlist::advice_not_found<_methodX_>, 0>::type ...
   std::cout << std::endl;
 
   return 0;

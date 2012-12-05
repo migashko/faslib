@@ -42,33 +42,23 @@ namespace errorlist
   struct recursive_alias;
 }
 
+template<typename Tg, typename Cond>
+struct advice_not_found
+  : static_error< errorlist::advice_not_found<Tg>, Cond::value >::type
+{
+  enum { value = 1};
+};
 
-/*
-template<typename Tg, typename T>
-struct advice_not_found { enum { value = 0 }; };
-*/
-
-template<typename Tg>
-struct advice_not_found/*<Tg, empty_type>*/;
-
-/*
-template<typename Tg, typename T>
-struct advice_has_been_removed { enum { value = 0 }; };
-*/
-
-template<typename Tg>
-struct advice_has_been_removed/*<Tg, empty_type>*/;
-
-
-/*template<typename Tg, typename AliasList, typename T>
-struct recursive_alias{ enum { value = 0 }; };*/
-
-template<typename Tg, typename AliasList>
-struct recursive_alias1/*<Tg, AliasList, empty_type>*/;
+template<typename Tg, typename Cond>
+struct advice_has_been_removed
+  : static_error< errorlist::advice_has_been_removed<Tg>, Cond::value >::type
+{
+  enum { value = 2};
+};
 
 template<typename Tg, typename AliasList, typename Cond>
-struct recursive_alias:
-  static_error< errorlist::recursive_alias<AliasList>, Cond::value >::type
+struct recursive_alias
+  : static_error< errorlist::recursive_alias<AliasList>, Cond::value >::type
 {
   enum { value = 3};
 };
@@ -111,7 +101,7 @@ struct find_advice_helper<Tg, empty_list, ALT>
 template<typename Tg >
 struct find_advice_helper<Tg, empty_list, _no_alternative_>
 {
-  enum { error = advice_not_found<Tg/*, empty_type*/>::value };
+  enum { error = advice_not_found<Tg, false_>::value };
 };
 
 template<typename Tg, typename L, typename ALT >
@@ -135,7 +125,7 @@ struct find_advice_impl_1
 template<typename Tg, typename L, int Len, typename AliasList>
 struct find_advice_impl_2<Tg, L, _no_alternative_, Len, Len, AliasList>
 {
-  enum { error = advice_not_found<Tg/*, empty_type*/>::value };
+  enum { error = advice_not_found<Tg, false_>::value };
   typedef empty_type type;
 };
 
@@ -182,7 +172,7 @@ struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::forward>, 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
 struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::removed>, AliasList >
 {
-  enum { error = advice_has_been_removed<Tg/*, empty_type*/>::value };
+  enum { error = advice_has_been_removed<Tg, false_>::value };
   typedef empty_type type;
 };
 
