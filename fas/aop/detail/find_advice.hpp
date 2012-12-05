@@ -21,12 +21,27 @@
 #include <fas/type_list/empty_list.hpp>
 #include <fas/type_list/index_of.hpp>
 #include <fas/type_list/push_front.hpp>
-
+#include <fas/typemanip/is_empty_type.hpp>
+#include <fas/integral/bool_.hpp>
+#include <fas/static_check/static_error.hpp>
 
 namespace fas{
 
 struct _alternative_;
 struct _no_alternative_;
+
+namespace errorlist
+{
+  template<typename Tg>
+  struct advice_not_found;
+
+  template<typename Tg>
+  struct advice_has_been_removed;
+
+  template<typename TgList>
+  struct recursive_alias;
+}
+
 
 /*
 template<typename Tg, typename T>
@@ -49,7 +64,14 @@ struct advice_has_been_removed/*<Tg, empty_type>*/;
 struct recursive_alias{ enum { value = 0 }; };*/
 
 template<typename Tg, typename AliasList>
-struct recursive_alias/*<Tg, AliasList, empty_type>*/;
+struct recursive_alias1/*<Tg, AliasList, empty_type>*/;
+
+template<typename Tg, typename AliasList, typename Cond>
+struct recursive_alias:
+  static_error< errorlist::recursive_alias<AliasList>, Cond::value >::type
+{
+  enum { value = 3};
+};
 
 namespace detail
 {
@@ -167,7 +189,7 @@ struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::removed>, 
 template<typename Tg, typename L, typename ALT, int Len, typename AliasList, int RecursiveAlias>
 struct find_advice_impl_4
 {
-  enum { error = recursive_alias<Tg, AliasList/*, empty_type*/>::value };
+  enum { error = recursive_alias<Tg, AliasList, false_>::value };
   typedef fas::empty_type type;
 };
 

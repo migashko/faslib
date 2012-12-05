@@ -60,7 +60,7 @@ struct error_aspect: fas::aspect< fas::type_list_n<
   fas::advice<_method3_, ad_method3a>,
   fas::forward<_method3_orig_, _method3_>
   // ,fas::remover<_method3_> // error: incomplete type ‘fas::advice_has_been_removed<_method3_>’ used in nested name specifier
-  //, fas::alias<_method3_, _method3_orig_> // error: incomplete type ‘fas::recursive_alias<_method3_orig_, fas::type_list<_method3_orig_, fas::empty_list>, fas::empty_type>’ used in nested name specifier
+  , fas::alias<_method3_, _method3_orig_> // error: incomplete type ‘fas::recursive_alias<_method3_orig_, fas::type_list<_method3_orig_, fas::empty_list>, fas::empty_type>’ used in nested name specifier
 
 >::type >{};
 
