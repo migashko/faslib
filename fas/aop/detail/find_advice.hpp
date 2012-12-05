@@ -45,11 +45,11 @@ template<typename Tg>
 struct advice_has_been_removed/*<Tg, empty_type>*/;
 
 
-template<typename Tg, typename AliasList, typename T>
-struct recursive_alias{ enum { value = 0 }; };
+/*template<typename Tg, typename AliasList, typename T>
+struct recursive_alias{ enum { value = 0 }; };*/
 
 template<typename Tg, typename AliasList>
-struct recursive_alias<Tg, AliasList, empty_type>;
+struct recursive_alias/*<Tg, AliasList, empty_type>*/;
 
 namespace detail
 {
@@ -167,7 +167,7 @@ struct find_advice_impl_3<Tg, L, ALT, Pos, Len, int_<advace_category::removed>, 
 template<typename Tg, typename L, typename ALT, int Len, typename AliasList, int RecursiveAlias>
 struct find_advice_impl_4
 {
-  enum { error = recursive_alias<Tg, AliasList, empty_type>::value };
+  enum { error = recursive_alias<Tg, AliasList/*, empty_type*/>::value };
   typedef fas::empty_type type;
 };
 
