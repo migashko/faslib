@@ -33,13 +33,11 @@ struct provider;
 
 template<typename M >
 struct provider< w<M> >
-  : provider_t< lambda< M >::template apply >
 {
-  /*
   template<typename T>
   struct build
   {
-    typedef typename fas::apply< typename M::type, T>::type type;
+    typedef typename fas::apply< M, T>::type type;
   };
 
   template<typename T>
@@ -47,7 +45,6 @@ struct provider< w<M> >
   {
     return typename build<T>::type(&t);
   }
-  */
 };
 
 }
