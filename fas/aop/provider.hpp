@@ -16,15 +16,15 @@ template<template<typename> class P >
 struct provider_t
 {
   template<typename T>
-  struct build
+  struct apply
   {
     typedef P<T> type;
   };
 
   template<typename T>
-  typename build<T>::type operator()(T& t) const
+  typename apply<T>::type operator()(T& t) const
   {
-    return typename build<T>::type(&t);
+    return typename apply<T>::type(&t);
   }
 };
 
@@ -35,15 +35,15 @@ template<typename M >
 struct provider< w<M> >
 {
   template<typename T>
-  struct build
+  struct apply
   {
     typedef typename fas::apply< M, T>::type type;
   };
 
   template<typename T>
-  typename build<T>::type operator()(T& t) const
+  typename apply<T>::type operator()(T& t) const
   {
-    return typename build<T>::type(&t);
+    return typename apply<T>::type(&t);
   }
 };
 
