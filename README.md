@@ -11,7 +11,7 @@ faslib тестировалась на следующих компилятора
 
 ## Установка и настройка
 
-Компиляция не требуется, но необходимо конфигурирование с помощью cmake
+Компиляция не требуется, но необходимо конфигурирование с помощью cmake:
 ```
 git clone git://github.com/migashko/faslib.github
 cd faslib
@@ -20,21 +20,21 @@ cd build
 cmake ..
 ```
 
-Вы также можете загрузить сконфигурированный faslib c [sourceforge](https://sourceforge.net/projects/faslib2)
+Вы также можете загрузить сконфигурированный faslib c [sourceforge](https://sourceforge.net/projects/faslib2).
 
-Для компиляции примеров и тестов
+Для компиляции примеров и тестов:
 ```
 make
 ```
 
-или по отдельности
+или по отдельности:
 ```
 make tests
 make examples
 make tutorial
 ```
 
-для запуска тестов
+для запуска тестов:
 ```
 ctest
 ```
@@ -61,8 +61,6 @@ public:
 неудобно. Более развернутые примеры (в том числе и с этими вариантами реализации) вы можете найти в [tutorial/aop](https://github.com/migashko/faslib/tree/master/tutorial/aop).
 
 Для наглядности изобразим этот класс на картинке в виде монолитного блока:
-
-
 
 ![foo](http://i.imgur.com/ovInI.png)
 
