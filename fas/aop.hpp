@@ -19,10 +19,12 @@
 #include <fas/aop/group_call_reverse.hpp>
 #include <fas/aop/group_for_each.hpp>
 #include <fas/aop/group_for_each_reverse.hpp>
+#include <fas/aop/provider.hpp>
 #include <fas/aop/remover.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/tag.hpp>
 #include <fas/aop/type_advice.hpp>
+#include <fas/aop/value.hpp>
 #include <fas/aop/value_advice.hpp>
 
 #endif

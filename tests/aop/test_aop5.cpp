@@ -34,11 +34,7 @@ struct advice_list:
     >::type
 {};
 
-
-  typedef find_advice<
-                      _tag1_,
-                      advice_list
-                    >::type aaa;
+typedef find_advice<_tag1_, advice_list>::type aaa;
 
 int main()
 {
