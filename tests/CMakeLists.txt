@@ -1,5 +1,7 @@
 project(tests)
 
+set(FAS_TESTING_CPP "${CMAKE_SOURCE_DIR}/fas/testing/testing.cpp")
+
 add_subdirectory(static_check)
 add_subdirectory(integral)
 add_subdirectory(typemanip)
