@@ -21,7 +21,7 @@ struct f_unit_run
   void operator()(T& t, tag<Tg> )
   {
     typename T::aspect::template advice_cast<Tg>::type &u = t.get_aspect().template get<Tg>();
-    
+
     t.out() << std::endl << RUN << u.name();
     try
     {
@@ -42,18 +42,18 @@ struct f_unit_run
     catch(const std::exception& e)
     {
       t.unit_end(u);
-      t.out() << EXCEPT << e.what() << std::endl;
+      t.out() << std::endl << EXCEPT << e.what() << std::endl;
       this->print_fail(t, u);
       throw;
     }
     catch(...)
     {
       t.unit_end(u);
-      t.out() << EXCEPT << "Unhandled exception." << std::endl;
+      t.out() << std::endl << EXCEPT << "Unhandled exception." << std::endl;
       this->print_fail(t, u);
       throw;
     }
-    
+
     if (u)
       t.out() << std::endl << OK;
     else
