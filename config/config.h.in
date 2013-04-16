@@ -1,5 +1,11 @@
-#ifndef FAS_SYSTEM_CONFIG_H
-#define FAS_SYSTEM_CONFIG_H
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+#ifndef FAS_SYSTEM_CONFIG_HPP
+#define FAS_SYSTEM_CONFIG_HPP
 
 /* Define to 1 if you have the <sys/time.h> header file. */
 #cmakedefine HAVE_SYS_TIME_H
@@ -34,3 +40,4 @@
 #cmakedefine HAVE_RT_LIB
 
 #endif
+
