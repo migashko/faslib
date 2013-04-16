@@ -52,18 +52,18 @@ struct equal<M, empty_type>: statement<M>
 template<typename M = assert, typename T = empty_type>
 struct not_equal: statement<M>
 {
-  equal(T left, T right): statement<M>( left != right, "Not equal statement. " ) {}
-  equal(T left, T right, const std::string& text): statement<M>( left != right, text ) {}
+  not_equal(T left, T right): statement<M>( left != right, "Not equal statement. " ) {}
+  not_equal(T left, T right, const std::string& text): statement<M>( left != right, text ) {}
 };
 
 template<typename M>
 struct not_equal<M, empty_type>: statement<M>
 {
   template<typename L, typename R>
-  equal(L left, R right): statement<M>( left != right, "Not equal statement. " ) {}
+  not_equal(L left, R right): statement<M>( left != right, "Not equal statement. " ) {}
 
   template<typename L, typename R>
-  equal(L left, R right, const std::string& text): statement<M>( left != right, text ) {}
+  not_equal(L left, R right, const std::string& text): statement<M>( left != right, text ) {}
 };
 
 
