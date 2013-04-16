@@ -69,7 +69,7 @@ public:
 Для демонстрации возможностей разработаем класс foo2 с аналогичным функционалом, но используя концепции АОП.
 Сначала разобьем его на составляющие, выделив каждый метод в отдельные сущности которые в faslib называются адвайс-классами:
 
-![ad_method](http://i.imgur.com/n2diQ.png)
+![advices](http://i.imgur.com/mof7U.png)
 
 ```cpp
 struct ad_method1
@@ -109,7 +109,7 @@ struct _method3_;
 Использование знака “_” для обрамления имени тега, чертовски удобная штука.
 Следующим этапом необходимо связать теги и адвайс-классы, создав таким образом собственно адвайсы:
 
-![advices](http://i.imgur.com/mof7U.png)
+![ad_method](http://i.imgur.com/n2diQ.png)
 
 ```cpp
 typedef fas::advice<_method1_, ad_method1> method1_advice;
