@@ -1,3 +1,6 @@
+#ifndef FAS_SYSTEM_CONFIG_H
+#define FAS_SYSTEM_CONFIG_H
+
 /* Define to 1 if you have the <sys/time.h> header file. */
 #cmakedefine HAVE_SYS_TIME_H
 
@@ -29,3 +32,5 @@
 #cmakedefine HAVE__ISATTY_FUNC
 #cmakedefine HAVE_GETRUSAGE_FUNC
 #cmakedefine HAVE_RT_LIB
+
+#endif
