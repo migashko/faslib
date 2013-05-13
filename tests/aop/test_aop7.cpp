@@ -9,6 +9,7 @@
 #include <fas/mp.hpp>
 #include <fas/static_check/static_check.hpp>
 #include <map>
+#include <string>
 
 using fas::w;
 using fas::_;
@@ -27,5 +28,19 @@ int main()
   typedef fas::aspect_class<aspect1> class1;
   class1 c1;
   c1.get_aspect().get<_value_>() = 10;
+
+  typedef std::map<int, std::string> orig_map;
+  typedef fas::advice_cast<_map_, class1::aspect>::type::type metamap;
+  typedef fas::apply<
+    metamap,
+    orig_map::key_type,
+    orig_map::mapped_type,
+    orig_map::key_compare,
+    orig_map::allocator_type
+  >::type map_type;
+
+  map_type m;
+  m[1]="test";
+  
   return 0;
 }

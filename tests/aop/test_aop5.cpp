@@ -16,9 +16,7 @@
 #include <fas/algorithm/find_if.hpp>
 #include <fas/typemanip/type2type.hpp>
 
-using namespace fas
-;
-
+using namespace fas;
 
 struct _tag1_;
 struct _tag2_;
