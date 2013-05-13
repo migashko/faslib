@@ -10,7 +10,6 @@
 #include <fas/aop/metalist.hpp>
 #include <fas/type_list/normalize.hpp>
 
-
 namespace fas{
 
 template<typename Tg, typename TgL>

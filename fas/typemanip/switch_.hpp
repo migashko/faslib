@@ -23,11 +23,11 @@ template<
 >
 struct switch_
 {
-  typedef if_c< P4::value, typename P4::type, empty_type > if4;
-  typedef if_c< P3::value, typename P3::type, typename if4::type > if3;
-  typedef if_c< P2::value, typename P2::type, typename if3::type > if2;
-  typedef if_c< P1::value, typename P1::type, typename if2::type > if1;
-  typedef if_c< P0::value, typename P0::type, typename if1::type > if0;
+  typedef if_c< P4::value, typename P4::case_type, empty_type > if4;
+  typedef if_c< P3::value, typename P3::case_type, typename if4::type > if3;
+  typedef if_c< P2::value, typename P2::case_type, typename if3::type > if2;
+  typedef if_c< P1::value, typename P1::case_type, typename if2::type > if1;
+  typedef if_c< P0::value, typename P0::case_type, typename if1::type > if0;
   
   typedef typename if0::type type;
   
@@ -49,10 +49,10 @@ template<
 >
 struct switch_<P0, P1, P2, P3, empty_type>
 {
-  typedef if_c< P3::value, typename P3::type, empty_type > if3;
-  typedef if_c< P2::value, typename P2::type, typename if3::type > if2;
-  typedef if_c< P1::value, typename P1::type, typename if2::type > if1;
-  typedef if_c< P0::value, typename P0::type, typename if1::type > if0;
+  typedef if_c< P3::value, typename P3::case_type, empty_type > if3;
+  typedef if_c< P2::value, typename P2::case_type, typename if3::type > if2;
+  typedef if_c< P1::value, typename P1::case_type, typename if2::type > if1;
+  typedef if_c< P0::value, typename P0::case_type, typename if1::type > if0;
   
   typedef typename if0::type type;
   
@@ -72,9 +72,9 @@ template<
 >
 struct switch_<P0, P1, P2, empty_type, empty_type>
 {  
-  typedef if_c< P2::value, typename P2::type, empty_type > if2;
-  typedef if_c< P1::value, typename P1::type, typename if2::type > if1;
-  typedef if_c< P0::value, typename P0::type, typename if1::type > if0;
+  typedef if_c< P2::value, typename P2::case_type, empty_type > if2;
+  typedef if_c< P1::value, typename P1::case_type, typename if2::type > if1;
+  typedef if_c< P0::value, typename P0::case_type, typename if1::type > if0;
   
   typedef typename if0::type type;
   
@@ -92,8 +92,8 @@ template<
 >
 struct switch_<P0, P1, empty_type, empty_type, empty_type>
 {  
-  typedef if_c< P1::value, typename P1::type, empty_type > if1;
-  typedef if_c< P0::value, typename P0::type, typename if1::type > if0;
+  typedef if_c< P1::value, typename P1::case_type, empty_type > if1;
+  typedef if_c< P0::value, typename P0::case_type, typename if1::type > if0;
   
   typedef typename if0::type type;
   
@@ -106,7 +106,7 @@ struct switch_<P0, P1, empty_type, empty_type, empty_type>
 
 template< typename P0 >
 struct switch_<P0, empty_type, empty_type, empty_type, empty_type>
-  : if_c< P0::value, typename P0::type, empty_type >
+  : if_c< P0::value, typename P0::case_type, empty_type >
 {  
 };
 

@@ -9,27 +9,12 @@
 
 #include <fas/aop/metalist.hpp>
 #include <fas/typemanip/is_has_metatype.hpp>
-#include <fas/aop/group.hpp>
-#include <fas/integral/bool_.hpp>
+#include <fas/mp/f.hpp>
 
 namespace fas{
 
 template<typename T>
-struct is_group
-{
-  enum { value = is_has_metatype<T, metalist::group>::value };
-  typedef bool_< value > type;
-};
-
-
-template<typename Tg, typename TgL>
-struct is_group< group<Tg, TgL> >
-{
-  enum { value = 1};
-  typedef true_ type;
-};
-
-
+struct is_group: f< is_has_metatype<T, metalist::group> > {};
 
 }
 

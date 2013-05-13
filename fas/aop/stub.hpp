@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -22,24 +22,23 @@ public:
   advice_class& get_advice() { return *this;}
   const advice_class& get_advice() const { return *this;}
 
-
   template<typename T>
-  R operator()(T&) { return R(); }
+  R operator()(T&) const { return R(); }
 
   template<typename T, typename P1>
-  R operator()(T&, P1) { return R(); }
+  R operator()(T&, P1) const { return R(); }
 
   template<typename T, typename P1, typename P2>
-  R operator()(T&, P1, P2) { return R(); }
+  R operator()(T&, P1, P2) const { return R(); }
 
   template<typename T, typename P1, typename P2, typename P3>
-  R operator()(T&, P1, P2, P3) { return R(); }
+  R operator()(T&, P1, P2, P3) const { return R(); }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4>
-  R operator()(T&, P1, P2, P3, P4) { return R(); }
+  R operator()(T&, P1, P2, P3, P4)  const { return R(); }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
-  R operator()(T&, P1, P2, P3, P4, P5) { return R(); }
+  R operator()(T&, P1, P2, P3, P4, P5)  const { return R(); }
 };
 
 }

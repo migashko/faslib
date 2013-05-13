@@ -1,3 +1,12 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+#ifndef FAS_SYSTEM_CONFIG_HPP
+#define FAS_SYSTEM_CONFIG_HPP
+
 /* Define to 1 if you have the <sys/time.h> header file. */
 #cmakedefine HAVE_SYS_TIME_H
 
@@ -10,9 +19,6 @@
 
 /* Define to 1 if you have the <windows.h> header file. */
 #cmakedefine HAVE_WINDOWS_H
-
-/* Define to 1 if you have the <wincon.h> header file. */
-#cmakedefine HAVE_WINCON_H
 
 /* Define to 1 if you have the <io.h> header file. */
 #cmakedefine HAVE_IO_H
@@ -31,5 +37,7 @@
 #cmakedefine HAVE_ISATTY_FUNC
 #cmakedefine HAVE__ISATTY_FUNC
 #cmakedefine HAVE_GETRUSAGE_FUNC
-#cmakedefine HAVE_SETCONSOLETEXTATTRIBUTE_FUNC
 #cmakedefine HAVE_RT_LIB
+
+#endif
+

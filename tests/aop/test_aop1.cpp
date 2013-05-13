@@ -6,19 +6,19 @@
 
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
-#include <fas/aop/has_tag.hpp>
-#include <fas/aop/is_has_tag.hpp>
+#include <fas/aop/private/has_tag.hpp>
+#include <fas/aop/private/is_has_tag.hpp>
+#include <fas/aop/private/is_advice.hpp>
 #include <fas/aop/private/aspect_select.hpp>
-#include <fas/aop/is_advice.hpp>
 
-#include <fas/type_list/length.hpp>
-#include <fas/integral/int_.hpp>
 #include <fas/static_check/static_check.hpp>
-#include <fas/algorithm/find_if.hpp>
+#include <fas/integral/int_.hpp>
 #include <fas/typemanip/type2type.hpp>
+#include <fas/type_list/length.hpp>
+#include <fas/algorithm/find_if.hpp>
+
 
 using namespace fas;
-
 
 struct _tag_;
 
@@ -44,13 +44,14 @@ struct test_aspect2: aspect<
 
 struct test_aspect3: aspect<
     type_list_n<
-      advice< int_<6>, int_<6> >,
-      advice< int_<7>, int_<7> >,
-      advice< int_<5>, int_<55> >,
+      aspect< aspect< advice< int_<6>, int_<6> > > >,
+      aspect< aspect< advice< int_<7>, int_<7> > > >,
+      aspect< aspect< advice< int_<5>, int_<55> >  > >,
       test_aspect2
     >::type
   >
 {};
+
 
 typedef aspect_select<test_aspect3, is_advice< a< _1 > > >::type result;
 

@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_SYSTEM_COLORIZED_HPP
 #define FAS_SYSTEM_COLORIZED_HPP
 
@@ -99,14 +105,14 @@ namespace std {
          || ( ::fas::system::is_atty_stderr() && cerr.rdbuf() == os.rdbuf() )
        )
     {
+#if defined(HAVE_WINDOWS_H)
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C1);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C2);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C3);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C4);
+      ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C5);
+      return os;
 
-#if defined(CWINDOWSCONSOLE)
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C1);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C2);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C3);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C4);
-      ::fas::detail::CWindowsConsole::Instance().SetAttributes(C5);
-      return os
 #elif defined(_POSIX_VERSION)
       os << "\033["<<C1;
       //os << "\e["<<C1;

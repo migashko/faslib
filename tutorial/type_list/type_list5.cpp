@@ -23,16 +23,16 @@ typedef fas::type_list_n<
   fas::int_<6>
 >::type list;
 
-typedef fas::split_c< fas::length<list>::value / 2, list>::type split_list;
+typedef fas::split_c< fas::length<list>::value / 2, list>::type list_pair;
 
 typedef fas::merge<
-  fas::erase_c< fas::length< split_list::first >::value-1, split_list::first>::type,
-  fas::erase_c< 0, split_list::second>::type
->::type list1;
+  fas::erase_c< fas::length< list_pair::first >::value-1, list_pair::first>::type,
+  fas::erase_c< 0, list_pair::second>::type
+>::type modified_list;
 
 int main()
 {
   std::cout << "list : " << list() << std::endl;
-  std::cout << "list1: " << list1() << std::endl;
+  std::cout << "modified list: " << modified_list() << std::endl;
   return 0;
 }

@@ -2,33 +2,16 @@ cmake_minimum_required(VERSION 2.6)
 
 project(faslib CXX)
 
-SET(CPACK_PACKAGE_NAME "faslib")
-SET(CPACK_PACKAGE_VERSION "0.2.0")
-
-if (NOT DEFINED CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release")
-endif (NOT DEFINED CMAKE_BUILD_TYPE)
-
-if ( "${CMAKE_BUILD_TYPE}" STREQUAL ""  )
-  set(CMAKE_BUILD_TYPE "Release")
-endif ( "${CMAKE_BUILD_TYPE}" STREQUAL ""  )
-
-
 if(UNIX)
-
-  # SET(CMAKE_CXX_FLAGS "-W -Wall -Werror -pedantic -fno-rtti")
-  SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti")
+  SET(CMAKE_CXX_FLAGS "-W -Wall -Werror -pedantic -fno-rtti -Wno-long-long")
   SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ")
   SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O2 -g -DNDEBUG")
   SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
-
 elseif(MSVC)
-
-  SET(CMAKE_CXX_FLAGS "/W3 /wd4503 /wd4307 /EHsc /D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS")
+  SET(CMAKE_CXX_FLAGS "/GR- /W3 /wd4503 /wd4307 /EHsc /D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS")
   SET(CMAKE_CXX_FLAGS_RELEASE "/O2 /DNDEBUG")
   SET(CMAKE_CXX_FLAGS_DEBUG  "/Od /D_DEBUG")
   SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "/Yd /O2 /DNDEBUG")
-
 else(UNIX)
 
 endif(UNIX)
@@ -52,13 +35,8 @@ add_subdirectory(config)
 add_definitions(-DFAS_DISABLE_WARNINGS)
 
 if (FAS_USE_RT_LIB)
-  message(STATUS "ADD_DEFINITIONS(-DFAS_USE_RT_LIB)")
   add_definitions(-DFAS_USE_RT_LIB)
-else(FAS_USE_RT_LIB)
-  message(STATUS "NOT ADD_DEFINITIONS(-DFAS_USE_RT_LIB)")
 endif(FAS_USE_RT_LIB)
-
-message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
 ENABLE_TESTING()
 
@@ -72,6 +50,7 @@ add_custom_target( tests make WORKING_DIRECTORY tests )
 add_custom_target( examples make WORKING_DIRECTORY examples )
 add_custom_target( tutorial make WORKING_DIRECTORY tutorial )
 
+set(CPACK_PACKAGE_NAME "faslib")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "2")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
@@ -92,10 +71,11 @@ install(DIRECTORY fas DESTINATION include
 install(DIRECTORY . DESTINATION share/faslib
   PATTERN "fas" EXCLUDE
   PATTERN "*.cmake" EXCLUDE
-  PATTERN "*~" EXCLUDE
+  PATTERN "*~*" EXCLUDE
   PATTERN "*kdev*" EXCLUDE
   PATTERN ".git*" EXCLUDE
   PATTERN "README.md" EXCLUDE
+  PATTERN "fasg++*" EXCLUDE
   PATTERN timeout EXCLUDE
 )
 

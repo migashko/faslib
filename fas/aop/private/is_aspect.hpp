@@ -8,27 +8,13 @@
 #define FAS_AOP_IS_ASPECT_HPP
 
 #include <fas/aop/metalist.hpp>
-#include <fas/aop/aspect.hpp>
-
 #include <fas/typemanip/is_has_metatype.hpp>
-#include <fas/integral/bool_.hpp>
-
+#include <fas/mp/f.hpp>
 
 namespace fas{
 
 template<typename T>
-struct is_aspect
-  : is_has_metatype<T, metalist::aspect>
-{
-};
-
-template<typename L>
-struct is_aspect< aspect<L> >
-{
-  enum { value = 1};
-  typedef true_ type;
-};
-
+struct is_aspect: f< is_has_metatype<T, metalist::aspect> >{};
 
 }
 

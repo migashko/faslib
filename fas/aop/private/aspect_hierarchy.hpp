@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2012
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,59 +7,30 @@
 #ifndef FAS_AOP_ASPECT_HIERARCHY_HPP
 #define FAS_AOP_ASPECT_HIERARCHY_HPP
 
-#include <fas/aop/private/aspect_helper.hpp>
 #include <fas/aop/private/find_advice.hpp>
-#include <fas/aop/private/group_call.hpp>
-#include <fas/aop/private/aspect_select_group.hpp>
+#include <fas/aop/private/group_object.hpp>
+#include <fas/aop/private/reverse_group_object.hpp>
 
-#include <fas/aop/aspect.hpp>
+#include <fas/aop/detail/aspect_helper.hpp>
+#include <fas/aop/detail/select_group.hpp>
+#include <fas/aop/detail/has_advice.hpp>
 
 #include <fas/hierarchy/scatter_hierarchy.hpp>
 #include <fas/hierarchy/field.hpp>
 
-#include <fas/type_list/type_list.hpp>
-#include <fas/algorithm/index_of_if.hpp>
-#include <fas/mp/bind2nd.hpp>
+#include <fas/type_list/reverse.hpp>
 
 namespace fas{
 
-
-template<typename A>
-struct aspect_common_helper
-{
-  typedef aspect_helper<A> helper;
-  struct common_list: helper::common_list{};
-  struct group_list: helper::group_list{};
-  struct net_list: helper::net_list{};
-  struct flat_list: helper::flat_list{};
-
-};
-
-template<typename L>
-struct aspect_common_helper< aspect<L> >
-{
-  typedef aspect_helper< aspect<L> > helper;
-  typedef typename helper::common_list common_list;
-  typedef typename helper::group_list group_list;
-  typedef typename helper::net_list net_list;
-  typedef typename helper::flat_list flat_list;
-};
-
-
-
 template<typename A>
 class aspect_hierarchy
-  : public scatter_hierarchy< typename aspect_helper<A>::hierarchy_list >
-
+  : public scatter_hierarchy< typename detail::aspect_helper<A>::hierarchy_list >
 {
-  typedef aspect_helper<A> helper;
+  typedef detail::aspect_helper<A> helper;
 public:
-
-  typedef typename aspect_common_helper<A>::net_list net_list; // удалить
-  typedef typename aspect_common_helper<A>::flat_list flat_list; // удалить
   typedef typename helper::hierarchy_list hierarchy_list;
-  typedef typename aspect_common_helper<A>::common_list common_list;
-  typedef typename aspect_common_helper<A>::group_list group_list;
+  typedef typename helper::common_list common_list;
+  typedef typename helper::group_list group_list;
 
   typedef scatter_hierarchy< hierarchy_list > super;
 
@@ -88,34 +59,38 @@ public:
   template<typename Tg>
   struct has_advice
   {
-    typedef index_of_if_t<
-      common_list,
-      bind2nd<is_has_tag, Tg>::template apply
-    > helper;
-
-    enum { value = helper::value!=-1 };
-    typedef bool_< value!=0 > type;
+    typedef detail::has_advice_aspect<Tg, aspect_hierarchy<A> > helper;
+    typedef typename helper::type type;
+    enum { value = helper::value};
   };
 
   template<typename Tg>
-  group_call<Tg> getg() const
+  group_object<Tg> getg() const
   {
-    return group_call<Tg>();
+    return group_object<Tg>();
+  }
+
+  template<typename Tg>
+  reverse_group_object<Tg> gete() const
+  {
+    return reverse_group_object<Tg>();
   }
 
   template<typename Tg>
   struct select_group
   {
-    typedef typename find_advice< Tg, typename helper::net_list, empty_type >::type type1;
+    typedef typename detail::select_group_aspect< Tg, aspect_hierarchy<A> >::type type;
+  };
 
-    typedef typename aspect_select_group<
-      group_list,
-      Tg,
-      is_advice<type1>::value && !some_type< type1, empty_type>::value
+  template<typename Tg>
+  struct select_group_reverse
+  {
+    typedef typename reverse<
+      typename detail::select_group_aspect< Tg, aspect_hierarchy<A> >::type
     >::type type;
   };
-};
 
+};
 
 }
 

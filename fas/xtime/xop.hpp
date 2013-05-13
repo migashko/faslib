@@ -35,8 +35,8 @@ inline nanospan operator / (const nanospan& s, const nanospan& f)
   {
     xsec_t xsec = s.to_nanosec()/f.sec;
     return nanospan(
-          static_cast< long > (xsec / FAS_NANOSEC ),
-          static_cast< long > (xsec % FAS_NANOSEC )
+          static_cast< xsec_t > (xsec / FAS_NANOSEC ),
+          static_cast< xsec_t > (xsec % FAS_NANOSEC )
     );
   }
   else
@@ -49,8 +49,8 @@ inline nanospan operator * (const nanospan& s, const nanospan& f)
   {
     xsec_t xsec = s.to_nanosec()*f.sec;
     return nanospan(
-          static_cast<long> ( xsec / FAS_NANOSEC ),
-          static_cast<long> ( xsec % FAS_NANOSEC )
+          static_cast<xsec_t> ( xsec / FAS_NANOSEC ),
+          static_cast<xsec_t> ( xsec % FAS_NANOSEC )
     );
   }
   else

@@ -7,9 +7,10 @@
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/type_list/type_at_c.hpp>
-#include <fas/aop/remove_advice.hpp>
+#include <fas/aop/remover.hpp>
 #include <fas/aop/value_advice.hpp>
 #include <fas/aop/aspect.hpp>
+#include <fas/aop/stub.hpp>
 #include <fas/aop/aspect_class.hpp>
 #include <fas/static_check/static_check.hpp>
 
@@ -40,9 +41,8 @@ struct aspect2: fas::aspect< fas::type_list_n<
 {};
 
 struct aspect3: fas::aspect< fas::type_list_n<
-  fas::remove_advice<_tag1_>,
-  fas::remove_advice<_tag3_>,
-  fas::remove_advice<_tag5_>,
+  fas::remover<_tag1_>,
+  fas::remover< fas::type_list_n<_tag3_, _tag5_>::type >,
   aspect1,
   aspect2
 >::type >
@@ -52,9 +52,9 @@ struct aspect3: fas::aspect< fas::type_list_n<
 int main()
 {
   typedef fas::aspect_class<aspect3> class3;
-  
-  enum 
-  { 
+
+  enum
+  {
     result = fas::static_check< class3::aspect::has_advice<_tag1_>::value == 0 >::value
            + fas::static_check< class3::aspect::has_advice<_tag2_>::value == 1 >::value
            + fas::static_check< class3::aspect::has_advice<_tag3_>::value == 0 >::value

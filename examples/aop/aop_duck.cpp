@@ -85,8 +85,7 @@ class FlyWithRocket : public FlyBehaviour
 class DuckInterface
 {
 public:
-  /*virtual void quack() = 0;
-  virtual void fly() = 0;*/
+  virtual ~DuckInterface() {}
   virtual void performQuack() = 0;
   virtual void performFly() = 0;
   virtual void floatAround() = 0;
@@ -126,7 +125,8 @@ struct aspect_MallardDuck: fas::aspect< fas::type_list_n<
 >::type >{};
 
 template<typename A = fas::aspect<> >
-class MallardDuck : public Duck< typename fas::aspect_merge<A, aspect_MallardDuck>::type >
+class MallardDuck
+  : public Duck< typename fas::aspect_merge<A, aspect_MallardDuck>::type >
 {
   public:
     MallardDuck()
@@ -179,6 +179,13 @@ class PaintedDuck : public Duck< typename fas::aspect_merge<A, aspect_PaintedDuc
 };
 // ----------------------- End of Duck class and subtypes -------------------------
 
+struct Rocket: fas::aspect< fas::advice<_fly_, FlyWithRocket> > {};
+
+struct QuackRocket: fas::aspect< fas::type_list_n<
+  fas::advice<_fly_, FlyWithRocket>,
+  fas::advice<_quack_, Quack>
+>::type > {};
+
 // ----------------------- The main event -------------------------
 int main()
 {
@@ -187,7 +194,7 @@ int main()
   mallard->floatAround();
   mallard->performFly();
   mallard->performQuack();
-
+  delete mallard;
   cout << endl << endl;
 
   DuckInterface *rubber = new RubberDuck<>();
@@ -195,27 +202,28 @@ int main()
   rubber->floatAround();
   rubber->performFly();
   rubber->performQuack();
-
-
+  delete rubber;
   cout << endl << endl;
 
   DuckInterface *painted = new PaintedDuck<>();
   painted->display();
   painted->floatAround();
   painted->performFly();
-
+  delete painted;
+  
   cout << "Changing compile-time quack behaviour (generate new class)..." << endl;
-  painted = new PaintedDuck< fas::aspect< fas::advice<_fly_, FlyWithRocket> > >();
+  painted = new PaintedDuck<Rocket>();
+  painted->display();
   painted->performFly();
   painted->performQuack();
+  delete painted;
 
   cout << "Changing compile-time quack behaviour (generate new class)..." << endl;
-  painted = new PaintedDuck< fas::aspect< fas::type_list_n<
-                  fas::advice<_fly_, FlyWithRocket>,
-                  fas::advice<_quack_, Quack>
-                >::type> >();
+  painted = new PaintedDuck<QuackRocket>();
+  painted->display();
   painted->performFly();
   painted->performQuack();
-
+  delete painted;
+  
   return 0;
 }

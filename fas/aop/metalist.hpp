@@ -16,7 +16,7 @@ namespace metalist
   struct alias;
   struct forward;
   struct group;
-  struct remove_advice;
+  struct remover;
 }
 
 }

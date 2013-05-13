@@ -1,8 +1,14 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_SYSTEM_COLORS_HPP
 #define FAS_SYSTEM_COLORS_HPP
 
 namespace fas { namespace console{
-  
+
 struct colors
 {
   enum
@@ -72,7 +78,7 @@ struct colors
     typedef background bg;
   };
 };
-  
+
 }}
 
 #endif

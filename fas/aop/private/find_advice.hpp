@@ -15,7 +15,7 @@ template<typename Tg, typename L, typename ALT = _no_alternative_ >
 struct find_advice
 {
   // it's worked, but very long compiled
-  // compile time for tutorial/chain/chain4 : 0m19.857s
+  // compile time for tutorial/aop/aop15 : 0m19.857s
 
   /*
   typedef typename find_if< L, is_has_tag<_1, Tg > >::type firts_item;
@@ -25,10 +25,10 @@ struct find_advice
   typedef second< split< find_index, second< _1 > > > tail_list; 
   typedef find_if< tail_list, a< is_has_tag< p<_1> , target< first<_1> > > > > find_func;
   typedef pair< find_func, tail_list> doit;
-  typedef typename do_while< initial, doit, cond >::type::first type;
+  typedef typename for_< initial, doit, cond >::type::first type;
   */
 
-  // compile time for tutorial/chain/chain4 : 0m2.621s
+  // compile time for tutorial/aop/aop15 : 0m2.621s (g++-4.7), 43.12s (g++-3.3)
   typedef typename detail::find_advice_helper<Tg, L, ALT >::type type;
 };
 

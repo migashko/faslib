@@ -7,14 +7,16 @@
 #include <fas/aop/advice.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/alias.hpp>
-#include <fas/aop/has_tag.hpp>
+#include <fas/aop/private/has_tag.hpp>
 #include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/aspect_class.hpp>
+#include <fas/aop/advice_cast.hpp>
 #include <fas/type_list/type_list_n.hpp>
 #include <fas/type_list/length.hpp>
 #include <fas/integral.hpp>
 #include <fas/static_check/static_check.hpp>
 #include <fas/algorithm/find_if.hpp>
+#include <fas/algorithm/select.hpp>
 #include <fas/typemanip/type2type.hpp>
 #include <iostream>
 #include <string>
@@ -66,42 +68,42 @@ struct ad_test
 {
   enum { id = ID };
   template<typename T>
-  void operator()(T& t)
+  void operator()(T& t) const
   {
     t.get_aspect().template get< _counters_ >().c0++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int )
+  void operator()(T& t, int ) const
   {
     t.get_aspect().template get< _counters_ >().c1++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int )
+  void operator()(T& t, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c2++;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int )
+  void operator()(T& t, int, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c3++;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int, int )
+  void operator()(T& t, int, int, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c4++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID) ;
   }
 
   template<typename T>
-  void operator()(T& t, int, int, int, int, int )
+  void operator()(T& t, int, int, int, int, int ) const
   {
     t.get_aspect().template get< _counters_ >().c5++ ;
     t.get_aspect().template get< _counters_ >().ids.push_back(ID);
@@ -139,7 +141,6 @@ struct test_aspect: aspect<test_advice_list> {};
 
 struct test_class: aspect_class<test_aspect>
 {
-  // without the "::" will not work because the base class private ad_counters aspect_class
   const ::ad_counters& get_counters() const { return this->get_aspect().get< _counters_ >();}
   ::ad_counters& get_counters() { return this->get_aspect().get< _counters_ >();}
 };
@@ -195,11 +196,11 @@ struct ad_id
 };
 
 
-  template<typename T>
-  struct t
-  {
-    typedef typename equal_to< int_<0>, modulus< typename ad_id<T>::type , int_<2> > >::type type;
-  };
+template<typename T>
+struct t
+{
+  typedef typename equal_to< int_<0>, modulus< typename ad_id<T>::type , int_<2> > >::type type;
+};
 
 
 
@@ -210,7 +211,7 @@ int main()
         static_check<
           some_type<
             test_class::aspect::advice_cast<_overlapped2_>::type,
-            group_call<_overlapped2_>
+            group_object<_overlapped2_>
           >::value
         >::value
   };
@@ -258,7 +259,9 @@ int main()
   if ( !test_ids( "_overlapped2_ test3foreach", f.ids, ids(2, 3) ))
     return -1;
 
-  f_test f2 = test.get_aspect().getg<_group5_>().for_each_if_t< t >(test, f_test());
+  typedef select_group<_group5_, test_class>::type group5_tags;
+  typedef fas::select< group5_tags, t< fas::advice_cast<_1, test_class> > >::type group5_tags_selected;
+  f_test f2 = test.get_aspect().getg<group5_tags_selected>().for_each(test, f_test());
   if ( !test_ids( "test3foreach", f2.ids, ids(2, 4) ))
     return -1;
 

@@ -11,10 +11,10 @@
 
 namespace fas {
 
-template<typename Tg, typename A>
+template<typename Tg, typename T>
 struct advice_cast
 {
-  typedef typename find_advice< Tg, typename A::common_list >::type::advice_class type;
+  typedef typename find_advice< Tg, typename T::aspect::common_list >::type::advice_class type;
 };
 
 }

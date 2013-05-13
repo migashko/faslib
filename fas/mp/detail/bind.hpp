@@ -11,7 +11,6 @@
 #include <fas/mp/w.hpp>
 #include <fas/mp/private/ps_c.hpp>
 
-
 namespace fas{ namespace detail{
 
 template<typename F, typename PL, int IsP, int Counter_>
@@ -78,9 +77,9 @@ struct bind_impl2_1< F<P0>, PL, Counter_>
 {
   typedef P0 arg0;
   typedef bind_impl1< arg0, PL, is_p<arg0>::value, Counter_ > P0_bind;
-  
+
   enum { counter = P0_bind::counter };
-  
+
   typedef F<
     typename P0_bind::type
   > type;
@@ -88,7 +87,7 @@ struct bind_impl2_1< F<P0>, PL, Counter_>
 
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_2
-  : bind_impl2_1 < F, PL, Counter_ > 
+  : bind_impl2_1 < F, PL, Counter_ >
 {};
 
 template<
@@ -100,12 +99,12 @@ struct bind_impl2_2< F<P0, P1>, PL, Counter_>
 {
   typedef P0 arg0;
   typedef P1 arg1;
-  
+
   typedef bind_impl1< arg0, PL, is_p<arg0>::value, Counter_ > P0_bind;
   enum { counter0 = P0_bind::counter };
 
   typedef bind_impl1< arg1, PL, is_p<arg1>::value, counter0 > P1_bind;
-  enum { counter = P1_bind::counter }; 
+  enum { counter = P1_bind::counter };
 
   typedef F<
     typename P0_bind::type,
@@ -116,12 +115,12 @@ struct bind_impl2_2< F<P0, P1>, PL, Counter_>
 
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_3
-  : bind_impl2_2 < F, PL, Counter_ > 
+  : bind_impl2_2 < F, PL, Counter_ >
 {};
 
 
 template<
-  template<typename, typename, typename> class F, 
+  template<typename, typename, typename> class F,
   typename P0, typename P1, typename P2,
   typename PL, int Counter_
 >
@@ -149,12 +148,12 @@ struct bind_impl2_3< F<P0, P1, P2>, PL, Counter_>
 
 template<typename F, typename PL, int Counter_>
 struct bind_impl2_4
-  : bind_impl2_3 < F, PL, Counter_ > 
+  : bind_impl2_3 < F, PL, Counter_ >
 {};
 
 template<
-  template<typename, typename, typename, typename> class F, 
-  typename P0, typename P1, typename P2, typename P3, 
+  template<typename, typename, typename, typename> class F,
+  typename P0, typename P1, typename P2, typename P3,
   typename PL, int Counter_
 >
 struct bind_impl2_4< F<P0, P1, P2, P3>, PL, Counter_>
@@ -163,7 +162,7 @@ struct bind_impl2_4< F<P0, P1, P2, P3>, PL, Counter_>
   typedef P1 arg1;
   typedef P2 arg2;
   typedef P3 arg3;
-  
+
   typedef bind_impl1< arg0, PL, is_p<arg0>::value, Counter_ > P0_bind;
   enum { counter0 = P0_bind::counter };
 

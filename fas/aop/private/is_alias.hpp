@@ -8,25 +8,13 @@
 #define FAS_AOP_IS_ALIAS_HPP
 
 #include <fas/aop/metalist.hpp>
-#include <fas/aop/alias.hpp>
-#include <fas/integral/bool_.hpp>
 #include <fas/typemanip/is_has_metatype.hpp>
+#include <fas/mp/f.hpp>
 
 namespace fas{
 
 template<typename T>
-struct is_alias
-{
- enum { value = is_has_metatype<T, metalist::alias>::value };
- typedef bool_< value > type;
-};
-
-template<typename Tg, typename TTg>
-struct is_alias< alias<Tg, TTg> >
-{
-  enum { value = 1};
-  typedef true_ type;
-};
+struct is_alias: f< is_has_metatype<T, metalist::alias> >{};
 
 }
 

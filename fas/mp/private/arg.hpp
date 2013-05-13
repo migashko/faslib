@@ -24,7 +24,6 @@ struct is_arg { enum {value = 0}; };
 template<typename T>
 struct is_arg< arg<T> > { enum {value = 1}; };
 
-
 }
 
 #endif

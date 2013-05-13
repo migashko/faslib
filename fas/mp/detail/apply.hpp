@@ -13,8 +13,6 @@
 #include <fas/mp/w.hpp>
 #include <fas/mp/has_type.hpp>
 
-
-
 namespace fas{ namespace detail{
 
 template<typename F>
@@ -96,11 +94,11 @@ struct apply_impl2_1< F<P0> >
 
 template<typename F>
 struct apply_impl2_2
-  : apply_impl2_1< F > 
+  : apply_impl2_1< F >
 {};
 
 template<
-  template<typename, typename> class F, 
+  template<typename, typename> class F,
   typename P0, typename P1
 >
 struct apply_impl2_2< F<P0, P1> >

@@ -5,9 +5,12 @@
 //
 
 #include <fas/type_list.hpp>
+#include <fas/algorithm/nothing.hpp>
 #include <fas/algorithm/transform.hpp>
+#include <fas/algorithm/transform_if.hpp>
 #include <fas/typemanip.hpp>
 #include <fas/integral.hpp>
+#include <fas/mp.hpp>
 #include <fas/static_check.hpp>
 
 using namespace ::fas;
@@ -29,7 +32,12 @@ typedef type_list_n<
 int main()
 {
   typedef transform<list1, type2type<_1> >::type result_type;
-  enum { result = some_type<result_type, list2>::value };
+ 
+  enum { result = static_check< some_type<result_type, list2>::value>::value
+  };
+  
+  
+  
   return 0;
 }
 

@@ -9,6 +9,7 @@
 
 #include <fas/system/system.hpp>
 #include <fas/xtime/nanospan.hpp>
+#include <time.h>
 
 namespace fas {
 
@@ -27,15 +28,17 @@ inline nanospan nanotime()
 #elif defined(HAVE__FTIME_S_FUNC)
   struct _timeb timebuffer;
   _ftime_s( &timebuffer );
-  return millispan(static_cast<long>(timebuffer.time), timebuffer.millitm);
+  return millispan(static_cast<xsec_t>(timebuffer.time), static_cast<xsec_t>(timebuffer.millitm) );
 #elif defined(HAVE__FTIME_FUNC)
   struct _timeb timebuffer;
   _ftime( &timebuffer );
-  return millispan(static_cast<long>(timebuffer.time), timebuffer.millitm);
+  return millispan(static_cast<xsec_t>(timebuffer.time), static_cast<xsec_t>(timebuffer.millitm) );
 #elif defined(HAVE_FTIME_FUNC)
 	struct timeb timebuffer;
 	ftime( &timebuffer );
-	return millispan(static_cast<long>(timebuffer.time), timebuffer.millitm);
+	return millispan(static_cast<xsec_t>(timebuffer.time), static_cast<xsec_t>(timebuffer.millitm) );
+#else
+#error FAIL
 #endif //HAVE_CLOCK_GETTIME_FUNC
   return nanospan(0, 0);
 }

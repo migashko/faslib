@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -11,19 +11,30 @@
 
 namespace fas{
 
-template<typename Tg, typename T>
+template<typename Tg, typename V >
 class value_advice
 {
 public:
   typedef metalist::advice metatype;
   typedef Tg tag;
-  typedef T advice_class;
+  typedef V advice_class;
 
-  advice_class& get_advice() { return _value;}
-  const advice_class& get_advice() const { return _value;}
-  
+  value_advice()
+    :_value()
+  {}
+
+  advice_class& get_advice()
+  {
+    return _value;
+  }
+
+  const advice_class& get_advice() const
+  {
+    return _value;
+  }
+
 private:
-   T _value;
+   V _value;
 };
 
 }

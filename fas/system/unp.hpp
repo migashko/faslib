@@ -1,3 +1,9 @@
+//
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
 #ifndef FAS_SYSTEM_UNP_HPP
 #define FAS_SYSTEM_UNP_HPP
 
@@ -12,7 +18,7 @@
 #endif
 
 #ifdef HAVE_SYS_RESORCE_H
-#include <sys/resource.h> 
+#include <sys/resource.h>
 #endif
 
 #ifdef HAVE_UNISTD_H
