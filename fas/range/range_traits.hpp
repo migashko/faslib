@@ -37,6 +37,6 @@ struct range_traits<T*>
   typedef T&                         reference;
 };
 
-};
+}
 
 #endif
