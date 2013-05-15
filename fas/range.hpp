@@ -37,4 +37,6 @@
 #include <fas/range/random_access_range.hpp>
 #include <fas/range/string_range.hpp>
 
+#include <fas/range/range_traits.hpp>
+
 #endif
