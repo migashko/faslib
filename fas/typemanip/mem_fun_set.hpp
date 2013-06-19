@@ -14,6 +14,8 @@ namespace fas{
 template<typename V, typename VT, void (V::* mg)(VT), typename VVT = typename remove_const_reference<VT>::type >
 struct mem_fun_set
 {
+  typedef VVT value_type;
+  
   mem_fun_set()
     : _obj()
     , _value()
@@ -39,6 +41,8 @@ private:
 template<typename V, typename VT, void (V::* mg)(VT), typename VVT >
 struct mem_fun_set<V, VT, mg, VVT*>
 {
+  typedef VVT value_type;
+
   VVT* operator()(V& v, VVT* buffer )
   {
     _obj = &v;

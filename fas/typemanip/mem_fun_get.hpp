@@ -12,6 +12,8 @@ namespace fas{
 template<typename V, typename VT, VT (V::* mg)(void) const>
 struct mem_fun_get
 {
+  typedef VT value_type;
+
   VT operator()(const V& v) const
   {
     return (v.*mg)();
@@ -22,6 +24,8 @@ struct mem_fun_get
 template<typename V, typename VT, VT (V::* mg)(void)>
 struct mem_fun_get_non_const
 {
+  typedef VT value_type;
+
   VT operator()(const V& v) const
   {
     return (v.*mg)();

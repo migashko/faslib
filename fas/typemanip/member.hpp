@@ -14,6 +14,7 @@ namespace fas{
 template<typename V, typename VT, VT V::* m>
 struct member
 {
+  typedef VT value_type;
   template<typename VV>
   typename const_if_const<VT, VV>::type& operator()(VV& v) const
   {

@@ -12,6 +12,7 @@ namespace fas{
 template<typename V, typename VT, VT V::* m>
 struct member_get
 {
+  typedef VT value_type;
   const VT& operator()(const V& v) const
   {
     return v.*m;
