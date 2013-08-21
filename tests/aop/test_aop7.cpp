@@ -10,10 +10,7 @@
 #include <fas/typemanip.hpp>
 #include <fas/static_check/static_check.hpp>
 #include <map>
-<<<<<<< HEAD
-=======
 #include <set>
->>>>>>> e163a6e0d4a78b879a227ddfd643c436957285d8
 #include <string>
 
 using fas::w;
