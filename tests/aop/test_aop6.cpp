@@ -9,6 +9,7 @@
 #include <fas/type_list/type_at_c.hpp>
 #include <fas/aop/remover.hpp>
 #include <fas/aop/value_advice.hpp>
+#include <fas/aop/type_advice.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/aspect_class.hpp>

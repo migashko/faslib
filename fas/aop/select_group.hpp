@@ -14,7 +14,7 @@ namespace fas{
 template< typename TgList, typename T >
 struct select_group
 {
-  typedef typename detail::select_group_aspect<TgList, typename T::aspect>::type type;
+  typedef typename detail::select_group<TgList, typename T::aspect>::type type;
 };
 
 }

@@ -12,7 +12,6 @@
 
 namespace fas{
 
-
 template< typename TgList, typename T >
 struct select_group_reverse
 {

@@ -29,7 +29,7 @@ struct find_advice
   */
 
   // compile time for tutorial/aop/aop15 : 0m2.621s (g++-4.7), 43.12s (g++-3.3)
-  typedef typename detail::find_advice_helper<Tg, L, ALT >::type type;
+  typedef typename detail::find_advice<Tg, L, ALT >::type type;
 };
 
 }

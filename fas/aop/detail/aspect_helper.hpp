@@ -7,6 +7,8 @@
 #ifndef FAS_AOP_DETAIL_ASPECT_HELPER_HPP
 #define FAS_AOP_DETAIL_ASPECT_HELPER_HPP
 
+#include <fas/aop/group.hpp>
+#include <fas/aop/forward.hpp>
 
 #include <fas/aop/private/aspect_select.hpp>
 #include <fas/aop/private/group_object.hpp>
@@ -27,6 +29,7 @@
 #include <fas/algorithm/transform_if.hpp>
 #include <fas/algorithm/unique_first_if.hpp>
 #include <fas/algorithm/find_if.hpp>
+#include <fas/algorithm/select.hpp>
 
 #include <fas/mp/placeholders.hpp>
 #include <fas/mp/a.hpp>
@@ -38,6 +41,8 @@
 #include <fas/type_list/merge.hpp>
 #include <fas/type_list/tail.hpp>
 #include <fas/type_list/head.hpp>
+#include <fas/type_list/organize.hpp>
+
 
 #include <fas/integral/not_equal_to.hpp>
 #include <fas/integral/int_.hpp>

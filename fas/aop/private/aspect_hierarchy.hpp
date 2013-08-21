@@ -26,6 +26,7 @@ template<typename A>
 class aspect_hierarchy
   : public scatter_hierarchy< typename detail::aspect_helper<A>::hierarchy_list >
 {
+  typedef aspect_hierarchy<A> self;
   typedef detail::aspect_helper<A> helper;
 public:
   typedef typename helper::hierarchy_list hierarchy_list;
@@ -59,7 +60,7 @@ public:
   template<typename Tg>
   struct has_advice
   {
-    typedef detail::has_advice_aspect<Tg, aspect_hierarchy<A> > helper;
+    typedef detail::has_advice<Tg, self > helper;
     typedef typename helper::type type;
     enum { value = helper::value};
   };
@@ -79,14 +80,14 @@ public:
   template<typename Tg>
   struct select_group
   {
-    typedef typename detail::select_group_aspect< Tg, aspect_hierarchy<A> >::type type;
+    typedef typename detail::select_group< Tg, self >::type type;
   };
 
   template<typename Tg>
   struct select_group_reverse
   {
     typedef typename reverse<
-      typename detail::select_group_aspect< Tg, aspect_hierarchy<A> >::type
+      typename detail::select_group< Tg, self >::type
     >::type type;
   };
 

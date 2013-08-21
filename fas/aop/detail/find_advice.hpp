@@ -77,7 +77,7 @@ struct advace_category
 };
 
 template<typename Tg, typename L, typename ALT >
-struct find_advice_helper;
+struct find_advice;
 
 template<typename Tg, typename L, typename ALT, int Pos, int Len, typename AliasList>
 struct find_advice_impl_1;
@@ -92,20 +92,20 @@ template<typename Tg, typename L, typename ALT, int Len, typename AliasList, int
 struct find_advice_impl_4;
 
 template<typename Tg, typename ALT >
-struct find_advice_helper<Tg, empty_list, ALT>
+struct find_advice<Tg, empty_list, ALT>
 {
   enum { error = 0 };
   typedef ALT type;
 };
 
 template<typename Tg >
-struct find_advice_helper<Tg, empty_list, _no_alternative_>
+struct find_advice<Tg, empty_list, _no_alternative_>
 {
   enum { error = advice_not_found<Tg, false_>::value };
 };
 
 template<typename Tg, typename L, typename ALT >
-struct find_advice_helper
+struct find_advice
  : find_advice_impl_1<Tg, L, ALT, 0, length<L>::value, fas::empty_list >
 {
 };

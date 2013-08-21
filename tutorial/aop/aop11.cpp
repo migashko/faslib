@@ -91,7 +91,7 @@ struct aspect_ONE: fas::aspect< fas::type_list_n<
 >::type > {};
 
 struct aspect_ONE23s:
-  fas::aspect_merge<aspect_ONE, dredd::aspect_123s >::type
+  fas::merge_aspect<aspect_ONE, dredd::aspect_123s >::type
 {};
 
 template< typename A = fas::aspect<> >
@@ -171,7 +171,7 @@ struct aspect_4567: fas::aspect< fas::type_list_n<
 
 
 struct aspect_1234567:
-  fas::aspect_merge< aspect_4567, dredd::aspect_123s>::type
+  fas::merge_aspect< aspect_4567, dredd::aspect_123s>::type
 {};
 
 /// /////////////////////////////////////////////////
@@ -198,7 +198,7 @@ namespace sam
 struct _say_;
 
 struct aspect_ONE234567:
-  fas::aspect_merge<
+  fas::merge_aspect<
     fas::aspect< fas::alias<_say_, bob::_say_> >,
     jon::aspect_ONE,
     bob::aspect_1234567

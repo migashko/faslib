@@ -31,7 +31,7 @@ struct aspect_transform
 };
 
 template<typename L, template<typename> class F>
-struct aspect_select_t_helper
+struct aspect_select_t
 {
   typedef typename aspect_transform< typename advice_list_cast<L>::type >::type raw_list;
   typedef typename normalize<raw_list>::type flat_list;

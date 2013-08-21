@@ -17,7 +17,7 @@
 namespace fas { namespace detail{
 
 template<typename Tg, typename A>
-struct has_advice_helper
+struct has_advice_impl
 {
   typedef index_of_if<
     typename A::common_list,
@@ -29,9 +29,9 @@ struct has_advice_helper
 };
 
 template<typename Tg, typename A>
-struct has_advice_aspect
+struct has_advice
 {
-  typedef has_advice_helper<Tg, A> helper;
+  typedef has_advice_impl<Tg, A> helper;
   typedef typename helper::type type;
   enum { value = helper::value};
 };

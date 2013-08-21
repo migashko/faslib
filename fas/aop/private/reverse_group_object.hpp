@@ -7,12 +7,10 @@
 #ifndef FAS_AOP_REVERSE_GROUP_OBJECT_HPP
 #define FAS_AOP_REVERSE_GROUP_OBJECT_HPP
 
-
 #include <fas/aop/select_group.hpp>
 #include <fas/aop/detail/group_helper.hpp>
 #include <fas/aop/metalist.hpp>
 #include <fas/type_list/reverse.hpp>
-
 
 namespace fas {
 

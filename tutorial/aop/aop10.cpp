@@ -183,7 +183,7 @@ namespace sam
 {
 
 struct aspect_ONE234567:
-  fas::aspect_merge< jon::aspect_ONE, bob::aspect_1234567>::type
+  fas::merge_aspect< jon::aspect_ONE, bob::aspect_1234567>::type
 {};
 
 /// /////////////////////////////////////////////////

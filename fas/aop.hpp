@@ -12,7 +12,7 @@
 #include <fas/aop/alias.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/aspect_class.hpp>
-#include <fas/aop/aspect_merge.hpp>
+#include <fas/aop/merge_aspect.hpp>
 #include <fas/aop/forward.hpp>
 #include <fas/aop/group.hpp>
 #include <fas/aop/group_call.hpp>

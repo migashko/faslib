@@ -126,7 +126,7 @@ struct aspect_MallardDuck: fas::aspect< fas::type_list_n<
 
 template<typename A = fas::aspect<> >
 class MallardDuck
-  : public Duck< typename fas::aspect_merge<A, aspect_MallardDuck>::type >
+  : public Duck< typename fas::merge_aspect<A, aspect_MallardDuck>::type >
 {
   public:
     MallardDuck()
@@ -146,7 +146,7 @@ struct aspect_RubberDuck: fas::aspect< fas::type_list_n<
 >::type >{};
 
 template<typename A = fas::aspect<> >
-class RubberDuck : public Duck< typename fas::aspect_merge<A, aspect_RubberDuck>::type >
+class RubberDuck : public Duck< typename fas::merge_aspect<A, aspect_RubberDuck>::type >
 {
   public:
     RubberDuck()
@@ -165,7 +165,7 @@ struct aspect_PaintedDuck: fas::aspect< fas::type_list_n<
 >::type >{};
 
 template<typename A = fas::aspect<> >
-class PaintedDuck : public Duck< typename fas::aspect_merge<A, aspect_PaintedDuck>::type >
+class PaintedDuck : public Duck< typename fas::merge_aspect<A, aspect_PaintedDuck>::type >
 {
   public:
     PaintedDuck()
