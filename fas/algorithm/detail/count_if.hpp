@@ -25,7 +25,7 @@ struct count_if_impl2_t;
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename L, template<typename> class F>
-struct count_if_helper_t
+struct count_if_impl_t
   : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
   , static_error< errorlist::not_organized, is_organized<L>::value >::type
   , count_if_impl1_t<L, F>
@@ -35,7 +35,7 @@ struct count_if_helper_t
 #else
 
 template<typename L, template<typename> class F>
-struct count_if_helper_t
+struct count_if_impl_t
   : count_if_impl1_t<L, F>
 {
 };

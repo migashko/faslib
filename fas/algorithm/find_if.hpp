@@ -16,7 +16,7 @@ namespace fas{
 template<typename L, typename F >
 struct find_if
 {
-  typedef detail::find_if_helper_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply > helper;
+  typedef detail::find_if_impl_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply > helper;
   typedef typename helper::type type;
   typedef typename helper::tail tail;
 };
@@ -24,7 +24,7 @@ struct find_if
 template<typename L, template<typename> class F >
 struct find_if_t
 {
-  typedef detail::find_if_helper_t<L, F > helper;
+  typedef detail::find_if_impl_t<L, F > helper;
   typedef typename helper::type type;
   typedef typename helper::tail tail;
 };

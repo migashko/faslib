@@ -16,10 +16,10 @@
 namespace fas{ namespace detail{
 
 template<typename F>
-struct apply_helper;
+struct apply_impl;
 
 template<typename F>
-struct apply_impl;
+struct apply_impl1;
 
 template<typename F>
 struct apply_impl2;
@@ -28,28 +28,28 @@ template<typename F, int>
 struct apply_impl3;
 
 template<typename F>
-struct apply_helper
+struct apply_impl
 {
-  typedef typename apply_impl<F >::type type;
+  typedef typename apply_impl1<F >::type type;
 };
 
 /// ///////////////////////////
 
 template<typename F>
-struct apply_impl< w<F> >
+struct apply_impl1< w<F> >
 {
   typedef w<F> type;
 };
 
 
 template<typename F>
-struct apply_impl< a<F> >
+struct apply_impl1< a<F> >
 {
   typedef F type;
 };
 
 template<typename F>
-struct apply_impl
+struct apply_impl1
 {
   typedef typename apply_impl2<F>::type apply_type;
   typedef typename apply_impl3<apply_type, has_type<apply_type>::value >::type type;
@@ -88,7 +88,7 @@ struct apply_impl2_1< F<P0> >
 {
   typedef P0 arg0;
   typedef F<
-    typename apply_impl< arg0 >::type
+    typename apply_impl1< arg0 >::type
   > type;
 };
 
@@ -106,8 +106,8 @@ struct apply_impl2_2< F<P0, P1> >
   typedef P0 arg0;
   typedef P1 arg1;
   typedef F<
-    typename apply_impl< arg0 >::type,
-    typename apply_impl< arg1 >::type
+    typename apply_impl1< arg0 >::type,
+    typename apply_impl1< arg1 >::type
   > type;
 };
 
@@ -126,9 +126,9 @@ struct apply_impl2_3< F<P0, P1, P2> >
   typedef P1 arg1;
   typedef P2 arg2;
   typedef F<
-    typename apply_impl< arg0 >::type,
-    typename apply_impl< arg1 >::type,
-    typename apply_impl< arg2 >::type
+    typename apply_impl1< arg0 >::type,
+    typename apply_impl1< arg1 >::type,
+    typename apply_impl1< arg2 >::type
   > type;
 };
 
@@ -148,10 +148,10 @@ struct apply_impl2_4< F<P0, P1, P2, P3> >
   typedef P2 arg2;
   typedef P3 arg3;
   typedef F<
-    typename apply_impl< arg0 >::type,
-    typename apply_impl< arg1 >::type,
-    typename apply_impl< arg2 >::type,
-    typename apply_impl< arg3 >::type
+    typename apply_impl1< arg0 >::type,
+    typename apply_impl1< arg1 >::type,
+    typename apply_impl1< arg2 >::type,
+    typename apply_impl1< arg3 >::type
   > type;
 };
 
@@ -167,11 +167,11 @@ struct apply_impl2< F<P0, P1, P2, P3, P4> >
   typedef P3 arg3;
   typedef P4 arg4;
   typedef F<
-    typename apply_impl< arg0 >::type,
-    typename apply_impl< arg1 >::type,
-    typename apply_impl< arg2 >::type,
-    typename apply_impl< arg3 >::type,
-    typename apply_impl< arg4 >::type
+    typename apply_impl1< arg0 >::type,
+    typename apply_impl1< arg1 >::type,
+    typename apply_impl1< arg2 >::type,
+    typename apply_impl1< arg3 >::type,
+    typename apply_impl1< arg4 >::type
   > type;
 };
 

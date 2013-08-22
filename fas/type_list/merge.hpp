@@ -15,7 +15,7 @@ namespace fas{
 template<typename L, typename R>
 struct merge
 {
-  typedef typename detail::merge_helper<L, R>::type type;
+  typedef typename detail::merge_impl<L, R>::type type;
 };
 
 }

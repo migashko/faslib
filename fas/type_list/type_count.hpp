@@ -14,7 +14,7 @@ namespace fas{
 template<typename T, typename L>
 struct type_count
 {
-  enum { value = detail::type_count_helper<T, L>::value  };
+  enum { value = detail::type_count_impl<T, L>::value  };
 };
 
 }

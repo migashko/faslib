@@ -30,7 +30,7 @@ template<typename M, typename L1, typename L2>
 struct merge_impl5;
 
 template<typename L1, typename L2>
-struct merge_helper
+struct merge_impl
   : merge_impl1<is_type_list<L1>::value, is_type_list<L2>::value, L1, L2>
 {
 };
@@ -39,11 +39,11 @@ struct merge_helper
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<typename L1, typename R1, typename L2>
-struct merge_helper<type_list<L1, R1>, L2 >
+struct merge_impl<type_list<L1, R1>, L2 >
 {
   typedef type_list<
     L1,
-    typename merge_helper<
+    typename merge_impl<
       R1, 
       L2
     >::type
@@ -51,7 +51,7 @@ struct merge_helper<type_list<L1, R1>, L2 >
 };
 
 template<typename L2>
-struct merge_helper<empty_list, L2 >
+struct merge_impl<empty_list, L2 >
   : merge_impl1< true, is_type_list<L2>::value, empty_list, L2>
 {
 };
@@ -83,7 +83,7 @@ struct merge_impl1<false, true, T, empty_list >
 template<typename L, typename T>
 struct merge_impl1<true, false, L, T>
 {
-  typedef typename merge_helper< 
+  typedef typename merge_impl< 
         L,
         type_list<T, empty_list>
       >::type type;
@@ -97,7 +97,7 @@ struct merge_impl1<true, false, type_list<L, R>, T>
 {
   typedef type_list<
     L,
-    typename merge_helper< R, T>::type
+    typename merge_impl< R, T>::type
   > type;
 };
 
@@ -170,7 +170,7 @@ struct merge_impl4<type_list<L1, R1>, type_list<L2, R2> >
 {
   typedef type_list< 
     L1,
-    typename merge_helper<
+    typename merge_impl<
       R1, 
       type_list<L2, R2>
     >::type
@@ -190,7 +190,7 @@ struct merge_impl5<metalist::type_list, L1, L2>
 {
   typedef type_list<
       typename L1::left_type,
-      typename merge_helper<
+      typename merge_impl<
           typename L1::right_type,
           L2
       >::type

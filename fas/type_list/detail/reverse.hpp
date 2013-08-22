@@ -17,22 +17,19 @@
 namespace fas{ namespace detail{
 
 template<typename L, int C >
-struct reverse_impl;
-
-template<typename L, int C >
-struct reverse_impl;
+struct reverse_impl1;
 
 template<typename MT, typename L, int C >
 struct reverse_impl2;
 
 template<typename L>
-struct reverse_helper
-  : reverse_impl< L, length<L>::value - 1>
+struct reverse_impl
+  : reverse_impl1< L, length<L>::value - 1>
 {
 };
 
 template<typename L, int C >
-struct reverse_impl
+struct reverse_impl1
   : reverse_impl2< typename L::metatype, L, C>
 {
 };
@@ -40,22 +37,22 @@ struct reverse_impl
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<typename L, typename R, int C>
-struct reverse_impl<type_list<L, R>, C>
+struct reverse_impl1<type_list<L, R>, C>
 {
   typedef type_list<
     typename type_at_c< C, type_list<L, R> >::type,
-    typename reverse_impl< type_list<L, R>, C-1>::type
+    typename reverse_impl1< type_list<L, R>, C-1>::type
   > type;
 };
 
 template<typename L, typename R>
-struct reverse_impl<type_list<L, R>, 0>
+struct reverse_impl1<type_list<L, R>, 0>
 {
   typedef type_list<L> type;
 };
 
 template<>
-struct reverse_impl<empty_list, -1>
+struct reverse_impl1<empty_list, -1>
 {
   typedef empty_list type;
 };
@@ -68,7 +65,7 @@ struct reverse_impl2<metalist::type_list, L, C>
 {
   typedef type_list<
       typename type_at_c< C, L>::type,
-      typename reverse_impl< L, C-1>::type
+      typename reverse_impl1< L, C-1>::type
   > type;
 };
 

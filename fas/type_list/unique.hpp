@@ -14,7 +14,7 @@ namespace fas{
 template<typename L>
 struct unique
 {
-  typedef typename detail::unique_helper<L>::type type;
+  typedef typename detail::unique_impl<L>::type type;
 };
 
 }

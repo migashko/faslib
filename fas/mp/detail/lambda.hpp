@@ -17,10 +17,10 @@ template<typename F, int C, int U>
 struct lambda_impl;
 
 template<typename F, int C>
-struct lambda_impl0: F { };
+struct lambda_impl1: F { };
 
 template<typename F>
-struct lambda_impl0<F, 0>
+struct lambda_impl1<F, 0>
 {
   template<typename Temp = empty_type>
   struct apply
@@ -31,7 +31,7 @@ struct lambda_impl0<F, 0>
 
 template<typename F, int U>
 struct lambda_impl<F, 0, U>
-  : lambda_impl0< F, has_apply<F, U>::value > 
+  : lambda_impl1< F, has_apply<F, U>::value > 
 {
 };
 

@@ -54,13 +54,13 @@ struct aspect_pre< aspect<empty_type>, true>
 };
 
 template<typename L, int I>
-struct merge_aspect_impl
+struct merge_aspect_impl1
 {
   typedef aspect< L > type;
 };
 
 template<typename L>
-struct merge_aspect_impl< L, 0 >
+struct merge_aspect_impl1< L, 0 >
 {
   typedef aspect<> type;
 };
@@ -79,14 +79,14 @@ struct merge_aspect_impl2<L, false>
 
 
 template<typename L>
-struct merge_aspect_impl< L, 1 >
+struct merge_aspect_impl1< L, 1 >
 {
   typedef typename head<L>::type item;
   typedef typename merge_aspect_impl2< item, is_aspect<item>::value >::type type;
 };
 
 template<typename A1, typename A2, typename A3, typename A4, typename A5>
-struct merge_aspect
+struct merge_aspect_impl
 {
   typedef typename type_list_n<
     typename aspect_pre<A1, is_aspect<A1>::value >::type,
@@ -96,7 +96,7 @@ struct merge_aspect
     typename aspect_pre<A5, is_aspect<A5>::value >::type
   >::type param_list;
 
-  typedef typename merge_aspect_impl<
+  typedef typename merge_aspect_impl1<
     param_list,
     length<param_list>::value
   >::type type;

@@ -14,7 +14,7 @@ namespace fas{
 template<int I, typename L>
 struct type_at_c
 {
-  typedef detail::type_at_helper<I, L> helper;
+  typedef detail::type_at_impl<I, L> helper;
 public:
   typedef typename helper::type type;
   typedef typename helper::tail tail;

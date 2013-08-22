@@ -19,11 +19,11 @@
 namespace fas{ namespace detail{
   
 template<int I, typename G>
-struct generate_impl
+struct generate_impl1
 {
   typedef type_list<
     typename G::type,
-    typename generate_impl<
+    typename generate_impl1<
       I-1,
       typename G::next
     >::type
@@ -31,17 +31,17 @@ struct generate_impl
 };
 
 template<typename G>
-struct generate_impl<0, G>
+struct generate_impl1<0, G>
 {
   typedef empty_list type;
 };
 
 
 template<int I, typename G>
-struct generate_helper
+struct generate_impl
   : static_error< errorlist::generator_required, has_next<G>::value >::type
 {
-  typedef typename generate_impl< I, G>::type type;
+  typedef typename generate_impl1< I, G>::type type;
 };
 
 

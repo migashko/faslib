@@ -14,23 +14,23 @@
 namespace fas{ namespace detail{
 
 template<typename L, template<typename> class F, int I>
-struct find_if_impl_t;
+struct find_if_impl1_t;
 
 template<typename L, template<typename> class F>
-struct find_if_helper_t
-  : find_if_impl_t<L, F, index_of_if_t<L, F>::value >
+struct find_if_impl_t
+  : find_if_impl1_t<L, F, index_of_if_t<L, F>::value >
 {
 };
 
 template<typename L, template<typename> class F, int I>
-struct find_if_impl_t
+struct find_if_impl1_t
 {
   typedef typename type_at_c< I, L >::type type;
   typedef typename type_at_c< I, L >::tail tail;
 };
 
 template<typename L, template<typename> class F>
-struct find_if_impl_t<L, F, -1>
+struct find_if_impl1_t<L, F, -1>
 {
   typedef empty_type type;
   typedef empty_type tail;

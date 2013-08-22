@@ -25,16 +25,16 @@
 namespace fas{ namespace detail{
 
 template<typename LL, int P, typename L>
-struct unique_impl0;
-
-template<typename MT, int P, typename L>
 struct unique_impl1;
 
-template<int P, typename L, int>
+template<typename MT, int P, typename L>
 struct unique_impl2;
 
-template<int P,typename LL, typename RL>
+template<int P, typename L, int>
 struct unique_impl3;
+
+template<int P,typename LL, typename RL>
+struct unique_impl4;
 
 
 #ifdef FASLIB_TYPE_LIST_CHECK
@@ -43,40 +43,40 @@ template<typename L>
 struct unique_verifying;
 
 template<typename L>
-struct unique_helper
+struct unique_impl
   : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
   , static_error< errorlist::not_organized, is_organized<L>::value >::type
-  , unique_impl0<L, 0, L>
+  , unique_impl1<L, 0, L>
 {
 };
 
 #else
 
 template<typename L>
-struct unique_helper
-  : unique_impl0<L, 0, L>
+struct unique_impl
+  : unique_impl1<L, 0, L>
 {
 };
 
 #endif
 
 template<typename LL, int P, typename L>
-struct unique_impl0
-  : unique_impl1<typename LL::metatype, P, L>
+struct unique_impl1
+  : unique_impl2<typename LL::metatype, P, L>
 {
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<typename LL, typename RR, int P, typename L>
-struct unique_impl0<type_list<LL, RR>, P, L >
+struct unique_impl1<type_list<LL, RR>, P, L >
 {
   typedef typename type_at_c< P, L>::type current;
-  typedef typename unique_impl2< P, L, (type_count<current, L>::value > 1) >::type type;
+  typedef typename unique_impl3< P, L, (type_count<current, L>::value > 1) >::type type;
 };
 
 template< int P, typename L>
-struct unique_impl0<empty_list, P, L>
+struct unique_impl1<empty_list, P, L>
 {
   typedef L type;
 };
@@ -84,49 +84,49 @@ struct unique_impl0<empty_list, P, L>
 #endif // DISABLE_TYPE_LIST_SPEC
 
 template<int P, typename L>
-struct unique_impl1<metalist::type_list, P, L>
+struct unique_impl2<metalist::type_list, P, L>
 {
   typedef typename type_at_c< P, L>::type current;
-  typedef typename unique_impl2< P, L, (type_count<current, L>::value > 1) >::type type;
+  typedef typename unique_impl3< P, L, (type_count<current, L>::value > 1) >::type type;
 };
 
 template<int P, typename L>
-struct unique_impl1<metalist::empty_list, P, L>
+struct unique_impl2<metalist::empty_list, P, L>
 {
   typedef L type;
 };
 
 template<int P,typename L, int>
-struct unique_impl2
+struct unique_impl3
 {
   typedef split_c<P, L> splitter;
   typedef typename splitter::left_list left_list;
   typedef typename splitter::right_list right_list;
   
-  typedef typename unique_impl3<P, left_list, right_list>::type type;
+  typedef typename unique_impl4<P, left_list, right_list>::type type;
 };
 
 template<int P,typename L>
-struct unique_impl2<P, L, false>
+struct unique_impl3<P, L, false>
 {
   typedef typename type_at_c< P, L>::tail tail;
-  typedef typename unique_impl0<tail, P + 1, L>::type type;
+  typedef typename unique_impl1<tail, P + 1, L>::type type;
 };
 
 template<int P,typename LL, typename RL>
-struct unique_impl3
+struct unique_impl4
 {
   typedef typename RL::right_type tail;
   typedef typename merge<LL, tail>::type result_list;
-  typedef typename unique_impl0<tail, P, result_list>::type type;
+  typedef typename unique_impl1<tail, P, result_list>::type type;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<int P,typename LL, typename L, typename R>
-struct unique_impl3<P, LL, type_list<L, R> >
+struct unique_impl4<P, LL, type_list<L, R> >
 {
-  typedef typename unique_impl0<
+  typedef typename unique_impl1<
     R, P, 
     typename merge<LL, R>::type
     >::type type;

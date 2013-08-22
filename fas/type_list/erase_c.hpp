@@ -14,7 +14,7 @@ namespace fas{
 template<int I, typename L>
 struct erase_c
 {
-  typedef typename detail::erase_helper<I, L>::type type;
+  typedef typename detail::erase_impl<I, L>::type type;
 };
 
 

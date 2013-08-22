@@ -9,7 +9,7 @@
 
 namespace fas{ namespace detail{
 
-struct conversion_base
+struct conversion_helper_base
 {
   typedef char small_type;
   typedef class big_tag { char dummy[2];} big_type;
@@ -17,7 +17,7 @@ struct conversion_base
 
 template<typename T, typename U>
 struct conversion_helper
-  : conversion_base
+  : conversion_helper_base
 {
   static small_type test(U);
   static big_type test(...);

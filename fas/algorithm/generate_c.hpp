@@ -15,7 +15,7 @@ namespace fas{
 template<int I, typename G>
 struct generate_c
 {
-  typedef typename detail::generate_helper<I, G>::type type;
+  typedef typename detail::generate_impl<I, G>::type type;
 };
 
 }

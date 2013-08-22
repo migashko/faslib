@@ -14,7 +14,7 @@ namespace fas{
 template<typename T, typename D, template<typename> class F>
 struct is_has_typename
 {
-  enum { value = detail::is_has_typename_helper<T, D, F>::value };
+  enum { value = detail::is_has_typename_impl<T, D, F>::value };
 };
 
 

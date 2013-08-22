@@ -19,7 +19,7 @@ template<typename T, int>
 struct is_has_typename_impl2;
 
 template<typename T, typename D, template<typename> class F>
-struct is_has_typename_helper
+struct is_has_typename_impl
   : is_has_typename_impl1<T, D, typename F<T>::type, F<T>::value >
 {
 };

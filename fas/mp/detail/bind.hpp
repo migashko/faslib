@@ -20,7 +20,7 @@ template<typename F, typename PL, int Counter_>
 struct bind_impl2;
 
 template<typename F, typename PL>
-struct bind_helper
+struct bind_impl
 {
   typedef typename bind_impl1<F, PL, is_p<F>::value, 0 >::type type;
 };

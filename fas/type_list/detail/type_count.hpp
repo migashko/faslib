@@ -32,7 +32,7 @@ struct type_count_some_type;
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename T,typename L>
-struct type_count_helper
+struct type_count_impl
   : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
   , static_error< errorlist::not_organized, is_organized<L>::value >::type
   , type_count_impl1<T, L> 
@@ -42,7 +42,7 @@ struct type_count_helper
 #else
 
 template<typename T, typename L>
-struct type_count_helper
+struct type_count_impl
   : type_count_impl1< T, L>
 {
 };
@@ -52,8 +52,7 @@ struct type_count_helper
 template<typename T, typename L>
 struct type_count_impl1
   : type_count_impl2<typename L::metatype, T, L>
-{
-  
+{ 
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC

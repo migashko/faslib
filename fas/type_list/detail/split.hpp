@@ -18,7 +18,7 @@
 namespace fas{ namespace detail{
 
 template<int I, typename L, int N>
-struct split_impl;
+struct split_impl1;
 
 template<int I, typename L>
 struct split_impl2;
@@ -29,34 +29,34 @@ template<int I, typename L>
 struct split_verifying;
 
 template<int I,typename L>
-struct split_helper
+struct split_impl
   : static_error< 
       errorlist::out_of_range< I, length<L>::value >, 
       ( (I>=0) && (I <= length<L>::value) )
     >::type
-  , split_impl< I, L, length<L>::value>
+  , split_impl1< I, L, length<L>::value>
 {
 };
 
 #else
 
 template<int I,typename L>
-struct split_helper
-  : split_impl< I, L, length<L>::value>
+struct split_impl
+  : split_impl1< I, L, length<L>::value>
 {
 };
 
 #endif
 
 template<int I, typename L, int N>
-struct split_impl
+struct split_impl1
 {
   typedef typename split_impl2<I, L >::left_list left_list;
   typedef typename split_impl2<I, L >::right_list right_list;
 };
 
 template<typename L, int N>
-struct split_impl<0, L, N>
+struct split_impl1<0, L, N>
 {
   typedef empty_list left_list;
   typedef L right_list;
@@ -65,14 +65,14 @@ struct split_impl<0, L, N>
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<int N>
-struct split_impl<0, empty_list, N>
+struct split_impl1<0, empty_list, N>
 {
   typedef empty_list left_list;
   typedef empty_list right_list;
 };
 
 template<typename L, typename R, int N>
-struct split_impl<0, type_list<L, R>, N>
+struct split_impl1<0, type_list<L, R>, N>
 {
   typedef empty_list left_list;
   typedef type_list<L, R> right_list;
@@ -81,7 +81,7 @@ struct split_impl<0, type_list<L, R>, N>
 #endif // DISABLE_TYPE_LIST_SPEC
 
 template<typename L, int N>
-struct split_impl<N, L, N>
+struct split_impl1<N, L, N>
 {
   typedef L left_list;
   typedef empty_list right_list;
@@ -90,14 +90,14 @@ struct split_impl<N, L, N>
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<typename L, typename R, int N>
-struct split_impl<N, type_list<L, R>, N>
+struct split_impl1<N, type_list<L, R>, N>
 {
   typedef type_list<L, R> left_list;
   typedef empty_list right_list;
 };
 
 template<int N>
-struct split_impl<N, empty_list, N>
+struct split_impl1<N, empty_list, N>
 {
   typedef empty_list left_list;
   typedef empty_list right_list;

@@ -15,7 +15,7 @@ namespace fas{
 
 template<typename I>
 struct factorial
-  : detail::factorial_helper<
+  : detail::factorial_impl<
       typename I::value_type,
       I::value,
       less<I, int_<0> >::value

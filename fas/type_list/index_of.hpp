@@ -14,8 +14,8 @@ namespace fas{
 template<typename T, typename L>
 struct index_of
 {
-  enum { value = detail::index_of_helper<T, L>::value  };
-  typedef typename detail::index_of_helper<T, L>::tail tail;
+  enum { value = detail::index_of_impl<T, L>::value  };
+  typedef typename detail::index_of_impl<T, L>::tail tail;
 };
 
 }

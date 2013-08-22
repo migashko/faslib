@@ -15,7 +15,7 @@
 namespace fas{ namespace detail{
 
 template<typename F, int>
-struct simplify_impl;
+struct simplify_impl1;
 
 template<typename F>
 struct simplify_impl2;
@@ -27,13 +27,13 @@ template<typename F, int>
 struct simplify_impl4;
 
 template<typename F>
-struct simplify_helper
+struct simplify_impl
 {
-  typedef typename simplify_impl<F, is_placeholder<F>::value || is_a<F>::value >::type type;
+  typedef typename simplify_impl1<F, is_placeholder<F>::value || is_a<F>::value >::type type;
 };
 
 template<typename F>
-struct simplify_impl<F, false>
+struct simplify_impl1<F, false>
 {
   typedef simplify_impl2<F> simplify_type;
   typedef typename simplify_type::type type;
@@ -41,7 +41,7 @@ struct simplify_impl<F, false>
 };
 
 template<typename F>
-struct simplify_impl<F, true>
+struct simplify_impl1<F, true>
 {
   typedef F type;
   enum { value = 1};
@@ -82,7 +82,7 @@ struct simplify_impl2_1< w<F> >
 template< template<typename> class F, typename P0 >
 struct simplify_impl2_1 < F<P0> >
 {
-  typedef simplify_impl< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
+  typedef simplify_impl1< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
 
   enum { value = si0::value };
 
@@ -99,8 +99,8 @@ struct simplify_impl2_2: simplify_impl2_1<F> {};
 template< template<typename, typename> class F, typename P0, typename P1 >
 struct simplify_impl2_2 < F<P0, P1> >
 {
-  typedef simplify_impl< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
-  typedef simplify_impl< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
+  typedef simplify_impl1< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
+  typedef simplify_impl1< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
 
   enum { value = si0::value || si1::value };
 
@@ -121,9 +121,9 @@ struct simplify_impl2_3
 template< template<typename, typename, typename> class F, typename P0, typename P1, typename P2 >
 struct simplify_impl2_3 < F<P0, P1, P2> >
 {
-  typedef simplify_impl< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
-  typedef simplify_impl< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
-  typedef simplify_impl< P2, is_placeholder<P2>::value || is_a<P2>::value > si2;
+  typedef simplify_impl1< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
+  typedef simplify_impl1< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
+  typedef simplify_impl1< P2, is_placeholder<P2>::value || is_a<P2>::value > si2;
 
   enum { value = si0::value || si1::value || si2::value};
 
@@ -147,10 +147,10 @@ template<
 >
 struct simplify_impl2_4 < F<P0, P1, P2, P3> >
 {
-  typedef simplify_impl< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
-  typedef simplify_impl< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
-  typedef simplify_impl< P2, is_placeholder<P2>::value || is_a<P2>::value > si2;
-  typedef simplify_impl< P3, is_placeholder<P3>::value || is_a<P3>::value > si3;
+  typedef simplify_impl1< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
+  typedef simplify_impl1< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
+  typedef simplify_impl1< P2, is_placeholder<P2>::value || is_a<P2>::value > si2;
+  typedef simplify_impl1< P3, is_placeholder<P3>::value || is_a<P3>::value > si3;
 
   enum { value = si0::value || si1::value || si2::value || si3::value};
 
@@ -170,11 +170,11 @@ template<
 >
 struct simplify_impl2 < F<P0, P1, P2, P3, P4> >
 {
-  typedef simplify_impl< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
-  typedef simplify_impl< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
-  typedef simplify_impl< P2, is_placeholder<P2>::value || is_a<P2>::value > si2;
-  typedef simplify_impl< P3, is_placeholder<P3>::value || is_a<P2>::value > si3;
-  typedef simplify_impl< P4, is_placeholder<P4>::value || is_a<P4>::value > si4;
+  typedef simplify_impl1< P0, is_placeholder<P0>::value || is_a<P0>::value > si0;
+  typedef simplify_impl1< P1, is_placeholder<P1>::value || is_a<P1>::value > si1;
+  typedef simplify_impl1< P2, is_placeholder<P2>::value || is_a<P2>::value > si2;
+  typedef simplify_impl1< P3, is_placeholder<P3>::value || is_a<P2>::value > si3;
+  typedef simplify_impl1< P4, is_placeholder<P4>::value || is_a<P4>::value > si4;
 
   enum { value = si0::value || si1::value || si2::value || si3::value || si4::value};
 

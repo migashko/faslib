@@ -16,7 +16,7 @@ namespace fas{
 template<typename PE, typename L = empty_list >
 struct bind
 {
-  typedef typename detail::bind_helper<PE, L >::type type;
+  typedef typename detail::bind_impl<PE, L >::type type;
 };
  
 }

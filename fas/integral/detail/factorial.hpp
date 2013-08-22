@@ -13,36 +13,35 @@
 namespace fas{ namespace detail{
 
 template<typename VT, VT v, int>
-struct factorial_impl;
-
+struct factorial_impl1;
 
 template<typename VT, VT v, bool>
-struct factorial_helper;
+struct factorial_impl;
 
 template<typename VT, VT v>
-struct factorial_helper<VT, v, false>
-  : factorial_impl<VT, v, static_cast<int>(v) >
+struct factorial_impl<VT, v, false>
+  : factorial_impl1<VT, v, static_cast<int>(v) >
 {
 };
 
 template<typename VT, VT v>
-struct factorial_impl<VT, v, 0 >
+struct factorial_impl1<VT, v, 0 >
 {
   typedef integral_c< VT, 1 > type;
 };
 
 template<typename VT, VT v>
-struct factorial_impl<VT, v, 1>
+struct factorial_impl1<VT, v, 1>
 {
   typedef integral_c< VT, 1 > type;
 };
 
 template<typename VT, VT v, int N>
-struct factorial_impl
+struct factorial_impl1
 {
   typedef typename times<
     integral_c< VT, v >,
-    typename factorial_impl<VT, v-1, N - 1>::type
+    typename factorial_impl1<VT, v-1, N - 1>::type
   >::type type;
 };
 

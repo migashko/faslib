@@ -14,7 +14,7 @@ namespace fas{
 template<typename L>
 struct is_organized
 {
-  enum { value = detail::is_organized_helper<L>::value};
+  enum { value = detail::is_organized_impl<L>::value};
 };
 
 

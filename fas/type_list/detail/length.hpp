@@ -21,47 +21,47 @@
 namespace fas{ namespace detail{
 
 template<typename L>
-struct length_impl;
+struct length_impl1;
 
 template<typename MT, typename L>
-struct length_impl1;
+struct length_impl2;
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename L>
-struct length_helper
+struct length_impl
   : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
   , static_error< errorlist::not_organized, is_organized<L>::value >::type
-  , length_impl<L>
+  , length_impl1<L>
 {
 };
 
 #else
 
 template<typename L>
-struct length_helper
-  : length_impl<L>
+struct length_impl
+  : length_impl1<L>
 {
 };
 
 #endif
 
 template<typename L>
-struct length_impl
-  : length_impl1<typename L::metatype, L>
+struct length_impl1
+  : length_impl2<typename L::metatype, L>
 {
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<typename L, typename R>
-struct length_impl< type_list<L, R> >
+struct length_impl1< type_list<L, R> >
 {
-  enum { value = 1 + length_impl<R>::value };
+  enum { value = 1 + length_impl1<R>::value };
 };
 
 template<>
-struct length_impl< empty_list >
+struct length_impl1< empty_list >
 {
   enum { value = 0 };
 };
@@ -69,14 +69,14 @@ struct length_impl< empty_list >
 #endif
 
 template<typename L>
-struct length_impl1<metalist::type_list, L>
+struct length_impl2<metalist::type_list, L>
 {
   typedef typename L::right_type tail;
-  enum { value = 1 + length_impl< tail>::value };
+  enum { value = 1 + length_impl1< tail>::value };
 };
 
 template<typename L>
-struct length_impl1<metalist::empty_list, L>
+struct length_impl2<metalist::empty_list, L>
 {
   enum { value = 0 };
 };

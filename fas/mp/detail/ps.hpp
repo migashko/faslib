@@ -17,26 +17,26 @@
 namespace fas{ namespace detail{
 
 template<typename PH, typename PL, int PD, int>
-struct ps_impl;
+struct ps_impl1;
 
 template<typename PH, typename PL, int PD>
 struct ps_impl2;
 
   
 template<typename PH, typename PL, int PD>
-struct ps_helper
- : ps_impl<PH, PL, PD, is_placeholder<PH>::value >
+struct ps_impl
+ : ps_impl1<PH, PL, PD, is_placeholder<PH>::value >
 {
 };
 
 template<typename PH, typename PL, int PD, int>
-struct ps_impl
+struct ps_impl1
   : ps_impl2<PH, PL, PD>
 {
 };
 
 template<typename PH, typename PL, int PD>
-struct ps_impl<PH, PL, PD, false>
+struct ps_impl1<PH, PL, PD, false>
 {
   typedef PH type;
   enum { value = 0 };

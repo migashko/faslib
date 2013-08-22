@@ -13,7 +13,7 @@ namespace fas{
 
 template<typename L >
 struct scatter_hierarchy
-  : detail::scatter_hierarchy_helper< L >::type
+  : detail::scatter_hierarchy_impl< L >::type
 {
 };
 

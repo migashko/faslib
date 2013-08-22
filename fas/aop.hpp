@@ -15,10 +15,10 @@
 #include <fas/aop/merge_aspect.hpp>
 #include <fas/aop/forward.hpp>
 #include <fas/aop/group.hpp>
-#include <fas/aop/group_call.hpp>
-#include <fas/aop/group_call_reverse.hpp>
-#include <fas/aop/group_for_each.hpp>
-#include <fas/aop/group_for_each_reverse.hpp>
+#include <fas/aop/call_group.hpp>
+#include <fas/aop/reverse_call_group.hpp>
+#include <fas/aop/for_each_group.hpp>
+#include <fas/aop/reverse_for_each_group.hpp>
 #include <fas/aop/provider.hpp>
 #include <fas/aop/remover.hpp>
 #include <fas/aop/stub.hpp>

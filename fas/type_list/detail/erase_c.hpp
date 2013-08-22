@@ -19,26 +19,26 @@
 namespace fas{ namespace detail{
 
 template<int I, typename L>
-struct erase_impl;
+struct erase_impl1;
 
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<int I,typename L>
-struct erase_helper
+struct erase_impl
   : static_error< 
       errorlist::out_of_range< I, length<L>::value >, 
       ( (I>=0) && (I < length<L>::value) )
     >::type
-  , erase_impl< I, L>
+  , erase_impl1< I, L>
 {
 };
 
 #else
 
 template<int I,typename L>
-struct erase_helper
-  : erase_impl< I, L>
+struct erase_impl
+  : erase_impl1< I, L>
 {
 };
 
@@ -46,7 +46,7 @@ struct erase_helper
 
 
 template<int I, typename L>
-struct erase_impl
+struct erase_impl1
 {
   typedef typename split_c<I, L>::left_list left_list;
   typedef typename split_c<I, L>::right_list right_list;

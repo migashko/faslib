@@ -14,7 +14,7 @@ namespace fas{
 template<typename F>
 struct simplify
 {
-  typedef typename detail::simplify_helper<F>::type type;
+  typedef typename detail::simplify_impl<F>::type type;
 };
 
 

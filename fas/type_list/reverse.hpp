@@ -15,7 +15,7 @@ namespace fas{
 template<typename T>
 struct reverse
 {
-  typedef typename detail::reverse_helper<T>::type type;
+  typedef typename detail::reverse_impl<T>::type type;
 };
 
 }

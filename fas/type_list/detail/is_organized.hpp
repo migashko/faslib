@@ -20,59 +20,59 @@ struct is_organized;
 namespace detail{
 
 template<typename L, bool B>
-struct is_organized_impl0;
-
-template<typename L>
-struct is_organized_impl1;
-
-template<typename MT, typename L>
 struct is_organized_impl2;
 
-template<typename L, bool B>
+template<typename L>
 struct is_organized_impl3;
 
+template<typename MT, typename L>
+struct is_organized_impl4;
+
+template<typename L, bool B>
+struct is_organized_impl5;
+
 template<typename L>
-struct is_organized_helper
-  : is_organized_impl0< L, is_type_list<L>::value >
+struct is_organized_impl
+  : is_organized_impl2< L, is_type_list<L>::value >
 {
 };
 
 template<typename L>
-struct is_organized_impl0<L, false>
+struct is_organized_impl2<L, false>
 {
   enum { value = 0};
 };
 
 template<typename L>
-struct is_organized_impl0<L, true>
+struct is_organized_impl2<L, true>
 {
-  enum { value = is_organized_impl1<L>::value };
+  enum { value = is_organized_impl3<L>::value };
 };
 
 template<typename L>
-struct is_organized_impl1
-  : is_organized_impl2<typename L::metatype, L>
+struct is_organized_impl3
+  : is_organized_impl4<typename L::metatype, L>
 {
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<typename L, typename R>
-struct is_organized_impl1< type_list<L, R> >
+struct is_organized_impl3< type_list<L, R> >
 {
   enum { left_value = is_type_list< L >::value };
   enum { right_value = is_type_list< R >::value };
-  enum { value = is_organized_impl3< type_list<L, R>, !left_value && right_value>::value };
+  enum { value = is_organized_impl5< type_list<L, R>, !left_value && right_value>::value };
 };
 
 template<>
-struct is_organized_impl1< empty_list >
+struct is_organized_impl3< empty_list >
 {
   enum { value = 1 };
 };
 
 template<typename L, typename R>
-struct is_organized_impl3< type_list<L, R>, true>
+struct is_organized_impl5< type_list<L, R>, true>
 {
   enum { value = is_organized<R>::value };
 };
@@ -82,28 +82,28 @@ struct is_organized_impl3< type_list<L, R>, true>
 #endif // DISABLE_TYPE_LIST_SPEC
 
 template<typename L>
-struct is_organized_impl2<metalist::type_list, L>
+struct is_organized_impl4<metalist::type_list, L>
 {
   enum { left_value = is_type_list< typename L::left_type >::value };
   enum { right_value = is_type_list< typename L::right_type >::value };
 
-  enum { value = is_organized_impl3<L, !left_value && right_value>::value };
+  enum { value = is_organized_impl5<L, !left_value && right_value>::value };
 };
 
 template<typename L>
-struct is_organized_impl2<metalist::empty_list, L>
+struct is_organized_impl4<metalist::empty_list, L>
 {
   enum { value = 1 };
 };
 
 template<typename L>
-struct is_organized_impl3<L, false>
+struct is_organized_impl5<L, false>
 {
   enum { value = 0};
 };
 
 template<typename L>
-struct is_organized_impl3<L, true>
+struct is_organized_impl5<L, true>
 {
   enum { value = is_organized<typename L::right_type>::value };
 };

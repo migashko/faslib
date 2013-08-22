@@ -25,59 +25,59 @@ template<typename L>
 struct sh;
 
 template<typename L>
-struct scatter_hierarchy_impl;
+struct scatter_hierarchy_impl1;
 
 template<typename MT, typename L>
-struct scatter_hierarchy_impl1;
+struct scatter_hierarchy_impl2;
 
 #ifdef FASLIB_TYPE_LIST_CHECK
 
 template<typename L>
-struct scatter_hierarchy_helper
+struct scatter_hierarchy_impl
   : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
   , static_error< errorlist::not_organized, is_organized<L>::value >::type
-  , scatter_hierarchy_impl<L>
+  , scatter_hierarchy_impl1<L>
 {
 };
 
 #else
 
 template<typename L>
-struct scatter_hierarchy_helper
-  : scatter_hierarchy_impl<L>
+struct scatter_hierarchy_impl
+  : scatter_hierarchy_impl1<L>
 {
 };
 
 #endif
 
 template<typename L>
-struct scatter_hierarchy_impl
-  :  scatter_hierarchy_impl1<typename L::metatype, L>
+struct scatter_hierarchy_impl1
+  :  scatter_hierarchy_impl2<typename L::metatype, L>
 {
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
 template<typename L, typename R>
-struct scatter_hierarchy_impl< type_list<L, R> >
+struct scatter_hierarchy_impl1< type_list<L, R> >
 {
   typedef sh< type_list<L, R> > type;
 };
 
 template<>
-struct scatter_hierarchy_impl< empty_list >
+struct scatter_hierarchy_impl1< empty_list >
 {
   typedef sh< empty_list > type;
 };
 #endif
 
 template< typename L>
-struct scatter_hierarchy_impl1<metalist::type_list, L>
+struct scatter_hierarchy_impl2<metalist::type_list, L>
 {
   typedef sh<L> type;
 };
 
 template< typename L>
-struct scatter_hierarchy_impl1<metalist::empty_list, L>
+struct scatter_hierarchy_impl2<metalist::empty_list, L>
 {
   typedef sh<empty_list> type;
 };
@@ -85,11 +85,11 @@ struct scatter_hierarchy_impl1<metalist::empty_list, L>
 template<typename L>
 struct sh
   : L::left_type
-  , scatter_hierarchy_impl<typename L::right_type>::type
+  , scatter_hierarchy_impl1<typename L::right_type>::type
 {
   typedef L hierarchy_list;
   typedef typename L::left_type left_base;
-  typedef typename scatter_hierarchy_impl<typename L::right_type>::type right_base;
+  typedef typename scatter_hierarchy_impl1<typename L::right_type>::type right_base;
 };
 
 #ifndef DISABLE_TYPE_LIST_SPEC
@@ -97,11 +97,11 @@ struct sh
 template<typename L, typename R>
 struct sh< type_list<L, R> >
   : L
-  , scatter_hierarchy_impl<R>::type
+  , scatter_hierarchy_impl1<R>::type
 {
   typedef type_list<L, R> hierarchy_list;
   typedef L left_base;
-  typedef typename scatter_hierarchy_impl<R>::type right_base;
+  typedef typename scatter_hierarchy_impl1<R>::type right_base;
 };
 
 #endif

@@ -6,7 +6,7 @@
 
 #include <fas/type_list.hpp>
 #include <fas/aop.hpp>
-#include <fas/aop/group_call.hpp>
+#include <fas/aop/call_group.hpp>
 #include <fas/mp.hpp>
 #include <fas/typemanip.hpp>
 #include <fas/static_check/static_check.hpp>
@@ -71,7 +71,7 @@ int main()
   test_values.clear();
   check_values.clear();
   for (int i=1; i < 4; ++i ) check_values.push_back(i);
-  fas::group_call<_group1_>( test );
+  fas::call_group<_group1_>( test );
   if (test_values!=check_values)
   {
     show(test_values, check_values);
@@ -83,7 +83,7 @@ int main()
   for (int i=1; i < 6; ++i ) check_values.push_back(i);
   for (int i=1; i < 4; ++i ) check_values.push_back(i);
   check_values.push_back(1);
-  fas::group_call< fas::type_list_n<_group1_, _group2_, _group1_, _tag1_>::type >( test );
+  fas::call_group< fas::type_list_n<_group1_, _group2_, _group1_, _tag1_>::type >( test );
   if (test_values!=check_values)
   {
     show(test_values, check_values);

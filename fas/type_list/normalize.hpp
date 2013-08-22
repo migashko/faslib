@@ -21,7 +21,7 @@ namespace fas{
 template<typename L>
 struct normalize
 {
-  typedef typename detail::normalize_helper<L, is_type_list<L>::value >::type type;
+  typedef typename detail::normalize_impl<L, is_type_list<L>::value >::type type;
 };
 
 template<>

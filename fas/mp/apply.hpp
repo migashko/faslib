@@ -32,21 +32,21 @@ struct apply
   >::type arg_list;
   
   typedef typename bind<F, arg_list>::type binded_type;
-  typedef typename detail::apply_helper<binded_type>::type type;
+  typedef typename detail::apply_impl<binded_type>::type type;
 };
 
 template<typename F >
 struct apply0
 {
   typedef typename bind<F>::type binded_type;
-  typedef typename detail::apply_helper<binded_type>::type type;
+  typedef typename detail::apply_impl<binded_type>::type type;
 };
 
 template<typename F, typename P0 >
 struct apply1
 {
   typedef typename bind<F, arg<P0> >::type binded_type;
-  typedef typename detail::apply_helper<binded_type>::type type;
+  typedef typename detail::apply_impl<binded_type>::type type;
 };
 
 template<typename F, typename P0, typename P1 >
@@ -58,7 +58,7 @@ struct apply2
 
   typedef typename bind< F, arg_list >::type binded_type;
   
-  typedef typename detail::apply_helper<binded_type>::type type;
+  typedef typename detail::apply_impl<binded_type>::type type;
 };
 
 template<typename F, typename P0, typename P1, typename P2 >
@@ -68,7 +68,7 @@ struct apply3
     arg<P0>, arg<P1>, arg<P2>
   >::type arg_list;
   typedef typename bind<F, arg_list >::type binded_type;
-  typedef typename detail::apply_helper<binded_type>::type type;
+  typedef typename detail::apply_impl<binded_type>::type type;
 };
 
 template<typename F, typename P0, typename P1, typename P2, typename P3 >
@@ -78,7 +78,7 @@ struct apply4
     arg<P0>, arg<P1>, arg<P2>, arg<P3>
   >::type arg_list;
   typedef typename bind<F, arg_list >::type binded_type;
-  typedef typename detail::apply_helper<binded_type>::type type;
+  typedef typename detail::apply_impl<binded_type>::type type;
 };
 
 template<typename F, typename P0, typename P1, typename P2, typename P3, typename P4 >
@@ -89,7 +89,7 @@ struct apply5
   >::type arg_list;
   
   typedef typename bind<F, arg_list>::type binded_type;
-  typedef typename detail::apply_helper<binded_type>::type type;
+  typedef typename detail::apply_impl<binded_type>::type type;
 };
 
 }

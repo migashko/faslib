@@ -25,12 +25,12 @@
 namespace fas{ namespace detail{
 
 template< typename TgList, typename A >
-struct select_group_impl
+struct select_group_impl1
 {
   typedef typename head<TgList>::type head;
   typedef typename tail<TgList>::type tail;
   typedef type_list< head, tail> tag_list;
-  typedef typename select_group_impl< tag_list, A >::type type;
+  typedef typename select_group_impl1< tag_list, A >::type type;
 };
 
 template<typename, typename Adv, typename >
@@ -43,37 +43,37 @@ template<typename Tg, typename A>
 struct target_cast_or_tag< Tg, empty_type, A >
 {
   typedef typename if_c<
-    has_advice<Tg, A>::value,
+    has_advice_impl<Tg, A>::value,
     type_list<Tg>,
     empty_list
   >::type type;
 };
 
 template< typename L, typename R, typename A >
-struct select_group_impl< fas::type_list<L, R>, A >
+struct select_group_impl1< fas::type_list<L, R>, A >
 {
   typedef typename A::group_list group_list;
   typedef typename find_advice< L, group_list, empty_type >::type group_advice;
   typedef typename target_cast_or_tag< L, group_advice, A>::type tag_list;
   typedef typename fas::merge<
     tag_list,
-    typename select_group_impl< R, A >::type
+    typename select_group_impl1< R, A >::type
   >::type type;
 };
 
 template< typename A >
-struct select_group_impl< fas::empty_list, A >
+struct select_group_impl1< fas::empty_list, A >
 {
   typedef fas::empty_list type;
 };
 
 
 template< typename TgList, typename A >
-struct select_group
+struct select_group_impl
 {
   typedef typename normalize<TgList>::type tag_list;
   typedef typename organize<
-    typename select_group_impl<tag_list, A>::type
+    typename select_group_impl1<tag_list, A>::type
   >::type type;
 };
 

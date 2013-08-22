@@ -60,7 +60,7 @@ public:
   template<typename Tg>
   struct has_advice
   {
-    typedef detail::has_advice<Tg, self > helper;
+    typedef detail::has_advice_impl<Tg, self > helper;
     typedef typename helper::type type;
     enum { value = helper::value};
   };
@@ -80,14 +80,14 @@ public:
   template<typename Tg>
   struct select_group
   {
-    typedef typename detail::select_group< Tg, self >::type type;
+    typedef typename detail::select_group_impl< Tg, self >::type type;
   };
 
   template<typename Tg>
   struct select_group_reverse
   {
     typedef typename reverse<
-      typename detail::select_group< Tg, self >::type
+      typename detail::select_group_impl< Tg, self >::type
     >::type type;
   };
 

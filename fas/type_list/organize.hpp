@@ -14,7 +14,7 @@ namespace fas{
 template<typename L>
 struct organize
 {
-  typedef typename detail::organize_helper<L>::type type;
+  typedef typename detail::organize_impl<L>::type type;
 };
 
 

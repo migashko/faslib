@@ -13,16 +13,16 @@
 namespace fas{ namespace detail{
 
 template<typename L, int B>
-struct normalize_helper;
+struct normalize_impl;
 
 template<typename T>
-struct normalize_helper< T, false>
+struct normalize_impl< T, false>
 {
   typedef type_list<T> type;
 };
 
 template<typename L, int B>
-struct normalize_helper
+struct normalize_impl
 {
   typedef typename organize< L >::type type;
 };

@@ -14,7 +14,7 @@ namespace fas{
 template<typename F>
 struct ph_max
 {
-  enum { value = detail::ph_max_helper<F>::value };
+  enum { value = detail::ph_max_impl<F>::value };
 };
 
 }

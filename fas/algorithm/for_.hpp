@@ -16,7 +16,7 @@ namespace fas{
 template<typename I, typename C, typename F >
 struct for_
 {
-  typedef typename detail::for_helper_t<
+  typedef typename detail::for_impl_t<
     FAS_T_SIMPLIFY(I),
     lambda< FAS_T_SIMPLIFY(C) >::template apply,
     lambda< FAS_T_SIMPLIFY(F) >::template apply
@@ -26,7 +26,7 @@ struct for_
 template<typename I, template<typename> class  C, template<typename> class F >
 struct for_t
 {
-  typedef typename detail::for_helper_t<
+  typedef typename detail::for_impl_t<
     I, C, F
   >::type type;
 };

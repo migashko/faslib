@@ -17,7 +17,7 @@ namespace fas{
 template<typename A, template<typename> class F = any >
 struct aspect_select_t
 {
-  typedef typename detail::aspect_select_t<A, F>::type type;
+  typedef typename detail::aspect_select_impl<A, F>::type type;
 };
 
 template<typename A, typename F = any<_> >
