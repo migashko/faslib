@@ -16,7 +16,7 @@
 namespace fas{ namespace detail{
 
 template<typename L, template<typename,typename> class F, int>
-struct sort_impl_t;
+struct sort_impl1_t;
 
 template<typename L, template<typename,typename> class F>
 struct bubble_sort_t;
@@ -37,22 +37,22 @@ template<typename L, template<typename,typename> class F, int>
 struct bubble_sort_impl3_t;
 
 template<typename L, template<typename,typename> class F>
-struct sort_helper_t
+struct sort_impl_t
 {
-  typedef typename sort_impl_t< L, F, is_sorted_t<L, F>::value >::type type;
+  typedef typename sort_impl1_t< L, F, is_sorted_t<L, F>::value >::type type;
 };
 
 template<typename L, template<typename,typename> class F>
-struct sort_impl_t<L, F, true>
+struct sort_impl1_t<L, F, true>
 {
   typedef L type;
 };
 
 template<typename L, template<typename,typename> class F>
-struct sort_impl_t<L, F, false>
+struct sort_impl1_t<L, F, false>
 {
   typedef typename bubble_sort_t<L, F>::type bubbled;
-  typedef typename sort_helper_t<bubbled, F>::type type;
+  typedef typename sort_impl_t<bubbled, F>::type type;
 };
 
 template<typename L, template<typename,typename> class F>

@@ -15,19 +15,19 @@
 namespace fas{ namespace detail{
 
 template<typename L, template<typename, typename> class F, int P, int C>
-struct unique_if_impl_t;
+struct unique_if_impl1_t;
   
 template<typename L, template<typename, typename> class F, int P, int C, int B>
 struct unique_if_impl2_t;
   
 template<typename L, template<typename, typename> class F>
-struct unique_if_helper_t
-  : unique_if_impl_t< L, F, 0, length<L>::value  >
+struct unique_if_impl_t
+  : unique_if_impl1_t< L, F, 0, length<L>::value  >
 {
 };
 
 template<typename L, template<typename, typename> class F, int P, int C>
-struct unique_if_impl_t
+struct unique_if_impl1_t
 {
   typedef typename type_at_c< P, L>::type current;
   enum { value = count_if_t<L, bind1st<F, current>::template apply >::value };
@@ -35,7 +35,7 @@ struct unique_if_impl_t
 };
 
 template<typename L, template<typename, typename> class F, int C>
-struct unique_if_impl_t<L, F, C, C>
+struct unique_if_impl1_t<L, F, C, C>
 {
   typedef L type;
 };
@@ -44,13 +44,13 @@ template<typename L, template<typename, typename> class F, int P, int C, int B>
 struct unique_if_impl2_t
 {
   typedef typename erase_c<P, L>::type erased;
-  typedef typename unique_if_impl_t<erased, F, P, C-1>::type type;
+  typedef typename unique_if_impl1_t<erased, F, P, C-1>::type type;
 };
 
 template<typename L, template<typename, typename> class F, int P, int C>
 struct unique_if_impl2_t<L, F, P, C, false>
 {
-  typedef typename unique_if_impl_t<L, F, P+1, C>::type type;
+  typedef typename unique_if_impl1_t<L, F, P+1, C>::type type;
 };
 
 

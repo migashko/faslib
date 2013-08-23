@@ -21,13 +21,13 @@ namespace fas{
 template<typename L, template<typename, typename> class F >
 struct unique_first_if_t
 {
-  typedef typename detail::unique_first_if_helper_t< L, F >::type type;
+  typedef typename detail::unique_first_if_impl_t< L, F >::type type;
 };
 
 template<typename L, typename F = some_type<_1, _2> >
 struct unique_first_if
 {
-  typedef typename detail::unique_first_if_helper_t< L, lambda_r< FAS_T_SIMPLIFY(F) , 2 >::template apply >::type type;
+  typedef typename detail::unique_first_if_impl_t< L, lambda_r< FAS_T_SIMPLIFY(F) , 2 >::template apply >::type type;
 };
 
 

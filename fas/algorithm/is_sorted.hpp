@@ -19,14 +19,14 @@ namespace fas{
 template<typename L, typename F = less<_1, _2> >
 struct is_sorted
 {
-  enum { value = detail::is_sorted_helper_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply >::value  };
+  enum { value = detail::is_sorted_impl_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply >::value  };
   typedef bool_<value> type;
 };
 
 template<typename L, template <typename, typename> class F = less >
 struct is_sorted_t
 {
-  enum { value = detail::is_sorted_helper_t<L, F >::value  };
+  enum { value = detail::is_sorted_impl_t<L, F >::value  };
   typedef bool_<value> type;
 };
 

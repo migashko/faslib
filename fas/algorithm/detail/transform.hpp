@@ -20,7 +20,7 @@
 namespace fas{ namespace detail{
 
 template<typename L, template<typename> class F>
-struct transform_impl_t;
+struct transform_impl1_t;
 
 template<typename MT, typename L, template<typename> class F>
 struct transform_impl2_t;
@@ -29,42 +29,42 @@ struct transform_impl2_t;
 
 
 template<typename L, template<typename> class F>
-struct transform_helper_t
+struct transform_impl_t
   : static_error< errorlist::not_type_list, is_type_list<L>::value >::type
   , static_error< errorlist::not_organized, is_organized<L>::value >::type
-  , transform_impl_t<L, F>
+  , transform_impl1_t<L, F>
 {
 };
 
 #else
 
 template<typename L, template<typename> class F>
-struct transform_helper_t
-  : transform_impl_t<L, F>
+struct transform_impl_t
+  : transform_impl1_t<L, F>
 {
 };
 
 #endif
 
 template<typename L, template<typename> class F>
-struct transform_impl_t
+struct transform_impl1_t
   : transform_impl2_t<typename L::metatype, L, F>
 {};
 
 #ifndef DISABLE_TYPE_LIST_SPEC
 
 template<template<typename> class F>
-struct transform_impl_t<empty_list, F>
+struct transform_impl1_t<empty_list, F>
 {
   typedef empty_list type;
 };
 
 template<typename L, typename R, template<typename> class F>
-struct transform_impl_t< type_list<L, R>, F>
+struct transform_impl1_t< type_list<L, R>, F>
 {
   typedef type_list< 
     typename F<L>::type,
-    typename transform_impl_t< R, F>::type
+    typename transform_impl1_t< R, F>::type
   > type;
 };
 
@@ -78,7 +78,7 @@ struct transform_impl2_t< metalist::type_list, L, F>
 
   typedef type_list<
     typename F<head>::type,
-    typename transform_impl_t< tail, F>::type
+    typename transform_impl1_t< tail, F>::type
   > type;
 };
 

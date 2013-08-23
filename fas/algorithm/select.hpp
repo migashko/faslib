@@ -17,13 +17,13 @@ namespace fas{
 template<typename L, typename F >
 struct select
 {
-  typedef typename detail::select_helper_t<L, lambda< FAS_T_SIMPLIFY(F) >::template apply >::type type;
+  typedef typename detail::select_impl_t<L, lambda< FAS_T_SIMPLIFY(F) >::template apply >::type type;
 };
 
 template<typename L, template<typename> class F >
 struct select_t
 {
-  typedef typename detail::select_helper_t<L, F >::type type;
+  typedef typename detail::select_impl_t<L, F >::type type;
 };
 
 }

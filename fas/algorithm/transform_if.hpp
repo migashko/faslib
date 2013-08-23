@@ -16,7 +16,7 @@ namespace fas{
 template<typename L, typename F, typename IF >
 struct transform_if
 {
-  typedef typename detail::transform_if_helper_t<
+  typedef typename detail::transform_if_impl_t<
     L, 
     lambda<FAS_T_SIMPLIFY(F)>::template apply,
     lambda<FAS_T_SIMPLIFY(IF)>::template apply 
@@ -26,7 +26,7 @@ struct transform_if
 template<typename L, template<typename> class F, template<typename> class IF >
 struct transform_if_t
 {
-  typedef typename detail::transform_if_helper_t<L, F, IF >::type type;
+  typedef typename detail::transform_if_impl_t<L, F, IF >::type type;
 };
 
 

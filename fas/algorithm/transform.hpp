@@ -16,13 +16,13 @@ namespace fas{
 template<typename L, typename F >
 struct transform
 {
-  typedef typename detail::transform_helper_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply >::type type;
+  typedef typename detail::transform_impl_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply >::type type;
 };
 
 template<typename L, template<typename> class F >
 struct transform_t
 {
-  typedef typename detail::transform_helper_t<L, F >::type type;
+  typedef typename detail::transform_impl_t<L, F >::type type;
 };
 
 
