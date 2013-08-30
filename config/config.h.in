@@ -37,6 +37,7 @@
 #cmakedefine HAVE_ISATTY_FUNC
 #cmakedefine HAVE__ISATTY_FUNC
 #cmakedefine HAVE_GETRUSAGE_FUNC
+#cmakedefine HAVE_USLEEP_FUNC
 #cmakedefine HAVE_RT_LIB
 
 #endif

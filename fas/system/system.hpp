@@ -47,11 +47,10 @@ inline void sleep( int millisec )
 {
 #ifdef _POSIX_VERSION
 
-#ifdef HAVE_HAS_SELECT_FUNC
-  timeval tv={millisec/1000, (millisec%1000)*1000};
-  ::select(0, 0, 0, 0, &tv);
+#ifdef HAVE_USLEEP_FUNC
+  ::usleep(millisec*1000);
 #else
-  ::sleep( millisec/1000 );
+  ::sleep(millisec/1000);
 #endif
 
 #elif defined(_WIN32)

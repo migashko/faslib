@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,17 +7,15 @@
 #ifndef FAS_RANGE_SRANGE_HPP
 #define FAS_RANGE_SRANGE_HPP
 
-#include <fas/range/string_range.hpp>
+#include <fas/range/random_access_range.hpp>
+#include <cstring>
 
 namespace fas{
 
-template<typename C>
-inline string_range<C*> srange(C* str)
+inline random_access_range<char*> srange(char* str)
 {
-  return string_range<C*>(str);
+  return random_access_range<char*>(str, str + std::strlen(str) );
 }
-
-
 
 }
 

@@ -10,14 +10,14 @@
 
 #include <climits>
 
-#define FAS_NANOSEC  1000000000LL
-#define FAS_MICROSEC 1000000LL
-#define FAS_MILLISEC 1000LL
+#define FAS_NANOSEC  1000000000L
+#define FAS_MICROSEC 1000000L
+#define FAS_MILLISEC 1000L
 
 
 namespace fas
 {
-  typedef long long int xsec_t;
+  typedef long int xsec_t;
 }
 
 

@@ -8,7 +8,6 @@
 #define FAS_RANGE_ERANGE_HPP
 
 #include <fas/range/typerange.hpp>
-#include <fas/range/string_range.hpp>
 
 namespace fas{
 

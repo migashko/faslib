@@ -33,6 +33,7 @@ check_function_exists("_ftime64_s" HAVE__FTIME_S_FUNC)
 check_function_exists("isatty" HAVE_ISATTY_FUNC)
 check_function_exists("_isatty" HAVE__ISATTY_FUNC)
 check_function_exists("getrusage" HAVE_GETRUSAGE_FUNC)
+check_function_exists("usleep" HAVE_USLEEP_FUNC)
 
 check_library_exists(rt clock_gettime "time.h" HAVE_RT_LIB)
 

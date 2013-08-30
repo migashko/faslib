@@ -9,10 +9,12 @@
 #include <fas/mp.hpp>
 
 #include <iostream>
+#include <vector>
 
 struct _value_;
 struct _provider1_;
 struct _provider2_;
+struct _creator_;
 
 template<typename T>
 class provider
@@ -42,8 +44,8 @@ private:
 struct aspect: fas::aspect< fas::type_list_n<
   fas::advice< _provider1_, fas::provider< fas::w< provider< fas::_1 > > > >,
   fas::advice< _provider2_, fas::provider_t< provider> >,
+  fas::advice< _creator_, fas::creator< std::vector<int>  > >,
   fas::advice< _value_, fas::value<int> >
-
 >::type >{};
 
 template<typename A>
@@ -56,6 +58,14 @@ public:
   typedef typename super::aspect::template advice_cast<_value_>::type::value_type value_type;
   typedef typename super::aspect::template advice_cast<_provider1_>::type::template apply< self >::type provider1_type;
   typedef typename super::aspect::template advice_cast<_provider2_>::type::template apply< self >::type provider2_type;
+  typedef typename super::aspect::template advice_cast<_creator_>::type::template apply< self >::type creator_type;
+  
+  template<typename P1, typename P2>
+  const creator_type& vector(P1 p1, P2 p2)
+  {
+    _container = super::get_aspect().template get<_creator_>()(*this, p1, p2);
+    return _container;
+  }
 
   void set(const value_type& value)
   {
@@ -76,6 +86,8 @@ public:
   {
     return provider2_type(this);
   }
+private:
+  creator_type _container;
 };
 
 int main()
@@ -100,5 +112,11 @@ int main()
     std::cout << p.get() << std::endl;
     return 1;
   }
+  
+  int d[]={1,2,3,4};
+  const test<aspect>::creator_type& c = t.vector(d, d + 4);
+  if ( c.size()!=4 )
+    return 1;
+  
   return 0;
 }

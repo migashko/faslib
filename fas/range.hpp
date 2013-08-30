@@ -11,6 +11,7 @@
 #include <fas/range/orange.hpp>
 #include <fas/range/erange.hpp>
 #include <fas/range/srange.hpp>
+#include <fas/range/swrange.hpp>
 #include <fas/range/rrange.hpp>
 #include <fas/range/irange.hpp>
 #include <fas/range/crange.hpp>
@@ -35,8 +36,6 @@
 #include <fas/range/forward_range.hpp>
 #include <fas/range/bidirectional_range.hpp>
 #include <fas/range/random_access_range.hpp>
-#include <fas/range/string_range.hpp>
-
 #include <fas/range/range_traits.hpp>
 
 #endif

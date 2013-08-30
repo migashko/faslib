@@ -39,7 +39,7 @@ struct xspan
     , xsec(xsec)
   {}
 
-  xspan(xsec_t sec)
+  xspan(short sec)
     : sec(sec)
     , xsec(0)
   {}
@@ -49,11 +49,11 @@ struct xspan
     , xsec(0)
   {}
 
-  xspan(long sec)
+  xspan(long int sec)
     : sec(sec)
     , xsec(0)
   {}
-
+  
   xspan(float s)
     : sec( static_cast<xsec_t>(s) )
     , xsec( static_cast<xsec_t>( (s - sec)*xmax ) )
