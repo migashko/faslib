@@ -53,8 +53,6 @@ struct factorial:
   enum { value = second::value};
 };
 
-
-
 int fgcd(int a, int b)
 {
   while (a != b)

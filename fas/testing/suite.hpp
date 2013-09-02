@@ -17,7 +17,7 @@
 
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
-#include <fas/aop/type_advice.hpp>
+#include <fas/aop/type.hpp>
 #include <fas/aop/value_advice.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/group.hpp>

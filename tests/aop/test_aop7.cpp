@@ -24,11 +24,11 @@ struct _map4_;
 struct _value_;
 
 struct aspect1: fas::aspect< fas::type_list_n<
-  fas::type_advice<_map1_, w< std::set<_,_,_> > >,
+  fas::type<_map1_, w< std::set<_,_,_> > >,
   fas::alias< _map3_, _map4_>,
   fas::forward< _map2_, _map4_>,
   fas::forward< _map4_, _map1_>,
-  fas::type_advice<_map1_, w< std::map<_,_,_,_> > >,
+  fas::type<_map1_, w< std::map<_,_,_,_> > >,
   fas::value_advice<_value_, int>
 >::type>{};
 

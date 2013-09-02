@@ -1,20 +1,18 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_AOP_TYPE_ADVICE_HPP
-#define FAS_AOP_TYPE_ADVICE_HPP
+#ifndef FAS_AOP_TYPE_HPP
+#define FAS_AOP_TYPE_HPP
 
 #include <fas/aop/metalist.hpp>
-#include <fas/aop/private/is_remover.hpp>
-#include <fas/integral/bool_.hpp>
 
 namespace fas{
 
 template<typename Tg, typename T>
-class type_advice
+class type
 {
 public:
   typedef metalist::advice metatype;

@@ -12,9 +12,8 @@
 namespace fas {
 
 template<typename Tg, typename R = void>
-class stub
+struct stub
 {
-public:
   typedef metalist::advice metatype;
   typedef Tg tag;
   typedef stub<Tg, R> advice_class;

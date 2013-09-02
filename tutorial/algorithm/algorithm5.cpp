@@ -109,8 +109,26 @@ typedef type_list_n< int_<1>, int_<2>, int_<3>, int_<4>, int_<5> >::type list2;
 
 int main()
 {
+  std::cout << "list_of_list():" << std::endl;
   std::cout << list_of_list() << std::endl;
+  
+  std::cout << "fbrute_combinations():" << std::endl;
+  typedef std::vector<int> v_type;
+  typedef std::vector< v_type > vv_type;
+  v_type v;
+  v.push_back(1);
+  v.push_back(2);
+  v.push_back(3);
+  vv_type vv = fbrute_combinations(v);
+  for (vv_type::iterator vvitr=vv.begin(); vvitr!=vv.end(); ++vvitr)
+  {
+    for (v_type::iterator vitr=vvitr->begin(); vitr!=vvitr->end(); ++vitr)
+      std::cout << *vitr << ", ";
+    std::cout << std::endl;
+  }
+  std::cout << "brute_combinations<list>::type():" << std::endl;
   std::cout << brute_combinations<list>::type() << std::endl;
+  std::cout << "brute_combinations<list>::iterations::value:" << std::endl;
   std::cout << brute_combinations<list>::iterations::value << std::endl;
   // gcc-4.6 allocated over 14GB!!!
   // std::cout << brute_combinations<list2>::type() << std::endl;

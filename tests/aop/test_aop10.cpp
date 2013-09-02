@@ -42,9 +42,9 @@ private:
 };
 
 struct aspect: fas::aspect< fas::type_list_n<
-  fas::advice< _provider1_, fas::provider< fas::w< provider< fas::_1 > > > >,
-  fas::advice< _provider2_, fas::provider_t< provider> >,
-  fas::advice< _creator_, fas::creator< std::vector<int>  > >,
+  fas::provider< _provider1_, fas::w< provider< fas::_1 > > > ,
+  fas::provider_t< _provider2_,  provider>,
+  fas::creator< _creator_, std::vector<int>  > ,
   fas::advice< _value_, fas::value<int> >
 >::type >{};
 

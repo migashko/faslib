@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012, 2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -12,18 +12,19 @@
 #include <fas/aop/alias.hpp>
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/aspect_class.hpp>
-#include <fas/aop/merge_aspect.hpp>
-#include <fas/aop/forward.hpp>
-#include <fas/aop/group.hpp>
+#include <fas/aop/creator.hpp>
 #include <fas/aop/call_group.hpp>
-#include <fas/aop/reverse_call_group.hpp>
+#include <fas/aop/forward.hpp>
 #include <fas/aop/for_each_group.hpp>
-#include <fas/aop/reverse_for_each_group.hpp>
+#include <fas/aop/group.hpp>
+#include <fas/aop/merge_aspect.hpp>
 #include <fas/aop/provider.hpp>
+#include <fas/aop/reverse_call_group.hpp>
+#include <fas/aop/reverse_for_each_group.hpp>
 #include <fas/aop/remover.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/tag.hpp>
-#include <fas/aop/type_advice.hpp>
+#include <fas/aop/type.hpp>
 #include <fas/aop/value.hpp>
 #include <fas/aop/value_advice.hpp>
 
