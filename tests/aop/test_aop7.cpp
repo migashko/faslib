@@ -29,7 +29,7 @@ struct aspect1: fas::aspect< fas::type_list_n<
   fas::forward< _map2_, _map4_>,
   fas::forward< _map4_, _map1_>,
   fas::type<_map1_, w< std::map<_,_,_,_> > >,
-  fas::value_advice<_value_, int>
+  fas::value<_value_, int>
 >::type>{};
 
 int main()

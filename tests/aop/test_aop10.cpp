@@ -19,7 +19,7 @@ struct _creator_;
 template<typename T>
 class provider
 {
-  typedef typename T::aspect::template advice_cast<_value_>::type::value_type value_type;
+  typedef typename T::aspect::template advice_cast<_value_>::type value_type;
 public:
   provider(T* t)
   {
@@ -28,12 +28,12 @@ public:
 
   void set(const value_type& value)
   {
-    _target->get_aspect().template get<_value_>()(*this, value);
+    _target->get_aspect().template get<_value_>()=value;
   }
 
   const value_type& get() const
   {
-    return _target->get_aspect().template get<_value_>()(*this);
+    return _target->get_aspect().template get<_value_>();
   }
 
 
@@ -45,7 +45,7 @@ struct aspect: fas::aspect< fas::type_list_n<
   fas::provider< _provider1_, fas::w< provider< fas::_1 > > > ,
   fas::provider_t< _provider2_,  provider>,
   fas::creator< _creator_, std::vector<int>  > ,
-  fas::advice< _value_, fas::value<int> >
+  fas::value< _value_, int >
 >::type >{};
 
 template<typename A>
@@ -55,7 +55,7 @@ class test
   typedef test<A> self;
   typedef fas::aspect_class<A> super;
 public:
-  typedef typename super::aspect::template advice_cast<_value_>::type::value_type value_type;
+  typedef typename super::aspect::template advice_cast<_value_>::type value_type;
   typedef typename super::aspect::template advice_cast<_provider1_>::type::template apply< self >::type provider1_type;
   typedef typename super::aspect::template advice_cast<_provider2_>::type::template apply< self >::type provider2_type;
   typedef typename super::aspect::template advice_cast<_creator_>::type::template apply< self >::type creator_type;
@@ -69,12 +69,12 @@ public:
 
   void set(const value_type& value)
   {
-    super::get_aspect().template get<_value_>()(*this, value);
+    super::get_aspect().template get<_value_>() = value;
   }
 
   const value_type& get() const
   {
-    return super::get_aspect().template get<_value_>()(*this);
+    return super::get_aspect().template get<_value_>();
   }
 
   provider1_type get_provider1()

@@ -26,6 +26,5 @@
 #include <fas/aop/tag.hpp>
 #include <fas/aop/type.hpp>
 #include <fas/aop/value.hpp>
-#include <fas/aop/value_advice.hpp>
 
 #endif

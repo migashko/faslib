@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2013
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2007, 2011, 2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,41 +7,34 @@
 #ifndef FAS_AOP_VALUE_HPP
 #define FAS_AOP_VALUE_HPP
 
+#include <fas/aop/metalist.hpp>
+
 namespace fas{
 
-template<typename V>
-struct value
+template<typename Tg, typename V >
+class value
 {
-  typedef V value_type;
+public:
+  typedef metalist::advice metatype;
+  typedef Tg tag;
+  typedef V advice_class;
 
   value()
-    : _value()
+    :_value()
   {}
 
-  template<typename T>
-  const value_type& operator()(T& ) const
-  {
-    return get_value();
-  }
-
-  template<typename T>
-  void operator()(T&, const value_type& newval)
-  {
-    set_value(newval);
-  }
-
-  const value_type& get_value() const
+  advice_class& get_advice()
   {
     return _value;
   }
 
-  void set_value(const value_type& newval)
+  const advice_class& get_advice() const
   {
-    _value = newval;
+    return _value;
   }
 
 private:
-  value_type _value;
+   V _value;
 };
 
 }

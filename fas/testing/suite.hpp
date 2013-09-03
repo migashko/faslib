@@ -18,7 +18,7 @@
 #include <fas/aop/aspect.hpp>
 #include <fas/aop/advice.hpp>
 #include <fas/aop/type.hpp>
-#include <fas/aop/value_advice.hpp>
+#include <fas/aop/value.hpp>
 #include <fas/aop/stub.hpp>
 #include <fas/aop/group.hpp>
 #include <fas/aop/aspect_class.hpp>
@@ -73,7 +73,6 @@ public:
 
   const std::stringstream& stub() const { return _stub;}
 
-
   template<typename U>
   void unit_begin(U& /*u*/)
   {
@@ -96,8 +95,6 @@ public:
       _suite_counts.units_passed++;
     _suite_counts += u.counts();
     _suite_counts.units++;
-
-
   }
 
   void _status_check()
@@ -212,7 +209,12 @@ public:
     return _out;
   }
 
-  operator bool () const { return _suite_counts.errors == 0 &&  _suite_counts.fails==0 && _suite_counts.fatals==0;}
+  operator bool () const 
+  { 
+    return   _suite_counts.errors == 0 
+          && _suite_counts.fails  == 0 
+          && _suite_counts.fatals == 0;
+  }
 
   bool run()
   {
@@ -303,8 +305,8 @@ private:
 #define ADD_UNIT(name) ,name##_type_list
 #define ADD_CLASS(name) , ::fas::advice<name, name>
 #define ADD_ADVICE(tag, name) , ::fas::advice<tag, name>
-#define ADD_VALUE_ADVICE(tag, name) , ::fas::value_advice<tag, name>
-#define ADD_TYPE_ADVICE(tag, name) , ::fas::type_advice<tag, name>
+#define ADD_VALUE(tag, name) , ::fas::value<tag, name>
+#define ADD_TYPE_ADVICE(tag, name) , ::fas::type<tag, name>
 #define ADD_GROUP(tag, tag_list) , ::fas::group<tag, tag_list>
 #define ADD_STUB(tag) , ::fas::stub<tag>
 #define ADD_ASPECT(aspect) , aspect
