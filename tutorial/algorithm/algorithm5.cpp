@@ -109,9 +109,7 @@ typedef type_list_n< int_<1>, int_<2>, int_<3>, int_<4>, int_<5> >::type list2;
 
 int main()
 {
-  std::cout << "list_of_list():" << std::endl;
-  std::cout << list_of_list() << std::endl;
-  
+  /*
   std::cout << "fbrute_combinations():" << std::endl;
   typedef std::vector<int> v_type;
   typedef std::vector< v_type > vv_type;
@@ -126,11 +124,20 @@ int main()
       std::cout << *vitr << ", ";
     std::cout << std::endl;
   }
+  
+  std::cout << "list_of_list():" << std::endl;
+  std::cout << list_of_list() << std::endl;
+
   std::cout << "brute_combinations<list>::type():" << std::endl;
   std::cout << brute_combinations<list>::type() << std::endl;
   std::cout << "brute_combinations<list>::iterations::value:" << std::endl;
   std::cout << brute_combinations<list>::iterations::value << std::endl;
   // gcc-4.6 allocated over 14GB!!!
-  // std::cout << brute_combinations<list2>::type() << std::endl;
+  std::cout << brute_combinations<list2>::type() << std::endl;
+  */
+  typedef fas::generate< fas::int_<50>, fas::generator< fas::int_<1>, fas::rand< fas::_> > >::type gen_list;
+  std::cout << fas::length< gen_list >::value << std::endl;
+  typedef fas::sort< gen_list, fas::less<_1, fas::_2> >::type sorted_list; 
+  std::cout << fas::length< sorted_list >::value << std::endl;
   return 0;
 }

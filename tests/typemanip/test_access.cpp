@@ -214,36 +214,36 @@ UNIT(global_fun_unit, "")
   foo f;
   const foo& fc = f;
 
-  typedef fas::global_fun_get<const foo&, const std::string&, &get_foo1> get_foo1;
-  typedef fas::global_fun_get<const foo&, int, &get_foo2> get_foo2;
-  typedef fas::global_fun_get<const foo&, const char*, &get_foo3> get_foo3;
-  typedef fas::global_fun_get<const foo&, const char*, &get_foo4> get_foo4;
+  typedef fas::global_fun_get<const foo&, const std::string&, &get_foo1> foo1_getter;
+  typedef fas::global_fun_get<const foo&, int, &get_foo2> foo2_getter;
+  typedef fas::global_fun_get<const foo&, const char*, &get_foo3> foo3_getter;
+  typedef fas::global_fun_get<const foo&, const char*, &get_foo4> foo4_getter;
 
-  t << equal<assert, std::string> ( get_foo1()(f), "foo1" ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, int> ( get_foo2()(f), 2 ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, std::string> ( get_foo3()(f), "foo3" ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, std::string> ( get_foo4()(f), "foo4" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo1_getter()(f), "foo1" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, int> ( foo2_getter()(f), 2 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo3_getter()(f), "foo3" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo4_getter()(f), "foo4" ) << FAS_TESTING_FILE_LINE;
 
-  typedef fas::global_fun_set<foo&, const std::string&, &set_foo1> set_foo1;
-  typedef fas::global_fun_set<foo&, int, &set_foo2> set_foo2;
-  typedef fas::global_fun_set<foo&, const char*, &set_foo3, char*> set_foo3;
-  typedef fas::global_fun_set<foo&, const char*, &set_foo4, char*> set_foo4;
+  typedef fas::global_fun_set<foo&, const std::string&, &set_foo1> foo1_setter;
+  typedef fas::global_fun_set<foo&, int, &set_foo2> foo2_setter;
+  typedef fas::global_fun_set<foo&, const char*, &set_foo3, char*> foo3_setter;
+  typedef fas::global_fun_set<foo&, const char*, &set_foo4, char*> foo4_setter;
 
-  set_foo1()(f) = "foo1-test";
-  set_foo2()(f) = 42;
+  foo1_setter()(f) = "foo1-test";
+  foo2_setter()(f) = 42;
   char buffer[256];
-  std::strcpy( set_foo3()(f, buffer), "foo3-test" );
-  std::strcpy( set_foo4()(f, buffer), "foo4-test" );
+  std::strcpy( foo3_setter()(f, buffer), "foo3-test" );
+  std::strcpy( foo4_setter()(f, buffer), "foo4-test" );
 
-  t << equal<assert, std::string> ( get_foo1()(f), "foo1-test" ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, int> ( get_foo2()(f), 42 ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, std::string> ( get_foo3()(f), "foo3-test" ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, std::string> ( get_foo4()(f), "foo4-test" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo1_getter()(f), "foo1-test" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, int> ( foo2_getter()(f), 42 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo3_getter()(f), "foo3-test" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo4_getter()(f), "foo4-test" ) << FAS_TESTING_FILE_LINE;
 
-  t << equal<assert, std::string> ( get_foo1()(fc), "foo1-test" ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, int> ( get_foo2()(fc), 42 ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, std::string> ( get_foo3()(fc), "foo3-test" ) << FAS_TESTING_FILE_LINE;
-  t << equal<assert, std::string> ( get_foo4()(fc), "foo4-test" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo1_getter()(fc), "foo1-test" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, int> ( foo2_getter()(fc), 42 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo3_getter()(fc), "foo3-test" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( foo4_getter()(fc), "foo4-test" ) << FAS_TESTING_FILE_LINE;
 }
 
 

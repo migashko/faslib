@@ -14,7 +14,18 @@ struct integral2type
 {
   typedef I value_type;
   enum { value = i};
+  //static const I value = i;
 };
+
+/*
+template<typename I, I i>
+struct integral2type_s
+{
+  typedef I value_type;
+  static const I value = i;
+};
+*/
+
 
 }
 

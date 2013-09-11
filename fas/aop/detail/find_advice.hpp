@@ -68,7 +68,7 @@ namespace detail
 
 struct advace_category
 {
-  typedef enum{
+  typedef enum {
     advice = 0,
     alias = 1,
     forward = 2,
