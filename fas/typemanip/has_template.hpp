@@ -11,7 +11,7 @@
 namespace N##_detail{\
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(typename P::D const *);\
   template<typename P>\
@@ -31,7 +31,7 @@ struct N\
 namespace N##_detail{\
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P, typename P1>\
   static small_type test(typename P::template D<P1> const *);\
   template<typename P, typename P1>\
@@ -51,7 +51,7 @@ struct N\
 namespace N##_detail{\
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P, typename P1, typename P2>\
   static small_type test(typename P::template D<P1, P2> const *);\
   template<typename P, typename P1, typename P2>\
@@ -71,7 +71,7 @@ struct N\
 namespace N##_detail{\
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P, typename P1, typename P2, typename P3>\
   static small_type test(typename P::template D<P1, P2, P3> const *);\
   template<typename P, typename P1, typename P2, typename P3>\
@@ -91,7 +91,7 @@ struct N\
 namespace N##_detail{\
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P, typename P1, typename P2, typename P3, typename P4>\
   static small_type test(typename P::template D<P1, P2, P3, P4> const *);\
   template<typename P, typename P1, typename P2, typename P3, typename P4>\
@@ -111,7 +111,7 @@ struct N\
 namespace N##_detail{\
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P, typename P1, typename P2, typename P3, typename P4, typename P5>\
   static small_type test(typename P::template D<P1, P2, P3, P4, P5> const *);\
   template<typename P, typename P1, typename P2, typename P3, typename P4, typename P5>\

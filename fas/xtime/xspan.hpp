@@ -49,7 +49,7 @@ struct xspan
     , xsec(0)
   {}
 
-  xspan(long sec)
+  xspan(size_t sec)
     : sec(sec)
     , xsec(0)
   {}
