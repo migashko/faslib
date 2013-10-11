@@ -34,7 +34,7 @@ struct range_helper<I, typerange_flag::iterator >
     return range(beg, end);
   }
 
-  static inline difference_type distance( iterator r )
+  static inline difference_type distance( iterator /*r*/ )
   {
     return 0;
   }

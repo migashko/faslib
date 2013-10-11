@@ -11,7 +11,7 @@
 namespace N##_detail{\
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(typename P::D const *);\
   template<typename P>\
