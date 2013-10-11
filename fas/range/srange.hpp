@@ -17,6 +17,11 @@ inline random_access_range<char*> srange(char* str)
   return random_access_range<char*>(str, str + std::strlen(str) );
 }
 
+inline random_access_range<const char*> srange(const char* str)
+{
+  return random_access_range<const char*>(str, str + std::strlen(str) );
+}
+
 }
 
 #endif
