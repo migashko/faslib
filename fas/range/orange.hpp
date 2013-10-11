@@ -17,6 +17,13 @@ inline typename typerange<C>::orange orange(C& cnt, bool clear = false)
   return typerange<C>::make_orange(cnt, clear);
 }
 
+template<typename ORange>
+inline typename typerange<const ORange>::orange orange(const ORange& ora/*, bool clear = false*/)
+{
+  return typerange<const ORange>::make_orange(ora, false);
+}
+
+
 }
 
 #endif

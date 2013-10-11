@@ -18,7 +18,7 @@ UNIT(stream_range_unit, "")
   using namespace ::fas::testing;
 
   std::ofstream fo("stream_range.txt");
-  fas::typerange< std::ofstream >::orange ro( fo );
+  fas::typerange< std::ofstream >::orange ro( fas::orange( fas::orange(fo) ) );
   *ro++ = '1';
   *ro++ = '2';
   *ro++ = '3';
