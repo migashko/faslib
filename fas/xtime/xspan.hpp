@@ -44,11 +44,16 @@ struct xspan
     , xsec(0)
   {}
 
-  xspan(size_t sec)
+  xspan(int sec)
     : sec(sec)
     , xsec(0)
   {}
-  
+
+  xspan(long sec)
+    : sec(sec)
+    , xsec(0)
+  {}
+
   xspan(float s)
     : sec( static_cast<xsec_t>(s) )
     , xsec( static_cast<xsec_t>( (s - sec)*xmax ) )
