@@ -1,11 +1,11 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_TYPEMANIP_TSTRING_HPP
-#define FAS_TYPEMANIP_TSTRING_HPP
+#ifndef FAS_FUNCTIONAL_TSTRING_HPP
+#define FAS_FUNCTIONAL_TSTRING_HPP
 
 #include <fas/typemanip/metalist.hpp>
 

@@ -1,11 +1,11 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012, 2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_ACCESS_MEM_FUN_SET_HPP
-#define FAS_ACCESS_MEM_FUN_SET_HPP
+#ifndef FAS_FUNCTIONAL_MEM_FUN_SET_HPP
+#define FAS_FUNCTIONAL_MEM_FUN_SET_HPP
 
 #include <fas/typemanip/remove_const_reference.hpp>
 

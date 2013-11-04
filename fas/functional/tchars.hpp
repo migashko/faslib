@@ -1,16 +1,16 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012, 2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#ifndef FAS_TYPEMANIP_TCHARS_HPP
-#define FAS_TYPEMANIP_TCHARS_HPP
+#ifndef FAS_FUNCTIONAL_TCHARS_HPP
+#define FAS_FUNCTIONAL_TCHARS_HPP
 
 #include <fas/typemanip/metalist.hpp>
 
 template< typename C, C ch0=C(), C ch1=C(), C ch2=C(), C ch3=C(), C ch4=C()
-										, C ch5=C(), C ch6=C(), C ch7=C(), C ch8=C(), C ch9=C()	>
+                    , C ch5=C(), C ch6=C(), C ch7=C(), C ch8=C(), C ch9=C()	>
 struct tchars_t
 {
   typedef fas::metalist::tstring metatype; 
