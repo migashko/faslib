@@ -40,17 +40,32 @@ struct xspan
   {}
 
   xspan(short sec)
-    : sec(sec)
+    : sec(static_cast<xsec_t>(sec))
+    , xsec(0)
+  {}
+
+  xspan(unsigned short sec)
+    : sec(static_cast<xsec_t>(sec))
     , xsec(0)
   {}
 
   xspan(int sec)
-    : sec(sec)
+    : sec(static_cast<xsec_t>(sec))
+    , xsec(0)
+  {}
+
+  xspan(unsigned int sec)
+    : sec(static_cast<xsec_t>(sec))
     , xsec(0)
   {}
 
   xspan(long sec)
-    : sec(sec)
+    : sec(static_cast<xsec_t>(sec))
+    , xsec(0)
+  {}
+
+  xspan(unsigned long sec)
+    : sec(static_cast<xsec_t>(sec))
     , xsec(0)
   {}
 
