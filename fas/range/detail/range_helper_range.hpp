@@ -25,16 +25,25 @@ struct range_helper<R, typerange_flag::range >
   typedef typename range::difference_type   difference_type;
   typedef typename range::iterator   iterator;
 
-  static inline R make_range(R r)
+  static inline R& make_range(R& r)
   {
     return r;
   }
 
-  static inline R make_orange(R r, bool)
+  static inline const R& make_range(const R& r)
   {
     return r;
   }
 
+  static inline R& make_orange(R& r, bool)
+  {
+    return r;
+  }
+
+  static inline const R& make_orange(const R& r, bool)
+  {
+    return r;
+  }
   
   template<typename RR /*==R */>
   static inline
