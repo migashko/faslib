@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011,  2013
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -15,8 +15,6 @@
 #include <fas/typemanip/fifth.hpp>
 #include <fas/typemanip/first.hpp>
 #include <fas/typemanip/fourth.hpp>
-#include <fas/typemanip/global_fun_get.hpp>
-#include <fas/typemanip/global_fun_set.hpp>
 #include <fas/typemanip/has_member_function.hpp>
 #include <fas/typemanip/has_metatype.hpp>
 #include <fas/typemanip/has_template.hpp>
@@ -33,11 +31,6 @@
 #include <fas/typemanip/make_pair.hpp>
 #include <fas/typemanip/make_tuple.hpp>
 #include <fas/typemanip/max_sizeof.hpp>
-#include <fas/typemanip/member.hpp>
-#include <fas/typemanip/member_get.hpp>
-#include <fas/typemanip/member_set.hpp>
-#include <fas/typemanip/mem_fun_get.hpp>
-#include <fas/typemanip/mem_fun_set.hpp>
 #include <fas/typemanip/metalist.hpp>
 #include <fas/typemanip/pair.hpp>
 #include <fas/typemanip/remove_const.hpp>
@@ -50,7 +43,6 @@
 #include <fas/typemanip/super_subclass_strict.hpp>
 #include <fas/typemanip/switch_.hpp>
 #include <fas/typemanip/third.hpp>
-#include <fas/typemanip/tstring.hpp>
 #include <fas/typemanip/tuple.hpp>
 #include <fas/typemanip/type2type.hpp>
 #include <fas/typemanip/unwrap.hpp>

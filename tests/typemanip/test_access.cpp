@@ -4,13 +4,13 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#include <fas/typemanip/member.hpp>
-#include <fas/typemanip/member_get.hpp>
-#include <fas/typemanip/member_set.hpp>
-#include <fas/typemanip/mem_fun_get.hpp>
-#include <fas/typemanip/mem_fun_set.hpp>
-#include <fas/typemanip/global_fun_get.hpp>
-#include <fas/typemanip/global_fun_set.hpp>
+#include <fas/functional/member.hpp>
+#include <fas/functional/member_get.hpp>
+#include <fas/functional/member_set.hpp>
+#include <fas/functional/mem_fun_get.hpp>
+#include <fas/functional/mem_fun_set.hpp>
+#include <fas/functional/global_fun_get.hpp>
+#include <fas/functional/global_fun_set.hpp>
 
 #include <fas/static_check/static_check.hpp>
 

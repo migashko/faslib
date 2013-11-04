@@ -4,8 +4,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#include <fas/typemanip/tchars.hpp>
-#include <fas/typemanip/tstring.hpp>
+#include <fas/functional/tchars.hpp>
+#include <fas/functional/tstring.hpp>
 
 #include <string>
 #include <iostream>
