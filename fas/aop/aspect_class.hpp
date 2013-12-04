@@ -13,12 +13,12 @@
 
 namespace fas{
 
-template<typename A1, typename A2 = empty_type, typename A3 = empty_type, typename A4 = empty_type, typename A5 = empty_type >
+template<typename A = empty_type >
 class aspect_class
-  : private aspect_hierarchy< typename merge_aspect<A1, A2, A3, A4, A5>::type >
+  : private aspect_hierarchy< A >
 {
 public:
-  typedef typename merge_aspect<A1, A2, A3, A4, A5>::type aspect_type;
+  typedef A aspect_type;
   typedef aspect_hierarchy< aspect_type > aspect;
 
   aspect& get_aspect()
