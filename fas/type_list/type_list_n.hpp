@@ -13,6 +13,37 @@
 
 
 namespace fas{
+  
+#if __cplusplus >= 201103L
+
+namespace detail
+{
+  template<typename ...Args>
+  struct type_list_helper;
+
+  template<typename Head, typename ...Args>
+  struct type_list_helper<Head, Args...>
+  {
+    typedef type_list<Head, typename type_list_helper<Args...>::type > type;
+  };
+
+  template<>
+  struct type_list_helper<>
+  {
+    typedef empty_list type;
+  };
+}
+  
+
+template<typename ...Args>
+struct type_list_n
+{
+  typedef typename organize<
+    typename detail::type_list_helper< Args... >::type
+  >::type type;
+};
+  
+#else
 
 template< typename T1 = empty_list,  typename T2 = empty_list,  typename T3 = empty_list,  
           typename T4 = empty_list,  typename T5 = empty_list,  typename T6 = empty_list,
@@ -45,6 +76,8 @@ struct type_list_n
   >::type type;
 
 };
+
+#endif
 
 }
 
