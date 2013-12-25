@@ -2,9 +2,8 @@ add_subdirectory(benchmark)
 
 add_executable(
   test_range
-  ${CMAKE_SOURCE_DIR}/fas/testing/testing.cpp
+  ${FAS_TESTING_CPP}
   test_range.cpp
-  
   basic_suite.cpp 
   basic2_suite.cpp 
   array_range_suite.cpp 

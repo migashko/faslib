@@ -1,6 +1,10 @@
+cmake_minimum_required(VERSION 2.6)
+
 project(tests)
 
-set(FAS_TESTING_CPP "${CMAKE_SOURCE_DIR}/fas/testing/testing.cpp")
+include_directories(..)
+
+set(FAS_TESTING_CPP "${CMAKE_SOURCE_DIR}/../fas/testing/testing.cpp")
 
 add_subdirectory(static_check)
 add_subdirectory(integral)
