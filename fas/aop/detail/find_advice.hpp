@@ -68,12 +68,15 @@ namespace detail
 
 struct advace_category
 {
-  typedef enum {
+  enum type_tag
+  {
     advice = 0,
     alias = 1,
     forward = 2,
     removed = 4
-  } type;
+  };
+  
+  typedef type_tag type;
 };
 
 template<typename Tg, typename L, typename ALT >

@@ -46,5 +46,5 @@ else(HAVE_RT_LIB)
   SET(FAS_USE_RT_LIB OFF PARENT_SCOPE)
 endif(HAVE_RT_LIB)
 
-configure_file("${CMAKE_SOURCE_DIR}/config/config.h.in"
-               "${CMAKE_SOURCE_DIR}/fas/system/config.h" )
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/../config/config.h.in"
+               "${CMAKE_CURRENT_SOURCE_DIR}/../fas/system/config.h" )
