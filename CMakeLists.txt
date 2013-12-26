@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 2.6)
 
 project(faslib CXX)
 
-
-
 add_subdirectory(config)
 
 # Enable compile-time check type_list and generate human readable error (increases compile time)
@@ -21,37 +19,12 @@ add_subdirectory(config)
 # Disable warnings for non-optimal code
 add_definitions(-DFAS_DISABLE_WARNINGS)
 
-if (FAS_USE_RT_LIB)
-  add_definitions(-DFAS_USE_RT_LIB)
-endif(FAS_USE_RT_LIB)
-
-ENABLE_TESTING()
 
 include_directories(./)
 
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
-add_custom_target( tests 
-  #COMMAND cd tests
-  COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release --build ${CMAKE_BINARY_DIR}/tests --target all ${CMAKE_SOURCE_DIR}/tests
-  #COMMAND cd ..
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
-)
-#add_subdirectory(tests)
-#add_subdirectory(examples)
-#add_subdirectory(tutorial)
-
-
-
-#CMAKE_INCLUDE_PATH
-#add_custom_target(all true WORKING_DIRECTORY .)
-#add_custom_target( all make WORKING_DIRECTORY true )
-#add_custom_target( tests {CMAKE_COMMAND} WORKING_DIRECTORY tests )
-#add_custom_target( examples make WORKING_DIRECTORY examples )
-#add_custom_target( tutorial make WORKING_DIRECTORY tutorial )
-
 set(CPACK_PACKAGE_NAME "faslib")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "2")
+set(CPACK_PACKAGE_VERSION_MINOR "3")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")

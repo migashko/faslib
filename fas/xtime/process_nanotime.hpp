@@ -17,8 +17,7 @@ namespace fas {
 
 inline nanospan process_nanotime()
 {
-#if defined(HAVE_CLOCK_GETTIME_FUNC) && defined(FAS_USE_RT_LIB)
-
+#if defined(HAVE_CLOCK_GETTIME_FUNC)
   timespec ts;
   if ( -1 == clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts) )
     return nanospan();

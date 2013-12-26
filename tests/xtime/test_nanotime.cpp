@@ -19,15 +19,19 @@ int main()
   if (start == 0) return 1;
   fas::system::sleep(100);
   nanospan finish = nanotime();
-  if (finish == 0) return 1;
-  if (finish == start) return 1;
+  if (finish == 0) return 2;
+  if (finish == start) return 3;
+  std::cout << start << std::endl;
+  std::cout << finish << std::endl;
 
   start = process_nanotime();
-  if (start == 0) return 1;
+  if (start == 0) return 4;
   fas::system::sleep(100);
   finish = process_nanotime();
-  if (finish == 0) return 1;
-  if (finish == start) return 1;
+  if (finish == 0) return 5;
+  std::cout << start << std::endl;
+  std::cout << finish << std::endl;
+  if (finish == start) return 6;
   return 0;
 }
 

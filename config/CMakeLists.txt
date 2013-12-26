@@ -34,17 +34,7 @@ check_function_exists("isatty" HAVE_ISATTY_FUNC)
 check_function_exists("_isatty" HAVE__ISATTY_FUNC)
 check_function_exists("getrusage" HAVE_GETRUSAGE_FUNC)
 check_function_exists("usleep" HAVE_USLEEP_FUNC)
-
-check_library_exists(rt clock_gettime "time.h" HAVE_RT_LIB)
-
-if(HAVE_RT_LIB)
-  SET(FAS_USE_RT_LIB ON PARENT_SCOPE)
-  SET (CMAKE_REQUIRED_LIBRARIES rt)
-  check_function_exists(clock_gettime HAVE_CLOCK_GETTIME_FUNC)
-  SET (CMAKE_REQUIRED_LIBRARIES)
-else(HAVE_RT_LIB)
-  SET(FAS_USE_RT_LIB OFF PARENT_SCOPE)
-endif(HAVE_RT_LIB)
+check_function_exists("clock_gettime" HAVE_CLOCK_GETTIME_FUNC)
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/../config/config.h.in"
                "${CMAKE_CURRENT_SOURCE_DIR}/../fas/system/config.h" )
