@@ -34,7 +34,7 @@ struct foo_aspect: fas::aspect< advice_list >{};
 
 template<typename A = fas::aspect<> >
 class foo
-  : public fas::aspect_class<A, foo_aspect>
+  : public fas::aspect_class< typename fas::merge_aspect<A, foo_aspect>::type >
 {
 public:
   void method1() { this->get_aspect().template get<_method1_>()(*this); }

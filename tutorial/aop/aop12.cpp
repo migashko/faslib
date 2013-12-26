@@ -64,7 +64,7 @@ struct aspect_123s: fas::aspect< fas::type_list_n<
 
 template< typename A = fas::aspect<> >
 class dredd:
-  public fas::aspect_class<A, aspect_123s>
+  public fas::aspect_class< typename fas::merge_aspect<A, aspect_123s>::type >
 {
   // ...
 public:

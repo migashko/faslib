@@ -1,11 +1,14 @@
-# !/bin/sh
+#!/bin/sh
 # Usage example:
-#   cd ..
-#   mkdir faslib2-build
-#   cd faslib2-build
-#   cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=`pwd`/../faslib2/fasg++ ../faslib2
+#   export FAS_CXX=g++-3.3
+#   cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=`pwd`/../../fasg++ ..
 
-COMPILER=g++
+if [[ -z $FAS_CXX ]]; then
+  COMPILER=g++
+else
+  COMPILER=$FAS_CXX
+fi
+  
 
 SCRIPT_PATH=$(cd $(dirname $0) && pwd);
 

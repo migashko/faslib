@@ -136,7 +136,7 @@ struct ichain
 
 template< typename A = fas::aspect<> >
 class chain_base
-  : public fas::aspect_class< A, aspect_default_chain >
+  : public fas::aspect_class< typename fas::merge_aspect<A, aspect_default_chain>::type >
   , public ichain
 {
 protected:

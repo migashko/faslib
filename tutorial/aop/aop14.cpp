@@ -97,7 +97,7 @@ struct aspect_state: fas::aspect< fas::type_list_n<
 
 template<typename A = fas::empty_type >
 class test_state:
-  public fas::aspect_class<A, aspect_state>
+  public fas::aspect_class< typename fas::merge_aspect<A, aspect_state>::type >
 {
 public:
   void test(int value)

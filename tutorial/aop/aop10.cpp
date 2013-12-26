@@ -58,7 +58,7 @@ struct aspect_123s: fas::aspect< fas::type_list_n<
 
 template< typename A = fas::aspect<> >
 class dredd:
-  public fas::aspect_class<A, aspect_123s>
+  public fas::aspect_class< typename fas::merge_aspect<A, aspect_123s>::type >
 {
   // ...
 public:
@@ -84,7 +84,7 @@ struct aspect_ONE: fas::aspect< fas::advice< dredd::_one_, say_ONE> > {};
 
 template< typename A = fas::aspect<> >
 class jon:
-  public fas::aspect_class<A, aspect_ONE, dredd::aspect_123s >
+  public fas::aspect_class< typename fas::merge_aspect<A, aspect_ONE, dredd::aspect_123s>::type >
 {
   // ...
 public:
@@ -165,7 +165,7 @@ struct aspect_1234567: fas::aspect< fas::type_list_n<
 
 template< typename A = fas::aspect<> >
 class bob:
-  public fas::aspect_class<A, aspect_1234567 >
+  public fas::aspect_class< typename fas::merge_aspect<A, aspect_1234567>::type >
 {
   // ...
 public:
@@ -190,7 +190,7 @@ struct aspect_ONE234567:
 
 template< typename A = fas::aspect<> >
 class sam:
-  public fas::aspect_class<A, aspect_ONE234567>
+  public fas::aspect_class< typename fas::merge_aspect<A, aspect_ONE234567>::type >
 {
 public:
   void sam_say()

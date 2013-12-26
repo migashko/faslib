@@ -32,12 +32,12 @@ namespace fas{ namespace testing{
 
 template<typename A = ::fas::aspect<> >
 class suite
-  : public aspect_class< ::fas::aspect<>, A>
+  : public aspect_class< A>
 {
 
 public:
   typedef suite<A> self;
-  typedef aspect_class< ::fas::aspect<>, A> super;
+  typedef aspect_class< A> super;
 
   typedef typename super::aspect aspect;
   typedef typename aspect::template select_group<_units_>::type unit_tag_list;

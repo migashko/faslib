@@ -188,7 +188,7 @@ void test6()
     a< push_back< make_int< rand< type_at< dec< f< length< p<_1> > > >, p<_1> > > > , p<_1> > >
   > randsequence_generator;
 
-  typedef apply< randsequence_generator, pair< int_<0>, empty_list > >::type test1; 
+  //typedef apply< randsequence_generator, pair< int_<0>, empty_list > >::type test1; 
 
   typedef pair<
       inc< first<_1> >,

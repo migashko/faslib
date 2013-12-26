@@ -54,9 +54,9 @@ struct aspect1: aspect<advice_list1> {};
 
 template<typename A = aspect<> >
 class test
-  : public aspect_class<A, aspect1>
+  : public aspect_class< typename fas::merge_aspect<A, aspect1>::type >
 {
-  typedef aspect_class<A, aspect1> super;
+  typedef aspect_class< typename fas::merge_aspect<A, aspect1>::type > super;
 public:
   int method(int v)
   {
