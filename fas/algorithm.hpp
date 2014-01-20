@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2014
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -7,6 +7,7 @@
 #ifndef FAS_ALGORITHM_HPP
 #define FAS_ALGORITHM_HPP
 
+#include <fas/algorithm/accumulate.hpp>
 #include <fas/algorithm/any.hpp>
 #include <fas/algorithm/count.hpp>
 #include <fas/algorithm/count_if.hpp>

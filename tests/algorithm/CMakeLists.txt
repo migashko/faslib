@@ -1,3 +1,4 @@
+add_executable(test_accumulate      test_accumulate.cpp)
 add_executable(test_count           test_count.cpp)
 add_executable(test_index_of_if     test_index_of_if.cpp)
 add_executable(test_find_if         test_find_if.cpp)
@@ -15,6 +16,7 @@ add_executable(test_unique_if       test_unique_if.cpp)
 add_executable(test_unique_first_if test_unique_first_if.cpp)
 add_executable(test_select          test_select.cpp)
 
+add_test(algorithm_accumulate       test_accumulate)
 add_test(algorithm_count            test_count)
 add_test(algorithm_transform        test_transform)
 add_test(algorithm_transform2       test_transform2)
