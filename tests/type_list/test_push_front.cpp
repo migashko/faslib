@@ -20,7 +20,7 @@ int main()
 {
   enum
   {
-    test = static_check< some_type< check_list1, result_list>::value >::value
+    test = static_check< same_type< check_list1, result_list>::value >::value
   };
 
   return 0;

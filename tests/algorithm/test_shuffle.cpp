@@ -21,7 +21,7 @@ int main()
 {
   enum 
   {
-    test = static_check< some_type< reverse<list>::type, shuffled >::value  >::value
+    test = static_check< same_type< reverse<list>::type, shuffled >::value  >::value
   };
   return 0;
 }

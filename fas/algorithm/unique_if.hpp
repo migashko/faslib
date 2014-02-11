@@ -10,12 +10,12 @@
 #include <fas/algorithm/detail/unique_if.hpp>
 #include <fas/algorithm/algomacro.hpp>
 #include <fas/mp/placeholders.hpp>
-#include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/same_type.hpp>
 #include <fas/integral/less.hpp>
 
 namespace fas{
 
-template<typename L, typename F = some_type< _1,  _2 > >
+template<typename L, typename F = same_type< _1,  _2 > >
 struct unique_if
 {
   typedef typename detail::unique_if_impl_t< L, lambda_r< FAS_T_SIMPLIFY(F) , 2 >::template apply >::type type;

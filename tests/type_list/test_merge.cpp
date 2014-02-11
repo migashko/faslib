@@ -6,7 +6,7 @@
 
 #include <fas/type_list.hpp>
 #include <fas/static_check.hpp>
-#include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/same_type.hpp>
 
 #include <string>
 
@@ -21,13 +21,13 @@ typedef type_list<float, type_list<int, list_1 > > check_2;
 int main()
 {
   enum {
-    test = static_check< some_type<merge<list_1, list_2>::type, check_1>::value >::value
-         + static_check< some_type<merge<list_2, list_1>::type, check_2>::value >::value
-         + static_check< some_type<merge<empty_list, list_1>::type, list_1>::value >::value
-         + static_check< some_type<merge<list_1, empty_list>::type, list_1>::value >::value
-         + static_check< some_type<merge<empty_list, empty_list>::type, empty_list>::value >::value
-         + static_check< some_type<merge<empty_list, int>::type, type_list<int> >::value >::value
-         + static_check< some_type<merge<int, empty_list>::type, type_list<int> >::value >::value
+    test = static_check< same_type<merge<list_1, list_2>::type, check_1>::value >::value
+         + static_check< same_type<merge<list_2, list_1>::type, check_2>::value >::value
+         + static_check< same_type<merge<empty_list, list_1>::type, list_1>::value >::value
+         + static_check< same_type<merge<list_1, empty_list>::type, list_1>::value >::value
+         + static_check< same_type<merge<empty_list, empty_list>::type, empty_list>::value >::value
+         + static_check< same_type<merge<empty_list, int>::type, type_list<int> >::value >::value
+         + static_check< same_type<merge<int, empty_list>::type, type_list<int> >::value >::value
   };
   return 0;
 }

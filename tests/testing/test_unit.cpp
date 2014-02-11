@@ -20,28 +20,28 @@ int main()
   enum {
     result =
       static_check<
-        some_type<
+        same_type<
           foo_test_type_list::left_type::advice_class,
           foo_test_unit
         >::value
       >::value
       +
       static_check<
-        some_type<
+        same_type<
           foo_test_type_list::left_type::tag,
           foo_test
         >::value
       >::value
       +
       static_check<
-        some_type<
+        same_type<
           foo_test_type_list::right_type::left_type::tag,
           testing::_units_
         >::value
       >::value
       +
       static_check<
-        some_type<
+        same_type<
           foo_test_type_list::right_type::left_type::target,
           type_list<foo_test>
         >::value

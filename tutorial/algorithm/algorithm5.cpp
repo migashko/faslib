@@ -134,7 +134,7 @@ int main()
   // gcc-3.3 20min
   std::cout << brute_combinations<list>::iterations::value << std::endl;
   // gcc-4.6 allocated over 14GB!!!
-  std::cout << brute_combinations<list2>::type() << std::endl;
+  //! std::cout << brute_combinations<list2>::type() << std::endl;
   
   /*
   typedef fas::generate< fas::int_<50>, fas::generator< fas::int_<1>, fas::rand< fas::_> > >::type gen_list;

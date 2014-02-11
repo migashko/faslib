@@ -23,7 +23,7 @@ namespace test1
         a< second< p<_1> > >
       > list2func;
   typedef apply< list2func, list>::type list2;
-  enum { test = static_check< some_type< list2, list>::value == 1 >::value };
+  enum { test = static_check< same_type< list2, list>::value == 1 >::value };
 }
 
 namespace test2
@@ -47,7 +47,7 @@ namespace test2
 
 int main()
 {
-  enum { value = static_check< apply2< some_type<_,_>, int, int>::type::value >::value };
+  enum { value = static_check< apply2< same_type<_,_>, int, int>::type::value >::value };
   return 0;
 }
 

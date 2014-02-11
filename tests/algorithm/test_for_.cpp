@@ -104,7 +104,7 @@ void test3()
     test = static_check< lambda< cond >::apply< type_list<int> >::type::value == 1>::value
          + static_check< length< lambda< doit >::apply< type_list< int_<2> > >::type >::value == 2 >::value
          + static_check< length<result>::value - length<check_list>::value == 0 >::value
-         + static_check< some_type< type_at_c<0, result>::type, int_<2> >::value  >::value 
+         + static_check< same_type< type_at_c<0, result>::type, int_<2> >::value  >::value 
   };
   
 }
@@ -123,16 +123,16 @@ void test4()
   // 11837123 8949370 9722709 4858052 5065847 12997982 235177 12762824 13664875 11895682 760893
   enum {
     test = static_check< length< result >::value == 10>::value
-         + static_check< some_type< int_<11837123>, type_at_c<0, result>::type >::value >::value
-         + static_check< some_type< int_<8949370>,  type_at_c<1, result>::type >::value >::value
-         + static_check< some_type< int_<9722709>,  type_at_c<2, result>::type >::value >::value
-         + static_check< some_type< int_<4858052>,  type_at_c<3, result>::type >::value >::value
-         + static_check< some_type< int_<5065847>,  type_at_c<4, result>::type >::value >::value
-         + static_check< some_type< int_<12997982>, type_at_c<5, result>::type >::value >::value
-         + static_check< some_type< int_<235177>,   type_at_c<6, result>::type >::value >::value
-         + static_check< some_type< int_<12762824>, type_at_c<7, result>::type >::value >::value
-         + static_check< some_type< int_<13664875>, type_at_c<8, result>::type >::value >::value
-         + static_check< some_type< int_<11895682>, type_at_c<9, result>::type >::value >::value
+         + static_check< same_type< int_<11837123>, type_at_c<0, result>::type >::value >::value
+         + static_check< same_type< int_<8949370>,  type_at_c<1, result>::type >::value >::value
+         + static_check< same_type< int_<9722709>,  type_at_c<2, result>::type >::value >::value
+         + static_check< same_type< int_<4858052>,  type_at_c<3, result>::type >::value >::value
+         + static_check< same_type< int_<5065847>,  type_at_c<4, result>::type >::value >::value
+         + static_check< same_type< int_<12997982>, type_at_c<5, result>::type >::value >::value
+         + static_check< same_type< int_<235177>,   type_at_c<6, result>::type >::value >::value
+         + static_check< same_type< int_<12762824>, type_at_c<7, result>::type >::value >::value
+         + static_check< same_type< int_<13664875>, type_at_c<8, result>::type >::value >::value
+         + static_check< same_type< int_<11895682>, type_at_c<9, result>::type >::value >::value
   };
   
 }

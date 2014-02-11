@@ -21,21 +21,21 @@ int main()
 {
   typedef char array_type[10];
   enum {
-    test = static_check< some_type<A::value_type, int>::value >::value
+    test = static_check< same_type<A::value_type, int>::value >::value
            + static_check< A::value == 10 >::value
-           + static_check< some_type<B::value_type, bool>::value >::value
+           + static_check< same_type<B::value_type, bool>::value >::value
            + static_check< B::value == false >::value
-           + static_check< some_type<C::original_type, volatile const char *>::value >::value
-           + static_check< !some_type<C, const char *>::value >::value
-           + static_check< some_type< first<long_char>::type, long>::value >::value
-           + static_check< some_type< second<long_char>::type, char>::value >::value
-           + static_check< some_type< if_c<1, long, char>::type, long>::value >::value
-           + static_check< some_type< if_c<0, long, char>::type, char>::value >::value
-           + static_check< some_type< if_c< 1, long, char>::type, long>::value >::value
-           + static_check< some_type< if_c< 0, long, char>::type, char>::value >::value
-           + static_check< some_type< max_sizeof< int_<1>::value_type, char_<'x'>::value_type >::type, int >::value >::value
-           + static_check< some_type<  remove_cvrp<const int>::type, int >::value >::value
-           + static_check< some_type<  remove_cvrp<volatile int const * const&>::type, int >::value >::value
+           + static_check< same_type<C::original_type, volatile const char *>::value >::value
+           + static_check< !same_type<C, const char *>::value >::value
+           + static_check< same_type< first<long_char>::type, long>::value >::value
+           + static_check< same_type< second<long_char>::type, char>::value >::value
+           + static_check< same_type< if_c<1, long, char>::type, long>::value >::value
+           + static_check< same_type< if_c<0, long, char>::type, char>::value >::value
+           + static_check< same_type< if_c< 1, long, char>::type, long>::value >::value
+           + static_check< same_type< if_c< 0, long, char>::type, char>::value >::value
+           + static_check< same_type< max_sizeof< int_<1>::value_type, char_<'x'>::value_type >::type, int >::value >::value
+           + static_check< same_type<  remove_cvrp<const int>::type, int >::value >::value
+           + static_check< same_type<  remove_cvrp<volatile int const * const&>::type, int >::value >::value
            + static_check< is_const<const int>::value >::value
            + static_check< !is_const<int>::value >::value
            + static_check< is_pointer<const char*>::value >::value

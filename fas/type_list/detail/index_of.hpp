@@ -14,7 +14,7 @@
 #include <fas/type_list/type_list.hpp>
 #include <fas/type_list/empty_list.hpp>
 
-#include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/same_type.hpp>
 
 #include <fas/static_check/static_error.hpp>
 
@@ -97,7 +97,7 @@ struct index_of_impl2<T, type_list<L, R> >
     value = index_of_impl4< 
       T, 
       type_list<L, R>, 
-      some_type<T, L>::value 
+      same_type<T, L>::value 
     >::value 
   };
 };
@@ -117,7 +117,7 @@ struct index_of_impl3<metalist::type_list, T, L>
 {
   typedef index_of_impl4< 
     T, L, 
-    some_type<T, typename L::left_type>::value 
+    same_type<T, typename L::left_type>::value 
   > index_of_type;
   
   enum { value = index_of_type::value };

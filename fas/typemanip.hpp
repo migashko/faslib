@@ -38,7 +38,7 @@
 #include <fas/typemanip/remove_cvrp.hpp>
 #include <fas/typemanip/remove_reference.hpp>
 #include <fas/typemanip/second.hpp>
-#include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/same_type.hpp>
 #include <fas/typemanip/super_subclass.hpp>
 #include <fas/typemanip/super_subclass_strict.hpp>
 #include <fas/typemanip/switch_.hpp>

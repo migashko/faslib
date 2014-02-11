@@ -25,10 +25,10 @@ int main()
 
   enum 
   {
-    test = static_check< some_type< C, find_if< abc_list, super_subclass<_1, D> >::type >::value == 1 >::value
-         + static_check< some_type< D, find_if< abc_list, super_subclass<D, _1> >::type >::value == 1 >::value
-         + static_check< some_type< D, find_if< abc_list, super_subclass_strict<C, _1> >::type >::value == 1 >::value
-         + static_check< some_type< empty_type, find_if< abc_list, super_subclass_strict<_1, C> >::type >::value == 1 >::value
+    test = static_check< same_type< C, find_if< abc_list, super_subclass<_1, D> >::type >::value == 1 >::value
+         + static_check< same_type< D, find_if< abc_list, super_subclass<D, _1> >::type >::value == 1 >::value
+         + static_check< same_type< D, find_if< abc_list, super_subclass_strict<C, _1> >::type >::value == 1 >::value
+         + static_check< same_type< empty_type, find_if< abc_list, super_subclass_strict<_1, C> >::type >::value == 1 >::value
   };
 
   return 0;

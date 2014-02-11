@@ -35,39 +35,39 @@ typedef unique_first_if<list_3>::type result_list2;
 typedef unique_first_if<list_4>::type result_list3;
 
 template<typename L>
-struct some_type_class
+struct same_type_class
 {
   template<typename R>
   struct apply
   {
-    typedef typename some_type<L, R>::type type;
+    typedef typename same_type<L, R>::type type;
   };
   
-  typedef some_type_class<L> type;
+  typedef same_type_class<L> type;
 };
 
-struct some_type_metaclass
+struct same_type_metaclass
 {
   template<typename L, typename R>
   struct apply
   {
-    typedef typename f< some_type<L, R> >::type type;
+    typedef typename f< same_type<L, R> >::type type;
   };
 };
 
-typedef unique_first_if_t<list_4, lambda< some_type<_,_> >::apply >::type result_list3t;
-typedef unique_first_if<list_4, some_type_metaclass >::type result_list3tm;
-typedef unique_first_if<list_4, some_type<_1, _2 > >::type result_list3mp;
+typedef unique_first_if_t<list_4, lambda< same_type<_,_> >::apply >::type result_list3t;
+typedef unique_first_if<list_4, same_type_metaclass >::type result_list3tm;
+typedef unique_first_if<list_4, same_type<_1, _2 > >::type result_list3mp;
 
 int main()
 {
   enum {
-	  value = static_check< apply2< some_type<_,_>, int, int>::type::value >::value
+	  value = static_check< apply2< same_type<_,_>, int, int>::type::value >::value
 			+ static_check<
-    some_type<
-      some_type<int,char>,
+    same_type<
+      same_type<int,char>,
       bind<
-        some_type<_,_>,
+        same_type<_,_>,
         type_list_n<int, char>::type
       >::type
     >::value
@@ -77,15 +77,15 @@ int main()
   enum
   {
     test = static_check< length<result_list1>::value == 4 >::value
-         + static_check< some_type< type_at< int_<0>, result_list1>::type, char>::value >::value
-         + static_check< some_type< type_at< int_<0>, result_list3>::type, char>::value >::value
-         + static_check< some_type< type_at< int_<1>, result_list3>::type, int>::value >::value
-         + static_check< some_type< result_list1, check_list1>::value >::value
-         + static_check< some_type< result_list2, check_list2>::value >::value
-         + static_check< some_type< result_list3, check_list3>::value >::value
-         + static_check< some_type< result_list3t, check_list3>::value >::value
-         + static_check< some_type< result_list3tm, check_list3>::value >::value
-         + static_check< some_type< result_list3mp, check_list3>::value >::value
+         + static_check< same_type< type_at< int_<0>, result_list1>::type, char>::value >::value
+         + static_check< same_type< type_at< int_<0>, result_list3>::type, char>::value >::value
+         + static_check< same_type< type_at< int_<1>, result_list3>::type, int>::value >::value
+         + static_check< same_type< result_list1, check_list1>::value >::value
+         + static_check< same_type< result_list2, check_list2>::value >::value
+         + static_check< same_type< result_list3, check_list3>::value >::value
+         + static_check< same_type< result_list3t, check_list3>::value >::value
+         + static_check< same_type< result_list3tm, check_list3>::value >::value
+         + static_check< same_type< result_list3mp, check_list3>::value >::value
   };
   return 0;
 }

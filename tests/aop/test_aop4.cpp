@@ -209,7 +209,7 @@ int main()
   enum { value = test_class::aspect::advice_cast<_overlapped_>::type::value };
   enum { value2 =
         static_check<
-          some_type<
+          same_type<
             test_class::aspect::advice_cast<_overlapped2_>::type,
             group_object<_overlapped2_>
           >::value

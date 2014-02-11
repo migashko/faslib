@@ -64,11 +64,11 @@ int main()
   {
       value = static_check< length<result>::value == 10 >::value
               + static_check<
-                  some_type<
+                  same_type<
                     int_<55>,
                     find_if<
                       result,
-                      some_type< has_tag<_1>, int_<5> >
+                      same_type< has_tag<_1>, int_<5> >
                     >::type::advice_class
                   >::value
                 >::value

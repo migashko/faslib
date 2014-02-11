@@ -24,7 +24,7 @@ int main()
   enum
   {
     test =  static_check<
-              some_type<
+              same_type<
                 lambda< std::vector<_1> >::apply<int>::type,
                 std::vector<int>
               >::value == 1
@@ -40,19 +40,19 @@ int main()
             >::apply< int_<20>,  int_<10>, int_<3> >::type::value == 20
         >::value
 
-        + static_check< some_type< lambda<int>::apply<>::type, int >::value  >::value
+        + static_check< same_type< lambda<int>::apply<>::type, int >::value  >::value
   
-        + static_check< some_type< lambda< type2type<_1> >::apply< int >::type, type2type<int> >::value  >::value
+        + static_check< same_type< lambda< type2type<_1> >::apply< int >::type, type2type<int> >::value  >::value
   
-        + static_check< some_type< lambda< p<int> >::apply<>::type, int >::value  >::value
+        + static_check< same_type< lambda< p<int> >::apply<>::type, int >::value  >::value
 
-        + static_check< some_type< lambda< p< a< p<int> > > >::apply<>::type, p<int> >::value  >::value
+        + static_check< same_type< lambda< p< a< p<int> > > >::apply<>::type, p<int> >::value  >::value
 
-        + static_check< some_type< lambda< std::pair< _1, p<_1> > >::apply< int >::type, std::pair<int, _1> >::value  >::value
+        + static_check< same_type< lambda< std::pair< _1, p<_1> > >::apply< int >::type, std::pair<int, _1> >::value  >::value
   
-        + static_check< some_type< lambda< test_type<_1> >::apply< int >::type, std::vector<int> >::value  >::value
+        + static_check< same_type< lambda< test_type<_1> >::apply< int >::type, std::vector<int> >::value  >::value
   
-        + static_check< some_type< lambda< a< test_type<_1> > >::apply< int >::type, test_type<int> >::value  >::value
+        + static_check< same_type< lambda< a< test_type<_1> > >::apply< int >::type, test_type<int> >::value  >::value
   };
   
   return 0;

@@ -45,15 +45,15 @@ typedef type_list_n< int_<100>, int_<2>, int_<3>, int_<4> >::type check_9;
 int main()
 {
  enum {
-    test = static_check< some_type<organize<list_1>::type, check_1>::value >::value
-         + static_check< some_type<organize<list_2>::type, list_2>::value >::value
-         + static_check< some_type<organize<list_3>::type, check_3>::value >::value
-         + static_check< some_type<organize<list_5>::type, check_5>::value >::value
-         + static_check< some_type<organize<list_6>::type, check_6>::value >::value
-         + static_check< some_type<organize<list_6_1>::type, check_6>::value >::value
-         + static_check< some_type<organize<list_7>::type, check_7>::value >::value
-         + static_check< some_type<organize<list_8>::type, check_8>::value >::value
-         + static_check< some_type<organize<list_9>::type, check_9>::value >::value
+    test = static_check< same_type<organize<list_1>::type, check_1>::value >::value
+         + static_check< same_type<organize<list_2>::type, list_2>::value >::value
+         + static_check< same_type<organize<list_3>::type, check_3>::value >::value
+         + static_check< same_type<organize<list_5>::type, check_5>::value >::value
+         + static_check< same_type<organize<list_6>::type, check_6>::value >::value
+         + static_check< same_type<organize<list_6_1>::type, check_6>::value >::value
+         + static_check< same_type<organize<list_7>::type, check_7>::value >::value
+         + static_check< same_type<organize<list_8>::type, check_8>::value >::value
+         + static_check< same_type<organize<list_9>::type, check_9>::value >::value
   };
   return 0;
 }

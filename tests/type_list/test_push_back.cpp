@@ -22,11 +22,11 @@ int main()
   enum 
   {
     test = static_check< length< result_list>::value == 4 >::value
-         + static_check< some_type< type_at< int_<0>, result_list>::type, float>::value >::value
-         + static_check< some_type< type_at< int_<1>, result_list>::type, int>::value >::value
-         + static_check< some_type< type_at< int_<2>, result_list>::type, char>::value >::value
-         + static_check< some_type< type_at< int_<3>, result_list>::type, long>::value >::value
-         + static_check< some_type< check_list1, result_list>::value >::value
+         + static_check< same_type< type_at< int_<0>, result_list>::type, float>::value >::value
+         + static_check< same_type< type_at< int_<1>, result_list>::type, int>::value >::value
+         + static_check< same_type< type_at< int_<2>, result_list>::type, char>::value >::value
+         + static_check< same_type< type_at< int_<3>, result_list>::type, long>::value >::value
+         + static_check< same_type< check_list1, result_list>::value >::value
   };
   
   return 0;

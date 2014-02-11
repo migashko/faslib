@@ -32,31 +32,31 @@ struct test5{};
 int main()
 {
   enum {
-   test0 = static_check< some_type< int, bind<int>::type >::value == 1 >::value
-         + static_check< some_type< int, bind<_1, type_list_n<int>::type >::type >::value == 1 >::value
-         + static_check< some_type< int, bind<_1, int >::type >::value == 1 >::value
-         + static_check< some_type< std::vector<int>, bind<std::vector<_1>, int >::type >::value == 1 >::value
-         + static_check< some_type< std::pair< int, char >, bind< std::pair<int, _2>, type_list_n<int, char>::type >::type >::value == 1 >::value
+   test0 = static_check< same_type< int, bind<int>::type >::value == 1 >::value
+         + static_check< same_type< int, bind<_1, type_list_n<int>::type >::type >::value == 1 >::value
+         + static_check< same_type< int, bind<_1, int >::type >::value == 1 >::value
+         + static_check< same_type< std::vector<int>, bind<std::vector<_1>, int >::type >::value == 1 >::value
+         + static_check< same_type< std::pair< int, char >, bind< std::pair<int, _2>, type_list_n<int, char>::type >::type >::value == 1 >::value
          
          + static_check< 
-              some_type< 
+              same_type< 
                 test2< int, char >, 
                 bind< test2<_, _2>, type_list_n<int, char>::type >::type 
               >::value == 1
           >::value
 
          + static_check< 
-              some_type< 
+              same_type< 
                 test2< char, int >, 
                 bind< test2<_2, _>, type_list_n<int, char, float>::type >::type 
               >::value == 1
           >::value
          
          +  static_check<
-              some_type<
-                some_type<int,char>,
+              same_type<
+                same_type<int,char>,
                 bind<
-                  some_type<_,_>,
+                  same_type<_,_>,
                   type_list_n<int, char>::type
                 >::type
               >::value

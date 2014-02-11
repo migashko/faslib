@@ -15,7 +15,7 @@ using namespace ::fas;
 int main()
 {
   enum  { value = static_check< 
-                    some_type<
+                    same_type<
                       simplify< 
                         make_bool< less<int_<1>, int_<2> > > 
                       >::type,
@@ -24,7 +24,7 @@ int main()
                   >::value  
                   +
                   static_check< 
-                    some_type<
+                    same_type<
                       simplify< 
                         make_bool< less<int_<1>, int_<1> > > 
                       >::type,
@@ -33,7 +33,7 @@ int main()
                   >::value  
                   +
                   static_check< 
-                    some_type<
+                    same_type<
                       simplify< 
                         make_bool< 
                           less<
@@ -47,7 +47,7 @@ int main()
                   >::value  
                   +
                   static_check< 
-                    some_type<
+                    same_type<
                       simplify< 
                         make_bool< 
                           less<

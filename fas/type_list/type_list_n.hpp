@@ -32,7 +32,8 @@ namespace detail
   {
     typedef empty_list type;
   };
-}
+  
+} //  namespace detail
 
 template<typename ...Args>
 struct type_list_n_nocheck
@@ -51,6 +52,28 @@ struct type_list_n
 
 
 #else
+
+template<typename T>
+struct ignore_empty;
+
+template<typename L, typename R>
+struct ignore_empty< type_list<L, R> >
+{
+  typedef type_list<L, typename ignore_empty<R>::type > type;
+};
+
+template<typename R>
+struct ignore_empty< type_list< empty_list, R> >
+{
+  typedef typename ignore_empty<R>::type type;
+};
+
+template<>
+struct ignore_empty<empty_list>
+{
+  typedef empty_list type;
+};
+
 
 template< typename T1 = empty_list,  typename T2 = empty_list,  typename T3 = empty_list,  
           typename T4 = empty_list,  typename T5 = empty_list,  typename T6 = empty_list,
@@ -80,7 +103,9 @@ struct type_list_n_nocheck
                   > > > > > >
           > > > >
       > >
-  type;
+  bar;
+  
+  typedef typename ignore_empty<bar>::type type;
 
 };
 
@@ -99,21 +124,16 @@ struct type_list_n
 {
 
   typedef typename type_list_n_nocheck<
-       T1,   T2,   T3,   T4,
-       T5,   T6,   T7,   T8,
-       T9,   T10,  T11,  T12,
-       T13,  T14,  T15,  T16,
-       T17,  T18,  T19,  T20,
-       T21,  T22,  T23,  T24,
-       T25,  T26
-      > >
-          > > > >
-                  > > > > > >
-            > >
-                  > > > > > >
-          > > > >
-      > >
-  >::type type;
+    T1,   T2,   T3,   T4,
+    T5,   T6,   T7,   T8,
+    T9,   T10,  T11,  T12,
+    T13,  T14,  T15,  T16,
+    T17,  T18,  T19,  T20,
+    T21,  T22,  T23,  T24,
+    T25,  T26
+  >::type bar;
+  
+  typedef typename organize<bar>::type type;
 
 };
 

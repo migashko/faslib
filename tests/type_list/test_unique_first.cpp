@@ -27,12 +27,12 @@ typedef unique_first<list_4>::type result_list3;
 int main()
 {
   enum {
-    test = static_check< some_type< type_at< int_<0>, result_list1>::type, char>::value >::value
-         + static_check< some_type< type_at< int_<0>, result_list3>::type, char>::value >::value
-         + static_check< some_type< type_at< int_<1>, result_list3>::type, int>::value >::value
-         + static_check< some_type< result_list1, check_list1>::value >::value
-         + static_check< some_type< result_list2, check_list2>::value >::value
-         + static_check< some_type< result_list3, check_list3>::value >::value
+    test = static_check< same_type< type_at< int_<0>, result_list1>::type, char>::value >::value
+         + static_check< same_type< type_at< int_<0>, result_list3>::type, char>::value >::value
+         + static_check< same_type< type_at< int_<1>, result_list3>::type, int>::value >::value
+         + static_check< same_type< result_list1, check_list1>::value >::value
+         + static_check< same_type< result_list2, check_list2>::value >::value
+         + static_check< same_type< result_list3, check_list3>::value >::value
   };
   return 0;
 }

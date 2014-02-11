@@ -49,17 +49,17 @@ int main()
 
    enum {
     test2 = static_check< length< organize<list>::type >::value == 10>::value
-         //+ static_check< some_type< int_<11837123>,  type_at_c<0, list1>::type >::value >::value
-         + static_check< some_type< int_<8949370>,  type_at_c<1, list1>::type >::value >::value
-         + static_check< some_type< int_<9722709>,  type_at_c<2, list1>::type >::value >::value
-         + static_check< some_type< int_<4858052>,  type_at_c<3, list1>::type >::value >::value
-         + static_check< some_type< int_<5065847>,  type_at_c<4, list1>::type >::value >::value
-         + static_check< some_type< int_<12997982>, type_at_c<5, list1>::type >::value >::value
-         + static_check< some_type< int_<235177>,   type_at_c<6, list1>::type >::value >::value
-         + static_check< some_type< int_<12762824>, type_at_c<7, list1>::type >::value >::value
-         + static_check< some_type< int_<13664875>, type_at_c<8, list1>::type >::value >::value
-         + static_check< some_type< int_<11895682>, type_at_c<9, list1>::type >::value >::value
-         // + static_check< some_type< int_<760893>,   type_at_c<10, list1>::type >::value >::value
+         //+ static_check< same_type< int_<11837123>,  type_at_c<0, list1>::type >::value >::value
+         + static_check< same_type< int_<8949370>,  type_at_c<1, list1>::type >::value >::value
+         + static_check< same_type< int_<9722709>,  type_at_c<2, list1>::type >::value >::value
+         + static_check< same_type< int_<4858052>,  type_at_c<3, list1>::type >::value >::value
+         + static_check< same_type< int_<5065847>,  type_at_c<4, list1>::type >::value >::value
+         + static_check< same_type< int_<12997982>, type_at_c<5, list1>::type >::value >::value
+         + static_check< same_type< int_<235177>,   type_at_c<6, list1>::type >::value >::value
+         + static_check< same_type< int_<12762824>, type_at_c<7, list1>::type >::value >::value
+         + static_check< same_type< int_<13664875>, type_at_c<8, list1>::type >::value >::value
+         + static_check< same_type< int_<11895682>, type_at_c<9, list1>::type >::value >::value
+         // + static_check< same_type< int_<760893>,   type_at_c<10, list1>::type >::value >::value
   };
 
   return 0;

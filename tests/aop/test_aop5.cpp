@@ -39,14 +39,14 @@ int main()
 enum
   {
       value = static_check<
-                  some_type<
+                  same_type<
                     int_<1>,
                     find_advice<_tag1_, advice_list>::type::advice_class
                   >::value
                 >::value
               +
               static_check<
-                  some_type<
+                  same_type<
                     int_<2>,
                     find_advice<_tag4_, advice_list>::type::advice_class
                   >::value

@@ -25,8 +25,8 @@ typedef select_t< list_2, lambda< less_equal< _1, int_<4> > >::apply >::type res
 int main()
 {
   enum {
-    test = static_check< some_type< result_list1, check_list1>::value >::value
-         + static_check< some_type< result_list1t, check_list1>::value >::value
+    test = static_check< same_type< result_list1, check_list1>::value >::value
+         + static_check< same_type< result_list1t, check_list1>::value >::value
   };
   return 0;
 }

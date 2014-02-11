@@ -44,7 +44,7 @@ int main()
 {
   enum 
   {
-    result = static_check< some_type< check, shuffled >::value  >::value
+    result = static_check< same_type< check, shuffled >::value  >::value
   };
   return 0;
 }

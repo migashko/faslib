@@ -7,7 +7,7 @@
 #ifndef FAS_TYPEMANIP_DETAIL_IS_HAS_TYPENAME_HPP
 #define FAS_TYPEMANIP_DETAIL_IS_HAS_TYPENAME_HPP
 
-#include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/same_type.hpp>
 
 namespace fas{ namespace detail{
 
@@ -26,7 +26,7 @@ struct is_has_typename_impl
 
 template<typename T, typename D, typename DT, int>
 struct is_has_typename_impl1
-  : is_has_typename_impl2< T, some_type< D, DT >::value >
+  : is_has_typename_impl2< T, same_type< D, DT >::value >
 {
 };
 

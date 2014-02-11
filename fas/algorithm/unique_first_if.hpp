@@ -13,7 +13,7 @@
 #include <fas/mp/placeholders.hpp>
 #include <fas/mp/lambda.hpp>
 
-#include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/same_type.hpp>
 #include <fas/integral/less.hpp>
 
 namespace fas{
@@ -24,7 +24,7 @@ struct unique_first_if_t
   typedef typename detail::unique_first_if_impl_t< L, F >::type type;
 };
 
-template<typename L, typename F = some_type<_1, _2> >
+template<typename L, typename F = same_type<_1, _2> >
 struct unique_first_if
 {
   typedef typename detail::unique_first_if_impl_t< L, lambda_r< FAS_T_SIMPLIFY(F) , 2 >::template apply >::type type;

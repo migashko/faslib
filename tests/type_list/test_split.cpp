@@ -31,14 +31,14 @@ int main()
 {
   
   enum {
-    test = static_check< some_type< split< int_<0>, list_2>::left_list, check_0_left>::value >::value
-         + static_check< some_type< split< int_<0>, list_2>::right_list, check_0_right>::value >::value
-         + static_check< some_type< split< int_<1>, list_2>::left_list, check_1_left>::value >::value
-         + static_check< some_type< split< int_<1>, list_2>::right_list, check_1_right>::value >::value
-         + static_check< some_type< split< int_<2>, list_2>::left_list, check_2_left>::value >::value
-         + static_check< some_type< split< int_<2>, list_2>::right_list, check_2_right>::value >::value
-         + static_check< some_type< split< int_<4>, list_2>::left_list, check_4_left>::value >::value
-         + static_check< some_type< split< int_<4>, list_2>::right_list, check_4_right>::value >::value
+    test = static_check< same_type< split< int_<0>, list_2>::left_list, check_0_left>::value >::value
+         + static_check< same_type< split< int_<0>, list_2>::right_list, check_0_right>::value >::value
+         + static_check< same_type< split< int_<1>, list_2>::left_list, check_1_left>::value >::value
+         + static_check< same_type< split< int_<1>, list_2>::right_list, check_1_right>::value >::value
+         + static_check< same_type< split< int_<2>, list_2>::left_list, check_2_left>::value >::value
+         + static_check< same_type< split< int_<2>, list_2>::right_list, check_2_right>::value >::value
+         + static_check< same_type< split< int_<4>, list_2>::left_list, check_4_left>::value >::value
+         + static_check< same_type< split< int_<4>, list_2>::right_list, check_4_right>::value >::value
          // -DFASLIB_TYPE_LIST_CHECK for human readable error
          // + static_check< some_type< split< int_<-1>, list_2>::left_list, check_4_left>::value >::value
          // + static_check< some_type< split< int_<60>, list_2>::right_list, check_4_right>::value >::value

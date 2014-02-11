@@ -55,9 +55,9 @@ int main()
   enum {
     test1 = static_check< !has_test_type<A>::value >::value,
     test2 = static_check< has_test_type<B>::value >::value,
-    test1_some_type = static_check< some_type< bool, bool >::value >::value,
-    test2_some_type = static_check< !some_type< int*, float*>::value >::value,
-    test3_some_type = static_check< !some_type< int, const int>::value >::value,
+    test1_some_type = static_check< same_type< bool, bool >::value >::value,
+    test2_some_type = static_check< !same_type< int*, float*>::value >::value,
+    test3_some_type = static_check< !same_type< int, const int>::value >::value,
     test1_conv_type = static_check< conversion< int, long >::value >::value,
     test2_conv_type = static_check< !conversion< int*, char*>::value >::value,
     test3_conv_type = static_check< conversion< int*, const int* >::value >::value,
@@ -65,8 +65,8 @@ int main()
     test5_conv_type = static_check< conversion< int*, volatile int* >::value >::value,
     test6_conv_type = static_check< !conversion< volatile int*, int* >::value >::value,
 
-    test1_abc_type = static_check< some_type< A, A >::value >::value,
-    test2_abc_type = static_check< some_type< D, D >::value >::value,
+    test1_abc_type = static_check< same_type< A, A >::value >::value,
+    test2_abc_type = static_check< same_type< D, D >::value >::value,
     test3_abc_type = static_check< conversion< B, A >::value >::value,
     test4_abc_type = static_check< !conversion< A, B >::value >::value,
     test5_abc_type = static_check< conversion< B*, A* >::value >::value,

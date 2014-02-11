@@ -37,7 +37,7 @@ void test1()
   field< apply< type2type<_1>, char>::type >::get(h) = type2type<char>();
   field< C >::get(h) = C();
   field< B >::get(h) = B();
-  field_if< some_type<B, _1> >::get(h) = B();
+  field_if< same_type<B, _1> >::get(h) = B();
   field_if< super_subclass< A, _1 > >::get(h) = C();
   field_if< super_subclass< B, _1 > >::get(h) = C();
 }

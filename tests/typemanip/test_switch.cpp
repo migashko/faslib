@@ -45,11 +45,11 @@ int main()
   >::type result5;
 
   enum {
-    result = static_check< some_type<result1, std::string>::value >::value
-             + static_check< some_type<result2, empty_type>::value >::value
-             + static_check< some_type<result3, empty_type>::value >::value
-             + static_check< some_type<result4, char>::value >::value
-             + static_check< some_type<result5, int>::value >::value
+    result = static_check< same_type<result1, std::string>::value >::value
+           + static_check< same_type<result2, empty_type>::value >::value
+           + static_check< same_type<result3, empty_type>::value >::value
+           + static_check< same_type<result4, char>::value >::value
+           + static_check< same_type<result5, int>::value >::value
   };
   return 0;
 }

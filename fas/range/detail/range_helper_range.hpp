@@ -10,7 +10,7 @@
 #include <fas/range/typerange_flag.hpp>
 #include <fas/range/range_category.hpp>
 #include <fas/static_check/static_check.hpp>
-#include <fas/typemanip/some_type.hpp>
+#include <fas/typemanip/same_type.hpp>
 
 namespace fas{
 
@@ -49,8 +49,8 @@ struct range_helper<R, typerange_flag::range >
   {
     enum
     {
-      is_output_range = some_type< output_range_tag, typename RR::range_category_tag >::value,
-      is_intput_range = some_type< input_range_tag, typename RR::range_category_tag >::value,
+      is_output_range = same_type< output_range_tag, typename RR::range_category_tag >::value,
+      is_intput_range = same_type< input_range_tag, typename RR::range_category_tag >::value,
       not_input_or_output_range = static_check< !(is_output_range || is_intput_range ) >::value
     };
 

@@ -33,7 +33,7 @@ int main()
 {
   typedef transform<list1, type2type<_1> >::type result_type;
  
-  enum { result = static_check< some_type<result_type, list2>::value>::value
+  enum { result = static_check< same_type<result_type, list2>::value>::value
   };
   
   

@@ -21,10 +21,10 @@ int main()
 {
   
   enum {
-    test = static_check< some_type<A, type_at< int_<0>, abc_list>::type >::value >::value
-         + static_check< some_type<B, type_at< int_<1>, abc_list>::type >::value >::value
-         + static_check< some_type<C, type_at< int_<2>, abc_list>::type >::value >::value
-         + static_check< some_type<D, type_at< int_<3>, abc_list>::type >::value >::value
+    test = static_check< same_type<A, type_at< int_<0>, abc_list>::type >::value >::value
+         + static_check< same_type<B, type_at< int_<1>, abc_list>::type >::value >::value
+         + static_check< same_type<C, type_at< int_<2>, abc_list>::type >::value >::value
+         + static_check< same_type<D, type_at< int_<3>, abc_list>::type >::value >::value
          // -DFASLIB_TYPE_LIST_CHECK for human readable error
          // + static_check< some_type<D, type_at< int_<5>, abc_list >::type >::value >::value
          // + static_check< some_type<D, type_at< int_<-1>, abc_list >::type >::value >::value

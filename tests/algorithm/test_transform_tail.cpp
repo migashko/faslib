@@ -72,10 +72,10 @@ int main()
 
   enum
   {
-    test = fas::static_check< fas::some_type< result_list, check_list >::value >::value
-         + fas::static_check< fas::some_type< list1, nothing_list >::value >::value
-         + fas::static_check< fas::some_type< check_list2, nothing_list2 >::value >::value
-         + fas::static_check< fas::some_type< even_list, check_list3 >::value >::value
+    test = fas::static_check< fas::same_type< result_list, check_list >::value >::value
+         + fas::static_check< fas::same_type< list1, nothing_list >::value >::value
+         + fas::static_check< fas::same_type< check_list2, nothing_list2 >::value >::value
+         + fas::static_check< fas::same_type< even_list, check_list3 >::value >::value
          
   };
   

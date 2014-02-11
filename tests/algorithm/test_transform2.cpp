@@ -47,9 +47,9 @@ typedef transform2< list1, list4, pair<_1, _2> >::type result14;
 int main()
 {
   enum {
-    result = static_check< some_type< check12, result12 >::value >::value
-            + static_check< some_type< check13, result13 >::value >::value
-            + static_check< some_type< check14, result14 >::value >::value
+    result = static_check< same_type< check12, result12 >::value >::value
+            + static_check< same_type< check13, result13 >::value >::value
+            + static_check< same_type< check14, result14 >::value >::value
   };
   return 0;
 }
