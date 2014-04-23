@@ -11,13 +11,15 @@ namespace fas{ namespace testing{
 
 struct unit_status
 {
-  typedef enum {
+  enum type_tag{
     noerror,
     trace,
     error,
     fail,
     fatal
-  } type;
+  };
+  
+  typedef type_tag type;
 };
 
 }}
