@@ -10,19 +10,20 @@
 #include <fas/algorithm/detail/accumulate.hpp>
 #include <fas/algorithm/algomacro.hpp>
 #include <fas/mp/lambda.hpp>
+#include <fas/integral.hpp>
 
 namespace fas{ 
 
-template<typename L, template<typename,typename> class F, typename Init>
+template<typename L, typename Init, template<typename,typename> class F = plus >
 struct accumulate_t
 {
   typedef typename detail::accumulate_impl_t<L, F, Init>::type type;
 };
 
-template<typename L1, typename F, typename Init  >
+template<typename L, typename Init, typename F = plus<_,_>  >
 struct accumulate
 {
-  typedef typename accumulate_t<L1, lambda<FAS_T_SIMPLIFY(F)>::template apply, Init >::type type;
+  typedef typename accumulate_t<L, Init, lambda<FAS_T_SIMPLIFY(F)>::template apply >::type type;
 };
 
 }

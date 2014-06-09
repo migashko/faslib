@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2012,  2014
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -13,20 +13,20 @@
 
 namespace fas{
 
-template<typename L, typename F, typename IF >
+template<typename L, typename F, typename C >
 struct transform_if
 {
   typedef typename detail::transform_if_impl_t<
     L, 
     lambda<FAS_T_SIMPLIFY(F)>::template apply,
-    lambda<FAS_T_SIMPLIFY(IF)>::template apply 
+    lambda<FAS_T_SIMPLIFY(C)>::template apply 
   >::type type;
 };
 
-template<typename L, template<typename> class F, template<typename> class IF >
+template<typename L, template<typename> class F, template<typename> class C >
 struct transform_if_t
 {
-  typedef typename detail::transform_if_impl_t<L, F, IF >::type type;
+  typedef typename detail::transform_if_impl_t<L, F, C >::type type;
 };
 
 

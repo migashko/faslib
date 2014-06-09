@@ -44,7 +44,7 @@ constexpr double pi =
                     O,O,O,O,O,O,O,O,O,O,
                         O,O,O,O,O,O
                         
-    >::type, fas::plus, fas::int_<0> >::type::value ) 
+    >::type, fas::int_<0> >::type::value, fas::plus ) 
     
                                     //
                                    //
@@ -72,7 +72,7 @@ constexpr double pi =
                       O,O,O,O,O,O,O,O,
                       O,O,O,O,O,O,O,O
                       
-    >::type, fas::plus, fas::int_<0> >::type::value );
+    >::type, fas::int_<0> >::type::value, fas::plus );
 
 
 #endif
@@ -83,9 +83,9 @@ int main()
     
   enum 
   {
-    value = static_check< accumulate<list0, fas::plus<_1, _2>, fas::int_<21> >::type::value == 21 >::value
-          + static_check< accumulate<list1, fas::plus<_1, _2>, fas::int_<1> >::type::value == 2 >::value
-          + static_check< accumulate<list2, fas::plus<_1, _2>, fas::int_<0> >::type::value == 3 >::value
+    value = static_check< accumulate<list0, fas::int_<21>, fas::plus<_1, _2> >::type::value == 21 >::value
+          + static_check< accumulate<list1, fas::int_<1>,  fas::plus<_1, _2> >::type::value == 2 >::value
+          + static_check< accumulate<list2, fas::int_<0>,  fas::plus<_1, _2> >::type::value == 3 >::value
           #if __cplusplus >= 201103L
           // pi == 3.16667F
           + static_check< (pi > 3.16666F) && pi < (3.16668F) >::value

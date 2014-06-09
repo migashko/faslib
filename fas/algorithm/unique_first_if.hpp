@@ -18,7 +18,7 @@
 
 namespace fas{
 
-template<typename L, template<typename, typename> class F >
+template<typename L, template<typename, typename> class F = same_type >
 struct unique_first_if_t
 {
   typedef typename detail::unique_first_if_impl_t< L, F >::type type;

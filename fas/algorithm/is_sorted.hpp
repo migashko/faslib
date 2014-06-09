@@ -16,7 +16,7 @@
 
 namespace fas{
 
-template<typename L, typename F = less<_1, _2> >
+template<typename L, typename F = less<_,_> >
 struct is_sorted
 {
   enum { value = detail::is_sorted_impl_t<L, lambda<FAS_T_SIMPLIFY(F)>::template apply >::value  };
