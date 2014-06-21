@@ -17,6 +17,12 @@ struct test_type
   typedef std::vector<T> type;
 };
 
+template< template<typename, typename> class F>
+struct test12 
+{
+  typedef typename F< fas::int_<1>, fas::int_<2> >::type type;
+};
+
 int main()
 {
   using namespace ::fas;
@@ -54,6 +60,16 @@ int main()
   
         + static_check< same_type< lambda< a< test_type<_1> > >::apply< int >::type, test_type<int> >::value  >::value
   };
+  
+  typedef type_list_n< _1, _, _2, _>::type exp1;
+  typedef fas::type_list_n< int_<1>, int_<1>, int_<2>, int_<2> >::type chk1;
+  typedef test12< lambda<exp1>::apply >::type res1;
+ 
+  enum
+  {
+    test1 = static_check< same_type< res1, chk1 >::value  >::value
+  };
+  
   
   return 0;
 }

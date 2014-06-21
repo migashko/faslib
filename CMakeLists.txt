@@ -4,6 +4,12 @@ project(faslib CXX)
 
 add_subdirectory(config)
 
+if (FAS_BUILD_ALL)
+  add_subdirectory(tests)
+  add_subdirectory(examples)
+  add_subdirectory(tutorial)
+endif(FAS_BUILD_ALL)
+
 # Enable compile-time check type_list and generate human readable error (increases compile time)
 #add_definitions(-DFASLIB_TYPE_LIST_CHECK)
 
@@ -18,7 +24,6 @@ add_subdirectory(config)
 
 # Disable warnings for non-optimal code
 add_definitions(-DFAS_DISABLE_WARNINGS)
-
 
 include_directories(./)
 
