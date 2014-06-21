@@ -11,7 +11,6 @@
 #include <fas/static_check.hpp>
 #include <fas/mp.hpp>
 
-#include <iostream>
 using namespace ::fas;
 
 struct list0: empty_list {};
@@ -44,7 +43,7 @@ constexpr double pi =
                     O,O,O,O,O,O,O,O,O,O,
                         O,O,O,O,O,O
                         
-    >::type, fas::int_<0> >::type::value, fas::plus ) 
+    >::type, fas::int_<0>, fas::plus >::type::value ) 
     
                                     //
                                    //
@@ -72,15 +71,18 @@ constexpr double pi =
                       O,O,O,O,O,O,O,O,
                       O,O,O,O,O,O,O,O
                       
-    >::type, fas::int_<0> >::type::value, fas::plus );
+    >::type, fas::int_<0>, fas::plus >::type::value );
 
 
 #endif
 
+struct A; struct B; struct C;
+typedef fas::type_list_n< A, B, C >::type list4;
+typedef fas::accumulate<list4, empty_list, push_front<_1, _2> >::type res4;
+typedef fas::reverse<list4>::type chk4;
+
 int main()
 {
- 
-    
   enum 
   {
     value = static_check< accumulate<list0, fas::int_<21>, fas::plus<_1, _2> >::type::value == 21 >::value
@@ -90,6 +92,7 @@ int main()
           // pi == 3.16667F
           + static_check< (pi > 3.16666F) && pi < (3.16668F) >::value
           #endif
+          + static_check< same_type<res4, chk4>::value >::value
   };
   
   return 0;

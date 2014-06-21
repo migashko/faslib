@@ -65,8 +65,8 @@ template< typename L, typename R, template<typename,typename> class F, typename 
 struct accumulate_impl1_t< type_list<L, R>, F, Init >
 {
   typedef typename F<
-    L,
-    typename accumulate_impl1_t<  R, F, Init>::type
+    typename accumulate_impl1_t<  R, F, Init>::type, 
+    L
   >::type type;
 };
 
@@ -80,8 +80,8 @@ struct accumulate_impl2_t<metalist::type_list, L1, F, Init>
   typedef typename L1::right_type tail1;
   
   typedef typename F<
-    head1,
-    typename accumulate_impl1_t<  tail1, F, Init>::type
+    typename accumulate_impl1_t<  tail1, F, Init>::type, 
+    head1
   >::type type;
 };
 

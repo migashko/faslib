@@ -16,24 +16,52 @@
 using namespace ::fas;
 
 typedef type_list_n<
-	char, 
-	int,
-	long,
-	double
->::type list1;
+  char, 
+  int,
+  long,
+  double
+>::type lst1;
 
 typedef type_list_n<
   type2type<char>,
   type2type<int>,
   type2type<long>,
   type2type<double>
->::type list2;
+>::type chk1;
+
+typedef type_list_n<
+  fas::int_<1>, 
+  fas::int_<2>,
+  fas::int_<3>,
+  fas::int_<4>
+>::type lst2;
+
+typedef type_list_n<
+  fas::int_<2>, 
+  fas::int_<4>,
+  fas::int_<6>,
+  fas::int_<8>
+>::type chk2;
+
+typedef type_list_n<
+  fas::integral_c<int, 2>, 
+  fas::integral_c<int, 3>,
+  fas::integral_c<int, 4>,
+  fas::integral_c<int, 5>
+>::type chk3;
 
 int main()
 {
-  typedef transform<list1, type2type<_1> >::type result_type;
- 
-  enum { result = static_check< same_type<result_type, list2>::value>::value
+  typedef transform<lst1, type2type<_1> >::type res1;
+  typedef transform<lst2, make_int< times<_1, int_<2> > > >::type res2;
+  typedef transform_t<lst2, inc >::type res3;
+  typedef transform<lst2, inc<_> >::type res4;
+
+  enum { 
+    result = static_check< same_type<res1, chk1>::value>::value
+           + static_check< same_type<res2, chk2>::value>::value
+           + static_check< same_type<res3, chk3>::value>::value
+           + static_check< same_type<res4, chk3>::value>::value
   };
   
   

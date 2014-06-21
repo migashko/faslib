@@ -29,7 +29,7 @@ enable_testing()
 
 include_directories(..)
 
-set(FAS_TESTING_CPP "${CMAKE_SOURCE_DIR}/../fas/testing/testing.cpp")
+set(FAS_TESTING_CPP "${CMAKE_CURRENT_SOURCE_DIR}/../fas/testing/testing.cpp")
 
 add_subdirectory(static_check)
 add_subdirectory(integral)
