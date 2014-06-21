@@ -33,7 +33,6 @@ struct type_at_impl
       ( (I>=0) && (I < length<L>::value) )
     >::type
   , type_at_impl1< I, L >
-
 {
 };
 

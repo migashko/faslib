@@ -27,7 +27,8 @@ int main()
          + static_check< same_type<merge<list_1, empty_list>::type, list_1>::value >::value
          + static_check< same_type<merge<empty_list, empty_list>::type, empty_list>::value >::value
          + static_check< same_type<merge<empty_list, int>::type, type_list<int> >::value >::value
-         + static_check< same_type<merge<int, empty_list>::type, type_list<int> >::value >::value
+         + static_check< same_type<merge<int, type_list<long> >::type, type_list<int, type_list<long> > >::value >::value
+         //+ static_check< same_type<merge<int, int>::type, type_list<int, type_list<int> > >::value >::value
   };
   return 0;
 }
