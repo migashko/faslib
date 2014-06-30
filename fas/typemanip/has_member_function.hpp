@@ -12,7 +12,7 @@ namespace N##_detail{\
 template < typename T, R (T::*)() > struct op_mf {}; \
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(op_mf<P, &P::D>*);\
   template<typename P>\
@@ -31,7 +31,7 @@ namespace N##_detail{\
 template < typename T, R (T::*)(P1) > struct op_mf {}; \
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(op_mf<P, &P::D>*);\
   template<typename P>\
@@ -50,7 +50,7 @@ namespace N##_detail{\
 template < typename T, R (T::*)(P1, P2) > struct op_mf {}; \
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(op_mf<P, &P::D>*);\
   template<typename P>\
@@ -69,7 +69,7 @@ namespace N##_detail{\
 template < typename T, R (T::*)(P1, P2, P3) > struct op_mf {}; \
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(op_mf<P, &P::D>*);\
   template<typename P>\
@@ -88,7 +88,7 @@ namespace N##_detail{\
 template < typename T, R (T::*)(P1, P2, P3, P4) > struct op_mf {}; \
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(op_mf<P, &P::D>*);\
   template<typename P>\
@@ -107,7 +107,7 @@ namespace N##_detail{\
 template < typename T, R (T::*)(P1, P2, P3, P4, P5) > struct op_mf {}; \
 struct N##_helper {\
   typedef char small_type;\
-  typedef class big_tag { char dummy[2];} big_type;\
+  typedef struct big_tag { char dummy[2];} big_type;\
   template<typename P>\
   static small_type test(op_mf<P, &P::D>*);\
   template<typename P>\

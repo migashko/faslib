@@ -5,13 +5,14 @@
 //
 
 #include <fas/testing/unit.hpp>
+#include <fas/testing/statements.hpp>
 #include <fas/static_check/static_check.hpp>
 
 using namespace fas;
 
 UNIT(foo_test, "foo testing")
 {
-
+  t << fas::testing::nothing();
 }
 
 int main()

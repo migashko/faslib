@@ -22,6 +22,10 @@ inline nanospan process_nanotime()
   if ( -1 == clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts) )
     return nanospan();
   return nanospan(ts.tv_sec, ts.tv_nsec);
+#elif defined(HAVE_GETTIMEOFDAY_FUNC)
+  timeval tv;
+  ::gettimeofday(&tv, 0);
+  return nanospan(tv.tv_sec, tv.tv_usec*1000L);
 #elif defined(HAVE_GETRUSAGE_FUNC)
   rusage ru;
   if ( 0 == getrusage(RUSAGE_SELF, &ru ) )

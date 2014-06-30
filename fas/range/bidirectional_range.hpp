@@ -60,27 +60,37 @@ public:
   difference_type distance() const { return std::distance(b, e); }
 
   void advance(difference_type c)  { std::advance(b, c); }
-  
+
+#ifndef NDEBUG
   void increase(difference_type cbeg, difference_type cend)
   {
-#ifndef NDEBUG
     std::advance( s, 0 - cbeg );
     assert( s <= b);
-#endif
     std::advance( e, cend );
     assert( e >= b);
   }
 
   void decrease(difference_type cbeg, difference_type cend)
   {
-#ifndef NDEBUG
     std::advance( s, cbeg );
     assert( s <= b);
-#endif    
     std::advance( e, 0 - cend );
     assert( e >= b);
   }
 
+# else
+  void increase(difference_type , difference_type cend)
+  {
+    std::advance( e, cend );
+    assert( e >= b);
+  }
+
+  void decrease(difference_type , difference_type cend)
+  {
+    std::advance( e, 0 - cend );
+    assert( e >= b);
+  }
+# endif
 
   bidirectional_range<T>& operator++() 
   {
