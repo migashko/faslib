@@ -21,6 +21,16 @@ struct _3: placeholder<3> {};
 struct _4: placeholder<4> {};
 struct _5: placeholder<5> {};
 
+namespace placeholders 
+{
+  typedef ::fas::_  _;
+  typedef ::fas::_1 _1;
+  typedef ::fas::_2 _2;
+  typedef ::fas::_3 _3;
+  typedef ::fas::_4 _4;
+  typedef ::fas::_5 _5;
+}
+
 }
 
 #endif
