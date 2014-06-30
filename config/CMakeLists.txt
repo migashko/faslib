@@ -5,6 +5,7 @@ INCLUDE (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
 INCLUDE (${CMAKE_ROOT}/Modules/CheckLibraryExists.cmake)
 
 CHECK_LIBRARY_EXISTS(rt clock_gettime "time.h" HAVE_RT_LIB)
+CHECK_LIBRARY_EXISTS(rt clock_gettime "time.h" HAVE_CLOCK_GETTIME_FUNC)
 
 check_include_file("sys/time.h" HAVE_SYS_TIME_H)
 check_include_file("sys/resource.h" HAVE_SYS_RESORCE_H)
