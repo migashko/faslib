@@ -298,6 +298,10 @@ private:
 #define GET_REF(name) t.get_aspect().template get<name>()
 #define GET_TYPE(name) typename T::aspect::template advice_cast<name>::type
 
+#define BEGIN_UNIT_LIST(name) struct name##_unit_list: ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
+#define END_UNIT_LIST(name) >::type {};
+
+ 
 #define BEGIN_SUITE(name, desc)\
   inline const char* name##_suite_desc() { return desc;}\
   struct name##_suite_aspect: ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
@@ -306,10 +310,11 @@ private:
 #define ADD_CLASS(name) , ::fas::advice<name, name>
 #define ADD_ADVICE(tag, name) , ::fas::advice<tag, name>
 #define ADD_VALUE(tag, name) , ::fas::value<tag, name>
-#define ADD_TYPE_ADVICE(tag, name) , ::fas::type<tag, name>
+#define ADD_TYPE(tag, name) , ::fas::type<tag, name>
 #define ADD_GROUP(tag, tag_list) , ::fas::group<tag, tag_list>
 #define ADD_STUB(tag) , ::fas::stub<tag>
 #define ADD_ASPECT(aspect) , aspect
+#define ADD_UNIT_LIST(name) , name##_unit_list
 
 #define END_SUITE(name) >::type > {}; \
 struct name##_suite: ::fas::testing::suite<name##_suite_aspect> {\
@@ -324,6 +329,8 @@ struct name##_suite: ::fas::testing::suite<name##_suite_aspect> {\
   s.run(); \
   return s.counts();\
 }
+
+
 
 #endif
 

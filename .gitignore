@@ -3,3 +3,4 @@
 build
 fas/system/config.h
 timeout
+.kdev_include_paths
