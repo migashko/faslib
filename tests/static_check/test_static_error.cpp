@@ -29,8 +29,8 @@ int main()
 {
   typedef foo<1> foo1;
   typedef foo<2> foo2;
-  typedef foo<-1> foo3;
-  typedef foo<0> foo4;
+  // typedef foo<-1> foo3;
+  // typedef foo<0> foo4;
 
   foo<4> foo5obj;
   //foo<-2> foo6obj; // invalid use of incomplete type 'struct foo_param_is_less_zero'

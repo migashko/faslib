@@ -11,6 +11,7 @@
 #include <fas/static_check.hpp>
 #include <fas/typemanip.hpp>
 
+
 using namespace ::fas;
 
 void test1()
@@ -150,8 +151,6 @@ struct my_do_while
 
 void test5()
 {
-
-  
   typedef pair<
     int_<0>,
     empty_list
@@ -175,7 +174,9 @@ void test5()
   > cond;
 
   typedef for_< initial, cond, doit > dw;
-  typedef dw::type test;
+  typedef fas::second<dw::type>::type test;
+  enum { result = static_check< fas::length<test>::value == 11 >::value };
+
 }
 
 void test6()
@@ -200,12 +201,14 @@ void test6()
       >
     > doit;
 
-  typedef apply<doit, pair< int_<0>, empty_list> >::type test2;
+  //typedef apply<doit, pair< int_<0>, empty_list> >::type test2;
   
   typedef pair<int_<0>, empty_list> initial;
   typedef less_equal< f< length< second< _1> > >, int_<3> > cond;
   typedef for_< initial, cond, doit> dw;
-  typedef dw::type test3;
+  typedef fas::second<dw::type>::type test3;
+  enum { result = static_check< fas::length<test3>::value == 4 >::value };
+
 }
 
 int main()

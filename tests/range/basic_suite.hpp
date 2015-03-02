@@ -29,6 +29,12 @@ inline void trivial_test(T& t, R r1)
   R r_tmp = r1;
   t << equal<expect>( r1, r_tmp ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( &(*r1), &(*r_tmp) ) << FAS_TESTING_FILE_LINE;
+  enum { tmp = fas::same_type<iterator_category,iterator_category>::value
+               + fas::same_type<value_type,value_type>::value
+               + fas::same_type<difference_type,difference_type>::value
+               + fas::same_type<pointer,pointer>::value
+               + fas::same_type<reference,reference>::value
+  };
 }
 
 template<typename R, typename T>
