@@ -29,6 +29,10 @@ inline void UNIT_FAIL(_unit_fail_res_){}
 inline void SUITE_FAIL(_suite_fail_res_){}
 inline void TEST_FAIL(_test_fail_res_){}
 
+inline void stop(_stop_){}
+inline void nothing(_nothing_){}
+inline void flush(_flush_){}
+
 }}
 
 namespace std
@@ -108,6 +112,18 @@ namespace std
   {
     return o << std::endl << ::fas::console::red << "STOP" << fas::console::restore_colors << " Improper use of stop. Usage: 't << stop;'" << std::endl;
   }
+
+  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_nothing_) )
+  {
+    return o << std::endl << ::fas::console::red << "NOTHING" << fas::console::restore_colors << " Improper use of 'nothing'. Usage: 't << nothing;'" << std::endl;
+  }
+
+  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_flush_) )
+  {
+    o.flush();
+    return o;
+  }
+
 }
 
 #endif

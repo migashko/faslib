@@ -5,6 +5,7 @@
 //
 
 #include <fas/testing/statements.hpp>
+#include <fas/testing/formatting.hpp>
 #include <fas/range.hpp>
 
 template<typename R, typename T>

@@ -1,5 +1,6 @@
 #include <fas/testing/unit.hpp>
 #include <fas/testing/statements.hpp>
+#include <fas/testing/formatting.hpp>
 #include <fas/system/colorized.hpp>
 
 UNIT(unit1, "testing unit1")
@@ -19,5 +20,5 @@ UNIT(unit2, "testing unit2")
 UNIT(unit3, "testing unit3")
 {
   using namespace fas::testing;
-  t << nothing();
+  t << nothing;
 }

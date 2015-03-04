@@ -7,7 +7,8 @@ struct _units_;
 struct _suite_stub_; // заглушка
 
 struct _stop_{};
-inline void stop(_stop_){}
+struct _nothing_{};
+struct _flush_{};
 
 // suite без ошибок
 struct _passed_{};

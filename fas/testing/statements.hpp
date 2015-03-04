@@ -96,8 +96,6 @@ struct is_false: statement<M>
   is_false(bool value, const std::string& text): statement<M>(!value, text){}
 };
 
-struct nothing{};
-
 template<typename M = expect, typename F = _message_ >
 struct info: statement<M>
 {

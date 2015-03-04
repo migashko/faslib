@@ -123,6 +123,17 @@ public:
   {
     _status_check();
   }
+  
+  void operator <<( void (*)( _nothing_ ) )
+  {
+  }
+
+  std::ostream& operator <<( void (*)( _flush_ ) )
+  {
+    _out.flush();
+    return _out;
+  }
+
 
   std::ostream& operator << ( const statement<expect>& st )
   {
@@ -204,10 +215,6 @@ public:
     return _out;
   }
 
-  std::ostream& operator <<( nothing )
-  {
-    return _out;
-  }
 
   operator bool () const 
   { 

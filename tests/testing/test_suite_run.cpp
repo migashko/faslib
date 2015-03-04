@@ -32,7 +32,7 @@ bool test_run0()
 
 UNIT(unit1, "unit1 testing")
 {
-  t << nothing();
+  t << nothing;
 }
 
 typedef aspect<
