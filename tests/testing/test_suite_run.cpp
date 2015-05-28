@@ -37,7 +37,7 @@ UNIT(unit1, "unit1 testing")
 
 typedef aspect<
   type_list_n<
-    unit1_type_list
+    fas_unit1_type_list
   >::type
 > suite_aspect1;
 
@@ -69,8 +69,8 @@ UNIT(unit2, "unit2 testing")
 
 typedef aspect<
   type_list_n<
-    unit1_type_list,
-    unit2_type_list
+    fas_unit1_type_list,
+    fas_unit2_type_list
   >::type
 > suite_aspect2;
 

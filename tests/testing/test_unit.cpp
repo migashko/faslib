@@ -23,34 +23,34 @@ int main()
     result =
       static_check<
         same_type<
-          foo_test_type_list::left_type::advice_class,
-          foo_test_unit
+          fas_foo_test_type_list::left_type::advice_class,
+          fas_foo_test_unit
         >::value
       >::value
       +
       static_check<
         same_type<
-          foo_test_type_list::left_type::tag,
-          foo_test
+          fas_foo_test_type_list::left_type::tag,
+          fas_foo_test_tag
         >::value
       >::value
       +
       static_check<
         same_type<
-          foo_test_type_list::right_type::left_type::tag,
+          fas_foo_test_type_list::right_type::left_type::tag,
           testing::_units_
         >::value
       >::value
       +
       static_check<
         same_type<
-          foo_test_type_list::right_type::left_type::target,
-          type_list<foo_test>
+          fas_foo_test_type_list::right_type::left_type::target,
+          type_list<fas_foo_test_tag>
         >::value
       >::value
 
   };
-  foo_test_unit f;
+  fas_foo_test_unit f;
   if ( f.name() != "foo_test") return -1;
   if ( f.desc() != "foo testing") return -1;
 
