@@ -22,7 +22,7 @@ struct f_unit_run
   {
     typename T::aspect::template advice_cast<Tg>::type &u = t.get_aspect().template get<Tg>();
 
-    t.out() << std::endl << RUN << u.name();
+    t.out() << std::endl << RUN << u.fas_name();
     try
     {
       t.unit_begin(u);
@@ -54,7 +54,7 @@ struct f_unit_run
       throw;
     }
 
-    if (u)
+    if (u.fas_ready())
       t.out() << std::endl << OK;
     else
       this->print_fail(t, u);
@@ -63,16 +63,16 @@ struct f_unit_run
   template<typename T, typename U>
   void print_fail(T& t, U& u)
   {
-    t.out() << std::endl << UNIT_FAIL << u.name();
-    if ( !u.desc().empty() )
-      t.out() << "." << u.desc();
-    t.out() << std::endl << UNIT_FAIL << "statements: " << u.counts().statements;
-    if ( u.counts().errors!=0)
-      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "errors: " << u.counts().errors << ::fas::console::restore_colors;
-    if ( u.counts().fails!=0)
-      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fails: " << u.counts().fails << ::fas::console::restore_colors;
-    if ( u.counts().fatals!=0)
-      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fatals: " << u.counts().fatals << ::fas::console::restore_colors;
+    t.out() << std::endl << UNIT_FAIL << u.fas_name();
+    if ( !u.fas_desc().empty() )
+      t.out() << "." << u.fas_desc();
+    t.out() << std::endl << UNIT_FAIL << "statements: " << u.fas_counts().statements;
+    if ( u.fas_counts().errors!=0)
+      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "errors: " << u.fas_counts().errors << ::fas::console::restore_colors;
+    if ( u.fas_counts().fails!=0)
+      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fails: " << u.fas_counts().fails << ::fas::console::restore_colors;
+    if ( u.fas_counts().fatals!=0)
+      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fatals: " << u.fas_counts().fatals << ::fas::console::restore_colors;
   }
 };
 

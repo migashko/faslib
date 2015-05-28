@@ -87,13 +87,13 @@ public:
   template<typename U>
   void unit_end(U& u)
   {
-    u.counts().errors += _unit_errors;
-    u.counts().fails += _unit_fails;
-    u.counts().fatals += _unit_fatals;
-    u.counts().statements += _unit_statements;
+    u.fas_counts().errors += _unit_errors;
+    u.fas_counts().fails += _unit_fails;
+    u.fas_counts().fatals += _unit_fatals;
+    u.fas_counts().statements += _unit_statements;
     if ( _status == unit_status::noerror )
       _suite_counts.units_passed++;
-    _suite_counts += u.counts();
+    _suite_counts += u.fas_counts();
     _suite_counts.units++;
   }
 

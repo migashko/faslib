@@ -51,8 +51,8 @@ int main()
 
   };
   fas_foo_test_unit f;
-  if ( f.name() != "foo_test") return -1;
-  if ( f.desc() != "foo testing") return -1;
+  if ( f.fas_name() != "foo_test") return -1;
+  if ( f.fas_desc() != "foo testing") return -1;
 
   return 0;
 }

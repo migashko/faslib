@@ -15,33 +15,33 @@
 
 namespace fas{ namespace testing{
 
-class unit
+class fas_unit
 {
   std::string _name;
   std::string _desc;
   unit_counts _counts;
 
 public:
-  unit(const std::string& name = "", const std::string& desc = "")
+  fas_unit(const std::string& name = "", const std::string& desc = "")
    : _name(name), _desc(desc), _counts()
   {
   }
 
-  const std::string& name() const { return _name; }
-  const std::string& desc() const { return _desc; }
+  const std::string& fas_name() const { return _name; }
+  const std::string& fas_desc() const { return _desc; }
 
-  const unit_counts& counts() const { return _counts; }
-  unit_counts& counts() { return _counts; }
+  const unit_counts& fas_counts() const { return _counts; }
+  unit_counts& fas_counts() { return _counts; }
 
-  operator bool () const { return 0 == (_counts.errors + _counts.fails + _counts.fatals); }
+  bool fas_ready() const { return 0 == (_counts.errors + _counts.fails + _counts.fatals); }
 };
 
 }}
 
 #define UNIT(name, desc)\
-struct fas_##name##_unit: ::fas::testing::unit\
+struct fas_##name##_unit: ::fas::testing::fas_unit\
 { \
-  fas_##name##_unit(): unit( #name, desc) { }\
+  fas_##name##_unit(): fas_unit( #name, desc) { }\
 \
   template<typename T>\
   void operator()(T& t);\
