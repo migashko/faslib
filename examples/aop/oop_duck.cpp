@@ -169,26 +169,27 @@ int main()
   mallard->floatAround();
   mallard->performFly();
   mallard->performQuack();
-
-  cout << endl << endl;
+  cout << endl;
 
   Duck *rubber = new RubberDuck();
   rubber->display();
   rubber->floatAround();
   rubber->performFly();
   rubber->performQuack();
-
-  cout << endl << endl;
+  cout << endl;
 
   Duck *painted = new PaintedDuck();
   painted->display();
   painted->floatAround();
   painted->performFly();
+  cout << endl;
+
   painted->setFlyBehaviour(new FlyWithRocket);
   painted->performFly();
   painted->performQuack();
+
+  cout << endl;
   painted->setQuackBehaviour(new Quack);
   painted->performQuack();
-
   return 0;
 }

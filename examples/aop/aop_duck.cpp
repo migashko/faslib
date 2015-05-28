@@ -210,15 +210,16 @@ int main()
   painted->floatAround();
   painted->performFly();
   delete painted;
-  
-  cout << "Changing compile-time quack behaviour (generate new class)..." << endl;
+
+  // cout << "Changing compile-time quack behaviour (generate new class)..." << endl;
   painted = new PaintedDuck<Rocket>();
   painted->display();
   painted->performFly();
   painted->performQuack();
   delete painted;
+  cout << endl;
 
-  cout << "Changing compile-time quack behaviour (generate new class)..." << endl;
+  //cout << "Changing compile-time quack behaviour (generate new class)..." << endl;
   painted = new PaintedDuck<QuackRocket>();
   painted->display();
   painted->performFly();
