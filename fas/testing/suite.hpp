@@ -305,15 +305,15 @@ private:
 #define GET_REF(name) t.get_aspect().template get<name>()
 #define GET_TYPE(name) typename T::aspect::template advice_cast<name>::type
 
-#define BEGIN_UNIT_LIST(name) struct name##_unit_list: ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
+#define BEGIN_UNIT_LIST(name) struct fas_##name##_unit_list: ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
 #define END_UNIT_LIST(name) >::type {};
 
  
 #define BEGIN_SUITE(name, desc)\
-  inline const char* name##_suite_desc() { return desc;}\
-  struct name##_suite_aspect: ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
+  inline const char* fas_##name##_suite_desc() { return desc;}\
+  struct fas_##name##_suite_aspect: ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
 
-#define ADD_UNIT(name) ,name##_type_list
+#define ADD_UNIT(name) , fas_##name##_type_list
 #define ADD_CLASS(name) , ::fas::advice<name, name>
 #define ADD_ADVICE(tag, name) , ::fas::advice<tag, name>
 #define ADD_VALUE(tag, name) , ::fas::value<tag, name>
@@ -321,18 +321,18 @@ private:
 #define ADD_GROUP(tag, tag_list) , ::fas::group<tag, tag_list>
 #define ADD_STUB(tag) , ::fas::stub<tag>
 #define ADD_ASPECT(aspect) , aspect
-#define ADD_UNIT_LIST(name) , name##_unit_list
+#define ADD_UNIT_LIST(name) , fas_##name##_unit_list
 
 #define END_SUITE(name) >::type > {}; \
-struct name##_suite: ::fas::testing::suite<name##_suite_aspect> {\
-  typedef ::fas::testing::suite<name##_suite_aspect> super;\
+struct fas_##name##_suite: ::fas::testing::suite<fas_##name##_suite_aspect> {\
+  typedef ::fas::testing::suite<fas_##name##_suite_aspect> super;\
   bool run() { return super::_run(*this); }\
-  name##_suite(const std::string& name = "", const std::string& desc = ""): super(name, desc) {}\
-  name##_suite(std::ostream& os, const std::string& name = "", const std::string& desc = ""): super(os, name, desc) {}\
+  fas_##name##_suite(const std::string& name = "", const std::string& desc = ""): super(name, desc) {}\
+  fas_##name##_suite(std::ostream& os, const std::string& name = "", const std::string& desc = ""): super(os, name, desc) {}\
 };\
-::fas::testing::suite_counts name##_suite_run(int , char*[])\
+::fas::testing::suite_counts fas_##name##_suite_run(int , char*[])\
 {\
-  name##_suite s(#name, name##_suite_desc() );\
+  fas_##name##_suite s(#name, fas_##name##_suite_desc() );\
   s.run(); \
   return s.counts();\
 }

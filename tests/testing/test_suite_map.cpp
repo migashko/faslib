@@ -51,8 +51,8 @@ END_SUITE(suite)
 
 int main(int argc, char* argv[])
 {
-  ::fas::testing::suite_counts suite_suite_run(int argc, char* argv[]);
-  ::fas::testing::suite_counts result = suite_suite_run(argc, argv);
+  ::fas::testing::suite_counts fas_suite_suite_run(int argc, char* argv[]);
+  ::fas::testing::suite_counts result = fas_suite_suite_run(argc, argv);
  return !(result.units == 3 && result.units_total == 4);
 }
 

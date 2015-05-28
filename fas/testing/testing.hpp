@@ -48,7 +48,7 @@ inline void show_total_result( const suite_counts& sc )
 
 
 #define BEGIN_TEST ::fas::testing::suite_counts fas_testing(int argc, char* argv[]) { ::fas::testing::suite_counts sc;
-#define RUN_SUITE(name) ::fas::testing::suite_counts name##_suite_run(int argc, char* argv[]); sc+=name##_suite_run(argc, argv);
+#define RUN_SUITE(name) ::fas::testing::suite_counts fas_##name##_suite_run(int argc, char* argv[]); sc+=fas_##name##_suite_run(argc, argv);
 #define END_TEST show_total_result(sc); return sc;}
 
 #endif
