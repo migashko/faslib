@@ -21,7 +21,7 @@ namespace fas{
 template<typename L, typename F = less<_1, _2> >
 struct sort
 {
-  typedef typename detail::sort_impl_t<L, lambda_r<FAS_T_SIMPLIFY(F), 2>::template apply >::type type;
+  typedef typename detail::sort_impl_t<L, lambda<FAS_T_SIMPLIFY(F), 2>::template apply >::type type;
 };
 
 template<typename L, template <typename, typename> class F = less >

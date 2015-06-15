@@ -18,8 +18,8 @@ struct for_
 {
   typedef typename detail::for_impl_t<
     FAS_T_SIMPLIFY(I),
-    lambda< FAS_T_SIMPLIFY(C) >::template apply,
-    lambda< FAS_T_SIMPLIFY(F) >::template apply
+    lambda< FAS_T_SIMPLIFY(C), 1 >::template apply,
+    lambda< FAS_T_SIMPLIFY(F), 1 >::template apply
   >::type type;
 };
 

@@ -15,7 +15,7 @@ namespace fas{
 
 template<typename T, typename L>
 struct count
-  : count_if_t<L, lambda< same_type<T, _1> >::template apply > 
+  : count_if_t<L, lambda< same_type<T, _1>, 1 >::template apply > 
 {};
 
 }

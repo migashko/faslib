@@ -24,7 +24,7 @@ struct erase_if
 
 template<typename L, template<typename> class F >
 struct erase_if_t
-  : select_t< L, lambda< not_< F<_> > >::template apply >
+  : select_t< L, lambda< not_< F<_> >, 1 >::template apply >
 {
   
 };

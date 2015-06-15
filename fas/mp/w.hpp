@@ -15,7 +15,6 @@ struct w
   typedef T type;
 };
 
-
 }
 
 #endif

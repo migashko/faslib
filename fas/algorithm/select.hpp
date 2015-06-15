@@ -17,7 +17,7 @@ namespace fas{
 template<typename L, typename F >
 struct select
 {
-  typedef typename detail::select_impl_t<L, lambda< FAS_T_SIMPLIFY(F) >::template apply >::type type;
+  typedef typename detail::select_impl_t<L, lambda< FAS_T_SIMPLIFY(F), 1 >::template apply >::type type;
 };
 
 template<typename L, template<typename> class F >

@@ -26,7 +26,7 @@ template<typename T, typename F>
 struct generator
 {
   typedef T type;
-  typedef generator_t<T, lambda< FAS_T_SIMPLIFY(F)>::template apply > gt;
+  typedef generator_t<T, lambda< FAS_T_SIMPLIFY(F), 1>::template apply > gt;
   typedef typename gt::next_type next_type;
   typedef typename gt::next next;
 };

@@ -23,7 +23,7 @@ struct accumulate_t
 template<typename L, typename Init, typename F = plus<_,_>  >
 struct accumulate
 {
-  typedef typename accumulate_t<L, Init, lambda<FAS_T_SIMPLIFY(F)>::template apply >::type type;
+  typedef typename accumulate_t<L, Init, lambda<FAS_T_SIMPLIFY(F), 2>::template apply >::type type;
 };
 
 }

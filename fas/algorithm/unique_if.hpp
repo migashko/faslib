@@ -18,7 +18,7 @@ namespace fas{
 template<typename L, typename F = same_type< _1,  _2 > >
 struct unique_if
 {
-  typedef typename detail::unique_if_impl_t< L, lambda_r< FAS_T_SIMPLIFY(F) , 2 >::template apply >::type type;
+  typedef typename detail::unique_if_impl_t< L, lambda< FAS_T_SIMPLIFY(F), 2 >::template apply >::type type;
 };
 
 template<typename L, template<typename, typename> class F >

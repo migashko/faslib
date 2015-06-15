@@ -20,11 +20,13 @@ struct lambda
 {
 };
 
+/*
 template<typename F, int R>
 struct lambda_r 
   : detail::lambda_impl_r< F, R, has_apply<F, R>::value >
 {
 };
+*/
 
 }
 

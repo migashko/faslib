@@ -18,7 +18,7 @@ namespace fas{
 template<typename L, typename F >
 struct count_if
 {
-  enum { value = detail::count_if_impl_t<L, lambda< FAS_T_SIMPLIFY(F) >::template apply >::value };
+  enum { value = detail::count_if_impl_t<L, lambda< FAS_T_SIMPLIFY(F), 1 >::template apply >::value };
   typedef int_<value> type;
 };
 

@@ -18,8 +18,8 @@ struct transform_if
 {
   typedef typename detail::transform_if_impl_t<
     L, 
-    lambda<FAS_T_SIMPLIFY(F)>::template apply,
-    lambda<FAS_T_SIMPLIFY(C)>::template apply 
+    lambda<FAS_T_SIMPLIFY(F), 1>::template apply,
+    lambda<FAS_T_SIMPLIFY(C), 1>::template apply 
   >::type type;
 };
 
