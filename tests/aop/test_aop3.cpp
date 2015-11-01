@@ -62,7 +62,7 @@ public:
   {
     return this->get_aspect().template get<_tag1_>()(*this, v);
   };
-#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#if __cplusplus >= 201103L
 private:
 
   friend class super::aspect::template advice_cast< _tag1_ >::type;
