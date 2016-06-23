@@ -65,7 +65,7 @@ struct f_unit_run
   {
     t.out() << std::endl << UNIT_FAIL << u.fas_name();
     if ( !u.fas_desc().empty() )
-      t.out() << "." << u.fas_desc();
+      t.out() << ". " << u.fas_desc();
     t.out() << std::endl << UNIT_FAIL << "statements: " << u.fas_counts().statements;
     if ( u.fas_counts().errors!=0)
       t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "errors: " << u.fas_counts().errors << ::fas::console::restore_colors;
