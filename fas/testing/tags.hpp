@@ -12,6 +12,7 @@ struct _flush_{};
 
 // suite без ошибок
 struct _passed_{};
+struct _red_passed_{};
 // unit без ошибок
 struct _ok_{};
 // ошибка unit'а

@@ -13,6 +13,7 @@
 namespace fas{ namespace testing{
 
 inline void PASSED(_passed_) {}
+inline void RED_PASSED(_red_passed_) {}
 inline void OK(_ok_) {}
 inline void FAIL(_fail_) {}
 inline void EXCEPT(_except_) {}
@@ -53,7 +54,12 @@ namespace std
     return o << ::fas::console::green << "[ RUN     ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_fail_) )
+  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_red_passed_) )
+  {
+    return o << ::fas::console::light_red << "[ PASSED  ] " << fas::console::restore_colors;
+  }
+
+    inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_fail_) )
   {
     return o << ::fas::console::light_red << "[    FAIL ] " << fas::console::restore_colors;
   }

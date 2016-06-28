@@ -93,6 +93,7 @@ public:
     u.fas_counts().statements += _unit_statements;
     if ( _status == unit_status::noerror )
       _suite_counts.units_passed++;
+
     _suite_counts += u.fas_counts();
     _suite_counts.units++;
   }
@@ -116,7 +117,6 @@ public:
   {
     ++_unit_statements;
     _status_check();
-    _status = unit_status::noerror;
   }
 
   void operator << ( void (*)( _stop_ ) )
@@ -137,11 +137,11 @@ public:
 
   std::ostream& operator << ( const statement<expect>& st )
   {
-    statement_begin();
+    this->statement_begin();
     if ( st.result == false)
     {
       _unit_errors++;
-      _status = unit_status::error;
+      this->set_status_(unit_status::error);
       _out << std::endl << ERROR_MESSAGE << st.text;
       return _out;
     }
@@ -150,11 +150,11 @@ public:
 
   std::ostream& operator << ( const statement<assert>& st )
   {
-    statement_begin();
+    this->statement_begin();
     if ( st.result == false)
     {
       _unit_fails++;
-      _status = unit_status::fail;
+      this->set_status_(unit_status::fail);
       _out << std::endl << FAIL << st.text;
       return _out;
     }
@@ -163,10 +163,10 @@ public:
 
   std::ostream& operator << ( const statement<critical>& st )
   {
-    statement_begin();
+    this->statement_begin();
     if ( st.result == false)
     {
-      _status = unit_status::fatal;
+      this->set_status_(unit_status::fatal);
       _unit_fatals++;
       _out << std::endl << FATAL << st.text;
       return _out;
@@ -187,7 +187,7 @@ public:
   std::ostream& operator << ( const info<expect, F>& st )
   {
     _status_check();
-    _status = unit_status::error;
+    this->set_status_(unit_status::error);
     typename info<expect, F>::manip manip = 0;
     _out << std::endl << manip << st.text;
     return _out;
@@ -197,7 +197,7 @@ public:
   std::ostream& operator << ( const info<assert, F>& st )
   {
     _status_check();
-    _status = unit_status::fail;
+    this->set_status_(unit_status::fail);
     _unit_fails++;
     typename info<assert, F>::manip manip = 0;
     _out << std::endl << manip << st.text;
@@ -208,7 +208,7 @@ public:
   std::ostream& operator << ( const info<critical, F>& st )
   {
     _status_check();
-    _status = unit_status::fatal;
+    this->set_status_(unit_status::fatal);
     _unit_fatals++;
     typename info<critical, F>::manip manip = 0;
     _out << std::endl << manip << st.text;
@@ -226,6 +226,23 @@ public:
   bool run()
   {
     return _run(*this);
+  }
+
+
+  int size() const { return length<unit_tag_list>::value;};
+  int count() const { return _suite_counts.units; }
+
+  int errors() const { return _suite_counts.errors; }
+  int fails() const { return _suite_counts.fails; }
+  int fatals() const { return _suite_counts.fatals; }
+
+  const suite_counts& counts() const { return _suite_counts; };
+
+public:
+  void set_status_( unit_status::type status)
+  {
+    if ( status > _status )
+      _status = status;
   }
 
   template<typename T>
@@ -262,23 +279,14 @@ public:
     }
     else
     {
-      _out << SUITE_FAIL << _name << ". " << _desc << std::endl;
-      _out << PASSED << _suite_counts.units_passed << " tests." << std::endl;
+      _out << SUITE_FAIL << "Suite '" << _name << "' fail. " << _desc << std::endl;
+      _out << RED_PASSED << _suite_counts.units_passed << " tests." << std::endl;
       _out << FAIL << _suite_counts.units - _suite_counts.units_passed << " tests." << std::endl;
 
     }
 
     return *this;
   }
-
-  int size() const { return length<unit_tag_list>::value;};
-  int count() const { return _suite_counts.units; }
-
-  int errors() const { return _suite_counts.errors; }
-  int fails() const { return _suite_counts.fails; }
-  int fatals() const { return _suite_counts.fatals; }
-
-  const suite_counts& counts() const { return _suite_counts; };
 
 private:
 
