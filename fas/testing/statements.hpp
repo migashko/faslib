@@ -72,6 +72,23 @@ struct not_equal<M, empty_type>: statement<M>
   not_equal(L left, R right, const std::string& text): statement<M>( left != right, equal_message(text, left, "==", right) ) {}
 };
 
+template<typename M = assert, typename T = empty_type>
+struct less: statement<M>
+{
+  less(T left, T right): statement<M>( left < right, equal_message("Less statement. ", left, ">=", right) ) {}
+  less(T left, T right, const std::string& text): statement<M>( left == right, equal_message(text, left, ">=", right) ) {}
+};
+
+template<typename M>
+struct less<M, empty_type>: statement<M>
+{
+  template<typename L, typename R>
+  less(L left, R right): statement<M>( left < right, equal_message("Less statement. ", left, ">=", right) ) {}
+
+  template<typename L, typename R>
+  less(L left, R right, const std::string& text): statement<M>( left == right, equal_message(text, left, ">=", right) ) {}
+};
+
 
 template<typename M = assert>
 struct equal_str: statement<M>
