@@ -91,7 +91,7 @@ private:
   template<typename TT, typename V, int NN>
   static inline void _clear(TT* v, type2type<V[NN]> )
   {
-    for (register int i = 0; i < NN; ++i)
+    for (int i = 0; i < NN; ++i)
       _clear( v[i], type2type<V>() );
   }
 

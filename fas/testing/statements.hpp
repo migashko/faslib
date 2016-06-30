@@ -14,7 +14,7 @@
 #include <sstream>
 
 #define FAS_TESTING_FILE_LINE __FILE__ << ": " << __LINE__
-#define FAS_ENDL FAS_TESTING_FILE_LINE
+#define FAS_FL FAS_TESTING_FILE_LINE
 
 namespace fas{ namespace testing{
 
