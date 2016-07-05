@@ -338,6 +338,7 @@ struct fas_##name##_suite: ::fas::testing::suite<fas_##name##_suite_aspect> {\
   fas_##name##_suite(const std::string& name = "", const std::string& desc = ""): super(name, desc) {}\
   fas_##name##_suite(std::ostream& os, const std::string& name = "", const std::string& desc = ""): super(os, name, desc) {}\
 };\
+::fas::testing::suite_counts fas_##name##_suite_run(int , char*[]);\
 ::fas::testing::suite_counts fas_##name##_suite_run(int , char*[])\
 {\
   fas_##name##_suite s(#name, fas_##name##_suite_desc() );\

@@ -43,7 +43,7 @@ inline bool is_atty_stderr()
 }
 
 
-inline void sleep( int millisec )
+inline void sleep( useconds_t millisec )
 {
 #ifdef _POSIX_VERSION
 

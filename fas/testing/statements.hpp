@@ -34,7 +34,7 @@ protected:
 public:
   bool result;
   std::string text;
-  statement(bool result, const std::string& text = "" ): result(result), text(text) {}
+  statement(bool res, const std::string& txt = "" ): result(res), text(txt) {}
   ~statement() {}
 };
 
@@ -123,8 +123,8 @@ template<typename M = expect, typename F = _message_ >
 struct info: statement<M>
 {
   typedef void (*manip)( F );
-  info(bool result, const std::string& text)
-    : statement<M>(result, text)
+  info(bool res, const std::string& txt)
+    : statement<M>(res, txt)
   {
   }
 };
@@ -132,18 +132,18 @@ struct info: statement<M>
 struct message
   : info< trace, _message_ >
 {
-   message(const std::string& text)
-    : info< trace, _message_ >(true, text)
+   message(const std::string& txt)
+    : info< trace, _message_ >(true, txt)
    {}
 };
 
-struct warning: info< trace, _warning_ > { warning(const std::string& text): info< trace, _warning_ >(false, text) {} };
+struct warning: info< trace, _warning_ > { warning(const std::string& txt): info< trace, _warning_ >(false, txt) {} };
 
-struct error: info< expect, _error_ > { error(const std::string& text): info< expect, _error_ >(false, text) {} };
+struct error: info< expect, _error_ > { error(const std::string& txt): info< expect, _error_ >(false, txt) {} };
 
-struct fail: info< assert, _fail_ > { fail(const std::string& text): info< assert, _fail_ >(false, text) {} };
+struct fail: info< assert, _fail_ > { fail(const std::string& txt): info< assert, _fail_ >(false, txt) {} };
 
-struct fatal: info< critical, _fatal_> { fatal(const std::string& text): info< critical, _fatal_ >(false, text) {} };
+struct fatal: info< critical, _fatal_> { fatal(const std::string& txt): info< critical, _fatal_ >(false, txt) {} };
 
 
 typedef fas::type_list_n<

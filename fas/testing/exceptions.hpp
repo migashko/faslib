@@ -16,8 +16,8 @@ class exception
   : public std::logic_error
 {
 public:
-  exception(const std::string& what="")
-    : std::logic_error(what)
+  exception(const std::string& what_="")
+    : std::logic_error(what_)
   {}
 };
 
@@ -26,8 +26,8 @@ class fail_error
   : public exception
 {
 public:
-  fail_error(const std::string& what="")
-    : exception(what)
+  fail_error(const std::string& what_="")
+    : exception(what_)
   {}
 };
 
@@ -36,8 +36,8 @@ class fatal_error
   : public exception
 {
 public:
-  fatal_error(const std::string& what="")
-    : exception(what)
+  fatal_error(const std::string& what_="")
+    : exception(what_)
   {}
 };
 
