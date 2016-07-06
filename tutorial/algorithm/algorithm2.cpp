@@ -1,9 +1,11 @@
+#include "../out_type_list.hpp"
 #include <fas/type_list.hpp>
 #include <fas/algorithm.hpp>
 #include <fas/mp.hpp>
 #include <fas/integral.hpp>
 
 #include <iostream>
+
 
 template<int i>
 struct foo;
@@ -14,8 +16,17 @@ struct bar;
 
 namespace std
 {
-  template<typename L, typename R>
-  ostream& operator << ( ostream& os, fas::type_list<L,R> )  { os << L::value  << ", " << R(); return os;}
+  template<int i, typename R>
+  ostream& operator << ( ostream& os, fas::type_list< foo<i>, R> );
+  
+  template<int i, typename R>
+  ostream& operator << ( ostream& os, fas::type_list< bar<i>, R> );
+
+  template<int i>
+  ostream& operator << ( ostream& os, fas::type_list<foo<i>, fas::empty_list> );
+
+  template<int i>
+  ostream& operator << ( ostream& os, fas::type_list<bar<i>, fas::empty_list> );
 
   template<int i, typename R>
   ostream& operator << ( ostream& os, fas::type_list< foo<i>, R> )  { os << "foo-" << i << ", " << R(); return os;}
@@ -23,17 +34,12 @@ namespace std
   template<int i, typename R>
   ostream& operator << ( ostream& os, fas::type_list< bar<i>, R> )  { os << "bar-" << i << ", " << R(); return os;}
 
-
-  template<typename L>
-  ostream& operator << ( ostream& os, fas::type_list<L, fas::empty_list> )  { os << L::value; return os; }
-
   template<int i>
   ostream& operator << ( ostream& os, fas::type_list<foo<i>, fas::empty_list> )  { os << "foo-" << i; return os; }
 
   template<int i>
   ostream& operator << ( ostream& os, fas::type_list<bar<i>, fas::empty_list> )  { os << "bar-" << i; return os; }
 
-  ostream& operator << ( ostream& os, fas::empty_list )  { return os; }
 }
 
 template<int i>
@@ -81,10 +87,11 @@ int main()
   using fas::p;
   using fas::int_;
 
+  const int init = fas::rand<int_<111> >::value;
   typedef fas::generate<
     fas::int_<10>,
     fas::generator<
-      fas::rand<int_<111> >,
+      int_<init>,
       fas::make_int< fas::rand<_> >
     >
   >::type randlist;

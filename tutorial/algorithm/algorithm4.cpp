@@ -11,6 +11,9 @@ using fas::int_;
 using fas::_1;
 using fas::a;
 using fas::p;
+int fgcd(int a, int b);
+int flcm(int a, int b);
+int flcm_n(int* , size_t);
 
 int fgcd(int a, int b)
 {
@@ -83,6 +86,6 @@ int main()
   std::cout << "flcm_n(5,7,9,12):" << flcm_n(arr, 4) << std::endl;
 
   typedef fas::type_list_n< int_<5>, int_<7>, int_<9>, int_<12> >::type numlist;
-  std::cout << " lcm_n<5,7,9,12>:" << lcm_n<numlist>::value << std::endl;
+  std::cout << " lcm_n<5,7,9,12>:" << static_cast<int>( lcm_n<numlist>::value ) << std::endl;
   return 0;
 }

@@ -1,24 +1,7 @@
+#include "../out_type_list.hpp"
 #include <fas/type_list.hpp>
 #include <fas/integral.hpp>
 
-#include <iostream>
-
-namespace std
-{
-  template<typename L, typename R>
-  ostream& operator << ( ostream& os, fas::type_list<L,R> );
-  template<typename L>
-  ostream& operator << ( ostream& os, fas::type_list<L,fas::empty_list> );
-  ostream& operator << ( ostream& os, fas::empty_list );
-
-  template<typename L, typename R>
-  ostream& operator << ( ostream& os, fas::type_list<L,R> )  { os << static_cast<int>(L::value) << ", " << R(); return os;}
-
-  template<typename L>
-  ostream& operator << ( ostream& os, fas::type_list<L,fas::empty_list> )  { os << static_cast<int>(L::value); return os; }
-
-  ostream& operator << ( ostream& os, fas::empty_list )  { return os; }
-}
 
 typedef fas::type_list_n<
   fas::int_<1>,

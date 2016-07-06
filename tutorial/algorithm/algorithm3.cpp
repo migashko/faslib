@@ -12,6 +12,11 @@ using fas::_1;
 using fas::a;
 using fas::p;
 
+int ffactorial(int i);
+int fgcd(int a, int b);
+int flcm(int a, int b);
+
+
 int ffactorial(int i)
 {
   int result = 1;
@@ -106,14 +111,14 @@ struct tmp{};
 int main()
 {
   std::cout << "ffactorial(4):" << ffactorial(4) << std::endl;
-  std::cout << "factorial<4>:" << factorial<4>::value << std::endl;
+  std::cout << "factorial<4>:" << static_cast<int>( factorial<4>::value ) << std::endl;
   //class `factorial_nan' has incomplete type
   //std::cout << "factorial<-1>:" << factorial<-1>::value << std::endl;
   std::cout << "fgcd(5,15): " << fgcd(5,15) << std::endl;
   std::cout << "flcm(18,45): " << flcm(18,45) << std::endl;
 
-  std::cout << "gcd<5,15>: " << gcd< int_<5>, int_<15> >::value << std::endl;
-  std::cout << "lcm<18,45>: " << lcm< int_<45>, int_<18> >::value << std::endl;
-  std::cout << "lcm2<18,45>: " << lcm2< int_<45>, int_<18> >::value << std::endl;
+  std::cout << "gcd<5,15>: " << static_cast<int>(gcd< int_<5>, int_<15> >::value) << std::endl;
+  std::cout << "lcm<18,45>: " << static_cast<int>(lcm< int_<45>, int_<18> >::value) << std::endl;
+  std::cout << "lcm2<18,45>: " << static_cast<int>(lcm2< int_<45>, int_<18> >::value) << std::endl;
   return 0;
 }

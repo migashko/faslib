@@ -1,3 +1,4 @@
+#include "../out_type_list.hpp"
 #include <fas/type_list.hpp>
 #include <fas/algorithm.hpp>
 #include <fas/mp.hpp>
@@ -21,11 +22,13 @@ struct tagged
 
 namespace std
 {
-  template<typename L, typename R>
-  ostream& operator << ( ostream& os, fas::type_list<L,R> )  
-  { os << L::tag::value << "=" << sizeof( typename L::type) << ", " << R(); return os;}
+  template<int N, typename T, typename R>
+  ostream& operator << ( ostream& os, fas::type_list< tagged< tag<N>, T >, R > )  
+  { 
+    os << N << "=" << sizeof( T ) << ", " << R(); 
+    return os;
+  }
 
-  ostream& operator << ( ostream& os, fas::empty_list )  { return os; }
 }
 
 template<typename T>

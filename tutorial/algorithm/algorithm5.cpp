@@ -1,3 +1,4 @@
+#include "../out_type_list.hpp"
 #include <fas/type_list.hpp>
 #include <fas/algorithm.hpp>
 #include <fas/mp.hpp>
@@ -10,6 +11,8 @@
 #include <algorithm>
 
 /// For example only
+size_t factorial(size_t n);
+std::vector< std::vector<int> > fbrute_combinations(std::vector<int> v);
 
 size_t factorial(size_t n)
 {
@@ -29,7 +32,7 @@ std::vector< std::vector<int> > fbrute_combinations(std::vector<int> v)
     result.push_back(v);
     std::sort(result.begin(), result.end());
     std::vector< std::vector<int> >::iterator itr = std::unique(result.begin(), result.end() );
-    result.resize( std::distance(result.begin(), itr) );
+    result.resize( static_cast<size_t>(  std::distance(result.begin(), itr) ) );
   }
   return result;
 }
@@ -41,11 +44,6 @@ using fas::type_list_n;
 
 namespace std
 {
-  template<typename L, typename R>
-  ostream& operator << ( ostream& os, fas::type_list<L,R> )  { os << L::value  << ", " << R(); return os;}
-
-  template<typename L>
-  ostream& operator << ( ostream& os, fas::type_list<L, fas::empty_list> )  { os << L::value; return os;}
 
   template<typename L, typename R>
   ostream& operator << ( ostream& os, fas::type_list< wrapper<L>, R> )  { os << std::endl << L() << R(); return os;}
@@ -53,7 +51,6 @@ namespace std
   template<typename L>
   ostream& operator << ( ostream& os, fas::type_list< wrapper<L>, fas::empty_list> )  { os << std::endl <<L(); return os; }
 
-  ostream& operator << ( ostream& os, fas::empty_list )  { return os; }
 }
 
 typedef fas::type_list_n<
@@ -132,7 +129,7 @@ int main()
   std::cout << brute_combinations<list>::type() << std::endl;
   std::cout << "brute_combinations<list>::iterations::value:" << std::endl;
   // gcc-3.3 20min
-  std::cout << brute_combinations<list>::iterations::value << std::endl;
+  std::cout << static_cast<int>( brute_combinations<list>::iterations::value ) << std::endl;
   // gcc-4.6 allocated over 14GB!!!
   //! std::cout << brute_combinations<list2>::type() << std::endl;
   
