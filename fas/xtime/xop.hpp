@@ -13,20 +13,16 @@ namespace fas {
 
 inline nanospan operator - (const nanospan& f,  const nanospan& s)
 {
-  bool flag = f.xsec < s.xsec;
-  return nanospan(
-    f.sec - s.sec - flag,
-    f.xsec - s.xsec + flag * FAS_NANOSEC
-  );
+  return f.xsec < s.xsec
+         ? nanospan( f.sec - s.sec - 1, f.xsec - s.xsec + FAS_NANOSEC )
+         : nanospan( f.sec - s.sec, f.xsec - s.xsec);
 }
 
 inline nanospan operator + (const nanospan& f,  const nanospan& s)
 {
-  bool flag = (f.xsec + s.xsec >= FAS_NANOSEC);
-  return nanospan(
-    f.sec + s.sec + flag,
-    f.xsec + s.xsec - flag * FAS_NANOSEC
-  );
+  return f.xsec + s.xsec >= FAS_NANOSEC
+        ? nanospan( f.sec + s.sec + 1, f.xsec + s.xsec - FAS_NANOSEC )
+        : nanospan( f.sec + s.sec, f.xsec + s.xsec );
 }
 
 inline nanospan operator / (const nanospan& s, const nanospan& f)

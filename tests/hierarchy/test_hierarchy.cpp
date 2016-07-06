@@ -13,6 +13,9 @@
 #include <fas/typemanip/super_subclass.hpp>
 
 //
+void test1();
+int  test2();
+
 struct A{};
 struct B:A{};
 struct C:B{};

@@ -13,6 +13,10 @@
 using namespace fas;
 using namespace fas::testing;
 
+bool test_run0();
+bool test_run1();
+bool test_run2();
+
 bool test_run0()
 {
   std::stringstream ss, sst;

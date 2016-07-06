@@ -39,7 +39,7 @@ UNIT(range2_unit, "")
   fas::typerange<std::stringstream>::range r  = fas::range(ss);
   size_t i=0;
   for (; r; ++i, ++r)
-    t << equal<assert, char>( *r, '0' + i ) << FAS_TESTING_FILE_LINE << std::endl << (int)*r;
+    t << equal<assert, char>( *r, '0' + i ) << FAS_TESTING_FILE_LINE << std::endl << static_cast<int>(*r);
   t << equal<assert, size_t>( i, 10 ) << FAS_TESTING_FILE_LINE;
 }
 
@@ -60,7 +60,7 @@ UNIT(irange_unit, "")
   {
     input_adapter rr = r;
     for (size_t j =0; j < 10 - i; ++j, ++rr)
-      t << equal<assert>( *rr, '0' + arr[i+j] ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i << " j==" << j << ", "<< (int)*rr << "!=" << '0' + arr[i];
+      t << equal<assert>( *rr, '0' + arr[i+j] ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i << " j==" << j << ", "<< static_cast<int>(*rr) << "!=" << '0' + arr[i];
   }
   t << equal<assert, size_t>( i, 10 ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i ;
 }

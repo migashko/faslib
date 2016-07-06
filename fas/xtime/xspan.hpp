@@ -34,38 +34,38 @@ struct xspan
     , xsec( convert<xspan<X>::xmax>(span.xsec))
   {}
 
-  xspan(xsec_t sec, xsec_t xsec)
-    : sec(sec)
-    , xsec(xsec)
+  xspan(xsec_t s, xsec_t xs)
+    : sec(s)
+    , xsec(xs)
   {}
 
-  xspan(short sec)
-    : sec(static_cast<xsec_t>(sec))
+  xspan(short s)
+    : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(unsigned short sec)
-    : sec(static_cast<xsec_t>(sec))
+  xspan(unsigned short s)
+    : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(int sec)
-    : sec(static_cast<xsec_t>(sec))
+  xspan(int s)
+    : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(unsigned int sec)
-    : sec(static_cast<xsec_t>(sec))
+  xspan(unsigned int s)
+    : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(long sec)
-    : sec(static_cast<xsec_t>(sec))
+  xspan(long s)
+    : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(unsigned long sec)
-    : sec(static_cast<xsec_t>(sec))
+  xspan(unsigned long s)
+    : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
@@ -179,13 +179,12 @@ struct xspan
 
 namespace detail
 {
-
   template<xsec_t M, xsec_t F, int Less>
   struct xconverter
   {
     static xsec_t convert(xsec_t xsec)
     {
-      return (xsec * M) / F;
+      return static_cast<xsec_t>( (xsec * M) / static_cast<double>(F) );
     }
   };
 

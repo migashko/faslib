@@ -32,8 +32,8 @@ public:
   {}
   
   
-  explicit trivial_range(T b)
-    : b(b)
+  explicit trivial_range(T b1)
+    : b(b1)
   {}
 
   const iterator begin() const { return b; }

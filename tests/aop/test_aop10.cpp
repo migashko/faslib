@@ -67,9 +67,9 @@ public:
     return _container;
   }
 
-  void set(const value_type& value)
+  void set(const value_type& val)
   {
-    super::get_aspect().template get<_value_>() = value;
+    super::get_aspect().template get<_value_>() = val;
   }
 
   const value_type& get() const

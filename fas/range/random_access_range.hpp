@@ -38,10 +38,10 @@ public:
 #endif
   {};
 
-  random_access_range(T b, T e)
-    : b(b), e(e)
+  random_access_range(T b1, T e1)
+    : b(b1), e(e1)
 #ifndef NDEBUG
-    , s(b)
+    , s(b1)
 #endif
   {};
 

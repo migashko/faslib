@@ -218,7 +218,7 @@ UNIT(initial_range_sequence_unit, "")
   *(r++) = 1;
   *(r) = 2;
   *(r) = 3;
-  t << equal<assert>( cnt.size(), (size_t)3 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, size_t>( cnt.size(), 3 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( cnt[0], 1 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( cnt[1], 2 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( cnt[2], 3 ) << FAS_TESTING_FILE_LINE;
@@ -237,7 +237,7 @@ UNIT(initial_range_associative_unit, "")
   *(r++) = 2;
   *(r) = 1;
   container_type::iterator itr = cnt.begin();
-  t << equal<assert>( cnt.size(), (size_t)3 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert>( cnt.size(), static_cast<size_t>(3) ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( *(itr++), 1 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( *(itr++), 2 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( *(itr++), 3 ) << FAS_TESTING_FILE_LINE;

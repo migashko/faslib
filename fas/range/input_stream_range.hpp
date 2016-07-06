@@ -31,8 +31,8 @@ public:
     : super(), _pos()
   {};
 
-  explicit input_stream_range(T b, T e)
-    : super(b, e), _pos()
+  explicit input_stream_range(T b1, T e1)
+    : super(b1, e1), _pos()
   {};
 
   input_stream_range<T, ValueType>& operator++() 

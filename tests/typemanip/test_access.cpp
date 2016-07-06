@@ -18,6 +18,17 @@
 #include <string>
 #include <cstring>
 
+class foo;
+const std::string& get_foo1(const foo& f);
+void set_foo1(foo& f, const std::string& value);
+int get_foo2(const foo& f);
+void set_foo2(foo& f, int value);
+const char* get_foo3(const foo& f);
+void set_foo3(foo& f, const char* value);
+const char* get_foo4(const foo& f);
+void set_foo4(foo& f, const char* value);
+
+
 struct foo
 {
   std::string foo1;
@@ -165,6 +176,7 @@ UNIT(mem_fun_unit, "")
   t << equal<assert, std::string> ( get_foo3()(fc), "foo3-test-array" ) << FAS_TESTING_FILE_LINE;
   t << equal<assert, std::string> ( get_foo4()(fc), "foo4-test-array" ) << FAS_TESTING_FILE_LINE;
 }
+
 
 const std::string& get_foo1(const foo& f)
 {

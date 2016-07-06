@@ -30,8 +30,8 @@ public:
     : b()
   {}
 
-  explicit output_range(T b)
-    : b(b)
+  explicit output_range(T b1)
+    : b(b1)
   {}
 
   operator bool () const { return true; }

@@ -145,6 +145,10 @@ struct test_class: aspect_class<test_aspect>
   ::ad_counters& get_counters() { return this->get_aspect().get< _counters_ >();}
 };
 
+bool test_c( const std::string& text, ad_counters c, int c0, int c1, int c2, int c3, int c4, int c5);
+std::vector<int> ids( int c0 = -1, int c1= -1, int c2= -1, int c3= -1, int c4= -1, int c5= -1);
+bool test_ids( const std::string& text, std::vector<int> ids1, std::vector<int> ids2);
+
 bool test_c( const std::string& text, ad_counters c, int c0, int c1, int c2, int c3, int c4, int c5)
 {
   if ( c.c0!=c0) { std::cout << text << ". invalid counter c0 "<< c.c0 << "!=" << c0 << std::endl;  return false;}
@@ -156,7 +160,7 @@ bool test_c( const std::string& text, ad_counters c, int c0, int c1, int c2, int
   return true;
 }
 
-std::vector<int> ids( int c0 = -1, int c1= -1, int c2= -1, int c3= -1, int c4= -1, int c5= -1)
+std::vector<int> ids( int c0, int c1, int c2, int c3, int c4, int c5)
 {
   std::vector<int> ids_test;
   if (c0!=-1) ids_test.push_back(c0);
@@ -167,6 +171,7 @@ std::vector<int> ids( int c0 = -1, int c1= -1, int c2= -1, int c3= -1, int c4= -
   if (c5!=-1) ids_test.push_back(c5);
   return ids_test;
 }
+
 
 bool test_ids( const std::string& text, std::vector<int> ids1, std::vector<int> ids2)
 {

@@ -14,6 +14,13 @@
 
 using namespace ::fas;
 
+void test1();
+void test2();
+void test3();
+void test4();
+void test5();
+void test6();
+
 void test1()
 {
   using namespace ::fas;

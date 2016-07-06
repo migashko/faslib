@@ -13,6 +13,17 @@
 using namespace fas;
 using namespace fas::testing;
 
+bool test_expect_out1();
+bool test_expect_out2();
+bool test_assert_out1();
+bool test_assert_out2();
+bool test_critical_out1();
+bool test_critical_out2();
+bool test_message_out();
+bool test_warning_out();
+bool test_error_out();
+bool test_fatal_out();
+
 bool test_expect_out1()
 {
   std::stringstream ss;

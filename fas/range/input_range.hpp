@@ -38,8 +38,8 @@ public:
     : b(), e()
   {};
 
-  explicit input_range(T b, T e)
-    : b(b), e(e)
+  explicit input_range(T b1, T e1)
+    : b(b1), e(e1)
   {};
 
   operator bool () const { return b!=e; }

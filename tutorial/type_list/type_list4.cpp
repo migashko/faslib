@@ -6,10 +6,16 @@
 namespace std
 {
   template<typename L, typename R>
-  ostream& operator << ( ostream& os, fas::type_list<L,R> )  { os << L::value << ", " << R(); return os;}
+  ostream& operator << ( ostream& os, fas::type_list<L,R> );
+  template<typename L>
+  ostream& operator << ( ostream& os, fas::type_list<L,fas::empty_list> );
+  ostream& operator << ( ostream& os, fas::empty_list );
+
+  template<typename L, typename R>
+  ostream& operator << ( ostream& os, fas::type_list<L,R> )  { os << static_cast<int>(L::value) << ", " << R(); return os;}
 
   template<typename L>
-  ostream& operator << ( ostream& os, fas::type_list<L,fas::empty_list> )  { os << L::value; return os; }
+  ostream& operator << ( ostream& os, fas::type_list<L,fas::empty_list> )  { os << static_cast<int>(L::value); return os; }
 
   ostream& operator << ( ostream& os, fas::empty_list )  { return os; }
 }
@@ -25,7 +31,7 @@ typedef fas::type_list_n<
 int main()
 {
   std::cout << "list : " << list() << std::endl;
-  std::cout << "type_count<int_<-1>>: " << fas::type_count<fas::int_<-1>, list >::value << std::endl;
+  std::cout << "type_count<int_<-1>>: " << static_cast<int>(fas::type_count<fas::int_<-1>, list >::value) << std::endl;
   std::cout << "unique<list>: " << fas::unique<list>::type() << std::endl;
   std::cout << "unique_first<list>: " << fas::unique_first<list>::type() << std::endl;
 

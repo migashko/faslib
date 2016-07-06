@@ -99,7 +99,7 @@ struct range_helper<C, typerange_flag::container >
   static inline range make_erange(CC& ctn)
   {
     range r = super::make_range(ctn);
-    r.advance(ctn.size());
+    r.advance( static_cast<difference_type>( ctn.size() ) );
     return r;
   }
 

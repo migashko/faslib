@@ -218,9 +218,12 @@ public:
 
   operator bool () const 
   { 
+    return _suite_counts;
+    /*
     return   _suite_counts.errors == 0 
           && _suite_counts.fails  == 0 
           && _suite_counts.fatals == 0;
+          */
   }
 
   bool run()

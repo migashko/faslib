@@ -34,10 +34,10 @@ public:
 #endif
   {};
 
-  explicit bidirectional_range(T b, T e)
-    : b(b), e(e)
+  explicit bidirectional_range(T b1, T e1)
+    : b(b1), e(e1)
 #ifndef NDEBUG
-    , s(b)
+    , s(b1)
 #endif
   {};
 

@@ -31,7 +31,7 @@ public:
   typedef typename container_range::iterator         iterator;
   typedef typename container_range::reverse_iterator reverse_iterator;
   typedef typename container_range::reverse_range    reverse_range;
-  
+  typedef typename container::size_type              size_type;
   typedef typename container_range::iterator_category iterator_category;
   typedef typename container_range::value_type        value_type;
   typedef typename container_range::difference_type   difference_type;
@@ -56,7 +56,7 @@ public:
 
   operator bool () const {  return _pos < static_cast<difference_type>(_container->size()); }
 
-  reference operator*() const { return (*_container)[_pos]; }
+  reference operator*() const { return (*_container)[ static_cast<size_type>(_pos) ]; }
 
   pointer operator ->() const  { return &( (*_container)[_pos] );}
 
