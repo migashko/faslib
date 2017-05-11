@@ -262,16 +262,18 @@ public:
     if (!_name.empty()) _out << " from " << _name;
     _out << ".";
 
-    /*try
-    {*/
+    try
+    {
       super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
-    /*}
+    }
     catch(const fail_error& )
     {
+      ++_unit_fails;
     }
     catch(const fatal_error& )
     {
-    }*/
+      ++_unit_fatals;
+    }
 
     _out << std::endl;
 
