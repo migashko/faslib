@@ -45,7 +45,7 @@ struct equal: statement<M>
   equal(const L& left, const R& right)
     : statement<M>( 
         static_cast<const T&>(left) == static_cast<const T&>(right), 
-        equal_message("Equal statement. ", left, "!=", right) 
+        equal_message("Equal statement. ", static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
       ) 
   {}
 
@@ -53,7 +53,7 @@ struct equal: statement<M>
   equal(const L& left, const R& right, const std::string& text)
     : statement<M>( 
         static_cast<const T&>(left) == static_cast<const T&>(right),
-        equal_message(text, left, "!=", right) 
+        equal_message(text, static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
       ) 
   {}
 };
