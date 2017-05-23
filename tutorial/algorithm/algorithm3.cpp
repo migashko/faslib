@@ -19,9 +19,14 @@ int flcm(int a, int b);
 
 int ffactorial(int i)
 {
-  int result = 1;
-  for ( ; i > 0; result*=i, --i);
-  return result;
+  if ( i > 0 && i < 11 ) 
+  {
+    int result = 1;
+    for ( ; i > 0; --i) 
+      result*=i;
+    return result;
+  }
+  return 0;
 }
 
 /*

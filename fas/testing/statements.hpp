@@ -41,8 +41,21 @@ public:
 template<typename M = assert, typename T = empty_type>
 struct equal: statement<M>
 {
-  equal(const T& left, const T& right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
-  equal(const T& left, const T& right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
+  template<typename L, typename R>
+  equal(const L& left, const R& right)
+    : statement<M>( 
+        static_cast<const T&>(left) == static_cast<const T&>(right), 
+        equal_message("Equal statement. ", left, "!=", right) 
+      ) 
+  {}
+
+  template<typename L, typename R>
+  equal(const L& left, const R& right, const std::string& text)
+    : statement<M>( 
+        static_cast<const T&>(left) == static_cast<const T&>(right),
+        equal_message(text, left, "!=", right) 
+      ) 
+  {}
 };
 
 template<typename M>

@@ -23,7 +23,7 @@ UNIT(range_unit, "")
     for (size_t j =0; j < sizeof(arr)/sizeof(int) - i; ++j)
     {
       t << equal<assert>( *r, arr[i] ) << FAS_TESTING_FILE_LINE;
-      t << equal<assert>( r[j], arr[i+j] ) << FAS_TESTING_FILE_LINE;
+      t << equal<assert, char>( r[j], arr[i+j] ) << FAS_TESTING_FILE_LINE;
     }
   }
 }

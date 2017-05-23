@@ -10,11 +10,11 @@
 #include <fas/range/range_category.hpp>
 #include <iterator>
 #include <cassert>
+#include <cstddef>
 
 
 
 namespace fas {
-
 
 template<typename T>
 class random_access_range
@@ -182,7 +182,8 @@ public:
     return *this;
   }
 
-  reference operator[] ( difference_type n ) const
+  template<typename Diff>
+  reference operator[] ( Diff n ) const
   {
     //assert( e >= b + n);
     return b[n];
