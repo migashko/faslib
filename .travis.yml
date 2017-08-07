@@ -17,10 +17,8 @@ compiler:
 env:
     # список переменных окружения, влияющих на матрицу сборки:
     - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug FAS_BUILD_ALL=ON
-      FAS_BUILD_ALL=ON   
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-   
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug FAS_BUILD_ALL=ON
+    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release FAS_BUILD_ALL=ON
 
 matrix:
     exclude:
@@ -34,9 +32,9 @@ matrix:
         - os:  osx
           env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
-install:
+#install:
     # скрипт настройки среды и установки зависимостей:
-    - source ci/travis/install-$TRAVIS_OS_NAME.sh
+    #    - source ci/travis/install-$TRAVIS_OS_NAME.sh
 
 script:
     # скрипт сборки и тестирования проекта:
@@ -46,16 +44,16 @@ script:
     - cmake --build .
     - ctest --output-on-failure
 
-deploy:
+#deploy:
     # выкладываем tagged-коммиты на GitHub Releases:
-    provider:     releases
-    file:         <package-file>
-    skip_cleanup: true
-    overwrite:    true
+    #provider:     releases
+    #file:         <package-file>
+    #skip_cleanup: true
+    #overwrite:    true
 
-    api_key:
-        secure:   <encrypted-github-token>
+    #api_key:
+      # secure:   <encrypted-github-token>
 
-    on:
-        tags:     true
+    #on:
+      # tags:     true
         
