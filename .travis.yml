@@ -11,7 +11,7 @@ os:
 
 compiler:
     # ... и с помощью GCC, и Clang
-    - gcc
+    - gcc-4.7
     - clang
 
 env:
