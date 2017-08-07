@@ -40,7 +40,7 @@ script:
     # скрипт сборки и тестирования проекта:
     - mkdir build
     - cd build
-    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU -DFAS_BUILD_ALL=ON
+    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU -DBUILD_TESTING=ON -DFAS_ENABLE_ALL_WARNING=ON
     - cmake --build .
     - ctest --output-on-failure
 
