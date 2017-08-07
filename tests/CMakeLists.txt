@@ -22,8 +22,6 @@ else(UNIX)
 
 endif(UNIX)
 
-enable_testing()
-
 include_directories(..)
 
 set(FAS_TESTING_CPP "${CMAKE_CURRENT_SOURCE_DIR}/../fas/testing/testing.cpp")

@@ -42,6 +42,7 @@ UNIT(unit4, "testing unit 4")
   t << is_true<expect>( false ) << "is_true<expect>( false ) third";
 }
 
+
 BEGIN_SUITE(suite1, "suite example description" )
   ADD_UNIT(unit1)
   ADD_UNIT(unit2)
@@ -49,12 +50,11 @@ BEGIN_SUITE(suite1, "suite example description" )
   ADD_UNIT(unit4)
 END_SUITE(suite1)
 
+
 int main(int argc, char* argv[])
 {
- /*
-  ::fas::testing::suite_counts fas_suite_suite1_run(int argc, char* argv[]);
-  ::fas::testing::suite_counts result = fas_suite_suite1_run(argc, argv);
+  ::fas::testing::suite_counts fas_suite1_suite_run(int argc, char* argv[]);
+  ::fas::testing::suite_counts result = fas_suite1_suite_run(argc, argv);
  return !(result.units == 3 && result.units_total == 4);
- */
 }
 

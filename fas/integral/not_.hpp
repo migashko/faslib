@@ -14,8 +14,8 @@ namespace fas{
 template<typename A>
 struct not_
 {
-  enum { value = !A::value};
-  typedef bool_< value > type;
+  enum { value = A::value==0 ? 1 : 0 };
+  typedef bool_< value!=0 > type;
 };
 
 }

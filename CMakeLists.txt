@@ -11,13 +11,13 @@ if ( FAS_BUILD_ALL OR BUILD_TESTING)
                          -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations \
                          -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual \
                          -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel \
-                         -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused")
-  endif (FAS_ENABLE_ALL_WARNING)
-
+                         -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror")
+  endif ()
+  enable_testing()
   add_subdirectory(tests)
   add_subdirectory(examples)
   add_subdirectory(tutorial)
-endif(FAS_BUILD_ALL)
+endif()
 
 # Enable compile-time check type_list and generate human readable error (increases compile time)
 #add_definitions(-DFASLIB_TYPE_LIST_CHECK)
