@@ -16,9 +16,9 @@ compiler:
 
 env:
     # список переменных окружения, влияющих на матрицу сборки:
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug FAS_BUILD_ALL=ON
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug FAS_BUILD_ALL=ON
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release FAS_BUILD_ALL=ON
+    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug 
+    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
 matrix:
     exclude:
@@ -40,7 +40,7 @@ script:
     # скрипт сборки и тестирования проекта:
     - mkdir build
     - cd build
-    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
+    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU -DFAS_BUILD_ALL=ON
     - cmake --build .
     - ctest --output-on-failure
 
