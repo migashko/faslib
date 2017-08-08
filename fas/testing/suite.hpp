@@ -49,6 +49,7 @@ public:
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
+    , _unit_count(0)
     , _unit_errors(0)
     , _unit_fails(0)
     , _unit_fatals(0)

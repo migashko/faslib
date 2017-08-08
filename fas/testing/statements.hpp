@@ -30,7 +30,7 @@ template<typename M>
 struct statement
 {
 protected:
-  statement(const statement<M>&){}
+  statement(const statement<M>&):result(false){}
 public:
   bool result;
   std::string text;
@@ -107,28 +107,28 @@ template<typename M = assert>
 struct equal_str: statement<M>
 {
 
-  equal_str(std::string left, std::string right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
+  equal_str(const std::string& left, const std::string& right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
 
-  equal_str(std::string left, std::string right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
-
-  template<typename R>
-  equal_str(std::string left, R right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
+  equal_str(const std::string& left, const std::string& right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
 
   template<typename R>
-  equal_str(std::string left, R right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
+  equal_str(const std::string& left, R right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
+
+  template<typename R>
+  equal_str(const std::string& left, R right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
 };
 
 template<typename M = assert>
 struct is_true: statement<M>
 {
-  is_true(bool value): statement<M>(value, "Is true statement. ") {}
+  explicit is_true(bool value): statement<M>(value, "Is true statement. ") {}
   is_true(bool value, const std::string& text): statement<M>(value, text) {}
 };
 
 template<typename M = assert>
 struct is_false: statement<M>
 {
-  is_false(bool value): statement<M>(!value, "Is false statement. "){}
+  explicit is_false(bool value): statement<M>(!value, "Is false statement. "){}
   is_false(bool value, const std::string& text): statement<M>(!value, text){}
 };
 
@@ -145,18 +145,18 @@ struct info: statement<M>
 struct message
   : info< trace, _message_ >
 {
-   message(const std::string& txt)
+   explicit message(const std::string& txt)
     : info< trace, _message_ >(true, txt)
    {}
 };
 
-struct warning: info< trace, _warning_ > { warning(const std::string& txt): info< trace, _warning_ >(false, txt) {} };
+struct warning: info< trace, _warning_ > { explicit warning(const std::string& txt): info< trace, _warning_ >(false, txt) {} };
 
-struct error: info< expect, _error_ > { error(const std::string& txt): info< expect, _error_ >(false, txt) {} };
+struct error: info< expect, _error_ > { explicit error(const std::string& txt): info< expect, _error_ >(false, txt) {} };
 
-struct fail: info< assert, _fail_ > { fail(const std::string& txt): info< assert, _fail_ >(false, txt) {} };
+struct fail: info< assert, _fail_ > { explicit fail(const std::string& txt): info< assert, _fail_ >(false, txt) {} };
 
-struct fatal: info< critical, _fatal_> { fatal(const std::string& txt): info< critical, _fatal_ >(false, txt) {} };
+struct fatal: info< critical, _fatal_> { explicit fatal(const std::string& txt): info< critical, _fatal_ >(false, txt) {} };
 
 typedef fas::type_list_n<
   std::string,
@@ -179,7 +179,7 @@ template<typename V, typename H, typename L>
 void os_write(std::ostream& s, const V& v, fas::type_list<H, L> ) { os_write(s, v, L() ); }
 
 template<typename L, typename R>
-std::string equal_message(std::string msg, const L& left, std::string op, const R& right)
+std::string equal_message(const std::string& msg, const L& left, const std::string& op, const R& right)
 {
   std::stringstream ss;
   ss << msg << "( ";
