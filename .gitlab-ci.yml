@@ -1,0 +1,7 @@
+faslib:
+  script:
+    - mkdir build
+    - cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DFAS_BUILD_ALL=ON -DFAS_ENABLE_ALL_WARNING=ON
+    - cmake --build .
+    - ctest --output-on-failure
