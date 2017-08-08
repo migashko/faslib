@@ -62,7 +62,7 @@ struct is_organized_impl3< type_list<L, R> >
 {
   enum { left_value = is_type_list< L >::value };
   enum { right_value = is_type_list< R >::value };
-  enum { value = is_organized_impl5< type_list<L, R>, !left_value && right_value>::value };
+  enum { value = is_organized_impl5< type_list<L, R>, (!left_value && right_value) >::value };
 };
 
 template<>
@@ -86,8 +86,7 @@ struct is_organized_impl4<metalist::type_list, L>
 {
   enum { left_value = is_type_list< typename L::left_type >::value };
   enum { right_value = is_type_list< typename L::right_type >::value };
-
-  enum { value = is_organized_impl5<L, !left_value && right_value>::value };
+  enum { value = is_organized_impl5<L, (!left_value && right_value) >::value };
 };
 
 template<typename L>
