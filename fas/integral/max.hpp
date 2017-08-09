@@ -8,7 +8,7 @@
 #define FAS_INTEGRAL_MAX_HPP
 
 #include <fas/integral/int_.hpp>
-#include <fas/typename/if_c.hpp>
+#include <fas/typemanip/if_c.hpp>
 
 #ifndef FAS_NO_MINMAX_UNDEF
 #  ifdef max

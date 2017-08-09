@@ -21,7 +21,7 @@ class provider
 {
   typedef typename T::aspect::template advice_cast<_value_>::type value_type;
 public:
-  provider(T* t)
+  explicit provider(T* t)
   {
     _target = t;
   }

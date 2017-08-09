@@ -78,6 +78,7 @@ struct is_int< fas::int_<i> >
   enum {value=1};
 };
 
+static const int init = fas::rand< fas::int_<111> >::value;
 
 int main()
 {
@@ -87,7 +88,7 @@ int main()
   using fas::p;
   using fas::int_;
 
-  const int init = fas::rand<int_<111> >::value;
+  
   typedef fas::generate<
     fas::int_<10>,
     fas::generator<

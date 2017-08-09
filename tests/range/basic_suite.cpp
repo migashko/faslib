@@ -65,7 +65,7 @@ UNIT(output1_unit, "")
 
   container_type cnt1;
 
-  iterator cnt1itr(cnt1);
+  //iterator cnt1itr(cnt1);
   range_type r1 = range( iterator(cnt1) );
   output_test(t, r1);
 

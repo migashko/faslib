@@ -6,5 +6,5 @@ if (HAVE_RT_LIB)
   target_link_libraries(test_xspan rt)
 endif ()
 
-add_test(xtime_xspan    test_xspan)
-add_test(xtime_nanotime test_nanotime)
+add_test(test_xspan    test_xspan)
+add_test(test_nanotime test_nanotime)

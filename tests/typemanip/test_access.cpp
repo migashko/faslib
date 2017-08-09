@@ -65,8 +65,8 @@ struct foo
 
   const char* get_foo4() const { return foo4;}
   void set_foo4(const char* value) { std::strcpy(foo4, value);}
-
-
+private:
+  foo(const foo&) {}
 };
 
 UNIT(member_unit, "")

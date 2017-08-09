@@ -11,11 +11,14 @@
 
 namespace fas{
 
-//template<typename V, typename VT, void (V::* mg)(VT), typename VVT = typename remove_const_reference<VT>::type >
 template<typename V, typename VT, void (*fun)(V, VT), typename VVT = typename remove_const_reference<VT>::type>
 struct global_fun_set
 {
-  global_fun_set():_obj(), _value() {}
+  // cppcheck-suppress uninitMemberVar  
+  global_fun_set()
+    : _obj()
+    , _value() 
+  {}
 
   VVT& operator()(typename remove_const_reference<V>::type& v)
   {
@@ -37,7 +40,10 @@ private:
 template<typename V, typename VT, void (*fun)(V, VT), typename VVT >
 struct global_fun_set<V, VT, fun, VVT*>
 {
-  global_fun_set():_obj(), _value() {}
+  global_fun_set()
+    : _obj()
+    , _value() 
+  {}
 
   VVT* operator()(typename remove_const_reference<V>::type& v, VVT* buffer)
   {

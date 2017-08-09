@@ -24,10 +24,8 @@ std::vector< std::vector<int> > fbrute_combinations(std::vector<int> v)
   size_t size = factorial(v.size());
   std::vector< std::vector<int> > result;
   result.push_back(v);
-  int i = 0;
   while ( result.size() < size )
   {
-    ++i;
     std::random_shuffle(v.begin(), v.end());
     result.push_back(v);
     std::sort(result.begin(), result.end());
