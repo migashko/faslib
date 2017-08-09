@@ -24,8 +24,8 @@ UNIT(unit1, "testing unit 1")
 UNIT(unit2, "testing unit 2")
 {
   t << is_true<expect>( false ) << "is_true<expect>( false ) first";
-  t << is_true<assert>( false ) << "is_true<expect>( false ) second";
-  t << is_true<assert>( false ) << "is_true<expect>( false ) third";
+  t << is_true<expect>( false ) << "is_true<expect>( false ) second";
+  t << is_true<expect>( false ) << "is_true<expect>( false ) third";
 }
 
 UNIT(unit3, "testing unit 3")
@@ -53,8 +53,10 @@ END_SUITE(suite1)
 
 int main(int argc, char* argv[])
 {
-  ::fas::testing::suite_counts fas_suite1_suite_run(int argc, char* argv[]);
-  ::fas::testing::suite_counts result = fas_suite1_suite_run(argc, argv);
- return !(result.units == 3 && result.units_total == 4);
+  using namespace ::fas::testing;
+  suite_counts fas_suite1_suite_run(int argc, char* argv[]);
+  suite_counts result = fas_suite1_suite_run(argc, argv);
+  std::cout << MESSAGE << "result.units=" << result.units << " result.units_total=" << result.units_total << std::endl;
+  return !(result.units==2 && result.units_total == 4);
 }
 
