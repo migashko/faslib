@@ -24,7 +24,7 @@ struct assert;
 struct critical;
 
 template<typename L, typename R>
-std::string equal_message(std::string msg, const L& left, std::string op, const R& right);
+std::string equal_message(const std::string& msg, const L& left, const std::string& op, const R& right);
 
 template<typename M>
 struct statement
