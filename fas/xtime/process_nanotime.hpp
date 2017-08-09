@@ -33,9 +33,8 @@ inline nanospan process_nanotime()
     return microspan(ru.ru_utime.tv_sec, ru.ru_utime.tv_usec)+ 
            microspan(ru.ru_stime.tv_sec, ru.ru_stime.tv_usec);
   }
-#endif
   return nanotime();
-
+#endif
 }
 
 }

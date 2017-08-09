@@ -31,7 +31,7 @@ public:
     ValueType keep_;
   public:
     explicit proxy (ValueType c) : keep_(c){ }
-    ValueType operator*() {return keep_;}
+    ValueType operator*() const { return keep_; }
   };
   
   input_range()

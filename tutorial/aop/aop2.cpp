@@ -5,14 +5,14 @@ class dredd
   // ...
 public:
 
-  void dredd_say()
+  void dredd_say() const
   {
     this->say();
   }
 
 protected:
 
-  virtual void say()
+  virtual void say() const
   {
     this->one();
     this->two();
@@ -20,10 +20,10 @@ protected:
     this->strike();
   }
 
-  virtual void one()    {  std::cout<<"one, ";   }
-  virtual void two()    {  std::cout<<"two, ";   }
-  virtual void three()  {  std::cout<<"three, "; }
-  virtual void strike() {  std::cout<<"strike!"; }
+  virtual void one() const    {  std::cout<<"one, ";   }
+  virtual void two() const   {  std::cout<<"two, ";   }
+  virtual void three() const  {  std::cout<<"three, "; }
+  virtual void strike() const{  std::cout<<"strike!"; }
 };
 
 class jon:
@@ -32,14 +32,14 @@ class jon:
   // ...
 public:
 
-  void jon_say()
+  void jon_say() const
   {
     dredd::say();
   }
 
 protected:
 
-  virtual void one()
+  virtual void one() const
   {
     std::cout<<"ONE, ";
   }
@@ -51,14 +51,14 @@ class bob:
   // ...
 public:
 
-  void bob_say()
+  void bob_say() const
   {
     this->say();
   }
 
 protected:
 
-  virtual void say()
+  virtual void say() const
   {
     dredd::say();
     four();
@@ -67,11 +67,11 @@ protected:
     seven();
   }
 
-  virtual void four()  { std::cout<<"four, "; }
-  virtual void five()  { std::cout<<"five, "; }
-  virtual void six()   { std::cout<<"six, "; }
-  virtual void seven() { std::cout<<"seven!"; }
-  virtual void strike(){ }
+  virtual void four() const  { std::cout<<"four, "; }
+  virtual void five() const { std::cout<<"five, "; }
+  virtual void six() const  { std::cout<<"six, "; }
+  virtual void seven() const{ std::cout<<"seven!"; }
+  virtual void strike() const{ }
 };
 
 class sam:
@@ -80,7 +80,7 @@ class sam:
 {
   // ...
 public:
-  void sam_say()
+  void sam_say() const
   {
     bob::say();
   }

@@ -13,13 +13,13 @@ namespace fas{ namespace system{
 
 inline int isatty(int fd)
 {
-
 #ifdef HAVE__ISATTY_FUNC
   return ::_isatty(fd);
 #elif defined(HAVE_ISATTY_FUNC)
   return ::isatty(fd);
-#endif
+#else
   return 0;
+#endif
 }
 
 inline bool is_atty_stdout()
@@ -38,8 +38,8 @@ inline bool is_atty_stderr()
 #ifdef _POSIX_VERSION
   return isatty(fileno(stderr));
 #else
-#endif
   return false;
+#endif
 }
 
 

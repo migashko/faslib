@@ -61,7 +61,7 @@ struct f_unit_run
   }
 
   template<typename T, typename U>
-  void print_fail(T& t, U& u)
+  static void print_fail(T& t, U& u)
   {
     t.out() << std::endl << UNIT_FAIL << u.fas_name();
     if ( !u.fas_desc().empty() )

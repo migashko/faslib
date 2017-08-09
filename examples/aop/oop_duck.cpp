@@ -111,7 +111,7 @@ class Duck
       flyBehaviour = fb;
     }
 
-    void floatAround()
+    static void floatAround()
     {
       cout << "The duck bobs peacefully on the surface of the water." << endl;
     }

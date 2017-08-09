@@ -3,31 +3,31 @@
 struct say_one
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"one, "; }
+  void operator()(T&) const {  std::cout<<"one, "; }
 };
 
 struct say_two
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"two, "; }
+  void operator()(T&) const {  std::cout<<"two, "; }
 };
 
 struct say_three
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"three, "; }
+  void operator()(T&) const {  std::cout<<"three, "; }
 };
 
 struct say_strike
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"strike!"; }
+  void operator()(T&) const {  std::cout<<"strike!"; }
 };
 
 struct say_123s
 {
   template<typename T>
-  void operator()(T& t)
+  void operator()(T& t) const 
   {
     t._one(t);
     t._two(t);
@@ -47,7 +47,7 @@ class dredd
 {
   // ...
 public:
-  void dredd_say()
+  void dredd_say() const 
   {
     _say(*this);
   }
@@ -64,7 +64,7 @@ public:
 struct say_ONE
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"ONE, "; }
+  void operator()(T&) const {  std::cout<<"ONE, "; }
 };
 
 /// /////////////////////////////////////////////////
@@ -80,7 +80,7 @@ class jon
 {
   // ...
 public:
-  void jon_say()
+  void jon_say() const 
   {
     _say(*this);
   }
@@ -98,31 +98,31 @@ public:
 struct say_four
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"four, "; }
+  void operator()(T&) const {  std::cout<<"four, "; }
 };
 
 struct say_five
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"five, "; }
+  void operator()(T&) const {  std::cout<<"five, "; }
 };
 
 struct say_six
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"six, "; }
+  void operator()(T&) const {  std::cout<<"six, "; }
 };
 
 struct say_seven
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"seven!"; }
+  void operator()(T&) const {  std::cout<<"seven!"; }
 };
 
 struct say_1234567
 {
   template<typename T>
-  void operator()(T& t)
+  void operator()(T& t) const 
   {
     t._one(t);
     t._two(t);
@@ -148,7 +148,7 @@ class bob
 {
   // ...
 public:
-  void bob_say()
+  void bob_say() const 
   {
     _say(*this);
   }
@@ -178,7 +178,7 @@ class sam
 {
   // ...
 public:
-  void sam_say()
+  void sam_say() const 
   {
     _say(*this);
   }

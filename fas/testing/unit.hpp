@@ -44,12 +44,12 @@ struct fas_##name##_unit: ::fas::testing::fas_unit\
   fas_##name##_unit(): fas_unit( #name, desc) { }\
 \
   template<typename T>\
-  void operator()(T& t);\
+  void operator()(T& t) const;\
 };\
 \
 struct fas_##name##_tag;\
 struct fas_##name##_type_list: ::fas::type_list< ::fas::advice<fas_##name##_tag, fas_##name##_unit>, ::fas::type_list< ::fas::group< ::fas::testing::_units_, fas_##name##_tag> > > {};\
 template<typename T>\
-void fas_##name##_unit::operator()(T& t)
+void fas_##name##_unit::operator()(T& t) const
 
 #endif

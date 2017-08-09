@@ -4,9 +4,9 @@
 class foo1
 {
 public:
-  void method1() { std::cout << "method-1.1" << std::endl; }
-  void method2() { std::cout << "method-1.2" << std::endl; }
-  void method3() { std::cout << "method-1.3" << std::endl; }
+  static void method1() { std::cout << "method-1.1" << std::endl; }
+  static void method2() { std::cout << "method-1.2" << std::endl; }
+  static void method3() { std::cout << "method-1.3" << std::endl; }
 };
 
 /// /////////////////////////////////////////////////////
@@ -18,19 +18,19 @@ struct _method3_;
 struct ad_method1
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method-2.1" << std::endl; }
+  void operator()(T&)  const { std::cout << "method-2.1" << std::endl; }
 };
 
 struct ad_method2
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method-2.2" << std::endl; }
+  void operator()(T&)  const { std::cout << "method-2.2" << std::endl; }
 };
 
 struct ad_method3
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method-2.3" << std::endl; }
+  void operator()(T&)  const { std::cout << "method-2.3" << std::endl; }
 };
 
 typedef fas::advice<_method1_, ad_method1> method1_advice;
@@ -50,9 +50,9 @@ struct foo2_aspect: fas::aspect< advice_list >{};
     : public fas::aspect_class< typename fas::merge_aspect<A, foo2_aspect>::type >
   {
   public:
-    void method1() { this->get_aspect().template get<_method1_>()(*this); }
-    void method2() { this->get_aspect().template get<_method2_>()(*this); }
-    void method3() { this->get_aspect().template get<_method3_>()(*this); }
+    void method1() const { this->get_aspect().template get<_method1_>()(*this); }
+    void method2() const { this->get_aspect().template get<_method2_>()(*this); }
+    void method3() const { this->get_aspect().template get<_method3_>()(*this); }
 
   };
 
@@ -61,13 +61,13 @@ struct foo2_aspect: fas::aspect< advice_list >{};
 struct ad_method3_2
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method-3.2" << std::endl; }
+  void operator()(T&) const { std::cout << "method-3.2" << std::endl; }
 };
 
 struct ad_method3_3
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method-3.3" << std::endl; }
+  void operator()(T&) const { std::cout << "method-3.3" << std::endl; }
 };
 
 struct foo3_aspect: fas::aspect< fas::type_list_n<

@@ -30,7 +30,7 @@ template<typename M>
 struct statement
 {
 protected:
-  statement(const statement<M>&):result(false){}
+  statement(const statement<M>&):result(false), text(){}
 public:
   bool result;
   std::string text;

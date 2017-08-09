@@ -8,6 +8,6 @@ faslib:
     - cmake -DCMAKE_BUILD_TYPE=Release -DFAS_BUILD_ALL=ON -DFAS_ENABLE_ALL_WARNING=ON ..
     - cmake --build .
     - ctest --output-on-failure
-    cd -
-    - cppcheck --error-exitcode=1 --force -I ./ --quiet --enable=all --std=c++11 --suppress=missingIncludeSystem  --inline-suppr .
-    - cppcheck --error-exitcode=1 --force -I ./ --quiet --enable=all --std=c++03 --suppress=missingIncludeSystem  --inline-suppr .
+    - cd ..
+    - cppcheck --inconclusive  --error-exitcode=1 --force -I ./ --quiet --enable=all --std=c++11 --suppress=missingIncludeSystem  --inline-suppr .
+    - cppcheck --inconclusive  --error-exitcode=1 --force -I ./ --quiet --enable=all --std=c++03 --suppress=missingIncludeSystem  --inline-suppr .

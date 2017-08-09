@@ -16,31 +16,31 @@ struct _after_say_;
 struct say_one
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"one, "; }
+  void operator()(T&) const {  std::cout<<"one, "; }
 };
 
 struct say_two
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"two, "; }
+  void operator()(T&) const {  std::cout<<"two, "; }
 };
 
 struct say_three
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"three, "; }
+  void operator()(T&) const {  std::cout<<"three, "; }
 };
 
 struct say_strike
 {
   template<typename T>
-  void operator()(T&) {  std::cout<<"strike!"; }
+  void operator()(T&) const {  std::cout<<"strike!"; }
 };
 
 struct say_123s
 {
   template<typename T>
-  void operator()(T& t)
+  void operator()(T& t) const
   {
     t.get_aspect().template getg<_before_say_>()(t);
 
@@ -68,7 +68,7 @@ class dredd:
 {
   // ...
 public:
-  void dredd_say()
+  void dredd_say() const
   {
     this->get_aspect().template get<_say_>()(*this);
   }
@@ -79,13 +79,13 @@ public:
 struct left_bracket
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"["; }
+  void operator()(T&) const { std::cout<<"["; }
 };
 
 struct right_bracket
 {
   template<typename T>
-  void operator()(T&) { std::cout<<"]"; }
+  void operator()(T&) const { std::cout<<"]"; }
 };
 
 struct _before1_;

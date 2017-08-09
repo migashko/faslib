@@ -113,7 +113,7 @@ struct _output_;
 struct ad_final_chain
 {
   template<typename T>
-  void operator()(T& , int value)
+  void operator()(T& , int value) const
   {
     std::cout << "Done(" << value << ")" << std::endl;
   }

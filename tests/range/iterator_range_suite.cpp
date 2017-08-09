@@ -18,10 +18,10 @@ UNIT(iterator_range_unit, "")
   typedef std::vector<int> vint_type;
 
   vint_type vint;
-  const vint_type& vintc = vint;
   for (int i=0; i < 5; ++i)
     vint.push_back(i);
 
+  const vint_type& vintc = vint;
   typedef fas::typerange<vint_type::iterator>::range vint_range;
   vint_range r1 = fas::range( vint.begin(), vint.end() );
   for (int i=0; i < 5; ++i, ++r1)

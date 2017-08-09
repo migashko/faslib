@@ -23,7 +23,7 @@ struct _display_;
 struct ad_quack 
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "The duck says: Quack!" << std::endl;
   }
@@ -32,7 +32,7 @@ struct ad_quack
 struct ad_mute_quack
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "The duck says: <<< Silence >>>" << std::endl;
   }
@@ -45,7 +45,7 @@ struct ad_mute_quack
 struct ad_fly_with_wings
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "The duck flies into the friendly skies!" << std::endl;
   }
@@ -54,7 +54,7 @@ struct ad_fly_with_wings
 struct ad_fly_no_way
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "I can't fly!" << std::endl;
   }
@@ -63,7 +63,7 @@ struct ad_fly_no_way
 struct ad_fly_with_rocket
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "The duck flies through the air using a rocket!" << std::endl;
   }
@@ -74,7 +74,7 @@ struct ad_fly_with_rocket
 struct ad_float_around
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "The duck bobs peacefully on the surface of the water." << std::endl;
   }
@@ -89,7 +89,7 @@ struct ad_float_around
 struct ad_display_mallard
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "I'm a real mallard duck!" << std::endl;
   }
@@ -98,7 +98,7 @@ struct ad_display_mallard
 struct ad_display_rubber
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "I'm a rubber-ducky!" << std::endl;
   }
@@ -107,7 +107,7 @@ struct ad_display_rubber
 struct ad_display_painted
 {
   template<typename T>
-  void operator()(T&)
+  void operator()(T&) const
   {
     std::cout << "I'm a painted wooden duck!" << std::endl;
   }
@@ -150,22 +150,22 @@ class duck
   : public fas::aspect_class<A>
 {
 public:
-  void quack()
+  void quack() const
   {
     this->get_aspect().template get<_quack_>()(*this);
   }
 
-  void fly()
+  void fly() const
   {
     this->get_aspect().template get<_fly_>()(*this);
   }
 
-  void float_around()
+  void float_around() const
   {
     this->get_aspect().template get<_float_>()(*this);
   }
 
-  void display()
+  void display() const
   {
     this->get_aspect().template get<_display_>()(*this);
   }

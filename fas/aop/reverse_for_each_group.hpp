@@ -17,7 +17,7 @@ template<typename TgList, typename T, typename F>
 inline F reverse_for_each_group(T& t, F f)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  return detail::group_helper().for_each( typename reverse<tag_list>::type(), t, f);
+  return detail::group_helper::for_each( typename reverse<tag_list>::type(), t, f);
 }
 
 }

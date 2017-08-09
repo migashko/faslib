@@ -4,8 +4,8 @@ class dredd
 {
   // ...
 public:
-  
-  void dredd_say()
+  // cppcheck-suppress functionStatic
+  void dredd_say() const
   {
     std::cout << "one, two, three, strike!";
   }

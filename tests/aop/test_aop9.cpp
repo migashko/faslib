@@ -23,7 +23,7 @@ template<int P>
 struct ad_test
 {
   template<typename T>
-  void operator()( T& )
+  void operator()( T& ) const
   {
     test_values.push_back(P);
   }

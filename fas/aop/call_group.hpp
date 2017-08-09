@@ -16,42 +16,42 @@ template<typename TgList, typename T>
 inline void call_group(T& t)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  detail::group_helper().call( tag_list(), t);
+  detail::group_helper::call( tag_list(), t);
 }
 
 template<typename TgList, typename T, typename P1>
 inline void call_group(T& t, P1 p1)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  detail::group_helper().call( tag_list(), t, p1);
+  detail::group_helper::call( tag_list(), t, p1);
 }
 
 template<typename TgList, typename T, typename P1, typename P2>
 inline void call_group(T& t, P1 p1, P2 p2)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  detail::group_helper().call( tag_list(), t, p1, p2);
+  detail::group_helper::call( tag_list(), t, p1, p2);
 }
 
 template<typename TgList, typename T, typename P1, typename P2, typename P3>
 inline void call_group(T& t, P1 p1, P2 p2, P3 p3)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  detail::group_helper().call( tag_list(), t, p1, p2, p3);
+  detail::group_helper::call( tag_list(), t, p1, p2, p3);
 }
 
 template<typename TgList, typename T, typename P1, typename P2, typename P3, typename P4>
 inline void call_group(T& t, P1 p1, P2 p2, P3 p3, P4 p4)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  detail::group_helper().call( tag_list(),t, p1, p2, p3, p4);
+  detail::group_helper::call( tag_list(),t, p1, p2, p3, p4);
 }
 
 template<typename TgList, typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
 inline void call_group(T& t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  detail::group_helper().call( tag_list(), t, p1, p2, p3, p4, p5);
+  detail::group_helper::call( tag_list(), t, p1, p2, p3, p4, p5);
 }
 
 }
