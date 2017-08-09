@@ -16,6 +16,8 @@ add_executable(
 )
 
 add_test(range test_range)
+add_test(NAME range-leak COMMAND valgrind --leak-check=full ./test_range)
+
 
 
 

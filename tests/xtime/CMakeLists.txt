@@ -8,3 +8,6 @@ endif ()
 
 add_test(test_xspan    test_xspan)
 add_test(test_nanotime test_nanotime)
+
+add_test(NAME test_xspan-leak COMMAND valgrind --leak-check=full ./test_xspan)
+add_test(NAME test_test_nanotime COMMAND valgrind --leak-check=full ./test_nanotime)
