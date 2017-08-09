@@ -4,7 +4,7 @@ class dredd
 {
   // ...
 public:
-  // cppcheck-suppress functionStatic
+  // ppcheck-suppress functionStatic
   void dredd_say() const
   {
     this->one();
