@@ -9,4 +9,4 @@ faslib:
     - cmake --build .
     - ctest --output-on-failure
     - cd ..
-    - ./.cppcheck/cppcheck.sh
+    - ./.ci/cppcheck.sh

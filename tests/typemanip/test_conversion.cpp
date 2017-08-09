@@ -33,18 +33,12 @@ struct VB: virtual A{};
 struct VC: virtual A{};
 struct VD: virtual VB, virtual VC{};
 
-// cppcheck-suppress functionStatic
-struct M0 { void member0() {}; };
-// cppcheck-suppress functionStatic
-struct M1: M0 { void member1(int) {}; };
-// cppcheck-suppress functionStatic
-struct M2: M1 { void member2(int, int) {}; };
-// cppcheck-suppress functionStatic
-struct M3: M2 { void member3(int, int, int) {}; };
-// cppcheck-suppress functionStatic
-struct M4: M3 { void member4(int, int, int, int) {}; };
-// cppcheck-suppress functionStatic
-struct M5: M4 { void member5(int, int, int, int, int) {}; };
+struct M0 { void member0(); };
+struct M1: M0 { void member1(int); };
+struct M2: M1 { void member2(int, int); };
+struct M3: M2 { void member3(int, int, int); };
+struct M4: M3 { void member4(int, int, int, int); };
+struct M5: M4 { void member5(int, int, int, int, int); };
 
 // cppcheck-suppress unusedStructMember
 FAS_HAS_TYPENAME(has_test_type, test_type)
