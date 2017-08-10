@@ -189,6 +189,7 @@ public:
   {
     _status_check();
     this->set_status_(unit_status::error);
+    _unit_errors++;
     typename info<expect, F>::manip manip = 0;
     _out << std::endl << manip << st.text;
     return _out;
@@ -217,14 +218,9 @@ public:
   }
 
 
-  operator bool () const 
+  bool ok() const 
   { 
     return _suite_counts;
-    /*
-    return   _suite_counts.errors == 0 
-          && _suite_counts.fails  == 0 
-          && _suite_counts.fatals == 0;
-          */
   }
 
   bool run()
@@ -278,7 +274,7 @@ public:
 
     _out << std::endl;
 
-    if ( *this )
+    if ( this->ok() )
     {
       _out << SUITE_END << std::endl;
       _out << PASSED << _suite_counts.units_passed << " tests." << std::endl;
@@ -288,10 +284,9 @@ public:
       _out << SUITE_FAIL << "Suite '" << _name << "' fail. " << _desc << std::endl;
       _out << RED_PASSED << _suite_counts.units_passed << " tests." << std::endl;
       _out << FAIL << _suite_counts.units - _suite_counts.units_passed << " tests." << std::endl;
-
     }
 
-    return *this;
+    return this->ok();
   }
 
 private:

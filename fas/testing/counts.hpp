@@ -24,7 +24,7 @@ struct counts
   void operator += ( const counts& c )
   {
     errors += c.errors;
-    fails += c.fails;
+    fails  += c.fails;
     fatals += c.fatals;
   }
   

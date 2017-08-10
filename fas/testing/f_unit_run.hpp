@@ -23,36 +23,9 @@ struct f_unit_run
     typename T::aspect::template advice_cast<Tg>::type &u = t.get_aspect().template get<Tg>();
 
     t.out() << std::endl << RUN << u.fas_name();
-    /*try
-    {*/
-      t.unit_begin(u);
-      u(t);
-      t.unit_end(u);
-    /*}
-    catch(const fail_error& )
-    {
-      t.unit_end(u);
-    }
-    catch(const fatal_error&)
-    {
-      t.unit_end(u);
-      this->print_fail(t, u);
-      throw;
-    }
-    catch(const std::exception& e)
-    {
-      t.unit_end(u);
-      t.out() << std::endl << EXCEPT << e.what() << std::endl;
-      this->print_fail(t, u);
-      throw;
-    }
-    catch(...)
-    {
-      t.unit_end(u);
-      t.out() << std::endl << EXCEPT << "Unhandled exception." << std::endl;
-      this->print_fail(t, u);
-      throw;
-    }*/
+    t.unit_begin(u);
+    u(t);
+    t.unit_end(u);
 
     if (u.fas_ready())
       t.out() << std::endl << OK;
