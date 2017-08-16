@@ -50,10 +50,10 @@ struct equal: statement<M>
   {}
 
   template<typename L, typename R>
-  equal(const L& left, const R& right, const std::string& text)
+  equal(const L& left, const R& right, const std::string& txt)
     : statement<M>( 
         static_cast<const T&>(left) == static_cast<const T&>(right),
-        equal_message(text, static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
+        equal_message(txt, static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
       ) 
   {}
 };
@@ -65,14 +65,14 @@ struct equal<M, empty_type>: statement<M>
   equal(const L& left, const R& right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
 
   template<typename L, typename R>
-  equal(const L& left, const R& right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
+  equal(const L& left, const R& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, "!=", right) ) {}
 };
 
 template<typename M = assert, typename T = empty_type>
 struct not_equal: statement<M>
 {
   not_equal(const T& left, const T& right): statement<M>( left != right, equal_message("Not equal statement. ", left, "==", right) ) {}
-  not_equal(const T& left, const T& right, const std::string& text): statement<M>( left != right, equal_message(text, left, "==", right) ) {}
+  not_equal(const T& left, const T& right, const std::string& txt): statement<M>( left != right, equal_message(txt, left, "==", right) ) {}
 };
 
 template<typename M>
@@ -82,14 +82,14 @@ struct not_equal<M, empty_type>: statement<M>
   not_equal(const L& left, const R& right): statement<M>( left != right, equal_message("Not equal statement. ", left, "==", right) ) {}
 
   template<typename L, typename R>
-  not_equal(const L& left, const R& right, const std::string& text): statement<M>( left != right, equal_message(text, left, "==", right) ) {}
+  not_equal(const L& left, const R& right, const std::string& txt): statement<M>( left != right, equal_message(txt, left, "==", right) ) {}
 };
 
 template<typename M = assert, typename T = empty_type>
 struct less: statement<M>
 {
   less(const T& left, const T& right): statement<M>( left < right, equal_message("Less statement. ", left, ">=", right) ) {}
-  less(const T& left, const T& right, const std::string& text): statement<M>( left == right, equal_message(text, left, ">=", right) ) {}
+  less(const T& left, const T& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, ">=", right) ) {}
 };
 
 template<typename M>
@@ -99,7 +99,7 @@ struct less<M, empty_type>: statement<M>
   less(const L& left, const R& right): statement<M>( left < right, equal_message("Less statement. ", left, ">=", right) ) {}
 
   template<typename L, typename R>
-  less(const L& left, const R& right, const std::string& text): statement<M>( left == right, equal_message(text, left, ">=", right) ) {}
+  less(const L& left, const R& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, ">=", right) ) {}
 };
 
 
@@ -109,27 +109,27 @@ struct equal_str: statement<M>
 
   equal_str(const std::string& left, const std::string& right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
 
-  equal_str(const std::string& left, const std::string& right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
+  equal_str(const std::string& left, const std::string& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, "!=", right) ) {}
 
   template<typename R>
   equal_str(const std::string& left, R right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
 
   template<typename R>
-  equal_str(const std::string& left, R right, const std::string& text): statement<M>( left == right, equal_message(text, left, "!=", right) ) {}
+  equal_str(const std::string& left, R right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, "!=", right) ) {}
 };
 
 template<typename M = assert>
 struct is_true: statement<M>
 {
   explicit is_true(bool value): statement<M>(value, "Is true statement. ") {}
-  is_true(bool value, const std::string& text): statement<M>(value, text) {}
+  is_true(bool value, const std::string& txt): statement<M>(value, txt) {}
 };
 
 template<typename M = assert>
 struct is_false: statement<M>
 {
   explicit is_false(bool value): statement<M>(!value, "Is false statement. "){}
-  is_false(bool value, const std::string& text): statement<M>(!value, text){}
+  is_false(bool value, const std::string& txt): statement<M>(!value, txt){}
 };
 
 template<typename M = expect, typename F = _message_ >

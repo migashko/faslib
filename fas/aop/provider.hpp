@@ -13,12 +13,12 @@
 
 namespace fas{
 
-template<typename Tg, template<typename> class P >
+template<typename Tg, template<typename> class P, template<typename> class W = P >
 struct provider_t
 {
   typedef metalist::advice metatype;
   typedef Tg tag;
-  typedef provider_t<Tg, P> advice_class;
+  typedef provider_t<Tg, P, W> advice_class;
   
   advice_class& get_advice() { return *this;}
   const advice_class& get_advice() const { return *this;}
@@ -30,21 +30,27 @@ struct provider_t
   };
 
   template<typename T>
+  struct apply_wrapper
+  {
+    typedef W<T> type;
+  };
+
+  template<typename T>
   typename apply<T>::type operator()(T& t) const
   {
-    return typename apply<T>::type(&t);
+    return typename apply<T>::type( typename apply_wrapper<T>::type(&t) );
   }
 };
 
-template<typename Tg, typename M >
+template<typename Tg, typename M, typename W = M >
 struct provider;
 
-template<typename Tg, typename M >
-struct provider< Tg, w<M> >
+template<typename Tg, typename M, typename W >
+struct provider< Tg, w<M>, w<W> >
 {
   typedef metalist::advice metatype;
   typedef Tg tag;
-  typedef provider<Tg, w<M> > advice_class;
+  typedef provider<Tg, w<M>, w<W> > advice_class;
   
   advice_class& get_advice() { return *this;}
   const advice_class& get_advice() const { return *this;}
@@ -54,13 +60,21 @@ struct provider< Tg, w<M> >
   {
     typedef typename fas::apply< M, T>::type type;
   };
+  
+  template<typename T>
+  struct apply_wrapper
+  {
+    typedef typename fas::apply< W, T>::type type;
+  };
+
 
   template<typename T>
   typename apply<T>::type operator()(T& t) const
   {
-    return typename apply<T>::type(&t);
+    return typename apply<T>::type( typename apply_wrapper<T>::type(&t) );
   }
   
+  /*
   template<typename T, typename P1>
   typename apply<T>::type operator()(T& t, P1 p1) const
   {
@@ -90,6 +104,7 @@ struct provider< Tg, w<M> >
   {
     return M(&t, p1, p2, p3, p4, p5);
   }
+  */
 };
 
 }
