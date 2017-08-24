@@ -50,17 +50,23 @@ bool test_run1()
   std::stringstream ss, sst;
   suite< suite_aspect1 > su(ss);
   su.run();
+
   std::cout << ss.str() << std::endl;
   sst << "[ --BEG-- ] 1 tests."<< std::endl
       << "[ RUN     ] unit1"<< std::endl
       << "[      OK ] " << std::endl
       << "[ --END-- ] " <<std::endl
       << "[ PASSED  ] 1 tests." << std::endl;
-  if ( ss.str() != sst.str() ) return false;
+  if ( ss.str() != sst.str() ) 
+  {
+    std::cout << std::endl << "Expected: " << std::endl << sst.str() << std::endl;
+    return false;
+  }
   if ( su.size() != 1) return false;
   if ( su.errors() != 0) return false;
   if ( su.fails() != 0) return false;
   if ( su.fatals() != 0) return false;
+
   return true;
 }
 

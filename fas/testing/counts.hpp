@@ -28,7 +28,7 @@ struct counts
     fatals += c.fatals;
   }
   
-  operator bool () const
+  bool ok() const
   {
     return errors==0 && fails==0 && fatals==0;
   }

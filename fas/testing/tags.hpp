@@ -15,6 +15,8 @@ struct _passed_{};
 struct _red_passed_{};
 // unit без ошибок
 struct _ok_{};
+// пропуск unit из-за фатальной ошибки в suit
+struct _skip_{};
 // ошибка unit'а
 struct _fail_{};
 // критическия ошибка unit'а, прекращаем все

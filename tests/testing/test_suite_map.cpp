@@ -56,7 +56,10 @@ int main(int argc, char* argv[])
   using namespace ::fas::testing;
   suite_counts fas_suite1_suite_run(int argc, char* argv[]);
   suite_counts result = fas_suite1_suite_run(argc, argv);
-  std::cout << MESSAGE << "result.units=" << result.units << " result.units_total=" << result.units_total << std::endl;
-  return !(result.units==2 && result.units_total == 4);
+  std::cout << MESSAGE << "---------------------------------" << std::endl;
+  std::cout << MESSAGE << "result.units_passed=" << result.units_passed << " result.units_total=" << result.units_total << std::endl;
+  std::cout << MESSAGE << "result.units_skip=" << result.units_skip << std::endl;
+  std::cout << MESSAGE << "suite unit list size = " << fas_suite1_suite::size() << std::endl;
+  return !(result.units_passed==2 && result.units_total == 4);
 }
 

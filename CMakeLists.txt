@@ -4,8 +4,8 @@ project(faslib CXX)
 
 add_subdirectory(config)
 
-if ( FAS_BUILD_ALL OR BUILD_TESTING)
-  if (FAS_ENABLE_ALL_WARNING)
+if ( BUILD_TESTING)
+  if (PARANOID_WARNING)
     if(UNIX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-align \
                          -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization\
@@ -39,8 +39,8 @@ add_definitions(-DFAS_DISABLE_WARNINGS)
 include_directories(./)
 
 set(CPACK_PACKAGE_NAME "faslib")
-set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "3")
+set(CPACK_PACKAGE_VERSION_MAJOR "1")
+set(CPACK_PACKAGE_VERSION_MINOR "1")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")

@@ -16,20 +16,20 @@ namespace fas{ namespace testing{
 inline void show_total_result( const suite_counts& sc )
 {
   using namespace ::fas::console;
-  if (!sc)
+  if (!sc.ok())
     std::cout << light_red ;
   else
     std::cout << green ;
   
   std::cout << "**************************************" << std::endl;
-  std::cout << "units: " << sc.units << std::endl;
-  if (!sc)
+  std::cout << "units: " << sc.units_total << std::endl;
+  if (!sc.ok())
   {
-    std::cout << red  << "units fails: " << sc.units-sc.units_passed << light_red  << std::endl;
+    std::cout << red  << "units fails: " << sc.units_total - sc.units_passed << light_red  << std::endl;
   }
   
   std::cout << "statements: " << sc.statements << std::endl;
-  if (!sc)
+  if (!sc.ok())
   {
     if (sc.errors!=0) std::cout << red ;
     std::cout << "errors: " << sc.errors << light_red << std::endl;
