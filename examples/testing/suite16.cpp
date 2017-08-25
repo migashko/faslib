@@ -11,3 +11,8 @@ BEGIN_SUITE(suite16, "suite16 description" )
   ADD_UNIT(unit5)
   ADD_UNIT(unit6)
 END_SUITE(suite16)
+
+
+BEGIN_SUITE(suite16_skip, "Этот suit будет пропущен" )
+  ADD_UNIT(unit1)
+END_SUITE(suite16_skip)

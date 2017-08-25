@@ -18,6 +18,7 @@ inline void OK(_ok_) {}
 inline void FAIL(_fail_) {}
 inline void EXCEPT(_except_) {}
 inline void FATAL(_fatal_) {}
+inline void CRASH(_crash_) {}
 inline void RUN(_run_) {}
 inline void SKIP(_skip_) {}
 inline void WARNING(_warning_) {}
@@ -78,6 +79,11 @@ namespace std
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_fatal_) )
   {
     return o << ::fas::console::red << "[   FATAL ] " << fas::console::restore_colors;
+  }
+
+  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_crash_) )
+  {
+    return o << ::fas::console::brown << "[   CRASH ] " << fas::console::restore_colors;
   }
 
   inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_warning_) )

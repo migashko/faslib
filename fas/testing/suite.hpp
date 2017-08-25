@@ -28,35 +28,26 @@
 #include <iostream>
 
 namespace fas{ namespace testing{
-
+ 
 
 template<typename A = ::fas::aspect<> >
 class suite
   : public aspect_class< A>
 {
-
 public:
   typedef suite<A> self;
   typedef aspect_class< A> super;
 
   typedef typename super::aspect aspect;
   typedef typename aspect::template select_group<_units_>::type unit_tag_list;
-
 public:
-
+  
   suite(const std::string& name = "", const std::string& desc = "")
     : _out(std::cout)
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
     , _unit_counts()
-    /*
-    , _unit_count(0)
-    , _unit_errors(0)
-    , _unit_fails(0)
-    , _unit_fatals(0)
-    , _unit_statements(0)
-    */
   {
   }
 
@@ -66,13 +57,6 @@ public:
     , _desc(desc)
     , _status(unit_status::noerror)
     , _unit_counts()
-    /*
-    , _unit_count(0)
-    , _unit_errors(0)
-    , _unit_fails(0)
-    , _unit_fatals(0)
-    , _unit_statements(0)
-    */
   {
   }
 
@@ -89,13 +73,6 @@ public:
   template<typename U>
   void unit_begin(U& /*u*/)
   {
-    /*
-    _unit_count++;
-    _unit_errors = 0;
-    _unit_fails = 0;
-    _unit_fatals = 0;
-    _unit_statements = 0;
-    */
     _unit_counts = unit_counts();
     _status = unit_status::noerror;
   }
@@ -103,38 +80,19 @@ public:
   template<typename U>
   void unit_end(U& )
   {
-    /*
-    u.fas_counts().errors += _unit_errors;
-    u.fas_counts().fails += _unit_fails;
-    u.fas_counts().fatals += _unit_fatals;
-    u.fas_counts().statements += _unit_statements;
-    */
-    /*std::cout << "DEBUG unit_end" << std::endl;
-    if ( _status == unit_status::noerror )
-      _suite_counts.units_passed++;*/
-
     _suite_counts += _unit_counts;
-    //_suite_counts.units++;
   }
 
   void _status_check()
   {
-    if ( _status == unit_status::error )
-    {
-    }
-    else if (_status == unit_status::fail)
-    {
+    if (_unit_counts.fails != 0)
       throw fail_error();
-    }
-    else if (_status == unit_status::fatal)
-    {
+    else if ( _unit_counts.fatals != 0 || _unit_counts.crash )
       throw fatal_error();
-    }
   }
 
   void statement_begin()
   {
-    //++_unit_statements;
     ++_unit_counts.statements;
     _status_check();
   }
@@ -189,6 +147,19 @@ public:
       this->set_status_(unit_status::fatal);
       _unit_counts.fatals++;
       _out << std::endl << FATAL << st.text;
+      return _out;
+    }
+    return _stub;
+  }
+
+  std::ostream& operator << ( const statement<crash>& st )
+  {
+    this->statement_begin();
+    if ( st.result == false)
+    {
+      this->set_status_(unit_status::fatal);
+      _unit_counts.crash = true;
+      _out << std::endl << CRASH << st.text;
       return _out;
     }
     return _stub;
@@ -277,33 +248,12 @@ public:
   template<typename T>
   bool _run(T& t)
   {
-    /*
-    _unit_count = 0;
-    _unit_errors = 0;
-    _unit_fails = 0;
-    _unit_fatals = 0;
-    _unit_statements = 0;
-    */
     _unit_counts = unit_counts();
-    // _suite_counts.units_total = size();
     _out << SUITE_BEG << this->size() << " tests";
     if (!_name.empty()) _out << " from " << _name;
     _out << ".";
 
-    /*
-    try
-    {*/
-      super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
-    /*}
-    catch(const fail_error& )
-    {
-      ++_unit_fails;
-    }
-    catch(const fatal_error& )
-    {
-      ++_unit_fatals;
-    }*/
-
+    super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
     _out << std::endl;
 
     if ( this->ok() )
@@ -317,7 +267,7 @@ public:
       _out << RED_PASSED << _suite_counts.units_passed << " tests." << std::endl;
       _out << FAIL << _suite_counts.units_total - _suite_counts.units_passed << " tests." << std::endl;
     }
-
+    _out << std::endl;
     return this->ok();
   }
 
@@ -329,14 +279,6 @@ private:
   std::string _name;
   std::string _desc;
   unit_status::type _status;
-  /*
-  int _unit_count;
-  int _unit_errors;
-  int _unit_fails;
-  int _unit_fatals;
-  int _unit_statements;
-  */
-
   unit_counts  _unit_counts;
   suite_counts _suite_counts;
 };

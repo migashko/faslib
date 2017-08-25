@@ -19,8 +19,10 @@ struct _ok_{};
 struct _skip_{};
 // ошибка unit'а
 struct _fail_{};
-// критическия ошибка unit'а, прекращаем все
+// критическия ошибка unit'а, пропускаем все юниты в suite
 struct _fatal_{};
+// критическия ошибка unit'а, пропускаем все suite в тесте
+struct _crash_{};
 // пользовательсокое исключение в unit
 struct _except_{};
 // запуск unit

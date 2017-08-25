@@ -11,14 +11,16 @@ namespace fas{ namespace testing{
 
 struct counts
 {
-  int errors;
-  int fails;
-  int fatals;
+  int  errors;
+  int  fails;
+  int  fatals;
+  bool crash;
   
   counts()
     : errors()
     , fails()
     , fatals()
+    , crash()
   {}
   
   void operator += ( const counts& c )
@@ -26,11 +28,13 @@ struct counts
     errors += c.errors;
     fails  += c.fails;
     fatals += c.fatals;
+    if ( c.crash )
+      crash = true;
   }
   
   bool ok() const
   {
-    return errors==0 && fails==0 && fatals==0;
+    return errors==0 && fails==0 && fatals==0 && crash==false;
   }
 };
 

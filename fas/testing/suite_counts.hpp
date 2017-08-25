@@ -30,7 +30,6 @@ struct suite_counts
   {
     unit_counts::operator += ( static_cast<const unit_counts&>(c) );
     this->units_total += c.units_total;
-    std::cout << "-2-" << this->units_total << std::endl;
     this->units_passed += c.units_passed;
     this->units_skip += c.units_skip;
   }
@@ -39,7 +38,6 @@ struct suite_counts
   {
     unit_counts::operator += (c);
     ++this->units_total;
-    std::cout << "-1-" << this->units_total << std::endl;
     if ( c.ok() )
       ++this->units_passed;
   }
@@ -47,7 +45,6 @@ struct suite_counts
   bool ok() const
   {
     return unit_counts::ok();
-    //return units - units_passed == 0;
   }
 };
 

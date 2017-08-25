@@ -28,7 +28,7 @@ struct f_unit_run
 
     if ( fail_flag )
     {
-      t.out() << std::endl << SKIP << u.fas_name();
+      t.out() << std::endl << SKIP << "Skip unit '" << u.fas_name() << "'";
       t.unit_skip(u);
       return;
     }
@@ -72,6 +72,8 @@ struct f_unit_run
       t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fails: " << counts.fails << ::fas::console::restore_colors;
     if ( counts.fatals!=0)
       t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "fatals: " << counts.fatals << ::fas::console::restore_colors;
+    if ( counts.crash)
+      t.out() << std::endl << UNIT_FAIL << ::fas::console::light_red << "crash!" << ::fas::console::restore_colors;
   }
 private:
   bool fail_flag;

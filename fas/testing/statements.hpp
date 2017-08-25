@@ -22,6 +22,7 @@ struct trace;
 struct expect;
 struct assert;
 struct critical;
+struct crash;
 
 template<typename L, typename R>
 std::string equal_message(const std::string& msg, const L& left, const std::string& op, const R& right);
@@ -157,6 +158,9 @@ struct error: info< expect, _error_ > { explicit error(const std::string& txt): 
 struct fail: info< assert, _fail_ > { explicit fail(const std::string& txt): info< assert, _fail_ >(false, txt) {} };
 
 struct fatal: info< critical, _fatal_> { explicit fatal(const std::string& txt): info< critical, _fatal_ >(false, txt) {} };
+
+//struct : info< critical, _fatal_> { explicit fatal(const std::string& txt): info< critical, _fatal_ >(false, txt) {} };
+
 
 typedef fas::type_list_n<
   std::string,

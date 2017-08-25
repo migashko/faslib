@@ -31,7 +31,7 @@ public:
   {}
 };
 
-// abort current suite
+// abort current suite or all tests
 class fatal_error
   : public exception
 {
