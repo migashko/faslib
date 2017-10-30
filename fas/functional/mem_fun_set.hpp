@@ -22,15 +22,17 @@ struct mem_fun_set
     , _value()
   {}
 
+  // cppcheck-suppress uninitMemberVar  
   mem_fun_set(const mem_fun_set& mfs)
     : _obj(mfs._obj)
     , _value(mfs._value)
   {}
 
+  // cppcheck-suppress uninitvar
   mem_fun_set& operator=(const mem_fun_set& mfs)
   {
-    _obj = mfs._obj;
-    _value = mfs._value;
+    this->_obj = mfs._obj;
+    this->_value = mfs._value;
     return *this;
   }
 
@@ -63,11 +65,13 @@ struct mem_fun_set<V, VT, mg, VVT*>
   {
   }
   
+  // cppcheck-suppress uninitMemberVar  
   mem_fun_set(const mem_fun_set& mfs)
     : _obj(mfs._obj)
     , _value(mfs._value)
   {}
 
+  // cppcheck-suppress uninitvar
   mem_fun_set& operator=(const mem_fun_set& mfs)
   {
     _obj = mfs._obj;

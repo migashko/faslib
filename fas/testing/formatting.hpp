@@ -41,105 +41,105 @@ inline void flush(_flush_){}
 namespace std
 {
 
-  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_passed_) )
+  inline ostream& operator<<(ostream& os, void (*)( ::fas::testing::_passed_) )
   {
-    return o << ::fas::console::green << "[ PASSED  ] " << fas::console::restore_colors;
+    return os << ::fas::console::green << "[ PASSED  ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_ok_) )
+  inline ostream& operator<<(ostream& os, void (*)( ::fas::testing::_ok_) )
   {
-    return o << ::fas::console::green << "[      OK ] " << fas::console::restore_colors;
+    return os << ::fas::console::green << "[      OK ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_skip_) )
+  inline ostream& operator<<(ostream& os, void (*)( ::fas::testing::_skip_) )
   {
-    return o << ::fas::console::magenta << "[    SKIP ] " << fas::console::restore_colors;
+    return os << ::fas::console::magenta << "[    SKIP ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_run_) )
+  inline ostream& operator<<(ostream& os, void (*)( ::fas::testing::_run_) )
   {
-    return o << ::fas::console::green << "[ RUN     ] " << fas::console::restore_colors;
+    return os << ::fas::console::green << "[ RUN     ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_red_passed_) )
+  inline ostream& operator<<(ostream& os, void (*)( ::fas::testing::_red_passed_) )
   {
-    return o << ::fas::console::light_red << "[ PASSED  ] " << fas::console::restore_colors;
+    return os << ::fas::console::light_red << "[ PASSED  ] " << fas::console::restore_colors;
   }
 
-    inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_fail_) )
+    inline ostream& operator<<(ostream& os, void (*)( ::fas::testing::_fail_) )
   {
-    return o << ::fas::console::light_red << "[    FAIL ] " << fas::console::restore_colors;
+    return os << ::fas::console::light_red << "[    FAIL ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)( ::fas::testing::_except_) )
+  inline ostream& operator<<(ostream& os, void (*)( ::fas::testing::_except_) )
   {
-    return o << ::fas::console::light_red << "[  EXCEPT ] " << fas::console::restore_colors;
+    return os << ::fas::console::light_red << "[  EXCEPT ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_fatal_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_fatal_) )
   {
-    return o << ::fas::console::red << "[   FATAL ] " << fas::console::restore_colors;
+    return os << ::fas::console::red << "[   FATAL ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_crash_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_crash_) )
   {
-    return o << ::fas::console::brown << "[   CRASH ] " << fas::console::restore_colors;
+    return os << ::fas::console::brown << "[   CRASH ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_warning_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_warning_) )
   {
-    return o << ::fas::console::yellow <<"[ WARNING ] " << fas::console::restore_colors;
+    return os << ::fas::console::yellow <<"[ WARNING ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_message_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_message_) )
   {
-    return o << ::fas::console::blue <<"[ MESSAGE ] " << fas::console::restore_colors;
+    return os << ::fas::console::blue <<"[ MESSAGE ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_error_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_error_) )
   {
-    return o << ::fas::console::light_red << "[   ERROR ] " << fas::console::restore_colors;
+    return os << ::fas::console::light_red << "[   ERROR ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_suite_beg_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_suite_beg_) )
   {
-    return o << ::fas::console::cyan << "[ --BEG-- ] " << fas::console::restore_colors;
+    return os << ::fas::console::cyan << "[ --BEG-- ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_suite_end_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_suite_end_) )
   {
-    return o << ::fas::console::cyan << "[ --END-- ] " << fas::console::restore_colors;
+    return os << ::fas::console::cyan << "[ --END-- ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_unit_fail_res_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_unit_fail_res_) )
   {
-    return o << ::fas::console::red <<  "[ ------- ] " << fas::console::restore_colors;
+    return os << ::fas::console::red <<  "[ ------- ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_suite_fail_res_))
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_suite_fail_res_))
   {
-    return o << ::fas::console::red << "[ ======= ] " << fas::console::restore_colors;
+    return os << ::fas::console::red << "[ ======= ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_test_fail_res_))
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_test_fail_res_))
   {
-    return o << ::fas::console::red << "[ ******* ] " << fas::console::restore_colors;
+    return os << ::fas::console::red << "[ ******* ] " << fas::console::restore_colors;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_stop_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_stop_) )
   {
-    return o << std::endl << ::fas::console::red << "STOP" << fas::console::restore_colors << " Improper use of stop. Usage: 't << stop;'" << std::endl;
+    return os << std::endl << ::fas::console::red << "STOP" << fas::console::restore_colors << " Improper use of stop. Usage: 't << stop;'" << std::endl;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_nothing_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_nothing_) )
   {
-    return o << std::endl << ::fas::console::red << "NOTHING" << fas::console::restore_colors << " Improper use of 'nothing'. Usage: 't << nothing;'" << std::endl;
+    return os << std::endl << ::fas::console::red << "NOTHING" << fas::console::restore_colors << " Improper use of 'nothing'. Usage: 't << nothing;'" << std::endl;
   }
 
-  inline ostream& operator<<(ostream& o, void (*)(::fas::testing::_flush_) )
+  inline ostream& operator<<(ostream& os, void (*)(::fas::testing::_flush_) )
   {
-    o.flush();
-    return o;
+    os.flush();
+    return os;
   }
 
 }

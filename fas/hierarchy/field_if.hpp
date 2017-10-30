@@ -34,7 +34,7 @@ struct field_if
   }
 
   template<typename H>
-  inline const
+  static inline const
   typename find_if< typename H::hierarchy_list, F>::type&
   get_const(const H& h)
   {

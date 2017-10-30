@@ -20,15 +20,17 @@ struct global_fun_set
     , _value() 
   {}
 
+  // cppcheck-suppress uninitMemberVar  
   global_fun_set(const global_fun_set& gfs)
     : _obj(gfs._obj)
     , _value(gfs._value)
   {}
 
+  // cppcheck-suppress uninitvar  
   global_fun_set& operator=(const global_fun_set& gfs)
   {
-    _obj = gfs._obj;
-    _value = gfs._value;
+    this->_obj = gfs._obj;
+    this->_value = gfs._value;
     return *this;
   }
 
@@ -57,15 +59,17 @@ struct global_fun_set<V, VT, fun, VVT*>
     , _value() 
   {}
 
+  // cppcheck-suppress uninitMemberVar  
   global_fun_set(const global_fun_set& gfs)
     : _obj(gfs._obj)
     , _value(gfs._value)
   {}
 
+  // cppcheck-suppress uninitvar  
   global_fun_set& operator=(const global_fun_set& gfs)
   {
-    _obj = gfs._obj;
-    _value = gfs._value;
+    this->_obj = gfs._obj;
+    this->_value = gfs._value;
     return *this;
   }
   
