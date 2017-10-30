@@ -1,59 +1,12 @@
-dist:     trusty    # используем Ubuntu 14.04 Trusty Tahr (а не 12.02 Precise Pangolin)
-sudo:     required  # используем Virtual Machine (а не Docker container)
-
-language: cpp       # на практике разницы между специфичным для C++ окружением
-                    # и, скажем, python -- никакой. Но пусть будет cpp.
-
-os:
-    # будем прогонять CI и на Linux, и на Mac OS X...
-    - linux
-    - osx
-
-compiler:
-    # ... и с помощью GCC, и Clang
-    - gcc-4.7
-    - clang
-
-env:
-    # список переменных окружения, влияющих на матрицу сборки:
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug 
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
-
-matrix:
-    exclude:
-        # вручную исключим ненужные элементы из матрицы сборки:
-        - os:       osx
-          compiler: gcc
-
-        - os:  osx
-          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-
-        - os:  osx
-          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
-
-#install:
-    # скрипт настройки среды и установки зависимостей:
-    #    - source ci/travis/install-$TRAVIS_OS_NAME.sh
-
-script:
-    # скрипт сборки и тестирования проекта:
+faslib:
+  only:
+#    - master
+#    - devel
+  script:
     - mkdir build
     - cd build
-    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU -DBUILD_TESTING=ON -DFAS_ENABLE_ALL_WARNING=ON
+    - cmake -DCMAKE_BUILD_TYPE=Release -DFAS_BUILD_ALL=ON -DFAS_ENABLE_ALL_WARNING=ON ..
     - cmake --build .
     - ctest --output-on-failure
-
-#deploy:
-    # выкладываем tagged-коммиты на GitHub Releases:
-    #provider:     releases
-    #file:         <package-file>
-    #skip_cleanup: true
-    #overwrite:    true
-
-    #api_key:
-      # secure:   <encrypted-github-token>
-
-    #on:
-      # tags:     true
-        
+    - cd ..
+    - ./.ci/cppcheck.sh
