@@ -76,7 +76,7 @@ struct xspan
 
   explicit xspan(double s)
     : sec( static_cast<xsec_t>(s) )
-    , xsec( static_cast<xsec_t>( (s - sec)*xmax  ) )
+    , xsec( static_cast<xsec_t>( (s - static_cast<double>(sec) )*xmax  ) )
   {}
 
   xsec_t to_nanosec() const
@@ -184,7 +184,7 @@ namespace detail
   {
     static xsec_t convert(xsec_t xsec)
     {
-      return static_cast<xsec_t>( (xsec * M) / static_cast<double>(F) );
+      return static_cast<xsec_t>( static_cast<double>(xsec * M) / static_cast<double>(F) );
     }
   };
 

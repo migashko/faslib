@@ -38,7 +38,7 @@ struct ad_counters
   std::vector<int> ids;
 
   ad_counters() : c0(0), c1(0), c2(0)
-                , c3(0), c4(0), c5(0)
+                , c3(0), c4(0), c5(0), ids()
   {
   }
 };

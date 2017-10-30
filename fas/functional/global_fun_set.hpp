@@ -20,6 +20,18 @@ struct global_fun_set
     , _value() 
   {}
 
+  global_fun_set(const global_fun_set& gfs)
+    : _obj(gfs._obj)
+    , _value(gfs._value)
+  {}
+
+  global_fun_set& operator=(const global_fun_set& gfs)
+  {
+    _obj = gfs._obj;
+    _value = gfs._value;
+    return *this;
+  }
+
   VVT& operator()(typename remove_const_reference<V>::type& v)
   {
     _obj = &v;
@@ -45,6 +57,18 @@ struct global_fun_set<V, VT, fun, VVT*>
     , _value() 
   {}
 
+  global_fun_set(const global_fun_set& gfs)
+    : _obj(gfs._obj)
+    , _value(gfs._value)
+  {}
+
+  global_fun_set& operator=(const global_fun_set& gfs)
+  {
+    _obj = gfs._obj;
+    _value = gfs._value;
+    return *this;
+  }
+  
   VVT* operator()(typename remove_const_reference<V>::type& v, VVT* buffer)
   {
     _obj = &v;

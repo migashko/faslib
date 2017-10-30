@@ -21,7 +21,19 @@ struct mem_fun_set
     : _obj()
     , _value()
   {}
-  
+
+  mem_fun_set(const mem_fun_set& mfs)
+    : _obj(mfs._obj)
+    , _value(mfs._value)
+  {}
+
+  mem_fun_set& operator=(const mem_fun_set& mfs)
+  {
+    _obj = mfs._obj;
+    _value = mfs._value;
+    return *this;
+  }
+
   VVT& operator()(V& v)
   {
     _obj = &v;
@@ -50,6 +62,19 @@ struct mem_fun_set<V, VT, mg, VVT*>
     , _value()
   {
   }
+  
+  mem_fun_set(const mem_fun_set& mfs)
+    : _obj(mfs._obj)
+    , _value(mfs._value)
+  {}
+
+  mem_fun_set& operator=(const mem_fun_set& mfs)
+  {
+    _obj = mfs._obj;
+    _value = mfs._value;
+    return *this;
+  }
+
 
   VVT* operator()(V& v, VVT* buffer )
   {

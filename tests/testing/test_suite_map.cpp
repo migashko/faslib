@@ -16,7 +16,7 @@ using namespace fas::testing;
 
 UNIT(unit0, "testing unit 0")
 {
-  t << is_true<crash>( false ) << "is_true<expect>( true ) first";
+  //t << is_true<crash>( false ) << "is_true<expect>( true ) first";
   t << is_true<expect>( true ) << "is_true<expect>( true ) first";
   t << is_true<expect>( true ) << "is_true<expect>( true ) second";
   t << is_true<expect>( true ) << "is_true<expect>( true ) third";
@@ -35,7 +35,7 @@ UNIT(unit2, "testing unit 2")
 {
   t << is_true<expect>( false ) << "is_true<expect>( false ) first";
   t << is_true<assert>( false ) << "is_true<assert>( false ) second";
-  t << stop;
+  t << stop; // assert abort unit
   t << is_true<assert>( false ) << "is_true<assert>( false ) third";
 }
 
@@ -43,9 +43,8 @@ UNIT(unit3, "testing unit 3")
 {
   t << is_true<expect>( false ) << "is_true<assert>( false ) first";
   t << is_true<critical>( false ) << "is_true<critical>( false ) second";
-  t << stop;
+  t << stop; // critical abort test
   t << is_true<assert>( false ) << "is_true<assert>( false ) third";
-  
 }
 
 UNIT(unit4, "testing unit 4 (SKIP THIS)")
@@ -86,6 +85,6 @@ int main(int argc, char* argv[])
   std::cout << MESSAGE << "Fatals " << result.fatals << std::endl;
   
   std::cout << MESSAGE << "suite unit list size = " << fas_suite1_suite::size() << std::endl;
-  return !(result.units_passed==2 && result.units_total == 4);
+  return !(result.units_passed==1 && result.units_total == 4 && result.units_skip==2 && result.statements==10);
 }
 

@@ -28,7 +28,7 @@ UNIT(pointer_range_unit, "")
   ptr_range_type pr1 = fas::range(pbeg, pend);
 
   for (int i =0 ; i < BUFF_SIZE; ++i)
-    *(pr1++) = i;
+    *(pr1++) = char(i);
 
   t << equal<expect, size_t>( fas::distance(pr1), 0 ) << FAS_TESTING_FILE_LINE;
   pr1 -= BUFF_SIZE;

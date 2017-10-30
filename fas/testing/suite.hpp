@@ -44,19 +44,23 @@ public:
   
   suite(const std::string& name = "", const std::string& desc = "")
     : _out(std::cout)
+    , _stub()
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
     , _unit_counts()
+    , _suite_counts()
   {
   }
 
   suite(std::ostream& os, const std::string& name = "", const std::string& desc = "")
     : _out(os)
+    , _stub()
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
     , _unit_counts()
+    , _suite_counts()
   {
   }
 
@@ -267,7 +271,6 @@ public:
       _out << RED_PASSED << _suite_counts.units_passed << " tests." << std::endl;
       _out << FAIL << _suite_counts.units_total - _suite_counts.units_passed << " tests." << std::endl;
     }
-    _out << std::endl;
     return this->ok();
   }
 

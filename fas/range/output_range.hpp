@@ -26,6 +26,7 @@ public:
   typedef typename std::iterator_traits<T>::pointer           pointer;
   typedef typename std::iterator_traits<T>::reference         reference;
   
+  
   output_range()
     : b()
   {}

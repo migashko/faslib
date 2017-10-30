@@ -21,9 +21,8 @@ class provider
 {
   typedef typename T::aspect::template advice_cast<_value_>::type value_type;
 public:
-  explicit provider(T* t)
+  explicit provider(T* t): _target(t)
   {
-    _target = t;
   }
 
   void set(const value_type& value)
@@ -59,6 +58,8 @@ public:
   typedef typename super::aspect::template advice_cast<_provider1_>::type::template apply< self >::type provider1_type;
   typedef typename super::aspect::template advice_cast<_provider2_>::type::template apply< self >::type provider2_type;
   typedef typename super::aspect::template advice_cast<_creator_>::type::template apply< self >::type creator_type;
+  
+  test(): _container() {};
   
   template<typename P1, typename P2>
   const creator_type& vector(P1 p1, P2 p2)

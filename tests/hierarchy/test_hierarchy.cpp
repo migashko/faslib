@@ -59,6 +59,11 @@ T& get(H& h)
   return field< holder<T> >::get(h).value_;
 }
 
+inline int d2i100(double val)
+{
+  return static_cast<int>(val*100);
+}
+
 int test2()
 {
   using namespace ::fas;
@@ -74,7 +79,7 @@ int test2()
   hierarchy h;
   get<char>(h) = 'A';
   get<double>(h) = 3.14;
-  return (get<char>(h) == 'A' && get<double>(h) == 3.14 && get<int>(h) == 0 ) ? 0 : -1;
+  return (get<char>(h) == 'A' && d2i100(get<double>(h)) == d2i100(3.14) && get<int>(h) == 0 ) ? 0 : -1;
 }
 
 int main()

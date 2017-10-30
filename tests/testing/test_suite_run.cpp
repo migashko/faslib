@@ -26,11 +26,35 @@ bool test_run0()
   sst << "[ --BEG-- ] 0 tests." << std::endl
       << "[ --END-- ] " <<std::endl
       << "[ PASSED  ] 0 tests." << std::endl;
-  if ( ss.str() != sst.str() ) return false;
-  if ( su.size() != 0) return false;
-  if ( su.errors() != 0) return false;
-  if ( su.fails() != 0) return false;
-  if ( su.fatals() != 0) return false;
+  if ( ss.str() != sst.str() ) 
+  {
+    std::cout << FAS_FL << std::endl;
+    return false;
+  }
+  
+  if ( su.size() != 0) 
+  {
+    std::cout << FAS_FL << std::endl;
+    return false;
+  }
+  
+  if ( su.errors() != 0) 
+  {
+    std::cout << FAS_FL << std::endl;
+    return false;
+  }
+  
+  if ( su.fails() != 0) 
+  {
+    std::cout << FAS_FL << std::endl;
+    return false;
+  }
+  
+  if ( su.fatals() != 0) 
+  {
+    std::cout << FAS_FL << std::endl;
+    return false;
+  }
   return true;
 }
 
@@ -110,8 +134,8 @@ bool test_run2()
 int main()
 {
   if (!test_run0()) return -1;
-  if (!test_run1()) return -1;
-  if (!test_run2()) return -1;
+  if (!test_run1()) return -2;
+  if (!test_run2()) return -3;
   return 0;
 }
 

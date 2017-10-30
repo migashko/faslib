@@ -7,12 +7,21 @@ add_subdirectory(config)
 if ( BUILD_TESTING)
   if (PARANOID_WARNING)
     if(UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-align \
-                         -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization\
-                         -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations \
+      # -Weffc++ -Wunsafe-loop-optimizations
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -pedantic -Wcast-align -Winvalid-pch\
+                         -pedantic-errors -Wextra -Wformat-nonliteral\
+                         -Wchar-subscripts  -Wcomment -Wconversion -Wformat-security -Wimport \
+                         -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat-y2k\
+                         -Wlong-long -Wmissing-braces -Wmissing-field-initializers\
+                         -Wmissing-format-attribute -Wmissing-noreturn -Wpacked -Wparentheses -Wpointer-arith\
+                         -Wreturn-type -Wsequence-point -Wsign-compare -Wstack-protector -Wuninitialized\
+                         -Wstrict-aliasing -Wstrict-aliasing=2 -Wswitch-enum -Wtrigraphs -Wunknown-pragmas\
+                         -Wfloat-equal  -Wformat -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations \
+                         -Wunreachable-code -Wunused -Wunused-function -Wunused-label -Wunused-parameter -Wunused-value \
+                         -Wunused-variable  -Wvariadic-macros -Wvolatile-register-var  -Wwrite-strings \
                          -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual \
                          -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel \
-                         -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror")
+                         -Wstrict-overflow=5 -Wswitch -Wswitch-default -Wundef -Werror")
     endif()
   endif ()
   enable_testing()

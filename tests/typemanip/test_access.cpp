@@ -43,9 +43,9 @@ struct foo
   foo()
     : foo1("foo1")
     , foo2(2)
+    , foo4(new char[100])
   {
     std::strcpy(foo3, "foo3");
-    foo4 = new char[100];
     std::strcpy(foo4, "foo4");
   }
 
@@ -66,7 +66,8 @@ struct foo
   const char* get_foo4() const { return foo4;}
   void set_foo4(const char* value) { std::strcpy(foo4, value);}
 private:
-  foo(const foo&) {}
+  foo(const foo&): foo1(""), foo2(0), foo4(0) {}
+  foo& operator=(const foo&) { return *this;}
 };
 
 UNIT(member_unit, "")

@@ -19,7 +19,7 @@ template<typename R>
 void initialize( R r, std::size_t size )
 {
   for ( std::size_t i = 0 ; i < size; ++i)
-    *(r++) = i % 100;
+    *(r++) = static_cast<int>(i % 100);
 
 }
 

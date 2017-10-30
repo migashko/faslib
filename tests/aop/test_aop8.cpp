@@ -47,7 +47,8 @@ struct test_aspect: fas::aspect< fas::type_list_n<
   fas::group<_group2_, fas::type_list_n<_tag4_, _tag5_>::type >
 >::type>{};
 
-static inline void show(const std::vector<int>& f, const std::vector<int>& s )
+void show(const std::vector<int>& f, const std::vector<int>& s );
+void show(const std::vector<int>& f, const std::vector<int>& s )
 {
   std::cout << f.size() << " " << s.size() << std::endl;
 
