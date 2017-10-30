@@ -28,32 +28,26 @@
 #include <iostream>
 
 namespace fas{ namespace testing{
-
+ 
 
 template<typename A = ::fas::aspect<> >
 class suite
   : public aspect_class< A>
 {
-
 public:
   typedef suite<A> self;
   typedef aspect_class< A> super;
 
   typedef typename super::aspect aspect;
   typedef typename aspect::template select_group<_units_>::type unit_tag_list;
-
 public:
-
+  
   suite(const std::string& name = "", const std::string& desc = "")
     : _out(std::cout)
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
-    , _unit_count(0)
-    , _unit_errors(0)
-    , _unit_fails(0)
-    , _unit_fatals(0)
-    , _unit_statements(0)
+    , _unit_counts()
   {
   }
 
@@ -62,11 +56,7 @@ public:
     , _name(name)
     , _desc(desc)
     , _status(unit_status::noerror)
-    , _unit_count(0)
-    , _unit_errors(0)
-    , _unit_fails(0)
-    , _unit_fatals(0)
-    , _unit_statements(0)
+    , _unit_counts()
   {
   }
 
@@ -75,48 +65,35 @@ public:
   const std::stringstream& stub() const { return _stub;}
 
   template<typename U>
+  void unit_skip(U& /*u*/)
+  {
+    _suite_counts.units_skip++;
+  }
+
+  template<typename U>
   void unit_begin(U& /*u*/)
   {
-    _unit_count++;
-    _unit_errors = 0;
-    _unit_fails = 0;
-    _unit_fatals = 0;
-    _unit_statements = 0;
+    _unit_counts = unit_counts();
     _status = unit_status::noerror;
   }
 
   template<typename U>
-  void unit_end(U& u)
+  void unit_end(U& )
   {
-    u.fas_counts().errors += _unit_errors;
-    u.fas_counts().fails += _unit_fails;
-    u.fas_counts().fatals += _unit_fatals;
-    u.fas_counts().statements += _unit_statements;
-    if ( _status == unit_status::noerror )
-      _suite_counts.units_passed++;
-
-    _suite_counts += u.fas_counts();
-    _suite_counts.units++;
+    _suite_counts += _unit_counts;
   }
 
   void _status_check()
   {
-    if ( _status == unit_status::error )
-    {
-    }
-    else if (_status == unit_status::fail)
-    {
+    if (_unit_counts.fails != 0)
       throw fail_error();
-    }
-    else if (_status == unit_status::fatal)
-    {
+    else if ( _unit_counts.fatals != 0 || _unit_counts.crash )
       throw fatal_error();
-    }
   }
 
   void statement_begin()
   {
-    ++_unit_statements;
+    ++_unit_counts.statements;
     _status_check();
   }
 
@@ -141,7 +118,7 @@ public:
     this->statement_begin();
     if ( st.result == false)
     {
-      _unit_errors++;
+      _unit_counts.errors++;
       this->set_status_(unit_status::error);
       _out << std::endl << ERROR_MESSAGE << st.text;
       return _out;
@@ -154,7 +131,7 @@ public:
     this->statement_begin();
     if ( st.result == false)
     {
-      _unit_fails++;
+      _unit_counts.fails++;
       this->set_status_(unit_status::fail);
       _out << std::endl << FAIL << st.text;
       return _out;
@@ -168,8 +145,21 @@ public:
     if ( st.result == false)
     {
       this->set_status_(unit_status::fatal);
-      _unit_fatals++;
+      _unit_counts.fatals++;
       _out << std::endl << FATAL << st.text;
+      return _out;
+    }
+    return _stub;
+  }
+
+  std::ostream& operator << ( const statement<crash>& st )
+  {
+    this->statement_begin();
+    if ( st.result == false)
+    {
+      this->set_status_(unit_status::fatal);
+      _unit_counts.crash = true;
+      _out << std::endl << CRASH << st.text;
       return _out;
     }
     return _stub;
@@ -189,6 +179,7 @@ public:
   {
     _status_check();
     this->set_status_(unit_status::error);
+    _unit_counts.errors++;
     typename info<expect, F>::manip manip = 0;
     _out << std::endl << manip << st.text;
     return _out;
@@ -199,7 +190,7 @@ public:
   {
     _status_check();
     this->set_status_(unit_status::fail);
-    _unit_fails++;
+    _unit_counts.fails++;
     typename info<assert, F>::manip manip = 0;
     _out << std::endl << manip << st.text;
     return _out;
@@ -210,21 +201,26 @@ public:
   {
     _status_check();
     this->set_status_(unit_status::fatal);
-    _unit_fatals++;
+    _unit_counts.fatals++;
     typename info<critical, F>::manip manip = 0;
     _out << std::endl << manip << st.text;
     return _out;
   }
 
 
-  operator bool () const 
+  bool ok() const 
   { 
-    return _suite_counts;
-    /*
-    return   _suite_counts.errors == 0 
-          && _suite_counts.fails  == 0 
-          && _suite_counts.fatals == 0;
-          */
+    return _suite_counts.ok();
+  }
+
+  const unit_counts& current_unit_counts() const 
+  { 
+    return _unit_counts;
+  }
+
+  bool current_unit_ok() const 
+  { 
+    return _unit_counts.ok();
   }
 
   bool run()
@@ -233,8 +229,8 @@ public:
   }
 
 
-  int size() const { return length<unit_tag_list>::value;};
-  int count() const { return _suite_counts.units; }
+  static int size() { return length<unit_tag_list>::value;};
+  int units_total() const { return _suite_counts.units_total; }
 
   int errors() const { return _suite_counts.errors; }
   int fails() const { return _suite_counts.fails; }
@@ -252,33 +248,15 @@ public:
   template<typename T>
   bool _run(T& t)
   {
-    _unit_count = 0;
-    _unit_errors = 0;
-    _unit_fails = 0;
-    _unit_fatals = 0;
-    _unit_statements = 0;
-
-    _suite_counts.units_total = size();
-    _out << SUITE_BEG << size() << " tests";
+    _unit_counts = unit_counts();
+    _out << SUITE_BEG << this->size() << " tests";
     if (!_name.empty()) _out << " from " << _name;
     _out << ".";
 
-    try
-    {
-      super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
-    }
-    catch(const fail_error& )
-    {
-      ++_unit_fails;
-    }
-    catch(const fatal_error& )
-    {
-      ++_unit_fatals;
-    }
-
+    super::get_aspect().template getg<_units_>().for_each(t, f_unit_run() );
     _out << std::endl;
 
-    if ( *this )
+    if ( this->ok() )
     {
       _out << SUITE_END << std::endl;
       _out << PASSED << _suite_counts.units_passed << " tests." << std::endl;
@@ -287,11 +265,10 @@ public:
     {
       _out << SUITE_FAIL << "Suite '" << _name << "' fail. " << _desc << std::endl;
       _out << RED_PASSED << _suite_counts.units_passed << " tests." << std::endl;
-      _out << FAIL << _suite_counts.units - _suite_counts.units_passed << " tests." << std::endl;
-
+      _out << FAIL << _suite_counts.units_total - _suite_counts.units_passed << " tests." << std::endl;
     }
-
-    return *this;
+    _out << std::endl;
+    return this->ok();
   }
 
 private:
@@ -302,13 +279,7 @@ private:
   std::string _name;
   std::string _desc;
   unit_status::type _status;
-
-  int _unit_count;
-  int _unit_errors;
-  int _unit_fails;
-  int _unit_fatals;
-  int _unit_statements;
-
+  unit_counts  _unit_counts;
   suite_counts _suite_counts;
 };
 

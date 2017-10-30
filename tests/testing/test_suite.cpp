@@ -28,7 +28,7 @@ bool test_expect_out1()
 {
   std::stringstream ss;
   suite<> su(ss);
-  su << is_true<expect>( 1 < 2 ) << "Test message.";
+  su << is_true<expect>( true ) << "Test message.";
   std::cout << su.stub().str() << std::endl;
   if ( !ss.str().empty() ) return false;
   if ( su.stub().str() != "Test message." ) return false;
@@ -39,7 +39,7 @@ bool test_expect_out2()
 {
   std::stringstream ss;
   suite<> su(ss);
-  su << is_true<expect>( 2 < 1 ) << "Test message.";
+  su << is_true<expect>( false ) << "Test message.";
   std::cout << ss.str() << std::endl;
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[   ERROR ] Is true statement. Test message." ) return false;
@@ -50,7 +50,7 @@ bool test_assert_out1()
 {
   std::stringstream ss;
   suite<> su(ss);
-  su << is_true<expect>( 1 < 2 ) << "Test message.";
+  su << is_true<expect>( true ) << "Test message.";
   if ( !ss.str().empty() ) return false;
   if ( su.stub().str() != "Test message." ) return false;
   return true;
@@ -60,7 +60,7 @@ bool test_assert_out2()
 {
   std::stringstream ss;
   suite<> su(ss);
-  su << is_true<assert>( 2 < 1 ) << "Test message.";
+  su << is_true<assert>( false ) << "Test message.";
   std::cout << ss.str() << std::endl;
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[    FAIL ] Is true statement. Test message." ) return false;
@@ -71,7 +71,7 @@ bool test_critical_out1()
 {
   std::stringstream ss;
   suite<> su(ss);
-  su << is_true<critical>( 1 < 2 ) << "Test message.";
+  su << is_true<critical>( true ) << "Test message.";
   if ( !ss.str().empty() ) return false;
   if ( su.stub().str() != "Test message." ) return false;
   return true;
@@ -81,7 +81,7 @@ bool test_critical_out2()
 {
   std::stringstream ss;
   suite<> su(ss);
-  su << is_true<critical>( 2 < 1 ) << "Test message.";
+  su << is_true<critical>( false ) << "Test message.";
   std::cout << ss.str() << std::endl;
   if ( !su.stub().str().empty() ) return false;
   if ( ss.str() != "\n[   FATAL ] Is true statement. Test message." ) return false;

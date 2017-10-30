@@ -12,9 +12,9 @@
 
 namespace fas {
 
-inline nanospan rate(const nanospan& s)
+inline xsec_t rate(const nanospan& s)
 {
-  return s == 0 ? nanospan::xmax : 1/s;
+  return (s == nanospan(0) ? nanospan(nanospan::xmax) : nanospan(1)/s).sec ;
 }
 
 }

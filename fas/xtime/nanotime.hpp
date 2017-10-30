@@ -39,8 +39,8 @@ inline nanospan nanotime()
 	return millispan(static_cast<xsec_t>(timebuffer.time), static_cast<xsec_t>(timebuffer.millitm) );
 #else
 #error FAIL
-#endif //HAVE_CLOCK_GETTIME_FUNC
   return nanospan(0, 0);
+#endif //HAVE_CLOCK_GETTIME_FUNC
 }
 
 }

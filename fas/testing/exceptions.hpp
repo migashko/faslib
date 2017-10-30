@@ -21,7 +21,7 @@ public:
   {}
 };
 
-// abort unit
+// abort current unit
 class fail_error
   : public exception
 {
@@ -31,7 +31,7 @@ public:
   {}
 };
 
-// abort suite
+// abort current suite or all tests
 class fatal_error
   : public exception
 {

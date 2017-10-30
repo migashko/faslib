@@ -27,52 +27,52 @@ public:
   const advice_class& get_advice() const { return *this;}
 
   template<typename T, typename F>
-  F for_each(T& t, F f) const
+  static F for_each(T& t, F f)
   {
     typedef typename select_group<Tg, T>::type tag_list;
-    return detail::group_helper().for_each( tag_list(), t, f);
+    return detail::group_helper::for_each( tag_list(), t, f);
   }
 
   template<typename T>
   void operator()(T& t) const
   {
     typedef typename select_group< Tg, T>::type tag_list;
-    detail::group_helper().call(typename reverse<tag_list>::type(), t);
+    detail::group_helper::call(typename reverse<tag_list>::type(), t);
   }
 
   template<typename T, typename P1>
   void operator()(T& t, P1 p1)  const
   {
     typedef typename select_group< Tg, T>::type tag_list;
-    detail::group_helper().call(typename reverse<tag_list>::type(), t, p1);
+    detail::group_helper::call(typename reverse<tag_list>::type(), t, p1);
   }
 
   template<typename T, typename P1, typename P2>
   void operator()(T& t, P1 p1, P2 p2)  const
   {
     typedef typename select_group< Tg, T>::type tag_list;
-    detail::group_helper().call(typename reverse<tag_list>::type(), t, p1, p2);
+    detail::group_helper::call(typename reverse<tag_list>::type(), t, p1, p2);
   }
 
   template<typename T, typename P1, typename P2, typename P3>
   void operator()(T& t, P1 p1, P2 p2, P3 p3)  const
   {
     typedef typename select_group< Tg, T>::type tag_list;
-    detail::group_helper().call(typename reverse<tag_list>::type(), t, p1, p2, p3);
+    detail::group_helper::call(typename reverse<tag_list>::type(), t, p1, p2, p3);
   }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4>
   void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4) const
   {
     typedef typename select_group< Tg, T>::type tag_list;
-    detail::group_helper().call(typename reverse<tag_list>::type(), t, p1, p2, p3, p4);
+    detail::group_helper::call(typename reverse<tag_list>::type(), t, p1, p2, p3, p4);
   }
 
   template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
   void operator()(T& t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5) const
   {
     typedef typename select_group< Tg, T>::type tag_list;
-    detail::group_helper().call(typename reverse<tag_list>::type(), t, p1, p2, p3, p4, p5);
+    detail::group_helper::call(typename reverse<tag_list>::type(), t, p1, p2, p3, p4, p5);
   }
 };
 

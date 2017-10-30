@@ -32,7 +32,7 @@ bool test_xspan()
 
   /// ----------------
 
-  span = span + 1;
+  span = span + X(1);
   span += -2;
   span += 2;
 
@@ -64,20 +64,19 @@ bool test_xspan()
 
   /// ----------------
 
-  span = span - 1;
+  span = span - X(1);
   span -= -2;
   span -= 2;
-
   if ( span.sec!=23 || span.xsec!=X::xmax/2)  return false;
-
+  
   span = span - X(10, X::xmax/2 + 1);
 
   if ( span.sec!=12 || span.xsec!=X::xmax - 1)  return false;
-
+  
   span -= X(0, X::xmax - 1);
 
   if ( span.sec!=12 || span.xsec!=0)  return false;
-
+  
   span -= nanospan(0, nanospan::xmax/2);
 
   if ( span.sec!=11 || span.xsec!=X::xmax/2)  return false;
@@ -92,7 +91,7 @@ bool test_xspan()
 
   /// ----------------
 
-  span = span / 2;
+  span = span / X(2);
 
   if ( span.sec!=5 || span.xsec!=X::xmax/4)  return false;
 
@@ -100,13 +99,13 @@ bool test_xspan()
 
   if ( span.sec!=21 || span.xsec!=0)  return false;
 
-  span = ( span + 4 ) / 5;
+  span = ( span + X(4) ) / X(5);
 
   if ( span.sec!=5 || span.xsec!=0)  return false;
 
   /// ----------------
 
-  span = span * 5;
+  span = span * X(5);
 
   if ( span.sec!=25 || span.xsec!=0)  return false;
 
@@ -122,22 +121,22 @@ bool test_xspan()
   if ( span.sec!=6 || !_equal(span.xsec, X::xmax /* *5/100*/ / 20, 1) )  return false;
 
   if ( span == X() ) return false;
-  if ( span == 0 ) return false;
-  if ( span == 0.0 ) return false;
+  if ( span == X(0) ) return false;
+  if ( span == X(0.0) ) return false;
 
   if ( X() != X(0, 0) ) return false;
-  if ( X() != 0 ) return false;
-  if ( X() != 0.0 ) return false;
+  if ( X() != X(0) ) return false;
+  if ( X() != X(0.0) ) return false;
 
-  span = 1.5;
+  span = X(1.5);
 
-  if ( span > 1.5) return false;
-  if ( span >= 1.51) return false;
-  if ( span < 1.5) return false;
-  if ( span != 1.5) return false;
-  if ( !(span == 1.5)) return false;
-  if ( !(span >= 1.5)) return false;
-  if ( !(span <= 1.5)) return false;
+  if ( span > X(1.5) ) return false;
+  if ( span >= X(1.51) ) return false;
+  if ( span < X(1.5) ) return false;
+  if ( span != X(1.5) ) return false;
+  if ( !(span == X(1.5))) return false;
+  if ( !(span >= X(1.5) )) return false;
+  if ( !(span <= X(1.5) )) return false;
 
   if ( span != X(1, X::xmax/2) ) return false;
 

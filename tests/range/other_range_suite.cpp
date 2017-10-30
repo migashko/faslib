@@ -24,15 +24,15 @@ UNIT(other_range_unit, "")
   t << equal<expect>(value, 10) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( fas::begin(r), &value) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( fas::end(r), &value + 1) << FAS_TESTING_FILE_LINE;
-  (*r)++;
+  ++(*r);
   t << equal<expect>(*r, 11) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(value, 11) << FAS_TESTING_FILE_LINE;
   *r = 22;
   t << equal<expect>(*r, 22) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(value, 22) << FAS_TESTING_FILE_LINE;
-  r++;
+  ++r;
   t << is_false<expect>( r ) << FAS_TESTING_FILE_LINE;
-  r--;
+  --r;
   t << is_true<expect>( r ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(*r, 22) << FAS_TESTING_FILE_LINE;
   t << equal<expect>(value, 22) << FAS_TESTING_FILE_LINE;

@@ -147,7 +147,7 @@ struct test_class: aspect_class<test_aspect>
 
 bool test_c( const std::string& text, ad_counters c, int c0, int c1, int c2, int c3, int c4, int c5);
 std::vector<int> ids( int c0 = -1, int c1= -1, int c2= -1, int c3= -1, int c4= -1, int c5= -1);
-bool test_ids( const std::string& text, std::vector<int> ids1, std::vector<int> ids2);
+bool test_ids( const std::string& text, const std::vector<int>& ids1, const std::vector<int>& ids2);
 
 bool test_c( const std::string& text, ad_counters c, int c0, int c1, int c2, int c3, int c4, int c5)
 {
@@ -173,7 +173,7 @@ std::vector<int> ids( int c0, int c1, int c2, int c3, int c4, int c5)
 }
 
 
-bool test_ids( const std::string& text, std::vector<int> ids1, std::vector<int> ids2)
+bool test_ids( const std::string& text, const std::vector<int>& ids1, const std::vector<int>& ids2)
 {
   if ( ids1 == ids2)
     return true;
@@ -237,6 +237,7 @@ int main()
   c = test.get_counters();
   if ( !test_c( "test1", c, 1, 1, 1, 1, 1, 1 ) )
     return -1;
+  
   if ( !test_ids( "test1ids", c.ids, ids(1, 1, 1, 1, 1, 1) ))
     return -1;
 

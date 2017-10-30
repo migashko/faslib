@@ -15,10 +15,14 @@ struct _passed_{};
 struct _red_passed_{};
 // unit без ошибок
 struct _ok_{};
+// пропуск unit из-за фатальной ошибки в suit
+struct _skip_{};
 // ошибка unit'а
 struct _fail_{};
-// критическия ошибка unit'а, прекращаем все
+// критическия ошибка unit'а, пропускаем все юниты в suite
 struct _fatal_{};
+// критическия ошибка unit'а, пропускаем все suite в тесте
+struct _crash_{};
 // пользовательсокое исключение в unit
 struct _except_{};
 // запуск unit

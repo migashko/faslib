@@ -39,42 +39,42 @@ struct xspan
     , xsec(xs)
   {}
 
-  xspan(short s)
+  explicit xspan(short s)
     : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(unsigned short s)
+  explicit xspan(unsigned short s)
     : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(int s)
+  explicit xspan(int s)
     : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(unsigned int s)
+  explicit xspan(unsigned int s)
     : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(long s)
+  explicit xspan(long s)
     : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(unsigned long s)
+  explicit xspan(unsigned long s)
     : sec(static_cast<xsec_t>(s))
     , xsec(0)
   {}
 
-  xspan(float s)
+  explicit xspan(float s)
     : sec( static_cast<xsec_t>(s) )
     , xsec( static_cast<xsec_t>( (s - sec)*xmax ) )
   {}
 
-  xspan(double s)
+  explicit xspan(double s)
     : sec( static_cast<xsec_t>(s) )
     , xsec( static_cast<xsec_t>( (s - sec)*xmax  ) )
   {}

@@ -81,7 +81,8 @@ UNIT(range_array_unit, "")
 
   fas::typerange< std::stringstream >::orange isr = fas::orange(ss);
   *(isr++) = 'a';
-  *(isr++) = 'b';
+  // cppcheck-suppress unreadVariable
+  *(isr++) = 'b'; 
 
 
   fas::typerange< std::stringstream >::range osr = fas::range(ss);

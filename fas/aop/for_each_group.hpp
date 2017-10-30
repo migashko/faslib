@@ -15,7 +15,7 @@ template<typename TgList, typename T, typename F>
 inline F for_each_group(T& t, F f)
 {
   typedef typename select_group< TgList, T>::type tag_list;
-  return detail::group_helper().for_each( tag_list(), t, f);
+  return detail::group_helper::for_each( tag_list(), t, f);
 }
 
 }

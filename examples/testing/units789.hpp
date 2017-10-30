@@ -5,16 +5,17 @@
 UNIT(unit7, "testing unit7")
 {
   using namespace fas::testing;
-  t << nothing;
+  t << is_true<crash>(false) << "остановка теста ";
+  t << stop;
 }
 
-UNIT(unit8, "testing unit8")
+UNIT(unit8, "Этот юнит будет пропущен")
 {
   using namespace fas::testing;
   t << nothing;
 }
 
-UNIT(unit9, "testing unit9")
+UNIT(unit9, "Этот юнит будет пропущен")
 {
   using namespace fas::testing;
   t << nothing;

@@ -17,6 +17,7 @@ using namespace std;
 class QuackBehaviour
 {
   public:
+    virtual ~QuackBehaviour(){};
     virtual void quack() = 0; // Abstract class because of this pure virtual function
 };
 
@@ -44,6 +45,7 @@ class MuteQuack : public QuackBehaviour
 class FlyBehaviour
 {
   public:
+    virtual ~FlyBehaviour(){};
     virtual void fly() = 0; // Abstract class because of this pure virtual function
 };
 
@@ -81,7 +83,12 @@ class Duck
   public:
     QuackBehaviour *quackBehaviour;
     FlyBehaviour   *flyBehaviour;
-
+    virtual ~Duck()
+    {
+      delete quackBehaviour;
+      delete flyBehaviour;
+    }
+    
     void performQuack()
     {
       quackBehaviour->quack();
@@ -104,7 +111,7 @@ class Duck
       flyBehaviour = fb;
     }
 
-    void floatAround()
+    static void floatAround()
     {
       cout << "The duck bobs peacefully on the surface of the water." << endl;
     }
@@ -169,6 +176,7 @@ int main()
   mallard->floatAround();
   mallard->performFly();
   mallard->performQuack();
+  delete mallard;
   cout << endl;
 
   Duck *rubber = new RubberDuck();
@@ -176,12 +184,14 @@ int main()
   rubber->floatAround();
   rubber->performFly();
   rubber->performQuack();
+  delete rubber;
   cout << endl;
 
   Duck *painted = new PaintedDuck();
   painted->display();
   painted->floatAround();
   painted->performFly();
+  delete painted;
   cout << endl;
 
   painted->setFlyBehaviour(new FlyWithRocket);

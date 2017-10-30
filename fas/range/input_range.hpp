@@ -30,8 +30,8 @@ public:
   class proxy {
     ValueType keep_;
   public:
-    proxy (ValueType c) : keep_(c){ }
-    ValueType operator*() {return keep_;}
+    explicit proxy (ValueType c) : keep_(c){ }
+    ValueType operator*() const { return keep_; }
   };
   
   input_range()

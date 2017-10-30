@@ -12,7 +12,7 @@ struct _change_state_;
 struct stateA
 {
   template<typename T>
-  void operator()(T& t, int value )
+  void operator()(T& t, int value ) const
   {
     printf("A%d ", value);
     if (value > 1)
@@ -24,7 +24,7 @@ struct stateA
 struct stateB
 {
   template<typename T>
-  void operator()(T& t, int value )
+  void operator()(T& t, int value ) const
   {
     printf("B%d ", value);
     if ( value == 3)
@@ -37,7 +37,7 @@ struct stateB
 struct stateC
 {
   template<typename T>
-  void operator()(T&, int value )
+  void operator()(T&, int value ) const
   {
     printf("C%d ", value);
   }
@@ -125,7 +125,7 @@ struct _show_change_state_;
 struct ad_change_state
 {
   template<typename T, typename Tg>
-  void operator()(T& , fas::tag<Tg>)
+  void operator()(T& , fas::tag<Tg>) const 
   {
     printf("| ");
   }

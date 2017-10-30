@@ -5,29 +5,29 @@
 struct ione
 {
   virtual ~ione() {};
-  virtual void one() = 0;
-  virtual ione* clone() = 0;
+  virtual void one() const = 0;
+  virtual ione* clone() const = 0;
 };
 
 struct itwo
 {
   virtual ~itwo() {};
-  virtual void two() = 0;
-  virtual itwo* clone() = 0;
+  virtual void two() const = 0;
+  virtual itwo* clone() const= 0;
 };
 
 struct ithree
 {
   virtual ~ithree() {};
-  virtual void three() = 0;
-  virtual ithree* clone() = 0;
+  virtual void three() const = 0;
+  virtual ithree* clone() const= 0;
 };
 
 struct istrike
 {
   virtual ~istrike() {};
-  virtual void strike() = 0;
-  virtual istrike* clone() = 0;
+  virtual void strike() const= 0;
+  virtual istrike* clone() const= 0;
 };
 
 /// concrete strategies
@@ -35,29 +35,29 @@ struct istrike
 struct say_one: ione
 {
   virtual ~say_one() {};
-  virtual void one() {  std::cout<<"one, "; };
-  virtual ione* clone() { return new say_one; };
+  virtual void one() const {  std::cout<<"one, "; };
+  virtual ione* clone() const { return new say_one; };
 };
 
 struct say_two: itwo
 {
   virtual ~say_two() {};
-  virtual void two() {  std::cout<<"two, "; }
-  virtual itwo* clone() { return new say_two; };
+  virtual void two() const {  std::cout<<"two, "; }
+  virtual itwo* clone() const { return new say_two; };
 };
 
 struct say_three: ithree
 {
   virtual ~say_three() {};
-  virtual void three() {  std::cout<<"three, "; }
-  virtual ithree* clone() { return new say_three; };
+  virtual void three() const {  std::cout<<"three, "; }
+  virtual ithree* clone() const { return new say_three; };
 };
 
 struct say_strike: istrike
 {
   virtual ~say_strike() {};
-  virtual void strike() {  std::cout<<"strike!"; }
-  virtual istrike* clone() { return new say_strike; };
+  virtual void strike() const{  std::cout<<"strike!"; }
+  virtual istrike* clone() const { return new say_strike; };
 };
 
 /// dredd
@@ -99,7 +99,7 @@ public:
     return *this;
   }
 
-  void dredd_say()
+  void dredd_say() const
   {
     if (_one)    _one->one();
     if (_two)    _two->two();
@@ -143,8 +143,8 @@ private:
 struct say_ONE: ione
 {
   virtual ~say_ONE() {};
-  virtual void one() {  std::cout<<"ONE, "; };
-  virtual ione* clone() { return new say_ONE; };
+  virtual void one() const{  std::cout<<"ONE, "; };
+  virtual ione* clone() const{ return new say_ONE; };
 };
 
 /// strategies intefaces for from5to7
@@ -152,29 +152,29 @@ struct say_ONE: ione
 struct ifour
 {
   virtual ~ifour() {};
-  virtual void four() = 0;
-  virtual ifour* clone() = 0;
+  virtual void four() const= 0;
+  virtual ifour* clone() const= 0;
 };
 
 struct ifive
 {
   virtual ~ifive() {};
-  virtual void five() = 0;
-  virtual ifive* clone() = 0;
+  virtual void five() const= 0;
+  virtual ifive* clone() const= 0;
 };
 
 struct isix
 {
   virtual ~isix() {};
-  virtual void six() = 0;
-  virtual isix* clone() = 0;
+  virtual void six() const= 0;
+  virtual isix* clone() const= 0;
 };
 
 struct iseven
 {
   virtual ~iseven() {};
-  virtual void seven() = 0;
-  virtual iseven* clone() = 0;
+  virtual void seven() const= 0;
+  virtual iseven* clone() const= 0;
 };
 
 /// strategies for say_4567
@@ -182,29 +182,29 @@ struct iseven
 struct say_four: ifour
 {
   virtual ~say_four() {};
-  virtual void four() {  std::cout<<"four, "; }
-  virtual ifour* clone() { return new say_four; };
+  virtual void four() const{  std::cout<<"four, "; }
+  virtual ifour* clone() const{ return new say_four; };
 };
 
 struct say_five: ifive
 {
   virtual ~say_five() {};
-  virtual void five() {  std::cout<<"five, "; }
-  virtual ifive* clone() { return new say_five; };
+  virtual void five() const{  std::cout<<"five, "; }
+  virtual ifive* clone() const{ return new say_five; };
 };
 
 struct say_six: isix
 {
   virtual ~say_six() {};
-  virtual void six() {  std::cout<<"six, "; }
-  virtual isix* clone() { return new say_six; };
+  virtual void six() const{  std::cout<<"six, "; }
+  virtual isix* clone() const{ return new say_six; };
 };
 
 struct say_seven: iseven
 {
   virtual ~say_seven() {};
-  virtual void seven() {  std::cout<<"seven!"; }
-  virtual iseven* clone() { return new say_seven; };
+  virtual void seven() const{  std::cout<<"seven!"; }
+  virtual iseven* clone() const{ return new say_seven; };
 };
 
 class say_4567
@@ -245,17 +245,17 @@ public:
     return *this;
   }
 
-  istrike* clone()
+  istrike* clone() const
   {
     return new say_4567(*this);
   }
 
-  virtual void strike()
+  virtual void strike() const
   {
     this->say();
   }
 
-  virtual void say()
+  virtual void say() const
   {
     if (_four) _four->four();
     if (_five) _five->five();

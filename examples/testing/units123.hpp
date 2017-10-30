@@ -14,11 +14,12 @@ UNIT(unit1, "testing unit1")
 UNIT(unit2, "testing unit2")
 {
   using namespace fas::testing;
+  t << equal<expect>(10, 20) << FAS_FL;
   t << warning("This is warning.") << "This is warning description.";
 }
 
 UNIT(unit3, "testing unit3")
 {
   using namespace fas::testing;
-  t << nothing;
+  t << nothing; // disable warning unused param t
 }

@@ -65,8 +65,8 @@ struct foo
 
   const char* get_foo4() const { return foo4;}
   void set_foo4(const char* value) { std::strcpy(foo4, value);}
-
-
+private:
+  foo(const foo&) {}
 };
 
 UNIT(member_unit, "")
@@ -231,9 +231,13 @@ UNIT(global_fun_unit, "")
   typedef fas::global_fun_get<const foo&, const char*, &get_foo3> foo3_getter;
   typedef fas::global_fun_get<const foo&, const char*, &get_foo4> foo4_getter;
 
+  t << equal<assert, std::string> ( get_foo1(f), "foo1" ) << FAS_TESTING_FILE_LINE;
   t << equal<assert, std::string> ( foo1_getter()(f), "foo1" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, int> ( get_foo2(f), 2 ) << FAS_TESTING_FILE_LINE;
   t << equal<assert, int> ( foo2_getter()(f), 2 ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( get_foo3(f), "foo3" ) << FAS_TESTING_FILE_LINE;
   t << equal<assert, std::string> ( foo3_getter()(f), "foo3" ) << FAS_TESTING_FILE_LINE;
+  t << equal<assert, std::string> ( get_foo4(f), "foo4" ) << FAS_TESTING_FILE_LINE;
   t << equal<assert, std::string> ( foo4_getter()(f), "foo4" ) << FAS_TESTING_FILE_LINE;
 
   typedef fas::global_fun_set<foo&, const std::string&, &set_foo1> foo1_setter;
@@ -241,7 +245,9 @@ UNIT(global_fun_unit, "")
   typedef fas::global_fun_set<foo&, const char*, &set_foo3, char*> foo3_setter;
   typedef fas::global_fun_set<foo&, const char*, &set_foo4, char*> foo4_setter;
 
+  set_foo1(f, "");
   foo1_setter()(f) = "foo1-test";
+  set_foo2(f, 1);
   foo2_setter()(f) = 42;
   char buffer[256];
   std::strcpy( foo3_setter()(f, buffer), "foo3-test" );

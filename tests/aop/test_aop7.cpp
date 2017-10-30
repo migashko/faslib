@@ -48,5 +48,5 @@ int main()
           >::type map_type;
   map_type mt;
   mt[10]="test";
-  return 0;
+  return mt.size()==1 ? 0 : -1;
 }

@@ -28,7 +28,7 @@ struct _tag3_;
 struct ad_advice1
 {
   template<typename T>
-  int operator()(T& t, int value)
+  int operator()(T& t, int value) const
   {
     std::cout << "ad_advice1" << std::endl;
     t.private_method();
@@ -39,7 +39,7 @@ struct ad_advice1
 struct ad_advice2
 {
   template<typename T>
-  int operator()(T&, int value)
+  int operator()(T&, int value) const
   {
     std::cout << "ad_advice2" << std::endl;
     return value*2;
@@ -78,7 +78,7 @@ private:
 struct ad_advice3
 {
   template<typename T>
-  int operator()(T& t, int value)
+  int operator()(T& t, int value) const
   {
     std::cout << "ad_advice3" << std::endl;
     return t.get_aspect().template get<_tag3_>()(t, value) * 3;

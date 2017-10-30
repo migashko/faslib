@@ -33,20 +33,28 @@ struct VB: virtual A{};
 struct VC: virtual A{};
 struct VD: virtual VB, virtual VC{};
 
-struct M0 { void member0() {}; };
-struct M1: M0 { void member1(int) {}; };
-struct M2: M1 { void member2(int, int) {}; };
-struct M3: M2 { void member3(int, int, int) {}; };
-struct M4: M3 { void member4(int, int, int, int) {}; };
-struct M5: M4 { void member5(int, int, int, int, int) {}; };
+struct M0 { void member0(); };
+struct M1: M0 { void member1(int); };
+struct M2: M1 { void member2(int, int); };
+struct M3: M2 { void member3(int, int, int); };
+struct M4: M3 { void member4(int, int, int, int); };
+struct M5: M4 { void member5(int, int, int, int, int); };
 
+// cppcheck-suppress unusedStructMember
 FAS_HAS_TYPENAME(has_test_type, test_type)
+// cppcheck-suppress unusedStructMember
 FAS_HAS_TEMPLATE1(has_apply, apply)
+// cppcheck-suppress unusedStructMember
 FAS_HAS_MEMBER_FUNCTION0(has_member0, member0, void)
+// cppcheck-suppress unusedStructMember
 FAS_HAS_MEMBER_FUNCTION1(has_member1, member1, void, int)
+// cppcheck-suppress unusedStructMember
 FAS_HAS_MEMBER_FUNCTION2(has_member2, member2, void, int, int)
+// cppcheck-suppress unusedStructMember
 FAS_HAS_MEMBER_FUNCTION3(has_member3, member3, void, int, int, int)
+// cppcheck-suppress unusedStructMember
 FAS_HAS_MEMBER_FUNCTION4(has_member4, member4, void, int, int, int, int)
+// cppcheck-suppress unusedStructMember
 FAS_HAS_MEMBER_FUNCTION5(has_member5, member5, void, int, int, int, int, int)
 
 template < typename T, typename U, void (T::*)(const U&) > struct op_mf3 {};

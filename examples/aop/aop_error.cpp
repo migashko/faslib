@@ -9,19 +9,19 @@ struct _methodX_;
 struct ad_method1
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method1" << std::endl; }
+  void operator()(T&) const { std::cout << "method1" << std::endl; }
 };
 
 struct ad_method2
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method2" << std::endl; }
+  void operator()(T&) const { std::cout << "method2" << std::endl; }
 };
 
 struct ad_method3
 {
   template<typename T>
-  void operator()(T&) { std::cout << "method3" << std::endl; }
+  void operator()(T&) const { std::cout << "method3" << std::endl; }
 };
 
 typedef fas::type_list_n<
@@ -37,9 +37,9 @@ class foo
   : public fas::aspect_class< typename fas::merge_aspect<A, foo_aspect>::type >
 {
 public:
-  void method1() { this->get_aspect().template get<_method1_>()(*this); }
-  void method2() { this->get_aspect().template get<_method2_>()(*this); }
-  void method3() { this->get_aspect().template get<_method3_>()(*this); }
+  void method1() const { this->get_aspect().template get<_method1_>()(*this); }
+  void method2() const { this->get_aspect().template get<_method2_>()(*this); }
+  void method3() const { this->get_aspect().template get<_method3_>()(*this); }
 };
 
 /// /////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ struct _method3_orig_;
 struct ad_method3a
 {
   template<typename T>
-  void operator()(T& t)
+  void operator()(T& t) const
   {
     std::cout << "method3a" << std::endl;
     t.get_aspect().template get<_method3_orig_>()(t);

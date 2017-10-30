@@ -41,6 +41,7 @@ typedef type_list_n< D, C, B, A, A >::type check2_2;
 int main()
 {
 
+  // cppcheck-suppress syntaxError
   enum 
   {
     result = test<int>::result

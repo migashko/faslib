@@ -15,12 +15,13 @@ template<typename V, typename VT, void (V::* mg)(VT), typename VVT = typename re
 struct mem_fun_set
 {
   typedef VVT value_type;
-  
+
+  // cppcheck-suppress uninitMemberVar  
   mem_fun_set()
     : _obj()
     , _value()
   {}
-
+  
   VVT& operator()(V& v)
   {
     _obj = &v;
@@ -42,6 +43,13 @@ template<typename V, typename VT, void (V::* mg)(VT), typename VVT >
 struct mem_fun_set<V, VT, mg, VVT*>
 {
   typedef VVT value_type;
+
+  
+  mem_fun_set()
+    : _obj()
+    , _value()
+  {
+  }
 
   VVT* operator()(V& v, VVT* buffer )
   {
