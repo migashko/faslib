@@ -1,7 +1,10 @@
 faslib:
+  language: cpp
+  compiler:
+    - gcc
   only:
-#    - master
-#    - devel
+    - master
+    - devel
   script:
     - mkdir build
     - cd build
@@ -10,3 +13,4 @@ faslib:
     - ctest --output-on-failure
     - cd ..
     - ./.ci/cppcheck.sh
+ 
