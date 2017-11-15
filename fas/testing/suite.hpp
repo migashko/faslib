@@ -227,9 +227,18 @@ public:
     return _unit_counts.ok();
   }
 
-  bool run()
+  bool run(int argc, char* argv[])
   {
-    return _run(*this);
+    return _run(*this, argc, argv);
+  }
+  
+  int get_argc() const { return _argc;}
+  char** get_argv() const { return _argv;}
+  std::string get_arg(int n) const 
+  {
+    if ( n < _argc)
+      return std::string(_argv[n]);
+    return std::string();
   }
 
 
@@ -250,8 +259,10 @@ public:
   }
 
   template<typename T>
-  bool _run(T& t)
+  bool _run(T& t, int argc, char* argv[])
   {
+    _argc = argc;
+    _argv = argv;
     _unit_counts = unit_counts();
     _out << SUITE_BEG << this->size() << " tests";
     if (!_name.empty()) _out << " from " << _name;
@@ -275,7 +286,7 @@ public:
   }
 
 private:
-
+  
   std::ostream& _out;
   std::stringstream _stub;
 
@@ -284,6 +295,9 @@ private:
   unit_status::type _status;
   unit_counts  _unit_counts;
   suite_counts _suite_counts;
+  
+  int _argc;
+  char** _argv;
 };
 
 }}
@@ -314,15 +328,15 @@ private:
 #define END_SUITE(name) >::type > {}; \
 struct fas_##name##_suite: ::fas::testing::suite<fas_##name##_suite_aspect> {\
   typedef ::fas::testing::suite<fas_##name##_suite_aspect> super;\
-  bool run() { return super::_run(*this); }\
+  bool run(int argc, char* argv[]) { return super::_run(*this, argc, argv); }\
   fas_##name##_suite(const std::string& name = "", const std::string& desc = ""): super(name, desc) {}\
   fas_##name##_suite(std::ostream& os, const std::string& name = "", const std::string& desc = ""): super(os, name, desc) {}\
 };\
 ::fas::testing::suite_counts fas_##name##_suite_run(int , char*[]);\
-::fas::testing::suite_counts fas_##name##_suite_run(int , char*[])\
+::fas::testing::suite_counts fas_##name##_suite_run(int argc, char* argv[])\
 {\
   fas_##name##_suite s(#name, fas_##name##_suite_desc() );\
-  s.run(); \
+  s.run(argc, argv); \
   return s.counts();\
 }
 
