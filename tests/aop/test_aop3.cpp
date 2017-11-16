@@ -68,7 +68,7 @@ private:
   friend class super::aspect::template advice_cast< _tag1_ >::type;
 #endif
 
-  void private_method()
+  static void private_method()
   {
 
   };

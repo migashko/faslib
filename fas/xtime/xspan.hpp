@@ -34,6 +34,14 @@ struct xspan
     , xsec( convert<xspan<X>::xmax>(span.xsec))
   {}
 
+  template<xsec_t X>
+  xspan<I>& operator=(const xspan<X>& span )
+  {
+    sec = span.sec;
+    xsec = convert<xspan<X>::xmax>(span.xsec);
+    return *this;
+  }
+
   xspan(xsec_t s, xsec_t xs)
     : sec(s)
     , xsec(xs)

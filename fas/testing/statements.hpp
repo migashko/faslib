@@ -32,6 +32,7 @@ struct statement
 {
 protected:
   statement(const statement<M>&):result(false), text(){}
+  statement& operator=(const statement<M>&){result=false; text.clear(); return *this;}
 public:
   bool result;
   std::string text;

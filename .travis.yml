@@ -1,16 +1,59 @@
-sudo: required
-language: cpp
+dist:     trusty    # используем Ubuntu 14.04 Trusty Tahr (а не 12.02 Precise Pangolin)
+sudo:     required  # используем Virtual Machine (а не Docker container)
+
+language: cpp       # на практике разницы между специфичным для C++ окружением
+                    # и, скажем, python -- никакой. Но пусть будет cpp.
+
+os:
+    # будем прогонять CI и на Linux, и на Mac OS X...
+    - linux
+    - osx
+
 compiler:
-  - gcc
-only:
-  - master
-  - devel
+    # ... и с помощью GCC, и Clang
+    - gcc
+    - clang
+
+env:
+    # список переменных окружения, влияющих на матрицу сборки:
+    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug BUILD_TESTING=ON PARANOID_WARNING=ON   
+    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+
+matrix:
+    exclude:
+        # вручную исключим ненужные элементы из матрицы сборки:
+        - os:       osx
+          compiler: gcc
+
+        - os:  osx
+          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+
+        - os:  osx
+          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+
+install:
+    # скрипт настройки среды и установки зависимостей:
+    - source ci/travis/install-$TRAVIS_OS_NAME.sh
+
 script:
-  - mkdir build
-  - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON -DPARANOID_WARNING=ON ..
-  - cmake --build .
-  - ctest --output-on-failure
-  - cd ..
-  - ./.ci/cppcheck.sh
- 
+    # скрипт сборки и тестирования проекта:
+    - mkdir build
+    - cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
+    - cmake --build .
+    - ctest --output-on-failure
+
+#deploy:
+    # выкладываем tagged-коммиты на GitHub Releases:
+#   provider:     releases
+#    file:         <package-file>
+#    skip_cleanup: true
+#    overwrite:    true
+
+#    api_key:
+#        secure:   <encrypted-github-token>
+
+#    on:
+#        tags:     true
+        
