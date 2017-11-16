@@ -1,1 +1,7 @@
-asdadas
+functionConst:faslib/fas/testing/suite.hpp:108
+functionConst:faslib/fas/testing/suite.hpp:113
+operatorEqVarError:faslib/fas/functional/mem_fun_set.hpp:32
+operatorEqVarError:faslib/fas/functional/global_fun_set.hpp:30
+operatorEqVarError:faslib/tests/typemanip/test_access.cpp:70
+syntaxError:faslib/tests/algorithm/test_sort.cpp:45
+unusedFunction:faslib/tests/typemanip/test_access.cpp:278
