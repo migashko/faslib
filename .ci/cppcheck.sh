@@ -4,10 +4,10 @@ script_dir=$(dirname $script_name)
 prj_dir=$(dirname $script_dir)
 #echo $prj_dir
 opt="--inconclusive --error-exitcode=1 --force --max-configs=128 \
---quiet --enable=all --suppress=missingIncludeSystem  \
+--quiet --enable=all --suppress=missingIncludeSystem --suppressions-list=suppressions.txt \
 --inline-suppr -I $prj_dir $prj_dir"
 
-#echo $opt
+echo $opt
 cppcheck --std=c++11 $opt |& tee /tmp/cppcheck.cppcheck > /dev/null
 
 #cppcheck --inconclusive  --error-exitcode=1 --force --max-configs=128 -I /home/migashko/prj/faslib/ --quiet --enable=all --std=c++11 --suppress=missingIncludeSystem  --inline-suppr /home/migashko/prj/faslib/ |& tee /tmp/cppcheck.cppcheck > /dev/null

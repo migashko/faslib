@@ -50,6 +50,8 @@ public:
     , _status(unit_status::noerror)
     , _unit_counts()
     , _suite_counts()
+    , _argc()
+    , _argv()
   {
   }
 
@@ -61,6 +63,8 @@ public:
     , _status(unit_status::noerror)
     , _unit_counts()
     , _suite_counts()
+    , _argc()
+    , _argv()
   {
   }
 
@@ -87,7 +91,7 @@ public:
     _suite_counts += _unit_counts;
   }
 
-  void _status_check()
+  void _status_check() const
   {
     if (_unit_counts.fails != 0)
       throw fail_error();
