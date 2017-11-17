@@ -4,7 +4,6 @@ class dredd
 {
   // ...
 public:
-  // ppcheck-suppress functionStatic
   void dredd_say() const
   {
     this->one();
@@ -14,13 +13,9 @@ public:
   }
 
 private:
-  // cppcheck-suppress functionStatic
   void one() const   {  std::cout<<"one, ";   }
-  // cppcheck-suppress functionStatic
   void two() const   {  std::cout<<"two, ";   }
-  // cppcheck-suppress functionStatic
   void three() const {  std::cout<<"three, "; }
-  // cppcheck-suppress functionStatic
   void strike() const {  std::cout<<"strike!"; }
 };
 

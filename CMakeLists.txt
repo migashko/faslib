@@ -16,12 +16,13 @@ if ( BUILD_TESTING)
                          -Wmissing-format-attribute -Wmissing-noreturn -Wpacked -Wparentheses -Wpointer-arith\
                          -Wreturn-type -Wsequence-point -Wsign-compare -Wstack-protector -Wuninitialized\
                          -Wstrict-aliasing -Wstrict-aliasing=2 -Wswitch-enum -Wtrigraphs -Wunknown-pragmas\
-                         -Wfloat-equal  -Wformat -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations \
+                         -Wfloat-equal  -Wformat -Wformat=2 -Winit-self  -Wmissing-declarations \
                          -Wunreachable-code -Wunused -Wunused-function -Wunused-label -Wunused-parameter -Wunused-value \
                          -Wunused-variable  -Wvariadic-macros -Wvolatile-register-var  -Wwrite-strings \
-                         -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual \
-                         -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel \
+                         -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual \
+                         -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo \
                          -Wstrict-overflow=5 -Wswitch -Wswitch-default -Wundef -Werror")
+       # -Wlogical-op -Wnoexcept -Wstrict-null-sentinel
     endif()
   endif ()
   enable_testing()

@@ -14,7 +14,6 @@ using namespace ::fas;
 typedef char char12[12];
 struct good_list: type_list<char, type_list< int, type_list< long > > > {};
 struct void_list: empty_list {};
-// cppcheck-suppress syntaxError
 struct one_list: type_list<char12> {};
 
 struct A{};
