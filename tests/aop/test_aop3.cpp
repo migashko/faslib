@@ -64,8 +64,7 @@ public:
   };
 #if __cplusplus >= 201103L
 private:
-
-  friend class super::aspect::template advice_cast< _tag1_ >::type;
+  friend typename super::aspect::template advice_cast< _tag1_ >::type;
 #endif
 
   static void private_method()

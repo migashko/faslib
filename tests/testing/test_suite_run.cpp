@@ -21,7 +21,7 @@ bool test_run0()
 {
   std::stringstream ss, sst;
   suite<> su(ss);
-  su.run(0, nullptr);
+  su.run(0, NULL);
   std::cout << ss.str() << std::endl;
   sst << "[ --BEG-- ] 0 tests." << std::endl
       << "[ --END-- ] " <<std::endl
@@ -73,7 +73,7 @@ bool test_run1()
 {
   std::stringstream ss, sst;
   suite< suite_aspect1 > su(ss);
-  su.run(0, nullptr);
+  su.run(0, NULL);
 
   std::cout << ss.str() << std::endl;
   sst << "[ --BEG-- ] 1 tests."<< std::endl
@@ -112,7 +112,7 @@ bool test_run2()
 {
   std::stringstream ss, sst;
   suite< suite_aspect2 > su(ss);
-  su.run(0, nullptr);
+  su.run(0, NULL);
   std::cout << ss.str() << std::endl;
   sst << "[ --BEG-- ] 2 tests."<< std::endl
       << "[ RUN     ] unit1"<< std::endl

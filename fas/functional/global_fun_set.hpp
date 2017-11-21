@@ -14,19 +14,16 @@ namespace fas{
 template<typename V, typename VT, void (*fun)(V, VT), typename VVT = typename remove_const_reference<VT>::type>
 struct global_fun_set
 {
-  // cppcheck-suppress uninitMemberVar  
   global_fun_set()
     : _obj()
     , _value() 
   {}
 
-  // cppcheck-suppress uninitMemberVar  
   global_fun_set(const global_fun_set& gfs)
     : _obj(gfs._obj)
     , _value(gfs._value)
   {}
 
-  // cppcheck-suppress uninitvar  
   global_fun_set& operator=(const global_fun_set& gfs)
   {
     this->_obj = gfs._obj;
@@ -59,13 +56,11 @@ struct global_fun_set<V, VT, fun, VVT*>
     , _value() 
   {}
 
-  // cppcheck-suppress uninitMemberVar  
   global_fun_set(const global_fun_set& gfs)
     : _obj(gfs._obj)
     , _value(gfs._value)
   {}
 
-  // cppcheck-suppress uninitvar  
   global_fun_set& operator=(const global_fun_set& gfs)
   {
     this->_obj = gfs._obj;

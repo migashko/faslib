@@ -21,7 +21,6 @@ struct counts
     , fails()
     , fatals()
     , crash()
-    , _a1('\0'),_a2('\0'),_a3('\0')
   {}
   
   void operator += ( const counts& c )
@@ -38,8 +37,6 @@ struct counts
     return errors==0 && fails==0 && fatals==0 && crash==false;
   }
   
-private:
-  char _a1,_a2,_a3;
 };
 
 }}

@@ -18,7 +18,7 @@
 #include <string>
 #include <cstring>
 
-class foo;
+struct foo;
 const std::string& get_foo1(const foo& f);
 void set_foo1(foo& f, const std::string& value);
 int get_foo2(const foo& f);
@@ -264,9 +264,6 @@ UNIT(global_fun_unit, "")
   t << equal<assert, std::string> ( foo3_getter()(fc), "foo3-test" ) << FAS_TESTING_FILE_LINE;
   t << equal<assert, std::string> ( foo4_getter()(fc), "foo4-test" ) << FAS_TESTING_FILE_LINE;
 }
-
-
-
 
 BEGIN_SUITE(access_suite, "")
   ADD_UNIT(member_unit)

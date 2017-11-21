@@ -95,7 +95,6 @@ int main()
 {
   test<aspect> t;
   test<aspect>::provider1_type p = t.get_provider2();
-  // cppcheck-suppress redundantAssignment
   p = t.get_provider1();
   t.set(10);
   if ( t.get()!=p.get() )
