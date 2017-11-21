@@ -1,0 +1,6 @@
+syntaxError:/home/migashko/prj/faslib/tests/type_list/test_index_of.cpp
+unmatchedSuppression:/home/migashko/prj/faslib/tests/algorithm/test_sort.cpp
+unmatchedSuppression:/home/migashko/prj/faslib/tests/aop/test_aop10.cpp
+unmatchedSuppression:/home/migashko/prj/faslib/tests/range/basic2_suite.cpp
+unmatchedSuppression:/home/migashko/prj/faslib/tests/type_list/test_reverse.cpp
+unmatchedSuppression:/home/migashko/prj/faslib/tests/type_list/test_type_count.cpp
