@@ -74,8 +74,5 @@ int main()
                 >::value
   };
 
-  if (ah.get< int_<3> >().value != 33)
-    return 1;
-
-  return 0;
+  return static_cast<int>(ah.get< int_<3> >().value != 33);
 }
