@@ -8,7 +8,7 @@ if ( BUILD_TESTING)
   if (PARANOID_WARNING)
     if(UNIX)
       # -Weffc++ -Wunsafe-loop-optimizations
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -pedantic -Wcast-align -Winvalid-pch\
+      set(CMAKE_CXX_FLAGS "-Wall  -pedantic -Wcast-align -Winvalid-pch\
                          -pedantic-errors -Wextra -Wformat-nonliteral\
                          -Wchar-subscripts  -Wcomment -Wconversion -Wformat-security -Wimport \
                          -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat-y2k\
