@@ -6,8 +6,9 @@ variables:
 stages:
   - build
   - check
-  - merge
-  - push
+  - clean
+  - release
+  - publish
 
 base-build:
   stage: build
@@ -35,7 +36,7 @@ full-build:
     - tags
     - /^build.*$/
   
-check-faslib:
+cppcheck:
   stage: check
   script:
     - ./.ci/cppcheck.sh --std=c++03
@@ -46,16 +47,16 @@ check-faslib:
     - tags
     - /^check.*$/
 
-tagged-push:
-  stage: merge
+release-branch:
+  stage: release
   script:
     - echo git push ${PROJECT_SSH} ${CI_COMMIT_REF_NAME}:${RELEASE_BRANCH}
     - git push ${PROJECT_SSH} ${CI_COMMIT_REF_NAME}:refs/heads/${RELEASE_BRANCH}
   only:
     - tags
 
-master-merge:
-  stage: merge
+make-merge-request:
+  stage: release
   script:
     - if [ "${RELEASE_BRANCH}" != "${CI_COMMIT_REF_NAME}" ]; then exit 1; fi
     - ./.ci/headtag.sh ${CI_COMMIT_REF_NAME}
@@ -63,8 +64,8 @@ master-merge:
   only:
     - /^release.*$/
 
-delete-branch:
-  stage: merge
+delete-branches:
+  stage: clean
   script:
     - echo git push ${PROJECT_SSH} :${CI_COMMIT_REF_NAME}
     - git push ${PROJECT_SSH} :${CI_COMMIT_REF_NAME}
@@ -73,11 +74,10 @@ delete-branch:
     - /^build.*$/
 
 faslib-push:
-  stage: push
+  stage: publish
   only:
     - master
   script:
-    - echo git push ${REMOTE_SSH} master:mambaru
-    - git push ${REMOTE_SSH} master:mambaru
+    - git push ${REMOTE_SSH} master:refs/heads/mambaru
     - git push --tags ${REMOTE_SSH} master:mambaru
     
