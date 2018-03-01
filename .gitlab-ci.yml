@@ -50,7 +50,7 @@ tagged-push:
   stage: merge
   script:
     - echo git push ${PROJECT_SSH} ${CI_COMMIT_REF_NAME}:${RELEASE_BRANCH}
-    - git push ${PROJECT_SSH} ${CI_COMMIT_REF_NAME}:${RELEASE_BRANCH}
+    - git push ${PROJECT_SSH} ${CI_COMMIT_REF_NAME}:refs/heads/${RELEASE_BRANCH}
   only:
     - tags
 
