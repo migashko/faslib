@@ -17,7 +17,6 @@ namespace fas{
 template< typename R>
 struct range_helper<R, typerange_flag::range >
 {
-  // TODO: orange spec
   enum { flag = typerange_flag::range };
   typedef R range;
   typedef R orange;
@@ -54,15 +53,15 @@ struct range_helper<R, typerange_flag::range >
       not_input_or_output_range = static_check< !(is_output_range || is_intput_range ) >::value
     };
 
-    typedef forward_range< typename RR::iterator > orange;
+    typedef forward_range< typename RR::iterator > orange_type;
 
     if ( clear )
     {
-      for ( orange i(r.begin(), r.end()); i ; ++i)
+      for ( orange_type i(r.begin(), r.end()); i ; ++i)
         *i = typename RR::value_type();
     }
 
-    return orange( r.begin(), r.end() );
+    return orange_type( r.begin(), r.end() );
   }
 
   static inline range make_erange(R r)

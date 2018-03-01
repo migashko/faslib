@@ -1,59 +1,45 @@
-dist:     trusty    # используем Ubuntu 14.04 Trusty Tahr (а не 12.02 Precise Pangolin)
-sudo:     required  # используем Virtual Machine (а не Docker container)
+dist:     trusty
+sudo:     required
 
-language: cpp       # на практике разницы между специфичным для C++ окружением
-                    # и, скажем, python -- никакой. Но пусть будет cpp.
+language: cpp
 
 os:
-    # будем прогонять CI и на Linux, и на Mac OS X...
     - linux
-    - osx
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y valgrind
 
 compiler:
-    # ... и с помощью GCC, и Clang
-    - gcc
-    - clang
+    - g++
+    - clang++ 
+    - g++-5
+    - g++-6
 
 env:
-    # список переменных окружения, влияющих на матрицу сборки:
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug BUILD_TESTING=ON PARANOID_WARNING=ON   
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+    - BUILD_TYPE=Debug STANDARD=98
+    - BUILD_TYPE=Release STANDARD=98
+    - BUILD_TYPE=Debug STANDARD=11
+    - BUILD_TYPE=Release STANDARD=11
+    - BUILD_TYPE=Debug STANDARD=14
+    - BUILD_TYPE=Release STANDARD=14
 
 matrix:
-    exclude:
-        # вручную исключим ненужные элементы из матрицы сборки:
-        - os:       osx
-          compiler: gcc
-
-        - os:  osx
-          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-
-        - os:  osx
-          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
-
-install:
-    # скрипт настройки среды и установки зависимостей:
-    - source ci/travis/install-$TRAVIS_OS_NAME.sh
-
+  exclude:
+  - compiler: g++
+    env: 
+        - BUILD_TYPE=Debug STANDARD=14
+        - BUILD_TYPE=Release STANDARD=14
+  include:
+  - compiler: g++-6
+    env: 
+       - BUILD_TYPE=Debug STANDARD=17
+       - BUILD_TYPE=Release STANDARD=17
+  
 script:
-    # скрипт сборки и тестирования проекта:
     - mkdir build
     - cd build
-    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
+    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTING=ON -DPARANOID_WARNING=ON 
+      -DCMAKE_CXX_STANDARD=$STANDARD
     - cmake --build .
     - ctest --output-on-failure
-
-#deploy:
-    # выкладываем tagged-коммиты на GitHub Releases:
-#   provider:     releases
-#    file:         <package-file>
-#    skip_cleanup: true
-#    overwrite:    true
-
-#    api_key:
-#        secure:   <encrypted-github-token>
-
-#    on:
-#        tags:     true
-        

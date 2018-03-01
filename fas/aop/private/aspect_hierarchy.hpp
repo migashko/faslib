@@ -60,9 +60,9 @@ public:
   template<typename Tg>
   struct has_advice
   {
-    typedef detail::has_advice_impl<Tg, self > helper;
-    typedef typename helper::type type;
-    enum { value = helper::value};
+    typedef detail::has_advice_impl<Tg, self > has_helper;
+    typedef typename has_helper::type type;
+    enum { value = has_helper::value};
   };
 
   template<typename Tg>

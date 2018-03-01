@@ -22,5 +22,5 @@ int main()
     // test5 = static_check< 0 >::value, // error: incomplete type 'fas::static_check<0>' used in nested name specifier
     // test6 = static_check< 2 >::value, // error: incomplete type 'fas::static_check<2>' used in nested name specifier
   };
-  return 0;
+  return !(test1obj.value && test2obj.value);
 }

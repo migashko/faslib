@@ -44,10 +44,13 @@ inline nanospan operator * (const nanospan& s, const nanospan& f)
   if ( f.xsec == 0)
   {
     xsec_t xsec = s.to_nanosec()*f.sec;
-    return nanospan(
-          static_cast<xsec_t> ( xsec / FAS_NANOSEC ),
-          static_cast<xsec_t> ( xsec % FAS_NANOSEC )
-    );
+    if ( xsec != 0L)
+      return nanospan(
+        static_cast<xsec_t> ( xsec / FAS_NANOSEC ),
+        static_cast<xsec_t> ( xsec % FAS_NANOSEC )
+      );
+    else
+      return nanospan(0, 0);
   }
   else
     return nanospan( s.to_double() * f.to_double() );
