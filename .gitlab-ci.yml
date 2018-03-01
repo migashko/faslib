@@ -78,6 +78,6 @@ faslib-push:
   only:
     - master
   script:
-    - git push ${REMOTE_SSH} master:refs/heads/mambaru
+    - git push ${REMOTE_SSH} master:mambaru
     - git push --tags ${REMOTE_SSH} master:mambaru
     
