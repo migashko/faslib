@@ -31,6 +31,12 @@ full-build:
     - ./.ci/build-and-test.sh clang++ 98 Debug
     - ./.ci/build-and-test.sh clang++ 11 Debug
     - ./.ci/build-and-test.sh clang++ 14 Debug
+    - ./.ci/build-and-test.sh g++ 98 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
+    - ./.ci/build-and-test.sh g++ 11 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
+    - ./.ci/build-and-test.sh g++ 14 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
+    - ./.ci/build-and-test.sh clang++ 98 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
+    - ./.ci/build-and-test.sh clang++ 11 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
+    - ./.ci/build-and-test.sh clang++ 14 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
   only:
     - master
     - tags
@@ -67,11 +73,10 @@ make-merge-request:
 delete-branches:
   stage: clean
   script:
-    - echo git push ${PROJECT_SSH} :${CI_COMMIT_REF_NAME}
     - git push ${PROJECT_SSH} :${CI_COMMIT_REF_NAME}
   only:
-    - /^check.*$/
     - /^build.*$/
+    - /^check.*$/
 
 faslib-push:
   stage: publish
@@ -80,4 +85,3 @@ faslib-push:
   script:
     - git push ${REMOTE_SSH} master:mambaru
     - git push --tags ${REMOTE_SSH} master:mambaru
-    

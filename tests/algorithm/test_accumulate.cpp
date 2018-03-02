@@ -17,7 +17,8 @@ struct list0: empty_list {};
 struct list1: type_list_n< int_<1> >::type {};
 struct list2: type_list_n< int_<1>, int_<2> >::type {};
 
-#if __cplusplus >= 201103L
+#if __cplusplus >= 201103L /*&& !defined(FASLIB_TYPE_LIST_CHECK)*/
+// For FASLIB_TYPE_LIST_CHECK needs -ftemplate-depth=1400 or more 
 
 typedef fas::int_<1> O;
 
@@ -88,7 +89,7 @@ int main()
     value = static_check< accumulate<list0, fas::int_<21>, fas::plus<_1, _2> >::type::value == 21 >::value
           + static_check< accumulate<list1, fas::int_<1>,  fas::plus<_1, _2> >::type::value == 2 >::value
           + static_check< accumulate<list2, fas::int_<0>,  fas::plus<_1, _2> >::type::value == 3 >::value
-          #if __cplusplus >= 201103L
+          #if __cplusplus >= 201103L /*&& !defined(FASLIB_TYPE_LIST_CHECK)*/
           // pi == 3.16667F
           + static_check< (pi > 3.16666F) && pi < (3.16668F) >::value
           #endif

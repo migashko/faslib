@@ -1,14 +1,38 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 2.8)
 
 project(faslib CXX)
+
+# Enable compile-time check type_list and generate human readable error (increases compile time)
+if ( FASLIB_TYPE_LIST_CHECK )
+  add_definitions(-DFASLIB_TYPE_LIST_CHECK)
+endif()
+
+# Experimental disable type_list specialization (increases compile time)
+if ( DISABLE_TYPE_LIST_SPEC )
+  add_definitions(-DDISABLE_TYPE_LIST_SPEC)
+endif()
+
+# Deprecated
+if ( FAS_ALGORITHM_LAMBDA_CAST )
+  add_definitions(-DFAS_ALGORITHM_LAMBDA_CAST)
+endif()
+
+# Enable simplify  expressions for algorithms (experimental)
+if ( FAS_ALGORITHM_SIMPLIFY )
+  add_definitions(-DFAS_ALGORITHM_SIMPLIFY)
+endif()
+
+# Disable warnings for non-optimal code
+if ( NOT FAS_ENABLE_WARNINGS )
+  add_definitions(-DFAS_DISABLE_WARNINGS)
+endif()
 
 add_subdirectory(config)
 
 if ( BUILD_TESTING)
   if (PARANOID_WARNING)
     if(UNIX)
-      # -Weffc++ -Wunsafe-loop-optimizations
-      set(CMAKE_CXX_FLAGS "-Wall  -pedantic -Wcast-align -Winvalid-pch -pedantic-errors -Wextra -Wformat-nonliteral -Wchar-subscripts ")
+      set(CMAKE_CXX_FLAGS "-Wall -pedantic -Wextra -ftemplate-depth=1400 -Wcast-align -Winvalid-pch -pedantic-errors  -Wformat-nonliteral -Wchar-subscripts ")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcomment -Wconversion -Wformat-security -Wimport")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat-y2k")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlong-long -Wmissing-braces -Wmissing-field-initializers")
@@ -21,31 +45,19 @@ if ( BUILD_TESTING)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wstrict-overflow=5 -Wswitch -Wswitch-default -Wundef -Werror")
-       # -Wlogical-op -Wnoexcept -Wstrict-null-sentinel
+      #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weffc++ -Wnon-virtual-dtor")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
+      if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op -Wunsafe-loop-optimizations -Wnoexcept -Wstrict-null-sentinel")
+      endif()
     endif()
   endif ()
   enable_testing()
+  include_directories(./)
   add_subdirectory(tests)
   add_subdirectory(examples)
   add_subdirectory(tutorial)
 endif()
-
-# Enable compile-time check type_list and generate human readable error (increases compile time)
-#add_definitions(-DFASLIB_TYPE_LIST_CHECK)
-
-# Experimental disable type_list specialization (increases compile time)
-#add_definitions(-DDISABLE_TYPE_LIST_SPEC)
-
-# Deprecated
-#add_definitions(-DFAS_ALGORITHM_LAMBDA_CAST)
-
-# Enable simplify  expressions for algorithms (experimental)
-#add_definitions(-DFAS_ALGORITHM_SIMPLIFY)
-
-# Disable warnings for non-optimal code
-add_definitions(-DFAS_DISABLE_WARNINGS)
-
-include_directories(./)
 
 set(CPACK_PACKAGE_NAME "faslib")
 set(CPACK_PACKAGE_VERSION_MAJOR "1")
