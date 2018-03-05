@@ -30,9 +30,14 @@ endif()
 add_subdirectory(config)
 
 if ( BUILD_TESTING)
+
+  if ( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" )
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__STRICT_ANSI__")
+  endif()
+  
   if (PARANOID_WARNING)
     if(UNIX)
-      set(CMAKE_CXX_FLAGS "-Wall -pedantic -Wextra -ftemplate-depth=1400 -Wcast-align -Winvalid-pch -pedantic-errors  -Wformat-nonliteral -Wchar-subscripts ")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -ftemplate-depth=1400 -Wcast-align -Winvalid-pch -pedantic-errors  -Wformat-nonliteral -Wchar-subscripts ")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcomment -Wconversion -Wformat-security -Wimport")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat-y2k")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlong-long -Wmissing-braces -Wmissing-field-initializers")
