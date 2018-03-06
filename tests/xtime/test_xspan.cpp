@@ -65,8 +65,10 @@ bool test_xspan()
   /// ----------------
 
   span = span - X(1);
-  span -= -2;
-  span -= 2;
+  
+  span -= X(-2, 0);
+  span -= X(2, 0);
+  
   if ( span.sec!=23 || span.xsec!=X::xmax/2)  return false;
   
   span = span - X(10, X::xmax/2 + 1);
@@ -90,7 +92,7 @@ bool test_xspan()
   if ( span.sec!=10 || span.xsec!=X::xmax/2)  return false;
 
   /// ----------------
-
+  
   span = span / X(2);
 
   if ( span.sec!=5 || span.xsec!=X::xmax/4)  return false;
@@ -104,7 +106,7 @@ bool test_xspan()
   if ( span.sec!=5 || span.xsec!=0)  return false;
 
   /// ----------------
-
+  
   span = span * X(5);
 
   if ( span.sec!=25 || span.xsec!=0)  return false;
@@ -114,12 +116,12 @@ bool test_xspan()
   if ( span.sec!=5 || span.xsec!=0)  return false;
 
   span *= X(1, X::xmax/10);
-  if ( span.sec!=5 || !_equal(span.xsec, X::xmax/* *5/10 */ / 2, 1) )  return false;
+  if ( span.sec!=5 || !_equal(span.xsec, X::xmax / 2, 1) )  return false;
 
   span *= 1.1;
-
-  if ( span.sec!=6 || !_equal(span.xsec, X::xmax /* *5/100*/ / 20, 1) )  return false;
-
+  
+  if ( span.sec!=6 || !_equal(span.xsec, X::xmax / 20, 1) )  return false;
+    
   if ( span == X() ) return false;
   if ( span == X(0) ) return false;
   if ( span == X(0.0) ) return false;
@@ -127,7 +129,7 @@ bool test_xspan()
   if ( X() != X(0, 0) ) return false;
   if ( X() != X(0) ) return false;
   if ( X() != X(0.0) ) return false;
-
+  
   span = X(1.5);
 
   if ( span > X(1.5) ) return false;
