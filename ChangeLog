@@ -10,3 +10,5 @@ Wed Dec 25 2013
 Mon, 30 Oct 2017
     faslib-0.7.0
 
+Wed, 04 Apr 2018
+    Изменения fas::testing: исправлен less, добавлены less_equal, greater, greater_equal
