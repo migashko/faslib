@@ -12,6 +12,10 @@
 #include <fas/type_list.hpp>
 #include <string>
 #include <sstream>
+#include <cmath>
+#include <sstream>
+#include <limits>
+
 
 #define FAS_TESTING_FILE_LINE " " << __FILE__ << ": " << __LINE__
 #define FAS_FL FAS_TESTING_FILE_LINE
@@ -25,7 +29,10 @@ struct critical;
 struct crash;
 
 template<typename L, typename R>
-std::string equal_message(const std::string& msg, const L& left, const std::string& op, const R& right);
+std::string compare_message(const std::string& msg, const L& left, const std::string& op, const R& right);
+
+template<typename T>
+bool is_float_equal(const T& left, const T& right);
 
 template<typename M>
 struct statement
@@ -47,7 +54,7 @@ struct equal: statement<M>
   equal(const L& left, const R& right)
     : statement<M>( 
         static_cast<const T&>(left) == static_cast<const T&>(right), 
-        equal_message("Equal statement. ", static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
+        compare_message("Equal statement. ", static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
       ) 
   {}
 
@@ -55,69 +62,324 @@ struct equal: statement<M>
   equal(const L& left, const R& right, const std::string& txt)
     : statement<M>( 
         static_cast<const T&>(left) == static_cast<const T&>(right),
-        equal_message(txt, static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
+        compare_message(txt, static_cast<const T&>(left), "!=", static_cast<const T&>(right)) 
       ) 
   {}
 };
+
+template<typename M, typename T, bool neg>
+struct float_equal: statement<M>
+{
+  template<typename L, typename R>
+  float_equal(const L& left, const R& right, const std::string& txt)    
+    : statement<M>( 
+        is_float_equal( 
+          static_cast<const T&>(left), 
+          static_cast<const T&>(right) 
+        ), 
+        compare_message( 
+          txt.empty() ? std::string("Equal statement. ") : txt, 
+          left, 
+          neg ? std::string("--") : std::string("!="), 
+          right
+        ) 
+    ) 
+  {}
+};
+
+template<typename M>
+struct equal<M, float>: float_equal<M, float, false>
+{
+  template<typename L, typename R>
+  equal(const L& left, const R& right)
+    : float_equal<M, float, false>(left, right, "Equal statement. ")
+  {}
+
+  template<typename L, typename R>
+  equal(const L& left, const R& right, const std::string& txt)
+    : float_equal<M, float, false>(left, right, txt)
+  {}
+};
+
+template<typename M>
+struct equal<M, double>: float_equal<M, double, false>
+{
+  template<typename L, typename R>
+  equal(const L& left, const R& right)
+    : float_equal<M, double, false>(left, right, "Equal statement. ")
+  {}
+
+  template<typename L, typename R>
+  equal(const L& left, const R& right, const std::string& txt)
+    : float_equal<M, double, false>(left, right, txt)
+  {}
+};
+
 
 template<typename M>
 struct equal<M, empty_type>: statement<M>
 {
   template<typename L, typename R>
-  equal(const L& left, const R& right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
+  equal(const L& left, const R& right)
+    : statement<M>( 
+      left == right, 
+      compare_message("Equal statement. ", left, "!=", right) 
+    ) 
+  {}
 
   template<typename L, typename R>
-  equal(const L& left, const R& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, "!=", right) ) {}
+  equal(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+      left == right, 
+      compare_message(txt, left, "!=", right) 
+    ) 
+  {}
 };
 
 template<typename M = assert, typename T = empty_type>
 struct not_equal: statement<M>
 {
-  not_equal(const T& left, const T& right): statement<M>( left != right, equal_message("Not equal statement. ", left, "==", right) ) {}
-  not_equal(const T& left, const T& right, const std::string& txt): statement<M>( left != right, equal_message(txt, left, "==", right) ) {}
+  template<typename L, typename R>
+  not_equal(const L& left, const R& right)
+    : statement<M>( 
+      static_cast<const T&>(left) != static_cast<const T&>(right), 
+      compare_message("Not equal statement. ", static_cast<const T&>(left), "==", static_cast<const T&>(right) ) 
+    ) 
+  {}
+  
+  template<typename L, typename R>
+  not_equal(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+      static_cast<const T&>(left) != static_cast<const T&>(right), 
+      compare_message(txt, static_cast<const T&>(left), "==", static_cast<const T&>(right) ) 
+    ) 
+  {}
 };
+
+
+template<typename M>
+struct not_equal<M, float>: float_equal<M, float, true>
+{
+  template<typename L, typename R>
+  not_equal(const L& left, const R& right)
+    : float_equal<M, float, true>(left, right, "Not equal statement. ")
+  {}
+
+  template<typename L, typename R>
+  not_equal(const L& left, const R& right, const std::string& txt)
+    : float_equal<M, float, true>(left, right, txt)
+  {}
+};
+
+template<typename M>
+struct not_equal<M, double>: float_equal<M, double, true>
+{
+  template<typename L, typename R>
+  not_equal(const L& left, const R& right)
+    : float_equal<M, double, true>(left, right, "Not equal statement. ")
+  {}
+
+  template<typename L, typename R>
+  not_equal(const L& left, const R& right, const std::string& txt)
+    : float_equal<M, double, true>(left, right, txt)
+  {}
+};
+
 
 template<typename M>
 struct not_equal<M, empty_type>: statement<M>
 {
   template<typename L, typename R>
-  not_equal(const L& left, const R& right): statement<M>( left != right, equal_message("Not equal statement. ", left, "==", right) ) {}
+  not_equal(const L& left, const R& right)
+    : statement<M>( 
+      left != right, 
+      compare_message("Not equal statement. ", left, "==", right) 
+    ) 
+  {}
 
   template<typename L, typename R>
-  not_equal(const L& left, const R& right, const std::string& txt): statement<M>( left != right, equal_message(txt, left, "==", right) ) {}
+  not_equal(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+      left != right, 
+      compare_message(txt, left, "==", right) 
+    ) 
+  {}
 };
 
 template<typename M = assert, typename T = empty_type>
 struct less: statement<M>
 {
-  less(const T& left, const T& right): statement<M>( left < right, equal_message("Less statement. ", left, ">=", right) ) {}
-  less(const T& left, const T& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, ">=", right) ) {}
+  template<typename L, typename R>
+  less(const L& left, const R& right)
+    : statement<M>( 
+        static_cast<const T&>(left) < static_cast<const T&>(right), 
+        compare_message("Less statement. ", static_cast<const T&>(left), ">=", static_cast<const T&>(right) ) 
+      ) 
+  {}
+  
+  template<typename L, typename R>
+  less(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+        static_cast<const T&>(left) < static_cast<const T&>(right), 
+        compare_message(txt, static_cast<const T&>(left), ">=", static_cast<const T&>(right) ) 
+      ) 
+  {}
 };
 
 template<typename M>
 struct less<M, empty_type>: statement<M>
 {
   template<typename L, typename R>
-  less(const L& left, const R& right): statement<M>( left < right, equal_message("Less statement. ", left, ">=", right) ) {}
+  less(const L& left, const R& right)
+    : statement<M>( 
+      left < right, 
+      compare_message("Less statement. ", left, ">=", right) 
+    ) 
+  {}
 
   template<typename L, typename R>
-  less(const L& left, const R& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, ">=", right) ) {}
+  less(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+      left < right, 
+      compare_message(txt, left, ">=", right) 
+    ) 
+  {}
 };
 
+
+template<typename M = assert, typename T = empty_type>
+struct less_equal: statement<M>
+{
+  template<typename L, typename R>
+  less_equal(const L& left, const R& right)
+    : statement<M>( 
+        static_cast<const T&>(left) <= static_cast<const T&>(right), 
+        compare_message("Less equal statement. ", static_cast<const T&>(left), ">", static_cast<const T&>(right) ) 
+      ) 
+  {}
+  
+  template<typename L, typename R>
+  less_equal(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+        static_cast<const T&>(left) <= static_cast<const T&>(right), 
+        compare_message(txt, static_cast<const T&>(left), ">", static_cast<const T&>(right) ) 
+      ) 
+  {}
+};
+
+template<typename M>
+struct less_equal<M, empty_type>: statement<M>
+{
+  template<typename L, typename R>
+  less_equal(const L& left, const R& right)
+    : statement<M>( 
+      left <= right, 
+      compare_message("Less equal statement. ", left, ">", right) 
+    ) 
+  {}
+
+  template<typename L, typename R>
+  less_equal(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+      left <= right, 
+      compare_message(txt, left, ">", right) 
+    ) 
+  {}
+};
+
+template<typename M = assert, typename T = empty_type>
+struct greater: statement<M>
+{
+  template<typename L, typename R>
+  greater(const L& left, const R& right)
+    : statement<M>( 
+        static_cast<const T&>(left) > static_cast<const T&>(right), 
+        compare_message("Greater statement. ", static_cast<const T&>(left), "<=", static_cast<const T&>(right) ) 
+      ) 
+  {}
+  
+  template<typename L, typename R>
+  greater(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+        static_cast<const T&>(left) > static_cast<const T&>(right), 
+        compare_message(txt, static_cast<const T&>(left), "<=", static_cast<const T&>(right) ) 
+      ) 
+  {}
+};
+
+template<typename M>
+struct greater<M, empty_type>: statement<M>
+{
+  template<typename L, typename R>
+  greater(const L& left, const R& right)
+    : statement<M>( 
+      left > right, 
+      compare_message("Greater statement. ", left, "<=", right) 
+    ) 
+  {}
+
+  template<typename L, typename R>
+  greater(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+      left > right, 
+      compare_message(txt, left, "<=", right) 
+    ) 
+  {}
+};
+
+
+template<typename M = assert, typename T = empty_type>
+struct greater_equal: statement<M>
+{
+  template<typename L, typename R>
+  greater_equal(const L& left, const R& right)
+    : statement<M>( 
+        static_cast<const T&>(left) >= static_cast<const T&>(right), 
+        compare_message("Greater equal statement. ", static_cast<const T&>(left), "<", static_cast<const T&>(right) ) 
+      ) 
+  {}
+  
+  template<typename L, typename R>
+  greater_equal(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+        static_cast<const T&>(left) >= static_cast<const T&>(right), 
+        compare_message(txt, static_cast<const T&>(left), "<", static_cast<const T&>(right) ) 
+      ) 
+  {}
+};
+
+template<typename M>
+struct greater_equal<M, empty_type>: statement<M>
+{
+  template<typename L, typename R>
+  greater_equal(const L& left, const R& right)
+    : statement<M>( 
+      left >= right, 
+      compare_message("Greater equal statement. ", left, "<", right) 
+    ) 
+  {}
+
+  template<typename L, typename R>
+  greater_equal(const L& left, const R& right, const std::string& txt)
+    : statement<M>( 
+      left >= right, 
+      compare_message(txt, left, "<", right) 
+    ) 
+  {}
+};
 
 template<typename M = assert>
 struct equal_str: statement<M>
 {
+  equal_str(const std::string& left, const std::string& right): statement<M>( left == right, compare_message("Equal statement. ", left, "!=", right) ) {}
 
-  equal_str(const std::string& left, const std::string& right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
-
-  equal_str(const std::string& left, const std::string& right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, "!=", right) ) {}
-
-  template<typename R>
-  equal_str(const std::string& left, R right): statement<M>( left == right, equal_message("Equal statement. ", left, "!=", right) ) {}
+  equal_str(const std::string& left, const std::string& right, const std::string& txt): statement<M>( left == right, compare_message(txt, left, "!=", right) ) {}
 
   template<typename R>
-  equal_str(const std::string& left, R right, const std::string& txt): statement<M>( left == right, equal_message(txt, left, "!=", right) ) {}
+  equal_str(const std::string& left, R right): statement<M>( left == right, compare_message("Equal statement. ", left, "!=", right) ) {}
+
+  template<typename R>
+  equal_str(const std::string& left, R right, const std::string& txt): statement<M>( left == right, compare_message(txt, left, "!=", right) ) {}
 };
 
 template<typename M = assert>
@@ -184,7 +446,7 @@ template<typename V, typename H, typename L>
 void os_write(std::ostream& s, const V& v, fas::type_list<H, L> ) { os_write(s, v, L() ); }
 
 template<typename L, typename R>
-std::string equal_message(const std::string& msg, const L& left, const std::string& op, const R& right)
+std::string compare_message(const std::string& msg, const L& left, const std::string& op, const R& right)
 {
   std::stringstream ss;
   ss << msg << "( ";
@@ -194,6 +456,13 @@ std::string equal_message(const std::string& msg, const L& left, const std::stri
   ss << " ). ";
   return ss.str();
 }
+
+template<typename T>
+bool is_float_equal(const T& left, const T& right)
+{
+  return std::fabs(left - right) < std::numeric_limits<T>::epsilon();
+}
+
 
 }}
 

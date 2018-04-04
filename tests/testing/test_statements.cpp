@@ -48,7 +48,71 @@ int main()
   fatal ftl("test fatal");
   if ( ftl.result || ftl.text!="test fatal")
     return -1;
+  
+  double d1=0.0, d2=0.0;
+  int    i1=0;
+  
+  if ( equal<expect, double>(i1, d1).result != true )
+    return -1;
 
+  if ( equal<expect, double>(d2, d1, "test").result != true )
+    return -1;
+
+  if ( equal<expect, size_t>(i1, d1).result != true )
+    return -1;
+
+  if ( equal<expect, size_t>(d2, d1, "test").result != true )
+    return -1;
+  
+  if ( less_equal<expect, double>(i1, d1).result != true )
+    return -1;
+
+  if ( less_equal<expect, double>(d2, d1, "test").result != true )
+    return -1;
+
+  if ( less_equal<expect, size_t>(i1, d1).result != true )
+    return -1;
+
+  if ( less_equal<expect, size_t>(d2, d1, "test").result != true )
+    return -1;
+  
+  if ( greater_equal<expect, double>(i1, d1).result != true )
+    return -1;
+
+  if ( greater_equal<expect, double>(d2, d1, "test").result != true )
+    return -1;
+
+  if ( greater_equal<expect, size_t>(i1, d1).result != true )
+    return -1;
+
+  if ( greater_equal<expect, size_t>(d2, d1, "test").result != true )
+    return -1;
+  
+  if ( less<expect, double>(i1, d1).result != false )
+    return -1;
+
+  if ( less<expect, double>(d2, d1, "test").result != false )
+    return -1;
+
+  if ( less<expect, size_t>(i1, d1).result != false )
+    return -1;
+
+  if ( less<expect, size_t>(d2, d1, "test").result != false)
+    return -1;
+  
+  if ( greater<expect, double>(i1, d1).result != false )
+    return -1;
+
+  if ( greater<expect, double>(d2, d1, "test").result != false )
+    return -1;
+
+  if ( greater<expect, size_t>(i1, d1).result != false )
+    return -1;
+
+  if ( greater<expect, size_t>(d2, d1, "test").result != false )
+    return -1;
+    
+  
   std::cout << "OK" << std::endl;
   return 0;
 }
