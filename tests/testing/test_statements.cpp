@@ -111,7 +111,6 @@ int main()
 
   if ( greater<expect, size_t>(d2, d1, "test").result != false )
     return -1;
-    
   
   std::cout << "OK" << std::endl;
   return 0;
