@@ -440,7 +440,7 @@ template<typename V>
 void os_write(std::ostream& s, const V&, fas::empty_list ) { s << "?"; }
 
 template<typename V, typename L>
-void os_write(std::ostream& s, const V& v, fas::type_list<V, L> ) { s << v; }
+void os_write(std::ostream& s, const V& v, fas::type_list<V, L> ) { s << std::boolalpha << v; }
 
 template<typename V, typename H, typename L>
 void os_write(std::ostream& s, const V& v, fas::type_list<H, L> ) { os_write(s, v, L() ); }
