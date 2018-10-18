@@ -38,7 +38,6 @@ full-build:
     - ./.ci/build-and-test.sh clang++ 11 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
     - ./.ci/build-and-test.sh clang++ 14 Release -DFASLIB_TYPE_LIST_CHECK=ON -DDISABLE_TYPE_LIST_SPEC=ON -DFAS_ALGORITHM_SIMPLIFY=ON -DFAS_ENABLE_WARNINGS=ON
   only:
-    - master
     - tags
     - /^build.*$/
   
@@ -49,7 +48,6 @@ cppcheck:
     - ./.ci/cppcheck.sh --std=c++11
     - ./.ci/cppcheck.sh --std=c++14
   only:
-    - master
     - tags
     - /^check.*$/
 
