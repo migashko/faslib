@@ -15,8 +15,10 @@ base-build:
   script:
     - ./.ci/build-and-test.sh g++ 98 Release
     - ./.ci/build-and-test.sh g++ 11 Release
-  except:
-    - /^draft.*$/
+  only:
+    - devel
+    - tags
+    - /^build.*$/
 
 full-build:
   stage: build
