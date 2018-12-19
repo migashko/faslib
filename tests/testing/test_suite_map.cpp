@@ -8,6 +8,7 @@
 #include <fas/testing/unit.hpp>
 #include <fas/testing/statements.hpp>
 #include <fas/static_check/static_check.hpp>
+#include <fas/functional/ignore_args.hpp>
 #include <sstream>
 #include <iostream>
 
@@ -69,10 +70,15 @@ BEGIN_SUITE(suite1, "suite example description" )
   ADD_UNIT(unit5)
 END_SUITE(suite1)
 
+BEGIN_SUITE(suite2, "empty suite" )
+END_SUITE(suite2)
 
 int main(int argc, char* argv[])
 {
   using namespace ::fas::testing;
+  
+  fas::ignore_args(fas_suite2_suite_run);
+  
   suite_counts fas_suite1_suite_run(int argc, char* argv[]);
   suite_counts result = fas_suite1_suite_run(argc, argv);
   std::cout << MESSAGE << "---------------------------------" << std::endl;
@@ -83,7 +89,6 @@ int main(int argc, char* argv[])
   std::cout << MESSAGE << "Errors " << result.errors << std::endl;
   std::cout << MESSAGE << "Fails " << result.fails << std::endl;
   std::cout << MESSAGE << "Fatals " << result.fatals << std::endl;
-  
   std::cout << MESSAGE << "suite unit list size = " << fas_suite1_suite::size() << std::endl;
   return !(result.units_passed==1 && result.units_total == 4 && result.units_skip==2 && result.statements==10);
 }

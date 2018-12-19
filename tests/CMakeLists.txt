@@ -24,10 +24,9 @@ endif(UNIX)
 
 include_directories(..)
 
-set(FAS_TESTING_CPP "${CMAKE_CURRENT_SOURCE_DIR}/../fas/testing/testing.cpp")
-
 add_subdirectory(static_check)
 add_subdirectory(integral)
+add_subdirectory(functional)
 add_subdirectory(typemanip)
 add_subdirectory(type_list)
 add_subdirectory(mp)
