@@ -14,7 +14,19 @@ namespace fas{
 template<typename T>
 inline void ignore_arg(const T&){}
 
-template<typename T1=empty_type, typename T2=empty_type, typename T3=empty_type, typename T4=empty_type, typename T5=empty_type>
+template<typename T1>
+inline void ignore_args(const T1& =T1() ){}
+
+template<typename T1, typename T2>
+inline void ignore_args(const T1& =T1(), const T2& =T2() ){}
+
+template<typename T1, typename T2, typename T3>
+inline void ignore_args(const T1& =T1(), const T2& =T2(), const T3& =T3() ){}
+
+template<typename T1, typename T2, typename T3, typename T4>
+inline void ignore_args(const T1& =T1(), const T2& =T2(), const T3& =T3(), const T4& =T4() ){}
+
+template<typename T1, typename T2, typename T3, typename T4, typename T5>
 inline void ignore_args(const T1& =T1(), const T2& =T2(), const T3& =T3(), const T4& =T4(), const T5& =T5() ){}
 
 }
