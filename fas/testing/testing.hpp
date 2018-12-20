@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2018
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -8,9 +8,11 @@
 #define FAS_TESTING_TESTING_HPP
 
 #include <fas/testing/suite_counts.hpp>
-#include <fas/system/colorized.hpp>
-#include <iostream>
 #include <fas/testing/formatting.hpp>
+#include <fas/functional/ignore_args.hpp>
+#include <fas/system/colorized.hpp>
+
+#include <iostream>
 
 namespace fas{ namespace testing{
 
@@ -52,7 +54,10 @@ inline void show_total_result( const suite_counts& sc )
 
 #define BEGIN_TEST \
   ::fas::testing::suite_counts fas_testing(int argc, char* argv[]);\
-  ::fas::testing::suite_counts fas_testing(int argc, char* argv[]) { ::fas::testing::suite_counts sc;
+  ::fas::testing::suite_counts fas_testing(int argc, char* argv[]) {\
+    ::fas::testing::suite_counts sc; \
+    ::fas::ignore_arg(argc); \
+    ::fas::ignore_arg(argv); 
 #define RUN_SUITE(name) \
   ::fas::testing::suite_counts fas_##name##_suite_run(int argc, char* argv[]); \
   if (sc.crash) std::cout << ::fas::testing::SKIP << "Skip suite '" << #name << "'" << std::endl;\
