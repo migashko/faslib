@@ -115,6 +115,20 @@ struct equal<M, double>: float_equal<M, double, false>
   {}
 };
 
+template<typename M>
+struct equal<M, long double>: float_equal<M, long double, false>
+{
+  template<typename L, typename R>
+  equal(const L& left, const R& right)
+    : float_equal<M, long double, false>(left, right, "Equal statement. ")
+  {}
+
+  template<typename L, typename R>
+  equal(const L& left, const R& right, const std::string& txt)
+    : float_equal<M, long double, false>(left, right, txt)
+  {}
+};
+
 
 template<typename M>
 struct equal<M, empty_type>: statement<M>
