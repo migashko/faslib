@@ -310,6 +310,9 @@ private:
 
 #define GET_REF(name) t.get_aspect().template get<name>()
 #define GET_TYPE(name) typename T::aspect::template advice_cast<name>::type
+#define GET_UNIT(name) t.get_aspect().template get<fas_##name##_tag>()
+#define RUN_UNIT(name) t.get_aspect().template get<fas_##name##_tag>()(t)
+
 
 #define BEGIN_UNIT_LIST(name) struct fas_##name##_unit_list: ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
 #define END_UNIT_LIST(name) >::type {};
