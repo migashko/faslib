@@ -41,7 +41,7 @@ namespace fas { namespace console{
   template<int C1>
   inline typename make_color<C1, -1, -1, -1, -1>::type color() { return 0; }
 
-  inline make_color<-1, -1, -1, -1, -1>::type color() { return 0; }
+  inline make_color<-1, -1, -1, -1, -1>::type color() { return NULL; }
 
   inline void restore_colors(color_list<colors::restore>){}
   inline void black( color_list<colors::foreground::black>){}

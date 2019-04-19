@@ -18,6 +18,13 @@ struct max_c
   typedef int_< value > type;
 };
 
+template<int V>
+struct max_c<V, V>
+{
+  enum { value = V };
+  typedef int_< value > type;
+};
+
 }
 
 #endif

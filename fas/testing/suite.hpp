@@ -29,7 +29,6 @@
 
 namespace fas{ namespace testing{
  
-
 template<typename A = ::fas::aspect<> >
 class suite
   : public aspect_class< A>
