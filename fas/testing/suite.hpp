@@ -41,6 +41,8 @@ public:
   typedef typename aspect::template select_group<_units_>::type unit_tag_list;
 public:
   
+  ~suite() {}
+  
   suite(const std::string& name = "", const std::string& desc = "")
     : _out(std::cout)
     , _stub()

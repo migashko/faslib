@@ -20,6 +20,7 @@ class t_unit
   std::string _desc;
 
 public:
+  ~t_unit(){}
   t_unit(const std::string& name = "", const std::string& desc = "")
    : _name(name), _desc(desc)
   {
