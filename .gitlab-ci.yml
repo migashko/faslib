@@ -1,5 +1,5 @@
 variables:
-  RELEASE_BRANCH: 'release-0.7'
+  RELEASE_BRANCH: 'release-0.8'
   PROJECT_SSH: "git@github.lan:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git"
   REMOTE_SSH:  "git@github.com:migashko/${CI_PROJECT_NAME}.git"
 
