@@ -24,6 +24,7 @@
 #include <fas/aop/aspect_class.hpp>
 #include <fas/aop/tag.hpp>
 
+#include <fas/system/nullptr.hpp>
 #include <sstream>
 #include <iostream>
 
@@ -178,7 +179,7 @@ public:
   std::ostream& operator << ( const info<trace, F>& st )
   {
     _status_check();
-    typename info<expect, F>::manip manip = nullptr;
+    typename info<expect, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -189,7 +190,7 @@ public:
     _status_check();
     this->set_status_(unit_status::error);
     _unit_counts.errors++;
-    typename info<expect, F>::manip manip = nullptr;
+    typename info<expect, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -200,7 +201,7 @@ public:
     _status_check();
     this->set_status_(unit_status::fail);
     _unit_counts.fails++;
-    typename info<assert, F>::manip manip = nullptr;
+    typename info<assert, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -211,7 +212,7 @@ public:
     _status_check();
     this->set_status_(unit_status::fatal);
     _unit_counts.fatals++;
-    typename info<critical, F>::manip manip = nullptr;
+    typename info<critical, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
