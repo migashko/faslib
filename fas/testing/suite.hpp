@@ -178,7 +178,7 @@ public:
   std::ostream& operator << ( const info<trace, F>& st )
   {
     _status_check();
-    typename info<expect, F>::manip manip = 0;
+    typename info<expect, F>::manip manip = NULL;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -189,7 +189,7 @@ public:
     _status_check();
     this->set_status_(unit_status::error);
     _unit_counts.errors++;
-    typename info<expect, F>::manip manip = 0;
+    typename info<expect, F>::manip manip = NULL;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -200,7 +200,7 @@ public:
     _status_check();
     this->set_status_(unit_status::fail);
     _unit_counts.fails++;
-    typename info<assert, F>::manip manip = 0;
+    typename info<assert, F>::manip manip = NULL;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -211,7 +211,7 @@ public:
     _status_check();
     this->set_status_(unit_status::fatal);
     _unit_counts.fatals++;
-    typename info<critical, F>::manip manip = 0;
+    typename info<critical, F>::manip manip = NULL;
     _out << std::endl << manip << st.text;
     return _out;
   }
