@@ -247,14 +247,14 @@ public:
   }
 
 
-  static int size() { return length<unit_tag_list>::value;};
+  static int size() { return length<unit_tag_list>::value;}
   int units_total() const { return _suite_counts.units_total; }
 
   int errors() const { return _suite_counts.errors; }
   int fails() const { return _suite_counts.fails; }
   int fatals() const { return _suite_counts.fatals; }
 
-  const suite_counts& counts() const { return _suite_counts; };
+  const suite_counts& counts() const { return _suite_counts; }
 
 public:
   void set_status_( unit_status::type status)
