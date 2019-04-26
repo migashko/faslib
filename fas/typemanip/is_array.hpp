@@ -8,6 +8,7 @@
 #define FAS_TYPEMANIP_IS_ARRAY_HPP
 
 #include <fas/integral/bool_.hpp>
+#include <cstddef>
 
 namespace fas
 {
@@ -15,7 +16,7 @@ namespace fas
 template<typename T>
 struct is_array { enum { value = 0 }; };
 
-template<typename T, int N >
+template<typename T, size_t N >
 struct is_array< T[N] > { enum { value = 1  }; };
 
 template<typename T >

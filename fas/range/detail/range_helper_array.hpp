@@ -15,7 +15,7 @@
 
 namespace fas{
 
-template< typename T, int N>
+template< typename T, size_t N>
 struct range_helper<T[N], typerange_flag::array >
 {
   enum
@@ -88,10 +88,10 @@ struct range_helper<T[N], typerange_flag::array >
 
 private:
 
-  template<typename TT, typename V, int NN>
+  template<typename TT, typename V, size_t NN>
   static inline void _clear(TT* v, type2type<V[NN]> )
   {
-    for (int i = 0; i < NN; ++i)
+    for (size_t i = 0; i < NN; ++i)
       _clear( v[i], type2type<V>() );
   }
 

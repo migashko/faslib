@@ -246,7 +246,7 @@ struct less<M, empty_type>: statement<M>
   template<typename L, typename R>
   less(const L& left, const R& right)
     : statement<M>( 
-      left < right, 
+      left < static_cast<const L&>(right), 
       compare_message("Less statement. ", left, ">=", right) 
     ) 
   {}
@@ -254,7 +254,7 @@ struct less<M, empty_type>: statement<M>
   template<typename L, typename R>
   less(const L& left, const R& right, const std::string& txt)
     : statement<M>( 
-      left < right, 
+      left <  static_cast<const L&>(right), 
       compare_message(txt, left, ">=", right) 
     ) 
   {}

@@ -24,12 +24,12 @@
 #include <fas/aop/aspect_class.hpp>
 #include <fas/aop/tag.hpp>
 
+#include <fas/system/nullptr.hpp>
 #include <sstream>
 #include <iostream>
 
 namespace fas{ namespace testing{
  
-
 template<typename A = ::fas::aspect<> >
 class suite
   : public aspect_class< A>
@@ -41,6 +41,8 @@ public:
   typedef typename super::aspect aspect;
   typedef typename aspect::template select_group<_units_>::type unit_tag_list;
 public:
+  
+  ~suite() {}
   
   suite(const std::string& name = "", const std::string& desc = "")
     : _out(std::cout)
@@ -177,7 +179,7 @@ public:
   std::ostream& operator << ( const info<trace, F>& st )
   {
     _status_check();
-    typename info<expect, F>::manip manip = 0;
+    typename info<expect, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -188,7 +190,7 @@ public:
     _status_check();
     this->set_status_(unit_status::error);
     _unit_counts.errors++;
-    typename info<expect, F>::manip manip = 0;
+    typename info<expect, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -199,7 +201,7 @@ public:
     _status_check();
     this->set_status_(unit_status::fail);
     _unit_counts.fails++;
-    typename info<assert, F>::manip manip = 0;
+    typename info<assert, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -210,7 +212,7 @@ public:
     _status_check();
     this->set_status_(unit_status::fatal);
     _unit_counts.fatals++;
-    typename info<critical, F>::manip manip = 0;
+    typename info<critical, F>::manip manip = fas_nullptr;
     _out << std::endl << manip << st.text;
     return _out;
   }
@@ -246,14 +248,14 @@ public:
   }
 
 
-  static int size() { return length<unit_tag_list>::value;};
+  static int size() { return length<unit_tag_list>::value;}
   int units_total() const { return _suite_counts.units_total; }
 
   int errors() const { return _suite_counts.errors; }
   int fails() const { return _suite_counts.fails; }
   int fatals() const { return _suite_counts.fatals; }
 
-  const suite_counts& counts() const { return _suite_counts; };
+  const suite_counts& counts() const { return _suite_counts; }
 
 public:
   void set_status_( unit_status::type status)
