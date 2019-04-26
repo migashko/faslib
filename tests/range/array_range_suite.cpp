@@ -72,20 +72,19 @@ UNIT(array_range2_unit, "")
   r1i_type r1i = fas::rrange(array1);
   r2_type r2 = fas::range(array2r2);
 
-  int i1 = 0;
-  int i2 = 0;
-  
-  for ( ;r1i /*&& i1< 99*/; ++r1i, ++i1 )
+  int c1 = 0;
+  int c2 = 0;
+  for ( int i1 = 0; r1i && i1< 99; ++r1i, ++i1, ++c1 )
   {
     typedef fas::typerange< r1i_type::value_type>::range r2i_type;
     r2i_type r2i = fas::range( *r1i );
-    for ( ;r2i /*&& i2 < 99*/; ++r2i, ++i2 )
+    for ( int i2 = 0; r2i && i2 < 99; ++r2i, ++i2, ++c2 )
     {
       t << equal<expect, std::string>( *r2i, *r2++ );
     }
   }
-  t << equal<expect, int>( i1 + 1, 4 ) << FAS_FL;
-  t << equal<expect, int>( i2 + 1, 10 ) << FAS_FL;
+  t << equal<expect, int>( c1 + 1, 4 ) << FAS_FL;
+  t << equal<expect, int>( c2 + 1, 10 ) << FAS_FL;
   t << nothing;
 }
 
