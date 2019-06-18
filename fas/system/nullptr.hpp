@@ -7,6 +7,8 @@
 #ifndef FAS_SYSTEM_NULLPTR_HPP
 #define FAS_SYSTEM_NULLPTR_HPP
 
+#include <cstddef>
+
 #if __cplusplus > 199711L
   #if defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 9))
     #define fas_nullptr nullptr
