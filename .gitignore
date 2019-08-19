@@ -1,6 +1,51 @@
-*.kdev4
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# ---
 *~
+*.kdev4
+*.pyc
+.cproject
+.project
+*/debug
+*/release
+*/build
 build
-fas/system/config.h
-timeout
-.kdev_include_paths
+.tup
+*.kch
+autom4te.cache
+*.deps
+CMakeFiles
+Testing
+CMakeCache.txt
+*.kate-swp
+config.h
+docs
+

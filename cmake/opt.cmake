@@ -24,7 +24,7 @@ if ( CODE_COVERAGE )
   set(BUILD_TESTING ON)
   set(WITH_SAMPLES OFF)
   set(CMAKE_BUILD_TYPE "Debug")
-  set(CMAKE_CXX_FLAGS_DEBUG "-fprofile-arcs -ftest-coverage")
+  set(CMAKE_CXX_FLAGS "-fprofile-arcs -ftest-coverage")
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Wpedantic -pedantic-errors -ftemplate-depth=1024 -ftemplate-backtrace-limit=0")
