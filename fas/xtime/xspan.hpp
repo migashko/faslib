@@ -8,6 +8,7 @@
 #define FAS_XTIME_XSPAN_HPP
 
 #include <fas/xtime/types.hpp>
+#include <fas/utility/useless_cast.hpp>
 
 namespace fas {
 
@@ -48,48 +49,48 @@ struct xspan
   {}
 
   explicit xspan(short s)
-    : sec(static_cast<xsec_t>(s))
+    : sec(useless_cast<xsec_t>(s))
     , xsec(0)
   {}
 
   explicit xspan(unsigned short s)
-    : sec(static_cast<xsec_t>(s))
+    : sec(useless_cast<xsec_t>(s))
     , xsec(0)
   {}
 
   explicit xspan(int s)
-    : sec(static_cast<xsec_t>(s))
+    : sec(useless_cast<xsec_t>(s))
     , xsec(0)
   {}
 
   explicit xspan(unsigned int s)
-    : sec(static_cast<xsec_t>(s))
+    : sec(useless_cast<xsec_t>(s))
     , xsec(0)
   {}
 
   explicit xspan(long s)
-    : sec(static_cast<xsec_t>(s))
+    : sec(useless_cast<xsec_t>(s))
     , xsec(0)
   {}
 
   explicit xspan(unsigned long s)
-    : sec(static_cast<xsec_t>(s))
+    : sec(useless_cast<xsec_t>(s))
     , xsec(0)
   {}
 
   explicit xspan(float s)
-    : sec( static_cast<xsec_t>(s) )
-    , xsec( static_cast<xsec_t>( (s - sec)*xmax ) )
+    : sec( useless_cast<xsec_t>(s) )
+    , xsec( useless_cast<xsec_t>( (s - sec)*xmax ) )
   {}
 
   explicit xspan(double s)
-    : sec( static_cast<xsec_t>(s) )
-    , xsec( static_cast<xsec_t>( (s - static_cast<double>(sec) )*xmax  ) )
+    : sec( useless_cast<xsec_t>(s) )
+    , xsec( useless_cast<xsec_t>( (s - useless_cast<double>(sec) )*xmax  ) )
   {}
 
   xsec_t to_nanosec() const
   {
-    return ( static_cast<xsec_t>(sec) * xmax + xsec) * (FAS_NANOSEC/xmax );
+    return ( useless_cast<xsec_t>(sec) * xmax + xsec) * (FAS_NANOSEC/xmax );
   }
 
   xsec_t to_microsec() const
@@ -114,12 +115,12 @@ struct xspan
 
   float to_float() const
   {
-    return static_cast<float>( to_nanosec() ) / xmax;
+    return useless_cast<float>( to_nanosec() ) / xmax;
   }
 
   double to_double() const
   {
-    return static_cast<double>( to_nanosec() ) / xmax;
+    return useless_cast<double>( to_nanosec() ) / xmax;
   }
 
   template<xsec_t X>
@@ -192,7 +193,7 @@ namespace detail
   {
     static xsec_t convert(xsec_t xsec)
     {
-      return static_cast<xsec_t>( static_cast<double>(xsec * M) / static_cast<double>(F) );
+      return useless_cast<xsec_t>( useless_cast<double>(xsec * M) / useless_cast<double>(F) );
     }
   };
 

@@ -9,6 +9,7 @@
 #include <fas/testing.hpp>
 #include <fas/range.hpp>
 #include <fas/static_check/static_check.hpp>
+#include <fas/utility/useless_cast.hpp>
 #include <string>
 #include <vector>
 
@@ -43,7 +44,7 @@ UNIT(range2_unit, "")
   t << equal<assert, size_t>( i, 10 ) << FAS_TESTING_FILE_LINE;
 }
 
-UNIT(irange_unit, "")
+UNIT(irange_unit2, "")
 {
   using namespace ::fas::testing;
 
@@ -53,6 +54,7 @@ UNIT(irange_unit, "")
     ss << i ;
 
   std::vector<int> vect;
+  vect.reserve(10);
   typedef fas::input_range_adapter< fas::typerange<std::stringstream>::range, std::vector<int> >  input_adapter;
   input_adapter r  = fas::irange(ss, vect);
   size_t i=0;
@@ -60,9 +62,10 @@ UNIT(irange_unit, "")
   {
     input_adapter rr = r;
     for (size_t j =0; j < 10 - i; ++j, ++rr)
-      t << equal<assert>( *rr, '0' + arr[i+j] ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i << " j==" << j << ", "<< static_cast<int>(*rr) << "!=" << '0' + arr[i];
+      t << equal<assert, int>( *rr, '0' + arr[i+j] ) << FAS_FL;
   }
-  t << equal<assert, size_t>( i, 10 ) << FAS_TESTING_FILE_LINE << std::endl << "i==" << i ;
+  t << equal<assert, size_t>( i, 10 ) << FAS_FL;
+
 }
 
 UNIT(crange_unit, "")
@@ -75,6 +78,7 @@ UNIT(crange_unit, "")
     ss << i ;
 
   std::vector<int> vect;
+  vect.reserve(10);
 
   typedef fas::copy_range_adapter<
     fas::typerange<std::stringstream>::range,
@@ -98,6 +102,6 @@ UNIT(crange_unit, "")
 BEGIN_SUITE(range_suite, "")
   ADD_UNIT(range_unit)
   ADD_UNIT(range2_unit)
-  ADD_UNIT(irange_unit)
+  ADD_UNIT(irange_unit2)
   ADD_UNIT(crange_unit)
 END_SUITE(range_suite)

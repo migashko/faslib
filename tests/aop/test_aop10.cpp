@@ -58,9 +58,9 @@ public:
   typedef typename super::aspect::template advice_cast<_provider1_>::type::template apply< self >::type provider1_type;
   typedef typename super::aspect::template advice_cast<_provider2_>::type::template apply< self >::type provider2_type;
   typedef typename super::aspect::template advice_cast<_creator_>::type::template apply< self >::type creator_type;
-  
-  test(): _container() {};
-  
+
+  test(): _container() {}
+
   template<typename P1, typename P2>
   const creator_type& vector(P1 p1, P2 p2)
   {
@@ -113,11 +113,11 @@ int main()
     std::cout << p.get() << std::endl;
     return 1;
   }
-  
+
   int d[]={1,2,3,4};
   const test<aspect>::creator_type& c = t.vector(d, d + 4);
   if ( c.size()!=4 )
     return 1;
-  
+
   return 0;
 }

@@ -17,7 +17,7 @@ using namespace std;
 class QuackBehaviour
 {
   public:
-    virtual ~QuackBehaviour(){};
+    virtual ~QuackBehaviour(){}
     virtual void quack() = 0; // Abstract class because of this pure virtual function
 };
 
@@ -45,7 +45,7 @@ class MuteQuack : public QuackBehaviour
 class FlyBehaviour
 {
   public:
-    virtual ~FlyBehaviour(){};
+    virtual ~FlyBehaviour(){}
     virtual void fly() = 0; // Abstract class because of this pure virtual function
 };
 
@@ -88,7 +88,7 @@ class Duck
       delete quackBehaviour;
       delete flyBehaviour;
     }
-    
+
     void performQuack()
     {
       quackBehaviour->quack();

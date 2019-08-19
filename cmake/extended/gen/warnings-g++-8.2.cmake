@@ -1,0 +1,6 @@
+extended_option(-Wc++17-compat "Warn about C++ constructs whose meaning differs between ISO C++ 2014 and ISO C++ 2017." ON)
+extended_option(-Wcast-align=strict "Warn about pointer casts which increase alignment." ON)
+extended_option(-Wclass-memaccess "Warn for unsafe raw memory writes to objects of class types." ON)
+extended_option(-Wextra-semi "Warn about semicolon after in-class function definition." ON)
+extended_option(-Wsuggest-attribute=cold "Warn about functions which might be candidates for __attribute__((cold))." ON)
+extended_option(-Wsuggest-attribute=malloc "Warn about functions which might be candidates for __attribute__((malloc))." ON)

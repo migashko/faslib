@@ -19,9 +19,9 @@ class forward_range
 {
 public:
   typedef forward_range_tag range_category;
-  
+
   typedef T iterator;
-  
+
   typedef typename std::iterator_traits<T>::iterator_category iterator_category;
   typedef typename std::iterator_traits<T>::value_type        value_type;
   typedef typename std::iterator_traits<T>::difference_type   difference_type;
@@ -30,11 +30,11 @@ public:
 
   forward_range()
     : b(), e()
-  {};
+  {}
 
   explicit forward_range(T b1, T e1)
     : b(b1), e(e1)
-  {};
+  {}
 
   operator bool () const { return b!=e; }
 
@@ -48,16 +48,16 @@ public:
 
   difference_type distance() const { return std::distance(b, e); }
 
-  void advance(difference_type s)  
+  void advance(difference_type s)
   {
-    std::advance(b, s); 
+    std::advance(b, s);
   }
 
-  forward_range<T>& operator++() 
+  forward_range<T>& operator++()
   {
     assert(b!=e);
     ++b;
-    return *this; 
+    return *this;
   }
 
   forward_range<T> operator++(int)

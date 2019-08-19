@@ -225,6 +225,6 @@ int main()
   painted->performFly();
   painted->performQuack();
   delete painted;
-  
+
   return 0;
 }

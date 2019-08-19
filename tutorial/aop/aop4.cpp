@@ -2,7 +2,7 @@
 
 struct say_one
 {
-  void operator()() const {  std::cout<<"one, "; };
+  void operator()() const {  std::cout<<"one, "; }
 };
 
 struct say_two
@@ -31,14 +31,14 @@ class dredd
 {
   // ...
 public:
-  void dredd_say() const 
+  void dredd_say() const
   {
     _one();
     _two();
     _three();
     _strike();
   }
-  
+
 private:
   One _one;
   Two _two;
@@ -50,7 +50,7 @@ private:
 
 struct say_ONE
 {
-  void operator()() const {  std::cout<<"ONE, "; };
+  void operator()() const {  std::cout<<"ONE, "; }
 };
 
 /// /////////////////////////////////////////////////
@@ -65,7 +65,7 @@ class jon
 {
   // ...
 public:
-  void jon_say() const 
+  void jon_say() const
   {
     _one();
     _two();
@@ -116,7 +116,7 @@ class bob
 {
   // ...
 public:
-  void bob_say() const 
+  void bob_say() const
   {
     _one();
     _two();
@@ -151,7 +151,7 @@ class sam
 {
   // ...
 public:
-  void sam_say() const 
+  void sam_say() const
   {
     _one();
     _two();
@@ -183,7 +183,7 @@ int main()
   std::cout << "Jon: ";
   j.jon_say();
   std::cout << std::endl;
-  
+
   bob<> b;
   std::cout << "Bob: ";
   b.bob_say();

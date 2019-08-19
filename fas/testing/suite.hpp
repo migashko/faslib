@@ -29,7 +29,7 @@
 #include <iostream>
 
 namespace fas{ namespace testing{
- 
+
 template<typename A = ::fas::aspect<> >
 class suite
   : public aspect_class< A>
@@ -41,9 +41,9 @@ public:
   typedef typename super::aspect aspect;
   typedef typename aspect::template select_group<_units_>::type unit_tag_list;
 public:
-  
+
   ~suite() {}
-  
+
   suite(const std::string& name = "", const std::string& desc = "")
     : _out(std::cout)
     , _stub()
@@ -57,7 +57,7 @@ public:
   {
   }
 
-  suite(std::ostream& os, const std::string& name = "", const std::string& desc = "")
+  explicit suite(std::ostream& os, const std::string& name = "", const std::string& desc = "")
     : _out(os)
     , _stub()
     , _name(name)
@@ -111,7 +111,7 @@ public:
   {
     _status_check();
   }
-  
+
   void operator <<( void (*)( _nothing_ ) )
   {
   }
@@ -218,18 +218,18 @@ public:
   }
 
 
-  bool ok() const 
-  { 
+  bool ok() const
+  {
     return _suite_counts.ok();
   }
 
-  const unit_counts& current_unit_counts() const 
-  { 
+  const unit_counts& current_unit_counts() const
+  {
     return _unit_counts;
   }
 
-  bool current_unit_ok() const 
-  { 
+  bool current_unit_ok() const
+  {
     return _unit_counts.ok();
   }
 
@@ -237,10 +237,10 @@ public:
   {
     return _run(*this, argc, argv);
   }
-  
+
   int get_argc() const { return _argc;}
   char** get_argv() const { return _argv;}
-  std::string get_arg(int n) const 
+  std::string get_arg(int n) const
   {
     if ( n < _argc)
       return std::string(_argv[n]);
@@ -292,7 +292,7 @@ public:
   }
 
 private:
-  
+
   std::ostream& _out;
   std::stringstream _stub;
 
@@ -301,7 +301,7 @@ private:
   unit_status::type _status;
   unit_counts  _unit_counts;
   suite_counts _suite_counts;
-  
+
   int _argc;
   char** _argv;
 };
@@ -319,7 +319,7 @@ private:
 #define BEGIN_UNIT_LIST(name) struct fas_##name##_unit_list: ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
 #define END_UNIT_LIST(name) >::type {};
 
- 
+
 #define BEGIN_SUITE(name, desc)\
   inline const char* fas_##name##_suite_desc() { return desc;}\
   struct fas_##name##_suite_aspect: ::fas::aspect< ::fas::type_list_n< ::fas::stub< ::fas::testing::_suite_stub_>
@@ -339,7 +339,7 @@ struct fas_##name##_suite: ::fas::testing::suite<fas_##name##_suite_aspect> {\
   typedef ::fas::testing::suite<fas_##name##_suite_aspect> super;\
   bool run(int argc, char* argv[]) { return super::_run(*this, argc, argv); }\
   fas_##name##_suite(const std::string& name = "", const std::string& desc = ""): super(name, desc) {}\
-  fas_##name##_suite(std::ostream& os, const std::string& name = "", const std::string& desc = ""): super(os, name, desc) {}\
+  explicit fas_##name##_suite(std::ostream& os, const std::string& name = "", const std::string& desc = ""): super(os, name, desc) {}\
 };\
 ::fas::testing::suite_counts fas_##name##_suite_run(int , char*[]);\
 ::fas::testing::suite_counts fas_##name##_suite_run(int argc, char* argv[])\

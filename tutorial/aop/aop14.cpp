@@ -68,7 +68,7 @@ private:
 class state_context
 {
 public:
-  state_context(): _state(0) {};
+  state_context(): _state(0) {}
 
   template<typename Tg, typename T>
   void set_state(T& t)
@@ -125,7 +125,7 @@ struct _show_change_state_;
 struct ad_change_state
 {
   template<typename T, typename Tg>
-  void operator()(T& , fas::tag<Tg>) const 
+  void operator()(T& , fas::tag<Tg>) const
   {
     printf("| ");
   }

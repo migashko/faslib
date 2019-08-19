@@ -11,7 +11,7 @@
 
 using namespace fas;
 
-#define MAX_I 10000000
+//#define MAX_I 10000000
 
 int main()
 {

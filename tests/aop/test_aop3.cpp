@@ -61,7 +61,7 @@ public:
   int method(int v)
   {
     return this->get_aspect().template get<_tag1_>()(*this, v);
-  };
+  }
 #if __cplusplus >= 201103L
 private:
   friend typename super::aspect::template advice_cast< _tag1_ >::type;
@@ -70,7 +70,7 @@ private:
   static void private_method()
   {
 
-  };
+  }
 };
 
 ///

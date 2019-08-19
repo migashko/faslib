@@ -8,7 +8,7 @@
 #include <fas/testing/unit.hpp>
 #include <fas/testing/statements.hpp>
 #include <fas/static_check/static_check.hpp>
-#include <fas/functional/ignore_args.hpp>
+#include <fas/utility/ignore_args.hpp>
 #include <sstream>
 #include <iostream>
 
@@ -58,7 +58,7 @@ UNIT(unit4, "testing unit 4 (SKIP THIS)")
 UNIT(unit5, "testing unit 5 (SKIP THIS)")
 {
   t << nothing;
-  
+
 }
 
 BEGIN_SUITE(suite1, "suite example description" )
@@ -76,9 +76,9 @@ END_SUITE(suite2)
 int main(int argc, char* argv[])
 {
   using namespace ::fas::testing;
-  
+
   fas::ignore_args(fas_suite2_suite_run);
-  
+
   suite_counts fas_suite1_suite_run(int argc, char* argv[]);
   suite_counts result = fas_suite1_suite_run(argc, argv);
   std::cout << MESSAGE << "---------------------------------" << std::endl;

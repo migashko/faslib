@@ -16,6 +16,6 @@
 #include <fas/functional/mem_fun_set.hpp>
 #include <fas/functional/tstring.hpp>
 #include <fas/functional/tchars.hpp>
-#include <fas/functional/ignore_args.hpp>
+
 
 #endif

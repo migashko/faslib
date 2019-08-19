@@ -1,0 +1,5 @@
+extended_option(-Wc++17-compat "Warn about C++ constructs whose meaning differs between ISO C++ 2014 and ISO C++ 2017." ON)
+extended_option(-Wnoexcept-type "Warn if C++17 noexcept function type will change the mangled name of a symbol." ON)
+extended_option(-Wpessimizing-move "Warn about calling std::move on a local object in a return statement preventing copy elision." ON)
+extended_option(-Wredundant-move "Warn about redundant calls to std::move." ON)
+extended_option(-Wzero-as-null-pointer-constant "Warn when a literal '0' is used as null pointer." ON)

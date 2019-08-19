@@ -1,32 +1,33 @@
 #include <iostream>
+#include <fas/system/nullptr.hpp>
 
 /// interfaces
 
 struct ione
 {
-  virtual ~ione() {};
+  virtual ~ione() {}
   virtual void one() const = 0;
   virtual ione* clone() const = 0;
 };
 
 struct itwo
 {
-  virtual ~itwo() {};
+  virtual ~itwo() {}
   virtual void two() const = 0;
   virtual itwo* clone() const= 0;
 };
 
 struct ithree
 {
-  virtual ~ithree() {};
+  virtual ~ithree() {}
   virtual void three() const = 0;
   virtual ithree* clone() const= 0;
 };
 
 struct istrike
 {
-  virtual ~istrike() {};
-  virtual void strike() const= 0;
+  virtual ~istrike() {}
+  virtual void strike() const = 0;
   virtual istrike* clone() const= 0;
 };
 
@@ -34,30 +35,30 @@ struct istrike
 
 struct say_one: ione
 {
-  virtual ~say_one() {};
-  virtual void one() const {  std::cout<<"one, "; };
-  virtual ione* clone() const { return new say_one; };
+  virtual ~say_one() {}
+  virtual void one() const {  std::cout<<"one, "; }
+  virtual ione* clone() const { return new say_one; }
 };
 
 struct say_two: itwo
 {
-  virtual ~say_two() {};
+  virtual ~say_two() {}
   virtual void two() const {  std::cout<<"two, "; }
-  virtual itwo* clone() const { return new say_two; };
+  virtual itwo* clone() const { return new say_two; }
 };
 
 struct say_three: ithree
 {
-  virtual ~say_three() {};
+  virtual ~say_three() {}
   virtual void three() const {  std::cout<<"three, "; }
-  virtual ithree* clone() const { return new say_three; };
+  virtual ithree* clone() const { return new say_three; }
 };
 
 struct say_strike: istrike
 {
-  virtual ~say_strike() {};
+  virtual ~say_strike() {}
   virtual void strike() const{  std::cout<<"strike!"; }
-  virtual istrike* clone() const { return new say_strike; };
+  virtual istrike* clone() const { return new say_strike; }
 };
 
 /// dredd
@@ -83,19 +84,19 @@ public:
   {}
 
   dredd(const dredd& jd)
-    : _one   ( jd._one    ? jd._one->clone()    : 0 )
-    , _two   ( jd._two    ? jd._two->clone()    : 0 )
-    , _three ( jd._three  ? jd._three->clone()  : 0 )
-    , _strike( jd._strike ? jd._strike->clone() : 0 )
+    : _one   ( jd._one    ? jd._one->clone()    : fas_nullptr )
+    , _two   ( jd._two    ? jd._two->clone()    : fas_nullptr )
+    , _three ( jd._three  ? jd._three->clone()  : fas_nullptr )
+    , _strike( jd._strike ? jd._strike->clone() : fas_nullptr )
   {
   }
 
   dredd& operator = (const dredd& jd)
   {
-    this->set_one(    jd._one    ? jd._one->clone()    : 0 );
-    this->set_two(    jd._two    ? jd._two->clone()    : 0 );
-    this->set_three(  jd._three  ? jd._three->clone()  : 0 );
-    this->set_strike( jd._strike ? jd._strike->clone() : 0 );
+    this->set_one(    jd._one    ? jd._one->clone()    : fas_nullptr );
+    this->set_two(    jd._two    ? jd._two->clone()    : fas_nullptr );
+    this->set_three(  jd._three  ? jd._three->clone()  : fas_nullptr );
+    this->set_strike( jd._strike ? jd._strike->clone() : fas_nullptr );
     return *this;
   }
 
@@ -142,37 +143,37 @@ private:
 
 struct say_ONE: ione
 {
-  virtual ~say_ONE() {};
-  virtual void one() const{  std::cout<<"ONE, "; };
-  virtual ione* clone() const{ return new say_ONE; };
+  virtual ~say_ONE() {}
+  virtual void one() const{  std::cout<<"ONE, "; }
+  virtual ione* clone() const{ return new say_ONE; }
 };
 
 /// strategies intefaces for from5to7
 
 struct ifour
 {
-  virtual ~ifour() {};
+  virtual ~ifour() {}
   virtual void four() const= 0;
   virtual ifour* clone() const= 0;
 };
 
 struct ifive
 {
-  virtual ~ifive() {};
+  virtual ~ifive() {}
   virtual void five() const= 0;
   virtual ifive* clone() const= 0;
 };
 
 struct isix
 {
-  virtual ~isix() {};
+  virtual ~isix() {}
   virtual void six() const= 0;
   virtual isix* clone() const= 0;
 };
 
 struct iseven
 {
-  virtual ~iseven() {};
+  virtual ~iseven() {}
   virtual void seven() const= 0;
   virtual iseven* clone() const= 0;
 };
@@ -181,30 +182,30 @@ struct iseven
 
 struct say_four: ifour
 {
-  virtual ~say_four() {};
+  virtual ~say_four() {}
   virtual void four() const{  std::cout<<"four, "; }
-  virtual ifour* clone() const{ return new say_four; };
+  virtual ifour* clone() const{ return new say_four; }
 };
 
 struct say_five: ifive
 {
-  virtual ~say_five() {};
+  virtual ~say_five() {}
   virtual void five() const{  std::cout<<"five, "; }
-  virtual ifive* clone() const{ return new say_five; };
+  virtual ifive* clone() const{ return new say_five; }
 };
 
 struct say_six: isix
 {
-  virtual ~say_six() {};
+  virtual ~say_six() {}
   virtual void six() const{  std::cout<<"six, "; }
-  virtual isix* clone() const{ return new say_six; };
+  virtual isix* clone() const{ return new say_six; }
 };
 
 struct say_seven: iseven
 {
-  virtual ~say_seven() {};
+  virtual ~say_seven() {}
   virtual void seven() const{  std::cout<<"seven!"; }
-  virtual iseven* clone() const{ return new say_seven; };
+  virtual iseven* clone() const{ return new say_seven; }
 };
 
 class say_4567
@@ -228,20 +229,19 @@ public:
   {}
 
   say_4567(const say_4567& jd)
-    : istrike(jd)
-    , _four ( jd._four  ? jd._four->clone()  : 0 )
-    , _five ( jd._five  ? jd._five->clone()  : 0 )
-    , _six  ( jd._six   ? jd._six->clone()   : 0 )
-    , _seven( jd._seven ? jd._seven->clone() : 0 )
+    : _four ( jd._four  ? jd._four->clone()  : fas_nullptr )
+    , _five ( jd._five  ? jd._five->clone()  : fas_nullptr )
+    , _six  ( jd._six   ? jd._six->clone()   : fas_nullptr )
+    , _seven( jd._seven ? jd._seven->clone() : fas_nullptr )
   {
   }
 
   say_4567& operator = (const say_4567& jd)
   {
-    this->set_four ( jd._four  ? jd._four->clone()  : 0 );
-    this->set_five ( jd._five  ? jd._five->clone()  : 0 );
-    this->set_six  ( jd._six   ? jd._six->clone()   : 0 );
-    this->set_seven( jd._seven ? jd._seven->clone() : 0 );
+    this->set_four ( jd._four  ? jd._four->clone()  : fas_nullptr );
+    this->set_five ( jd._five  ? jd._five->clone()  : fas_nullptr );
+    this->set_six  ( jd._six   ? jd._six->clone()   : fas_nullptr );
+    this->set_seven( jd._seven ? jd._seven->clone() : fas_nullptr );
     return *this;
   }
 

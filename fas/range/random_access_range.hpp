@@ -12,8 +12,6 @@
 #include <cassert>
 #include <cstddef>
 
-
-
 namespace fas {
 
 template<typename T>
@@ -36,14 +34,14 @@ public:
 #ifndef NDEBUG
     , s(b)
 #endif
-  {};
+  {}
 
   random_access_range(T b1, T e1)
     : b(b1), e(e1)
 #ifndef NDEBUG
     , s(b1)
 #endif
-  {};
+  {}
 
   operator bool () const { return b!=e; }
 

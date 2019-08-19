@@ -9,7 +9,7 @@
 
 #include <fas/testing/suite_counts.hpp>
 #include <fas/testing/formatting.hpp>
-#include <fas/functional/ignore_args.hpp>
+#include <fas/utility/ignore_args.hpp>
 #include <fas/system/colorized.hpp>
 
 #include <iostream>
@@ -23,14 +23,14 @@ inline void show_total_result( const suite_counts& sc )
     std::cout << light_red ;
   else
     std::cout << green ;
-  
+
   std::cout << "**************************************" << std::endl;
   std::cout << "units: " << sc.units_total << std::endl;
   if (!sc.ok())
   {
     std::cout << red  << "units fails: " << sc.units_total - sc.units_passed << light_red  << std::endl;
   }
-  
+
   std::cout << "statements: " << sc.statements << std::endl;
   if (!sc.ok())
   {
@@ -57,7 +57,7 @@ inline void show_total_result( const suite_counts& sc )
   ::fas::testing::suite_counts fas_testing(int argc, char* argv[]) {\
     ::fas::testing::suite_counts sc; \
     ::fas::ignore_arg(argc); \
-    ::fas::ignore_arg(argv); 
+    ::fas::ignore_arg(argv);
 #define RUN_SUITE(name) \
   ::fas::testing::suite_counts fas_##name##_suite_run(int argc, char* argv[]); \
   if (sc.crash) std::cout << ::fas::testing::SKIP << "Skip suite '" << #name << "'" << std::endl;\

@@ -1,0 +1,8 @@
+extended_option(-falign-functions "Align the start of functions." OFF)
+extended_option(-falign-jumps "Align labels which are only reached by jumping." OFF)
+extended_option(-falign-loops "Align the start of loops." OFF)
+extended_option(-flimit-function-alignment "This option lacks documentation." OFF)
+extended_option(-fstack-protector "Use propolice as a stack protection method." OFF)
+extended_option(-fstack-protector-all "Use a stack protection method for every function." OFF)
+extended_option(-fstack-protector-explicit "Use stack protection method only for functions with the stack_protect attribute." OFF)
+extended_option(-fstack-protector-strong "Use a smart stack protection method for certain functions." OFF)

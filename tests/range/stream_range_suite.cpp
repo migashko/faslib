@@ -23,7 +23,6 @@ UNIT(stream_range_unit, "")
   *ro++ = '2';
   *ro++ = '3';
 
-
   {
     std::ifstream fi("stream_range.txt");
     fas::typerange< std::ifstream >::range ri = fas::range( fi );

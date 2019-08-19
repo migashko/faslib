@@ -32,14 +32,14 @@ public:
 #ifndef NDEBUG
     , s(b)
 #endif
-  {};
+  {}
 
   explicit bidirectional_range(T b1, T e1)
     : b(b1), e(e1)
 #ifndef NDEBUG
     , s(b1)
 #endif
-  {};
+  {}
 
   operator bool () const { return b!=e; }
 
@@ -54,7 +54,7 @@ public:
   reverse_iterator rbegin() const { return reverse_iterator(e); }
 
   reverse_iterator rend() const { return reverse_iterator(b); }
-  
+
   reverse_range reverse() const { return reverse_range( rbegin(), rend() ); }
 
   difference_type distance() const { return std::distance(b, e); }
@@ -92,38 +92,38 @@ public:
   }
 # endif
 
-  bidirectional_range<T>& operator++() 
+  bidirectional_range<T>& operator++()
   {
     assert(b!=e);
     ++b;
-    return *this; 
+    return *this;
   }
 
-  bidirectional_range<T> operator++(int) 
+  bidirectional_range<T> operator++(int)
   {
     assert(b!=e);
-    bidirectional_range<T> ans = *this;   
-    b++; 
-    return ans; 
+    bidirectional_range<T> ans = *this;
+    b++;
+    return ans;
   }
 
-  bidirectional_range<T>& operator--() 
+  bidirectional_range<T>& operator--()
   {
 #ifndef NDEBUG
     assert(b!=s);
 #endif
-    --b; 
-    return *this; 
+    --b;
+    return *this;
   }
 
-  bidirectional_range<T> operator--(int) 
+  bidirectional_range<T> operator--(int)
   {
 #ifndef NDEBUG
     assert(b!=s);
 #endif
-    bidirectional_range<T> ans = *this;   
-    b--; 
-    return ans; 
+    bidirectional_range<T> ans = *this;
+    b--;
+    return ans;
   }
 
   bool operator == (const bidirectional_range<T>& r ) const { return b == r.b && e==r.e;  }

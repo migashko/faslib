@@ -1,2 +1,0 @@
-add_executable(test_functional test_functional.cpp)
-add_test(functional test_functional)

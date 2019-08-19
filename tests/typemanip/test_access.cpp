@@ -11,7 +11,7 @@
 #include <fas/functional/mem_fun_set.hpp>
 #include <fas/functional/global_fun_get.hpp>
 #include <fas/functional/global_fun_set.hpp>
-
+#include <fas/system/nullptr.hpp>
 #include <fas/static_check/static_check.hpp>
 
 #include <fas/testing.hpp>
@@ -66,7 +66,7 @@ struct foo
   const char* get_foo4() const { return foo4;}
   void set_foo4(const char* value) { std::strcpy(foo4, value);}
 private:
-  foo(const foo&): foo1(""), foo2(0), foo4(0) {}
+  foo(const foo&): foo1(""), foo2(0), foo3(), foo4(fas_nullptr) {}
   foo& operator=(const foo&) { return *this;}
 };
 

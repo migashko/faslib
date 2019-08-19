@@ -17,7 +17,7 @@ class input_stream_range
 {
   typedef input_range<T, ValueType> super;
 public:
-  
+
   typedef typename super::range_category    range_category;
   typedef typename super::iterator          iterator;
   typedef typename super::value_type        value_type;
@@ -26,44 +26,44 @@ public:
   typedef typename super::pointer           pointer;
   typedef typename super::reference         reference;
   typedef typename super::proxy             proxy;
-  
+
   input_stream_range()
     : super(), _pos()
-  {};
+  {}
 
   explicit input_stream_range(T b1, T e1)
     : super(b1, e1), _pos()
-  {};
+  {}
 
-  input_stream_range<T, ValueType>& operator++() 
+  input_stream_range<T, ValueType>& operator++()
   {
     ++_pos;
     super::operator++();
-    return *this; 
+    return *this;
   }
 
-  proxy operator++(int) 
+  proxy operator++(int)
   {
     ++_pos;
-    return super::operator++(0); 
+    return super::operator++(0);
   }
 
   difference_type distance() const { return _pos; }
-  
-  void advance(difference_type s)  
-  { 
+
+  void advance(difference_type s)
+  {
     _pos += s;
     super::advance(s);
   }
-  
-  bool operator == (const input_stream_range<T, ValueType>& r ) const 
+
+  bool operator == (const input_stream_range<T, ValueType>& r ) const
   {
-    return super::operator==(r) && _pos == r._pos;  
+    return super::operator==(r) && _pos == r._pos;
   }
 
-  bool operator != (const input_stream_range<T, ValueType>& r ) const 
+  bool operator != (const input_stream_range<T, ValueType>& r ) const
   {
-    return !(*this == r); 
+    return !(*this == r);
   }
 
 private:

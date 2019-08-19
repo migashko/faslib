@@ -18,22 +18,22 @@ struct list1: type_list_n< int_<1> >::type {};
 struct list2: type_list_n< int_<1>, int_<2> >::type {};
 
 #if __cplusplus >= 201103L /*&& !defined(FASLIB_TYPE_LIST_CHECK)*/
-// For FASLIB_TYPE_LIST_CHECK needs -ftemplate-depth=1400 or more 
+// For FASLIB_TYPE_LIST_CHECK needs -ftemplate-depth=1400 or more
 
 typedef fas::int_<1> O;
 
-constexpr double pi = 
-    double( fas::accumulate_t< fas::type_list_n_nocheck< 
-    
-                        O,O,O,O,O,O,              
-                    O,O,O,O,O,O,O,O,O,O,          
-                  O,O,O,O,O,O,O,O,O,O,O,O,        
-                  O,O,O,O,O,O,O,O,O,O,O,O,        
-                O,O,O,O,O,O,O,O,O,O,O,O,O,O,      
-                O,O,O,O,O,O,O,O,O,O,O,O,O,O,      
-                O,O,O,O,O,O,O,O,O,O,O,O,O,O,      
-              O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,    
-              O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,    
+constexpr double pi =
+    double( fas::accumulate_t< fas::type_list_n_nocheck<
+
+                        O,O,O,O,O,O,
+                    O,O,O,O,O,O,O,O,O,O,
+                  O,O,O,O,O,O,O,O,O,O,O,O,
+                  O,O,O,O,O,O,O,O,O,O,O,O,
+                O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+                O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+                O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+              O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+              O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
               O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
               O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
                 O,O,O,O,O,O,O,O,O,O,O,O,O,O,
@@ -43,9 +43,9 @@ constexpr double pi =
                   O,O,O,O,O,O,O,O,O,O,O,O,
                     O,O,O,O,O,O,O,O,O,O,
                         O,O,O,O,O,O
-                        
-    >::type, fas::int_<0>, fas::plus >::type::value ) 
-    
+
+    >::type, fas::int_<0>, fas::plus >::type::value )
+
                                     //
                                    //
                                   //
@@ -59,9 +59,9 @@ constexpr double pi =
                           //
                          //
                         //
-                        
-    double( fas::accumulate_t< fas::type_list_n_nocheck< 
-    
+
+    double( fas::accumulate_t< fas::type_list_n_nocheck<
+
                       O,O,O,O,O,O,O,O,
                       O,O,O,O,O,O,O,O,
                       O,O,O,O,O,O,O,O,
@@ -71,7 +71,7 @@ constexpr double pi =
                       O,O,O,O,O,O,O,O,
                       O,O,O,O,O,O,O,O,
                       O,O,O,O,O,O,O,O
-                      
+
     >::type, fas::int_<0>, fas::plus >::type::value );
 
 
@@ -84,17 +84,17 @@ typedef fas::reverse<list4>::type chk4;
 
 int main()
 {
-  enum 
+  enum
   {
     value = static_check< accumulate<list0, fas::int_<21>, fas::plus<_1, _2> >::type::value == 21 >::value
           + static_check< accumulate<list1, fas::int_<1>,  fas::plus<_1, _2> >::type::value == 2 >::value
           + static_check< accumulate<list2, fas::int_<0>,  fas::plus<_1, _2> >::type::value == 3 >::value
           #if __cplusplus >= 201103L /*&& !defined(FASLIB_TYPE_LIST_CHECK)*/
           // pi == 3.16667F
-          + static_check< (pi > 3.16666F) && pi < (3.16668F) >::value
+          + static_check< (pi > 3.16666L) && pi < (3.16668L) >::value
           #endif
           + static_check< same_type<res4, chk4>::value >::value
   };
-  
+
   return 0;
 }

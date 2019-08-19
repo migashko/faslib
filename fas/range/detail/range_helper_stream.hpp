@@ -23,13 +23,12 @@ struct range_helper<C, typerange_flag::stream >
   static inline orange make_orange(C& cnt, bool)
   {
     return orange( std::ostreambuf_iterator<char_type>(cnt) );
-  };
+  }
 
   static inline range make_range(C& cnt)
   {
     return range( std::istreambuf_iterator<char_type>(cnt), std::istreambuf_iterator<char_type>() );
-  };
-
+  }
 };
 
 }

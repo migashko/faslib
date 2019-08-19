@@ -18,7 +18,7 @@ struct A{ };
 struct B:A
 {
   typedef int test_type;
-  
+
   template<typename T>
   struct apply
   {
@@ -81,18 +81,18 @@ int main()
     testC = static_check< super_subclass< A, B >::value >::value,
     testD = static_check< super_subclass< A, A >::value >::value,
     testE = static_check< !super_subclass_strict< A, A >::value >::value,
-    
+
     test_template = static_check< !has_apply<A>::value >::value
                     + static_check< has_apply<B>::value >::value,
-                    
-    test_method = 
+
+    test_method =
             static_check< has_member0< M0 >::value >::value
           + static_check< has_member1< M1 >::value >::value
           + static_check< has_member2< M2 >::value >::value
           + static_check< has_member3< M3 >::value >::value
           + static_check< has_member4< M4 >::value >::value
           + static_check< has_member5< M5 >::value >::value
- 					
+
   };
   return 0;
 }

@@ -18,7 +18,7 @@ class input_range
 {
 public:
   typedef input_range_tag range_category;
-  
+
   typedef T iterator;
 
   typedef ValueType value_type;
@@ -33,14 +33,14 @@ public:
     explicit proxy (ValueType c) : keep_(c){ }
     ValueType operator*() const { return keep_; }
   };
-  
+
   input_range()
     : b(), e()
-  {};
+  {}
 
   explicit input_range(T b1, T e1)
     : b(b1), e(e1)
-  {};
+  {}
 
   operator bool () const { return b!=e; }
 
@@ -49,39 +49,39 @@ public:
   pointer operator ->() const  { return &(*b);}
 
   iterator begin() const { return b; }
-  
+
   iterator end() const { return e; }
 
-  input_range<T, ValueType>& operator++() 
+  input_range<T, ValueType>& operator++()
   {
     assert(b!=e);
-    ++b; 
-    return *this; 
+    ++b;
+    return *this;
   }
 
-  proxy operator++(int) 
+  proxy operator++(int)
   {
     assert(b!=e);
     proxy p( *b );
-    b++; 
-    return p; 
+    b++;
+    return p;
   }
 
   difference_type distance() const { return std::distance(b, e); }
-  
-  void advance(difference_type s)  
-  { 
-    std::advance(b, s); 
-  }
-  
-  bool operator == (const input_range<T, ValueType>& r ) const 
+
+  void advance(difference_type s)
   {
-    return b == r.b && e==r.e;  
+    std::advance(b, s);
   }
 
-  bool operator != (const input_range<T, ValueType>& r ) const 
+  bool operator == (const input_range<T, ValueType>& r ) const
   {
-    return !(*this == r); 
+    return b == r.b && e==r.e;
+  }
+
+  bool operator != (const input_range<T, ValueType>& r ) const
+  {
+    return !(*this == r);
   }
 
 protected:

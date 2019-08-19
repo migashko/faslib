@@ -26,7 +26,7 @@ include_directories(..)
 
 add_subdirectory(static_check)
 add_subdirectory(integral)
-add_subdirectory(functional)
+add_subdirectory(utility)
 add_subdirectory(typemanip)
 add_subdirectory(type_list)
 add_subdirectory(mp)

@@ -23,13 +23,13 @@ struct aspect
 };
 
 }
-  
+
 #else
 
 #include <fas/type_list/normalize.hpp>
 
 namespace fas{
-  
+
 template<typename L = empty_list>
 struct aspect
 {
