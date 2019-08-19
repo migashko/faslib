@@ -8,6 +8,7 @@
 #include <fas/testing/unit.hpp>
 #include <fas/testing/statements.hpp>
 #include <fas/static_check/static_check.hpp>
+#include <fas/system/nullptr.hpp>
 #include <sstream>
 
 using namespace fas;
@@ -21,7 +22,7 @@ bool test_run0()
 {
   std::stringstream ss, sst;
   suite<> su(ss);
-  su.run(0, NULL);
+  su.run(0, fas_nullptr);
   std::cout << ss.str() << std::endl;
   sst << "[ --BEG-- ] 0 tests." << std::endl
       << "[ --END-- ] " <<std::endl
@@ -73,7 +74,7 @@ bool test_run1()
 {
   std::stringstream ss, sst;
   suite< suite_aspect1 > su(ss);
-  su.run(0, NULL);
+  su.run(0, fas_nullptr);
 
   std::cout << ss.str() << std::endl;
   sst << "[ --BEG-- ] 1 tests."<< std::endl
@@ -112,7 +113,7 @@ bool test_run2()
 {
   std::stringstream ss, sst;
   suite< suite_aspect2 > su(ss);
-  su.run(0, NULL);
+  su.run(0, fas_nullptr);
   std::cout << ss.str() << std::endl;
   sst << "[ --BEG-- ] 2 tests."<< std::endl
       << "[ RUN     ] unit1"<< std::endl
