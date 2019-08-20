@@ -42,13 +42,11 @@ full-build:
   only:
     - tags
     - /^build.*$/
-  
+
 cppcheck:
   stage: check
   script:
-    - ./.ci/cppcheck.sh --std=c++03
     - ./.ci/cppcheck.sh --std=c++11
-    - ./.ci/cppcheck.sh --std=c++14
   only:
     - tags
     - /^check.*$/
