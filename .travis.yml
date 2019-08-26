@@ -9,12 +9,12 @@ os:
 before_install:
   - sudo apt-get update -qq
 
-install: 
-  - sudo apt-get install -y valgrind 
+install:
+  - sudo apt-get install -y valgrind
 
 compiler:
   - g++
-  - clang++ 
+  - clang++
 
 env:
   - BUILD_TYPE=Debug STANDARD=98
@@ -36,10 +36,10 @@ matrix:
     env: BUILD_TYPE=Debug STANDARD=17
   - compiler: g++
     env: BUILD_TYPE=Release STANDARD=17
-  
+
 script:
     - mkdir build
     - cd build
-    - cmake .. -DBUILD_TESTING=ON -DPARANOID_WARNING=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_STANDARD=$STANDARD
+    - cmake .. -DBUILD_TESTING=ON -DPARANOID_WARNINGS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_STANDARD=$STANDARD
     - cmake --build .
     - ctest --output-on-failure

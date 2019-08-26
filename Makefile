@@ -19,7 +19,7 @@ tests: 	external build
 	cmake --build ./build -- -j4
 	cd build && ctest
 paranoid: external build
-	cd build && cmake .. -DBUILD_TESTING=ON -DPARANOID_WARNING=ON
+	cd build && cmake .. -DBUILD_TESTING=ON -DPARANOID_WARNINGS=ON
 	cmake --build ./build -- -j4
 debug: external build
 	cd build && cmake .. -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE="Debug"
