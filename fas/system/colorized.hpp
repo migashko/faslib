@@ -11,6 +11,7 @@
 #include <fas/system/colors.hpp>
 #include <fas/system/system.hpp>
 #include <fas/system/detail/windowsconsole.hpp>
+#include <fas/system/nullptr.hpp>
 
 #include <ostream>
 #include <iostream>
@@ -41,7 +42,7 @@ namespace fas { namespace console{
   template<int C1>
   inline typename make_color<C1, -1, -1, -1, -1>::type color() { return 0; }
 
-  inline make_color<-1, -1, -1, -1, -1>::type color() { return NULL; }
+  inline make_color<-1, -1, -1, -1, -1>::type color() { return fas_nullptr; }
 
   inline void restore_colors(color_list<colors::restore>){}
   inline void black( color_list<colors::foreground::black>){}

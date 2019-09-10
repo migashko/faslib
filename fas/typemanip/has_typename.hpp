@@ -7,6 +7,8 @@
 #ifndef FAS_TYPEMANIP_HAS_TYPENAME_HPP
 #define FAS_TYPEMANIP_HAS_TYPENAME_HPP
 
+#include <fas/system/nullptr.hpp>
+
 #define FAS_HAS_TYPENAME(N, D)\
 namespace N##_detail{\
 struct N##_helper {\
@@ -30,7 +32,7 @@ template<typename T>\
 struct N\
 {\
   typedef N##_detail::N##_helper helper; \
-  enum { value = sizeof( helper::test<T>(0) ) == sizeof(helper::small_type) };\
+  enum { value = sizeof( helper::test<T>(fas_nullptr) ) == sizeof(helper::small_type) };\
   typedef typename N##_detail::get_type<T, value>::type type;\
 };
 
