@@ -3,9 +3,9 @@ add_executable(test_comparisons test_comparisons.cpp)
 add_executable(test_arithmetic test_arithmetic.cpp)
 add_executable(test_logical_op test_logical_op.cpp)
 
-add_test(integral             test_integral)
-add_test(integral_comparisons test_comparisons)
-add_test(integral_arithmetic  test_arithmetic)
-add_test(integral_logical_op  test_logical_op)
+wci_test(NAME integral             COMMAND test_integral)
+wci_test(NAME integral_comparisons COMMAND test_comparisons)
+wci_test(NAME integral_arithmetic  COMMAND test_arithmetic)
+wci_test(NAME integral_logical_op  COMMAND test_logical_op)
 
 
