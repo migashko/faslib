@@ -217,6 +217,7 @@ UNIT(initial_range_sequence_unit, "")
   range_type r = orange(  cnt );
   *(r++) = 1;
   *(r) = 2;
+  ignore_arg(r);
   *(r) = 3;
   t << equal<assert, size_t>( cnt.size(), 3 ) << FAS_TESTING_FILE_LINE;
   t << equal<expect>( cnt[0], 1 ) << FAS_TESTING_FILE_LINE;

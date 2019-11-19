@@ -1,39 +1,11 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# ---
+*_build.counter
+*build_info.h
 *~
 *.kdev4
 *.pyc
 .cproject
 .project
+*.o
 */debug
 */release
 */build
@@ -43,9 +15,8 @@ build
 autom4te.cache
 *.deps
 CMakeFiles
-Testing
 CMakeCache.txt
 *.kate-swp
+*build_info.h
 config.h
 docs
-

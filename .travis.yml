@@ -9,37 +9,27 @@ os:
 before_install:
   - sudo apt-get update -qq
 
-install:
-  - sudo apt-get install -y valgrind
+install: 
+  - sudo apt-get install -y libc++-dev libboost-dev 
+  - sudo apt-get install -y libboost-system-dev libboost-program-options-dev 
+  - sudo apt-get install -y libboost-filesystem-dev libboost-date-time-dev libboost-regex-dev valgrind doxygen
 
 compiler:
   - g++
-  - clang++
+  - clang++ 
 
-env:
-  - BUILD_TYPE=Debug STANDARD=98
-  - BUILD_TYPE=Release STANDARD=98
-  - BUILD_TYPE=Debug STANDARD=11
-  - BUILD_TYPE=Release STANDARD=11
-  - BUILD_TYPE=Debug STANDARD=14
-  - BUILD_TYPE=Release STANDARD=14
-  - BUILD_TYPE=Debug STANDARD=17
-  - BUILD_TYPE=Release STANDARD=17
-
-matrix:
-  exclude:
-  - compiler: g++
-    env: BUILD_TYPE=Debug STANDARD=14
-  - compiler: g++
-    env: BUILD_TYPE=Release STANDARD=14
-  - compiler: g++
-    env: BUILD_TYPE=Debug STANDARD=17
-  - compiler: g++
-    env: BUILD_TYPE=Release STANDARD=17
+branches:
+  only:
+    - mambaru
+    - master
 
 script:
-    - mkdir build
-    - cd build
-    - cmake .. -DBUILD_TESTING=ON -DPARANOID_WARNINGS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_STANDARD=$STANDARD
-    - cmake --build .
-    - ctest --output-on-failure
+  - git submodule sync
+  - git submodule update --init --force
+  - mkdir -p build 
+  - pushd build 
+  -   cmake .. -DCMAKE_CXX_COMPILER=$TRAVIS_COMPILER -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON -DPARANOID_WARNING=ON
+  -   cmake --build .
+  -   ctest --output-on-failure
+  -   make clean
+  - popd

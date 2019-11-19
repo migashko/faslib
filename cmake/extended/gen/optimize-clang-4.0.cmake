@@ -1,5 +1,0 @@
-extended_option(-freciprocal-math "Same as -fassociative-math for expressions which include division." OFF)
-extended_option(-fstack-clash-protection "Insert code to probe each page of stack space as it is allocated to protect from stack-clash style attacks." OFF)
-extended_option(-fstack-protector "Use propolice as a stack protection method." OFF)
-extended_option(-fstack-protector-all "Use a stack protection method for every function." OFF)
-extended_option(-fstack-protector-strong "Use a smart stack protection method for certain functions." OFF)
