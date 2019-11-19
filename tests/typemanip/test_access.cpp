@@ -67,7 +67,11 @@ struct foo
   void set_foo4(const char* value) { std::strcpy(foo4, value);}
 private:
   foo(const foo&): foo1(""), foo2(0), foo3(), foo4(fas_nullptr) {}
-  foo& operator=(const foo&) { return *this;}
+  foo& operator=(const foo&) 
+  {
+    foo1=""; foo2=0; std::strcpy(foo3, ""); foo4=fas_nullptr;
+    return *this;
+  }
 };
 
 UNIT(member_unit, "")
