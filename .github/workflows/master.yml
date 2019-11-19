@@ -1,0 +1,22 @@
+name: C++ CI
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup
+      run: |
+        sudo apt-get install -y valgrind
+        mkdir -p build
+    - name: configure
+      run: cd build && cmake .. -DBUILD_TESTING=ON -DPARANOID_WARNINGS=OFF
+    - name: make
+      run: cmake --build ./build
+    - name: make check
+      run: cd build && ctest
