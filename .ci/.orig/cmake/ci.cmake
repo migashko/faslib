@@ -2,11 +2,11 @@ if ( WCI_SUPERMODULE )
   set(WCI_TOPLEVEL ON)
 elseif(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
   set(WCI_TOPLEVEL ON)
-elseif(EXISTS ${CMAKE_SOURCE_DIR}/external/cmake-ci/cmake/ci.cmake)
+elseif(EXISTS ${CMAKE_SOURCE_DIR}/external/cmake-ci/cmake/target.cmake)
   set(WCI_TOPLEVEL OFF)
 else()
   set(WCI_TOPLEVEL OFF)
-  
+
   macro(wci_getlib)
   endmacro()
 
@@ -15,7 +15,7 @@ else()
 
   macro(wci_targets)
   endmacro()
-  
+
   macro(wci_utils)
   endmacro()
 
@@ -24,16 +24,16 @@ else()
 
   macro(wci_remove_options)
   endmacro()
-  
+
 endif()
 
 if ( WCI_TOPLEVEL AND NOT WCI_SUPERMODULE)
 
-  if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/external/cmake-ci/cmake/ci.cmake)
+  if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/external/cmake-ci/cmake/target.cmake)
     execute_process(
-      COMMAND 
+      COMMAND
         git submodule update --init -- "external/cmake-ci"
-      WORKING_DIRECTORY 
+      WORKING_DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}
       RESULT_VARIABLE
         EXIT_CODE
