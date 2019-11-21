@@ -1,3 +1,6 @@
+![](https://github.com/migashko/faslib/workflows/C/C++%20CI/badge.svg?branch=master)
+![](https://github.com/migashko/faslib/workflows/C/C++%20CI/badge.svg?branch=mambaru)
+
 # faslib
 
 Библиотека faslib предлагает новый способ модульной разработки программного обеспечения,
