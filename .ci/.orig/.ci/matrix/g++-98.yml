@@ -1,6 +1,3 @@
-
-## g++-98
-
 .cpp98Debug:
   extends:
     - .build_template
@@ -24,11 +21,6 @@
   before_script:
     - export CXX_STANDARD=98  CXX_COMPILER=g++ BUILD_TYPE=Release
     - export BLDIR="BUILD_CPP98Release" CMAKE_ARGS=""
-
-
-########
-# build_rules
-########
 
 c++ 98 Debug:
   extends: .cpp98Debug

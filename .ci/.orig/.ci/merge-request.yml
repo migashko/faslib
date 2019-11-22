@@ -41,7 +41,7 @@ master merge:
 make release:
   extends: .merge request
   script:
-    - git tag -f ${RELEASE_TAG}
+    - git tag -f -a ${RELEASE_TAG} -m "${RELEASE_BRANCH}"
     - git push -f --tags ${PROJECT_SSH} ${CI_COMMIT_REF_NAME}
     - git push ${PROJECT_SSH} ${CI_COMMIT_REF_NAME}:${RELEASE_BRANCH}
   only:

@@ -1,5 +1,3 @@
-## g++-14
-
 .cpp14Debug:
   extends:
     - .build_template

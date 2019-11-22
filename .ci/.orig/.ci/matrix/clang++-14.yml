@@ -22,7 +22,6 @@
     - export CXX_STANDARD=14 CXX_COMPILER=clang++ BUILD_TYPE=Release
     - export BLDIR="BUILD_CLANG14Release" CMAKE_ARGS=""
 
-
 clang++ 14 Debug:
   extends: .clang14Debug
 

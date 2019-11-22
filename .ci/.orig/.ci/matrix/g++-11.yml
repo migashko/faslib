@@ -1,5 +1,3 @@
-## g++-11
-
 .cpp11Debug:
   extends:
     - .build_template
@@ -23,8 +21,6 @@
   before_script:
     - export CXX_STANDARD=11  CXX_COMPILER=g++ BUILD_TYPE=Release
     - export BLDIR="BUILD_CPP11Release" CMAKE_ARGS=""
-
-# ==== 
 
 c++ 11 Debug:
   extends: .cpp11Debug

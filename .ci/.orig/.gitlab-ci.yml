@@ -27,8 +27,6 @@ stages:
   - cppcheck
   - build
   - merge request
-  - release         # пуш в текущую ветку релиза
-  - deploy
   - github.com      # пуш в github.com для opensource проектов
   - clean
 
