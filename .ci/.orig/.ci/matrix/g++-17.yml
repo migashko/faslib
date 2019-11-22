@@ -1,5 +1,3 @@
-## g++-17
-
 .cpp17Debug:
   extends:
     - .build_template
@@ -23,7 +21,6 @@
   before_script:
     - export CXX_STANDARD=17 CXX_COMPILER=g++ BUILD_TYPE=Release
     - export BLDIR="BUILD_CPP17Release" CMAKE_ARGS=""
-
 
 c++ 17 Debug:
   extends: .cpp17Debug

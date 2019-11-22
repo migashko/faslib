@@ -1,5 +1,3 @@
-## clang++-98
-
 .clang98Debug:
   extends:
     - .build_template
