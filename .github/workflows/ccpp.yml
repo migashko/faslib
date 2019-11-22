@@ -27,6 +27,6 @@ jobs:
       uses: peter-evans/create-pull-request@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        branch: mamba-updates
+        base: master
         branch-suffix: none
 
