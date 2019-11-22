@@ -28,5 +28,6 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         base: master
+        branch: mambaru
         branch-suffix: none
 
