@@ -29,5 +29,5 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         base: master
         branch: kukara4a
-        branch-suffix: random
+        branch-suffix: none
 
