@@ -27,7 +27,7 @@ jobs:
       uses: peter-evans/create-pull-request@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        base: master
-        branch: mambaru
+        base: mambaru
+        branch: master
         branch-suffix: random
 
