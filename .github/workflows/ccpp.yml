@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: debug
+      run: time > time.txt
 #    - name: setup
 #      run: sudo apt-get install -y valgrind
 #    - name: init
@@ -27,9 +29,4 @@ jobs:
       uses: peter-evans/create-pull-request@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: update dependencies
-        title: Automated Dependency Updates
-        body: This is an auto-generated PR with dependency updates.
-        branch: dep-updates
-        branch-suffix: none
 
