@@ -7,4 +7,4 @@ add_executable(
   test_testing.cpp
 )
 
-
+wci_targets(testing)

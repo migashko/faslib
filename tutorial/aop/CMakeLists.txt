@@ -1,5 +1,3 @@
-project(intro)
-
 add_executable(aop0 aop0.cpp)
 add_executable(aop1 aop1.cpp)
 add_executable(aop2 aop2.cpp)
@@ -13,3 +11,6 @@ add_executable(aop12 aop12.cpp)
 add_executable(aop13 aop13.cpp)
 add_executable(aop14 aop14.cpp)
 add_executable(aop15 aop15.cpp)
+
+wci_remove_options(-Wsuggest-override -Wsuggest-override -Wnon-virtual-dtor -Wvirtual-inheritance -Wsuggest-override)
+wci_targets(aop0 aop1 aop2 aop3 aop4 aop7 aop8 aop10 aop11 aop12 aop13 aop14 aop15)
