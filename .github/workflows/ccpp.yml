@@ -12,11 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: setup
-      run: sudo apt-get install -y valgrind
+      run: |
+        sudo apt-get install -y valgrind
+        git config --global user.email "migashko@gmail.com"
+        git config --global user.name "Vladimir Migashko"
+        mkdir -p build
     - name: init
       run: |
         rm -rf external
-        mkdir -p build
         git submodule update --init external/cmake-ci
         rm -rf .github
         rm -rf cmake
