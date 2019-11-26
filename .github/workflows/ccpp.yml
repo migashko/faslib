@@ -19,14 +19,15 @@ jobs:
         mkdir -p build
     - name: init
       run: |
-        rm -rf external
-        git submodule update --init external/cmake-ci
         rm -rf .github
         rm -rf cmake
+        rm -rf external
+        git submodule update --init external/cmake-ci
+        pushd
+          git checkout master
+        popd
         rsync -a external/cmake-ci/root-ci/ ./
         date +"%F %X" >> ./.ci/build_history.txt
-        git add .
-        git commit --allow-empty -m "github.com import autocommit"
     - name: configure
       run: cd build && cmake .. -DBUILD_TESTING=ON -DPARANOID_WARNINGS=OFF
     - name: make
