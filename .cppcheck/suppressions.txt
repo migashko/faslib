@@ -1,5 +1,7 @@
 # Список подавлений для cppcheck относительно корня проекта. Примеры
-internalAstError:
-missingOverride:./examples/aop/*
-missingOverride:./tutorial/aop/*
-functionStatic:./tutorial/*
+# Для конкретной строки:
+# missingInclude:./daemon/demod.cpp:1
+# Для всего файла:
+# missingInclude:./daemon/demod.cpp
+# Для всего проекта:
+# missingInclude:
