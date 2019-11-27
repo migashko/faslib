@@ -1,5 +1,5 @@
-[![Build Status](https://github.com/migashko/faslib/workflows/C/C++%20CI/badge.svg?branch=master)](https://github.com/migashko/faslib/tree/master)
-[![Build Status](https://github.com/migashko/faslib/workflows/C/C++%20CI/badge.svg?branch=mambaru)](https://github.com/migashko/faslib/tree/mambaru)
+[![Build Status](https://github.com/migashko/faslib/workflows/C++%20CI/badge.svg?branch=master)](https://github.com/migashko/faslib/tree/master)
+[![Build Status](https://github.com/migashko/faslib/workflows/C++%20CI/badge.svg?branch=mambaru)](https://github.com/migashko/faslib/tree/mambaru)
 [![](http://github.lan/cpp/faslib/badges/pre-release/coverage.svg)](http://github.lan/cpp/faslib/commits/pre-release)
 
 # faslib
