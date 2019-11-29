@@ -3,7 +3,7 @@ add_executable(test_statements test_statements.cpp)
 add_executable(test_suite      test_suite.cpp)
 add_executable(test_suite_run  test_suite_run.cpp)
 add_executable(test_suite_map  test_suite_map.cpp)
-add_executable(test_test  test_test.cpp ${FAS_TESTING_CPP})
+add_executable(test_test  test_test.cpp $ENV{FAS_TESTING_CPP})
 
 wci_test(NAME testing_unit       COMMAND test_unit)
 wci_test(NAME testing_statements COMMAND test_statements)
