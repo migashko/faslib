@@ -48,6 +48,6 @@ jobs:
         git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
         git commit -m "${COMMIT_MESSAGE}"
         echo git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages
-        git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages
+        git push --force https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages
       working-directory: ./docs/html
         
