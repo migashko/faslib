@@ -47,6 +47,7 @@ jobs:
         COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
         git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
         git commit -m "${COMMIT_MESSAGE}"
+        echo git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.github.io.git master
         git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.github.io.git master
       working-directory: ./docs/html
         
