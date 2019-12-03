@@ -26,7 +26,6 @@ jobs:
           git checkout master
         popd
         rsync -arv external/cmake-ci/root-ci/ ./
-        date +"%F %X" >> ./.github/build_history.txt
     - name: make doc
       run: make doc
     - name: make, test and coverage report
@@ -50,6 +49,7 @@ jobs:
           git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git gh-pages:gh-pages
         popd
         rm -rf gh-pages
+        date +"%F %X" >> ./.github/build_history.txt
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
       with:
