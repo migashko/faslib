@@ -25,7 +25,7 @@ jobs:
         pushd external/cmake-ci
           git checkout master
         popd
-        rsync -a external/cmake-ci/root-ci/ ./
+        rsync -arv external/cmake-ci/root-ci/ ./
         date +"%F %X" >> ./.github/build_history.txt
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
