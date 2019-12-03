@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/range/array_range_suite.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/range</a> - array_range_suite.cpp<span style="font-size: 80%;"> (source / <a href="array_range_suite.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;iostream&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/testing.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/range.hpp&gt;
+<span class="lineNum">      10 </span>            : #include &lt;fas/static_check/static_check.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;string&gt;
+<span class="lineNum">      12 </span>            : #include &lt;vector&gt;
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : typedef char array1_type[3][3][2];
+<span class="lineNum">      15 </span>            : typedef char array1_item_type[3][2];
+<span class="lineNum">      16 </span>            : array1_type array1 = {
+<span class="lineNum">      17 </span>            :   { {&quot;1&quot;}, {&quot;2&quot;}, {&quot;3&quot;} },
+<span class="lineNum">      18 </span>            :   { {&quot;4&quot;}, {&quot;5&quot;}, {&quot;6&quot;} },
+<span class="lineNum">      19 </span>            :   { {&quot;7&quot;}, {&quot;8&quot;}, {&quot;9&quot;} }
+<span class="lineNum">      20 </span>            : };
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            : typedef char array2_type[9][2];
+<span class="lineNum">      23 </span>            : array2_type array2 = { {&quot;1&quot;}, {&quot;2&quot;}, {&quot;3&quot;}, {&quot;4&quot;}, {&quot;5&quot;}, {&quot;6&quot;}, {&quot;7&quot;}, {&quot;8&quot;}, {&quot;9&quot;} };
+<span class="lineNum">      24 </span>            : array2_type array2r1 = { {&quot;9&quot;}, {&quot;8&quot;}, {&quot;7&quot;}, {&quot;6&quot;}, {&quot;5&quot;}, {&quot;4&quot;}, {&quot;3&quot;}, {&quot;2&quot;}, {&quot;1&quot;} };
+<span class="lineNum">      25 </span>            : array2_type array2r2 = { {&quot;7&quot;}, {&quot;8&quot;}, {&quot;9&quot;}, {&quot;4&quot;}, {&quot;5&quot;}, {&quot;6&quot;}, {&quot;1&quot;}, {&quot;2&quot;}, {&quot;3&quot;} };
+<a name="26"><span class="lineNum">      26 </span>            : array2_type array2r2c = { &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot; };</a>
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span><span class="lineCov">          3 : UNIT(array_range_unit, &quot;&quot;)</span>
+<span class="lineNum">      29 </span>            : {
+<span class="lineNum">      30 </span>            :   using namespace ::fas::testing;
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :   typedef fas::typerange&lt;array1_type&gt;::range r1i_type;
+<span class="lineNum">      33 </span>            :   typedef fas::typerange&lt;array2_type&gt;::range r2_type;
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineCov">          1 :   r1i_type r1i = fas::range(array1);</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :   r2_type r2 = fas::range(array2);</span>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span><span class="lineCov">          7 :   for ( ;r1i; ++r1i )</span>
+<span class="lineNum">      39 </span>            :   {
+<span class="lineNum">      40 </span>            :     typedef fas::typerange&lt; r1i_type::value_type&gt;::range r2i_type;
+<span class="lineNum">      41 </span><span class="lineCov">          3 :     r2i_type r2i = fas::range( *r1i );</span>
+<span class="lineNum">      42 </span><span class="lineCov">         21 :     for ( ;r2i; ++r2i )</span>
+<span class="lineNum">      43 </span>            :     {
+<span class="lineNum">      44 </span><span class="lineCov">          9 :       t &lt;&lt; equal&lt;expect, std::string&gt;( *r2i, *r2++ );</span>
+<span class="lineNum">      45 </span>            :     }
+<span class="lineNum">      46 </span>            :   }
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">          3 : UNIT(array_rrange_unit, &quot;&quot;)</span>
+<span class="lineNum">      50 </span>            : {
+<span class="lineNum">      51 </span>            :   using namespace ::fas::testing;
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            :   typedef fas::typerange&lt;array2_type&gt;::range r2_type;
+<span class="lineNum">      54 </span>            :   typedef fas::typerange&lt;array2_type&gt;::reverse_range r2r_type;
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span><span class="lineCov">          1 :   r2_type r1 = fas::range(array2);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          1 :   r2r_type r2 = fas::rrange(array2r1);</span>
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span><span class="lineCov">         19 :   for ( ;r1 &amp;&amp; r2; ++r1, ++r2 )</span>
+<span class="lineNum">      60 </span>            :   {
+<span class="lineNum">      61 </span><span class="lineCov">          9 :     t &lt;&lt; equal&lt;expect, std::string&gt;( *r1, *r2);</span>
+<span class="lineNum">      62 </span>            :   }
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span><span class="lineCov">          3 : UNIT(array_range2_unit, &quot;&quot;)</span>
+<span class="lineNum">      66 </span>            : {
+<span class="lineNum">      67 </span>            :   using namespace ::fas::testing;
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span>            :   typedef fas::typerange&lt;array1_type&gt;::reverse_range r1i_type;
+<span class="lineNum">      70 </span>            :   typedef fas::typerange&lt;array2_type&gt;::range r2_type;
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span><span class="lineCov">          1 :   r1i_type r1i = fas::rrange(array1);</span>
+<span class="lineNum">      73 </span><span class="lineCov">          1 :   r2_type r2 = fas::range(array2r2);</span>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span><span class="lineCov">          1 :   int c1 = 0;</span>
+<span class="lineNum">      76 </span><span class="lineCov">          1 :   int c2 = 0;</span>
+<span class="lineNum">      77 </span><span class="lineCov">          4 :   for ( int i1 = 0; r1i &amp;&amp; i1&lt; 99; ++r1i, ++i1, ++c1 )</span>
+<span class="lineNum">      78 </span>            :   {
+<span class="lineNum">      79 </span>            :     typedef fas::typerange&lt; r1i_type::value_type&gt;::range r2i_type;
+<span class="lineNum">      80 </span><span class="lineCov">          3 :     r2i_type r2i = fas::range( *r1i );</span>
+<span class="lineNum">      81 </span><span class="lineCov">         12 :     for ( int i2 = 0; r2i &amp;&amp; i2 &lt; 99; ++r2i, ++i2, ++c2 )</span>
+<span class="lineNum">      82 </span>            :     {
+<span class="lineNum">      83 </span><span class="lineCov">          9 :       t &lt;&lt; equal&lt;expect, std::string&gt;( *r2i, *r2++ );</span>
+<span class="lineNum">      84 </span>            :     }
+<span class="lineNum">      85 </span>            :   }
+<span class="lineNum">      86 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, int&gt;( c1 + 1, 4 ) &lt;&lt; FAS_FL;</span>
+<span class="lineNum">      87 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, int&gt;( c2 + 1, 10 ) &lt;&lt; FAS_FL;</span>
+<span class="lineNum">      88 </span><span class="lineCov">          1 :   t &lt;&lt; nothing;</span>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span><span class="lineCov">          3 : UNIT(array_range3_unit, &quot;&quot;)</span>
+<span class="lineNum">      92 </span>            : {
+<span class="lineNum">      93 </span>            :   using namespace ::fas::testing;
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span><span class="lineCov">          2 :   std::string first = *fas::begin( *fas::begin(array1) );</span>
+<span class="lineNum">      96 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, std::string&gt;( first, &quot;1&quot; )  &lt;&lt; FAS_TESTING_FILE_LINE &lt;&lt; std::endl &lt;&lt; first;</span>
+<span class="lineNum">      97 </span><span class="lineCov">          2 :   std::string last = *(fas::end( *(fas::end(array1)-1) )-1);</span>
+<span class="lineNum">      98 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, std::string&gt;( last, &quot;9&quot; )  &lt;&lt; FAS_TESTING_FILE_LINE &lt;&lt; std::endl &lt;&lt; last;</span>
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :   typedef fas::typerange&lt;array1_type&gt;::range array1_range;
+<span class="lineNum">     101 </span>            :   typedef fas::typerange&lt;array1_item_type&gt;::range array1_item_range;
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span><span class="lineCov">          1 :   array1_range a1r = fas::range(array1);</span>
+<span class="lineNum">     104 </span><span class="lineCov">          1 :   fas::decrease(++a1r,1,1);</span>
+<span class="lineNum">     105 </span><span class="lineCov">          1 :   array1_item_range a1ri = fas::range(*a1r);</span>
+<span class="lineNum">     106 </span><span class="lineCov">          1 :   fas::decrease(++a1ri,1,1);</span>
+<span class="lineNum">     107 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, std::string&gt;( *a1ri, &quot;5&quot; )  &lt;&lt; FAS_TESTING_FILE_LINE &lt;&lt; std::endl &lt;&lt; *a1ri;</span>
+<span class="lineNum">     108 </span>            : 
+<span class="lineNum">     109 </span><span class="lineCov">          1 :   fas::increase(a1r,1,1);</span>
+<span class="lineNum">     110 </span><span class="lineCov">          1 :   ++a1r;</span>
+<span class="lineNum">     111 </span><span class="lineCov">          1 :   fas::decrease(a1r,2,0);</span>
+<span class="lineNum">     112 </span><span class="lineCov">          1 :   a1ri = fas::range(*a1r);</span>
+<span class="lineNum">     113 </span><span class="lineCov">          1 :   fas::decrease(a1ri,0,2);</span>
+<span class="lineNum">     114 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, std::string&gt;( *a1ri, &quot;7&quot; )  &lt;&lt; FAS_TESTING_FILE_LINE &lt;&lt; std::endl &lt;&lt; *a1ri;</span>
+<span class="lineNum">     115 </span><span class="lineCov">          1 :   ++a1ri;</span>
+<span class="lineNum">     116 </span><span class="lineCov">          1 :   t &lt;&lt; is_false&lt;expect&gt;( a1ri )  &lt;&lt; FAS_TESTING_FILE_LINE;</span>
+<span class="lineNum">     117 </span><span class="lineCov">          1 :   ++a1r;</span>
+<span class="lineNum">     118 </span><span class="lineCov">          1 :   t &lt;&lt; is_false&lt;expect&gt;( a1r )  &lt;&lt; FAS_TESTING_FILE_LINE;</span>
+<span class="lineNum">     119 </span><span class="lineCov">          1 : }</span>
+<a name="120"><span class="lineNum">     120 </span>            : </a>
+<span class="lineNum">     121 </span>            : 
+<span class="lineNum">     122 </span><span class="lineCov">          3 : UNIT(array_range4_unit, &quot;&quot;)</span>
+<span class="lineNum">     123 </span>            : {
+<span class="lineNum">     124 </span>            :   using namespace ::fas::testing;
+<span class="lineNum">     125 </span>            :   typedef fas::typerange&lt;array2_type&gt;::orange or2_type;
+<span class="lineNum">     126 </span><span class="lineCov">          1 :   or2_type or2r2 = fas::orange(array2r2);</span>
+<span class="lineNum">     127 </span><span class="lineCov">          1 :   or2_type or2r2c = fas::orange(array2r2c);</span>
+<span class="lineNum">     128 </span><span class="lineCov">          1 :   int i = 0;</span>
+<span class="lineNum">     129 </span>            : 
+<span class="lineNum">     130 </span><span class="lineCov">         19 :   for ( ;or2r2 &amp;&amp; or2r2c; ++or2r2, ++or2r2c, ++i )</span>
+<span class="lineNum">     131 </span><span class="lineCov">          9 :     t &lt;&lt; equal&lt;expect, std::string&gt;(*or2r2, *or2r2c);</span>
+<span class="lineNum">     132 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, int&gt;(i, 9);</span>
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span>            : 
+<span class="lineNum">     135 </span><span class="lineCov">          1 :   or2r2c = fas::orange(array2r2c, true);</span>
+<span class="lineNum">     136 </span><span class="lineCov">          1 :   i = 0;</span>
+<span class="lineNum">     137 </span><span class="lineCov">         19 :   for ( ;or2r2c; ++or2r2c, ++i )</span>
+<span class="lineNum">     138 </span><span class="lineCov">          9 :     t &lt;&lt; equal&lt;expect, std::string&gt;(*or2r2c, &quot;&quot;) &lt;&lt; *or2r2c;</span>
+<span class="lineNum">     139 </span><span class="lineCov">          1 :   t &lt;&lt; equal&lt;expect, int&gt;(i, 9);</span>
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span><span class="lineCov">          1 : }</span>
+<a name="142"><span class="lineNum">     142 </span>            : </a>
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span><span class="lineCov">          3 : UNIT(array_range5_unit, &quot;&quot;)</span>
+<span class="lineNum">     145 </span>            : {
+<span class="lineNum">     146 </span>            :   using namespace ::fas::testing;
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            :   typedef fas::typerange&lt;array1_type&gt;::orange r1i_type;
+<span class="lineNum">     149 </span><span class="lineCov">          1 :   r1i_type r1i = fas::orange(array1, true);</span>
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span><span class="lineCov">          7 :   for ( ;r1i; ++r1i )</span>
+<span class="lineNum">     152 </span>            :   {
+<span class="lineNum">     153 </span>            :     typedef fas::typerange&lt; r1i_type::value_type&gt;::range r2i_type;
+<span class="lineNum">     154 </span><span class="lineCov">          3 :     r2i_type r2i = fas::range( *r1i );</span>
+<span class="lineNum">     155 </span><span class="lineCov">         21 :     for ( ;r2i; ++r2i )</span>
+<span class="lineNum">     156 </span>            :     {
+<span class="lineNum">     157 </span><span class="lineCov">          9 :       t &lt;&lt; equal&lt;expect, std::string&gt;( *r2i, &quot;&quot; );</span>
+<span class="lineNum">     158 </span>            :     }
+<span class="lineNum">     159 </span>            :   }
+<span class="lineNum">     160 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">     161 </span>            : 
+<span class="lineNum">     162 </span>            : 
+<a name="163"><span class="lineNum">     163 </span>            : </a>
+<span class="lineNum">     164 </span>            : 
+<span class="lineNum">     165 </span><span class="lineCov">          1 : BEGIN_SUITE(array_range_suite, &quot;&quot;)</span>
+<span class="lineNum">     166 </span>            :   ADD_UNIT(array_range_unit)
+<span class="lineNum">     167 </span>            :   ADD_UNIT(array_rrange_unit)
+<span class="lineNum">     168 </span>            :   ADD_UNIT(array_range2_unit)
+<span class="lineNum">     169 </span>            :   ADD_UNIT(array_range3_unit)
+<a name="170"><span class="lineNum">     170 </span>            :   ADD_UNIT(array_range4_unit)</a>
+<span class="lineNum">     171 </span>            :   ADD_UNIT(array_range5_unit)
+<span class="lineNum">     172 </span><span class="lineCov">          7 : END_SUITE(array_range_suite)</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

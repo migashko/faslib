@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/range/detail/range_helper_other.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">fas/range/detail</a> - range_helper_other.hpp<span style="font-size: 80%;"> (source / <a href="range_helper_other.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2012
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_RANGE_DETAIL_RANGE_HELPER_OTHER_HPP
+<span class="lineNum">       8 </span>            : #define FAS_RANGE_DETAIL_RANGE_HELPER_OTHER_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/range/typerange_flag.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/range/random_access_range.hpp&gt;
+<span class="lineNum">      12 </span>            : #include &lt;fas/range/forward_range.hpp&gt;
+<span class="lineNum">      13 </span>            : #include &lt;iterator&gt;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : namespace fas{
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : template&lt; typename T&gt;
+<span class="lineNum">      18 </span>            : struct range_helper&lt;T, typerange_flag::other &gt;
+<span class="lineNum">      19 </span>            : {
+<span class="lineNum">      20 </span>            :   enum { flag = typerange_flag::other };
+<span class="lineNum">      21 </span>            :   typedef random_access_range&lt;T*&gt; range;
+<span class="lineNum">      22 </span>            :   typedef std::reverse_iterator&lt;T*&gt; reverse_iterator;
+<span class="lineNum">      23 </span>            :   typedef random_access_range&lt; std::reverse_iterator&lt;T*&gt; &gt; reverse_range;
+<span class="lineNum">      24 </span>            :   typedef forward_range&lt;T*&gt; orange;
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span>            :   typedef typename range::difference_type difference_type;
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            :   template&lt;typename TT&gt;
+<span class="lineNum">      29 </span>            :   static inline reverse_range make_rrange(TT* v)
+<span class="lineNum">      30 </span>            :   {
+<span class="lineNum">      31 </span>            :     return reverse_range( reverse_iterator(&amp;v), reverse_iterator(&amp;v - 1) );
+<span class="lineNum">      32 </span>            :   }
+<a name="33"><span class="lineNum">      33 </span>            : </a>
+<span class="lineNum">      34 </span>            :   template&lt;typename TT&gt;
+<span class="lineNum">      35 </span><span class="lineCov">          1 :   static inline range make_range(TT&amp; v)</span>
+<span class="lineNum">      36 </span>            :   {
+<span class="lineNum">      37 </span><span class="lineCov">          1 :     return range(&amp;v, &amp;v + 1);</span>
+<span class="lineNum">      38 </span>            :   }
+<a name="39"><span class="lineNum">      39 </span>            : </a>
+<span class="lineNum">      40 </span>            :   template&lt;typename TT&gt;
+<span class="lineNum">      41 </span><span class="lineCov">          2 :   static inline orange make_orange(TT&amp; v, bool clear = false)</span>
+<span class="lineNum">      42 </span>            :   {
+<span class="lineNum">      43 </span><span class="lineCov">          2 :     if ( clear )</span>
+<span class="lineNum">      44 </span><span class="lineCov">          1 :       v = T();</span>
+<span class="lineNum">      45 </span><span class="lineCov">          2 :     return orange(&amp;v, &amp;v + 1);</span>
+<span class="lineNum">      46 </span>            :   }
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span>            :   template&lt;typename TT&gt;
+<span class="lineNum">      49 </span>            :   static inline range make_erange(TT&amp; v)
+<span class="lineNum">      50 </span>            :   {
+<span class="lineNum">      51 </span>            :     range r = make_range(v);
+<span class="lineNum">      52 </span>            :     ++r;
+<span class="lineNum">      53 </span>            :     return r;
+<span class="lineNum">      54 </span>            :   }
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            :   template&lt;typename TT&gt;
+<span class="lineNum">      57 </span>            :   static inline difference_type distance( const TT&amp; )
+<span class="lineNum">      58 </span>            :   {
+<span class="lineNum">      59 </span>            :     return 1;
+<span class="lineNum">      60 </span>            :   }
+<span class="lineNum">      61 </span>            : };
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            : }
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

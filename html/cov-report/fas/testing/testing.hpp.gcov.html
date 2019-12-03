@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/testing/testing.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">fas/testing</a> - testing.hpp<span style="font-size: 80%;"> (source / <a href="testing.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntryLo">54.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011, 2018
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_TESTING_TESTING_HPP
+<span class="lineNum">       8 </span>            : #define FAS_TESTING_TESTING_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/testing/suite_counts.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/testing/formatting.hpp&gt;
+<span class="lineNum">      12 </span>            : #include &lt;fas/utility/ignore_args.hpp&gt;
+<span class="lineNum">      13 </span>            : #include &lt;fas/system/colorized.hpp&gt;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : #include &lt;iostream&gt;
+<span class="lineNum">      16 </span>            : 
+<a name="17"><span class="lineNum">      17 </span>            : namespace fas{ namespace testing{</a>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span><span class="lineCov">          3 : inline void show_total_result( const suite_counts&amp; sc )</span>
+<span class="lineNum">      20 </span>            : {
+<span class="lineNum">      21 </span>            :   using namespace ::fas::console;
+<span class="lineNum">      22 </span><span class="lineCov">          3 :   if (!sc.ok())</span>
+<span class="lineNum">      23 </span><span class="lineNoCov">          0 :     std::cout &lt;&lt; light_red ;</span>
+<span class="lineNum">      24 </span>            :   else
+<span class="lineNum">      25 </span><span class="lineCov">          3 :     std::cout &lt;&lt; green ;</span>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span><span class="lineCov">          3 :   std::cout &lt;&lt; &quot;**************************************&quot; &lt;&lt; std::endl;</span>
+<span class="lineNum">      28 </span><span class="lineCov">          3 :   std::cout &lt;&lt; &quot;units: &quot; &lt;&lt; sc.units_total &lt;&lt; std::endl;</span>
+<span class="lineNum">      29 </span><span class="lineCov">          3 :   if (!sc.ok())</span>
+<span class="lineNum">      30 </span>            :   {
+<span class="lineNum">      31 </span><span class="lineNoCov">          0 :     std::cout &lt;&lt; red  &lt;&lt; &quot;units fails: &quot; &lt;&lt; sc.units_total - sc.units_passed &lt;&lt; light_red  &lt;&lt; std::endl;</span>
+<span class="lineNum">      32 </span>            :   }
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span><span class="lineCov">          3 :   std::cout &lt;&lt; &quot;statements: &quot; &lt;&lt; sc.statements &lt;&lt; std::endl;</span>
+<span class="lineNum">      35 </span><span class="lineCov">          3 :   if (!sc.ok())</span>
+<span class="lineNum">      36 </span>            :   {
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :     if (sc.errors!=0) std::cout &lt;&lt; red ;</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :     std::cout &lt;&lt; &quot;errors: &quot; &lt;&lt; sc.errors &lt;&lt; light_red &lt;&lt; std::endl;</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :     if (sc.fails!=0) std::cout &lt;&lt; red ;</span>
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :     std::cout &lt;&lt; &quot;fails: &quot; &lt;&lt; sc.fails &lt;&lt; light_red &lt;&lt; std::endl;</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :     if (sc.fatals!=0) std::cout &lt;&lt; red ;</span>
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :     std::cout &lt;&lt; &quot;fatals: &quot; &lt;&lt; sc.fatals &lt;&lt; light_red &lt;&lt; std::endl;</span>
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :     if ( sc.crash )</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :       std::cout &lt;&lt; brown &lt;&lt; &quot;test is crash!&quot; &lt;&lt; light_red &lt;&lt; std::endl;</span>
+<span class="lineNum">      45 </span>            :   }
+<span class="lineNum">      46 </span><span class="lineCov">          3 :   std::cout &lt;&lt; &quot;**************************************&quot; &lt;&lt; std::endl;</span>
+<span class="lineNum">      47 </span><span class="lineCov">          3 :   std::cout &lt;&lt; restore_colors ;</span>
+<span class="lineNum">      48 </span><span class="lineCov">          3 :   std::cout &lt;&lt; std::endl;</span>
+<span class="lineNum">      49 </span><span class="lineCov">          3 : }</span>
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : }}
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            : #define BEGIN_TEST \
+<span class="lineNum">      56 </span>            :   ::fas::testing::suite_counts fas_testing(int argc, char* argv[]);\
+<span class="lineNum">      57 </span>            :   ::fas::testing::suite_counts fas_testing(int argc, char* argv[]) {\
+<span class="lineNum">      58 </span>            :     ::fas::testing::suite_counts sc; \
+<span class="lineNum">      59 </span>            :     ::fas::ignore_arg(argc); \
+<span class="lineNum">      60 </span>            :     ::fas::ignore_arg(argv);
+<span class="lineNum">      61 </span>            : #define RUN_SUITE(name) \
+<span class="lineNum">      62 </span>            :   ::fas::testing::suite_counts fas_##name##_suite_run(int argc, char* argv[]); \
+<span class="lineNum">      63 </span>            :   if (sc.crash) std::cout &lt;&lt; ::fas::testing::SKIP &lt;&lt; &quot;Skip suite '&quot; &lt;&lt; #name &lt;&lt; &quot;'&quot; &lt;&lt; std::endl;\
+<span class="lineNum">      64 </span>            :   else sc+=fas_##name##_suite_run(argc, argv);
+<span class="lineNum">      65 </span>            : #define END_TEST show_total_result(sc); return sc;}
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

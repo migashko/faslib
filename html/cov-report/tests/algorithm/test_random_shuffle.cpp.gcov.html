@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/algorithm/test_random_shuffle.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/algorithm</a> - test_random_shuffle.cpp<span style="font-size: 80%;"> (source / <a href="test_random_shuffle.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/type_list/type_list_n.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/algorithm/random_shuffle.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/static_check.hpp&gt;
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : using namespace ::fas;
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : /***************
+<span class="lineNum">      14 </span>            :   11837123  1
+<span class="lineNum">      15 </span>            :   8949370   2
+<span class="lineNum">      16 </span>            :   9722709   3
+<span class="lineNum">      17 </span>            :   4858052   4
+<span class="lineNum">      18 </span>            :   5065847   5
+<span class="lineNum">      19 </span>            :   12997982  6
+<span class="lineNum">      20 </span>            :   235177    7
+<span class="lineNum">      21 </span>            :   12762824  8
+<span class="lineNum">      22 </span>            :   13664875  9
+<span class="lineNum">      23 </span>            :   11895682  10
+<span class="lineNum">      24 </span>            :   760893    11
+<span class="lineNum">      25 </span>            :  
+<span class="lineNum">      26 </span>            :   235177    7
+<span class="lineNum">      27 </span>            :   760893    11
+<span class="lineNum">      28 </span>            :   4858052   4 
+<span class="lineNum">      29 </span>            :   5065847   5
+<span class="lineNum">      30 </span>            :   8949370   2
+<span class="lineNum">      31 </span>            :   9722709   3
+<span class="lineNum">      32 </span>            :   11837123  1
+<span class="lineNum">      33 </span>            :   11895682  10
+<span class="lineNum">      34 </span>            :   12762824  8
+<span class="lineNum">      35 </span>            :   12997982  6
+<span class="lineNum">      36 </span>            :   13664875  9
+<span class="lineNum">      37 </span>            :  ***************/
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            : typedef type_list_n&lt; int_&lt;1&gt;, int_&lt;2&gt;,  int_&lt;3&gt;, int_&lt;4&gt;, int_&lt;5&gt;, int_&lt;6&gt;, int_&lt;7&gt;, int_&lt;8&gt;,  int_&lt;9&gt;, int_&lt;10&gt;, int_&lt;11&gt; &gt;::type list;
+<span class="lineNum">      40 </span>            : typedef type_list_n&lt; int_&lt;7&gt;, int_&lt;11&gt;, int_&lt;4&gt;, int_&lt;5&gt;, int_&lt;2&gt;, int_&lt;3&gt;, int_&lt;1&gt;, int_&lt;10&gt;, int_&lt;8&gt;, int_&lt;6&gt;,  int_&lt;9&gt;  &gt;::type check;
+<a name="41"><span class="lineNum">      41 </span>            : typedef random_shuffle&lt; int_&lt;0x50000&gt;/*rand&lt;&gt;::type*/, list&gt;::type shuffled;</a>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      44 </span>            : {
+<span class="lineNum">      45 </span>            :   enum 
+<span class="lineNum">      46 </span>            :   {
+<span class="lineNum">      47 </span>            :     result = static_check&lt; same_type&lt; check, shuffled &gt;::value  &gt;::value
+<span class="lineNum">      48 </span>            :   };
+<span class="lineNum">      49 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">      50 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

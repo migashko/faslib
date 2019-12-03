@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/range/random_access_range.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">fas/range</a> - random_access_range.hpp<span style="font-size: 80%;"> (source / <a href="random_access_range.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">79</td>
+            <td class="headerCovTableEntry">79</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011, 2012
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_range_RANDOM_ACCESS_RANGE_HPP
+<span class="lineNum">       8 </span>            : #define FAS_range_RANDOM_ACCESS_RANGE_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/range/range_category.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;iterator&gt;
+<span class="lineNum">      12 </span>            : #include &lt;cassert&gt;
+<span class="lineNum">      13 </span>            : #include &lt;cstddef&gt;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : namespace fas {
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : template&lt;typename T&gt;
+<span class="lineNum">      18 </span>            : class random_access_range
+<span class="lineNum">      19 </span>            : {
+<span class="lineNum">      20 </span>            : public:
+<span class="lineNum">      21 </span>            :   typedef random_access_range_tag range_category;
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            :   typedef T iterator;
+<span class="lineNum">      24 </span>            :   typedef std::reverse_iterator&lt;iterator&gt; reverse_iterator;
+<span class="lineNum">      25 </span>            :   typedef random_access_range&lt;reverse_iterator&gt; reverse_range;
+<span class="lineNum">      26 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::iterator_category iterator_category;
+<span class="lineNum">      27 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::value_type        value_type;
+<span class="lineNum">      28 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::difference_type   difference_type;
+<span class="lineNum">      29 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::pointer           pointer;
+<span class="lineNum">      30 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::reference         reference;
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :   random_access_range()
+<span class="lineNum">      33 </span>            :     : b(), e()
+<span class="lineNum">      34 </span>            : #ifndef NDEBUG
+<span class="lineNum">      35 </span>            :     , s(b)
+<span class="lineNum">      36 </span>            : #endif
+<a name="37"><span class="lineNum">      37 </span>            :   {}</a>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span><span class="lineCov">         46 :   random_access_range(T b1, T e1)</span>
+<span class="lineNum">      40 </span>            :     : b(b1), e(e1)
+<span class="lineNum">      41 </span>            : #ifndef NDEBUG
+<span class="lineNum">      42 </span><span class="lineCov">         46 :     , s(b1)</span>
+<span class="lineNum">      43 </span>            : #endif
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         46 :   {}</span></a>
+<span class="lineNum">      45 </span>            : 
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">        117 :   operator bool () const { return b!=e; }</span></a>
+<span class="lineNum">      47 </span>            : 
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">        267 :   reference operator*() const { return *b; }</span></a>
+<span class="lineNum">      49 </span>            : 
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">         10 :   pointer operator -&gt;() const  { return &amp;(*b);}</span></a>
+<span class="lineNum">      51 </span>            : 
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          1 :   iterator begin() const { return b; }</span></a>
+<span class="lineNum">      53 </span>            : 
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          1 :   iterator end() const { return e; }</span></a>
+<span class="lineNum">      55 </span>            : 
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          1 :   reverse_iterator rbegin() const { return reverse_iterator(e); }</span></a>
+<span class="lineNum">      57 </span>            : 
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          1 :   reverse_iterator rend() const { return reverse_iterator(b); }</span></a>
+<span class="lineNum">      59 </span>            : 
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :   reverse_range reverse() const { return reverse_range( rbegin(), rend() ); }</span></a>
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineCov">          3 :   difference_type distance() const { return e-b; }</span>
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            :   void advance(difference_type c)
+<span class="lineNum">      65 </span>            :   {
+<span class="lineNum">      66 </span>            :     b+=c;
+<span class="lineNum">      67 </span>            :     assert( b &lt;= e);
+<span class="lineNum">      68 </span>            :   }
+<a name="69"><span class="lineNum">      69 </span>            : </a>
+<span class="lineNum">      70 </span>            : #ifndef NDEBUG
+<span class="lineNum">      71 </span><span class="lineCov">          1 :   void increase(difference_type cbeg, difference_type cend)</span>
+<span class="lineNum">      72 </span>            :   {
+<span class="lineNum">      73 </span><span class="lineCov">          1 :     s -= cbeg;</span>
+<span class="lineNum">      74 </span><span class="lineCov">          1 :     assert( s &lt;= b);</span>
+<span class="lineNum">      75 </span><span class="lineCov">          1 :     e += cend;</span>
+<span class="lineNum">      76 </span><span class="lineCov">          1 :     assert( e &gt;= b);</span>
+<span class="lineNum">      77 </span><span class="lineCov">          1 :   }</span>
+<span class="lineNum">      78 </span>            : #else
+<span class="lineNum">      79 </span>            :   void increase(difference_type, difference_type cend)
+<span class="lineNum">      80 </span>            :   {
+<span class="lineNum">      81 </span>            :     e += cend;
+<span class="lineNum">      82 </span>            :     assert( e &gt;= b);
+<span class="lineNum">      83 </span>            :   }
+<span class="lineNum">      84 </span>            : #endif
+<span class="lineNum">      85 </span>            : 
+<a name="86"><span class="lineNum">      86 </span>            : </a>
+<span class="lineNum">      87 </span>            :  #ifndef NDEBUG
+<span class="lineNum">      88 </span><span class="lineCov">          4 :   void decrease(difference_type cbeg, difference_type cend)</span>
+<span class="lineNum">      89 </span>            :   {
+<span class="lineNum">      90 </span><span class="lineCov">          4 :     s += cbeg;</span>
+<span class="lineNum">      91 </span><span class="lineCov">          4 :     assert( s &lt;= b);</span>
+<span class="lineNum">      92 </span><span class="lineCov">          4 :     e -= cend;</span>
+<span class="lineNum">      93 </span><span class="lineCov">          4 :     assert( e &gt;= b);</span>
+<span class="lineNum">      94 </span><span class="lineCov">          4 :   }</span>
+<span class="lineNum">      95 </span>            : #else
+<span class="lineNum">      96 </span>            :   void decrease(difference_type, difference_type cend)
+<span class="lineNum">      97 </span>            :   {
+<span class="lineNum">      98 </span>            :     e -= cend;
+<span class="lineNum">      99 </span>            :     assert( e &gt;= b);
+<span class="lineNum">     100 </span>            :   }
+<a name="101"><span class="lineNum">     101 </span>            : #endif</a>
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span><span class="lineCov">         86 :   random_access_range&lt;T&gt;&amp; operator++()</span>
+<span class="lineNum">     104 </span>            :   {
+<span class="lineNum">     105 </span><span class="lineCov">         86 :     assert(b!=e);</span>
+<span class="lineNum">     106 </span><span class="lineCov">         86 :     ++b;</span>
+<span class="lineNum">     107 </span><span class="lineCov">         86 :     return *this;</span>
+<a name="108"><span class="lineNum">     108 </span>            :   }</a>
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span><span class="lineCov">         54 :   random_access_range&lt;T&gt; operator++(int)</span>
+<span class="lineNum">     111 </span>            :   {
+<span class="lineNum">     112 </span><span class="lineCov">         54 :     assert(b!=e);</span>
+<span class="lineNum">     113 </span><span class="lineCov">         54 :     random_access_range&lt;T&gt; ans = *this;</span>
+<span class="lineNum">     114 </span><span class="lineCov">         54 :     b++;</span>
+<span class="lineNum">     115 </span><span class="lineCov">         54 :     return ans;</span>
+<a name="116"><span class="lineNum">     116 </span>            :   }</a>
+<span class="lineNum">     117 </span>            : 
+<span class="lineNum">     118 </span><span class="lineCov">          5 :   random_access_range&lt;T&gt;&amp; operator--()</span>
+<span class="lineNum">     119 </span>            :   {
+<span class="lineNum">     120 </span>            : #ifndef NDEBUG
+<span class="lineNum">     121 </span><span class="lineCov">          5 :     assert(b!=s);</span>
+<span class="lineNum">     122 </span>            : #endif
+<span class="lineNum">     123 </span><span class="lineCov">          5 :     --b;</span>
+<span class="lineNum">     124 </span><span class="lineCov">          5 :     return *this;</span>
+<a name="125"><span class="lineNum">     125 </span>            :   }</a>
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span><span class="lineCov">          4 :   random_access_range&lt;T&gt; operator--(int)</span>
+<span class="lineNum">     128 </span>            :   {
+<span class="lineNum">     129 </span>            : #ifndef NDEBUG
+<span class="lineNum">     130 </span><span class="lineCov">          4 :     assert(b!=s);</span>
+<span class="lineNum">     131 </span>            : #endif
+<span class="lineNum">     132 </span><span class="lineCov">          4 :     random_access_range&lt;T&gt; ans = *this;</span>
+<span class="lineNum">     133 </span><span class="lineCov">          4 :     b--;</span>
+<span class="lineNum">     134 </span><span class="lineCov">          4 :     return ans;</span>
+<a name="135"><span class="lineNum">     135 </span>            :   }</a>
+<span class="lineNum">     136 </span>            : 
+<span class="lineNum">     137 </span><span class="lineCov">          8 :   bool operator == (const random_access_range&lt;T&gt;&amp; r ) const</span>
+<span class="lineNum">     138 </span>            :   {
+<span class="lineNum">     139 </span><span class="lineCov">          8 :     return b == r.b ;</span>
+<span class="lineNum">     140 </span>            :   }
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span>            :   bool operator != (const random_access_range&lt;T&gt;&amp; r ) const
+<span class="lineNum">     143 </span>            :   {
+<span class="lineNum">     144 </span>            :     return !this-&gt;operator == (r);
+<span class="lineNum">     145 </span>            :   }
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            :   bool operator &lt; (const random_access_range&lt;T&gt;&amp; r ) const
+<span class="lineNum">     148 </span>            :   {
+<span class="lineNum">     149 </span>            :     return b &lt; r.b;
+<span class="lineNum">     150 </span>            :   }
+<span class="lineNum">     151 </span>            : 
+<span class="lineNum">     152 </span>            :   bool operator &gt; (const random_access_range&lt;T&gt;&amp; r ) const
+<span class="lineNum">     153 </span>            :   {
+<span class="lineNum">     154 </span>            :     return b &gt; r.b;
+<span class="lineNum">     155 </span>            :   }
+<span class="lineNum">     156 </span>            : 
+<span class="lineNum">     157 </span>            :   bool operator &lt;= (const random_access_range&lt;T&gt;&amp; r ) const
+<span class="lineNum">     158 </span>            :   {
+<span class="lineNum">     159 </span>            :     return !this-&gt;operator &gt;( r );
+<span class="lineNum">     160 </span>            :   }
+<span class="lineNum">     161 </span>            : 
+<span class="lineNum">     162 </span>            :   bool operator &gt;= (const random_access_range&lt;T&gt;&amp; r ) const
+<span class="lineNum">     163 </span>            :   {
+<span class="lineNum">     164 </span>            :     return !this-&gt;operator &lt; ( r );
+<a name="165"><span class="lineNum">     165 </span>            :   }</a>
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span><span class="lineCov">         12 :   random_access_range&lt;T&gt;&amp; operator += (difference_type n )</span>
+<span class="lineNum">     168 </span>            :   {
+<span class="lineNum">     169 </span><span class="lineCov">         12 :     b += n;</span>
+<span class="lineNum">     170 </span><span class="lineCov">         12 :     assert( e &gt;= b);</span>
+<span class="lineNum">     171 </span><span class="lineCov">         12 :     return *this;</span>
+<a name="172"><span class="lineNum">     172 </span>            :   }</a>
+<span class="lineNum">     173 </span>            : 
+<span class="lineNum">     174 </span><span class="lineCov">          7 :   random_access_range&lt;T&gt;&amp; operator -= (difference_type n )</span>
+<span class="lineNum">     175 </span>            :   {
+<span class="lineNum">     176 </span><span class="lineCov">          7 :     b -= n;</span>
+<span class="lineNum">     177 </span>            : #ifndef NDEBUG
+<span class="lineNum">     178 </span><span class="lineCov">          7 :     assert( s &lt;= b);</span>
+<span class="lineNum">     179 </span>            : #endif
+<span class="lineNum">     180 </span><span class="lineCov">          7 :     return *this;</span>
+<span class="lineNum">     181 </span>            :   }
+<a name="182"><span class="lineNum">     182 </span>            : </a>
+<span class="lineNum">     183 </span>            :   template&lt;typename Diff&gt;
+<span class="lineNum">     184 </span><span class="lineCov">        116 :   reference operator[] ( Diff n ) const</span>
+<span class="lineNum">     185 </span>            :   {
+<span class="lineNum">     186 </span>            :     //assert( e &gt;= b + n);
+<span class="lineNum">     187 </span><span class="lineCov">        116 :     return b[n];</span>
+<span class="lineNum">     188 </span>            :   }
+<span class="lineNum">     189 </span>            : 
+<span class="lineNum">     190 </span>            : protected:
+<span class="lineNum">     191 </span>            :   T b;
+<span class="lineNum">     192 </span>            :   T e;
+<span class="lineNum">     193 </span>            : #ifndef NDEBUG
+<span class="lineNum">     194 </span>            :   T s; // start
+<span class="lineNum">     195 </span>            : #endif
+<span class="lineNum">     196 </span>            : };
+<span class="lineNum">     197 </span>            : 
+<a name="198"><span class="lineNum">     198 </span>            : </a>
+<span class="lineNum">     199 </span>            : template&lt;typename T, typename Dist&gt;
+<span class="lineNum">     200 </span><span class="lineCov">         12 : inline random_access_range&lt;T&gt; operator +</span>
+<span class="lineNum">     201 </span>            :   (
+<span class="lineNum">     202 </span>            :     random_access_range&lt;T&gt; r,
+<span class="lineNum">     203 </span>            :     Dist n
+<span class="lineNum">     204 </span>            :   )
+<span class="lineNum">     205 </span>            : {
+<span class="lineNum">     206 </span><span class="lineCov">         12 :   return r+=n;</span>
+<span class="lineNum">     207 </span>            : }
+<span class="lineNum">     208 </span>            : 
+<span class="lineNum">     209 </span>            : template&lt;typename T, typename Dist&gt;
+<span class="lineNum">     210 </span>            : inline random_access_range&lt;T&gt; operator +
+<span class="lineNum">     211 </span>            :   (
+<span class="lineNum">     212 </span>            :     Dist n,
+<span class="lineNum">     213 </span>            :     random_access_range&lt;T&gt; r
+<span class="lineNum">     214 </span>            :   )
+<span class="lineNum">     215 </span>            : {
+<span class="lineNum">     216 </span>            :   return r+= n;
+<span class="lineNum">     217 </span>            : }
+<a name="218"><span class="lineNum">     218 </span>            : </a>
+<span class="lineNum">     219 </span>            : template&lt;typename T, typename Dist&gt;
+<span class="lineNum">     220 </span><span class="lineCov">          6 : inline random_access_range&lt;T&gt; operator -</span>
+<span class="lineNum">     221 </span>            :   (
+<span class="lineNum">     222 </span>            :     random_access_range&lt;T&gt; r,
+<span class="lineNum">     223 </span>            :     Dist n
+<span class="lineNum">     224 </span>            :   )
+<span class="lineNum">     225 </span>            : {
+<span class="lineNum">     226 </span><span class="lineCov">          6 :   return r-= n;</span>
+<span class="lineNum">     227 </span>            : }
+<span class="lineNum">     228 </span>            : 
+<span class="lineNum">     229 </span>            : template&lt;typename T, typename Dist&gt;
+<span class="lineNum">     230 </span>            : inline random_access_range&lt;T&gt; operator -
+<span class="lineNum">     231 </span>            :   (
+<span class="lineNum">     232 </span>            :     Dist n,
+<span class="lineNum">     233 </span>            :     random_access_range&lt;T&gt; r
+<span class="lineNum">     234 </span>            :   )
+<span class="lineNum">     235 </span>            : {
+<span class="lineNum">     236 </span>            :   return r -= n;
+<span class="lineNum">     237 </span>            : }
+<span class="lineNum">     238 </span>            : 
+<span class="lineNum">     239 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     240 </span>            : inline typename random_access_range&lt;T&gt;::difference_type operator -
+<span class="lineNum">     241 </span>            :   (
+<span class="lineNum">     242 </span>            :     random_access_range&lt;T&gt; r1,
+<span class="lineNum">     243 </span>            :     random_access_range&lt;T&gt; r2
+<span class="lineNum">     244 </span>            :   )
+<span class="lineNum">     245 </span>            : {
+<span class="lineNum">     246 </span>            :   return r1.begin() - r2.begin();
+<span class="lineNum">     247 </span>            : }
+<span class="lineNum">     248 </span>            : 
+<span class="lineNum">     249 </span>            : }
+<span class="lineNum">     250 </span>            : 
+<span class="lineNum">     251 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

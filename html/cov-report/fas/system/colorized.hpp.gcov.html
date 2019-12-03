@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/system/colorized.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">fas/system</a> - colorized.hpp<span style="font-size: 80%;"> (source / <a href="colorized.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryLo">25.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryLo">44.4 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2012
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_SYSTEM_COLORIZED_HPP
+<span class="lineNum">       8 </span>            : #define FAS_SYSTEM_COLORIZED_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/integral/int2type.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/system/colors.hpp&gt;
+<span class="lineNum">      12 </span>            : #include &lt;fas/system/system.hpp&gt;
+<span class="lineNum">      13 </span>            : #include &lt;fas/system/detail/windowsconsole.hpp&gt;
+<span class="lineNum">      14 </span>            : #include &lt;fas/system/nullptr.hpp&gt;
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span>            : #include &lt;ostream&gt;
+<span class="lineNum">      17 </span>            : #include &lt;iostream&gt;
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span>            : namespace fas { namespace console{
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            :   template&lt;int C1=0, int C2=-1, int C3=-1, int C4=-1, int C5=-1&gt;
+<span class="lineNum">      22 </span>            :   struct color_list {};
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span>            :   template&lt;int C1=-1, int C2=-1, int C3=-1, int C4=-1, int C5=-1&gt;
+<span class="lineNum">      25 </span>            :   struct make_color
+<span class="lineNum">      26 </span>            :   {
+<span class="lineNum">      27 </span>            :     typedef void (*type)( color_list&lt;C1, C2, C3, C4, C5&gt; );
+<span class="lineNum">      28 </span>            :   };
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :   template&lt;int C1, int C2, int C3, int C4, int C5&gt;
+<span class="lineNum">      31 </span>            :   inline typename make_color&lt;C1, C2, C3, C4, C5&gt;::type color() { return 0; }
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            :   template&lt;int C1, int C2, int C3, int C4&gt;
+<span class="lineNum">      34 </span>            :   inline typename make_color&lt;C1, C2, C3, C4, -1&gt;::type color() { return 0; }
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span>            :   template&lt;int C1, int C2, int C3&gt;
+<span class="lineNum">      37 </span>            :   inline typename make_color&lt;C1, C2, C3, -1, -1&gt;::type color() { return 0; }
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            :   template&lt;int C1, int C2&gt;
+<span class="lineNum">      40 </span>            :   inline typename make_color&lt;C1, C2, -1, -1, -1&gt;::type color() { return 0; }
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            :   template&lt;int C1&gt;
+<span class="lineNum">      43 </span>            :   inline typename make_color&lt;C1, -1, -1, -1, -1&gt;::type color() { return 0; }
+<span class="lineNum">      44 </span>            : 
+<a name="45"><span class="lineNum">      45 </span>            :   inline make_color&lt;-1, -1, -1, -1, -1&gt;::type color() { return fas_nullptr; }</a>
+<span class="lineNum">      46 </span>            : 
+<a name="47"><span class="lineNum">      47 </span><span class="lineNoCov">          0 :   inline void restore_colors(color_list&lt;colors::restore&gt;){}</span></a>
+<a name="48"><span class="lineNum">      48 </span>            :   inline void black( color_list&lt;colors::foreground::black&gt;){}</a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineNoCov">          0 :   inline void red( color_list&lt;colors::foreground::red&gt;){}</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineNoCov">          0 :   inline void green( color_list&lt;colors::foreground::green&gt;){}</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineNoCov">          0 :   inline void brown( color_list&lt;colors::foreground::brown&gt;){}</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineNoCov">          0 :   inline void blue( color_list&lt;colors::foreground::blue&gt;){}</span></a>
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :   inline void magenta( color_list&lt;colors::foreground::magenta&gt;){}</span>
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :   inline void cyan( color_list&lt;colors::foreground::cyan&gt;){}</span>
+<span class="lineNum">      55 </span>            :   inline void gray( color_list&lt;colors::foreground::gray&gt;){}
+<a name="56"><span class="lineNum">      56 </span>            : </a>
+<span class="lineNum">      57 </span>            :   inline void dark_gray( color_list&lt;colors::foreground::dark_gray&gt;){}
+<a name="58"><span class="lineNum">      58 </span><span class="lineNoCov">          0 :   inline void light_red( color_list&lt;colors::foreground::light_red&gt;){}</span></a>
+<span class="lineNum">      59 </span>            :   inline void light_green( color_list&lt;colors::foreground::light_green&gt;){}
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :   inline void yellow( color_list&lt;colors::foreground::yellow&gt;){}</span>
+<span class="lineNum">      61 </span>            :   inline void light_blue( color_list&lt;colors::foreground::light_blue&gt;){}
+<span class="lineNum">      62 </span>            :   inline void light_magenta( color_list&lt;colors::foreground::light_magenta&gt;){}
+<span class="lineNum">      63 </span>            :   inline void light_cyan   ( color_list&lt;colors::foreground::light_cyan&gt;){}
+<span class="lineNum">      64 </span>            :   inline void white( color_list&lt;colors::foreground::white&gt;){}
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            :   inline void bg_black( color_list&lt;colors::background::black&gt;){}
+<span class="lineNum">      67 </span>            :   inline void bg_red( color_list&lt;colors::background::red&gt;){}
+<span class="lineNum">      68 </span>            :   inline void bg_green( color_list&lt;colors::background::green&gt;){}
+<span class="lineNum">      69 </span>            :   inline void bg_brown( color_list&lt;colors::background::brown&gt;){}
+<span class="lineNum">      70 </span>            :   inline void bg_blue( color_list&lt;colors::background::blue&gt;){}
+<span class="lineNum">      71 </span>            :   inline void bg_magenta( color_list&lt;colors::background::magenta&gt;){}
+<span class="lineNum">      72 </span>            :   inline void bg_cyan( color_list&lt;colors::background::cyan&gt;){}
+<span class="lineNum">      73 </span>            :   inline void bg_gray( color_list&lt;colors::background::gray&gt;){}
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span>            :   inline void bg_dark_gray( color_list&lt;colors::background::dark_gray&gt;){}
+<span class="lineNum">      76 </span>            :   inline void bg_light_red( color_list&lt;colors::background::light_red&gt;){}
+<span class="lineNum">      77 </span>            :   inline void bg_light_green( color_list&lt;colors::background::light_green&gt;){}
+<span class="lineNum">      78 </span>            :   inline void bg_yellow( color_list&lt;colors::background::yellow&gt;){}
+<span class="lineNum">      79 </span>            :   inline void bg_light_blue( color_list&lt;colors::background::light_blue&gt;){}
+<span class="lineNum">      80 </span>            :   inline void bg_light_magenta( color_list&lt;colors::background::light_magenta&gt;){}
+<span class="lineNum">      81 </span>            :   inline void bg_light_cyan   ( color_list&lt;colors::background::light_cyan&gt;){}
+<span class="lineNum">      82 </span>            :   inline void bg_white( color_list&lt;colors::background::white&gt;){}
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span>            :   inline void bold(color_list&lt;colors::bold&gt;){}
+<span class="lineNum">      85 </span>            :   inline void underline(color_list&lt;colors::underline&gt;){}
+<span class="lineNum">      86 </span>            :   inline void underline2(color_list&lt;colors::underline2&gt;){}
+<span class="lineNum">      87 </span>            :   inline void blink(color_list&lt;colors::blink&gt;){}
+<span class="lineNum">      88 </span>            :   inline void blink2(color_list&lt;colors::blink2&gt;){}
+<span class="lineNum">      89 </span>            :   inline void reverse_color(color_list&lt;colors::reverse&gt;){}
+<span class="lineNum">      90 </span>            :   inline void nobold(color_list&lt;colors::nobold&gt;){}
+<span class="lineNum">      91 </span>            :   inline void nounderline(color_list&lt;colors::nounderline&gt;){}
+<span class="lineNum">      92 </span>            :   inline void noblink(color_list&lt;colors::noblink&gt;){}
+<span class="lineNum">      93 </span>            :   inline void noreverse_color(color_list&lt;colors::noreverse&gt;){}
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span>            : }} // namespace fas
+<span class="lineNum">      96 </span>            : 
+<a name="97"><span class="lineNum">      97 </span>            : namespace std {</a>
+<span class="lineNum">      98 </span>            :   template&lt;int C1, int C2, int C3, int C4, int C5&gt;
+<span class="lineNum">      99 </span><span class="lineCov">        354 :   ostream&amp; operator &lt;&lt; (</span>
+<span class="lineNum">     100 </span>            :     ostream&amp; os,
+<span class="lineNum">     101 </span>            :     void (*)( ::fas::console::color_list&lt;C1, C2, C3, C4, C5&gt; )
+<span class="lineNum">     102 </span>            :   )
+<span class="lineNum">     103 </span>            :   {
+<span class="lineNum">     104 </span>            :     // если переопределить rdbuf в cout, clog, или cerr, то все равно будет пытаться установить цвета
+<span class="lineNum">     105 </span><span class="lineCov">        708 :     if ( (::fas::system::is_atty_stdout() &amp;&amp; ( cout.rdbuf() == os.rdbuf() || clog.rdbuf() == os.rdbuf() ) )</span>
+<span class="lineNum">     106 </span><span class="lineCov">        708 :          || ( ::fas::system::is_atty_stderr() &amp;&amp; cerr.rdbuf() == os.rdbuf() )</span>
+<span class="lineNum">     107 </span>            :        )
+<span class="lineNum">     108 </span>            :     {
+<span class="lineNum">     109 </span>            : #if defined(HAVE_WINDOWS_H)
+<span class="lineNum">     110 </span>            :       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C1);
+<span class="lineNum">     111 </span>            :       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C2);
+<span class="lineNum">     112 </span>            :       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C3);
+<span class="lineNum">     113 </span>            :       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C4);
+<span class="lineNum">     114 </span>            :       ::fas::console::detail::CWindowsConsole::Instance().SetAttributes(C5);
+<span class="lineNum">     115 </span>            :       return os;
+<span class="lineNum">     116 </span>            : 
+<span class="lineNum">     117 </span>            : #elif defined(_POSIX_VERSION)
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :       os &lt;&lt; &quot;\033[&quot;&lt;&lt;C1;</span>
+<span class="lineNum">     119 </span>            :       //os &lt;&lt; &quot;\e[&quot;&lt;&lt;C1;
+<span class="lineNum">     120 </span>            :       if (C2!=-1) os &lt;&lt; &quot;;&quot; &lt;&lt; C2;
+<span class="lineNum">     121 </span>            :       if (C3!=-1) os &lt;&lt; &quot;;&quot; &lt;&lt; C3;
+<span class="lineNum">     122 </span>            :       if (C4!=-1) os &lt;&lt; &quot;;&quot; &lt;&lt; C4;
+<span class="lineNum">     123 </span>            :       if (C5!=-1) os &lt;&lt; &quot;;&quot; &lt;&lt; C5;
+<span class="lineNum">     124 </span><span class="lineNoCov">          0 :       os &lt;&lt; &quot;m&quot;;</span>
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :       return os;</span>
+<span class="lineNum">     126 </span>            : #endif
+<span class="lineNum">     127 </span>            :     }
+<span class="lineNum">     128 </span><span class="lineCov">        354 :     return os;</span>
+<span class="lineNum">     129 </span>            :   }
+<span class="lineNum">     130 </span>            : }
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

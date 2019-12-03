@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>faslib: Титульная страница</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">faslib
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">faslib Документация</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a href="https://github.com/migashko/faslib/tree/master"></a> <a href="https://github.com/migashko/faslib/tree/mambaru"></a></p>
+<ul>
+<li>Документация <a href="https://migashko.github.io/faslib/index.html">doxygen</a></li>
+<li>Репозитарий на <a href="https://github.com/migashko/faslib">github.com</a></li>
+<li>Отчет <a href="https://migashko.github.io/faslib/cov-report/index.html">coverage</a></li>
+</ul>
+<h1>faslib</h1>
+<p>Библиотека faslib предлагает новый способ модульной разработки программного обеспечения, называемый аспекто-ориентированным, используя исключительно конструкции языка C++.</p>
+<p>Статья на <a href="https://habrahabr.ru/post/228367/">хабре</a> про списки типов и мета-алгоритмы (без АОП).</p>
+<h2>Установка и настройка</h2>
+<p>Компиляция не требуется, но необходимо конфигурирование с помощью cmake: </p><div class="fragment"><div class="line">git clone git://github.com/migashko/faslib.git</div><div class="line">cd faslib</div><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake ..</div></div><!-- fragment --><p>Для компиляции примеров и тестов:</p>
+<div class="fragment"><div class="line">cmake -DBUILD_TESTING=ON ..</div><div class="line">make</div><div class="line">ctest</div></div><!-- fragment --><h2>Введение</h2>
+<p>Основная идея - дать разработчику возможность разрабатывать такие классы, в которых потенциальный пользователь, при необходимости, мог бы заменить тот или иной функционал с минимумом издержек. faslib поможет вам когда:</p><ul>
+<li>количество шаблонных стратегий для класса больше трех</li>
+<li>семантически идентичный функционал используется в нескольких, не связанных между собой, классах</li>
+<li>требуется заменить существующий функционал класса (реализацию одного или нескольких методов)</li>
+</ul>
+<p>В качестве примера рассмотрим простой класс:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>foo1</div><div class="line">{</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keywordtype">void</span> method1() { std::cout &lt;&lt; <span class="stringliteral">&quot;method-1.1&quot;</span> &lt;&lt; std::endl; }</div><div class="line">  <span class="keywordtype">void</span> method2() { std::cout &lt;&lt; <span class="stringliteral">&quot;method-1.2&quot;</span> &lt;&lt; std::endl; }</div><div class="line">  <span class="keywordtype">void</span> method3() { std::cout &lt;&lt; <span class="stringliteral">&quot;method-1.3&quot;</span> &lt;&lt; std::endl; }</div><div class="line">};</div></div><!-- fragment --><p>Предположим требуется предоставить пользователю возможность заменить функционал любого методов этого класса. Использовать для этого полиморфизм - не лучшая идея, классические стратегии слишком накладно, шаблонные стратегии неудобно. Более развернутые примеры (в том числе и с этими вариантами реализации) вы можете найти в <a href="https://github.com/migashko/faslib/tree/master/tutorial/aop">tutorial/aop</a>.</p>
+<p>Для наглядности изобразим этот класс на картинке в виде монолитного блока:</p>
+<div class="image">
+<img src="http://i.imgur.com/ovInI.png" alt="foo"/>
+</div>
+<p>Для демонстрации возможностей разработаем класс foo2 с аналогичным функционалом, но используя концепции АОП. Сначала разобьем его на составляющие, выделив каждый метод в отдельные сущности которые в faslib называются адвайс-классами:</p>
+<div class="image">
+<img src="http://i.imgur.com/mof7U.png" alt="advices"/>
+</div>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>ad_method1</div><div class="line">{</div><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">  <span class="keywordtype">void</span> operator()(T&amp;) { std::cout &lt;&lt; <span class="stringliteral">&quot;method-2.1&quot;</span> &lt;&lt; std::endl; }</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">struct </span>ad_method2</div><div class="line">{</div><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">  <span class="keywordtype">void</span> operator()(T&amp;) { std::cout &lt;&lt; <span class="stringliteral">&quot;method-2.2&quot;</span> &lt;&lt; std::endl; }</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">struct </span>ad_method3</div><div class="line">{</div><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">  <span class="keywordtype">void</span> operator()(T&amp;) { std::cout &lt;&lt; <span class="stringliteral">&quot;method-2.3&quot;</span> &lt;&lt; std::endl; }</div><div class="line">};</div></div><!-- fragment --><p>Каких либо особых требований к адвайс-классам не предъявляется, но использование определенных правил при разработке адвайс-классов существенно облегчит жизнь и вам и потенциальным пользователям. Использование перегруженного оператора () с первым шаблонным параметром, в который передается контекст вызова (в данном случае это ссылка на foo2) является хорошей практикой, даже если в конкретном адвайс-классе он не нужен. Дело в том, что ссылка на контекст может очень понадобиться пользователю, который решит заменить ваш адвайс своим. Префикс “ad_” подскажет пользователю, что он имеет дело с адвайс-классом.</p>
+<p>Далее для каждого адвайс-класса необходимо создать тег, по которому мы сможем обращаться к нему. Методов у нас три поэтому и тегов нам понадобиться тоже как минимум три:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>_method1_;</div><div class="line"><span class="keyword">struct </span>_method2_;</div><div class="line"><span class="keyword">struct </span>_method3_;</div></div><!-- fragment --><p>Использование знака “_” для обрамления имени тега, чертовски удобная штука. Следующим этапом необходимо связать теги и адвайс-классы, создав таким образом собственно адвайсы:</p>
+<div class="image">
+<img src="http://i.imgur.com/n2diQ.png" alt="ad_method"/>
+</div>
+<div class="fragment"><div class="line"><span class="keyword">typedef</span> fas::advice&lt;_method1_, ad_method1&gt; method1_advice;</div><div class="line"><span class="keyword">typedef</span> fas::advice&lt;_method2_, ad_method2&gt; method2_advice;</div><div class="line"><span class="keyword">typedef</span> fas::advice&lt;_method3_, ad_method3&gt; method3_advice;</div></div><!-- fragment --><p>Далее, необходимо объединить разрозненные адвайсы в список типов:</p>
+<div class="image">
+<img src="http://i.imgur.com/69b5W.png" alt="advice_list"/>
+</div>
+<div class="fragment"><div class="line"><span class="keyword">typedef</span> fas::type_list_n&lt;</div><div class="line">  method1_advice,</div><div class="line">  method2_advice,</div><div class="line">  method3_advice</div><div class="line">&gt;::type advice_list;</div></div><!-- fragment --><p>Cформируем аспект foo2_aspect:</p>
+<div class="image">
+<img src="http://i.imgur.com/KJeJq.png" alt="foo2_aspect"/>
+</div>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>foo2_aspect: fas::aspect&lt; advice_list &gt;{};</div></div><!-- fragment --><p>Ну и наконец разработаем сам аспектный класс foo2, в который внедрим аспект foo2_aspect:</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> A = fas::aspect&lt;&gt; &gt;</div><div class="line"><span class="keyword">class </span>foo2</div><div class="line">  : <span class="keyword">public</span> fas::aspect_class&lt;A, foo2_aspect&gt;</div><div class="line">{</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keywordtype">void</span> method1() { this-&gt;get_aspect().template get&lt;_method1_&gt;()( *<span class="keyword">this</span>); }</div><div class="line">  <span class="keywordtype">void</span> method2() { this-&gt;get_aspect().template get&lt;_method2_&gt;()( *<span class="keyword">this</span>); }</div><div class="line">  <span class="keywordtype">void</span> method3() { this-&gt;get_aspect().template get&lt;_method3_&gt;()( *<span class="keyword">this</span>); }</div><div class="line">};</div></div><!-- fragment --><p> В реализации методов делегируем вызов необходимому адвайсу. Но в большинстве случаев компилятор выполнит inline подстановку.</p>
+<p>Использовать аспектный класс foo2&lt;&gt; не сложнее обычного foo1:</p>
+<div class="fragment"><div class="line">foo2&lt;&gt; f2;</div><div class="line">f2.method1();</div><div class="line">f2.method2();</div><div class="line">f2.method3();</div></div><!-- fragment --><p>Класс foo2&lt;&gt; изобразим следующим образом:</p>
+<div class="image">
+<img src="http://i.imgur.com/BNWNa.png" alt="foo2_aspect"/>
+</div>
+<p>Полный пример <a href="https://github.com/migashko/faslib/blob/master/examples/aop/foo.cpp">здесь</a></p>
+<p>Теперь попробуем заменить функционал method2 и method3, чтобы он выводил вместо строк "method-2.2" и "method-2.3", строки "method-3.2" и "method-3.3" соответственно.</p>
+<p>Для этого аналогично сформируем аспект foo3_aspect:</p>
+<div class="image">
+<img src="http://i.imgur.com/I0dIb.png" alt="foo3_aspect"/>
+</div>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>ad_method3_2</div><div class="line">{</div><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">  <span class="keywordtype">void</span> operator()(T&amp;) { std::cout &lt;&lt; <span class="stringliteral">&quot;method-3.2&quot;</span> &lt;&lt; std::endl; }</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">struct </span>ad_method3_3</div><div class="line">{</div><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">  <span class="keywordtype">void</span> operator()(T&amp;) { std::cout &lt;&lt; <span class="stringliteral">&quot;method-3.3&quot;</span> &lt;&lt; std::endl; }</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">struct </span>foo3_aspect: fas::aspect&lt; fas::type_list_n&lt;</div><div class="line">  fas::advice&lt;_method2_, ad_method3_2&gt;,</div><div class="line">  fas::advice&lt;_method3_, ad_method3_3&gt;</div><div class="line">&gt;::type &gt;{};</div></div><!-- fragment --><p>И внедрим его в класс foo2</p>
+<div class="fragment"><div class="line">foo2&lt;foo3_aspect&gt; f3;</div><div class="line">f3.method1();</div><div class="line">f3.method2();</div><div class="line">f3.method3();</div></div><!-- fragment --><p>После внедрения произошло неявное объединение аспектов, в результате старый функционал, реализованный в адвайс-классах стал недоступен, но физически он остался аспекте.</p>
+<div class="image">
+<img src="http://i.imgur.com/dYzYB.png" alt="foo3"/>
+</div>
+<p>В большинстве случаев это не проблема, но при необходимости его можно удалить с помощью конструкции <a href="https://github.com/migashko/faslib/wiki/%D0%A0%D0%B5%D0%BC%D1%83%D0%B2%D0%B5%D1%80%D1%8B">remover</a> или же наоборот обеспечить к нему доступ по другим тегам с помощью <a href="https://github.com/migashko/faslib/wiki/%D0%A4%D0%BE%D1%80%D0%B2%D0%B0%D1%80%D0%B4%D1%8B">forward</a>. Также имеется возможность связывать с одним адвайсом несколько тегов, с помощью псевдонимов (<a href="https://github.com/migashko/faslib/wiki/%D0%90%D0%BB%D0%B8%D0%B0%D1%81%D1%8B">alias</a>). Объединив несколько адвайсов в логическую группу ( <a href="https://github.com/migashko/faslib/wiki/%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B">group</a>) у вас появляется возможность группового вызова (аналог событий, но на этапе компиляции). Специальные адвайсы-значения ( <a href="https://github.com/migashko/faslib/wiki/value-%D0%B0%D0%B4%D0%B2%D0%B0%D0%B9%D1%81%D1%8B">value_advice</a> ) в отличии от обычных адвайсов не наследуют тип, а агрегируют его, что позволяет включить в аспект простые типы, такие как int. А с помощью <a href="https://github.com/migashko/faslib/wiki/type-%D0%B0%D0%B4%D0%B2%D0%B0%D0%B9%D1%81%D1%8B">type_advice</a>, вы можете включить в аспект определение типа, например контейнера, и соответственно, пользователь может его заменить.</p>
+<p>Для более сложных классов имеет смысл разработать несколько аспектов из адвайсов реализующих определенный функционал. Аспекты можно объединять явно, используя конструкцию aspect_merge. Это позволит вам повторно использовать аспекты в качестве стратегий и/или комбинировать их.</p>
+<p><a href="https://github.com/migashko/faslib/wiki">далее...</a> </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

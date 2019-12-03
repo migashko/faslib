@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/range/forward_range.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">fas/range</a> - forward_range.hpp<span style="font-size: 80%;"> (source / <a href="forward_range.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011, 2012
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_range_FORWARD_RANGE_HPP
+<span class="lineNum">       8 </span>            : #define FAS_range_FORWARD_RANGE_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/range/range_category.hpp&gt;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : #include &lt;iterator&gt;
+<span class="lineNum">      13 </span>            : #include &lt;cassert&gt;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : namespace fas{
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : template&lt;typename T&gt;
+<span class="lineNum">      18 </span>            : class forward_range
+<span class="lineNum">      19 </span>            : {
+<span class="lineNum">      20 </span>            : public:
+<span class="lineNum">      21 </span>            :   typedef forward_range_tag range_category;
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            :   typedef T iterator;
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::iterator_category iterator_category;
+<span class="lineNum">      26 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::value_type        value_type;
+<span class="lineNum">      27 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::difference_type   difference_type;
+<span class="lineNum">      28 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::pointer           pointer;
+<span class="lineNum">      29 </span>            :   typedef typename std::iterator_traits&lt;T&gt;::reference         reference;
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            :   forward_range()
+<span class="lineNum">      32 </span>            :     : b(), e()
+<a name="33"><span class="lineNum">      33 </span>            :   {}</a>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineCov">          9 :   explicit forward_range(T b1, T e1)</span>
+<span class="lineNum">      36 </span><span class="lineCov">          9 :     : b(b1), e(e1)</span>
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">          9 :   {}</span></a>
+<span class="lineNum">      38 </span>            : 
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         44 :   operator bool () const { return b!=e; }</span></a>
+<span class="lineNum">      40 </span>            : 
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">         64 :   reference operator*() const { return *b; }</span></a>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span><span class="lineCov">          2 :   pointer operator -&gt;() const  { return &amp;(*b);}</span>
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            :   iterator begin() const { return b; }
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            :   iterator end() const { return e; }
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            :   difference_type distance() const { return std::distance(b, e); }
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            :   void advance(difference_type s)
+<span class="lineNum">      52 </span>            :   {
+<span class="lineNum">      53 </span>            :     std::advance(b, s);
+<a name="54"><span class="lineNum">      54 </span>            :   }</a>
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span><span class="lineCov">         31 :   forward_range&lt;T&gt;&amp; operator++()</span>
+<span class="lineNum">      57 </span>            :   {
+<span class="lineNum">      58 </span><span class="lineCov">         31 :     assert(b!=e);</span>
+<span class="lineNum">      59 </span><span class="lineCov">         31 :     ++b;</span>
+<span class="lineNum">      60 </span><span class="lineCov">         31 :     return *this;</span>
+<a name="61"><span class="lineNum">      61 </span>            :   }</a>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span><span class="lineCov">          9 :   forward_range&lt;T&gt; operator++(int)</span>
+<span class="lineNum">      64 </span>            :   {
+<span class="lineNum">      65 </span><span class="lineCov">          9 :     assert(b!=e);</span>
+<span class="lineNum">      66 </span><span class="lineCov">          9 :     forward_range&lt;T&gt; ans = *this;</span>
+<span class="lineNum">      67 </span><span class="lineCov">          9 :     b++;</span>
+<span class="lineNum">      68 </span><span class="lineCov">          9 :     return ans;</span>
+<a name="69"><span class="lineNum">      69 </span>            :   }</a>
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span><span class="lineCov">          2 :   bool operator == (const forward_range&lt;T&gt;&amp; r ) const { return b == r.b &amp;&amp; e==r.e;  }</span>
+<span class="lineNum">      72 </span>            : 
+<span class="lineNum">      73 </span>            :   bool operator != (const forward_range&lt;T&gt;&amp; r ) const { return !(*this == r); }
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span>            : protected:
+<span class="lineNum">      76 </span>            :   T b;
+<span class="lineNum">      77 </span>            :   T e;
+<span class="lineNum">      78 </span>            : };
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            : }
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

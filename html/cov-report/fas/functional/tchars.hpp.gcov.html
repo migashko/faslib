@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/functional/tchars.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">fas/functional</a> - tchars.hpp<span style="font-size: 80%;"> (source / <a href="tchars.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2012, 2013
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_FUNCTIONAL_TCHARS_HPP
+<span class="lineNum">       8 </span>            : #define FAS_FUNCTIONAL_TCHARS_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/typemanip/metalist.hpp&gt;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : template&lt; typename C, C ch0=C(), C ch1=C(), C ch2=C(), C ch3=C(), C ch4=C()
+<span class="lineNum">      13 </span>            :                     , C ch5=C(), C ch6=C(), C ch7=C(), C ch8=C(), C ch9=C()     &gt;
+<span class="lineNum">      14 </span>            : struct tchars_t
+<span class="lineNum">      15 </span>            : {
+<a name="16"><span class="lineNum">      16 </span>            :   typedef fas::metalist::tstring metatype; </a>
+<span class="lineNum">      17 </span>            :   typedef const C* value_type;
+<span class="lineNum">      18 </span><span class="lineCov">         12 :   value_type operator()() const </span>
+<span class="lineNum">      19 </span>            :   {
+<span class="lineNum">      20 </span>            :     static const C result[]={ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, C() };
+<span class="lineNum">      21 </span><span class="lineCov">         12 :     return result; </span>
+<span class="lineNum">      22 </span>            :   } 
+<span class="lineNum">      23 </span>            : };
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : template&lt; char ch0=char(), char ch1=char(), char ch2=char(), char ch3=char(), char ch4=char(),
+<span class="lineNum">      26 </span>            :           char ch5=char(), char ch6=char(), char ch7=char(), char ch8=char(), char ch9=char()&gt;
+<span class="lineNum">      27 </span>            : struct tchars
+<span class="lineNum">      28 </span>            :   : tchars_t&lt;char, ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9&gt;
+<span class="lineNum">      29 </span>            : {
+<span class="lineNum">      30 </span>            : };
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            : template&lt; wchar_t ch0=wchar_t(), wchar_t ch1=wchar_t(), wchar_t ch2=char(), wchar_t ch3=wchar_t(), wchar_t ch4=wchar_t(),
+<span class="lineNum">      33 </span>            :           wchar_t ch5=wchar_t(), wchar_t ch6=wchar_t(), wchar_t ch7=char(), wchar_t ch8=wchar_t(), wchar_t ch9=wchar_t()&gt;
+<span class="lineNum">      34 </span>            : struct twchars
+<span class="lineNum">      35 </span>            :   : tchars_t&lt;wchar_t, ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9&gt;
+<span class="lineNum">      36 </span>            : {
+<span class="lineNum">      37 </span>            : };
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

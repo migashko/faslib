@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/algorithm/test_transform_tail.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/algorithm</a> - test_transform_tail.cpp<span style="font-size: 80%;"> (source / <a href="test_transform_tail.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:08:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/type_list.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/algorithm/transform_tail_if.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/algorithm/transform_tail.hpp&gt;
+<span class="lineNum">      10 </span>            : #include &lt;fas/algorithm/nothing.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/algorithm/any.hpp&gt;
+<span class="lineNum">      12 </span>            : #include &lt;fas/typemanip.hpp&gt;
+<span class="lineNum">      13 </span>            : #include &lt;fas/static_check.hpp&gt;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : #include &lt;fas/integral.hpp&gt;
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : struct list2: fas::type_list_n&lt;
+<span class="lineNum">      18 </span>            :   fas::int_&lt;4&gt;,
+<span class="lineNum">      19 </span>            :   fas::int_&lt;5&gt;,
+<span class="lineNum">      20 </span>            :   fas::int_&lt;6&gt;
+<span class="lineNum">      21 </span>            : &gt;::type {};
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            : typedef fas::type_list_n&lt;
+<span class="lineNum">      24 </span>            :   fas::int_&lt;1&gt;,
+<span class="lineNum">      25 </span>            :   fas::int_&lt;2&gt;,
+<span class="lineNum">      26 </span>            :   fas::int_&lt;3&gt;,
+<span class="lineNum">      27 </span>            :   list2
+<span class="lineNum">      28 </span>            : &gt;::type list1;
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            : typedef fas::type_list_n&lt;
+<span class="lineNum">      31 </span>            :   fas::int_&lt;2&gt;,
+<span class="lineNum">      32 </span>            :   fas::int_&lt;4&gt;,
+<span class="lineNum">      33 </span>            :   fas::int_&lt;6&gt;,
+<span class="lineNum">      34 </span>            :   fas::int_&lt;8&gt;,
+<span class="lineNum">      35 </span>            :   fas::int_&lt;10&gt;,
+<span class="lineNum">      36 </span>            :   fas::int_&lt;12&gt;
+<span class="lineNum">      37 </span>            : &gt;::type check_list;
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            : typedef fas::type_list_n&lt;
+<span class="lineNum">      40 </span>            :   fas::int_&lt;1&gt;,
+<span class="lineNum">      41 </span>            :   fas::int_&lt;2&gt;,
+<span class="lineNum">      42 </span>            :   fas::int_&lt;3&gt;,
+<span class="lineNum">      43 </span>            :   fas::int_&lt;4&gt;,
+<span class="lineNum">      44 </span>            :   fas::int_&lt;5&gt;,
+<span class="lineNum">      45 </span>            :   fas::int_&lt;6&gt;
+<span class="lineNum">      46 </span>            : &gt;::type check_list2;
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span>            : typedef fas::type_list_n&lt;
+<span class="lineNum">      49 </span>            :   fas::int_&lt;1&gt;,
+<span class="lineNum">      50 </span>            :   fas::int_&lt;3&gt;,  
+<span class="lineNum">      51 </span>            :   fas::int_&lt;5&gt;, 
+<span class="lineNum">      52 </span>            :   fas::int_&lt;7&gt;, 
+<span class="lineNum">      53 </span>            :   fas::int_&lt;9&gt;, 
+<span class="lineNum">      54 </span>            :   fas::int_&lt;11&gt;
+<a name="55"><span class="lineNum">      55 </span>            : &gt;::type check_list3;</a>
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      58 </span>            : {
+<span class="lineNum">      59 </span>            :   typedef fas::any&lt; fas::_&gt; any;
+<span class="lineNum">      60 </span>            :   typedef fas::not_&lt; any &gt; nobody;
+<span class="lineNum">      61 </span>            :   typedef fas::nothing&lt; fas::_&gt; nothing;
+<span class="lineNum">      62 </span>            :   typedef fas::equal_to&lt; fas::modulus&lt;fas::_, fas::int_&lt;2&gt; &gt;, fas::int_&lt;0&gt; &gt; even;
+<span class="lineNum">      63 </span>            :   
+<span class="lineNum">      64 </span>            :   typedef fas::a&lt; fas::make_int&lt; fas::inc&lt; fas::p&lt; fas::_&gt; &gt; &gt; &gt; increment;
+<span class="lineNum">      65 </span>            :   typedef fas::transform&lt; fas::_1, increment &gt; increment_list;
+<span class="lineNum">      66 </span>            :   
+<span class="lineNum">      67 </span>            :   typedef fas::transform_tail_if&lt; list1, increment_list, any &gt;::type result_list;
+<span class="lineNum">      68 </span>            :   typedef fas::transform_tail_if&lt; list1, nothing, nobody &gt;::type nothing_list;
+<span class="lineNum">      69 </span>            :   typedef fas::transform_tail_t&lt; list1, fas::nothing &gt;::type nothing_list2;
+<span class="lineNum">      70 </span>            :   typedef fas::transform_tail_if&lt; list1, increment_list, even &gt;::type even_list;
+<span class="lineNum">      71 </span>            :   
+<span class="lineNum">      72 </span>            : 
+<span class="lineNum">      73 </span>            :   enum
+<span class="lineNum">      74 </span>            :   {
+<span class="lineNum">      75 </span>            :     test = fas::static_check&lt; fas::same_type&lt; result_list, check_list &gt;::value &gt;::value
+<span class="lineNum">      76 </span>            :          + fas::static_check&lt; fas::same_type&lt; list1, nothing_list &gt;::value &gt;::value
+<span class="lineNum">      77 </span>            :          + fas::static_check&lt; fas::same_type&lt; check_list2, nothing_list2 &gt;::value &gt;::value
+<span class="lineNum">      78 </span>            :          + fas::static_check&lt; fas::same_type&lt; even_list, check_list3 &gt;::value &gt;::value
+<span class="lineNum">      79 </span>            :          
+<span class="lineNum">      80 </span>            :   };
+<span class="lineNum">      81 </span>            :   
+<span class="lineNum">      82 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">      83 </span>            : }
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
