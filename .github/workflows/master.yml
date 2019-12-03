@@ -15,7 +15,7 @@ jobs:
         sudo locale-gen ru_RU
         sudo locale-gen ru_RU.UTF-8
         sudo update-locale
-        sudo apt-get install -y libboost-system-dev libboost-program-options-dev 
+        sudo apt-get install -y libboost-system-dev libboost-program-options-dev
         sudo apt-get install -y libboost-filesystem-dev libboost-date-time-dev libboost-regex-dev
         sudo apt-get install -y lcov
         mkdir -p build
@@ -34,4 +34,4 @@ jobs:
         git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
         git config --global user.name "${GITHUB_ACTOR}"
         git tag --force -a $tag -m "update from github actions"
-        git push --force --tags https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master
+        git push --force --tags https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:master
