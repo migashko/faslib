@@ -31,12 +31,12 @@ jobs:
       run: make doc
     - name: make, test and coverage report
       run: |
-        make coverage-report
+        # make coverage-report
         pushd build
           bash <(curl -s https://codecov.io/bash)
         popd
       with:
-          token: ${{ secrets.CODECOV_TOKEN }} #required
+        token: ${{ secrets.CODECOV_TOKEN }} #required
     - name: make gh-pages
       run: |
         git clone -b gh-pages https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git gh-pages
