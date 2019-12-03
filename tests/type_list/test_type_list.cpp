@@ -5,6 +5,7 @@
 //
 
 #include <fas/type_list/type_list.hpp>
+#include <fas/utility/ignore_args.hpp>
 #include <string>
 
 using namespace ::fas;
@@ -29,5 +30,6 @@ int main()
   type_list1 t1;
   type_list1 t2;
   t1 = t2;
+  fas::ignore_args(t1, t2);
   return 0;
 }
