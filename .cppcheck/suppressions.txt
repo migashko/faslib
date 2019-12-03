@@ -1,0 +1,5 @@
+# Список подавлений для cppcheck относительно корня проекта. Примеры
+internalAstError:
+missingOverride:./examples/aop/*
+missingOverride:./tutorial/aop/*
+functionStatic:./tutorial/*
