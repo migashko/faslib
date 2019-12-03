@@ -30,21 +30,25 @@ jobs:
     - name: make doc
       run: make doc
     - name: make, test and coverage report
-      run: make coverage-report
+      run: |
+        make coverage-report
+        bash <(curl -s https://codecov.io/bash)
     - name: make gh-pages
       run: |
-        git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
-        git config --global user.name "${GITHUB_ACTOR}"
-        git init
-        git stash
-        git pull https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git gh-pages
-        git stash pop
-        git add --all
-        COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
-        git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
-        git commit -m "${COMMIT_MESSAGE}"
-        git push --force https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages
-      working-directory: ./docs/html
+        git clone -b gh-pages https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git gh-pages
+        pushd docs/html
+          git archive --format=tar --prefix="${gh-pages}/" HEAD | (cd ../.. && tar xf -)
+        popd
+        pushd gh-pages
+          git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git add --all
+          COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
+          git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
+          git commit -m "${COMMIT_MESSAGE}"
+          git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git gh-pages:gh-pages
+        popd
+        rm -rf gh-pages
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
       with:
