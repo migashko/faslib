@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/type_list/test_organize.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/type_list</a> - test_organize.cpp<span style="font-size: 80%;"> (source / <a href="test_organize.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/type_list.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/static_check.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/integral/int_.hpp&gt;
+<span class="lineNum">      10 </span>            : #include &lt;string&gt;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : using namespace ::fas;
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : struct A{};
+<span class="lineNum">      15 </span>            : struct B:A{};
+<span class="lineNum">      16 </span>            : struct C{};
+<span class="lineNum">      17 </span>            : struct D:C{};
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span>            : struct list_1 : type_list&lt;char, long&gt; {};
+<span class="lineNum">      20 </span>            : struct list_2 : type_list&lt;float, type_list&lt;int&gt; &gt; {};
+<span class="lineNum">      21 </span>            : struct list_3 : type_list&lt;list_1, list_2&gt; {};
+<span class="lineNum">      22 </span>            : struct list_4 : type_list&lt;D, type_list&lt;C&gt; &gt; {};
+<span class="lineNum">      23 </span>            : struct list_5 : type_list&lt; type_list&lt;list_4, list_3 &gt;, type_list&lt;A, B&gt; &gt; {};
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : struct list_6_1 : type_list&lt; type_list&lt; empty_list, type_list&lt; empty_list, type_list&lt; A, type_list&lt; empty_list, type_list&lt; empty_list, type_list&lt; empty_list &gt; &gt; &gt; &gt; &gt; &gt; &gt; {};
+<span class="lineNum">      26 </span>            : struct list_6   : type_list&lt; type_list&lt;empty_list, type_list&lt;empty_list&gt; &gt; , type_list&lt;type_list&lt;empty_list&gt;, A &gt; &gt;{};
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            : struct list_7 : type_list&lt;empty_list&gt; {};
+<span class="lineNum">      29 </span>            : struct list_8 : type_list&lt;B, type_list&lt;empty_list, type_list&lt;empty_list&gt; &gt; &gt; {};
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            : typedef type_list&lt;char, type_list&lt;long&gt; &gt; check_1;
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            : typedef type_list&lt;char, type_list&lt;long, list_2 &gt; &gt; check_3;
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            : typedef type_list&lt;D, type_list&lt;C, type_list&lt;char, type_list&lt;long, type_list&lt;float, type_list&lt;int, type_list&lt;A, type_list&lt;B&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; check_5;
+<span class="lineNum">      36 </span>            : typedef type_list&lt;A&gt; check_6;
+<span class="lineNum">      37 </span>            : typedef type_list&lt;B&gt; check_8;
+<span class="lineNum">      38 </span>            : typedef empty_list check_7;
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span>            : typedef type_list&lt;int_&lt;100&gt;,type_list&lt;type_list&lt;int_&lt;2&gt;, type_list&lt;int_&lt;3&gt;,type_list&lt;int_&lt;4&gt;, empty_list&gt; &gt; &gt;,
+<span class="lineNum">      41 </span>            :                       empty_list&gt; &gt; list_9;
+<span class="lineNum">      42 </span>            : typedef type_list_n&lt; int_&lt;100&gt;, int_&lt;2&gt;, int_&lt;3&gt;, int_&lt;4&gt; &gt;::type check_9;
+<a name="43"><span class="lineNum">      43 </span>            : </a>
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      46 </span>            : {
+<span class="lineNum">      47 </span>            :  enum {
+<span class="lineNum">      48 </span>            :     test = static_check&lt; same_type&lt;organize&lt;list_1&gt;::type, check_1&gt;::value &gt;::value
+<span class="lineNum">      49 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_2&gt;::type, list_2&gt;::value &gt;::value
+<span class="lineNum">      50 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_3&gt;::type, check_3&gt;::value &gt;::value
+<span class="lineNum">      51 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_5&gt;::type, check_5&gt;::value &gt;::value
+<span class="lineNum">      52 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_6&gt;::type, check_6&gt;::value &gt;::value
+<span class="lineNum">      53 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_6_1&gt;::type, check_6&gt;::value &gt;::value
+<span class="lineNum">      54 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_7&gt;::type, check_7&gt;::value &gt;::value
+<span class="lineNum">      55 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_8&gt;::type, check_8&gt;::value &gt;::value
+<span class="lineNum">      56 </span>            :          + static_check&lt; same_type&lt;organize&lt;list_9&gt;::type, check_9&gt;::value &gt;::value
+<span class="lineNum">      57 </span>            :   };
+<span class="lineNum">      58 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">      59 </span>            : }
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

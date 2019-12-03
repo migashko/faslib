@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/aop/test_aop4.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/aop</a> - test_aop4.cpp<span style="font-size: 80%;"> (source / <a href="test_aop4.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">91</td>
+            <td class="headerCovTableEntry">104</td>
+            <td class="headerCovTableEntryMed">87.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/aop/advice.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/aop/aspect.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/aop/alias.hpp&gt;
+<span class="lineNum">      10 </span>            : #include &lt;fas/aop/private/has_tag.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/aop/private/aspect_select.hpp&gt;
+<span class="lineNum">      12 </span>            : #include &lt;fas/aop/aspect_class.hpp&gt;
+<span class="lineNum">      13 </span>            : #include &lt;fas/aop/advice_cast.hpp&gt;
+<span class="lineNum">      14 </span>            : #include &lt;fas/type_list/type_list_n.hpp&gt;
+<span class="lineNum">      15 </span>            : #include &lt;fas/type_list/length.hpp&gt;
+<span class="lineNum">      16 </span>            : #include &lt;fas/integral.hpp&gt;
+<span class="lineNum">      17 </span>            : #include &lt;fas/static_check/static_check.hpp&gt;
+<span class="lineNum">      18 </span>            : #include &lt;fas/algorithm/find_if.hpp&gt;
+<span class="lineNum">      19 </span>            : #include &lt;fas/algorithm/select.hpp&gt;
+<span class="lineNum">      20 </span>            : #include &lt;fas/typemanip/type2type.hpp&gt;
+<span class="lineNum">      21 </span>            : #include &lt;iostream&gt;
+<span class="lineNum">      22 </span>            : #include &lt;string&gt;
+<span class="lineNum">      23 </span>            : #include &lt;vector&gt;
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : using namespace fas;
+<span class="lineNum">      26 </span>            : 
+<a name="27"><span class="lineNum">      27 </span>            : struct _counters_;</a>
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span><span class="lineCov">         23 : struct ad_counters</span>
+<span class="lineNum">      30 </span>            : {
+<span class="lineNum">      31 </span>            :   int c0;
+<span class="lineNum">      32 </span>            :   int c1;
+<span class="lineNum">      33 </span>            :   int c2;
+<span class="lineNum">      34 </span>            :   int c3;
+<span class="lineNum">      35 </span>            :   int c4;
+<span class="lineNum">      36 </span>            :   int c5;
+<span class="lineNum">      37 </span>            : 
+<a name="38"><span class="lineNum">      38 </span>            :   std::vector&lt;int&gt; ids;</a>
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span><span class="lineCov">          5 :   ad_counters() : c0(0), c1(0), c2(0)</span>
+<span class="lineNum">      41 </span><span class="lineCov">          5 :                 , c3(0), c4(0), c5(0), ids()</span>
+<span class="lineNum">      42 </span>            :   {
+<span class="lineNum">      43 </span><span class="lineCov">          5 :   }</span>
+<span class="lineNum">      44 </span>            : };
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span>            : struct _test1_;
+<span class="lineNum">      47 </span>            : struct _test2_;
+<span class="lineNum">      48 </span>            : struct _test3_;
+<span class="lineNum">      49 </span>            : struct _test4_;
+<span class="lineNum">      50 </span>            : struct _test5_;
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : struct _group0_;
+<span class="lineNum">      53 </span>            : struct _group1_;
+<span class="lineNum">      54 </span>            : struct _group3_;
+<span class="lineNum">      55 </span>            : struct _group5_;
+<span class="lineNum">      56 </span>            : struct _group6_;
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            : struct _overlapped_;
+<span class="lineNum">      59 </span>            : struct _overlapped2_;
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span>            : struct ad_overlapped
+<span class="lineNum">      62 </span>            : {
+<span class="lineNum">      63 </span>            :   enum { value = 1};
+<span class="lineNum">      64 </span>            : };
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            : template&lt;int ID&gt;
+<span class="lineNum">      67 </span>            : struct ad_test
+<span class="lineNum">      68 </span>            : {
+<a name="69"><span class="lineNum">      69 </span>            :   enum { id = ID };</a>
+<span class="lineNum">      70 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">      71 </span><span class="lineCov">          2 :   void operator()(T&amp; t) const</span>
+<span class="lineNum">      72 </span>            :   {
+<span class="lineNum">      73 </span><span class="lineCov">          2 :     t.get_aspect().template get&lt; _counters_ &gt;().c0++ ;</span>
+<span class="lineNum">      74 </span><span class="lineCov">          2 :     t.get_aspect().template get&lt; _counters_ &gt;().ids.push_back(ID) ;</span>
+<span class="lineNum">      75 </span><span class="lineCov">          2 :   }</span>
+<a name="76"><span class="lineNum">      76 </span>            : </a>
+<span class="lineNum">      77 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">      78 </span><span class="lineCov">          5 :   void operator()(T&amp; t, int ) const</span>
+<span class="lineNum">      79 </span>            :   {
+<span class="lineNum">      80 </span><span class="lineCov">          5 :     t.get_aspect().template get&lt; _counters_ &gt;().c1++ ;</span>
+<span class="lineNum">      81 </span><span class="lineCov">          5 :     t.get_aspect().template get&lt; _counters_ &gt;().ids.push_back(ID) ;</span>
+<span class="lineNum">      82 </span><span class="lineCov">          5 :   }</span>
+<a name="83"><span class="lineNum">      83 </span>            : </a>
+<span class="lineNum">      84 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">      85 </span><span class="lineCov">          1 :   void operator()(T&amp; t, int, int ) const</span>
+<span class="lineNum">      86 </span>            :   {
+<span class="lineNum">      87 </span><span class="lineCov">          1 :     t.get_aspect().template get&lt; _counters_ &gt;().c2++;</span>
+<span class="lineNum">      88 </span><span class="lineCov">          1 :     t.get_aspect().template get&lt; _counters_ &gt;().ids.push_back(ID) ;</span>
+<span class="lineNum">      89 </span><span class="lineCov">          1 :   }</span>
+<a name="90"><span class="lineNum">      90 </span>            : </a>
+<span class="lineNum">      91 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">      92 </span><span class="lineCov">          4 :   void operator()(T&amp; t, int, int, int ) const</span>
+<span class="lineNum">      93 </span>            :   {
+<span class="lineNum">      94 </span><span class="lineCov">          4 :     t.get_aspect().template get&lt; _counters_ &gt;().c3++;</span>
+<span class="lineNum">      95 </span><span class="lineCov">          4 :     t.get_aspect().template get&lt; _counters_ &gt;().ids.push_back(ID) ;</span>
+<span class="lineNum">      96 </span><span class="lineCov">          4 :   }</span>
+<a name="97"><span class="lineNum">      97 </span>            : </a>
+<span class="lineNum">      98 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">      99 </span><span class="lineCov">          1 :   void operator()(T&amp; t, int, int, int, int ) const</span>
+<span class="lineNum">     100 </span>            :   {
+<span class="lineNum">     101 </span><span class="lineCov">          1 :     t.get_aspect().template get&lt; _counters_ &gt;().c4++ ;</span>
+<span class="lineNum">     102 </span><span class="lineCov">          1 :     t.get_aspect().template get&lt; _counters_ &gt;().ids.push_back(ID) ;</span>
+<span class="lineNum">     103 </span><span class="lineCov">          1 :   }</span>
+<a name="104"><span class="lineNum">     104 </span>            : </a>
+<span class="lineNum">     105 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">     106 </span><span class="lineCov">          1 :   void operator()(T&amp; t, int, int, int, int, int ) const</span>
+<span class="lineNum">     107 </span>            :   {
+<span class="lineNum">     108 </span><span class="lineCov">          1 :     t.get_aspect().template get&lt; _counters_ &gt;().c5++ ;</span>
+<span class="lineNum">     109 </span><span class="lineCov">          1 :     t.get_aspect().template get&lt; _counters_ &gt;().ids.push_back(ID);</span>
+<span class="lineNum">     110 </span><span class="lineCov">          1 :   }</span>
+<span class="lineNum">     111 </span>            : };
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            : typedef type_list_n&lt;
+<span class="lineNum">     114 </span>            :   advice&lt; _overlapped_, ad_overlapped&gt;,
+<span class="lineNum">     115 </span>            :   advice&lt; _counters_, ad_counters&gt;,
+<span class="lineNum">     116 </span>            :   advice&lt; _test1_, ad_test&lt;1&gt; &gt;,
+<span class="lineNum">     117 </span>            :   advice&lt; _test2_, ad_test&lt;2&gt; &gt;,
+<span class="lineNum">     118 </span>            :   advice&lt; _test3_, ad_test&lt;3&gt; &gt;,
+<span class="lineNum">     119 </span>            :   advice&lt; _test4_, ad_test&lt;4&gt; &gt;,
+<span class="lineNum">     120 </span>            :   advice&lt; _test5_, ad_test&lt;5&gt; &gt;,
+<span class="lineNum">     121 </span>            : 
+<span class="lineNum">     122 </span>            :   group&lt; _group1_, _test1_ &gt;,
+<span class="lineNum">     123 </span>            : 
+<span class="lineNum">     124 </span>            :   group&lt; _group3_, type_list_n&lt;_test2_, _test3_&gt;::type &gt;,
+<span class="lineNum">     125 </span>            :   group&lt; _group3_, _test1_ &gt;,
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            :   group&lt; _group5_, _test5_ &gt;,
+<span class="lineNum">     128 </span>            :   group&lt; _group5_, type_list_n&lt;_test2_, _test3_&gt;::type &gt;,
+<span class="lineNum">     129 </span>            :   group&lt; _group5_, type_list_n&lt;_test4_, _test5_&gt;::type &gt;,
+<span class="lineNum">     130 </span>            :   group&lt; _group5_, _test2_ &gt;,
+<span class="lineNum">     131 </span>            :   group&lt; _overlapped_, _test2_ &gt;,
+<span class="lineNum">     132 </span>            : 
+<span class="lineNum">     133 </span>            :   group&lt; _overlapped2_, _test2_ &gt;,
+<span class="lineNum">     134 </span>            :   advice&lt; _overlapped2_, ad_overlapped&gt;,
+<span class="lineNum">     135 </span>            :   group&lt; _overlapped2_, _test3_ &gt;,
+<span class="lineNum">     136 </span>            :   advice&lt; _group6_, ad_test&lt;6&gt; &gt;
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            : &gt;::type test_advice_list;
+<span class="lineNum">     139 </span>            : 
+<a name="140"><span class="lineNum">     140 </span>            : struct test_aspect: aspect&lt;test_advice_list&gt; {};</a>
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span><span class="lineCov">         11 : struct test_class: aspect_class&lt;test_aspect&gt;</span>
+<a name="143"><span class="lineNum">     143 </span>            : {</a>
+<span class="lineNum">     144 </span>            :   const ::ad_counters&amp; get_counters() const { return this-&gt;get_aspect().get&lt; _counters_ &gt;();}
+<span class="lineNum">     145 </span><span class="lineCov">          5 :   ::ad_counters&amp; get_counters() { return this-&gt;get_aspect().get&lt; _counters_ &gt;();}</span>
+<span class="lineNum">     146 </span>            : };
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            : bool test_c( const std::string&amp; text, ad_counters c, int c0, int c1, int c2, int c3, int c4, int c5);
+<span class="lineNum">     149 </span>            : std::vector&lt;int&gt; ids( int c0 = -1, int c1= -1, int c2= -1, int c3= -1, int c4= -1, int c5= -1);
+<a name="150"><span class="lineNum">     150 </span>            : bool test_ids( const std::string&amp; text, const std::vector&lt;int&gt;&amp; ids1, const std::vector&lt;int&gt;&amp; ids2);</a>
+<span class="lineNum">     151 </span>            : 
+<span class="lineNum">     152 </span><span class="lineCov">          5 : bool test_c( const std::string&amp; text, ad_counters c, int c0, int c1, int c2, int c3, int c4, int c5)</span>
+<span class="lineNum">     153 </span>            : {
+<span class="lineNum">     154 </span><span class="lineCov">          5 :   if ( c.c0!=c0) { std::cout &lt;&lt; text &lt;&lt; &quot;. invalid counter c0 &quot;&lt;&lt; c.c0 &lt;&lt; &quot;!=&quot; &lt;&lt; c0 &lt;&lt; std::endl;  return false;}</span>
+<span class="lineNum">     155 </span><span class="lineCov">          5 :   if ( c.c1!=c1) { std::cout &lt;&lt; text &lt;&lt; &quot;. invalid counter c1 &quot;&lt;&lt; c.c1 &lt;&lt; &quot;!=&quot; &lt;&lt; c1 &lt;&lt; std::endl;  return false;}</span>
+<span class="lineNum">     156 </span><span class="lineCov">          5 :   if ( c.c2!=c2) { std::cout &lt;&lt; text &lt;&lt; &quot;. invalid counter c2 &quot;&lt;&lt; c.c2 &lt;&lt; &quot;!=&quot; &lt;&lt; c2 &lt;&lt; std::endl;  return false;}</span>
+<span class="lineNum">     157 </span><span class="lineCov">          5 :   if ( c.c3!=c3) { std::cout &lt;&lt; text &lt;&lt; &quot;. invalid counter c3 &quot;&lt;&lt; c.c3 &lt;&lt; &quot;!=&quot; &lt;&lt; c3 &lt;&lt; std::endl;  return false;}</span>
+<span class="lineNum">     158 </span><span class="lineCov">          5 :   if ( c.c4!=c4) { std::cout &lt;&lt; text &lt;&lt; &quot;. invalid counter c4 &quot;&lt;&lt; c.c4 &lt;&lt; &quot;!=&quot; &lt;&lt; c4 &lt;&lt; std::endl;  return false;}</span>
+<span class="lineNum">     159 </span><span class="lineCov">          5 :   if ( c.c5!=c5) { std::cout &lt;&lt; text &lt;&lt; &quot;. invalid counter c5 &quot;&lt;&lt; c.c5 &lt;&lt; &quot;!=&quot; &lt;&lt; c5 &lt;&lt; std::endl;  return false;}</span>
+<span class="lineNum">     160 </span><span class="lineCov">          5 :   return true;</span>
+<a name="161"><span class="lineNum">     161 </span>            : }</a>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span><span class="lineCov">          6 : std::vector&lt;int&gt; ids( int c0, int c1, int c2, int c3, int c4, int c5)</span>
+<span class="lineNum">     164 </span>            : {
+<span class="lineNum">     165 </span><span class="lineCov">          6 :   std::vector&lt;int&gt; ids_test;</span>
+<span class="lineNum">     166 </span><span class="lineCov">          6 :   if (c0!=-1) ids_test.push_back(c0);</span>
+<span class="lineNum">     167 </span><span class="lineCov">          6 :   if (c1!=-1) ids_test.push_back(c1);</span>
+<span class="lineNum">     168 </span><span class="lineCov">          6 :   if (c2!=-1) ids_test.push_back(c2);</span>
+<span class="lineNum">     169 </span><span class="lineCov">          6 :   if (c3!=-1) ids_test.push_back(c3);</span>
+<span class="lineNum">     170 </span><span class="lineCov">          6 :   if (c4!=-1) ids_test.push_back(c4);</span>
+<span class="lineNum">     171 </span><span class="lineCov">          6 :   if (c5!=-1) ids_test.push_back(c5);</span>
+<span class="lineNum">     172 </span><span class="lineCov">          6 :   return ids_test;</span>
+<span class="lineNum">     173 </span>            : }
+<a name="174"><span class="lineNum">     174 </span>            : </a>
+<span class="lineNum">     175 </span>            : 
+<span class="lineNum">     176 </span><span class="lineCov">          6 : bool test_ids( const std::string&amp; text, const std::vector&lt;int&gt;&amp; ids1, const std::vector&lt;int&gt;&amp; ids2)</span>
+<span class="lineNum">     177 </span>            : {
+<span class="lineNum">     178 </span><span class="lineCov">          6 :   if ( ids1 == ids2)</span>
+<span class="lineNum">     179 </span><span class="lineCov">          6 :     return true;</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :   std::cout &lt;&lt; text &lt;&lt; &quot; fail&quot; &lt;&lt; std::endl;</span>
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :   return false;</span>
+<a name="182"><span class="lineNum">     182 </span>            : }</a>
+<span class="lineNum">     183 </span>            : 
+<span class="lineNum">     184 </span><span class="lineCov">         39 : struct f_test</span>
+<span class="lineNum">     185 </span>            : {
+<span class="lineNum">     186 </span>            :   std::vector&lt;int&gt; ids;
+<a name="187"><span class="lineNum">     187 </span>            : </a>
+<span class="lineNum">     188 </span>            :   template&lt;typename T, typename Tg&gt;
+<span class="lineNum">     189 </span><span class="lineCov">          8 :   void operator()(T&amp;, ::fas::tag&lt;Tg&gt; )</span>
+<span class="lineNum">     190 </span>            :   {
+<span class="lineNum">     191 </span>            :     typedef typename T::aspect::template advice_cast&lt;Tg&gt;::type advice_type;
+<span class="lineNum">     192 </span><span class="lineCov">          8 :     ids.push_back(advice_type::id);</span>
+<span class="lineNum">     193 </span><span class="lineCov">          8 :   }</span>
+<span class="lineNum">     194 </span>            : 
+<span class="lineNum">     195 </span>            : };
+<span class="lineNum">     196 </span>            : 
+<span class="lineNum">     197 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     198 </span>            : struct ad_id
+<span class="lineNum">     199 </span>            : {
+<span class="lineNum">     200 </span>            :   typedef int_&lt;T::id&gt; type;
+<span class="lineNum">     201 </span>            : };
+<span class="lineNum">     202 </span>            : 
+<span class="lineNum">     203 </span>            : 
+<span class="lineNum">     204 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     205 </span>            : struct t
+<span class="lineNum">     206 </span>            : {
+<span class="lineNum">     207 </span>            :   typedef typename equal_to&lt; int_&lt;0&gt;, modulus&lt; typename ad_id&lt;T&gt;::type , int_&lt;2&gt; &gt; &gt;::type type;
+<span class="lineNum">     208 </span>            : };
+<span class="lineNum">     209 </span>            : 
+<a name="210"><span class="lineNum">     210 </span>            : </a>
+<span class="lineNum">     211 </span>            : 
+<span class="lineNum">     212 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">     213 </span>            : {
+<span class="lineNum">     214 </span>            :   enum { value = test_class::aspect::advice_cast&lt;_overlapped_&gt;::type::value };
+<span class="lineNum">     215 </span>            :   enum { value2 =
+<span class="lineNum">     216 </span>            :         static_check&lt;
+<span class="lineNum">     217 </span>            :           same_type&lt;
+<span class="lineNum">     218 </span>            :             test_class::aspect::advice_cast&lt;_overlapped2_&gt;::type,
+<span class="lineNum">     219 </span>            :             group_object&lt;_overlapped2_&gt;
+<span class="lineNum">     220 </span>            :           &gt;::value
+<span class="lineNum">     221 </span>            :         &gt;::value
+<span class="lineNum">     222 </span>            :   };
+<span class="lineNum">     223 </span><span class="lineCov">          2 :   ad_counters c;</span>
+<span class="lineNum">     224 </span><span class="lineCov">          2 :   test_class test;</span>
+<span class="lineNum">     225 </span>            : 
+<span class="lineNum">     226 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group0_&gt;()(test);</span>
+<span class="lineNum">     227 </span><span class="lineCov">          1 :   c = test.get_counters();</span>
+<span class="lineNum">     228 </span><span class="lineCov">          1 :   if ( !test_c( &quot;test0&quot;, c, 0, 0, 0, 0, 0, 0 ) )</span>
+<span class="lineNum">     229 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     230 </span>            : 
+<span class="lineNum">     231 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group1_&gt;()(test);</span>
+<span class="lineNum">     232 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group1_&gt;()(test, 0);</span>
+<span class="lineNum">     233 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group1_&gt;()(test, 0, 0);</span>
+<span class="lineNum">     234 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group1_&gt;()(test, 0, 0, 0);</span>
+<span class="lineNum">     235 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group1_&gt;()(test, 0, 0, 0, 0);</span>
+<span class="lineNum">     236 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group1_&gt;()(test, 0, 0, 0, 0, 0);</span>
+<span class="lineNum">     237 </span><span class="lineCov">          1 :   c = test.get_counters();</span>
+<span class="lineNum">     238 </span><span class="lineCov">          1 :   if ( !test_c( &quot;test1&quot;, c, 1, 1, 1, 1, 1, 1 ) )</span>
+<span class="lineNum">     239 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     240 </span>            :   
+<span class="lineNum">     241 </span><span class="lineCov">          1 :   if ( !test_ids( &quot;test1ids&quot;, c.ids, ids(1, 1, 1, 1, 1, 1) ))</span>
+<span class="lineNum">     242 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     243 </span>            : 
+<span class="lineNum">     244 </span><span class="lineCov">          1 :   test = test_class();</span>
+<span class="lineNum">     245 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group3_&gt;()(test, 0, 0, 0);</span>
+<span class="lineNum">     246 </span><span class="lineCov">          1 :   c = test.get_counters();</span>
+<span class="lineNum">     247 </span><span class="lineCov">          1 :   if ( !test_c( &quot;test2&quot;, c, 0, 0, 0, 3, 0, 0 ) )</span>
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     249 </span><span class="lineCov">          1 :   if ( !test_ids( &quot;test2ids&quot;, c.ids, ids(2, 3, 1) ))</span>
+<span class="lineNum">     250 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     251 </span>            : 
+<span class="lineNum">     252 </span><span class="lineCov">          1 :   test = test_class();</span>
+<span class="lineNum">     253 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group5_&gt;()(test, 0);</span>
+<span class="lineNum">     254 </span><span class="lineCov">          1 :   c = test.get_counters();</span>
+<span class="lineNum">     255 </span><span class="lineCov">          1 :   if ( !test_c( &quot;test3&quot;, c, 0, 4, 0, 0, 0, 0 ) )</span>
+<span class="lineNum">     256 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     257 </span><span class="lineCov">          1 :   if ( !test_ids( &quot;test3ids&quot;, c.ids, ids(5, 2, 3, 4) ))</span>
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     259 </span>            : 
+<span class="lineNum">     260 </span><span class="lineCov">          2 :   f_test f = test.get_aspect().getg&lt;_group5_&gt;().for_each(test, f_test());</span>
+<span class="lineNum">     261 </span><span class="lineCov">          1 :   if ( !test_ids( &quot;test3foreach&quot;, f.ids, ids(5, 2, 3, 4) ))</span>
+<span class="lineNum">     262 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     263 </span>            : 
+<span class="lineNum">     264 </span><span class="lineCov">          1 :   f = test.get_aspect().getg&lt;_overlapped2_&gt;().for_each(test, f_test());</span>
+<span class="lineNum">     265 </span><span class="lineCov">          1 :   if ( !test_ids( &quot;_overlapped2_ test3foreach&quot;, f.ids, ids(2, 3) ))</span>
+<span class="lineNum">     266 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span>            :   typedef select_group&lt;_group5_, test_class&gt;::type group5_tags;
+<span class="lineNum">     269 </span>            :   typedef fas::select&lt; group5_tags, t&lt; fas::advice_cast&lt;_1, test_class&gt; &gt; &gt;::type group5_tags_selected;
+<span class="lineNum">     270 </span><span class="lineCov">          2 :   f_test f2 = test.get_aspect().getg&lt;group5_tags_selected&gt;().for_each(test, f_test());</span>
+<span class="lineNum">     271 </span><span class="lineCov">          1 :   if ( !test_ids( &quot;test3foreach&quot;, f2.ids, ids(2, 4) ))</span>
+<span class="lineNum">     272 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     273 </span>            : 
+<span class="lineNum">     274 </span><span class="lineCov">          1 :   test = test_class();</span>
+<span class="lineNum">     275 </span><span class="lineCov">          1 :   test.get_aspect().getg&lt;_group6_&gt;()(test);</span>
+<span class="lineNum">     276 </span><span class="lineCov">          1 :   c = test.get_counters();</span>
+<span class="lineNum">     277 </span><span class="lineCov">          1 :   if ( !test_c( &quot;_group6_(advice)&quot;, c, 1, 0, 0, 0, 0, 0 ) )</span>
+<span class="lineNum">     278 </span><span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     279 </span>            : 
+<span class="lineNum">     280 </span>            : 
+<a name="281"><span class="lineNum">     281 </span>            : </a>
+<span class="lineNum">     282 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">     283 </span><span class="lineCov">          3 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

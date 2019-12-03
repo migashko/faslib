@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/typemanip/test_conversion.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/typemanip</a> - test_conversion.cpp<span style="font-size: 80%;"> (source / <a href="test_conversion.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/typemanip.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/static_check.hpp&gt;
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;vector&gt;
+<span class="lineNum">      11 </span>            : #include &lt;set&gt;
+<span class="lineNum">      12 </span>            : #include &lt;iterator&gt;
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : using namespace ::fas;
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span>            : struct A{ };
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : struct B:A
+<span class="lineNum">      19 </span>            : {
+<span class="lineNum">      20 </span>            :   typedef int test_type;
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">      23 </span>            :   struct apply
+<span class="lineNum">      24 </span>            :   {
+<span class="lineNum">      25 </span>            :     enum { value = T::value };
+<span class="lineNum">      26 </span>            :   };
+<span class="lineNum">      27 </span>            : };
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : struct C:A{};
+<span class="lineNum">      30 </span>            : struct D:B,C{};
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            : struct VB: virtual A{};
+<span class="lineNum">      33 </span>            : struct VC: virtual A{};
+<span class="lineNum">      34 </span>            : struct VD: virtual VB, virtual VC{};
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span>            : struct M0 { void member0(); };
+<span class="lineNum">      37 </span>            : struct M1: M0 { void member1(int); };
+<span class="lineNum">      38 </span>            : struct M2: M1 { void member2(int, int); };
+<span class="lineNum">      39 </span>            : struct M3: M2 { void member3(int, int, int); };
+<span class="lineNum">      40 </span>            : struct M4: M3 { void member4(int, int, int, int); };
+<span class="lineNum">      41 </span>            : struct M5: M4 { void member5(int, int, int, int, int); };
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            : FAS_HAS_TYPENAME(has_test_type, test_type)
+<span class="lineNum">      44 </span>            : FAS_HAS_TEMPLATE1(has_apply, apply)
+<span class="lineNum">      45 </span>            : FAS_HAS_MEMBER_FUNCTION0(has_member0, member0, void)
+<span class="lineNum">      46 </span>            : FAS_HAS_MEMBER_FUNCTION1(has_member1, member1, void, int)
+<span class="lineNum">      47 </span>            : FAS_HAS_MEMBER_FUNCTION2(has_member2, member2, void, int, int)
+<span class="lineNum">      48 </span>            : FAS_HAS_MEMBER_FUNCTION3(has_member3, member3, void, int, int, int)
+<span class="lineNum">      49 </span>            : FAS_HAS_MEMBER_FUNCTION4(has_member4, member4, void, int, int, int, int)
+<span class="lineNum">      50 </span>            : FAS_HAS_MEMBER_FUNCTION5(has_member5, member5, void, int, int, int, int, int)
+<a name="51"><span class="lineNum">      51 </span>            : </a>
+<span class="lineNum">      52 </span>            : template &lt; typename T, typename U, void (T::*)(const U&amp;) &gt; struct op_mf3 {};
+<span class="lineNum">      53 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      54 </span>            : {
+<span class="lineNum">      55 </span>            :   enum {
+<span class="lineNum">      56 </span>            :     test1 = static_check&lt; !has_test_type&lt;A&gt;::value &gt;::value,
+<span class="lineNum">      57 </span>            :     test2 = static_check&lt; has_test_type&lt;B&gt;::value &gt;::value,
+<span class="lineNum">      58 </span>            :     test1_some_type = static_check&lt; same_type&lt; bool, bool &gt;::value &gt;::value,
+<span class="lineNum">      59 </span>            :     test2_some_type = static_check&lt; !same_type&lt; int*, float*&gt;::value &gt;::value,
+<span class="lineNum">      60 </span>            :     test3_some_type = static_check&lt; !same_type&lt; int, const int&gt;::value &gt;::value,
+<span class="lineNum">      61 </span>            :     test1_conv_type = static_check&lt; conversion&lt; int, long &gt;::value &gt;::value,
+<span class="lineNum">      62 </span>            :     test2_conv_type = static_check&lt; !conversion&lt; int*, char*&gt;::value &gt;::value,
+<span class="lineNum">      63 </span>            :     test3_conv_type = static_check&lt; conversion&lt; int*, const int* &gt;::value &gt;::value,
+<span class="lineNum">      64 </span>            :     test4_conv_type = static_check&lt; !conversion&lt; const int*, int* &gt;::value &gt;::value,
+<span class="lineNum">      65 </span>            :     test5_conv_type = static_check&lt; conversion&lt; int*, volatile int* &gt;::value &gt;::value,
+<span class="lineNum">      66 </span>            :     test6_conv_type = static_check&lt; !conversion&lt; volatile int*, int* &gt;::value &gt;::value,
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span>            :     test1_abc_type = static_check&lt; same_type&lt; A, A &gt;::value &gt;::value,
+<span class="lineNum">      69 </span>            :     test2_abc_type = static_check&lt; same_type&lt; D, D &gt;::value &gt;::value,
+<span class="lineNum">      70 </span>            :     test3_abc_type = static_check&lt; conversion&lt; B, A &gt;::value &gt;::value,
+<span class="lineNum">      71 </span>            :     test4_abc_type = static_check&lt; !conversion&lt; A, B &gt;::value &gt;::value,
+<span class="lineNum">      72 </span>            :     test5_abc_type = static_check&lt; conversion&lt; B*, A* &gt;::value &gt;::value,
+<span class="lineNum">      73 </span>            :     test6_abc_type = static_check&lt; !conversion&lt; A*, B* &gt;::value &gt;::value,
+<span class="lineNum">      74 </span>            :     test7_abc_type = static_check&lt; conversion&lt; C, A &gt;::value &gt;::value,
+<span class="lineNum">      75 </span>            :     // 'A' is an ambiguous base of 'D'. use virtual inheritance
+<span class="lineNum">      76 </span>            :     // testt8_abc_type = static_check&lt; conversion&lt; D, A &gt;::value &gt;::value,
+<span class="lineNum">      77 </span>            :     test9_abc_type = static_check&lt; conversion&lt; D, B &gt;::value &gt;::value,
+<span class="lineNum">      78 </span>            :     testA_abc_type = static_check&lt; conversion&lt; D, C &gt;::value &gt;::value,
+<span class="lineNum">      79 </span>            :     // OK - virtual inheritance
+<span class="lineNum">      80 </span>            :     testB_abc_type = static_check&lt; conversion&lt; VD, A &gt;::value &gt;::value,
+<span class="lineNum">      81 </span>            :     testC = static_check&lt; super_subclass&lt; A, B &gt;::value &gt;::value,
+<span class="lineNum">      82 </span>            :     testD = static_check&lt; super_subclass&lt; A, A &gt;::value &gt;::value,
+<span class="lineNum">      83 </span>            :     testE = static_check&lt; !super_subclass_strict&lt; A, A &gt;::value &gt;::value,
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span>            :     test_template = static_check&lt; !has_apply&lt;A&gt;::value &gt;::value
+<span class="lineNum">      86 </span>            :                     + static_check&lt; has_apply&lt;B&gt;::value &gt;::value,
+<span class="lineNum">      87 </span>            : 
+<span class="lineNum">      88 </span>            :     test_method =
+<span class="lineNum">      89 </span>            :             static_check&lt; has_member0&lt; M0 &gt;::value &gt;::value
+<span class="lineNum">      90 </span>            :           + static_check&lt; has_member1&lt; M1 &gt;::value &gt;::value
+<span class="lineNum">      91 </span>            :           + static_check&lt; has_member2&lt; M2 &gt;::value &gt;::value
+<span class="lineNum">      92 </span>            :           + static_check&lt; has_member3&lt; M3 &gt;::value &gt;::value
+<span class="lineNum">      93 </span>            :           + static_check&lt; has_member4&lt; M4 &gt;::value &gt;::value
+<span class="lineNum">      94 </span>            :           + static_check&lt; has_member5&lt; M5 &gt;::value &gt;::value
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            :   };
+<span class="lineNum">      97 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">      98 </span>            : }
+<span class="lineNum">      99 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

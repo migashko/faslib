@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/utility/useless_cast.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">fas/utility</a> - useless_cast.hpp<span style="font-size: 80%;"> (source / <a href="useless_cast.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2019
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_USELESS_CAST_HPP
+<span class="lineNum">       8 </span>            : #define FAS_USELESS_CAST_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/typemanip/same_type.hpp&gt;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : namespace fas{
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : namespace detail
+<span class="lineNum">      15 </span>            : {
+<span class="lineNum">      16 </span>            :   template&lt;typename To, typename From&gt;
+<span class="lineNum">      17 </span>            :   struct useless_cast_t
+<span class="lineNum">      18 </span>            :   {
+<a name="19"><span class="lineNum">      19 </span>            :     typedef To type;</a>
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span><span class="lineCov">        355 :     static type cast(const From&amp; from)</span>
+<span class="lineNum">      22 </span>            :     {
+<span class="lineNum">      23 </span><span class="lineCov">        355 :       return static_cast&lt;To&gt;(from);</span>
+<span class="lineNum">      24 </span>            :     }
+<span class="lineNum">      25 </span>            :   };
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            :   template&lt;typename T&gt;
+<span class="lineNum">      28 </span>            :   struct useless_cast_t&lt;T, T&gt;
+<span class="lineNum">      29 </span>            :   {
+<a name="30"><span class="lineNum">      30 </span>            :     typedef const T&amp; type;</a>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span><span class="lineCov">         35 :     static type cast(const T&amp; from)</span>
+<span class="lineNum">      33 </span>            :     {
+<span class="lineNum">      34 </span><span class="lineCov">         35 :       return from;</span>
+<span class="lineNum">      35 </span>            :     }
+<span class="lineNum">      36 </span>            :   };
+<span class="lineNum">      37 </span>            : }
+<a name="38"><span class="lineNum">      38 </span>            : </a>
+<span class="lineNum">      39 </span>            : template&lt;typename To, typename From&gt;
+<span class="lineNum">      40 </span><span class="lineCov">        390 : inline typename detail::useless_cast_t&lt;To, From&gt;::type useless_cast(const From&amp; from)</span>
+<span class="lineNum">      41 </span>            : {
+<span class="lineNum">      42 </span><span class="lineCov">        390 :   return detail::useless_cast_t&lt;To, From&gt;::cast(from);</span>
+<span class="lineNum">      43 </span>            : }
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            : }
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

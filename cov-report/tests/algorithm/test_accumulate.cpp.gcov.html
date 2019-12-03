@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/algorithm/test_accumulate.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/algorithm</a> - test_accumulate.cpp<span style="font-size: 80%;"> (source / <a href="test_accumulate.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/type_list.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/algorithm/accumulate.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/typemanip.hpp&gt;
+<span class="lineNum">      10 </span>            : #include &lt;fas/integral.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/static_check.hpp&gt;
+<span class="lineNum">      12 </span>            : #include &lt;fas/mp.hpp&gt;
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : using namespace ::fas;
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span>            : struct list0: empty_list {};
+<span class="lineNum">      17 </span>            : struct list1: type_list_n&lt; int_&lt;1&gt; &gt;::type {};
+<span class="lineNum">      18 </span>            : struct list2: type_list_n&lt; int_&lt;1&gt;, int_&lt;2&gt; &gt;::type {};
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : #if __cplusplus &gt;= 201103L /*&amp;&amp; !defined(FASLIB_TYPE_LIST_CHECK)*/
+<span class="lineNum">      21 </span>            : // For FASLIB_TYPE_LIST_CHECK needs -ftemplate-depth=1400 or more
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            : typedef fas::int_&lt;1&gt; O;
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : constexpr double pi =
+<span class="lineNum">      26 </span>            :     double( fas::accumulate_t&lt; fas::type_list_n_nocheck&lt;
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            :                         O,O,O,O,O,O,
+<span class="lineNum">      29 </span>            :                     O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      30 </span>            :                   O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      31 </span>            :                   O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      32 </span>            :                 O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      33 </span>            :                 O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      34 </span>            :                 O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      35 </span>            :               O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      36 </span>            :               O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      37 </span>            :               O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      38 </span>            :               O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      39 </span>            :                 O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      40 </span>            :                 O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      41 </span>            :                 O,O,O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      42 </span>            :                   O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      43 </span>            :                   O,O,O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      44 </span>            :                     O,O,O,O,O,O,O,O,O,O,
+<span class="lineNum">      45 </span>            :                         O,O,O,O,O,O
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            :     &gt;::type, fas::int_&lt;0&gt;, fas::plus &gt;::type::value )
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            :                                     //
+<span class="lineNum">      50 </span>            :                                    //
+<span class="lineNum">      51 </span>            :                                   //
+<span class="lineNum">      52 </span>            :                                  //
+<span class="lineNum">      53 </span>            :                                 //
+<span class="lineNum">      54 </span>            :                                //
+<span class="lineNum">      55 </span>            :                               /
+<span class="lineNum">      56 </span>            :                              //
+<span class="lineNum">      57 </span>            :                             //
+<span class="lineNum">      58 </span>            :                            //
+<span class="lineNum">      59 </span>            :                           //
+<span class="lineNum">      60 </span>            :                          //
+<span class="lineNum">      61 </span>            :                         //
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            :     double( fas::accumulate_t&lt; fas::type_list_n_nocheck&lt;
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      66 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      67 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      68 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      69 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      70 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      71 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      72 </span>            :                       O,O,O,O,O,O,O,O,
+<span class="lineNum">      73 </span>            :                       O,O,O,O,O,O,O,O
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span>            :     &gt;::type, fas::int_&lt;0&gt;, fas::plus &gt;::type::value );
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span>            : 
+<span class="lineNum">      78 </span>            : #endif
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            : struct A; struct B; struct C;
+<span class="lineNum">      81 </span>            : typedef fas::type_list_n&lt; A, B, C &gt;::type list4;
+<span class="lineNum">      82 </span>            : typedef fas::accumulate&lt;list4, empty_list, push_front&lt;_1, _2&gt; &gt;::type res4;
+<a name="83"><span class="lineNum">      83 </span>            : typedef fas::reverse&lt;list4&gt;::type chk4;</a>
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      86 </span>            : {
+<span class="lineNum">      87 </span>            :   enum
+<span class="lineNum">      88 </span>            :   {
+<span class="lineNum">      89 </span>            :     value = static_check&lt; accumulate&lt;list0, fas::int_&lt;21&gt;, fas::plus&lt;_1, _2&gt; &gt;::type::value == 21 &gt;::value
+<span class="lineNum">      90 </span>            :           + static_check&lt; accumulate&lt;list1, fas::int_&lt;1&gt;,  fas::plus&lt;_1, _2&gt; &gt;::type::value == 2 &gt;::value
+<span class="lineNum">      91 </span>            :           + static_check&lt; accumulate&lt;list2, fas::int_&lt;0&gt;,  fas::plus&lt;_1, _2&gt; &gt;::type::value == 3 &gt;::value
+<span class="lineNum">      92 </span>            :           #if __cplusplus &gt;= 201103L /*&amp;&amp; !defined(FASLIB_TYPE_LIST_CHECK)*/
+<span class="lineNum">      93 </span>            :           // pi == 3.16667F
+<span class="lineNum">      94 </span>            :           + static_check&lt; (pi &gt; 3.16666L) &amp;&amp; pi &lt; (3.16668L) &gt;::value
+<span class="lineNum">      95 </span>            :           #endif
+<span class="lineNum">      96 </span>            :           + static_check&lt; same_type&lt;res4, chk4&gt;::value &gt;::value
+<span class="lineNum">      97 </span>            :   };
+<span class="lineNum">      98 </span>            : 
+<span class="lineNum">      99 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">     100 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

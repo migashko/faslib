@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - fas/aop/reverse_call_group.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">fas/aop</a> - reverse_call_group.hpp<span style="font-size: 80%;"> (source / <a href="reverse_call_group.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2012, 2013
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #ifndef FAS_AOP_REVERSE_CALL_GROUP_HPP
+<span class="lineNum">       8 </span>            : #define FAS_AOP_REVERSE_CALL_GROUP_HPP
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #include &lt;fas/aop/detail/group_helper.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/aop/select_group.hpp&gt;
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : namespace fas{
+<a name="14"><span class="lineNum">      14 </span>            : </a>
+<span class="lineNum">      15 </span>            : template&lt;typename TgList, typename T&gt;
+<span class="lineNum">      16 </span><span class="lineCov">          2 : inline void reverse_call_group(T&amp; t)</span>
+<span class="lineNum">      17 </span>            : {
+<span class="lineNum">      18 </span>            :   typedef typename select_group&lt; TgList, T&gt;::type tag_list;
+<span class="lineNum">      19 </span><span class="lineCov">          2 :   detail::group_helper::call( typename reverse&lt;tag_list&gt;::type(), t);</span>
+<span class="lineNum">      20 </span><span class="lineCov">          2 : }</span>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            : template&lt;typename TgList, typename T, typename P1&gt;
+<span class="lineNum">      23 </span>            : inline void reverse_call_group(T&amp; t, P1 p1)
+<span class="lineNum">      24 </span>            : {
+<span class="lineNum">      25 </span>            :   typedef typename select_group&lt; TgList, T&gt;::type tag_list;
+<span class="lineNum">      26 </span>            :   detail::group_helper::call( typename reverse&lt;tag_list&gt;::type(), t, p1);
+<span class="lineNum">      27 </span>            : }
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : template&lt;typename TgList, typename T, typename P1, typename P2&gt;
+<span class="lineNum">      30 </span>            : inline void reverse_call_group(T&amp; t, P1 p1, P2 p2)
+<span class="lineNum">      31 </span>            : {
+<span class="lineNum">      32 </span>            :   typedef typename select_group&lt; TgList, T&gt;::type tag_list;
+<span class="lineNum">      33 </span>            :   detail::group_helper::call( typename reverse&lt;tag_list&gt;::type(), t, p1, p2);
+<span class="lineNum">      34 </span>            : }
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span>            : template&lt;typename TgList, typename T, typename P1, typename P2, typename P3&gt;
+<span class="lineNum">      37 </span>            : inline void reverse_call_group(T&amp; t, P1 p1, P2 p2, P3 p3)
+<span class="lineNum">      38 </span>            : {
+<span class="lineNum">      39 </span>            :   typedef typename select_group&lt; TgList, T&gt;::type tag_list;
+<span class="lineNum">      40 </span>            :   detail::group_helper::call( typename reverse&lt;tag_list&gt;::type(), t, p1, p2, p3);
+<span class="lineNum">      41 </span>            : }
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            : template&lt;typename TgList, typename T, typename P1, typename P2, typename P3, typename P4&gt;
+<span class="lineNum">      44 </span>            : inline void reverse_call_group(T&amp; t, P1 p1, P2 p2, P3 p3, P4 p4)
+<span class="lineNum">      45 </span>            : {
+<span class="lineNum">      46 </span>            :   typedef typename select_group&lt; TgList, T&gt;::type tag_list;
+<span class="lineNum">      47 </span>            :   detail::group_helper::call( typename reverse&lt;tag_list&gt;::type(),t, p1, p2, p3, p4);
+<span class="lineNum">      48 </span>            : }
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span>            : template&lt;typename TgList, typename T, typename P1, typename P2, typename P3, typename P4, typename P5&gt;
+<span class="lineNum">      51 </span>            : inline void reverse_call_group(T&amp; t, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
+<span class="lineNum">      52 </span>            : {
+<span class="lineNum">      53 </span>            :   typedef typename select_group&lt; TgList, T&gt;::type tag_list;
+<span class="lineNum">      54 </span>            :   detail::group_helper::call( typename reverse&lt;tag_list&gt;::type(), t, p1, p2, p3, p4, p5);
+<span class="lineNum">      55 </span>            : }
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : }
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

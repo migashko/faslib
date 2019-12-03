@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/mp/test_lambda.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/mp</a> - test_lambda.cpp<span style="font-size: 80%;"> (source / <a href="test_lambda.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/integral/comparisons.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/mp/lambda.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/typemanip.hpp&gt;
+<span class="lineNum">      10 </span>            : #include &lt;fas/integral/logical_op.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/static_check.hpp&gt;
+<span class="lineNum">      12 </span>            : #include &lt;vector&gt;
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : template&lt;typename T&gt;
+<span class="lineNum">      15 </span>            : struct test_type
+<span class="lineNum">      16 </span>            : {
+<span class="lineNum">      17 </span>            :   typedef std::vector&lt;T&gt; type;
+<span class="lineNum">      18 </span>            : };
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : template&lt; template&lt;typename, typename&gt; class F&gt;
+<span class="lineNum">      21 </span>            : struct test12 
+<span class="lineNum">      22 </span>            : {
+<span class="lineNum">      23 </span>            :   typedef typename F&lt; fas::int_&lt;1&gt;, fas::int_&lt;2&gt; &gt;::type type;
+<a name="24"><span class="lineNum">      24 </span>            : };</a>
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      27 </span>            : {
+<span class="lineNum">      28 </span>            :   using namespace ::fas;
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :   enum
+<span class="lineNum">      31 </span>            :   {
+<span class="lineNum">      32 </span>            :     test =  static_check&lt;
+<span class="lineNum">      33 </span>            :               same_type&lt;
+<span class="lineNum">      34 </span>            :                 lambda&lt; std::vector&lt;_1&gt; &gt;::apply&lt;int&gt;::type,
+<span class="lineNum">      35 </span>            :                 std::vector&lt;int&gt;
+<span class="lineNum">      36 </span>            :               &gt;::value == 1
+<span class="lineNum">      37 </span>            :             &gt;::value
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            :         + static_check&lt;
+<span class="lineNum">      40 </span>            :             lambda&lt;
+<span class="lineNum">      41 </span>            :               if_&lt;
+<span class="lineNum">      42 </span>            :                 less&lt;_1, _2&gt;,
+<span class="lineNum">      43 </span>            :                 _3,
+<span class="lineNum">      44 </span>            :                 if_&lt; less&lt;_3, int_&lt;10&gt; &gt;, _1, _2 &gt;
+<span class="lineNum">      45 </span>            :               &gt; 
+<span class="lineNum">      46 </span>            :             &gt;::apply&lt; int_&lt;20&gt;,  int_&lt;10&gt;, int_&lt;3&gt; &gt;::type::value == 20
+<span class="lineNum">      47 </span>            :         &gt;::value
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            :         + static_check&lt; same_type&lt; lambda&lt;int&gt;::apply&lt;&gt;::type, int &gt;::value  &gt;::value
+<span class="lineNum">      50 </span>            :   
+<span class="lineNum">      51 </span>            :         + static_check&lt; same_type&lt; lambda&lt; type2type&lt;_1&gt; &gt;::apply&lt; int &gt;::type, type2type&lt;int&gt; &gt;::value  &gt;::value
+<span class="lineNum">      52 </span>            :   
+<span class="lineNum">      53 </span>            :         + static_check&lt; same_type&lt; lambda&lt; p&lt;int&gt; &gt;::apply&lt;&gt;::type, int &gt;::value  &gt;::value
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            :         + static_check&lt; same_type&lt; lambda&lt; p&lt; a&lt; p&lt;int&gt; &gt; &gt; &gt;::apply&lt;&gt;::type, p&lt;int&gt; &gt;::value  &gt;::value
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            :         + static_check&lt; same_type&lt; lambda&lt; std::pair&lt; _1, p&lt;_1&gt; &gt; &gt;::apply&lt; int &gt;::type, std::pair&lt;int, _1&gt; &gt;::value  &gt;::value
+<span class="lineNum">      58 </span>            :   
+<span class="lineNum">      59 </span>            :         + static_check&lt; same_type&lt; lambda&lt; test_type&lt;_1&gt; &gt;::apply&lt; int &gt;::type, std::vector&lt;int&gt; &gt;::value  &gt;::value
+<span class="lineNum">      60 </span>            :   
+<span class="lineNum">      61 </span>            :         + static_check&lt; same_type&lt; lambda&lt; a&lt; test_type&lt;_1&gt; &gt; &gt;::apply&lt; int &gt;::type, test_type&lt;int&gt; &gt;::value  &gt;::value
+<span class="lineNum">      62 </span>            :   };
+<span class="lineNum">      63 </span>            :   
+<span class="lineNum">      64 </span>            :   typedef type_list_n&lt; _1, _, _2, _&gt;::type exp1;
+<span class="lineNum">      65 </span>            :   typedef fas::type_list_n&lt; int_&lt;1&gt;, int_&lt;1&gt;, int_&lt;2&gt;, int_&lt;2&gt; &gt;::type chk1;
+<span class="lineNum">      66 </span>            :   typedef test12&lt; lambda&lt;exp1&gt;::apply &gt;::type res1;
+<span class="lineNum">      67 </span>            :  
+<span class="lineNum">      68 </span>            :   enum
+<span class="lineNum">      69 </span>            :   {
+<span class="lineNum">      70 </span>            :     test1 = static_check&lt; same_type&lt; res1, chk1 &gt;::value  &gt;::value
+<span class="lineNum">      71 </span>            :   };
+<span class="lineNum">      72 </span>            :   
+<span class="lineNum">      73 </span>            :   
+<span class="lineNum">      74 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">      75 </span>            : }
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

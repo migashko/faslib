@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - faslib-coverage.info - tests/algorithm/test_unique_first_if.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/algorithm</a> - test_unique_first_if.cpp<span style="font-size: 80%;"> (source / <a href="test_unique_first_if.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">faslib-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-12-03 13:22:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //</a>
+<span class="lineNum">       2 </span>            : // Author: Vladimir Migashko &lt;migashko@gmail.com&gt;, (C) 2011
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // Copyright: See COPYING file that comes with this distribution
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &lt;fas/type_list/type_list_n.hpp&gt;
+<span class="lineNum">       8 </span>            : #include &lt;fas/static_check.hpp&gt;
+<span class="lineNum">       9 </span>            : #include &lt;fas/algorithm/unique_first_if.hpp&gt;
+<span class="lineNum">      10 </span>            : #include &lt;fas/type_list/type_at.hpp&gt;
+<span class="lineNum">      11 </span>            : #include &lt;fas/mp/f.hpp&gt;
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : using namespace ::fas;
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span>            : struct list_1 : type_list_n&lt;char, int, long&gt;::type {};
+<span class="lineNum">      17 </span>            : struct list_2 : type_list_n&lt;char, int, double, list_1&gt;::type {};
+<span class="lineNum">      18 </span>            : struct list_3 : type_list_n&lt;list_1, char, int, double&gt;::type {};
+<span class="lineNum">      19 </span>            : struct list_4 : type_list_n&lt;char, int, int&gt;::type {};
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : typedef type_list_n&lt;
+<span class="lineNum">      22 </span>            :     char, int, double, long
+<span class="lineNum">      23 </span>            :     &gt;::type check_list1;
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : typedef type_list_n&lt;
+<span class="lineNum">      26 </span>            :     char, int, long, double
+<span class="lineNum">      27 </span>            : &gt;::type check_list2;
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : typedef type_list_n&lt;
+<span class="lineNum">      30 </span>            :     char, int
+<span class="lineNum">      31 </span>            : &gt;::type check_list3;
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            : typedef unique_first_if&lt;list_2&gt;::type result_list1;
+<span class="lineNum">      34 </span>            : typedef unique_first_if&lt;list_3&gt;::type result_list2;
+<span class="lineNum">      35 </span>            : typedef unique_first_if&lt;list_4&gt;::type result_list3;
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            : template&lt;typename L&gt;
+<span class="lineNum">      38 </span>            : struct same_type_class
+<span class="lineNum">      39 </span>            : {
+<span class="lineNum">      40 </span>            :   template&lt;typename R&gt;
+<span class="lineNum">      41 </span>            :   struct apply
+<span class="lineNum">      42 </span>            :   {
+<span class="lineNum">      43 </span>            :     typedef typename same_type&lt;L, R&gt;::type type;
+<span class="lineNum">      44 </span>            :   };
+<span class="lineNum">      45 </span>            :   
+<span class="lineNum">      46 </span>            :   typedef same_type_class&lt;L&gt; type;
+<span class="lineNum">      47 </span>            : };
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            : struct same_type_metaclass
+<span class="lineNum">      50 </span>            : {
+<span class="lineNum">      51 </span>            :   template&lt;typename L, typename R&gt;
+<span class="lineNum">      52 </span>            :   struct apply
+<span class="lineNum">      53 </span>            :   {
+<span class="lineNum">      54 </span>            :     typedef typename f&lt; same_type&lt;L, R&gt; &gt;::type type;
+<span class="lineNum">      55 </span>            :   };
+<span class="lineNum">      56 </span>            : };
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            : typedef unique_first_if_t&lt;list_4, lambda&lt; same_type&lt;_,_&gt; &gt;::apply &gt;::type result_list3t;
+<span class="lineNum">      59 </span>            : typedef unique_first_if&lt;list_4, same_type_metaclass &gt;::type result_list3tm;
+<a name="60"><span class="lineNum">      60 </span>            : typedef unique_first_if&lt;list_4, same_type&lt;_1, _2 &gt; &gt;::type result_list3mp;</a>
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      63 </span>            : {
+<span class="lineNum">      64 </span>            :   enum {
+<span class="lineNum">      65 </span>            :           value = static_check&lt; apply2&lt; same_type&lt;_,_&gt;, int, int&gt;::type::value &gt;::value
+<span class="lineNum">      66 </span>            :                         + static_check&lt;
+<span class="lineNum">      67 </span>            :     same_type&lt;
+<span class="lineNum">      68 </span>            :       same_type&lt;int,char&gt;,
+<span class="lineNum">      69 </span>            :       bind&lt;
+<span class="lineNum">      70 </span>            :         same_type&lt;_,_&gt;,
+<span class="lineNum">      71 </span>            :         type_list_n&lt;int, char&gt;::type
+<span class="lineNum">      72 </span>            :       &gt;::type
+<span class="lineNum">      73 </span>            :     &gt;::value
+<span class="lineNum">      74 </span>            :                         &gt;::value
+<span class="lineNum">      75 </span>            :   };
+<span class="lineNum">      76 </span>            :   
+<span class="lineNum">      77 </span>            :   enum
+<span class="lineNum">      78 </span>            :   {
+<span class="lineNum">      79 </span>            :     test = static_check&lt; length&lt;result_list1&gt;::value == 4 &gt;::value
+<span class="lineNum">      80 </span>            :          + static_check&lt; same_type&lt; type_at&lt; int_&lt;0&gt;, result_list1&gt;::type, char&gt;::value &gt;::value
+<span class="lineNum">      81 </span>            :          + static_check&lt; same_type&lt; type_at&lt; int_&lt;0&gt;, result_list3&gt;::type, char&gt;::value &gt;::value
+<span class="lineNum">      82 </span>            :          + static_check&lt; same_type&lt; type_at&lt; int_&lt;1&gt;, result_list3&gt;::type, int&gt;::value &gt;::value
+<span class="lineNum">      83 </span>            :          + static_check&lt; same_type&lt; result_list1, check_list1&gt;::value &gt;::value
+<span class="lineNum">      84 </span>            :          + static_check&lt; same_type&lt; result_list2, check_list2&gt;::value &gt;::value
+<span class="lineNum">      85 </span>            :          + static_check&lt; same_type&lt; result_list3, check_list3&gt;::value &gt;::value
+<span class="lineNum">      86 </span>            :          + static_check&lt; same_type&lt; result_list3t, check_list3&gt;::value &gt;::value
+<span class="lineNum">      87 </span>            :          + static_check&lt; same_type&lt; result_list3tm, check_list3&gt;::value &gt;::value
+<span class="lineNum">      88 </span>            :          + static_check&lt; same_type&lt; result_list3mp, check_list3&gt;::value &gt;::value
+<span class="lineNum">      89 </span>            :   };
+<span class="lineNum">      90 </span><span class="lineCov">          1 :   return 0;</span>
+<span class="lineNum">      91 </span>            : }
+<span class="lineNum">      92 </span>            : 
+<span class="lineNum">      93 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
