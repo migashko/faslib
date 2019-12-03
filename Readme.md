@@ -1,3 +1,11 @@
+[![Build Status](https://github.com/migashko/faslib/workflows/C++%20CI/badge.svg?branch=master)](https://github.com/migashko/faslib/tree/master)
+[![Build Status](https://github.com/migashko/faslib/workflows/C++%20CI/badge.svg?branch=mambaru)](https://github.com/migashko/faslib/tree/mambaru)
+[![codecov](https://codecov.io/gh/migashko/faslib/branch/master/graph/badge.svg)](https://codecov.io/gh/migashko/faslib)
+
+* Документация [doxygen](https://migashko.github.io/faslib/index.html)
+* Репозитарий на [github.com](https://github.com/migashko/faslib)
+* Отчет [coverage](https://migashko.github.io/faslib/cov-report/index.html)
+
 # faslib
 
 Библиотека faslib предлагает новый способ модульной разработки программного обеспечения,
@@ -9,7 +17,7 @@
 
 Компиляция не требуется, но необходимо конфигурирование с помощью cmake:
 ```
-git clone git://github.com/migashko/faslib.github
+git clone git://github.com/migashko/faslib.git
 cd faslib
 mkdir build
 cd build

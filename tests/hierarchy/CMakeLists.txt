@@ -1,2 +1,3 @@
 add_executable(test_hierarchy test_hierarchy.cpp)
-add_test(hierarchy test_hierarchy)
+target_link_libraries(test_hierarchy PRIVATE faslib)
+wci_test(NAME hierarchy COMMAND test_hierarchy)

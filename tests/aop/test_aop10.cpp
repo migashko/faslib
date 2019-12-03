@@ -95,6 +95,7 @@ int main()
 {
   test<aspect> t;
   test<aspect>::provider1_type p = t.get_provider2();
+  p.get();
   p = t.get_provider1();
   t.set(10);
   if ( t.get()!=p.get() )

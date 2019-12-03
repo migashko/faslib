@@ -1,0 +1,37 @@
+name: C++ CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup
+      run: |
+        sudo locale-gen ru_RU
+        sudo locale-gen ru_RU.UTF-8
+        sudo update-locale
+        sudo apt-get install -y libboost-system-dev libboost-program-options-dev
+        sudo apt-get install -y libboost-filesystem-dev libboost-date-time-dev libboost-regex-dev
+        sudo apt-get install -y lcov
+        mkdir -p build
+    - name: make coverage
+      run: |
+        make coverage
+        pushd build
+          export CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }}
+          bash <(curl -s https://codecov.io/bash)
+        popd
+    - name: push tag
+      run: |
+        git pull --tags https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+        tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+        echo "  tag=$tag"
+        git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
+        git config --global user.name "${GITHUB_ACTOR}"
+        git tag --force -a $tag -m "update from github actions"
+        git push --force --tags https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:master
