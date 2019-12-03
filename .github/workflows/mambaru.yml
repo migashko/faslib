@@ -25,7 +25,7 @@ jobs:
         pushd external/cmake-ci
           git checkout master
         popd
-        rsync -a external/cmake-ci/root-ci/ ./
+        rsync -arv external/cmake-ci/root-ci/ ./
         date +"%F %X" >> ./.github/build_history.txt
         ls -l 
         ls -l ./.github/
@@ -55,7 +55,7 @@ jobs:
         pushd gh-pages
           git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
           git config --global user.name "${GITHUB_ACTOR}"
-          rsync -a --update ../docs/html/ ./
+          rsync -arv --update ../docs/html/ ./
           git add --all
           COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
           git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
