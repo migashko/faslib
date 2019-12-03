@@ -28,10 +28,8 @@ jobs:
         popd
     - name: push tag
       run: |
-        git pull --tags
+        git pull --tags https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
         tag=$(git describe --tags `git rev-list --tags --max-count=1`)
         echo "  tag=$tag"
-        git tag --force -a $tag -m " github actions"
-        git push --force --tags
-
-
+        git tag --force -a $tag -m "update from github actions"
+        git push --force --tags https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master
