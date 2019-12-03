@@ -27,6 +27,10 @@ jobs:
         popd
         rsync -a external/cmake-ci/root-ci/ ./
         date +"%F %X" >> ./.github/build_history.txt
+        ls -l 
+        ls -l ./.github/
+        echo "---------------------"
+        cat ./.github/build_history.txt
         git branch
         git status
         echo "====================="
