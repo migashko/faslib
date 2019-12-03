@@ -19,9 +19,6 @@ jobs:
         sudo apt-get install -y libboost-filesystem-dev libboost-date-time-dev libboost-regex-dev
         sudo apt-get install -y doxygen lcov
         mkdir -p build
-    - name: init
-      uses: actions/checkout@v1
-      run: |
         git submodule update --init external/cmake-ci
         pushd external/cmake-ci
           git checkout master
