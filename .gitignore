@@ -34,10 +34,11 @@
 *.pyc
 .cproject
 .project
+*.o
 */debug
 */release
 */build
-build
+build*
 .tup
 *.kch
 autom4te.cache
