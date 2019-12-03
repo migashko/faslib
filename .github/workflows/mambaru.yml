@@ -29,19 +29,6 @@ jobs:
         date +"%F %X" >> ./.github/build_history.txt
     - name: make, test and coverage report
       run: make coverage-report
-    - name: make doc
-      run: make doc
-    - name: make gh-pages
-      run: |
-        pushd docs/html
-          git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
-          git config --global user.name "${GITHUB_ACTOR}"
-          git init
-          git add .
-          git commit -m "doxygen" || exit $?
-          echo "git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages"
-          git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages || exit $?
-        popd
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
       with:
@@ -49,3 +36,16 @@ jobs:
         base: master
         branch: mambaru
         branch-suffix: none
+    - name: make doc
+      run: make doc
+    - name: make gh-pages
+      run: |
+        pushd docs/html
+          git init
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: doxygen
+        base: gh-pages
+        
