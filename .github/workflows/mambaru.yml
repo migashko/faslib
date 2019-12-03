@@ -39,7 +39,8 @@ jobs:
           git init
           git add .
           git commit -m "doxygen" || exit $?
-          git push -f https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.github.io.git master || exit $?
+          echo "git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages"
+          git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages || exit $?
         popd
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
