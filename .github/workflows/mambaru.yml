@@ -31,7 +31,7 @@ jobs:
       run: make doc
     - name: make, test and coverage report
       run: |
-        # make coverage-report
+        make coverage-report
         pushd build
           export CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }}
           bash <(curl -s https://codecov.io/bash)
