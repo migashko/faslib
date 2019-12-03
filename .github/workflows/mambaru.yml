@@ -20,6 +20,7 @@ jobs:
         sudo apt-get install -y doxygen lcov
         mkdir -p build
     - name: init
+      uses: actions/checkout@v1
       run: |
         git submodule update --init external/cmake-ci
         pushd external/cmake-ci
