@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      
+
       - name: Установка пакетов
         run: |
           sudo locale-gen ru_RU
@@ -23,18 +23,18 @@ jobs:
       - name: Генерация документации
         run: |
           make doc
-        
+
       - name: Сборка
         run: |
           make coverage-report
-          
+
       - name: Отчет о покрытии
         run: |
           pushd build
              export CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }}
              bash <(curl -s https://codecov.io/bash)
           popd
-        
+
       - name: Публикация документации
         run: |
           git clone -b gh-pages https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git /tmp/gh-pages
@@ -42,7 +42,7 @@ jobs:
           pushd /tmp/gh-pages
             git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
             git config --global user.name "${GITHUB_ACTOR}"
-            rsync -a --update $docdir ./
+            rsync -arv --update $docdir ./
             git add --all
             COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
             git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
