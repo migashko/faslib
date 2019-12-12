@@ -1,2 +1,2 @@
 add_executable(test_utility test_utility.cpp)
-wci_test(NAME test_utility COMMAND test_utility)
+wci_test(NAME test_utility TARGET test_utility)

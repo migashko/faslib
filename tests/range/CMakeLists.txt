@@ -15,7 +15,7 @@ add_executable(
   range_suite.cpp
 )
 
-wci_test(NAME range COMMAND test_range)
+wci_test(NAME range TARGET test_range)
 
 
 

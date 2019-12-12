@@ -5,10 +5,10 @@ add_executable(test_tstring test_tstring.cpp)
 add_executable(test_access $ENV{FAS_TESTING_CPP} test_access.cpp)
 
 wci_remove_options(-Wvirtual-inheritance)
-wci_test(NAME typemanip              COMMAND test_typemanip)
-wci_test(NAME typemanip_conversion   COMMAND test_conversion)
-wci_test(NAME typemanip_switch       COMMAND test_switch)
-wci_test(NAME typemanip_tstring      COMMAND test_tstring)
-wci_test(NAME test_access            COMMAND test_access)
+wci_test(NAME typemanip              TARGET test_typemanip)
+wci_test(NAME typemanip_conversion   TARGET test_conversion)
+wci_test(NAME typemanip_switch       TARGET test_switch)
+wci_test(NAME typemanip_tstring      TARGET test_tstring)
+wci_test(NAME test_access            TARGET test_access)
 
 
