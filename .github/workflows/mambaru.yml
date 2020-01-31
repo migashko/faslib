@@ -42,6 +42,7 @@ jobs:
           echo "Субмодули подключаються при первой сборке (фиксируем их)"
           git config --global user.email "migashko@gmail.com"
           git config --global user.name "Vladimir Migashko"
+          git add .
           if git commit -am "[subm] build submodule autocommit"; then
             echo git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git mamba-ready:mamba-ready
             git push -f https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git mamba-ready:mamba-ready
