@@ -1,5 +1,5 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2020
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -17,6 +17,6 @@
 #include <fas/integral/negate.hpp>
 #include <fas/integral/rand.hpp>
 #include <fas/integral/factorial.hpp>
-
+#include <fas/integral/pow.hpp>
 
 #endif
