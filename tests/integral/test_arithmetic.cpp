@@ -51,6 +51,10 @@ int main()
     test_rand_2 = static_check< rand< int_<8949370> >::value == 9722709 >::value,
     test_rand_3 = static_check< rand< int_<9722709> >::value == 4858052 >::value,
 
+    test_pow_1 = static_check< pow< int_<2>, int_<0> >::value == 1 >::value,
+    test_pow_2 = static_check< pow< int_<2>, int_<1> >::value == 2 >::value,
+    test_pow_3 = static_check< pow< int_<2>, int_<2> >::value == 4 >::value,
+
     test_fact_0 = static_check< factorial< int_<0> >::value == 1 >::value,
     test_fact_1 = static_check< factorial< int_<1> >::value == 1 >::value,
     test_fact_2 = static_check< factorial< int_<2> >::value == 2 >::value,
