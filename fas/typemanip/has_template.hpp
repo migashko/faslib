@@ -1,11 +1,13 @@
 //
-// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011
+// Author: Vladimir Migashko <migashko@gmail.com>, (C) 2011, 2020
 //
 // Copyright: See COPYING file that comes with this distribution
 //
 
 #ifndef FAS_TYPEMANIP_HAS_TEMPLATE_HPP
 #define FAS_TYPEMANIP_HAS_TEMPLATE_HPP
+
+#include <fas/system/nullptr.hpp>
 
 #define FAS_HAS_TEMPLATE0(N, D)\
 namespace N##_detail{\
@@ -23,7 +25,7 @@ struct N\
 {\
   typedef N##_detail::N##_helper helper; \
   enum { \
-    value = sizeof( helper::test<T>(0) ) == sizeof(helper::small_type) \
+    value = sizeof( helper::test<T>(fas_nullptr) ) == sizeof(helper::small_type) \
   };\
 };
 
@@ -43,7 +45,7 @@ struct N\
 {\
   typedef N##_detail::N##_helper helper; \
   enum { \
-    value = sizeof( helper::test<T,void>(0) ) == sizeof(helper::small_type) \
+    value = sizeof( helper::test<T,void>(fas_nullptr) ) == sizeof(helper::small_type) \
   };\
 };
 
@@ -63,7 +65,7 @@ struct N\
 {\
   typedef N##_detail::N##_helper helper; \
   enum { \
-    value = sizeof( helper::test<T,void, void>(0) ) == sizeof(helper::small_type) \
+    value = sizeof( helper::test<T,void, void>(fas_nullptr) ) == sizeof(helper::small_type) \
   };\
 };
 
@@ -83,7 +85,7 @@ struct N\
 {\
   typedef N##_detail::N##_helper helper; \
   enum { \
-    value = sizeof( helper::test<T,void, void, void>(0) ) == sizeof(helper::small_type) \
+    value = sizeof( helper::test<T,void, void, void>(fas_nullptr) ) == sizeof(helper::small_type) \
   };\
 };
 
@@ -103,7 +105,7 @@ struct N\
 {\
   typedef N##_detail::N##_helper helper; \
   enum { \
-    value = sizeof( helper::test<T,void, void, void, void>(0) ) == sizeof(helper::small_type) \
+    value = sizeof( helper::test<T,void, void, void, void>(fas_nullptr) ) == sizeof(helper::small_type) \
   };\
 };
 
@@ -123,7 +125,7 @@ struct N\
 {\
   typedef N##_detail::N##_helper helper; \
   enum { \
-    value = sizeof( helper::test<T,void, void, void, void, void>(0) ) == sizeof(helper::small_type) \
+    value = sizeof( helper::test<T,void, void, void, void, void>(fas_nullptr) ) == sizeof(helper::small_type) \
   };\
 };
 
