@@ -1,3 +1,8 @@
+[![pipeline status](https://gitlab.mamba.ru/cpp/faslib/badges/master/pipeline.svg)](https://gitlab.mamba.ru/cpp/faslib/commits/master)
+[![pipeline status](https://gitlab.mamba.ru/cpp/faslib/badges/pre-release/pipeline.svg)](https://gitlab.mamba.ru/cpp/faslib/commits/pre-release)
+[![pipeline status](https://gitlab.mamba.ru/cpp/faslib/badges/devel/pipeline.svg)](https://gitlab.mamba.ru/cpp/faslib/commits/devel)
+[![pipeline status](https://gitlab.mamba.ru/cpp/faslib/badges/wip-devel/pipeline.svg)](https://gitlab.mamba.ru/cpp/faslib/commits/wip-devel)
+[![Coverage Report](https://gitlab.mamba.ru/cpp/faslib/badges/pre-release/coverage.svg)](https://gitlab.mamba.ru/cpp/faslib/commits/pre-release)
 
 [![Build Status](https://github.com/migashko/faslib/workflows/C++%20CI/badge.svg?branch=master)](https://github.com/migashko/faslib/tree/master)
 [![Build Status](https://github.com/migashko/faslib/workflows/C++%20CI/badge.svg?branch=mambaru)](https://github.com/migashko/faslib/tree/mambaru)
