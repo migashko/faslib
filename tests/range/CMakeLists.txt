@@ -2,7 +2,6 @@ add_subdirectory(benchmark)
 
 add_executable(
   test_range
-  $ENV{FAS_TESTING_CPP}
   test_range.cpp
   basic_suite.cpp
   basic2_suite.cpp
@@ -14,6 +13,7 @@ add_executable(
   stream_range_suite.cpp
   range_suite.cpp
 )
+target_link_libraries(test_range PRIVATE fas::testing)
 
 wci_test(NAME range TARGET test_range)
 

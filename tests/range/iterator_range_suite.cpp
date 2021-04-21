@@ -34,14 +34,16 @@ UNIT(iterator_range_unit, "")
   for (int i=0; i < 5; ++i, ++cr1)
     t << equal<expect>( *cr1, i ) << FAS_TESTING_FILE_LINE;
 
-
+  
   typedef fas::typerange<vint_type::reverse_iterator >::range vint_rrange;
   vint_rrange rr = fas::range( vint.rbegin(), vint.rend() );
 
   for (int i=0; i < 5; ++i, ++rr)
+  {
     t << equal<expect>( *rr, 5 - i -1 ) << FAS_TESTING_FILE_LINE
       << std::endl << (5 - i -1) << "!=" << *rr ;
-  ;
+  }
+  
 
   typedef std::back_insert_iterator<vint_type> vint_bii_type;
   typedef fas::typerange< vint_bii_type >::range rbi_type;

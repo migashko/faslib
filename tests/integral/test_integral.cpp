@@ -14,7 +14,7 @@ struct A: int_<10> {};
 struct B: bool_<false> {};
 struct C: integral_c<char, 'z'> {};
 struct D: char_<'z'> {};
-struct E: long_<10000000000L> {};
+struct E: long_<1000000000L> {};
 
 
 int main()
@@ -24,7 +24,7 @@ int main()
          + static_check< B::value == false >::value
          + static_check< C::value == 'z' >::value 
          + static_check< D::value == 'z' >::value
-         + static_check< E::value == 10000000000L >::value
+         + static_check< E::value == 1000000000L >::value
   };
   return 0;
 }

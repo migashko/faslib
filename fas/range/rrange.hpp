@@ -12,6 +12,12 @@
 namespace fas{
 
 template<typename R>
+inline typename typerange<const R>::reverse_range rrange(const R& r)
+{
+  return typerange<const R>::make_rrange(r);
+}
+
+template<typename R>
 inline typename typerange<R>::reverse_range rrange(R& r)
 {
   return typerange<R>::make_rrange(r);

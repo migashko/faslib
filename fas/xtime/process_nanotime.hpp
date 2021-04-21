@@ -33,8 +33,15 @@ inline nanospan process_nanotime()
     return microspan(ru.ru_utime.tv_sec, ru.ru_utime.tv_usec)+ 
            microspan(ru.ru_stime.tv_sec, ru.ru_stime.tv_usec);
   }
-  return nanotime();
+#elif defined(HAVE_WINDOWS_H)
+  __int64 wintime; 
+  GetSystemTimeAsFileTime((FILETIME*)&wintime);
+  wintime      -=116444736000000000i64;  //1jan1601 to 1jan1970
+  return nanospan( static_cast<xsec_t>(wintime / 10000000i64), static_cast<xsec_t>(wintime % 10000000i64 *100) );
 #endif
+
+return nanotime();
+
 }
 
 }

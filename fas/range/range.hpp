@@ -24,7 +24,6 @@ inline typename typerange<const IC>::range range(const IC& cnt)
   return typerange<const IC>::make_range(cnt);
 }
 
-
 template<typename IC>
 inline typename typerange<IC>::range range(IC& cnt)
 {

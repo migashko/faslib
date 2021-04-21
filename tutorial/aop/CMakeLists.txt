@@ -1,3 +1,7 @@
+if (MSVC )
+    add_compile_options(-wd4020 -wd4250)
+endif()
+
 add_executable(aop0 aop0.cpp)
 add_executable(aop1 aop1.cpp)
 add_executable(aop2 aop2.cpp)
@@ -12,5 +16,5 @@ add_executable(aop13 aop13.cpp)
 add_executable(aop14 aop14.cpp)
 add_executable(aop15 aop15.cpp)
 
-wci_remove_options(-Wsuggest-override -Wsuggest-override -Wnon-virtual-dtor -Wvirtual-inheritance -Wsuggest-override)
+update_ogenc(TARGETS aop2 aop3 aop15 WARNINGS -Wsuggest-override -Wnon-virtual-dtor -Wvirtual-inheritance OFF)
 wci_utils(aop0 aop1 aop2 aop3 aop4 aop7 aop8 aop10 aop11 aop12 aop13 aop14 aop15)

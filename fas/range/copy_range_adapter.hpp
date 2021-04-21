@@ -34,10 +34,10 @@ public:
   typedef typename input_range::pointer           pointer;
   typedef typename input_range::reference         reference;
 
-
   copy_range_adapter(input_range ri, output_range ro)
     : _input_range(ri)
     , _output_range(ro)
+    , _value()
   {
     if ( _input_range )
       *(_output_range++) = *_input_range;

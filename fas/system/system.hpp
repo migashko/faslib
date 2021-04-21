@@ -44,18 +44,18 @@ inline bool is_atty_stderr()
 }
 
 
-inline void sleep( useconds_t millisec )
+inline void sleep( time_t millisec )
 {
 #ifdef _POSIX_VERSION
 
 #ifdef HAVE_USLEEP_FUNC
-  ::usleep(millisec*1000);
+  ::usleep( static_cast<useconds_t>(millisec*1000) );
 #else
   ::sleep(millisec/1000);
 #endif
 
 #elif defined(_WIN32)
-  ::Sleep(millisec);
+  ::Sleep(static_cast<DWORD>(millisec));
 #endif
 }
 

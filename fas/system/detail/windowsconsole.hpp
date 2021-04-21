@@ -22,6 +22,7 @@ class CWindowsConsole
 
   CWindowsConsole()
     : m_hConsoleOutput(INVALID_HANDLE_VALUE)
+    , m_wAttributes(0)
     , m_bGetConsoleScreenBufferInfoResult(FALSE)
   {
     m_hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);

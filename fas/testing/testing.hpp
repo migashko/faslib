@@ -53,13 +53,13 @@ inline void show_total_result( const suite_counts& sc )
 
 
 #define BEGIN_TEST \
-  ::fas::testing::suite_counts fas_testing(int argc, char* argv[]);\
-  ::fas::testing::suite_counts fas_testing(int argc, char* argv[]) {\
+  ::fas::testing::suite_counts fas_testing(int argc, char** argv);\
+  ::fas::testing::suite_counts fas_testing(int argc, char** argv) {\
     ::fas::testing::suite_counts sc; \
     ::fas::ignore_arg(argc); \
     ::fas::ignore_arg(argv);
 #define RUN_SUITE(name) \
-  ::fas::testing::suite_counts fas_##name##_suite_run(int argc, char* argv[]); \
+  ::fas::testing::suite_counts fas_##name##_suite_run(int argc, char** argv); \
   if (sc.crash) std::cout << ::fas::testing::SKIP << "Skip suite '" << #name << "'" << std::endl;\
   else sc+=fas_##name##_suite_run(argc, argv);
 #define END_TEST show_total_result(sc); return sc;}

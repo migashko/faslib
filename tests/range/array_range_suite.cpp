@@ -54,6 +54,7 @@ UNIT(array_rrange_unit, "")
   typedef fas::typerange<array2_type>::reverse_range r2r_type;
 
   r2_type r1 = fas::range(array2);
+  //r2_type r2 = fas::range(array2);
   r2r_type r2 = fas::rrange(array2r1);
 
   for ( ;r1 && r2; ++r1, ++r2 )
@@ -163,10 +164,10 @@ UNIT(array_range5_unit, "")
 
 
 BEGIN_SUITE(array_range_suite, "")
-  ADD_UNIT(array_range_unit)
+  //ADD_UNIT(array_range_unit)
   ADD_UNIT(array_rrange_unit)
   ADD_UNIT(array_range2_unit)
-  ADD_UNIT(array_range3_unit)
+  /*ADD_UNIT(array_range3_unit)
   ADD_UNIT(array_range4_unit)
-  ADD_UNIT(array_range5_unit)
+  ADD_UNIT(array_range5_unit)*/
 END_SUITE(array_range_suite)

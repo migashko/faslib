@@ -40,6 +40,10 @@ bool test_xspan()
 
   span = span + X(10, X::xmax/2 - 1);
 
+  std::cout << X::xmax << std::endl;
+  std::cout << span.sec << std::endl;
+  std::cout << span.xsec << std::endl;
+    std::cout << X::xmax/2 << std::endl;
   if ( span.sec!=21 || span.xsec!=X::xmax/2)  return false;
 
   span = span + X(0, X::xmax/2 + 1);
