@@ -22,8 +22,8 @@ struct list2: type_list_n< int_<1>, int_<2> >::type {};
 
 typedef fas::int_<1> O;
 
-constexpr double pi =
-    double( fas::accumulate_t< fas::type_list_n_nocheck<
+constexpr long double pi =
+    static_cast<long double>( fas::accumulate_t< fas::type_list_n_nocheck<
 
                         O,O,O,O,O,O,
                     O,O,O,O,O,O,O,O,O,O,
@@ -60,7 +60,7 @@ constexpr double pi =
                          //
                         //
 
-    double( fas::accumulate_t< fas::type_list_n_nocheck<
+    static_cast<long double>( fas::accumulate_t< fas::type_list_n_nocheck<
 
                       O,O,O,O,O,O,O,O,
                       O,O,O,O,O,O,O,O,
@@ -91,7 +91,7 @@ int main()
           + static_check< accumulate<list2, fas::int_<0>,  fas::plus<_1, _2> >::type::value == 3 >::value
           #if __cplusplus >= 201103L /*&& !defined(FASLIB_TYPE_LIST_CHECK)*/
           // pi == 3.16667F
-          + static_check< (pi > 3.16666L) && pi < (3.16668L) >::value
+          + static_check< (pi > 3.16666L) && (pi < 3.16668L) >::value
           #endif
           + static_check< same_type<res4, chk4>::value >::value
   };
