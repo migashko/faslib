@@ -34,5 +34,5 @@ jobs:
              bash <(curl -s https://codecov.io/bash)
           popd
           git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:master
-          git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git :mamba-ready > /dev/null || true
+          git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git :mamba-ready 2> /dev/null || true
           git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git :mambaru || echo "Delete mambaru FAIL"
