@@ -42,26 +42,26 @@ int main()
 {
   enum 
   {
-    result = test<int>::result
-             + test< int_<4> >::result
-             + test< empty_list >::result
-             + test< type_list_n< int_<1>, int_<2> >::type >::result
-             + test< type_list_n< int_<2>, int_<1> >::type >::result
-             + test< type_list_n< int_<1>, int_<1> >::type >::result
-             + test< type_list_n< int_<2>, int_<1> >::type, greater<_1, _2> >::result
-             + test< type_list_n< int_<2>, int_<1> >::type, less<_2, _1> >::result
-             + test< type_list_n< int_<2>, int_<1> >::type, less_equal<_2, _1> >::result
-             + test< type_list_n< int_<3>, int_<2>, int_<1> >::type, less_equal<_2, _1> >::result
-             + test< type_list_n< int_<3>, int_<2>, int_<2> >::type, less_equal<_2, _1> >::result
-             + test< type_list_n< int_<3>, int_<2>, int_<3> >::type, less_equal<_2, _1> >::result
-             + static_check< same_type<check1_1, sort<list1>::type >::value  >::value
-             + static_check< same_type<check1_2, sort<list1, greater<_1, _2> >::type >::value  >::value
-             + static_check< same_type<check1_1, sort<list1, greater<_2, _1> >::type >::value  >::value
-             + static_check< same_type<check1_2, sort_t<list1, greater >::type >::value  >::value
-             + static_check< same_type<check1_2, sort<list1, less<_2, _1> >::type >::value  >::value
-             + static_check< same_type<check2_1, sort<list2, f< super_subclass<_1, _2> > >::type >::value  >::value
-             + static_check< same_type<check2_1, sort_t<list2, lambda< super_subclass<_1, _2> >::apply  >::type >::value  >::value
-             + static_check< same_type<check2_2, sort<list2, f< super_subclass<_2, _1> > >::type >::value  >::value
+    result = static_cast<int>( test<int>::result)
+             + static_cast<int>( test< int_<4> >::result)
+             + static_cast<int>( test< empty_list >::result)
+             + static_cast<int>( test< type_list_n< int_<1>, int_<2> >::type >::result)
+             + static_cast<int>( test< type_list_n< int_<2>, int_<1> >::type >::result)
+             + static_cast<int>( test< type_list_n< int_<1>, int_<1> >::type >::result)
+             + static_cast<int>( test< type_list_n< int_<2>, int_<1> >::type, greater<_1, _2> >::result)
+             + static_cast<int>( test< type_list_n< int_<2>, int_<1> >::type, less<_2, _1> >::result)
+             + static_cast<int>( test< type_list_n< int_<2>, int_<1> >::type, less_equal<_2, _1> >::result)
+             + static_cast<int>( test< type_list_n< int_<3>, int_<2>, int_<1> >::type, less_equal<_2, _1> >::result)
+             + static_cast<int>( test< type_list_n< int_<3>, int_<2>, int_<2> >::type, less_equal<_2, _1> >::result)
+             + static_cast<int>( test< type_list_n< int_<3>, int_<2>, int_<3> >::type, less_equal<_2, _1> >::result)
+             + static_cast<int>( static_check< same_type<check1_1, sort<list1>::type >::value  >::value)
+             + static_cast<int>( static_check< same_type<check1_2, sort<list1, greater<_1, _2> >::type >::value  >::value)
+             + static_cast<int>( static_check< same_type<check1_1, sort<list1, greater<_2, _1> >::type >::value  >::value)
+             + static_cast<int>( static_check< same_type<check1_2, sort_t<list1, greater >::type >::value  >::value)
+             + static_cast<int>( static_check< same_type<check1_2, sort<list1, less<_2, _1> >::type >::value  >::value)
+             + static_cast<int>( static_check< same_type<check2_1, sort<list2, f< super_subclass<_1, _2> > >::type >::value  >::value)
+             + static_cast<int>( static_check< same_type<check2_1, sort_t<list2, lambda< super_subclass<_1, _2> >::apply  >::type >::value  >::value)
+             + static_cast<int>( static_check< same_type<check2_2, sort<list2, f< super_subclass<_2, _1> > >::type >::value  >::value)
   };
   return 0;
 }

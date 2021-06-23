@@ -62,8 +62,8 @@ struct type_count_impl1<T, type_list<L, R> >
 {
   enum 
   {
-    value = type_count_some_type<T, L>::value 
-        + type_count_impl1<T, R>::value 
+    value = static_cast<int>(type_count_some_type<T, L>::value)
+        + static_cast<int>(type_count_impl1<T, R>::value)
   };
 };
 
@@ -83,8 +83,8 @@ struct type_count_impl2<metalist::type_list, T, L>
   typedef typename L::right_type tail;
   enum 
   {
-    value = type_count_some_type<T, head>::value 
-        + type_count_impl1<T, tail>::value 
+    value = static_cast<int>(type_count_some_type<T, head>::value)
+        + static_cast<int>(type_count_impl1<T, tail>::value)
   };
 };
 

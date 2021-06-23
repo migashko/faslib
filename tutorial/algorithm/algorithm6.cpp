@@ -18,6 +18,7 @@ struct tagged
 {
   typedef Tg tag;
   typedef T type;
+  typedef typename Tg::value_type value_type; 
 };
 
 namespace std
@@ -34,6 +35,7 @@ namespace std
 template<typename T>
 struct get_tag
 {
+  typedef typename T::value_type value_type;
   typedef typename T::tag type;
   enum { value = type::value};
 };

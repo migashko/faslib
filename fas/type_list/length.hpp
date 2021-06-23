@@ -14,6 +14,7 @@ namespace fas{
 template<typename L>
 struct length
 {
+  typedef int value_type;
   enum { value = detail::length_impl<L>::value  };
 };
 

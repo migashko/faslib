@@ -55,7 +55,7 @@ struct count_if_impl1_t<type_list<L, R>, F>
 {
   enum 
   {
-    value = F<L>::type::value + count_if_impl1_t<R, F>::value
+    value = static_cast<int>(F<L>::type::value) + static_cast<int>(count_if_impl1_t<R, F>::value)
   };
 
 };
@@ -75,7 +75,7 @@ struct count_if_impl2_t<metalist::type_list, L, F>
   typedef typename L::right_type tail;
   enum 
   {
-    value = F<head>::type::value + count_if_impl1_t<tail, F>::value
+    value = static_cast<int>(F<head>::type::value) + static_cast<int>(count_if_impl1_t<tail, F>::value)
   };
 };
 

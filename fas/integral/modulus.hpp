@@ -15,10 +15,11 @@ namespace fas{
 template<typename I1, typename I2>
 struct modulus
 {
-  typedef integral_c< 
-      typename max_sizeof<typename I1::value_type, typename I2::value_type>::type,
-      I1::value % I2::value
-    > type;
+  typedef typename max_sizeof< typename I1::value_type, typename I2::value_type >::type value_type;
+  typedef integral_c<
+    value_type,
+    static_cast<value_type>(I1::value) % static_cast<value_type>(I2::value)
+  > type;
   enum { value = type::value };
 };
 
