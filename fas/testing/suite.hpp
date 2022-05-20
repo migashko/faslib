@@ -109,6 +109,7 @@ public:
 
   void operator << ( void (*)( _stop_ ) )
   {
+    _out.flush();
     _status_check();
   }
 
@@ -119,6 +120,7 @@ public:
   std::ostream& operator <<( void (*)( _flush_ ) )
   {
     _out.flush();
+    _status_check();
     return _out;
   }
 

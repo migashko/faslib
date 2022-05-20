@@ -29,7 +29,7 @@ struct critical;
 struct crash;
 
 template<typename L, typename R>
-std::string compare_message(const std::string& msg, const L& left, const std::string& op, const R& right);
+std::string compare_message(const std::string& msg, const L& left, const std::string& op, const R& right, const std::string& quote_ch = "");
 
 template<typename T>
 bool is_float_equal(const T& left, const T& right);
@@ -381,15 +381,19 @@ struct greater_equal<M, empty_type>: statement<M>
 template<typename M = assert>
 struct equal_str: statement<M>
 {
-  equal_str(const std::string& left, const std::string& right): statement<M>( left == right, compare_message("Equal statement. ", left, "!=", right) ) {}
+  equal_str(const std::string& left, const std::string& right)
+    : statement<M>( left == right, compare_message("Equal statement. ", left, "!=", right, "\"") ) {}
 
-  equal_str(const std::string& left, const std::string& right, const std::string& txt): statement<M>( left == right, compare_message(txt, left, "!=", right) ) {}
+  equal_str(const std::string& left, const std::string& right, const std::string& txt)
+    : statement<M>( left == right, compare_message(txt, left, "!=", right, "\"") ) {}
 
   template<typename R>
-  equal_str(const std::string& left, R right): statement<M>( left == right, compare_message("Equal statement. ", left, "!=", right) ) {}
+  equal_str(const std::string& left, R right)
+    : statement<M>( left == right, compare_message("Equal statement. ", left, "!=", right, "\"") ) {}
 
   template<typename R>
-  equal_str(const std::string& left, R right, const std::string& txt): statement<M>( left == right, compare_message(txt, left, "!=", right) ) {}
+  equal_str(const std::string& left, R right, const std::string& txt)
+    : statement<M>( left == right, compare_message(txt, left, "!=", right, "\"") ) {}
 };
 
 template<typename M = assert>
@@ -453,14 +457,15 @@ template<typename V, typename H, typename L>
 void os_write(std::ostream& s, const V& v, fas::type_list<H, L> ) { os_write(s, v, L() ); }
 
 template<typename L, typename R>
-std::string compare_message(const std::string& msg, const L& left, const std::string& op, const R& right)
+std::string compare_message(const std::string& msg, const L& left, const std::string& op,
+                            const R& right, const std::string& quote_ch)
 {
   std::stringstream ss;
-  ss << msg << "( ";
+  ss << msg << "( " << quote_ch;
   os_write(ss, left, ostream_types() );
-  ss << op;
+  ss << quote_ch << op << quote_ch;
   os_write(ss, right, ostream_types() );
-  ss << " ). ";
+  ss << quote_ch << " ). ";
   return ss.str();
 }
 
