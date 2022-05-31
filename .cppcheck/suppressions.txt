@@ -1,5 +1,7 @@
-# Список подавлений для cppcheck относительно корня проекта. Примеры
-internalAstError:
+unknownMacro:
+unusedStructMember:
+ctuOneDefinitionRuleViolation:
 missingOverride:./examples/aop/*
 missingOverride:./tutorial/aop/*
 functionStatic:./tutorial/*
+

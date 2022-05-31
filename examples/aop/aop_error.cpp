@@ -8,6 +8,7 @@ struct _methodX_;
 
 struct ad_method1
 {
+  ad_method1(){}
   template<typename T>
   void operator()(T&) const { std::cout << "method1" << std::endl; }
 };
