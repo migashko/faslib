@@ -1,4 +1,5 @@
 add_subdirectory(benchmark)
+update_ogenc(TARGETS test_range WARNINGS -Wnull-dereference OFF)
 
 add_executable(
   test_range
@@ -14,7 +15,6 @@ add_executable(
   range_suite.cpp
 )
 target_link_libraries(test_range PRIVATE fas::testing)
-
 wci_test(NAME range TARGET test_range)
 
 
