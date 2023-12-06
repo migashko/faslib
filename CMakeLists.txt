@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(faslib CXX)
+project(faslib LANGUAGES CXX
+               VERSION "0.9.8"
+               HOMEPAGE_URL https://faslib.com/)
 
 include(cmake/ci.cmake)
 
@@ -25,13 +27,20 @@ endif()
 
 add_subdirectory(config)
 
+
 set(ENV{FAS_TESTING_CPP} "${CMAKE_CURRENT_SOURCE_DIR}/fas/testing/testing.cpp")
 add_library(faslib INTERFACE)
 add_library(fas_testing STATIC $ENV{FAS_TESTING_CPP})
 add_library(fas::testing ALIAS fas_testing)
-target_sources(faslib INTERFACE ${faslib_SOURCE_DIR})
-target_include_directories(faslib SYSTEM INTERFACE ${faslib_SOURCE_DIR})
-target_include_directories(fas_testing SYSTEM PUBLIC ${faslib_SOURCE_DIR})
+target_sources(faslib INTERFACE $<BUILD_INTERFACE:${faslib_SOURCE_DIR}>
+                                $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
+target_include_directories(faslib SYSTEM INTERFACE $<BUILD_INTERFACE:${faslib_SOURCE_DIR}>
+                                                   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
+target_include_directories(fas_testing SYSTEM PUBLIC $<BUILD_INTERFACE:${faslib_SOURCE_DIR}>
+                                                     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
 
 if ( BUILD_TESTING)
   enable_testing()
@@ -42,33 +51,17 @@ if ( BUILD_TESTING)
   endif()
 endif()
 
-set(CPACK_PACKAGE_NAME "faslib")
-set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "9")
-set(CPACK_PACKAGE_VERSION_PATCH "4")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
-set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/Readme.md")
-set(CPACK_PACKAGE_CONTACT "migashko@gmail.com")
+include(cmake/install.cmake)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-install(DIRECTORY fas DESTINATION include
-  PATTERN "*.cmake" EXCLUDE
-  PATTERN "*~" EXCLUDE
-  PATTERN ".*" EXCLUDE
-  PATTERN "Makefile" EXCLUDE
-  PATTERN "CMakeFiles" EXCLUDE
+install(
+  DIRECTORY fas/
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/fas"
 )
 
-install(DIRECTORY . DESTINATION share/faslib
-  PATTERN "fas" EXCLUDE
-  PATTERN "*.cmake" EXCLUDE
-  PATTERN "*~*" EXCLUDE
-  PATTERN "*kdev*" EXCLUDE
-  PATTERN ".git*" EXCLUDE
-  PATTERN "Readme.md" EXCLUDE
-  PATTERN "fasg++*" EXCLUDE
-  PATTERN timeout EXCLUDE
+install(
+  TARGETS fas_testing
+  EXPORT ${PROJECT_NAME}Targets
+  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+  INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 
-include(CPack)

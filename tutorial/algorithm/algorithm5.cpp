@@ -10,6 +10,10 @@
 #include <vector>
 #include <algorithm>
 
+#if __cplusplus >= 201103L
+#include <random>
+#endif
+
 /// For example only
 size_t factorial(size_t n);
 std::vector< std::vector<int> > fbrute_combinations(std::vector<int> v);
@@ -26,7 +30,13 @@ std::vector< std::vector<int> > fbrute_combinations(std::vector<int> v)
   result.push_back(v);
   while ( result.size() < size )
   {
+#if __cplusplus >= 201103L
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(v.begin(), v.end(), g);
+#else
     std::random_shuffle(v.begin(), v.end());
+#endif
     result.push_back(v);
     std::sort(result.begin(), result.end());
     std::vector< std::vector<int> >::iterator itr = std::unique(result.begin(), result.end() );
