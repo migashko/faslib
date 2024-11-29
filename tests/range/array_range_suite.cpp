@@ -11,6 +11,8 @@
 #include <string>
 #include <vector>
 
+namespace {
+
 typedef char array1_type[3][3][2];
 typedef char array1_item_type[3][2];
 array1_type array1 = {
@@ -22,8 +24,8 @@ array1_type array1 = {
 typedef char array2_type[9][2];
 array2_type array2 = { {"1"}, {"2"}, {"3"}, {"4"}, {"5"}, {"6"}, {"7"}, {"8"}, {"9"} };
 array2_type array2r1 = { {"9"}, {"8"}, {"7"}, {"6"}, {"5"}, {"4"}, {"3"}, {"2"}, {"1"} };
-array2_type array2r2 = { {"7"}, {"8"}, {"9"}, {"4"}, {"5"}, {"6"}, {"1"}, {"2"}, {"3"} };
-array2_type array2r2c = { "7", "8", "9", "4", "5", "6", "1", "2", "3" };
+array2_type array2r2 =  { {"7"}, {"8"}, {"9"}, {"4"}, {"5"}, {"6"}, {"1"}, {"2"}, {"3"} };
+array2_type array2r2c = { {"7"}, {"8"}, {"9"}, {"4"}, {"5"}, {"6"}, {"1"}, {"2"}, {"3"} };
 
 UNIT(array_range_unit, "")
 {
@@ -160,14 +162,14 @@ UNIT(array_range5_unit, "")
   }
 }
 
-
+} //namespace
 
 
 BEGIN_SUITE(array_range_suite, "")
-  //ADD_UNIT(array_range_unit)
+  ADD_UNIT(array_range_unit)
   ADD_UNIT(array_rrange_unit)
   ADD_UNIT(array_range2_unit)
-  /*ADD_UNIT(array_range3_unit)
+  ADD_UNIT(array_range3_unit)
   ADD_UNIT(array_range4_unit)
-  ADD_UNIT(array_range5_unit)*/
+  ADD_UNIT(array_range5_unit)
 END_SUITE(array_range_suite)

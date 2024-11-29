@@ -17,6 +17,8 @@
 #include <iostream>
 #include <algorithm>
 
+namespace {
+
 std::list<int> test_values;
 
 template<int P>
@@ -63,6 +65,8 @@ static inline void show(const std::list<int>& f, const std::list<int>& s )
     std::cout << *fbeg << "==" << *sbeg << std::endl;
   }
 }
+
+} //namespace
 
 int main()
 {

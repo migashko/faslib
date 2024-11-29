@@ -183,43 +183,43 @@ UNIT(mem_fun_unit, "")
 }
 
 
-const std::string& get_foo1(const foo& f)
+inline const std::string& get_foo1(const foo& f)
 {
   return f.foo1;
 }
 
-void set_foo1(foo& f, const std::string& value)
+inline void set_foo1(foo& f, const std::string& value)
 {
   f.foo1 = value;
 }
 
 
-int get_foo2(const foo& f)
+inline int get_foo2(const foo& f)
 {
   return f.foo2;
 }
 
-void set_foo2(foo& f, int value)
+inline void set_foo2(foo& f, int value)
 {
   f.foo2 = value;
 }
 
-const char* get_foo3(const foo& f)
+inline const char* get_foo3(const foo& f)
 {
   return f.foo3;
 }
 
-void set_foo3(foo& f, const char* value)
+inline void set_foo3(foo& f, const char* value)
 {
   f.set_foo3(value);
 }
 
-const char* get_foo4(const foo& f)
+inline const char* get_foo4(const foo& f)
 {
   return f.foo4;
 }
 
-void set_foo4(foo& f, const char* value)
+inline void set_foo4(foo& f, const char* value)
 {
   f.set_foo4(value);
 }

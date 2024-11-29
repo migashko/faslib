@@ -16,6 +16,8 @@
 #include <vector>
 #include <iostream>
 
+namespace {
+
 std::vector<int> test_values;
 
 template<int P>
@@ -63,6 +65,8 @@ void show(const std::vector<int>& f, const std::vector<int>& s )
     std::cout << *fbeg << "==" << *sbeg << std::endl;
   }
 }
+
+} //namespace
 
 int main()
 {
