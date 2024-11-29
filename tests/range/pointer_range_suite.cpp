@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 
+namespace {
 
 const int BUFF_SIZE = 10;
 typedef char buffer_type[BUFF_SIZE];
@@ -46,6 +47,7 @@ UNIT(pointer_range_unit, "")
 
 }
 
+}
 
 BEGIN_SUITE(pointer_range_suite, "")
   ADD_UNIT(pointer_range_unit)
